@@ -125,7 +125,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
                                     </label>
                                 </div>
                                 <div class="ml-column">
-                                    <label for="barbeque">Barbeque
+                                    <label for="barbeque">바베큐
                                         <input type="checkbox" id="barbeque">
                                         <span class="checkbox"></span>
                                     </label>
