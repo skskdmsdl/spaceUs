@@ -101,7 +101,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
                 <div class="card">
                     <div class="card-heading active">
                         <a data-toggle="collapse" data-target="#collapseOne">
-                            더 많은 옵션보기
+                            더 많은 옵션
                         </a>
                     </div>
                     <div id="collapseOne" class="collapse" data-parent="#accordionExample">
