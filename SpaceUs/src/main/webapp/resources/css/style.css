@@ -10913,17 +10913,6 @@ ol {
   display: inline-block;
 }
 
-.header-search{
-  font-size: 14px;
-  color: #20c997;
-  font-weight: 600;
-  text-transform: uppercase;
-  background: #00C89E;
-  padding: 10px 20px;
-  display: inline-block;
-  border-radius: 60px;
-}
-
 .site-btn {
   font-size: 14px;
   color: #ffffff;
