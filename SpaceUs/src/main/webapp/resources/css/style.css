@@ -10207,7 +10207,8 @@ select:focus{
 .search-form-content .filter-form .sm-width {
   width: 100%;
   margin-bottom: 20px;
-  margin-right: 0 !important;
+  margin-right: 20px;
+  /* margin-right: 0 !important; */
 }
 
 
