@@ -22,6 +22,10 @@
 .login100-form-btn {
 	background-color: #00C89E;
 }
+a:hover {
+    text-decoration: none;
+    color: #00C89E;
+}
 </style>
 <body style="background-color: #666666;">
 	
@@ -30,7 +34,7 @@
 			<div class="wrap-login100">
 				<form class="login100-form validate-form">
 					<span class="login100-form-title p-b-43">
-						회원가입
+						<a class="navbar-brand" href="${pageContext.request.contextPath }">Space Us</a>
 					</span>
 					
 					
@@ -97,10 +101,6 @@
 			</div>
 		</div>
 	</div>
-	
-	
-
-	
 	
 	<script src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/vendor/animsition/js/animsition.min.js"></script>
