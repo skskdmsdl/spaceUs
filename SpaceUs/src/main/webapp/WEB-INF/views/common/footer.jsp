@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<footer class="ftco-footer ftco-section">
+<footer class="ftco-footer ftco-section" style="background-color: #f7f7f7; padding: 4em 0;;">
       <div class="container">
         <div class="row mb-5">
           <div class="col-md">
@@ -8,7 +8,7 @@
               <h2 class="ftco-heading-2">Space Us</h2>
               <p>사업자등록번호 512-02-51985</p>
               <p>대표 김아무개</p>
-              <p>서울시 강남구 테헤란로 10길 9</p>
+              <p><span class="icon icon-map-marker"></span>&nbsp;서울시 강남구 테헤란로 10길 9</p>
               <ul class="ftco-footer-social list-unstyled mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -20,8 +20,7 @@
             <div class="ftco-footer-widget mb-4 ml-md-4">
               <h2 class="ftco-heading-2">About Us</h2>
               <ul class="list-unstyled">
-                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>About Us</a></li>
-                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Our Story</a></li>
+                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Space Us 소개</a></li>
                 <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
                 <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>FAQs</a></li>
               </ul>
@@ -39,13 +38,11 @@
             </div>
           </div>
         </div>
-        <div class="row">
           <div class="col-md-12 text-center">
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
   Copyright &copy;<script>document.write(new Date().getFullYear());</script><strong>&nbsp;Space Us&nbsp;</strong>All rights reserved 
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
           </div>
-        </div>
       </div>
     </footer>
      <!-- loader -->
@@ -67,6 +64,5 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="${pageContext.request.contextPath }/resources/js/google-map.js"></script>
   <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
-  
   </body>
 </html>
