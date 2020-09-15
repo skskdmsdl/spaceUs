@@ -100,7 +100,6 @@ input[type="text"]:focus {
 </div>
  </div>
 </div>
- 
 <!-- 검색창 시작 -->
 <section class="ftco-section goto-here">
 <section class="search-section spad">

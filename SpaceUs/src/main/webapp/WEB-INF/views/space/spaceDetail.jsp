@@ -78,20 +78,41 @@ margin-right: 16px
       				<div style="text-align:right; padding-right:5px">
 					    <i class="fas fa-heart" style="font-size:25px;"></i>
 					    &emsp;
-					    <i class="fas fa-share-alt" style="font-size:25px; margin-left: 30px;"></i>
+					    <i class="fas fa-share-alt" data-toggle="modal" data-target="#exampleModal" style="font-size:25px; margin-left: 30px;"></i>
 					    <input type="submit" value="예약하기" class="btn py-3 px-5 btn-primary" style="margin-left: 70px">
       				</div>
+      				<!-- 공유하기 모달창 시작-->
+						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">공유하기</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        ...
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						        <button type="button" class="btn btn-primary">Save changes</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+      				<!-- 공유하기 모달창 끝-->
       					<span class="subheading">카페</span>
       					<h2>The Blue Sky Home
       					</h2>
       					<br />
       					<span class="subheading">
-              <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">#감성적인</a>
-                <a href="#" class="tag-cloud-link">#바다가 보이는</a>
-                <a href="#" class="tag-cloud-link">#조용한</a>
-                <a href="#" class="tag-cloud-link">#힐링</a>
-              </div>
+			              <div class="tagcloud">
+			                <a href="#" class="tag-cloud-link">#감성적인</a>
+			                <a href="#" class="tag-cloud-link">#바다가 보이는</a>
+			                <a href="#" class="tag-cloud-link">#조용한</a>
+			                <a href="#" class="tag-cloud-link">#힐링</a>
+			              </div>
       					</span>
       				</div>
       			</div>
