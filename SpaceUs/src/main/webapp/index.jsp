@@ -23,12 +23,12 @@ font-family: 'NEXON Lv1 Gothic OTF';
           <div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-end">
           	<div class="text text-center mx-auto" style="margin-bottom:25%;">
 	            <h1 class="mb-4">어떤 공간을<br>찾고 있나요?</h1>
-	            <form action="#" class="search-location mt-md-5">
-		        		<div class="row justify-content-center">
-		        			<div class="col-lg-10 align-items-end">
-		        			</div>
-		        		</div>
-		        	</form>
+		        <form action="#" class="search-location mt-md-5">
+		        	<div class="row justify-content-center">
+		        		<div class="col-lg-10 align-items-end">
+		     			</div>
+		        	</div>
+		        </form>
             </div>
           </div>
         </div>
@@ -253,6 +253,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
 </section>
 <!-- 추천공간 끝 -->
 	
+
 
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

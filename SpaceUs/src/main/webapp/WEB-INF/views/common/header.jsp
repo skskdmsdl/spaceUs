@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <title>Space Us</title>
     <meta charset="utf-8">
+    <title>Space Us</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
 
@@ -23,12 +23,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/flaticon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/icomoon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/jquery-ui.min.css">
     
   <!-- loader -->
-  
   <%-- <script src="${pageContext.request.contextPath }/resources/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="${pageContext.request.contextPath }/resources/js/google-map.js"></script> --%>
   <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
+   <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
   </head>
   <body>
    
