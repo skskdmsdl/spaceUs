@@ -17,6 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/vendor/daterangepicker/daterangepicker.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
+	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 </head>
 <style>
 .login100-form-btn {
@@ -25,6 +26,9 @@
 a:hover {
     text-decoration: none;
     color: #00C89E;
+}
+.phone {
+    margin: auto;
 }
 </style>
 <body style="background-color: #666666;">
@@ -67,8 +71,11 @@ a:hover {
 						<span class="focus-input100"></span>
 						<span class="label-input100">Phone</span>
 					</div>
-
-
+						<div class="text-right p-b-10">
+						<a href="javascript:;" class="txt1">
+							휴대폰 인증
+						</a>
+					</div>
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							회원가입
@@ -80,9 +87,6 @@ a:hover {
 							이미 가입하셨나요?
 						</a>
 						<br /><br />
-						<span class="txt2">
-							Social enroll
-						</span>
 					</div>
 
 					<div class="login100-form-social flex-c-m">

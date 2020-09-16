@@ -25,6 +25,9 @@
 .next {
 margin-right: 16px
 }
+.prev, .next {
+color:white !important;
+}
 
 /* Position the "next button" to the right */
 .next {
@@ -35,6 +38,16 @@ margin-right: 16px
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
   opacity: 0.3;
+}
+
+.far, .fas {
+	color:black;
+	font-size:25px;
+}
+
+a:hover {
+  opacity: 0.3;
+  color:black;
 }
 
 
@@ -61,6 +74,20 @@ margin-right: 16px
   .prev, .next,.text {font-size: 11px}
 }
 </style>
+<script>
+$(function(){
+    $('[data-toggle="popover"]').popover();   
+    
+	$("#heart-a").click(function(){
+		if($("#heart-a").html() == '<i class="far fa-heart"></i>') {
+			$("#heart-a").html("<i class='fas fa-heart'></i>");
+		}
+		else if($("#heart-a").html() == '<i class="fas fa-heart"></i>') {
+			$("#heart-a").html("<i class='far fa-heart'></i>");
+		}
+	});
+});
+</script>
 <section class="ftco-section ftco-property-details">
       <div class="container">
       	<div class="row justify-content-center">
@@ -76,32 +103,17 @@ margin-right: 16px
       			<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i>
       				<div class="text text-center">
       				<div style="text-align:right; padding-right:5px">
-					    <i class="fas fa-heart" style="font-size:25px;"></i>
+					    <a href=javascript:; id="heart-a"><i class="far fa-heart"></i></a>
 					    &emsp;
-					    <i class="fas fa-share-alt" data-toggle="modal" data-target="#exampleModal" style="font-size:25px; margin-left: 30px;"></i>
+      				<!-- 공유하기 팝오버 시작-->
+					       <a href=javascript:; data-toggle="popover" data-trigger="focus" data-placement="bottom"
+					          title="공유하기" data-html="true"
+					       data-content='카카오톡, 트위터, 페이스북 공유<hr /><input type="text"/><button>url복사</button>'>
+					       <i class="far fa-share-square"></i>
+					       </a>
+      				<!-- 공유하기 팝오버 끝-->
 					    <input type="submit" value="예약하기" class="btn py-3 px-5 btn-primary" style="margin-left: 70px">
       				</div>
-      				<!-- 공유하기 모달창 시작-->
-						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						  <div class="modal-dialog">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <h5 class="modal-title" id="exampleModalLabel">공유하기</h5>
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						          <span aria-hidden="true">&times;</span>
-						        </button>
-						      </div>
-						      <div class="modal-body">
-						        ...
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						        <button type="button" class="btn btn-primary">Save changes</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-      				<!-- 공유하기 모달창 끝-->
       					<span class="subheading">카페</span>
       					<h2>The Blue Sky Home
       					</h2>
@@ -125,14 +137,14 @@ margin-right: 16px
 							  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 
 							    <li class="nav-item">
-							      <a class="nav-link active" id="pills-description-tab" data-toggle="pill"
-							      	 href="#pills-description" role="tab" aria-controls="pills-description"
-							      	 aria-expanded="true">공간옵션</a>
-							    </li>
-							    <li class="nav-item">
 							      <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill"
 							      	 href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer"
 							      	 aria-expanded="true">공간설명</a>
+							    </li>
+							    <li class="nav-item">
+							      <a class="nav-link active" id="pills-description-tab" data-toggle="pill"
+							      	 href="#pills-description" role="tab" aria-controls="pills-description"
+							      	 aria-expanded="true">공간옵션</a>
 							    </li>
 							    <li class="nav-item">
 							      <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill"
@@ -189,9 +201,8 @@ margin-right: 16px
 						    <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
 						      <div class="row">
 							   		<div class="col-md-7">
-							   			<h3 class="head">23 Reviews</h3>
+							   			<h3 class="head">23개의 리뷰</h3>
 							   			<div class="review d-flex">
-									   		<div class="user-img" style="background-image: url(${pageContext.request.contextPath }/resources/images/person_1.jpg)"></div>
 									   		<div class="desc">
 									   			<h4>
 									   				<span class="text-left">Jacob Webb</span>
@@ -211,7 +222,6 @@ margin-right: 16px
 									   		</div>
 									   	</div>
 									   	<div class="review d-flex">
-									   		<div class="user-img" style="background-image: url(${pageContext.request.contextPath }/resources/images/person_2.jpg)"></div>
 									   		<div class="desc">
 									   			<h4>
 									   				<span class="text-left">Jacob Webb</span>
@@ -231,7 +241,6 @@ margin-right: 16px
 									   		</div>
 									   	</div>
 									   	<div class="review d-flex">
-									   		<div class="user-img" style="background-image: url(${pageContext.request.contextPath }/resources/images/person_3.jpg)"></div>
 									   		<div class="desc">
 									   			<h4>
 									   				<span class="text-left">Jacob Webb</span>
@@ -253,7 +262,7 @@ margin-right: 16px
 							   		</div>
 							   		<div class="col-md-5">
 							   			<div class="rating-wrap">
-								   			<h3 class="head">Give a Review</h3>
+								   			<h3 class="head">별점 순</h3>
 								   			<div class="wrap">
 									   			<p class="star">
 									   				<span>
@@ -272,15 +281,12 @@ margin-right: 16px
 									   					<i class="ion-ios-star"></i>
 									   					<i class="ion-ios-star"></i>
 									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
 									   					(85%)
 								   					</span>
 								   					<span>10 Reviews</span>
 									   			</p>
 									   			<p class="star">
 									   				<span>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
 									   					<i class="ion-ios-star"></i>
 									   					<i class="ion-ios-star"></i>
 									   					<i class="ion-ios-star"></i>
@@ -292,19 +298,12 @@ margin-right: 16px
 									   				<span>
 									   					<i class="ion-ios-star"></i>
 									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
 									   					(10%)
 								   					</span>
 								   					<span>0 Reviews</span>
 									   			</p>
 									   			<p class="star">
 									   				<span>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
 									   					<i class="ion-ios-star"></i>
 									   					(0%)
 								   					</span>
@@ -321,7 +320,76 @@ margin-right: 16px
 				</div>
       </div>
     </section>
+    <!-- 추천시스템 시작 -->
+    <div class="container" style="border-top: 1px solid rgba(0, 0, 0, 0.1)">
+		<div class="row justify-content-center">
+      <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+      	<span class="subheading">카테고리 추천</span>
+        <h2 class="mb-2">카페를 찾고 계신가요?</h2>
+      </div>
+    </div>
+    <div class="row">
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    			<div class="text">
+    				<p class="price"><span class="old-price">800,000</span><span class="orig-price">$3,050<small>/mo</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="flaticon-bed"></span>3</li>
+    					<li><span class="flaticon-bathtub"></span>2</li>
+    					<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
+    				</ul>
+    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
+    				<span class="location">Oakland</span>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    					<span class="ion-ios-link"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    			<a href="#" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-2.jpg);"></a>
+    			<div class="text">
+    				<p class="price"><span class="old-price">800,000</span><span class="orig-price">$3,050<small>/mo</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="flaticon-bed"></span>3</li>
+    					<li><span class="flaticon-bathtub"></span>2</li>
+    					<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
+    				</ul>
+    				<h3><a href="#">The Blue Sky Home</a></h3>
+    				<span class="location">Oakland</span>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    					<span class="ion-ios-link"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    			<a href="#" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-3.jpg);"></a>
+    			<div class="text">
+    				<p class="price"><span class="old-price">800,000</span><span class="orig-price">$3,050<small>/mo</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="flaticon-bed"></span>3</li>
+    					<li><span class="flaticon-bathtub"></span>2</li>
+    					<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
+    				</ul>
+    				<h3><a href="#">The Blue Sky Home</a></h3>
+    				<span class="location">Oakland</span>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    					<span class="ion-ios-link"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+	</div>
+</section>
+    <!-- 추천시스템 끝 -->
 <script>
+
+	
 let b = document.querySelector('button');
 setTimeout(()=>b.focus(), 100);
 setTimeout(()=>b.blur(), 1000);
@@ -347,6 +415,8 @@ function showSlides(n) {
   }
   slides[slideIndex-1].style.display = "block";  
 }
+
+
 </script>
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
