@@ -31,13 +31,6 @@ a:hover {
     margin: auto;
 }
 </style>
-<script>
-$(function(){
-	$(".phone").click(function(){
-		alert('휴대폰인증클릭');
-	});
-});
-</script>
 <body style="background-color: #666666;">
 	
 	<div class="limiter">
