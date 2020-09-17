@@ -128,7 +128,11 @@ function urlcopy(){
 							  </div>
 						  </div>
       				<!-- 공유하기 팝오버 끝-->
-					    <input type="submit" value="예약하기" class="btn py-3 px-5 btn-primary" style="margin-left: 70px">
+      				<!-- 예약버튼 -->
+					    <input type="submit" onclick="rvSubmit();" value="예약하기" class="btn py-3 px-5 btn-primary" style="margin-left: 70px">
+					    <form id="reserveFrm">
+	   						<input type="hidden" name="" />
+      					</form>
       				</div>
       					<span class="subheading">카페</span>
       					<h2>The Blue Sky Home
@@ -171,7 +175,7 @@ function urlcopy(){
 				    <li class="nav-item">
 				      <a class="nav-link" id="detail-qna-tab" data-toggle="pill"
 				      	 href="#detail-qna" role="tab" aria-controls="detail-qna"
-				      	 aria-expanded="true">QnA</a>
+				      	 aria-expanded="true">Q&A</a>
 				    </li>
 				    <li class="nav-item">
 				      <a class="nav-link" id="detail-review-tab" data-toggle="pill"
@@ -265,7 +269,7 @@ function urlcopy(){
 <div class="tab-pane fade" id="detail-qna" role="tabpanel" aria-labelledby="detail-qna-tab">
      <div class="row">
    		<div class="col-md-10">
-   			<h3 class="head">5개의 QnA</h3>
+   			<h3 class="head">5개의 Q&A</h3>
    			<div class="review d-flex">
 		   		<div class="desc">
 		   			<h4>
@@ -422,6 +426,12 @@ function urlcopy(){
 		   			</p>
 		   		</div>
 	   		</div>
+	   		<br />
+   			<div class="rating-wrap">
+	   			<h3 class="head">포토리뷰</h3>
+	   			<div class="wrap">
+		   		</div>
+	   		</div>
    		</div>
    	</div>
    </div>
@@ -500,6 +510,12 @@ function urlcopy(){
 </section>
     <!-- 추천시스템 끝 -->
 <script>
+/* 예약버튼 */
+function rvSubmit() {
+/* 	$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserve?no=" + no) */
+	$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserveSpace.do")
+					.submit();
+}
 
 
 /* 이미지 슬라이드 시작 */

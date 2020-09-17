@@ -23,5 +23,13 @@ public class SpaceController {
 		
 		return "space/spaceDetail";
 	}
+	
+	@RequestMapping("/reserveSpace.do")
+	public String reserveSpace() {
+		
+		return "space/reserveSpace";
+	}
+	
+	
 }
 
