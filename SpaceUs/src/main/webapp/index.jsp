@@ -6,47 +6,107 @@
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+	  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+	  crossorigin="anonymous">
 <style>
 h1 {
 font-family: 'NEXON Lv1 Gothic OTF';
 }
-         
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+@import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
+
+#wrap {
+  margin: 50px 78px;
+  display: inline-block;
+  position: relative;
+  height: 60px;
+  float: right;
+  padding: 0;
+  position: relative;
+}
+
+input[type="text"] {
+  height: 40px;
+  font-size: 20px;
+  display: inline-block;
+  font-family: "NEXON Lv1 Gothic OTF";
+  font-weight: 100;
+  border: none;
+  outline: none;
+  color: black;
+  padding: 3px;
+  padding-right: 60px;
+  padding-left: 60px;
+  width: 0px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  z-index: 3;
+  transition: .4s cubic-bezier(0.5, 0.795, 0.5, 0.50);
+  cursor: pointer;
+}
+
+#search {
+	color: black;
+}
+
+#search:focus:hover {
+  border-bottom: 1px solid black;
+}
+
+input[type="text"]:focus {
+  width: 400px;
+  z-index: 1;
+  border-bottom: 1px solid black;
+  cursor: text;
+  left: -180px;
+  top: 55px;
+  text-align: center;
+}
+
+#search_submit:hover {
+  opacity: 0.8;
+}
 </style>
 <!-- 컨텐츠 시작 -->
-    <div class="hero-wrap ftco-degree-bg"
-    	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_1.jpg');
-    	 		height: 600px"
-    	 data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text justify-content-center align-items-center">
-          <div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-end">
-          	<div class="text text-center mx-auto" style="margin-bottom:25%;">
-	            <h1 class="mb-4">어떤 공간을<br>찾고 있나요?</h1>
-	            <form action="#" class="search-location mt-md-5">
-		        		<div class="row justify-content-center">
-		        			<div class="col-lg-10 align-items-end">
-		        			</div>
-		        		</div>
-		        	</form>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="mouse">
-				<a href="#" class="mouse-icon">
-					<div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
-				</a>
-			</div>
-    </div>
- 
+<div class="hero-wrap ftco-degree-bg"
+	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_1.jpg');
+	 		height: 600px"
+	 data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  	<div class="container">
+    	<div class="row no-gutters slider-text justify-content-center align-items-center">
+      		<div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-end">
+      			<div class="text text-center mx-auto" style="margin-bottom:25%;">
+          			<h1 class="mb-4">어떤 공간을<br>찾고 있나요?</h1>
+          			<p></p>
+     					<div class="col-lg-10 align-items-end" style="margin-top:-20px">
+     						<div id="wrap">
+							  <form action="" autocomplete="on">
+							  <input id="search" name="search" type="text" placeholder="키워드를 입력하세요">
+							  <i class="fas fa-search fa-2x" id="search_submit" type="submit" style="color:#00C89E"></i>
+							  </form>
+							</div>
+         				</div>
+       			</div>
+     		</div>
+   		</div>
+  <div class="mouse">
+	<a href="#" class="mouse-icon">
+		<div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
+	</a>
+</div>
+ </div>
+</div>
 <!-- 검색창 시작 -->
 <section class="ftco-section goto-here">
 <section class="search-section spad">
     <div class="container">
            		<div class="row justify-content-center">
       <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-      	<span class="subheading">원하는 공간을 검색해보세요</span>
+      	<span class="subheading">원하는 옵션으로 검색해보세요</span>
         <h2 class="mb-2">공간 검색</h2>
       </div>
     </div>
@@ -125,7 +185,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
                                     </label>
                                 </div>
                                 <div class="ml-column">
-                                    <label for="barbeque">바베큐
+                                    <label for="barbeque">Barbeque
                                         <input type="checkbox" id="barbeque">
                                         <span class="checkbox"></span>
                                     </label>
@@ -252,7 +312,85 @@ font-family: 'NEXON Lv1 Gothic OTF';
 	</div>
 </section>
 <!-- 추천공간 끝 -->
-	
 
+<!-- 이용자리뷰 시작 -->
+    <section class="ftco-section ftco-no-pt">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+          	<span class="subheading">생생한 리뷰를 만나보세요</span>
+            <h2>이용자 리뷰</h2>
+          </div>
+        </div>
+        <div class="row d-flex">
+          <div class="col-md-3 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <div class="text">
+                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
+                <div class="meta mb-3">
+                  <div><a href="#">July. 24, 2019</a></div>
+                  <div><a href="#">Admin</a></div>
+                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                </div>
+                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_1.jpg');">
+	              </a>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <div class="text">
+                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
+                <div class="meta mb-3">
+                  <div><a href="#">July. 24, 2019</a></div>
+                  <div><a href="#">Admin</a></div>
+                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                </div>
+                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_2.jpg');">
+	              </a>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <div class="text">
+                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
+                <div class="meta mb-3">
+                  <div><a href="#">July. 24, 2019</a></div>
+                  <div><a href="#">Admin</a></div>
+                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                </div>
+                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_3.jpg');">
+	              </a>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <div class="text">
+                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
+                <div class="meta mb-3">
+                  <div><a href="#">July. 24, 2019</a></div>
+                  <div><a href="#">Admin</a></div>
+                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                </div>
+                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');">
+	              </a>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>	
+<!-- 이용자리뷰 끝-->
+<script>
+document.querySelector('.stick').addEventListener('click',()=>{
+	  document.querySelector('.four').value = '';
+	});
+</script>
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
