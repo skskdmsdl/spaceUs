@@ -12,10 +12,23 @@ public class memberController {
 	
 	
 	@RequestMapping("/memberProfile.do")
-	public String login () {
-		
+	public String memberProfile () {
 		
 		return "member/memberProfile";
+	}
+	
+	//로그인
+	@RequestMapping("/memberLogin.do")
+	public String memberLogin () {
+		
+		return "member/memberLogin";
+	}
+	
+	//회원가입
+	@RequestMapping("/memberEnroll.do")
+	public String memberEnroll() {
+		
+		return "member/memberEnroll";
 	}
 
 }

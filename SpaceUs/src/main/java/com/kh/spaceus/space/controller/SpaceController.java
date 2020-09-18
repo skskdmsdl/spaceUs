@@ -11,10 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 public class SpaceController {
 
 	
-	@RequestMapping("/space.do")
-	public String space() {
+	@RequestMapping("/insertSpace.do")
+	public String insertSpace() {
 		
-		return "space/space";
+		
+		return "space/insertSpace";
 	}
 	
 	@RequestMapping("/spaceDetail.do")
@@ -22,5 +23,18 @@ public class SpaceController {
 		
 		return "space/spaceDetail";
 	}
+	
+	@RequestMapping("/reserveSpace.do")
+	public String reserveSpace() {
+		
+		return "space/reserveSpace";
+	}
+	
+	@RequestMapping("/searchSpace.do")
+	public String searchSpace() {
+		
+		return "space/searchSpace";
+	}
+	
 }
 
