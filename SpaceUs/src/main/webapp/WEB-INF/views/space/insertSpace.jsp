@@ -6,7 +6,18 @@
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-
+<style>
+.image-div {
+	background-color:#f7f7f7;
+	border:1px solid gray;
+	display:inline-block;
+	width:200px;
+	height: 200px;
+	margin-right: 20px;
+}
+.fas {position: absolute; padding: 90px;}
+input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
+</style>
 <!-- 컨텐츠 시작 -->
     <div class="hero-wrap ftco-degree-bg"
     	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_1.jpg');
@@ -25,7 +36,7 @@
     </div>
     <!-- Breadcrumb Section End -->
 
-    <!-- Property Submit Section Begin -->
+    <!-- 공간 등록 폼 -->
     <section class="property-submit-section spad">
         <div class="container">
             <div class="row">
@@ -33,54 +44,40 @@
                     <div class="property-submit-form">
                         <form action="#">
                             <div class="pf-title">
-                                <h4>Title</h4>
-                                <input type="text" placeholder="Your Title*">
+                                <h4>공간이름</h4>
+                                <input type="text">
                             </div>
                             <div class="pf-summernote">
-                                <h4>Content</h4>
-                                <textarea class="texteditor-content" name="example"></textarea>
+                                <h4>공간설명</h4>
+                                <textarea name="example" style="width:100%; height:200px"></textarea>
                             </div>
                             <div class="pf-location">
-                                <h4>Property Location</h4>
-                                <div class="location-inputs">
-                                    <input type="text" placeholder="Address">
-                                    <input type="text" placeholder="Neighborhood">
-                                    <input type="text" placeholder="City">
-                                    <input type="text" placeholder="State">
-                                    <input type="text" placeholder="Country">
-                                    <input type="text" placeholder="Posta Code / Zip">
-                                </div>
+                                <h4>공간주소</h4>
+                                <div style="display:inline-block; width:40%">
+	                                <input class="address-input" type="text"/>
+	                            </div>
+                                <div style="display:inline-block; width:40%">
+		                            <button class="btn">주소 검색</button>
+	                            </div>
+                                <input class="address-input" type="text">
+                                <input class="address-input" type="text">
                             </div>
-                            <div class="pf-map">
-                                <h4>Goolge Map</h4>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="map-inputs">
-                                            <input type="text" placeholder="Latitude">
-                                            <input type="text" placeholder="Longitude">
-                                            <input type="text" placeholder="Street View">
-                                        </div>
-                                        <button type="button" class="site-btn">PPlace the pin the address above</button>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <div class="g-map">
-                                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d735515.5813275519!2d-80.41163541934742!3d43.93644386501528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882a55bbf3de23d7%3A0x3ada5af229b47375!2sMono%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sbd!4v1583262687289!5m2!1sen!2sbd" height="245" style="border:0;" allowfullscreen=""></iframe>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="pf-phone" style="margin-bottom: 45px;">
+                                <h4>공간전화번호</h4>
+                                <input type="text">
                             </div>
                             <div class="pf-type">
-                                <h4>Property type</h4>
+                                <h4>카테고리 선택</h4>
                                 <div class="type-item">
-                                    <label for="pt-apart">Apartment
+                                    <label for="pt-apart">카페
                                         <input type="checkbox" id="pt-apart">
                                         <span class="checkbox"></span>
                                     </label>
-                                    <label for="pt-house">House
+                                    <label for="pt-house">식당
                                         <input type="checkbox" id="pt-house">
                                         <span class="checkbox"></span>
                                     </label>
-                                    <label for="pt-off">Office
+                                    <label for="pt-off">사무실
                                         <input type="checkbox" id="pt-off">
                                         <span class="checkbox"></span>
                                     </label>
@@ -99,7 +96,7 @@
                                 </div>
                             </div>
                             <div class="pf-status">
-                                <h4>Property status</h4>
+                                <h4>가능시간</h4>
                                 <div class="status-item">
                                     <label for="ps-rent">For rent
                                         <input type="checkbox" id="ps-rent">
@@ -112,49 +109,39 @@
                                 </div>
                             </div>
                             <div class="pf-feature-price">
-                                <h4>Featured Price</h4>
+                                <h4>가격 (시간당)</h4>
                                 <div class="fp-inputs">
-                                    <input type="text" placeholder="Price">
-                                    <input type="text" placeholder="Second Price ( Optional )">
-                                    <input type="text" placeholder="After Price Label (ex: monthly)">
+                                    <input type="number" placeholder="Price">
                                 </div>
                             </div>
                             <div class="pf-feature">
-                                <h4>Property Features</h4>
+                                <h4>옵션선택</h4>
                                 <div class="features-list">
                                     <div class="feature-item">
-                                        <label for="air">Air conditioning
+                                        <label for="air">와이파이
                                             <input type="checkbox" id="air">
                                             <span class="checkbox"></span>
                                         </label>
-                                        <label for="lundry">Laundry
+                                        <label for="lundry">식기
                                             <input type="checkbox" id="lundry">
                                             <span class="checkbox"></span>
                                         </label>
-                                        <label for="refrigerator">Refrigerator
+                                        <label for="refrigerator">취사가능
                                             <input type="checkbox" id="refrigerator">
-                                            <span class="checkbox"></span>
-                                        </label>
-                                        <label for="washer">Washer
-                                            <input type="checkbox" id="washer">
                                             <span class="checkbox"></span>
                                         </label>
                                     </div>
                                     <div class="feature-item">
-                                        <label for="barbeque">Barbeque
+                                        <label for="barbeque">에어컨
                                             <input type="checkbox" id="barbeque">
                                             <span class="checkbox"></span>
                                         </label>
-                                        <label for="lawn">Lawn
+                                        <label for="lawn">반려동물 동반가능
                                             <input type="checkbox" id="lawn">
                                             <span class="checkbox"></span>
                                         </label>
-                                        <label for="sauna">Sauna
+                                        <label for="sauna">테이블/의자
                                             <input type="checkbox" id="sauna">
-                                            <span class="checkbox"></span>
-                                        </label>
-                                        <label for="wifi">Wifi
-                                            <input type="checkbox" id="wifi">
                                             <span class="checkbox"></span>
                                         </label>
                                     </div>
@@ -171,10 +158,6 @@
                                             <input type="checkbox" id="pool">
                                             <span class="checkbox"></span>
                                         </label>
-                                        <label for="window">Window Coverings
-                                            <input type="checkbox" id="window">
-                                            <span class="checkbox"></span>
-                                        </label>
                                     </div>
                                     <div class="feature-item">
                                         <label for="gym">Gym
@@ -189,31 +172,43 @@
                                             <input type="checkbox" id="tv">
                                             <span class="checkbox"></span>
                                         </label>
-                                        <label for="villa">Villa
-                                            <input type="checkbox" id="villa">
-                                            <span class="checkbox"></span>
-                                        </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="pf-feature-image">
-                                <h4>Featured Image</h4>
-                                <div class="feature-image-content"></div>
+                                <h4>공간이미지</h4>
+                                <div class="image-div">
+	                                <div>
+	                                	<i class="fas fa-plus"></i>
+	                                </div>
+	                            </div>
+                                <div class="image-div">
+	                                <div>
+	                                	<i class="fas fa-plus"></i>
+	                                </div>
+	                            </div>
+                                <div class="image-div">
+	                                <div>
+	                                	<i class="fas fa-plus"></i>
+	                                </div>
+	                            </div>
+	                            <input type="file" name="" id="" />
+	                            <input type="file" name="" id="" />
+	                            <input type="file" name="" id="" />
+                            </div>
+                            <div class="pf-account" style="margin-bottom: 45px;">
+	                            <div style="display:inline-block; width:40%">
+	                                <h4>사업자등록증</h4>
+	                                <input type="text"/>
+	                            </div>
+	                            <div style="display:inline-block; width:40%; margin-left: 14em;">
+	                                <h4>계좌번호</h4>
+	                                <input type="text"/>
+	                            </div>
                             </div>
                             <div class="pf-property-details">
-                                <h4>Property details</h4>
-                                <div class="property-details-inputs">
-                                    <input type="text" placeholder="Property ID">
-                                    <input type="text" placeholder="Area Size ( Only digits )">
-                                    <input type="text" placeholder="Size Prefix">
-                                    <input type="text" placeholder="Bedrooms">
-                                    <input type="text" placeholder="Bathrooms">
-                                    <input type="text" placeholder="Garages">
-                                    <input type="text" placeholder="Garages Size">
-                                    <input type="text" placeholder="Year Built">
-                                    <input type="text" placeholder="Virtual Tour Video URL">
-                                </div>
-                                <button type="submit" class="site-btn">Submit Property</button>
+                            	<p>* 공간등록 심사는 2일 ~ 7일 소요됩니다.</p>
+                                <button type="submit" class="site-btn">공간등록</button>
                             </div>
                         </form>
                     </div>

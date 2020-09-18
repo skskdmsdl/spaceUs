@@ -7,6 +7,7 @@
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <script src="https://codepen.io/shshaw/pen/QmZYMG.js"></script>
+<link href="https://cdn.materialdesignicons.com/5.5.55/css/materialdesignicons.min.css" rel="stylesheet">
 
 <style>
 .prev, .next {
@@ -22,36 +23,14 @@
   border-radius: 0 3px 3px 0;
 }
 
-.next {
-margin-right: 16px
-}
-.prev, .next {
-color:white !important;
-}
+.next {margin-right: 16px}
+.prev, .next {color:white !important;}
+.next {right: 0; border-radius: 3px 0 0 3px;}
+.prev:hover, .next:hover {opacity: 0.3;}
+.far, .fas {color:black; font-size:25px;}
+.fab {margin-right:5px;}
+a:hover {opacity: 0.3; color:black;}
 
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  opacity: 0.3;
-}
-
-.far, .fas {
-	color:black;
-	font-size:25px;
-}
-
-a:hover {
-  opacity: 0.3;
-  color:black;
-}
-
-
-/* Fading animation */
 .fade1 {
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
@@ -69,14 +48,28 @@ a:hover {
   to {opacity: 1}
 }
 
-/* On smaller screens, decrease text size */
 @media only screen and (max-width: 300px) {
   .prev, .next,.text {font-size: 11px}
 }
 </style>
 <script>
+	var url = $(location).attr('href');
+	
 $(function(){
-    $('[data-toggle="popover"]').popover();   
+
+	$("#url-input").attr('value', url);
+	
+    $("[data-toggle=popover]").popover({
+        html : true,
+        content: function() {
+          var content = $(this).attr("data-popover-content");
+          return $(content).children(".popover-body").html();
+        },
+        title: function() {
+          var title = $(this).attr("data-popover-content");
+          return $(title).children(".popover-heading").html();
+        }
+    });
     
 	$("#heart-a").click(function(){
 		if($("#heart-a").html() == '<i class="far fa-heart"></i>') {
@@ -87,6 +80,20 @@ $(function(){
 		}
 	});
 });
+
+function urlcopy(){
+	var tempElem = document.createElement('textarea');
+
+	tempElem.value = url;  
+	document.body.appendChild(tempElem);
+	tempElem.select();
+	document.execCommand("copy");
+	document.body.removeChild(tempElem);
+
+	alert("url 복사완료!");
+}
+
+
 </script>
 <section class="ftco-section ftco-property-details">
       <div class="container">
@@ -107,12 +114,25 @@ $(function(){
 					    &emsp;
       				<!-- 공유하기 팝오버 시작-->
 					       <a href=javascript:; data-toggle="popover" data-trigger="focus" data-placement="bottom"
-					          title="공유하기" data-html="true"
-					       data-content='카카오톡, 트위터, 페이스북 공유<hr /><input type="text"/><button>url복사</button>'>
+					          tabindex="0" title="공유하기" data-html="true" data-popover-content="#a1" >
 					       <i class="far fa-share-square"></i>
 					       </a>
+					       
+					       <div class="d-none" id="a1">
+							  <div class="popover-body">
+							  <i class="fab fa-korvue fa-2x" style="color:#fae100"></i>
+							  <i class="fab fa-twitter-square fa-2x" style="color:#2aa9e0"></i>
+							  <i class="fab fa-facebook-square fa-2x" style="color:#3b5998"></i>
+							    <input class="input-group-text w-100 mt-2 mb-2" type="text" id="url-input">
+							    <button class="btn btn-primary w-100" id="url-btn" onclick="urlcopy();">URL 복사</button>
+							  </div>
+						  </div>
       				<!-- 공유하기 팝오버 끝-->
-					    <input type="submit" value="예약하기" class="btn py-3 px-5 btn-primary" style="margin-left: 70px">
+      				<!-- 예약버튼 -->
+					    <input type="submit" onclick="rvSubmit();" value="예약하기" class="btn py-3 px-5 btn-primary" style="margin-left: 70px">
+					    <form id="reserveFrm">
+	   						<input type="hidden" name="" />
+      					</form>
       				</div>
       					<span class="subheading">카페</span>
       					<h2>The Blue Sky Home
@@ -130,196 +150,298 @@ $(function(){
       			</div>
       		</div>
       	</div>
-      	<div class="row">
-      		<div class="col-md-12 pills">
-						<div class="bd-example bd-example-tabs">
-							<div class="d-flex justify-content-center">
-							  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+     	<!-- 세부카테고리 시작 -->
+   	<div class="row">
+   		<div class="col-md-12 pills">
+			<div class="bd-example bd-example-tabs">
+				<div class="d-flex justify-content-center">
+				  <ul class="nav nav-pills mb-3" id="detail-tab" role="tablist">
 
-							    <li class="nav-item">
-							      <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill"
-							      	 href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer"
-							      	 aria-expanded="true">공간설명</a>
-							    </li>
-							    <li class="nav-item">
-							      <a class="nav-link active" id="pills-description-tab" data-toggle="pill"
-							      	 href="#pills-description" role="tab" aria-controls="pills-description"
-							      	 aria-expanded="true">공간옵션</a>
-							    </li>
-							    <li class="nav-item">
-							      <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill"
-							      	 href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer"
-							      	 aria-expanded="true">호스트정보</a>
-							    </li>
-							    <li class="nav-item">
-							      <a class="nav-link" id="pills-review-tab" data-toggle="pill"
-							      	 href="#pills-review" role="tab" aria-controls="pills-review"
-							      	 aria-expanded="true">리뷰</a>
-							    </li>
-							   
-							  </ul>
-							</div>
-
-						  <div class="tab-content" id="pills-tabContent">
-						    <div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
-						    	<div class="row">
-						    		<div class="col-md-4">
-						    			<ul class="features">
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Lot Area: 1,250 SQ FT</li>
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Bed Rooms: 4</li>
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Bath Rooms: 4</li>
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Luggage</li>
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Garage: 2</li>
-						    			</ul>
-						    		</div>
-						    		<div class="col-md-4">
-						    			<ul class="features">
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Floor Area: 1,300 SQ FT</li>
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Year Build:: 2019</li>
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Water</li>
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Stories: 2</li>
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Roofing: New</li>
-						    			</ul>
-						    		</div>
-						    		<div class="col-md-4">
-						    			<ul class="features">
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Floor Area: 1,300 SQ FT</li>
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Year Build:: 2019</li>
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Water</li>
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Stories: 2</li>
-						    				<li class="check"><span class="ion-ios-checkmark"></span>Roofing: New</li>
-						    			</ul>
-						    		</div>
-						    	</div>
-						    </div>
-
-						    <div class="tab-pane fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
-						      <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-									<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
-						    </div>
-						    
-						    <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
-						      <div class="row">
-							   		<div class="col-md-7">
-							   			<h3 class="head">23개의 리뷰</h3>
-							   			<div class="review d-flex">
-									   		<div class="desc">
-									   			<h4>
-									   				<span class="text-left">Jacob Webb</span>
-									   				<span class="text-right">14 March 2018</span>
-									   			</h4>
-									   			<p class="star">
-									   				<span>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-								   					</span>
-								   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-									   			</p>
-									   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-									   		</div>
-									   	</div>
-									   	<div class="review d-flex">
-									   		<div class="desc">
-									   			<h4>
-									   				<span class="text-left">Jacob Webb</span>
-									   				<span class="text-right">14 March 2018</span>
-									   			</h4>
-									   			<p class="star">
-									   				<span>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-								   					</span>
-								   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-									   			</p>
-									   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-									   		</div>
-									   	</div>
-									   	<div class="review d-flex">
-									   		<div class="desc">
-									   			<h4>
-									   				<span class="text-left">Jacob Webb</span>
-									   				<span class="text-right">14 March 2018</span>
-									   			</h4>
-									   			<p class="star">
-									   				<span>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-								   					</span>
-								   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-									   			</p>
-									   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-									   		</div>
-									   	</div>
-							   		</div>
-							   		<div class="col-md-5">
-							   			<div class="rating-wrap">
-								   			<h3 class="head">별점 순</h3>
-								   			<div class="wrap">
-									   			<p class="star">
-									   				<span>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					(98%)
-								   					</span>
-								   					<span>20 Reviews</span>
-									   			</p>
-									   			<p class="star">
-									   				<span>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					(85%)
-								   					</span>
-								   					<span>10 Reviews</span>
-									   			</p>
-									   			<p class="star">
-									   				<span>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					(70%)
-								   					</span>
-								   					<span>5 Reviews</span>
-									   			</p>
-									   			<p class="star">
-									   				<span>
-									   					<i class="ion-ios-star"></i>
-									   					<i class="ion-ios-star"></i>
-									   					(10%)
-								   					</span>
-								   					<span>0 Reviews</span>
-									   			</p>
-									   			<p class="star">
-									   				<span>
-									   					<i class="ion-ios-star"></i>
-									   					(0%)
-								   					</span>
-								   					<span>0 Reviews</span>
-									   			</p>
-									   		</div>
-								   		</div>
-							   		</div>
-							   	</div>
-						    </div>
-						  </div>
-						</div>
-		      </div>
+				    <li class="nav-item">
+				      <a class="nav-link" id="detail-manufacturer-tab" data-toggle="pill"
+				      	 href="#detail-manufacturer" role="tab" aria-controls="detail-manufacturer"
+				      	 aria-expanded="true">공간설명</a>
+				    </li>
+				    <li class="nav-item">
+				      <a class="nav-link active" id="detail-description-tab" data-toggle="pill"
+				      	 href="#detail-description" role="tab" aria-controls="detail-description"
+				      	 aria-expanded="true">공간옵션</a>
+				    </li>
+				    <li class="nav-item">
+				      <a class="nav-link" id="detail-contact-tab" data-toggle="pill"
+				      	 href="#detail-contact" role="tab" aria-controls="detail-contact"
+				      	 aria-expanded="true">Contact</a>
+				    </li>
+				    <li class="nav-item">
+				      <a class="nav-link" id="detail-qna-tab" data-toggle="pill"
+				      	 href="#detail-qna" role="tab" aria-controls="detail-qna"
+				      	 aria-expanded="true">Q&A</a>
+				    </li>
+				    <li class="nav-item">
+				      <a class="nav-link" id="detail-review-tab" data-toggle="pill"
+				      	 href="#detail-review" role="tab" aria-controls="detail-review"
+				      	 aria-expanded="true">리뷰</a>
+				    </li>
+				   
+				  </ul>
 				</div>
-      </div>
-    </section>
+     	<!-- 세부카테고리 끝-->
+     	
+<div class="tab-content" id="detail-tabContent">
+ <!-- 공간설명 시작-->
+   <div class="tab-pane fade" id="detail-manufacturer" role="tabpanel" aria-labelledby="detail-manufacturer-tab">
+    <p>공간설명 1</p>
+    <p>공간설명 2</p>
+   </div>
+ <!-- 공간설명 끝-->
+ 
+<!-- 공간옵션시작 -->
+   <div class="tab-pane fade show active" id="detail-description" role="tabpanel" aria-labelledby="detail-description-tab">
+   	<div class="row">
+   		<div class="col-md-4">
+   			<ul class="features">
+   				<li class="check"><span class="ion-ios-checkmark"></span>Lot Area: 1,250 SQ FT</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>Bed Rooms: 4</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>Bath Rooms: 4</li>
+   			</ul>
+   		</div>
+   		<div class="col-md-4">
+   			<ul class="features">
+   				<li class="check"><span class="ion-ios-checkmark"></span>Floor Area: 1,300 SQ FT</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>Year Build:: 2019</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>Water</li>
+   			</ul>
+   		</div>
+   		<div class="col-md-4">
+   			<ul class="features">
+   				<li class="check"><span class="ion-ios-checkmark"></span>Floor Area: 1,300 SQ FT</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>Year Build:: 2019</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>Water</li>
+   			</ul>
+   		</div>
+   	</div>
+   </div>
+<!-- 공간옵션 끝-->
+
+<!-- contact 시작 -->
+ <div class="tab-pane fade" id="detail-contact" role="tabpanel" aria-labelledby="detail-manufacturer-tab">
+ <div class="row" style="margin-left: 5em;">
+      <div class="contact-info">
+          <div class="ci-item">
+              <div class="ci-icon">
+                  <i class="fa fa-map-marker"></i>
+              </div>
+              <div class="ci-text">
+                  <h5>주소</h5>
+                  <p>경기도 파주시 금바위로</p>
+              </div>
+          </div>
+          <div class="ci-item">
+              <div class="ci-icon">
+                  <i class="fa fa-mobile"></i>
+              </div>
+              <div class="ci-text">
+                  <h5>문의전화</h5>
+                  <ul>
+                      <li>125-711-811</li>
+                  </ul>
+              </div>
+          </div>
+          <div class="ci-item">
+              <div class="ci-icon">
+                  <i class="fa fa-headphones"></i>
+              </div>
+              <div class="ci-text">
+                  <h5>이메일주소</h5>
+                  <p>Support.aler@gmail.com</p>
+              </div>
+          </div>
+    </div>
+    <div class="cs-map">
+       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d735515.5813275519!2d-80.41163541934742!3d43.93644386501528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882a55bbf3de23d7%3A0x3ada5af229b47375!2sMono%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sbd!4v1583262687289!5m2!1sen!2sbd"
+           height="300" style="border:0;" allowfullscreen=""></iframe>
+	</div>
+ </div>
+</div>
+<!-- contact 끝 -->
+
+<!-- qna시작 -->
+<div class="tab-pane fade" id="detail-qna" role="tabpanel" aria-labelledby="detail-qna-tab">
+     <div class="row">
+   		<div class="col-md-10">
+   			<h3 class="head">5개의 Q&A</h3>
+   			<div class="review d-flex">
+		   		<div class="desc">
+		   			<h4>
+		   				<span class="text-left">질문자 닉네임</span>
+		   				<span class="text-right">14 March 2018</span>
+		   			</h4>
+		   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+		   		</div>
+		   
+		   	</div>
+   			<div class="review d-flex" style="padding: 15px;">
+		   		<div class="desc" style="background-color:#f7f7f7; padding:5px">
+		   			<h4>
+		   				<span class="text-left"><i class="mdi mdi-subdirectory-arrow-right"></i>&nbsp;방 이름</span>
+		   				<span class="text-right">14 March 2018</span>
+		   			</h4>
+		   			<p style="padding-left:15px">답변내용답변내용답변내용답변내용답변내용답변내용</p>
+		   		</div>
+		   	</div>
+		   	<div class="review d-flex">
+		   		<div class="desc">
+		   			<h4>
+		   				<span class="text-left">Jacob Webb</span>
+		   				<span class="text-right">14 March 2018</span>
+		   			</h4>
+		   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+		   		</div>
+		   	</div>
+		   	<div class="review d-flex">
+		   		<div class="desc">
+		   			<h4>
+		   				<span class="text-left">Jacob Webb</span>
+		   				<span class="text-right">14 March 2018</span>
+		   			</h4>
+		   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+		   		</div>
+		   	</div>
+   		</div>
+   		</div>
+   		</div>
+<!-- qna끝 -->
+
+<!-- 리뷰 시작-->
+   <div class="tab-pane fade" id="detail-review" role="tabpanel" aria-labelledby="detail-review-tab">
+     <div class="row">
+   		<div class="col-md-7">
+   			<h3 class="head">23개의 리뷰</h3>
+   			<div class="review d-flex">
+		   		<div class="desc">
+		   			<h4>
+		   				<span class="text-left">Jacob Webb</span>
+		   				<span class="text-right">14 March 2018</span>
+		   			</h4>
+		   			<p class="star">
+		   				<span>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+	   					</span>
+	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+		   			</p>
+		   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+		   		</div>
+		   	</div>
+		   	<div class="review d-flex">
+		   		<div class="desc">
+		   			<h4>
+		   				<span class="text-left">Jacob Webb</span>
+		   				<span class="text-right">14 March 2018</span>
+		   			</h4>
+		   			<p class="star">
+		   				<span>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+	   					</span>
+	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+		   			</p>
+		   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+		   		</div>
+		   	</div>
+		   	<div class="review d-flex">
+		   		<div class="desc">
+		   			<h4>
+		   				<span class="text-left">Jacob Webb</span>
+		   				<span class="text-right">14 March 2018</span>
+		   			</h4>
+		   			<p class="star">
+		   				<span>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+	   					</span>
+	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+		   			</p>
+		   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+		   		</div>
+		   	</div>
+   		</div>
+   		<div class="col-md-5">
+   			<div class="rating-wrap">
+	   			<h3 class="head">별점 순</h3>
+	   			<div class="wrap">
+		   			<p class="star">
+		   				<span>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					(98%)
+	   					</span>
+	   					<span>20 Reviews</span>
+		   			</p>
+		   			<p class="star">
+		   				<span>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					(85%)
+	   					</span>
+	   					<span>10 Reviews</span>
+		   			</p>
+		   			<p class="star">
+		   				<span>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					(70%)
+	   					</span>
+	   					<span>5 Reviews</span>
+		   			</p>
+		   			<p class="star">
+		   				<span>
+		   					<i class="ion-ios-star"></i>
+		   					<i class="ion-ios-star"></i>
+		   					(10%)
+	   					</span>
+	   					<span>0 Reviews</span>
+		   			</p>
+		   			<p class="star">
+		   				<span>
+		   					<i class="ion-ios-star"></i>
+		   					(0%)
+	   					</span>
+	   					<span>0 Reviews</span>
+		   			</p>
+		   		</div>
+	   		</div>
+	   		<br />
+   			<div class="rating-wrap">
+	   			<h3 class="head">포토리뷰</h3>
+	   			<div class="wrap">
+		   		</div>
+	   		</div>
+   		</div>
+   	</div>
+   </div>
+   <!-- 리뷰 끝 -->
+  </div>
+</div>
+    </div>
+</div>
+  </div>
+</section>
     <!-- 추천시스템 시작 -->
     <div class="container" style="border-top: 1px solid rgba(0, 0, 0, 0.1)">
 		<div class="row justify-content-center">
@@ -388,8 +510,15 @@ $(function(){
 </section>
     <!-- 추천시스템 끝 -->
 <script>
+/* 예약버튼 */
+function rvSubmit() {
+/* 	$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserve?no=" + no) */
+	$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserveSpace.do")
+					.submit();
+}
 
-	
+
+/* 이미지 슬라이드 시작 */
 let b = document.querySelector('button');
 setTimeout(()=>b.focus(), 100);
 setTimeout(()=>b.blur(), 1000);
@@ -415,7 +544,7 @@ function showSlides(n) {
   }
   slides[slideIndex-1].style.display = "block";  
 }
-
+/* 이미지 슬라이드 끝 */
 
 </script>
 <!-- 컨텐츠 끝 -->
