@@ -83,7 +83,7 @@ a:hover {
 					</div>
 					
 					<div class="text-center p-t-46 p-b-20">
-						<a href="${pageContext.request.contextPath }/login/login.do" class="txt1">
+						<a href="${pageContext.request.contextPath }/member/memberLogin.do" class="txt1">
 							이미 가입하셨나요?
 						</a>
 						<br /><br />
