@@ -11374,6 +11374,7 @@ icons path
  For all pages 
  ============================================================== */
 #main-wrapper {
+  background-color:#edf1f5;
   width: 100%;
   overflow: hidden; }
 
@@ -12124,3 +12125,7 @@ File: scss
     text-align: center;
     margin-top: 10px;
     overflow: hidden; } }
+
+.thumbnail .block-20{
+	border-radius: 5px;
+}    
