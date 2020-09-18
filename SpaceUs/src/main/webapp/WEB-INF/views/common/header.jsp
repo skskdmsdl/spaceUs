@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/dist/css/style.css">
     <!-- Dashboard 1 Page CSS -->
     <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/dist/css/pages/dashboard1.css">
-    
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link rel="canonical" href="https://www.wrappixel.com/templates/elegant-admin-lite/" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
