@@ -113,7 +113,7 @@ input[type="text"]:focus {
       </div>
     </div>
         <div class="search-form-content">
-            <form action="#" class="filter-form">
+            <form id="filter-search" class="filter-form">
                 <select class="nice-select sm-width">
                     <option value="">Chose The City</option>
                 </select>
@@ -154,7 +154,7 @@ input[type="text"]:focus {
                     <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 66.6667%;"></span>
                     </div>
                 </div>
-                <button type="button" class="search-btn sm-width">Search</button>
+                <button type="button" onclick="searchSpace();"class="search-btn sm-width">Search</button>
             </form>
         </div>
         <div class="more-option">
@@ -390,6 +390,14 @@ input[type="text"]:focus {
     </section>	
 <!-- 이용자리뷰 끝-->
 <script>
+function searchSpace(){
+	$("#filter-search").attr("action", 
+				"${ pageContext.request.contextPath}/space/searchSpace.do")
+				.attr("method", "GET")
+				.submit();
+}
+
+
 document.querySelector('.stick').addEventListener('click',()=>{
 	  document.querySelector('.four').value = '';
 	});
