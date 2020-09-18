@@ -10208,7 +10208,6 @@ select:focus{
   width: 100%;
   margin-bottom: 20px;
   margin-right: 20px;
-  /* margin-right: 0 !important; */
 }
 
 
@@ -14572,12 +14571,6 @@ li .richText-btn[data-command=toggleCode] {
 
   .search-form-content .filter-form {
     margin-right: 0;
-  }
-
-  .search-form-content .filter-form .sm-width {
-    width: 100%;
-    margin-bottom: 20px;
-    margin-right: 0 !important;
   }
 
   .change-btn {

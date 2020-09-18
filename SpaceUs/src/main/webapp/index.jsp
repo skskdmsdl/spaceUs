@@ -5,7 +5,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 	  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 	  crossorigin="anonymous">
@@ -15,6 +17,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
 }
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
 @import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
+
 
 #wrap {
   margin: 50px 78px;

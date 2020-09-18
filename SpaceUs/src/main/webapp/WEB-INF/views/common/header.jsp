@@ -43,13 +43,16 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/icomoon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/jquery-ui.min.css">
+    <!-- icons -->
+    <script src="https://kit.fontawesome.com/b74a25ff1b.js" crossorigin="anonymous"></script>
     
      
   <!-- loader -->
   <%-- <script src="${pageContext.request.contextPath }/resources/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="${pageContext.request.contextPath }/resources/js/google-map.js"></script> --%>
-  <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
-   <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+   <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
+  
   </head>
   <body>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
@@ -58,13 +61,65 @@
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span>
 	      </button>
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
-	          <li class="nav-item"><a href="${pageContext.request.contextPath }/login/login.do" class="nav-link">로그인</a></li>
-	          <li class="nav-item"><a href="${pageContext.request.contextPath }/enroll/enroll.do" class="nav-link">회원가입</a></li>
-	        </ul>
-	      </div>
+	      <sec:authorize access="isAnonymous()">
+		      <div class="collapse navbar-collapse" id="ftco-nav">
+		        <ul class="navbar-nav ml-auto">
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/login/login.do" class="nav-link">로그인</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/enroll/enroll.do" class="nav-link">회원가입</a></li>
+		        </ul>
+		      </div>
+	      </sec:authorize>
+	      <sec:authorize access="isAuthenticated()">
+	        <div class="collapse navbar-collapse" id="ftco-nav"  data-toggle="modal" data-target="#exampleModal">
+	        	<div class="navbar-nav ml-auto" style="cursor: pointer !important;">
+	        		<div>반갑습니다. &nbsp;</div>
+	        		<div><sec:authentication property="principal.username"/> 님!</div>
+	        		&nbsp;
+	        		<div class="user_profile_icon" data-subscribe-type="PRO" 
+	        		     style="background: #22B47B; border-radius: 90%; width: 40px;  height: 40px;">
+	        			<img src="https://resource.miricanvas.com/image/common/profile_argo.svg">
+	        		</div>
+	        	</div>
+		      </div>
+		  </sec:authorize>
 	    </div>
 	  </nav>
     <!-- END nav -->
+    
+    <!-- Modal -->
+	<div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-auto" role="document">
+	    <div class="modal-content"  style="border-radius: 1.3em; left:36rem; top:3rem; width:50%; ">
+	      <div class="modal-header" style="background: #30D795; border-radius: 1.3em;">
+	        <h5 class="modal-title" id="exampleModalLabel">
+	        	<img src="https://resource.miricanvas.com/image/common/profile_argo.svg" style="background: #22B47B; border-right: 0; border-radius: 90%; width: 40px;  height: 40px;">
+	        </h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<div>
+	    	    <a href="#">
+	    	    	<i class="fas fa-hashtag"></i>
+	    	    	마이페이지
+	    	    </a>
+	      	</div>
+	      	<div>
+		        <a href="#">
+		        	예약관리
+		        </a>
+	      	 </div>
+	      	 <div>
+		        <a href="#">
+		        	위시리스트
+		        </a>
+	      	 </div>
+	      	 <form:form action="${ pageContext.request.contextPath }/login/memberLogout.do">
+	      	 	 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">로그아웃</button>
+	      	 </form:form>
+	      </div>
+	    </div>
+	  </div>
+	</div>

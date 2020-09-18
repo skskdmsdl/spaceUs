@@ -8,14 +8,16 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequestMapping("/login")
+//세션저장
 public class LoginController {
 	
 	
 	@RequestMapping("/login.do")
 	public String login () {
 		
-		
 		return "login/login";
 	}
+	
+
 
 }

@@ -12,9 +12,7 @@ public class memberController {
 	
 	
 	@RequestMapping("/memberProfile.do")
-	public String login () {
-		
-		
+	public String login () {	
 		return "member/memberProfile";
 	}
 
