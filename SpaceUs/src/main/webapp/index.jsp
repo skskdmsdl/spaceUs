@@ -270,7 +270,7 @@ input[type="text"]:focus {
     					<li><span class="icon-comments"></span>29</li>
     				</ul>
     				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
-    				<small><span class="icon-my_location">신사동</span></small>
+    				<small><span class="icon-my_location">문발리</span></small>
     				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
     				<span class="icon-heart"></span>
     				</a>
