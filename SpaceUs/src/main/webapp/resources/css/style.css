@@ -15269,11 +15269,11 @@ i[class^=icon-chevron]{
 .couponImg{
 	width:500px;
 }
-#couponDday{
+#couponDday, #couponDday2{
 	position:absolute; 	
 	top: 13pt;
 	left: 225pt; 
 }
-#couponEnd{
+#couponEnd, #couponEnd2{
 	margin-left:10px;
 }
