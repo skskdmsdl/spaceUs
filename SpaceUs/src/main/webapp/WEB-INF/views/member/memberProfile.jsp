@@ -10,11 +10,7 @@
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
 
-
 <div class="skin-default-dark fixed-layout">
- <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
@@ -25,36 +21,24 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
+        <!-- 마이페이지 헤더 -->
         <header class="topbar">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <!-- ============================================================== -->
-                <!-- Logo -->
-                <!-- ============================================================== -->
                 <div class="navbar-header">
                     <a style="color:black" class="navbar-brand" href="${pageContext.request.contextPath }">Space Us</a>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
                 <div class="navbar-collapse">
                     
-                    <ul class="navbar-nav my-lg-0">
-                        <li class="nav-item dropdown">
-                            <a id="logout">로그아웃</a>
-                        </li>
-                    </ul>
-                </div>
+                   <ul class="navbar-nav my-lg-0">
+                       <li class="nav-item dropdown">
+                           <a id="logout">로그아웃</a>
+                       </li>
+                   </ul>
+               </div>
             </nav>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
+        
+        <!-- 목록들 -->
         <aside class="left-sidebar">
             <div class="d-flex no-block nav-text-box align-items-center">
                 <span>마이페이지</span>
