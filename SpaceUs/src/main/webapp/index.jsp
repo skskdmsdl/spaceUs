@@ -263,7 +263,7 @@ input[type="text"]:focus {
     		<div class="property-wrap ftco-animate">
     			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
     			<div class="text">
-    				<p class="price"><span class="space-price">70,000<small>원</small></span></p>
+    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
     				<ul class="property_list">
     					<li><span class="icon-people"></span>최대3인</li>
     					<li><span class="icon-heart"></span>55</li>
@@ -281,7 +281,7 @@ input[type="text"]:focus {
     		<div class="property-wrap ftco-animate">
     			<a href="#" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-2.jpg);"></a>
     			<div class="text">
-    				<p class="price"><span class="space-price">50,000<small>원</small></span></p>
+    				<p class="price"><span class="space-price">50,000<small>원/시간</small></span></p>
     				<ul class="property_list">
     					<li><span class="icon-people"></span>최대8인</li>
     					<li><span class="icon-heart"></span>45</li>
@@ -299,7 +299,7 @@ input[type="text"]:focus {
 	    		<div class="property-wrap ftco-animate">
 	    			<a href="#" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-3.jpg);"></a>
 	    			<div class="text">
-	    				<p class="price"><span class="space-price">60,000<small>원</small></span></p>
+	    				<p class="price"><span class="space-price">60,000<small>원/시간</small></span></p>
 	    				<ul class="property_list">
 	    					<li><span class="icon-people"></span>최대4인</li>
 	    					<li><span class="icon-heart"></span>20</li>
