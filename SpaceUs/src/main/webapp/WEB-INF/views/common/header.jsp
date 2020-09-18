@@ -15,6 +15,7 @@
     <meta name="description" content="Elegant Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
     
+
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${ pageContext.request.contextPath }/assets/images/favicon.png">
     <!-- This page CSS -->
@@ -43,14 +44,18 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/icomoon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/jquery-ui.min.css">
+
+    <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+   <script src="${pageContext.request.contextPath }/resources/js/aos.js"></script>  
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
-     
   <!-- loader -->
   <%-- <script src="${pageContext.request.contextPath }/resources/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="${pageContext.request.contextPath }/resources/js/google-map.js"></script> --%>
-  <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
+  
    <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
   </head>
+  
   <body>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
