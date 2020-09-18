@@ -45,31 +45,31 @@ a:hover {
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="email" name="email">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Email</span>
+						<span class="label-input100">이메일</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input class="input100" type="password" name="pass">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
+						<span class="label-input100">비밀번호</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input class="input100" type="password" name="pass">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Password check</span>
+						<span class="label-input100">비밀번호 확인</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input">
 						<input class="input100" type="text" name="address">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Address</span>
+						<span class="label-input100">닉네임</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input">
 						<input class="input100" type="tel" name="phone">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Phone</span>
+						<span class="label-input100">휴대폰번호</span>
 					</div>
 						<div class="text-right p-b-10">
 						<a href="javascript:;" class="txt1">

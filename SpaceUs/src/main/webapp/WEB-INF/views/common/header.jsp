@@ -60,7 +60,7 @@
 	      </button>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/space.do" class="nav-link">공간 등록하기</a></li>
+	          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
 	          <li class="nav-item"><a href="${pageContext.request.contextPath }/login/login.do" class="nav-link">로그인</a></li>
 	          <li class="nav-item"><a href="${pageContext.request.contextPath }/enroll/enroll.do" class="nav-link">회원가입</a></li>
 	        </ul>
