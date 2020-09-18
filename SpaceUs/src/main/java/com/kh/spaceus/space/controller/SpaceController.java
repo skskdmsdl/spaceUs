@@ -30,6 +30,11 @@ public class SpaceController {
 		return "space/reserveSpace";
 	}
 	
+	@RequestMapping("/searchSpace.do")
+	public String searchSpace() {
+		
+		return "space/searchSpace";
+	}
 	
 }
 
