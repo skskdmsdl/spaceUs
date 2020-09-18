@@ -2,6 +2,9 @@ package com.kh.spaceus.space.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,10 +33,13 @@ public class SpaceController {
 		return "space/reserveSpace";
 	}
 	
-	@RequestMapping("/searchSpace.do")
-	public String searchSpace() {
+	@RequestMapping(value="/searchSpace.do",
+					method=RequestMethod.GET)
+	public ModelAndView searchSpace(ModelAndView mav, @RequestParam("search_keyword") String keyword) {
+		mav.addObject("keyword", keyword);
 		
-		return "space/searchSpace";
+		
+		return mav;
 	}
 	
 }
