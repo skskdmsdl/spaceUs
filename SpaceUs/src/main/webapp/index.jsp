@@ -89,7 +89,7 @@ input[type="text"]:focus {
           			<p></p>
      					<div class="col-lg-10 align-items-end" style="margin-top:-20px">
      						<div id="wrap">
-							  <form id="searchFrm" action="" autocomplete="on">
+							  <form id="searchFrm" onsubmit="searchSpace();" action="" autocomplete="on">
 							  <input id="search_keyword" name="search_keyword" type="text" placeholder="키워드를 입력하세요">
 							  <i class="fas fa-search fa-2x" id="search_submit" type="submit" style="color:#00C89E"></i>
 							  </form>
@@ -157,7 +157,7 @@ input[type="text"]:focus {
                     <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 66.6667%;"></span>
                     </div>
                 </div>
-                <button type="button" onclick="searchSpace();"class="search-btn sm-width">검 색</button>
+                <button type="button" onclick="location.href='${pageContext.request.contextPath}/space/searchSpace.do?search_keyword=';" class="search-btn sm-width">검색</button>
             </form>
         </div>
         <div class="more-option">
@@ -397,8 +397,7 @@ function searchSpace(){
 	
 	$("#searchFrm").attr("action", 
 				"${ pageContext.request.contextPath}/space/searchSpace.do")
-				.attr("method", "GET")
-				.submit();
+				.attr("method", "GET");
 }
 
 
