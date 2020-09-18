@@ -27,6 +27,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
   position: relative;
 }
 
+
 input[type="text"] {
   height: 40px;
   font-size: 20px;

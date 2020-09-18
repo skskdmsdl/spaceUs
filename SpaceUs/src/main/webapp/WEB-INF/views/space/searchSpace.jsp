@@ -14,7 +14,7 @@
 	display: inline;
 	color: #343a40;
 	font-family: 'NEXON Lv1 Gothic OTF';
-	
+	letter-spacing: 2px;
 }
 .txt_keyword{
 	color: #007bff;
@@ -29,6 +29,7 @@
   padding-right: 15px;
   padding-left: 15px;
   font-size: 14px;
+  letter-spacing: 2px;
   color: white;
   font-weight: 600;
   text-transform: uppercase;
@@ -118,7 +119,7 @@
     		   <input type="date" name="space_date" id="space_date" class="nice-select sm-width"/>
     		 </form>
 			<div class="container">
-            <button type="button" class="search-btn">검색</button>
+            <button type="button" class="search-btn" onclick="searchSpace();">검색</button>
 			</div>
     	   </div>
 		</div>
@@ -391,6 +392,12 @@
 	      </div>
       </div>
 </section>
+<script>
+function searchSpace(){
+	alert('지금 만나러 갑니다...');
+	
+}
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	
