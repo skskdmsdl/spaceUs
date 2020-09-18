@@ -152,23 +152,116 @@
                             <h5 class="card-title">위시리스트</h5>
                             <h6 class="card-subtitle">위시리스트를 확인하세요</h6>
                         </div>
-		                
-						  <div class="col-sm-6 col-md-4">
-						    <div class="thumbnail">
-						      <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="...">
-						      <div class="caption">
-						        <h3>카페두드림 Do dream</h3>
-						        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-						        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-						      </div>
-						    </div>
+                        <div class="row">
+						<div class="col-md-3">
+						    <div class="thumbnail block-20" >
+						    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
+						</div>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p style="width:250px;">분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+					     </div>
 						  </div>
+						  <div class="col-md-3">
+						    <div class="thumbnail block-20" >
+						    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_2.jpg" alt="..."> 
+						</div>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+					     </div>
+						  </div>
+						  <div class="col-md-3">
+						    <div class="thumbnail block-20" >
+						    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_3.jpg" alt="..."> 
+						</div>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+					     </div>
+						  </div>
+						  <div class="col-md-3">
+						    <div class="thumbnail block-20" >
+						    	<img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_4.jpg" alt="..."> 
+							</div>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+					     </div>
+						  </div>
+						  <div class="col-md-3">
+						    <div class="thumbnail block-20" >
+							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_5.jpg" alt="..."> 
+							</div>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+					     </div>
+						  </div>
+						  <div class="col-md-3">
+						    <div class="thumbnail block-20" >
+							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_6.jpg" alt="..."> 
+							</div>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+					     </div>
+						  </div>
+						  <div class="col-md-3">
+						    <div class="thumbnail block-20" >
+							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_7.jpg" alt="..."> 
+							</div>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+					     </div>
+						  </div>
+						  <div class="col-md-3">
+						    <div class="thumbnail block-20" >
+							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_8.jpg" alt="..."> 
+							</div>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+					     </div>
+						  </div>
+						</div>
 						</div>
 					</div>
 				</div>
-                
-                
                 <!-- 위시리스트 끝 -->
+                
+                <!-- 쿠폰함 -->
+                 <div class="col-md">
+	                <div class="card p-4">
+		                <div class="card-body">
+			                <div class="col-md-10">
+	                            <h5 class="card-title">쿠폰함</h5>
+	                            <h6 class="card-subtitle mb-5">쿠폰함을 확인하세요</h6>
+	                        </div>
+	                        <div class="row">
+								<div class="col-md">
+				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/welCoupon.png" alt="..."> 
+	                               	 <span id="couponDday" class="label label-danger">D-8</span>
+	                               	 <p id="couponEnd">2020.10.23 까지</p>
+	                               </div>
+								<div class="col-md">
+				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/hbdCoupon.png" alt="..."> 
+                                	 <span id="couponDday" class="label label-warning">D-38</span>
+                                	 <p id="couponEnd">2020.10.23 까지</p>
+                                </div>
+							</div>
+						</div>
+					</div>
+                <!-- 쿠폰함 끝 -->
                     
                 <!-- 이용내역 -->
                  <div class="col-md">
@@ -191,8 +284,10 @@
                                     
                                     <div class="sl-item">
 	                                    <div class="row">
-	                                        <div class="col-2 m-b-20 m-l-30"> <img class="img-circle" alt="user" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg"> </div>
-	                                        <div class="sl-right m-10">
+	                                    <div class="mb-5 ml-5 mr-5 mt-3" >
+						    				<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
+	                                     </div>
+	                                        <div class="mt-2 col-md p-20">
 	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
 	                                        	<div class="row"> 
 		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
@@ -204,59 +299,73 @@
 	                                        </div>
 	                                        </div>
                                         </div>
-                                        
                                         <div class="sl-item">
 	                                    <div class="row">
-	                                        <div class="col-2 m-b-20 m-l-30"> <img class="img-circle" alt="user" src="${ pageContext.request.contextPath }/resources/images/image_2.jpg"> </div>
-	                                        <div class="sl-right m-10">
+	                                    <div class="mb-5 ml-5 mr-5 mt-3" >
+						    				<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_2.jpg" alt="..."> 
+	                                     </div>
+	                                        <div class="mt-2 col-md p-20">
 	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
 	                                        	<div class="row"> 
 		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
 		                                            <div class="col-md-9">
-		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-secondary">이용완료</a> 
+		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
+		                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
 		                                            </div>
 	                                            </div>
 	                                        </div>
 	                                        </div>
-                                        </div><div class="sl-item">
-	                                    <div class="row">
-	                                        <div class="col-2 m-b-20 m-l-30"> <img class="img-circle" alt="user" src="${ pageContext.request.contextPath }/resources/images/image_3.jpg"> </div>
-	                                        <div class="sl-right m-10">
+                                        </div>
+                                        <div class="sl-item">
+	                                     <div class="row">
+	                                    <div class="mb-5 ml-5 mr-5 mt-3" >
+						    				<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_3.jpg" alt="..."> 
+	                                     </div>
+	                                        <div class="mt-2 col-md p-20">
 	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
 	                                        	<div class="row"> 
 		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
 		                                            <div class="col-md-9">
-		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-secondary">이용완료</a> 
+		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
+		                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
 		                                            </div>
 	                                            </div>
 	                                        </div>
 	                                        </div>
-                                        </div><div class="sl-item">
-	                                    <div class="row">
-	                                        <div class="col-2 m-b-20 m-l-30"> <img class="img-circle" alt="user" src="${ pageContext.request.contextPath }/resources/images/image_4.jpg"> </div>
-	                                        <div class="sl-right m-10">
+                                        </div>
+                                        <div class="sl-item">
+	                                     <div class="row">
+	                                    <div class="mb-5 ml-5 mr-5 mt-3" >
+						    				<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_4.jpg" alt="..."> 
+	                                     </div>
+	                                        <div class="mt-2 col-md p-20">
 	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
 	                                        	<div class="row"> 
 		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
 		                                            <div class="col-md-9">
-		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-secondary">이용완료</a> 
+		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
+		                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
 		                                            </div>
 	                                            </div>
 	                                        </div>
 	                                        </div>
-                                        </div><div class="sl-item">
-	                                    <div class="row">
-	                                        <div class="col-2 m-b-20 m-l-30"> <img class="img-circle" alt="user" src="${ pageContext.request.contextPath }/resources/images/image_5.jpg"> </div>
-	                                        <div class="sl-right m-10">
-	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-	                                        	<div class="row"> 
-		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-		                                            <div class="col-md-9">
-		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-secondary">예약확인</a> 
+                                        </div>
+                                        <div class="sl-item">
+		                                    <div class="row">
+		                                    <div class="mb-5 ml-5 mr-5 mt-3" >
+							    				<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_5.jpg" alt="..."> 
+		                                     </div>
+		                                        <div class="mt-2 col-md p-20">
+		                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
+		                                        	<div class="row"> 
+			                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+			                                            <div class="col-md-9">
+			                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
+			                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
+			                                            </div>
 		                                            </div>
-	                                            </div>
-	                                        </div>
-	                                        </div>
+		                                        </div>
+		                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -286,8 +395,10 @@
                                     
                                     <div class="sl-item">
 	                                    <div class="row">
-	                                        <div class="col-2 m-b-20 m-l-30"> <img class="img-circle" alt="user" src="${ pageContext.request.contextPath }/resources/images/image_6.jpg"> </div>
-	                                        <div class="sl-right m-10">
+		                                    <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
+								    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_6.jpg" alt="..."> 
+		                                     </div>
+	                                        <div class="mt-2 col-md p-20">
 	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
 	                                        	<div class="row"> 
 		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
@@ -299,11 +410,46 @@
 	                                        </div>
 	                                        </div>
                                         </div>
-                                        
+                                        <div class="sl-item">
+		                                    <div class="row">
+		                                    <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
+								    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_7.jpg" alt="..."> 
+		                                     </div>
+	                                        <div class="mt-2 col-md p-20">
+	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
+	                                        	<div class="row"> 
+		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+		                                            <div class="col-md-9">
+		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
+		                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
+		                                            </div>
+	                                            </div>
+	                                        </div>
+	                                        </div>
+                                        </div>
+                                        <div class="sl-item">
+		                                    <div class="row">
+			                                    <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
+									    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_8.jpg" alt="..."> 
+			                                     </div>
+		                                        <div class="mt-2 col-md p-20">
+		                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
+		                                        	<div class="row"> 
+			                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+			                                            <div class="col-md-9">
+			                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
+			                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
+			                                            </div>
+		                                            </div>
+		                                        </div>
+		                                      </div>
+                                        </div>
                                         <div class="sl-item">
 	                                    <div class="row">
-	                                        <div class="col-2 m-b-20 m-l-30"> <img class="img-circle" alt="user" src="${ pageContext.request.contextPath }/resources/images/image_7.jpg"> </div>
-	                                        <div class="sl-right m-10">
+		                                    <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
+								    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
+		                                     </div>
+	                                        <div class="mt-2 col-md p-20">
 	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
 	                                        	<div class="row"> 
 		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
@@ -313,238 +459,32 @@
 		                                            </div>
 	                                            </div>
 	                                        </div>
-	                                        </div>
-                                        </div><div class="sl-item">
-	                                    <div class="row">
-	                                        <div class="col-2 m-b-20 m-l-30"> <img class="img-circle" alt="user" src="${ pageContext.request.contextPath }/resources/images/image_8.jpg"> </div>
-	                                        <div class="sl-right m-10">
-	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-	                                        	<div class="row"> 
-		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-		                                            <div class="col-md-9">
-		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
-		                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
-		                                            </div>
-	                                            </div>
-	                                        </div>
-	                                        </div>
-                                        </div><div class="sl-item">
-	                                    <div class="row">
-	                                        <div class="col-2 m-b-20 m-l-30"> <img class="img-circle" alt="user" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg"> </div>
-	                                        <div class="sl-right m-10">
-	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-	                                        	<div class="row"> 
-		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-		                                            <div class="col-md-9">
-		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
-		                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
-		                                            </div>
-	                                            </div>
-	                                        </div>
-	                                        </div>
-                                        </div><div class="sl-item">
-	                                    <div class="row">
-	                                        <div class="col-2 m-b-20 m-l-30"> <img class="img-circle" alt="user" src="${ pageContext.request.contextPath }/resources/images/image_2.jpg"> </div>
-	                                        <div class="sl-right m-10">
-	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-	                                        	<div class="row"> 
-		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-		                                            <div class="col-md-9">
-		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
-		                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
-		                                            </div>
-	                                            </div>
-	                                        </div>
-	                                        </div>
+	                                      </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                        <div class="sl-item">
+		                                   <div class="row">
+			                                    <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
+									    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_2.jpg" alt="..."> 
+			                                     </div>
+		                                        <div class="mt-2 col-md p-20">
+		                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
+		                                        	<div class="row"> 
+			                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+			                                            <div class="col-md-9">
+			                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
+			                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
+			                                            </div>
+		                                            </div>
+		                                        </div>
+		                                      </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
 					<!-- 리뷰 끝 -->
-               
-               
-               
-               
-               
-               
-               
-               
-                <div class="row">
-                    <!-- column -->
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <div>
-                                        <h5 class="card-title">Sales Overview</h5>
-                                        <h6 class="card-subtitle">Check the monthly sales </h6>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <select class="custom-select b-0">
-                                            <option>January</option>
-                                            <option value="1">February</option>
-                                            <option value="2" selected="">March</option>
-                                            <option value="3">April</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">#</th>
-                                            <th>NAME</th>
-                                            <th>DATE</th>
-                                            <th>PRICE</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                            <td class="txt-oflo">Elite admin</td>
-                                            <td class="txt-oflo">April 18, 2017</td>
-                                            <td><span class="text-success">$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">2</td>
-                                            <td class="txt-oflo">Real Homes WP Theme</td>
-                                            <td class="txt-oflo">April 19, 2017</td>
-                                            <td><span class="text-info">$1250</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">3</td>
-                                            <td class="txt-oflo">Ample Admin</td>
-                                            <td class="txt-oflo">April 19, 2017</td>
-                                            <td><span class="text-info">$1250</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">4</td>
-                                            <td class="txt-oflo">Medical Pro WP Theme</td>
-                                            <td class="txt-oflo">April 20, 2017</td>
-                                            <td><span class="text-danger">-$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">5</td>
-                                            <td class="txt-oflo">Hosting press html</td>
-                                            <td class="txt-oflo">April 21, 2017</td>
-                                            <td><span class="text-success">$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">6</td>
-                                            <td class="txt-oflo">Digital Agency PSD</td>
-                                            <td class="txt-oflo">April 23, 2017</td>
-                                            <td><span class="text-danger">-$14</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">7</td>
-                                            <td class="txt-oflo">Helping Hands WP Theme</td>
-                                            <td class="txt-oflo">April 22, 2017</td>
-                                            <td><span class="text-success">$64</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">8</td>
-                                            <td class="txt-oflo">Helping Hands WP Theme</td>
-                                            <td class="txt-oflo">April 22, 2017</td>
-                                            <td><span class="text-success">$64</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">9</td>
-                                            <td class="txt-oflo">Ample Admin</td>
-                                            <td class="txt-oflo">April 19, 2017</td>
-                                            <td><span class="text-info">$1250</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- To do chat and message -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Feeds</h4>
-                            </div>
-                            <ul class="feeds p-b-20">
-                                <li>
-                                    <div class="bg-info"><i class="fa fa-bell-o"></i></div> You have 4 pending tasks. <span class="text-muted">Just Now</span></li>
-                                <li>
-                                    <div class="bg-success"><i class="ti-server"></i></div> Server #1 overloaded.<span class="text-muted">2 Hours ago</span></li>
-                                <li>
-                                    <div class="bg-warning"><i class="ti-shopping-cart"></i></div> New order received.<span class="text-muted">31 May</span></li>
-                                <li>
-                                    <div class="bg-danger"><i class="ti-user"></i></div> New user registered.<span class="text-muted">30 May</span></li>
-                                <li>
-                                    <div class="bg-dark"><i class="fa fa-bell-o"></i></div> New Version just arrived. <span class="text-muted">27 May</span></li>
-                                <li>
-                                    <div class="bg-info"><i class="fa fa-bell-o"></i></div> You have 4 pending tasks. <span class="text-muted">Just Now</span></li>
-                                <li>
-                                    <div class="bg-danger"><i class="ti-user"></i></div> New user registered.<span class="text-muted">30 May</span></li>
-                                <li>
-                                    <div class="bg-dark"><i class="fa fa-bell-o"></i></div> New Version just arrived. <span class="text-muted">27 May</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Messages (5 New)</h5>
-                                <div class="message-box">
-                                    <div class="message-widget message-scroll">
-                                        <!-- Message -->
-                                        <a href="javascript:void(0)">
-                                            <div class="user-img"> <img src="${ pageContext.request.contextPath }/resources/assets/images/users/1.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
-                                            <div class="mail-contnet">
-                                                <h5>Pavan kumar</h5> <span class="mail-desc">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has been.</span> <span class="time">9:30 AM</span> </div>
-                                        </a>
-                                        <!-- Message -->
-                                        <a href="javascript:void(0)">
-                                            <div class="user-img"> <img src="${ pageContext.request.contextPath }/resources/assets/images/users/2.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
-                                            <div class="mail-contnet">
-                                                <h5>Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span> </div>
-                                        </a>
-                                        <!-- Message -->
-                                        <a href="javascript:void(0)">
-                                            <div class="user-img"> <span class="round">A</span> <span class="profile-status away pull-right"></span> </div>
-                                            <div class="mail-contnet">
-                                                <h5>Arijit Sinh</h5> <span class="mail-desc">Simply dummy text of the printing and typesetting industry.</span> <span class="time">9:08 AM</span> </div>
-                                        </a>
-                                        <!-- Message -->
-                                        <a href="javascript:void(0)">
-                                            <div class="user-img"> <img src="${ pageContext.request.contextPath }/resources/assets/images/users/4.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
-                                            <div class="mail-contnet">
-                                                <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
-                                        </a>
-                                        <!-- Message -->
-                                        <a href="javascript:void(0)">
-                                            <div class="user-img"> <img src="${ pageContext.request.contextPath }/resources/assets/images/users/1.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
-                                            <div class="mail-contnet">
-                                                <h5>Pavan kumar</h5> <span class="mail-desc">Welcome to the Elite Admin</span> <span class="time">9:30 AM</span> </div>
-                                        </a>
-                                        <!-- Message -->
-                                        <a href="javascript:void(0)">
-                                            <div class="user-img"> <img src="${ pageContext.request.contextPath }/resources/assets/images/users/2.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
-                                            <div class="mail-contnet">
-                                                <h5>Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span> </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
         </div>
+        
         <!-- 출석이벤트 달력 -->
 	    <div id="calendar">
 		    <div id="calendar_header">
@@ -555,6 +495,7 @@
 		    <div id="calendar_weekdays"></div>
 		    <div id="calendar_content"></div>
 	    </div>
+	    <!-- 출석이벤트 끝 -->
     </div>
 </div>
 
