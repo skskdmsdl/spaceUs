@@ -84,7 +84,9 @@
 	        <div class="collapse navbar-collapse" id="ftco-nav"  data-toggle="modal" data-target="#exampleModal">
 	        	<div class="navbar-nav ml-auto" style="cursor: pointer !important;">
 	        		<div>반갑습니다. &nbsp;</div>
-	        		<div><sec:authentication property="principal.username"/> 님!</div>
+	        		<div>
+	        			<sec:authentication property="principal.username"/> 님!
+	        		</div>
 	        		&nbsp;
 	        		<div class="user_profile_icon" data-subscribe-type="PRO" 
 	        		     style="background: #22B47B; border-radius: 90%; width: 40px;  height: 40px;">
@@ -116,7 +118,7 @@
 	      </div>
 	      <div class="modal-body">
 	      	<div>
-	    	    <a href="#">
+	    	    <a href="${pageContext.request.contextPath }/member/memberProfile.do">
 	    	    	<i class="fas fa-hashtag"></i>
 	    	    	마이페이지
 	    	    </a>

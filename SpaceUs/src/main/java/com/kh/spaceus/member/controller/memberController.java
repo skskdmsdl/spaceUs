@@ -37,7 +37,7 @@ public class memberController {
 	@RequestMapping("/memberEnrollForm.do")
 	public String memberEnroll() {
 		
-		return "member/memberEnrollFrom";
+		return "member/memberEnrollForm";
 	}
 	
 	//로그아웃

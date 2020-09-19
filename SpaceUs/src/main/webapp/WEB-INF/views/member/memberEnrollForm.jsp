@@ -1,14 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>Login</title>
+	<title>회원가입</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/images/icons/favicon.ico"/>
@@ -22,6 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/vendor/daterangepicker/daterangepicker.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
+	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 </head>
 <style>
 .login100-form-btn {
@@ -31,60 +27,67 @@ a:hover {
     text-decoration: none;
     color: #00C89E;
 }
+.phone {
+    margin: auto;
+}
 </style>
 <body style="background-color: #666666;">
 	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form:form 
-							action="${pageContext.request.contextPath }/member/memberLogin.do"
-							class="login100-form validate-form" >
+				<form class="login100-form validate-form"
+					  action="${pageContext.request.contextPath}">
 					<span class="login100-form-title p-b-43">
-						<a class="navbar-brand">Space Us</a>
+						<a class="navbar-brand" href="${pageContext.request.contextPath }">Space Us</a>
 					</span>
+					
+					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="email">
-						<span class="focus-input100">email</span>
-						<span class="focus-output100"></span>
+						<input class="input100" type="email" name="email">
+						<span class="focus-input100"></span>
+						<span class="label-input100">이메일</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="password" placeholder="password">
-						<span class="focus-input100">password</span>
-						
+						<input class="input100" type="password" name="pass">
+						<span class="focus-input100"></span>
+						<span class="label-input100">비밀번호</span>
 					</div>
-
-					<div class="flex-sb-m w-full p-t-3 p-b-32">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								아이디 저장
-							</label>
-						</div>
-
-						<div>
-							<a href="#" class="txt1">
-								비밀번호를 잊으셨나요?
-							</a>
-						</div>
+					
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" name="pass">
+						<span class="focus-input100"></span>
+						<span class="label-input100">비밀번호 확인</span>
 					</div>
-			
-
+					
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="text" name="address">
+						<span class="focus-input100"></span>
+						<span class="label-input100">닉네임</span>
+					</div>
+					
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="tel" name="phone">
+						<span class="focus-input100"></span>
+						<span class="label-input100">휴대폰번호</span>
+					</div>
+						<div class="text-right p-b-10">
+						<a href="javascript:;" class="txt1">
+							휴대폰 인증
+						</a>
+					</div>
 					<div class="container-login100-form-btn">
-						<button type="submit" class="login100-form-btn" onclick="${pageContext.request.contextPath}/member/memberLogin.do">
-							Login
+						<button class="login100-form-btn" onclick="${pageContext.request.contextPath}">
+							회원가입
 						</button>
 					</div>
 					
 					<div class="text-center p-t-46 p-b-20">
-						<a href="${pageContext.request.contextPath }/enroll/enroll.do" class="txt1">
-							아직 회원이 아니신가요?
+						<a href="${pageContext.request.contextPath }/member/memberLogin.do" class="txt1">
+							이미 가입하셨나요?
 						</a>
 						<br /><br />
-						<span class="txt2">
-							Social Login
-						</span>
 					</div>
 
 					<div class="login100-form-social flex-c-m">
@@ -96,13 +99,14 @@ a:hover {
 							<i class="fa fa-twitter" aria-hidden="true"></i>
 						</a>
 					</div>
-				</form:form>
+				</form>
 
-				<div class="login100-more" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg-01.jpg');">
+				<div class="login100-more" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_2.jpg');">
 				</div>
 			</div>
 		</div>
 	</div>
+	
 	<script src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/vendor/animsition/js/animsition.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/popper.js"></script>
