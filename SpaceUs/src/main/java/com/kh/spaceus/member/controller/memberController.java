@@ -12,12 +12,8 @@ public class memberController {
 	
 	
 	@RequestMapping("/memberProfile.do")
-<<<<<<< HEAD
-	public String login () {	
-=======
 	public String memberProfile () {
 		
->>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
 		return "member/memberProfile";
 	}
 	
