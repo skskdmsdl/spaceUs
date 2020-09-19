@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <!-- 선우님 마이페이지 부분 -->
-                <div id="profileEditPage" class="col-md">
+                <div id="profileEditPage" class="ml-5 mr-5">
                     <div class="card oh">
                         <div class="card-body">
                             <div class="d-flex m-b-30 align-items-center no-block">
@@ -118,7 +118,7 @@
 				<!-- 마이페이지 끝 -->
                   
                 <!-- 위시리스트 -->  
-                <div id="wishListPage" class="col-md">
+                <div id="wishListPage" class="ml-5 mr-5">
 	                <div class="card p-4">
 		                <div class="card-body">
 		                <div class="col-md-10">
@@ -213,7 +213,7 @@
                 <!-- 위시리스트 끝 -->
                 
                 <!-- 쿠폰함 -->
-                 <div id="couponPage" class="col-md">
+                 <div id="couponPage" class="ml-5 mr-5">
 	                <div class="card p-4">
 		                <div class="card-body">
 			                <div class="col-md-10">
@@ -237,7 +237,7 @@
                 <!-- 쿠폰함 끝 -->
                     
                 <!-- 이용내역 -->
-                 <div id="usageHistoryPage" class="col-md">
+                 <div id="usageHistoryPage" class="ml-5 mr-5">
                        <div class="card p-5">
                            <div class="card-body">
                             <div class="row"> 
@@ -347,7 +347,7 @@
               	<!-- 이용내역 끝 -->
               
                 <!-- 리뷰 -->
-                <div id="reviewPage" class="col-md">
+                <div id="reviewPage" class="ml-5 mr-5">
                         <div class="card p-5">
                             <div class="card-body">
                              <div class="row"> 
