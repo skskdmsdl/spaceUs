@@ -216,10 +216,20 @@
                  <div id="couponPage" class="ml-5 mr-5">
 	                <div class="card p-4">
 		                <div class="card-body">
-			                <div class="col-md-10">
-	                            <h5 class="card-title">쿠폰함</h5>
-	                            <h6 class="card-subtitle mb-5">쿠폰함을 확인하세요</h6>
-	                        </div>
+			                <div class="row"> 
+	                            <div class="col-md-10">
+	                                <h5 class="card-title">쿠폰함</h5>
+	                                <h6 class="card-subtitle mb-5">쿠폰을 확인하세요</h6>
+	                            </div>
+	                            <!-- 이 부분 지울때 위에 row도 div도 지우기 -->
+                               <div class="col-md-2">
+                                   <select class="custom-select b-0 ">
+                                       <option value="1">전체 쿠폰</option>
+                                       <option value="2">사용가능한 쿠폰</option>
+                                       <option value="3">사용 완료</option>
+                                   </select>
+                                </div> 
+                            </div>
 	                        <div class="row">
 								<div class="col-md">
 				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/welCoupon.png" alt="..."> 
@@ -243,10 +253,10 @@
                        <div class="card p-5">
                            <div class="card-body">
                             <div class="row"> 
-                            <div class="col-md-10">
-                                <h5 class="card-title">사용 내역</h5>
-                                <h6 class="card-subtitle">사용 공간 내역을 확인하세요</h6>
-                            </div>
+	                            <div class="col-md-10">
+	                                <h5 class="card-title">사용 내역</h5>
+	                                <h6 class="card-subtitle">사용 공간 내역을 확인하세요</h6>
+	                            </div>
                                <div class="col-md-2">
                                    <select class="custom-select b-0 ">
                                        <option value="1" >전체 공간</option>
@@ -368,7 +378,7 @@
                                   <div class="sl-item">
                                 <div class="row">
                                 <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
-		    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_7.jpg" alt="..."> 
+		    						<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_7.jpg" alt="..."> 
                                  </div>
                                    <div class="mt-2 col-md p-20">
                                        <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
@@ -385,7 +395,7 @@
                                   <div class="sl-item">
                                 <div class="row">
                                  <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
-			    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_8.jpg" alt="..."> 
+			    					<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_8.jpg" alt="..."> 
                                   </div>
                                     <div class="mt-2 col-md p-20">
                                         <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
@@ -402,7 +412,7 @@
                                   <div class="sl-item">
                                <div class="row">
                                 <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
-		    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
+		    						<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
                                  </div>
                                    <div class="mt-2 col-md p-20">
                                        <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
