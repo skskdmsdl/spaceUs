@@ -31,7 +31,7 @@
                     
                    <ul class="navbar-nav my-lg-0">
                        <li class="nav-item dropdown">
-                           <a id="logout">로그아웃</a>
+                           <a id="logout" class="m-r-30">로그아웃</a>
                        </li>
                    </ul>
                </div>
@@ -74,10 +74,10 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">마이페이지</h4>
+                        <h4 class="text-themecolor ml-5">마이페이지</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
-                        <div class="d-flex justify-content-end align-items-center">
+                        <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">마이페이지</a></li>
                                 <li class="breadcrumb-item active">프로필관리</li>
