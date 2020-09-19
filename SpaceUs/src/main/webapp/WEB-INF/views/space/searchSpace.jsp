@@ -394,7 +394,7 @@
 </section>
 <script>
 function searchSpace(){
-	alert('지금 만나러 갑니다...');
+	alert('지금 만나러 갑니다....');
 	
 }
 </script>
