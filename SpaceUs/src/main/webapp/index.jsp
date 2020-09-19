@@ -84,8 +84,8 @@ input[type="text"]:focus {
       			<div class="text text-center mx-auto" style="margin-bottom:25%;">
           			<h1 class="mb-4">어떤 공간을<br>찾고 있나요?</h1>
           			<p></p>
-     					<div class="col-lg-10 align-items-end" style="margin-top:-20px">
-     						<div id="wrap">
+     					<div style="margin-top:-20px">
+     						<div id="wrap" class="col-md-6">
 							  <form id="searchFrm" action="" autocomplete="on">
 							  <input id="search_keyword" name="search_keyword" type="text" placeholder="키워드를 입력하세요">
 							  <i class="fas fa-search fa-2x" id="search_submit" type="submit" style="color:#00C89E"></i>
