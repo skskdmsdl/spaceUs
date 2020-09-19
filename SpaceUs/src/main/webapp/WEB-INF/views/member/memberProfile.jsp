@@ -88,34 +88,34 @@
                 <!-- 선우님 마이페이지 부분 -->
                 <div id="profileEditPage" class="ml-5 mr-5">
                     <div class="card oh">
+                                <h5 class="card-title ">회원정보</h5>&nbsp;
                         <div class="card-body">
                             <div class="d-flex m-b-30 align-items-center no-block">
-                                <h5 class="card-title ">Yearly Sales</h5>
-                                <div class="ml-auto">
-                                    <ul class="list-inline font-12">
-                                        <li><i class="fa fa-circle text-info"></i> Iphone</li>
-                                        <li><i class="fa fa-circle text-primary"></i> Ipad</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div id="morris-area-chart" style="height: 350px;"></div>
-                        </div>
-                        <div class="card-body bg-light">
-                            <div class="row text-center m-b-20">
-                                <div class="col-lg-4 col-md-4 m-t-20">
-                                    <h2 class="m-b-0 font-light">6000</h2><span class="text-muted">Total sale</span>
-                                </div>
-                                <div class="col-lg-4 col-md-4 m-t-20">
-                                    <h2 class="m-b-0 font-light">4000</h2><span class="text-muted">Iphone</span>
-                                </div>
-                                <div class="col-lg-4 col-md-4 m-t-20">
-                                    <h2 class="m-b-0 font-light">2000</h2><span class="text-muted">Ipad</span>
-                                </div>
+                                <form name="memberUpdateFrm" action="" method="post" margin="0 auto" width="250px">
+
+	   <input type="text" class="form-control" placeholder="닉네임" name="nickName" id="nickName" value="" required=""><br>
+	   <input type="email" class="form-control" placeholder="이메일" name="email" id="email" value="" required=""><br>
+	   <input type="date" class="form-control" placeholder="생일" name="birthDay" id="birthDay" value=""><br>
+	   <input type="tel" class="form-control" placeholder="전화번호 (예:01012345678)" name="phone" id="phone" maxlength="11" value="" required=""><br>
+	   <input type="text" class="form-control" placeholder="주소" name="address" value="" id="address"><br>
+        <br>
+        <input type="submit" class="btn btn-outline-success" value="회원 수정">&nbsp;
+        <input type="reset" class="btn btn-outline-success" value="회원 탈퇴">
+	</form>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
+                                
+
+                  
+=======
 				<!-- 마이페이지 끝 -->
+>>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
+                  
+                  
                   
                 <!-- 위시리스트 -->  
                 <div id="wishListPage" class="ml-5 mr-5">
@@ -518,6 +518,23 @@ $(function() {
 <!-- 출석이벤트  -->
 $(function(){function c(){p();var e=h();var r=0;var u=false;l.empty();while(!u){if(s[r]==e[0].weekday){u=true}else{l.append('<div class="blank"></div>');r++}}for(var c=0;c<42-r;c++){if(c>=e.length){l.append('<div class="blank"></div>')}else{var v=e[c].day;var m=g(new Date(t,n-1,v))?'<div class="today">':"<div>";l.append(m+""+v+"</div>")}}var y=o[n-1];a.css("background-color",y).find("h1").text(i[n-1]+" "+t);f.find("div").css("color",y);l.find(".today").css("background-color",y);d()}function h(){var e=[];for(var r=1;r<v(t,n)+1;r++){e.push({day:r,weekday:s[m(t,n,r)]})}return e}function p(){f.empty();for(var e=0;e<7;e++){f.append("<div>"+s[e].substring(0,3)+"</div>")}}function d(){var t;var n=$("#calendar").css("width",e+"px");n.find(t="#calendar_weekdays, #calendar_content").css("width",e+"px").find("div").css({width:e/7+"px",height:e/7+"px","line-height":e/7+"px"});n.find("#calendar_header").css({height:e*(1/7)+"px"}).find('i[class^="icon-chevron"]').css("line-height",e*(1/7)+"px")}function v(e,t){return(new Date(e,t,0)).getDate()}function m(e,t,n){return(new Date(e,t-1,n)).getDay()}function g(e){return y(new Date)==y(e)}function y(e){return e.getFullYear()+"/"+(e.getMonth()+1)+"/"+e.getDate()}function b(){var e=new Date;t=e.getFullYear();n=e.getMonth()+1}var e=480;var t=2013;var n=9;var r=[];var i=["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];var s=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];var o=["#16a085","#1abc9c","#c0392b","#27ae60","#FF6860","#f39c12","#f1c40f","#e67e22","#2ecc71","#e74c3c","#d35400","#2c3e50"];var u=$("#calendar");var a=u.find("#calendar_header");var f=u.find("#calendar_weekdays");var l=u.find("#calendar_content");b();c();a.find('i[class^="icon-chevron"]').on("click",function(){var e=$(this);var r=function(e){n=e=="next"?n+1:n-1;if(n<1){n=12;t--}else if(n>12){n=1;t++}c()};if(e.attr("class").indexOf("left")!=-1){r("previous")}else{r("next")}})})
 </script>
+
+<!-- 회원정보 -->
+<style>
+.form#memberUpdateFrm {
+	margin : 0 auto;
+	position : absolute;
+	top : 50%;
+	left : 50%;
+	border : solid 1px gray;
+}
+#nickName, #email, #birthDay, #phone, #address {
+	display : block;
+	margin : 0 auto;
+	width : 350px;
+
+}
+</style>
 
 
 <!-- 호스트 정산내역 그래프 활용 ?
