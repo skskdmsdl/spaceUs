@@ -117,22 +117,26 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	      	<div>
+	      	<div class="col-sm-10 mb-2">
 	    	    <a href="${pageContext.request.contextPath }/member/memberProfile.do">
-	    	    	<i class="fas fa-hashtag"></i>
-	    	    	마이페이지
+	    	    	<i class="fas fa-user-alt"></i>
+	    	    	마이프로필
 	    	    </a>
 	      	</div>
-	      	<div>
+	      	<div class="col-sm-10 mb-2">
 		        <a href="#">
+		        	<i class="fas fa-history"></i>
 		        	예약관리
 		        </a>
 	      	 </div>
-	      	 <div>
-		        <a href="#">
+	      	 <div class="col-sm-10 mb-2">
+		        <a href="${pageContext.request.contextPath }/member/memberProfile.do">
+		        	<i class="fas fa-heart"></i> &nbsp;
 		        	위시리스트
 		        </a>
 	      	 </div>
+	      </div>
+	      <div class="modal-footer">
 	      	 <form:form action="${ pageContext.request.contextPath }/member/memberLogout.do">
 	      	 	 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">로그아웃</button>
 	      	 </form:form>
