@@ -10,11 +10,7 @@
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
 
-
 <div class="skin-default-dark fixed-layout">
- <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
@@ -25,36 +21,24 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
+        <!-- 마이페이지 헤더 -->
         <header class="topbar">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <!-- ============================================================== -->
-                <!-- Logo -->
-                <!-- ============================================================== -->
                 <div class="navbar-header">
                     <a style="color:black" class="navbar-brand" href="${pageContext.request.contextPath }">Space Us</a>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
                 <div class="navbar-collapse">
                     
-                    <ul class="navbar-nav my-lg-0">
-                        <li class="nav-item dropdown">
-                            <a id="logout">로그아웃</a>
-                        </li>
-                    </ul>
-                </div>
+                   <ul class="navbar-nav my-lg-0">
+                       <li class="nav-item dropdown">
+                           <a id="logout" class="m-r-30">로그아웃</a>
+                       </li>
+                   </ul>
+               </div>
             </nav>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
+        
+        <!-- 왼쪽 목록들 -->
         <aside class="left-sidebar">
             <div class="d-flex no-block nav-text-box align-items-center">
                 <span>마이페이지</span>
@@ -81,27 +65,19 @@
             </div>
             <!-- End Sidebar scroll-->
         </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
+        <!-- 목록 끝 -->
 
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">마이페이지</h4>
+                        <h4 class="text-themecolor ml-5">마이페이지</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
-                        <div class="d-flex justify-content-end align-items-center">
+                        <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">마이페이지</a></li>
                                 <li class="breadcrumb-item active">프로필관리</li>
@@ -109,13 +85,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Bread crumb and right sidebar toggle -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Yearly Sales -->
-                <!-- ============================================================== -->
-                <div id="profileEditPage" class="col-md">
+                <!-- 선우님 마이페이지 부분 -->
+                <div id="profileEditPage" class="ml-5 mr-5">
                     <div class="card oh">
                                 <h5 class="card-title ">회원정보</h5>&nbsp;
                         <div class="card-body">
@@ -136,14 +107,18 @@
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
                                 
 
                   
+=======
+				<!-- 마이페이지 끝 -->
+>>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
                   
                   
                   
                 <!-- 위시리스트 -->  
-                <div id="wishListPage" class="col-md">
+                <div id="wishListPage" class="ml-5 mr-5">
 	                <div class="card p-4">
 		                <div class="card-body">
 		                <div class="col-md-10">
@@ -238,7 +213,7 @@
                 <!-- 위시리스트 끝 -->
                 
                 <!-- 쿠폰함 -->
-                 <div id="couponPage" class="col-md">
+                 <div id="couponPage" class="ml-5 mr-5">
 	                <div class="card p-4">
 		                <div class="card-body">
 			                <div class="col-md-10">
@@ -259,112 +234,95 @@
 							</div>
 						</div>
 					</div>
+				</div>
+					
                 <!-- 쿠폰함 끝 -->
                     
                 <!-- 이용내역 -->
-                 <div id="usageHistoryPage" class="col-md">
-                        <div class="card p-5">
-                            <div class="card-body">
-                             <div class="row"> 
-	                            <div class="col-md-10">
-	                                <h5 class="card-title">사용 내역</h5>
-	                                <h6 class="card-subtitle">사용 공간 내역을 확인하세요</h6>
-	                            </div>
-                                <div class="col-md-2">
-                                    <select class="custom-select b-0 ">
-                                        <option value="1" >전체 공간</option>
-                                        <option value="2">사용 전</option>
-                                        <option value="3">사용 완료</option>
-                                    </select>
-                                 </div> 
+                 <div id="usageHistoryPage" class="ml-5 mr-5">
+                       <div class="card p-5">
+                           <div class="card-body">
+                            <div class="row"> 
+                            <div class="col-md-10">
+                                <h5 class="card-title">사용 내역</h5>
+                                <h6 class="card-subtitle">사용 공간 내역을 확인하세요</h6>
                             </div>
-                                <div class="steamline m-t-40">
-                                    
+                               <div class="col-md-2">
+                                   <select class="custom-select b-0 ">
+                                       <option value="1" >전체 공간</option>
+                                       <option value="2">사용 전</option>
+                                       <option value="3">사용 완료</option>
+                                   </select>
+                                </div> 
+                           </div>
+                               <div class="steamline m-t-40">
+                                  <div class="sl-item">
+                                     <div class="row">
+                                    	<div class="mb-5 ml-5 mr-5 mt-3" >
+					    					<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
+                                     	</div>
+                                        <div class="mt-2 col-md p-20">
+                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
+                                        	<div class="row"> 
+	                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+	                                            <div class="col-md-9">
+	                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
+	                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
+	                                            </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                   </div>
+                                   <div class="sl-item">
+                                     <div class="row">
+                                    	<div class="mb-5 ml-5 mr-5 mt-3" >
+					    					<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_2.jpg" alt="..."> 
+                                     	</div>
+                                        <div class="mt-2 col-md p-20">
+                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
+                                        	<div class="row"> 
+	                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+	                                            <div class="col-md-9">
+	                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
+	                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
+	                                            </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>    
+                                   <div class="sl-item">
+                                     <div class="row">
+                                    	<div class="mb-5 ml-5 mr-5 mt-3" >
+					    					<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_3.jpg" alt="..."> 
+                                     	</div>
+                                        <div class="mt-2 col-md p-20">
+                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
+                                        	<div class="row"> 
+	                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+	                                            <div class="col-md-9">
+	                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
+	                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
+	                                            </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
                                     <div class="sl-item">
-	                                    <div class="row">
-	                                    <div class="mb-5 ml-5 mr-5 mt-3" >
-						    				<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
-	                                     </div>
-	                                        <div class="mt-2 col-md p-20">
-	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-	                                        	<div class="row"> 
-		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-		                                            <div class="col-md-9">
-		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
-		                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
-		                                            </div>
+                                     <div class="row">
+                                    	<div class="mb-5 ml-5 mr-5 mt-3" >
+					    					<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_4.jpg" alt="..."> 
+                                     	</div>
+                                        <div class="mt-2 col-md p-20">
+                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
+                                        	<div class="row"> 
+	                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+	                                            <div class="col-md-9">
+	                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
+	                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
 	                                            </div>
-	                                        </div>
-	                                        </div>
+                                            </div>
                                         </div>
-                                        <div class="sl-item">
-	                                    <div class="row">
-	                                    <div class="mb-5 ml-5 mr-5 mt-3" >
-						    				<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_2.jpg" alt="..."> 
-	                                     </div>
-	                                        <div class="mt-2 col-md p-20">
-	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-	                                        	<div class="row"> 
-		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-		                                            <div class="col-md-9">
-		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
-		                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
-		                                            </div>
-	                                            </div>
-	                                        </div>
-	                                        </div>
-                                        </div>
-                                        <div class="sl-item">
-	                                     <div class="row">
-	                                    <div class="mb-5 ml-5 mr-5 mt-3" >
-						    				<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_3.jpg" alt="..."> 
-	                                     </div>
-	                                        <div class="mt-2 col-md p-20">
-	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-	                                        	<div class="row"> 
-		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-		                                            <div class="col-md-9">
-		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
-		                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
-		                                            </div>
-	                                            </div>
-	                                        </div>
-	                                        </div>
-                                        </div>
-                                        <div class="sl-item">
-	                                     <div class="row">
-	                                    <div class="mb-5 ml-5 mr-5 mt-3" >
-						    				<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_4.jpg" alt="..."> 
-	                                     </div>
-	                                        <div class="mt-2 col-md p-20">
-	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-	                                        	<div class="row"> 
-		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-		                                            <div class="col-md-9">
-		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
-		                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
-		                                            </div>
-	                                            </div>
-	                                        </div>
-	                                        </div>
-                                        </div>
-                                        <div class="sl-item">
-		                                    <div class="row">
-		                                    <div class="mb-5 ml-5 mr-5 mt-3" >
-							    				<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_5.jpg" alt="..."> 
-		                                     </div>
-		                                        <div class="mt-2 col-md p-20">
-		                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-		                                        	<div class="row"> 
-			                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-			                                            <div class="col-md-9">
-			                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
-			                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
-			                                            </div>
-		                                            </div>
-		                                        </div>
-		                                        </div>
-                                        </div>
+                                      </div>
                                     </div>
                                 </div>
                             </div>
@@ -373,115 +331,113 @@
               	<!-- 이용내역 끝 -->
               
                 <!-- 리뷰 -->
-                <div id="reviewPage" class="col-md">
-                        <div class="card p-5">
-                            <div class="card-body">
-                             <div class="row"> 
-	                            <div class="col-md-10">
-	                                <h5 class="card-title">공간 리뷰</h5>
-	                                <h6 class="card-subtitle">이용한 공간의 리뷰를 작성해주세요</h6>
-	                            </div>
-                                <div class="col-md-2">
-                                    <select class="custom-select b-0 ">
-                                        <option value="1" >전체 리뷰</option>
-                                        <option value="2">작성 가능한 리뷰</option>
-                                        <option value="3">내가 작성한 리뷰</option>
-                                    </select>
-                                 </div> 
+                <div id="reviewPage" class="ml-5 mr-5">
+                  <div class="card p-5">
+                      <div class="card-body">
+                       <div class="row"> 
+                       <div class="col-md-10">
+                           <h5 class="card-title">공간 리뷰</h5>
+                           <h6 class="card-subtitle">이용한 공간의 리뷰를 작성해주세요</h6>
+                       </div>
+                          <div class="col-md-2">
+                              <select class="custom-select b-0 ">
+                                  <option value="1" >전체 리뷰</option>
+                                  <option value="2">작성 가능한 리뷰</option>
+                                  <option value="3">내가 작성한 리뷰</option>
+                              </select>
+                           </div> 
+                      </div>
+                          <div class="steamline m-t-40">
+                              <div class="sl-item">
+                               <div class="row">
+                                <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
+		    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_6.jpg" alt="..."> 
+                                 </div>
+                                   <div class="mt-2 col-md p-20">
+                                       <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
+                                   	<div class="row"> 
+                                        <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+                                        <div class="col-md-9">
+                                            <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
+                                            <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
+                                        </div>
+                                       </div>
+                                   </div>
+                                   </div>
+                                  </div>
+                                  <div class="sl-item">
+                                <div class="row">
+                                <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
+		    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_7.jpg" alt="..."> 
+                                 </div>
+                                   <div class="mt-2 col-md p-20">
+                                       <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
+                                   	<div class="row"> 
+                                        <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+                                        <div class="col-md-9">
+                                            <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
+                                            <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
+                                        </div>
+                                       </div>
+                                   </div>
+                                   </div>
+                                  </div>
+                                  <div class="sl-item">
+                                <div class="row">
+                                 <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
+			    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_8.jpg" alt="..."> 
+                                  </div>
+                                    <div class="mt-2 col-md p-20">
+                                        <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
+                                    	<div class="row"> 
+                                         <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+                                         <div class="col-md-9">
+                                             <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
+                                             <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
+                                         </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                  </div>
+                                  <div class="sl-item">
+                               <div class="row">
+                                <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
+		    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
+                                 </div>
+                                   <div class="mt-2 col-md p-20">
+                                       <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
+                                   	<div class="row"> 
+                                        <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+                                        <div class="col-md-9">
+                                            <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
+                                            <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
+                                        </div>
+                                       </div>
+                                   </div>
+                                 </div>
+                                  </div>
+                                  <div class="sl-item">
+                               <div class="row">
+                                 <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
+			    					<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_2.jpg" alt="..."> 
+                                  </div>
+                                  <div class="mt-2 col-md p-20">
+                                      <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
+                                  	<div class="row"> 
+                                       <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+                                       <div class="col-md-9">
+                                           <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
+                                           <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
+                                       </div>
+                                      </div>
+                                  </div>
+                               </div>
                             </div>
-                                <div class="steamline m-t-40">
-                                    
-                                    <div class="sl-item">
-	                                    <div class="row">
-		                                    <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
-								    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_6.jpg" alt="..."> 
-		                                     </div>
-	                                        <div class="mt-2 col-md p-20">
-	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-	                                        	<div class="row"> 
-		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-		                                            <div class="col-md-9">
-		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
-		                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
-		                                            </div>
-	                                            </div>
-	                                        </div>
-	                                        </div>
-                                        </div>
-                                        <div class="sl-item">
-		                                    <div class="row">
-		                                    <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
-								    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_7.jpg" alt="..."> 
-		                                     </div>
-	                                        <div class="mt-2 col-md p-20">
-	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-	                                        	<div class="row"> 
-		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-		                                            <div class="col-md-9">
-		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
-		                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
-		                                            </div>
-	                                            </div>
-	                                        </div>
-	                                        </div>
-                                        </div>
-                                        <div class="sl-item">
-		                                    <div class="row">
-			                                    <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
-									    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_8.jpg" alt="..."> 
-			                                     </div>
-		                                        <div class="mt-2 col-md p-20">
-		                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-		                                        	<div class="row"> 
-			                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-			                                            <div class="col-md-9">
-			                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
-			                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
-			                                            </div>
-		                                            </div>
-		                                        </div>
-		                                      </div>
-                                        </div>
-                                        <div class="sl-item">
-	                                    <div class="row">
-		                                    <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
-								    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
-		                                     </div>
-	                                        <div class="mt-2 col-md p-20">
-	                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-	                                        	<div class="row"> 
-		                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-		                                            <div class="col-md-9">
-		                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
-		                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
-		                                            </div>
-	                                            </div>
-	                                        </div>
-	                                      </div>
-                                        </div>
-                                        <div class="sl-item">
-		                                   <div class="row">
-			                                    <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
-									    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_2.jpg" alt="..."> 
-			                                     </div>
-		                                        <div class="mt-2 col-md p-20">
-		                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-		                                        	<div class="row"> 
-			                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-			                                            <div class="col-md-9">
-			                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
-			                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
-			                                            </div>
-		                                            </div>
-		                                        </div>
-		                                      </div>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-					<!-- 리뷰 끝 -->
-        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		<!-- 리뷰 끝 -->
         
         <!-- 출석이벤트 달력 -->
 	    <div id="calendar">
@@ -497,6 +453,8 @@
     </div>
 </div>
 </div>
+</div>
+
 
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
@@ -545,18 +503,7 @@ $(function() {
 		$("#calendar").show();
 		$("#profileEditPage, #couponPage, #usageHistoryPage, #reviewPage, #wishListPage").hide();
 	});
-	
 }); 
-/*  profileEditBtn.onclick(function() {
-	wishListPage.style.display ='none';
-		profileEditPage.style.display ='block';
-
-	}); */  
-	
-
-
-</script>
-<script>
 	
 <!-- 출석이벤트  -->
 $(function(){function c(){p();var e=h();var r=0;var u=false;l.empty();while(!u){if(s[r]==e[0].weekday){u=true}else{l.append('<div class="blank"></div>');r++}}for(var c=0;c<42-r;c++){if(c>=e.length){l.append('<div class="blank"></div>')}else{var v=e[c].day;var m=g(new Date(t,n-1,v))?'<div class="today">':"<div>";l.append(m+""+v+"</div>")}}var y=o[n-1];a.css("background-color",y).find("h1").text(i[n-1]+" "+t);f.find("div").css("color",y);l.find(".today").css("background-color",y);d()}function h(){var e=[];for(var r=1;r<v(t,n)+1;r++){e.push({day:r,weekday:s[m(t,n,r)]})}return e}function p(){f.empty();for(var e=0;e<7;e++){f.append("<div>"+s[e].substring(0,3)+"</div>")}}function d(){var t;var n=$("#calendar").css("width",e+"px");n.find(t="#calendar_weekdays, #calendar_content").css("width",e+"px").find("div").css({width:e/7+"px",height:e/7+"px","line-height":e/7+"px"});n.find("#calendar_header").css({height:e*(1/7)+"px"}).find('i[class^="icon-chevron"]').css("line-height",e*(1/7)+"px")}function v(e,t){return(new Date(e,t,0)).getDate()}function m(e,t,n){return(new Date(e,t-1,n)).getDay()}function g(e){return y(new Date)==y(e)}function y(e){return e.getFullYear()+"/"+(e.getMonth()+1)+"/"+e.getDate()}function b(){var e=new Date;t=e.getFullYear();n=e.getMonth()+1}var e=480;var t=2013;var n=9;var r=[];var i=["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];var s=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];var o=["#16a085","#1abc9c","#c0392b","#27ae60","#FF6860","#f39c12","#f1c40f","#e67e22","#2ecc71","#e74c3c","#d35400","#2c3e50"];var u=$("#calendar");var a=u.find("#calendar_header");var f=u.find("#calendar_weekdays");var l=u.find("#calendar_content");b();c();a.find('i[class^="icon-chevron"]').on("click",function(){var e=$(this);var r=function(e){n=e=="next"?n+1:n-1;if(n<1){n=12;t--}else if(n>12){n=1;t++}c()};if(e.attr("class").indexOf("left")!=-1){r("previous")}else{r("next")}})})
