@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%-- 한글 인코딩 처리 --%>
 <fmt:requestEncoding value="utf-8" />
 
@@ -50,7 +52,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" id="profileEditBtn" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"  >프로필 관리</span></a></li>
+                        <li> <a class="waves-effect waves-dark" id="profileEditBtn" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"  >나의 정보</span></a></li>
                         <li> <a class="waves-effect waves-dark" id="wishListBtn" aria-expanded="false"><i class="fa fa-heart"></i><span class="hide-menu"></span>위시리스트</a></li>
                         <li> <a class="waves-effect waves-dark" id="couponListBtn" aria-expanded="false"><i class="fa fa-gift"></i><span class="hide-menu"></span>쿠폰함</a></li>
                         <li> <a class="waves-effect waves-dark" id="usageHistoryListBtn" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu"></span>사용내역</a></li>
@@ -80,40 +82,117 @@
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">마이페이지</a></li>
-                                <li class="breadcrumb-item active">프로필관리</li>
+                                <li class="breadcrumb-item active">나의 정보</li>
                             </ol>
                         </div>
                     </div>
                 </div>
                 <!-- 선우님 마이페이지 부분 -->
                 <div id="profileEditPage" class="ml-5 mr-5">
-                    <div class="card oh">
-                                <h5 class="card-title ">회원정보</h5>&nbsp;
-                        <div class="card-body">
-                            <div class="d-flex m-b-30 align-items-center no-block">
-                                <form name="memberUpdateFrm" action="" method="post" margin="0 auto" width="250px">
-
-	   <input type="text" class="form-control" placeholder="닉네임" name="nickName" id="nickName" value="" required=""><br>
-	   <input type="email" class="form-control" placeholder="이메일" name="email" id="email" value="" required=""><br>
-	   <input type="date" class="form-control" placeholder="생일" name="birthDay" id="birthDay" value=""><br>
-	   <input type="tel" class="form-control" placeholder="전화번호 (예:01012345678)" name="phone" id="phone" maxlength="11" value="" required=""><br>
-	   <input type="text" class="form-control" placeholder="주소" name="address" value="" id="address"><br>
-        <br>
-        <input type="submit" class="btn btn-outline-success" value="회원 수정">&nbsp;
-        <input type="reset" class="btn btn-outline-success" value="회원 탈퇴">
-	</form> 
-	
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 끝 -->
-                				
+                    <div class="card p-5">
+                       <div class="card-body">
+                        <div class="row"> 
+                         <div class="col-md-10">
+                             <h5 class="card-title">나의 정보</h5>
+                             <h6 class="card-subtitle mb-5">회원정보를 확인하세요</h6>
+                         </div>
+	                    </div>
+						 <table class="col-11">
+	                        <!-- <div class="section-title sidebar-title-b mt-5">
+	                            <h6>예약 정보</h6>
+	                        </div> -->
+							<tr>
+								<th class="align-baseline">닉네임</th>
+								<th><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.username"/>" required /></th>
+							</tr>
+						    <tr>
+						      <td class="align-baseline">이메일 계정</td>
+						      <td><input type="email" class="col-8 input-group-text mb-4 mr-5 pull-right" value="honggd@naver.com" required /></td>
+							</tr>
+						    <tr>
+						      <td class="align-baseline">생일</td>
+						      <td><input type="date" class="col-8 input-group-text mb-4 mr-5 pull-right" value="2020-08-08" /></td>
+							</tr>
+						    <tr>
+						      <td class="align-baseline">핸드폰</td>
+						      <td><input type="tel" class="col-8 input-group-text mb-4 mr-5 pull-right" maxlength="11" value="01012341234" required /></td>
+							</tr>
+						</table >
+						  <div class="mt-5" style="border-top: 1px solid #bbbbbb" ></div>
+						  <h6 class="card-subtitle mt-3 mb-5">비밀번호를 입력해주세요.</h6>
+						  <table class="col-11">
+							<tr>
+						      <td class="align-baseline">새 비밀번호</td>
+						      <td><input type="password" class="col-8 input-group-text ml-auto mb-4 mr-5" value="" /></td>
+							</tr>
+						    <tr>
+						      <td class="align-baseline">새 비밀번호 확인</td>
+						      <td><input type="password" class="col-8 input-group-text ml-auto mb-5 mr-5"value="" required /></td>
+							</tr>
+						</table>
+						<div class="mt-5 pull-right mr-5">
+					      <input type="submit" class="btn btn-outline-success btn-lg p-3 pl-4 pr-4" value="회원 수정">&nbsp;
+					      <input type="reset" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4" value="변경사항 없음">
+						
+						</div>
+					
+	                   </div>
+	               </div>
+	           </div>
+	            
                 <!-- 마이페이지 끝 -->
-                  
-                  
+                
+                <div id="profileEditPage" class="ml-5 mr-5">
+                    <div class="card p-5">
+                       <div class="card-body">
+                        <div class="row"> 
+                         <div class="col-md-10">
+                             <h5 class="card-title">나의 정보</h5>
+                             <h6 class="card-subtitle mb-5">회원정보를 확인하세요</h6>
+                         </div>
+	                    </div>
+						 <table class="table table-striped table-hover">
+	                        <!-- <div class="section-title sidebar-title-b mt-5">
+	                            <h6>예약 정보</h6>
+	                        </div> -->
+							<tr>
+								<th class="align-middle">닉네임</th>
+								<th><input type="text" class="col-8 input-group-text mr-5 pull-right" value="<sec:authentication property="principal.username"/>" required /></th>
+							</tr>
+						    <tr>
+						      <td class="align-middle">이메일 계정</td>
+						      <td><input type="email" class="col-8 input-group-text mr-5 pull-right" value="honggd@naver.com" required /></td>
+							</tr>
+						    <tr>
+						      <td class="align-middle">생일</td>
+						      <td><input type="date" class="col-8 input-group-text mr-5 pull-right" value="2020-08-08" /></td>
+							</tr>
+						    <tr>
+						      <td class="align-middle">핸드폰</td>
+						      <td><input type="tel" class="col-8 input-group-text mr-5 pull-right" maxlength="11" value="01012341234" required /></td>
+							</tr>
+						</table>
+						  <div class="mt-5" style="border-top: 1px solid #bbbbbb" ></div>
+						  <h6 class="card-subtitle mt-3 mb-5">비밀번호를 입력해주세요.</h6>
+						  <table class="table table-striped table-hover mb-5">
+							<tr>
+						      <td class="align-middle">새 비밀번호</td>
+						      <td><input type="password" class="col-8 input-group-text ml-auto mr-5" value="" /></td>
+							</tr>
+						    <tr>
+						      <td class="align-middle">새 비밀번호 확인</td>
+						      <td><input type="password" class="col-8 input-group-text ml-auto mr-5"value="" required /></td>
+							</tr>
+						</table>
+						<div class="mt-3 pull-right mr-5">
+					      <input type="submit" class="btn btn-outline-success btn-lg p-3 pl-4 pr-4" value="회원 수정">&nbsp;
+					      <input type="reset" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4" value="변경사항 없음">
+						
+						</div>
+					
+	                   </div>
+	               </div>
+	           </div>
              
                 <!-- 위시리스트 -->  
                 <div id="wishListPage" class="ml-5 mr-5">
