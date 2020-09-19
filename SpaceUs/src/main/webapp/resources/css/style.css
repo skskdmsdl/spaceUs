@@ -12195,7 +12195,7 @@ ol {
 }
 
 .cs-map {
-  height: 400px;
+ height: 400px;
   right: 0;
   top: 0;
   width: 50%;
@@ -14158,6 +14158,12 @@ li .richText-btn[data-command=toggleCode] {
     height: auto;
   }
 
+  .cs-map {
+    height: 450px;
+    position: relative;
+    width: 100%;
+  }
+
   .pd-text .pd-social {
     text-align: left;
     padding-top: 0;
@@ -14623,6 +14629,11 @@ li .richText-btn[data-command=toggleCode] {
     height: auto;
   }
 
+  .cs-map {
+    height: 450px;
+    position: relative;
+    width: 100%;
+  }
 
   .pd-text .pd-board .tab-board .tab-content .tab-details ul {
     width: 100%;
@@ -15158,7 +15169,6 @@ li .richText-btn[data-command=toggleCode] {
   background-position: top center;
 }
 
-
 /* 출석이벤트 */
 #calendar{
   margin-left: auto;
@@ -15229,10 +15239,34 @@ i[class^=icon-chevron]{
   width:15%;
   border-radius: 50%;
 }
+
+
+/* 마이페이지 */
 #main-wrapper {
   background-color:#edf1f5;}
-  
 .img-circle{ 
 	min-width: 100%;  min-height: 100%;
 }
-
+.thumbnail{
+	width:250px; height:200px;
+	border-radius: 5px;
+	margin-top:50px;
+}
+.usageHistoryImg{
+	width:200px; height:150px;
+	border-radius: 5px;
+}
+.usageReviewImg{
+	width:150px; height:150px;
+}
+.couponImg{
+	width:500px;
+}
+#couponDday, #couponDday2{
+	position:absolute; 	
+	top: 13pt;
+	left: 225pt; 
+}
+#couponEnd, #couponEnd2{
+	margin-left:10px;
+}

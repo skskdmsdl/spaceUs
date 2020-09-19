@@ -15,6 +15,7 @@
     <meta name="description" content="Elegant Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
     
+
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${ pageContext.request.contextPath }/assets/images/favicon.png">
     <!-- This page CSS -->
@@ -43,17 +44,29 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/icomoon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/jquery-ui.min.css">
+<<<<<<< HEAD
     <!-- icons -->
     <script src="https://kit.fontawesome.com/b74a25ff1b.js" crossorigin="anonymous"></script>
+=======
+
+    <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+   <script src="${pageContext.request.contextPath }/resources/js/aos.js"></script>  
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+>>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
     
-     
   <!-- loader -->
   <%-- <script src="${pageContext.request.contextPath }/resources/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="${pageContext.request.contextPath }/resources/js/google-map.js"></script> --%>
+<<<<<<< HEAD
   <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
   
+=======
+  
+   <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
+>>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
   </head>
+  
   <body>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
@@ -61,6 +74,7 @@
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span>
 	      </button>
+<<<<<<< HEAD
 	      <sec:authorize access="isAnonymous()">
 		      <div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav ml-auto">
@@ -83,6 +97,15 @@
 	        	</div>
 		      </div>
 		  </sec:authorize>
+=======
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
+	          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberLogin.do" class="nav-link">로그인</a></li>
+	          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberEnroll.do" class="nav-link">회원가입</a></li>
+	        </ul>
+	      </div>
+>>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
 	    </div>
 	  </nav>
     <!-- END nav -->

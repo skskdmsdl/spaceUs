@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>회원가입</title>
+	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/images/icons/favicon.ico"/>
@@ -17,7 +17,6 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/vendor/daterangepicker/daterangepicker.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
-	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 </head>
 <style>
 .login100-form-btn {
@@ -26,9 +25,6 @@
 a:hover {
     text-decoration: none;
     color: #00C89E;
-}
-.phone {
-    margin: auto;
 }
 </style>
 <body style="background-color: #666666;">
@@ -40,53 +36,49 @@ a:hover {
 					<span class="login100-form-title p-b-43">
 						<a class="navbar-brand" href="${pageContext.request.contextPath }">Space Us</a>
 					</span>
-					
-					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="email" name="email">
+						<input class="input100" type="text" name="email">
 						<span class="focus-input100"></span>
-						<span class="label-input100">이메일</span>
+						<span class="label-input100">Email</span>
 					</div>
+					
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input class="input100" type="password" name="pass">
 						<span class="focus-input100"></span>
-						<span class="label-input100">비밀번호</span>
+						<span class="label-input100">Password</span>
 					</div>
-					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pass">
-						<span class="focus-input100"></span>
-						<span class="label-input100">비밀번호 확인</span>
+
+					<div class="flex-sb-m w-full p-t-3 p-b-32">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="ckb1">
+								아이디 저장
+							</label>
+						</div>
+
+						<div>
+							<a href="#" class="txt1">
+								비밀번호를 잊으셨나요?
+							</a>
+						</div>
 					</div>
-					
-					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="address">
-						<span class="focus-input100"></span>
-						<span class="label-input100">닉네임</span>
-					</div>
-					
-					<div class="wrap-input100 validate-input">
-						<input class="input100" type="tel" name="phone">
-						<span class="focus-input100"></span>
-						<span class="label-input100">휴대폰번호</span>
-					</div>
-						<div class="text-right p-b-10">
-						<a href="javascript:;" class="txt1">
-							휴대폰 인증
-						</a>
-					</div>
+			
+
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
-							회원가입
+							Login
 						</button>
 					</div>
 					
 					<div class="text-center p-t-46 p-b-20">
-						<a href="${pageContext.request.contextPath }/login/login.do" class="txt1">
-							이미 가입하셨나요?
+						<a href="${pageContext.request.contextPath }/member/memberEnroll.do" class="txt1">
+							아직 회원이 아니신가요?
 						</a>
 						<br /><br />
+						<span class="txt2">
+							Social Login
+						</span>
 					</div>
 
 					<div class="login100-form-social flex-c-m">
@@ -100,12 +92,11 @@ a:hover {
 					</div>
 				</form>
 
-				<div class="login100-more" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_2.jpg');">
+				<div class="login100-more" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg-01.jpg');">
 				</div>
 			</div>
 		</div>
 	</div>
-	
 	<script src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/vendor/animsition/js/animsition.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/popper.js"></script>

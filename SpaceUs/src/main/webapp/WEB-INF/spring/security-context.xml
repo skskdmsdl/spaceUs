@@ -36,7 +36,7 @@
 		
 	</http>
 	
-	
+
 	<!-- #8.4 사용자 인증 -->
 	<authentication-manager>
 		<authentication-provider>
@@ -44,12 +44,12 @@
 			<!-- 1. in-memory 사용자 인증 -->
 			<user-service>
 				<user name="honggd"
-					  
 				      password="$2a$10$vY8lYMy7Xt.Qz9sTUH4V6uu2tYllGHtM2ehm39at.sbIVo4JBW4Ta" 
 				      authorities="ROLE_USER"
 				      />
 				<user name="admin"
 				      password="$2a$10$vY8lYMy7Xt.Qz9sTUH4V6uu2tYllGHtM2ehm39at.sbIVo4JBW4Ta" 
+
 				      authorities="ROLE_USER,ROLE_ADMIN"
 				      />
 			</user-service>

@@ -15,6 +15,7 @@
 h1 {
 font-family: 'NEXON Lv1 Gothic OTF';
 }
+
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
 @import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
 
@@ -51,11 +52,11 @@ input[type="text"] {
   cursor: pointer;
 }
 
-#search {
+#search_keyword {
 	color: black;
 }
 
-#search:focus:hover {
+#search_keyword:focus:hover {
   border-bottom: 1px solid black;
 }
 
@@ -72,6 +73,7 @@ input[type="text"]:focus {
 #search_submit:hover {
   opacity: 0.8;
 }
+
 </style>
 <!-- 컨텐츠 시작 -->
 <div class="hero-wrap ftco-degree-bg"
@@ -87,8 +89,8 @@ input[type="text"]:focus {
           			<p></p>
      					<div class="col-lg-10 align-items-end" style="margin-top:-20px">
      						<div id="wrap">
-							  <form action="" autocomplete="on">
-							  <input id="search" name="search" type="text" placeholder="키워드를 입력하세요">
+							  <form id="searchFrm" action="" autocomplete="on">
+							  <input id="search_keyword" name="search_keyword" type="text" placeholder="키워드를 입력하세요">
 							  <i class="fas fa-search fa-2x" id="search_submit" type="submit" style="color:#00C89E"></i>
 							  </form>
 							</div>
@@ -114,7 +116,7 @@ input[type="text"]:focus {
       </div>
     </div>
         <div class="search-form-content">
-            <form action="#" class="filter-form">
+            <form id="filter-search" class="filter-form">
                 <select class="nice-select sm-width">
                     <option value="">Chose The City</option>
                 </select>
@@ -155,7 +157,7 @@ input[type="text"]:focus {
                     <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 66.6667%;"></span>
                     </div>
                 </div>
-                <button type="button" class="search-btn sm-width">Search</button>
+                <button type="button" onclick="searchSpace();"class="search-btn sm-width">검 색</button>
             </form>
         </div>
         <div class="more-option">
@@ -163,7 +165,7 @@ input[type="text"]:focus {
                 <div class="card">
                     <div class="card-heading active">
                         <a data-toggle="collapse" data-target="#collapseOne">
-                            더 많은 옵션보기
+                            더 많은 옵션
                         </a>
                     </div>
                     <div id="collapseOne" class="collapse" data-parent="#accordionExample">
@@ -391,6 +393,15 @@ input[type="text"]:focus {
     </section>	
 <!-- 이용자리뷰 끝-->
 <script>
+function searchSpace(){
+	
+	$("#searchFrm").attr("action", 
+				"${ pageContext.request.contextPath}/space/searchSpace.do")
+				.attr("method", "GET")
+				.submit();
+}
+
+
 document.querySelector('.stick').addEventListener('click',()=>{
 	  document.querySelector('.four').value = '';
 	});
