@@ -15166,11 +15166,25 @@ li .richText-btn[data-command=toggleCode] {
 
 .no-csspointerevents .nice-select.open .list {
   display: block; }
-    
-    
-    
+      
 .set-bg {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top center;
 }
+
+/*  #exampleModal {
+    position: absolute;
+    top: calc(100% + 7px);
+    right: -7px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    width: 260px;
+    overflow: hidden;
+    box-shadow: 0 16px 43px 0 rgba(0, 0, 0, 0.24);
+    transform-origin: top right;
+    transition: transform .3s, opacity .3s;
+    transform: scale(0);
+    opacity: 0;
+    } */

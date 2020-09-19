@@ -10,7 +10,7 @@
 	  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 	  crossorigin="anonymous">
 
-
+<!-- test -->
 <!-- 사용자작성 css -->
 <style>
 h1 {
@@ -210,4 +210,4 @@ input[type="text"]:focus {
 
 </div>
 <!-- 컨텐츠 끝 -->
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/> 
