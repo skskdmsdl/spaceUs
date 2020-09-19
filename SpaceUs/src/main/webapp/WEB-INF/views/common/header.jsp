@@ -56,13 +56,21 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/jquery-ui.min.css">
 
+    <!-- icons -->
+    <script src="https://kit.fontawesome.com/b74a25ff1b.js" crossorigin="anonymous"></script>
+
     <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
    <script src="${pageContext.request.contextPath }/resources/js/aos.js"></script>  
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     
   <!-- loader -->
   <%-- <script src="${pageContext.request.contextPath }/resources/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="${pageContext.request.contextPath }/resources/js/google-map.js"></script> --%>
+
+  <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+   <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
+  
   
    <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
   </head>
@@ -74,13 +82,77 @@
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span>
 	      </button>
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
-	          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberLogin.do" class="nav-link">로그인</a></li>
-	          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberEnroll.do" class="nav-link">회원가입</a></li>
-	        </ul>
-	      </div>
-	    </div>
+	      <sec:authorize access="isAnonymous()">
+		      <div class="collapse navbar-collapse" id="ftco-nav">
+		        <ul class="navbar-nav ml-auto">
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberLoginForm.do" class="nav-link">로그인</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberEnrollForm.do" class="nav-link">회원가입</a></li>
+		        </ul>
+		      </div>
+	      </sec:authorize>
+	      <sec:authorize access="isAuthenticated()">
+	        <div class="collapse navbar-collapse" id="ftco-nav"  data-toggle="modal" data-target="#exampleModal">
+	        	<div class="navbar-nav ml-auto" style="cursor: pointer !important;">
+	        		<div>반갑습니다. &nbsp;</div>
+	        		<div>
+	        			<sec:authentication property="principal.username"/> 님!
+	        		</div>
+	        		&nbsp;
+	        		<div class="user_profile_icon" data-subscribe-type="PRO" 
+	        		     style="background: #22B47B; border-radius: 90%; width: 40px;  height: 40px;">
+	        			<img src="https://resource.miricanvas.com/image/common/profile_argo.svg">
+	        		</div>
+	        	</div>
+		      </div>
+		  </sec:authorize>
+
+	     
 	  </nav>
     <!-- END nav -->
+    
+    <!-- Modal -->
+     <sec:authorize access="isAuthenticated()">
+	<div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-auto" role="document">
+	    <div class="modal-content"  style="background:#625c55; border-radius: 1.3em; left:36rem; top:3rem; width:55%; ">
+	      <div class="modal-header" style="background: #30D795; border-radius: 1.3em;">
+	        <h5 class="modal-title" id="exampleModalLabel">
+	        	<div>
+		        	<img src="https://resource.miricanvas.com/image/common/profile_argo.svg" style="background: #22B47B; border-right: 0; border-radius: 90%; width: 40px;  height: 40px;">
+	        		<sec:authentication property="principal.username"/>@naver.com
+	        	</div>
+	        </h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="col-sm-10 mb-2">
+	    	    <a href="${pageContext.request.contextPath }/member/memberProfile.do">
+	    	    	<i class="fas fa-user-alt"></i>&nbsp;
+	    	    	마이프로필
+	    	    </a>
+	      	</div>
+	      	<div class="col-sm-10 mb-2">
+		        <a href="#">
+		        	<i class="fas fa-history"></i>&nbsp;
+		        	예약관리
+		        </a>
+	      	 </div>
+	      	 <div class="col-sm-10 mb-2">
+		        <a href="${pageContext.request.contextPath }/member/memberProfile.do">
+		        	<i class="fas fa-heart"></i>&nbsp;
+		        	위시리스트
+		        </a>
+	      	 </div>
+	      </div>
+	      <div class="modal-footer">
+	      	 <form:form action="${ pageContext.request.contextPath }/member/memberLogout.do">
+	      	 	 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">로그아웃</button>
+	      	 </form:form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	</sec:authorize>
