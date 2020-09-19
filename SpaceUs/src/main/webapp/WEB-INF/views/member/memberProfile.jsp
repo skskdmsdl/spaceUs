@@ -88,35 +88,29 @@
                 <!-- 선우님 마이페이지 부분 -->
                 <div id="profileEditPage" class="ml-5 mr-5">
                     <div class="card oh">
+                                <h5 class="card-title ">회원정보</h5>&nbsp;
                         <div class="card-body">
                             <div class="d-flex m-b-30 align-items-center no-block">
-                                <h5 class="card-title ">Yearly Sales</h5>
-                                <div class="ml-auto">
-                                    <ul class="list-inline font-12">
-                                        <li><i class="fa fa-circle text-info"></i> Iphone</li>
-                                        <li><i class="fa fa-circle text-primary"></i> Ipad</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div id="morris-area-chart" style="height: 350px;"></div>
-                        </div>
-                        <div class="card-body bg-light">
-                            <div class="row text-center m-b-20">
-                                <div class="col-lg-4 col-md-4 m-t-20">
-                                    <h2 class="m-b-0 font-light">6000</h2><span class="text-muted">Total sale</span>
-                                </div>
-                                <div class="col-lg-4 col-md-4 m-t-20">
-                                    <h2 class="m-b-0 font-light">4000</h2><span class="text-muted">Iphone</span>
-                                </div>
-                                <div class="col-lg-4 col-md-4 m-t-20">
-                                    <h2 class="m-b-0 font-light">2000</h2><span class="text-muted">Ipad</span>
-                                </div>
+                                <form name="memberUpdateFrm" action="" method="post" margin="0 auto" width="250px">
+
+	   <input type="text" class="form-control" placeholder="닉네임" name="nickName" id="nickName" value="" required=""><br>
+	   <input type="email" class="form-control" placeholder="이메일" name="email" id="email" value="" required=""><br>
+	   <input type="date" class="form-control" placeholder="생일" name="birthDay" id="birthDay" value=""><br>
+	   <input type="tel" class="form-control" placeholder="전화번호 (예:01012345678)" name="phone" id="phone" maxlength="11" value="" required=""><br>
+	   <input type="text" class="form-control" placeholder="주소" name="address" value="" id="address"><br>
+        <br>
+        <input type="submit" class="btn btn-outline-success" value="회원 수정">&nbsp;
+        <input type="reset" class="btn btn-outline-success" value="회원 탈퇴">
+	</form> 
+	
+                                
                             </div>
                         </div>
                     </div>
                 </div>
-				<!-- 마이페이지 끝 -->
-                  
+                
+                <!-- 끝 -->
+
                 <!-- 위시리스트 -->  
                 <div id="wishListPage" class="ml-5 mr-5">
 	                <div class="card p-4">
