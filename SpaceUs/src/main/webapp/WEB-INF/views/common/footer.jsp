@@ -22,7 +22,7 @@
               <ul class="list-unstyled">
                 <li><a href=""><span class="icon-long-arrow-right mr-2"></span>Space Us 소개</a></li>
                 <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
-                <li><a href="${pageContext.request.contextPath}/aboutus/faqs.do"><span class="icon-long-arrow-right mr-2"></span>FAQs</a></li>
+                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>FAQs</a></li>
               </ul>
             </div>
           </div>
