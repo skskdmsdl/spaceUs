@@ -27,6 +27,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
   position: relative;
 }
 
+
 input[type="text"] {
   height: 40px;
   font-size: 20px;
@@ -70,6 +71,9 @@ input[type="text"]:focus {
 #search_submit:hover {
   opacity: 0.8;
 }
+.space-price{
+  color: #007bff;
+}
 
 </style>
 <!-- 컨텐츠 시작 -->
@@ -86,7 +90,7 @@ input[type="text"]:focus {
           			<p></p>
      					<div class="col-lg-10 align-items-end" style="margin-top:-20px">
      						<div id="wrap">
-							  <form id="searchFrm" action="" autocomplete="on">
+							  <form id="searchFrm" onsubmit="searchSpace();" action="" autocomplete="on">
 							  <input id="search_keyword" name="search_keyword" type="text" placeholder="키워드를 입력하세요">
 							  <i class="fas fa-search fa-2x" id="search_submit" type="submit" style="color:#00C89E"></i>
 							  </form>
@@ -154,7 +158,7 @@ input[type="text"]:focus {
                     <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 66.6667%;"></span>
                     </div>
                 </div>
-                <button type="button" onclick="searchSpace();"class="search-btn sm-width">검 색</button>
+                <button type="button" onclick="location.href='${pageContext.request.contextPath}/space/searchSpace.do?search_keyword=';" class="search-btn sm-width">검색</button>
             </form>
         </div>
         <div class="more-option">
@@ -256,20 +260,20 @@ input[type="text"]:focus {
       </div>
     </div>
     <div class="row">
-    	<div class="col-md-4">
+    	    	<div class="col-md-4">
     		<div class="property-wrap ftco-animate">
     			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
     			<div class="text">
-    				<p class="price"><span class="old-price">800,000</span><span class="orig-price">$3,050<small>/mo</small></span></p>
+    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
     				<ul class="property_list">
-    					<li><span class="flaticon-bed"></span>3</li>
-    					<li><span class="flaticon-bathtub"></span>2</li>
-    					<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
+    					<li><span class="icon-people"></span>최대3인</li>
+    					<li><span class="icon-heart"></span>55</li>
+    					<li><span class="icon-comments"></span>29</li>
     				</ul>
     				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
-    				<span class="location">Oakland</span>
+    				<small><span class="icon-my_location">문발리</span></small>
     				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    					<span class="ion-ios-link"></span>
+    				<span class="icon-heart"></span>
     				</a>
     			</div>
     		</div>
@@ -278,38 +282,38 @@ input[type="text"]:focus {
     		<div class="property-wrap ftco-animate">
     			<a href="#" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-2.jpg);"></a>
     			<div class="text">
-    				<p class="price"><span class="old-price">800,000</span><span class="orig-price">$3,050<small>/mo</small></span></p>
+    				<p class="price"><span class="space-price">50,000<small>원/시간</small></span></p>
     				<ul class="property_list">
-    					<li><span class="flaticon-bed"></span>3</li>
-    					<li><span class="flaticon-bathtub"></span>2</li>
-    					<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
+    					<li><span class="icon-people"></span>최대8인</li>
+    					<li><span class="icon-heart"></span>45</li>
+    					<li><span class="icon-comments"></span>340</li>
     				</ul>
-    				<h3><a href="#">The Blue Sky Home</a></h3>
-    				<span class="location">Oakland</span>
+    				<h3><a href="#">망원옥탑</a></h3>
+    				<small><span class="icon-my_location">망원동</span></small>
     				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    					<span class="ion-ios-link"></span>
+    				<span class="icon-heart"></span>
     				</a>
     			</div>
     		</div>
     	</div>
-    	<div class="col-md-4">
-    		<div class="property-wrap ftco-animate">
-    			<a href="#" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-3.jpg);"></a>
-    			<div class="text">
-    				<p class="price"><span class="old-price">800,000</span><span class="orig-price">$3,050<small>/mo</small></span></p>
-    				<ul class="property_list">
-    					<li><span class="flaticon-bed"></span>3</li>
-    					<li><span class="flaticon-bathtub"></span>2</li>
-    					<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
-    				</ul>
-    				<h3><a href="#">The Blue Sky Home</a></h3>
-    				<span class="location">Oakland</span>
-    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    					<span class="ion-ios-link"></span>
-    				</a>
-    			</div>
-    		</div>
-    	</div>
+	    	<div class="col-md-4">
+	    		<div class="property-wrap ftco-animate">
+	    			<a href="#" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-3.jpg);"></a>
+	    			<div class="text">
+	    				<p class="price"><span class="space-price">60,000<small>원/시간</small></span></p>
+	    				<ul class="property_list">
+	    					<li><span class="icon-people"></span>최대4인</li>
+	    					<li><span class="icon-heart"></span>20</li>
+	    					<li><span class="icon-comments"></span>19</li>
+	    				</ul>
+	    				<h3><a href="#">노원 스튜디오 스페이셔스</a></h3>
+	    				<small><span class="icon-my_location">상계동</span></small>
+	    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+	    				<span class="icon-heart"></span>
+	    				</a>
+	    			</div>
+	    		</div>
+	    	</div>
     </div>
 	</div>
 </section>
@@ -394,8 +398,7 @@ function searchSpace(){
 	
 	$("#searchFrm").attr("action", 
 				"${ pageContext.request.contextPath}/space/searchSpace.do")
-				.attr("method", "GET")
-				.submit();
+				.attr("method", "GET");
 }
 
 
