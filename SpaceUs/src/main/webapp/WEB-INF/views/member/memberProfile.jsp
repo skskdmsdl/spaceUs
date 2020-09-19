@@ -107,13 +107,9 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
-                                
 
-                  
-=======
+                               
 				<!-- 마이페이지 끝 -->
->>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
                   
                   
                   

@@ -260,7 +260,7 @@ input[type="text"]:focus {
     </div>
     <div class="row">
     	<div class="col-md-4">
-    		<div class="property-wrap ftco-animate">
+    		<div class="property-wrap ftco-animate" onclick="${pageContext.request.contextPath }/space/spaceDetail.do">
     			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
     			<div class="text">
     				<p class="price"><span class="old-price">800,000</span><span class="orig-price">$3,050<small>/mo</small></span></p>
