@@ -75,8 +75,8 @@
 		      <div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav ml-auto">
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
-		          <li class="nav-item"><a href="${pageContext.request.contextPath }/login/login.do" class="nav-link">로그인</a></li>
-		          <li class="nav-item"><a href="${pageContext.request.contextPath }/enroll/enroll.do" class="nav-link">회원가입</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberLoginForm.do" class="nav-link">로그인</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberEnrollForm.do" class="nav-link">회원가입</a></li>
 		        </ul>
 		      </div>
 	      </sec:authorize>
@@ -131,7 +131,7 @@
 		        	위시리스트
 		        </a>
 	      	 </div>
-	      	 <form:form action="${ pageContext.request.contextPath }/login/memberLogout.do">
+	      	 <form:form action="${ pageContext.request.contextPath }/member/memberLogout.do">
 	      	 	 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">로그아웃</button>
 	      	 </form:form>
 	      </div>

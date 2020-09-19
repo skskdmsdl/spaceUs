@@ -38,7 +38,7 @@ a:hover {
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<form:form 
-							action="${pageContext.request.contextPath }/login/memberLogin.do"
+							action="${pageContext.request.contextPath }/member/memberLogin.do"
 							class="login100-form validate-form" >
 					<span class="login100-form-title p-b-43">
 						<a class="navbar-brand">Space Us</a>
@@ -72,7 +72,7 @@ a:hover {
 			
 
 					<div class="container-login100-form-btn">
-						<button type="submit" class="login100-form-btn" onclick="${pageContext.request.contextPath}/login/memberLogin">
+						<button type="submit" class="login100-form-btn" onclick="${pageContext.request.contextPath}/member/memberLogin.do">
 							Login
 						</button>
 					</div>
