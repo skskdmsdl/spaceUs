@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- 선우님 마이페이지 부분 -->
+                <!-- 회원정보 -->
                 <div id="profileEditPage" class="ml-5 mr-5">
                     <div class="card p-5">
                        <div class="card-body">
@@ -98,9 +98,6 @@
                          </div>
 	                    </div>
 						 <table class="col-11">
-	                        <!-- <div class="section-title sidebar-title-b mt-5">
-	                            <h6>예약 정보</h6>
-	                        </div> -->
 							<tr>
 								<th class="align-baseline">닉네임</th>
 								<th><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.username"/>" required /></th>
@@ -133,15 +130,13 @@
 						<div class="mt-5 pull-right mr-5">
 					      <input type="submit" class="btn btn-outline-success btn-lg p-3 pl-4 pr-4" value="회원 수정">&nbsp;
 					      <input type="reset" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4" value="변경사항 없음">
-						
 						</div>
-					
 	                   </div>
 	               </div>
 	           </div>
-	            
-                <!-- 마이페이지 끝 -->
+                <!-- 회원정보 끝 -->
                 
+                <!-- 회원정보2 -->
                 <div id="profileEditPage" class="ml-5 mr-5">
                     <div class="card p-5">
                        <div class="card-body">
@@ -152,9 +147,6 @@
                          </div>
 	                    </div>
 						 <table class="table table-striped table-hover">
-	                        <!-- <div class="section-title sidebar-title-b mt-5">
-	                            <h6>예약 정보</h6>
-	                        </div> -->
 							<tr>
 								<th class="align-middle">닉네임</th>
 								<th><input type="text" class="col-8 input-group-text mr-5 pull-right" value="<sec:authentication property="principal.username"/>" required /></th>
@@ -187,12 +179,11 @@
 						<div class="mt-3 pull-right mr-5">
 					      <input type="submit" class="btn btn-outline-success btn-lg p-3 pl-4 pr-4" value="회원 수정">&nbsp;
 					      <input type="reset" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4" value="변경사항 없음">
-						
 						</div>
-					
 	                   </div>
 	               </div>
 	           </div>
+	           <!-- 회원정보2 끝 -->
              
                 <!-- 위시리스트 -->  
                 <div id="wishListPage" class="ml-5 mr-5">
