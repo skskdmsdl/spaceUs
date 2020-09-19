@@ -29,11 +29,11 @@
                 </div>
                 <div class="navbar-collapse">
                     
-                   <ul class="navbar-nav my-lg-0">
+                   <!-- <ul class="navbar-nav my-lg-0">
                        <li class="nav-item dropdown">
                            <a id="logout" class="m-r-30">로그아웃</a>
                        </li>
-                   </ul>
+                   </ul> -->
                </div>
             </nav>
         </header>
