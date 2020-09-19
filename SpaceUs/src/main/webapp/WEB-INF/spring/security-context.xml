@@ -17,6 +17,7 @@
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
 		<intercept-url pattern="/resources/**" access="permitAll"/>
 		<intercept-url pattern="/member/**" access="permitAll"/>
+		<intercept-url pattern="/aboutus/**" access="permitAll"/>
 	
 		<intercept-url pattern="/**" access="hasRole('USER')"/>
 		
