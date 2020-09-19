@@ -401,7 +401,6 @@ function searchSpace(){
 				.attr("method", "GET");
 }
 
-
 document.querySelector('.stick').addEventListener('click',()=>{
 	  document.querySelector('.four').value = '';
 	});
