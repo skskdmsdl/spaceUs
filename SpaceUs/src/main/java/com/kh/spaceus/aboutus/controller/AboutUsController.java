@@ -8,11 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/aboutus")
 @Slf4j
-public class AboutUs {
+public class AboutUsController {
 
 	@RequestMapping("/faqs.do")
 	public String faqList() {
 		return "aboutus/faqs";
 	}
-	
+
 }

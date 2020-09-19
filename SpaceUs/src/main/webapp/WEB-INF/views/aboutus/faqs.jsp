@@ -16,10 +16,8 @@
 h1 {
 font-family: 'NEXON Lv1 Gothic OTF';
 }
-
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
 @import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
-
 #wrap {
   margin: 50px 78px;
   display: inline-block;
@@ -29,7 +27,6 @@ font-family: 'NEXON Lv1 Gothic OTF';
   padding: 0;
   position: relative;
 }
-
 input[type="text"] {
   height: 40px;
   font-size: 20px;
@@ -51,15 +48,12 @@ input[type="text"] {
   transition: .4s cubic-bezier(0.5, 0.795, 0.5, 0.50);
   cursor: pointer;
 }
-
 #search_keyword {
 	color: black;
 }
-
 #search_keyword:focus:hover {
   border-bottom: 1px solid black;
 }
-
 input[type="text"]:focus {
   width: 400px;
   z-index: 1;
@@ -69,11 +63,9 @@ input[type="text"]:focus {
   top: 55px;
   text-align: center;
 }
-
 #search_submit:hover {
   opacity: 0.8;
 }
-
 </style>
 <!-- 컨텐츠 시작 -->
 <!-- FAQ검색 시작 -->
@@ -118,7 +110,7 @@ input[type="text"]:focus {
             <h2>사용법 목록</h2>
           </div>
         </div>
-        
+
         <div class="row d-flex">
           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
@@ -181,7 +173,7 @@ input[type="text"]:focus {
 	      </div>
 	    </div>
 	  </div>
-	  
+
 	  <div class="card">
 	    <div class="card-header" id="headingTwo">
 	      <h2 class="mb-0">
@@ -198,7 +190,7 @@ input[type="text"]:focus {
 	      </div>
 	    </div>
 	  </div>
-	  
+
 	  <div class="card">
 	    <div class="card-header" id="headingThree">
 	      <h2 class="mb-0">
