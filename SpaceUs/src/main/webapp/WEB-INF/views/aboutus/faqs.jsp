@@ -100,68 +100,60 @@ input[type="text"]:focus {
 	</div>
 </div>
 <!-- FAQ검색 끝 -->
-
 <div class="w-75 mx-auto mt-5 mb-5">
 <!-- 사용법 목록 시작 -->
     <section class="ftco-no-pt mb-5">
-    	<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-		      <div class="container">
-		        <div class="row justify-content-center mb-3">
-		          <div class="col-md-7 heading-section text-center ftco-animate">
-		          	<span class="subheading">목록으로 사용법을 찾아보세요</span>
-		            <h2>사용법 목록</h2>
-		          </div>
-		        </div>
-		
-		        <div class="row d-flex">
-		        <li class="nav-item" role="presentation">
-			          <div class="col-md-3 d-flex ftco-animate">
-			          	<div class="blog-entry justify-content-end">
-			              <div class="text">
-			                <a href="blog-single.html" 
-			                   class="block-20 im" 
-			                   style="background-image: url('${pageContext.request.contextPath }/resources/images/icon1.PNG');">
-				              </a>
-			                <h3 class="heading text-center"><a href="#">회원</a></h3>
-			                <p class="text-center">회원등록, 회원탈퇴, 회원정보 수정 방법을<br>알 수 있습니다.</p>
-			              </div>
-			            </div>
-			          </div>
-			      </li>
-			      
-		          <div class="col-md-3 d-flex ftco-animate">
-		          	<div class="blog-entry justify-content-end">
-		              <div class="text">
-		                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon2.PNG');">
-			              </a>
-		                <h3 class="heading text-center"><a href="#">예약</a></h3>
-		                <p class="text-center">예약 방법, 예약 변경, 예약 취소 방법을<br>알 수 있습니다.</p>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex ftco-animate">
-		          	<div class="blog-entry justify-content-end">
-		              <div class="text">
-		                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon3.PNG');">
-			              </a>
-		                <h3 class="heading text-center"><a href="#">공간 등록</a></h3>
-		                <p class="text-center">공간등록 방법, 호스트 계정에 대해<br>알 수 있습니다.</p>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex ftco-animate">
-		          	<div class="blog-entry justify-content-end">
-		              <div class="text">
-		                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon4.PNG');">
-			              </a>
-		                <h3 class="heading text-center"><a href="#">리뷰</a></h3>
-		                <p class="text-center">리뷰등록, 리뷰수정, 리뷰삭제 방법에 대해<br>알 수 있습니다.</p>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-	      	</div>
-    	</ul>
+      <div class="container">
+        <div class="row justify-content-center mb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+          	<span class="subheading">목록으로 사용법을 찾아보세요</span>
+            <h2>사용법 목록</h2>
+          </div>
+        </div>
+
+        <div class="row d-flex">
+          <div class="col-md-3 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <div class="text">
+                <a href="blog-single.html" class="block-20 im" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon1.PNG');">
+	              </a>
+                <h3 class="heading text-center"><a href="#">회원</a></h3>
+                <p class="text-center">회원등록, 회원탈퇴, 회원정보 수정 방법을<br>알 수 있습니다.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <div class="text">
+                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon2.PNG');">
+	              </a>
+                <h3 class="heading text-center"><a href="#">예약</a></h3>
+                <p class="text-center">예약 방법, 예약 변경, 예약 취소 방법을<br>알 수 있습니다.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <div class="text">
+                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon3.PNG');">
+	              </a>
+                <h3 class="heading text-center"><a href="#">공간 등록</a></h3>
+                <p class="text-center">공간등록 방법, 호스트 계정에 대해<br>알 수 있습니다.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <div class="text">
+                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon4.PNG');">
+	              </a>
+                <h3 class="heading text-center"><a href="#">리뷰</a></h3>
+                <p class="text-center">리뷰등록, 리뷰수정, 리뷰삭제 방법에 대해<br>알 수 있습니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>	
 <!-- 사용법 목록 끝-->
 <!-- FAQ목차 시작 -->
@@ -218,4 +210,4 @@ input[type="text"]:focus {
 
 </div>
 <!-- 컨텐츠 끝 -->
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/> 

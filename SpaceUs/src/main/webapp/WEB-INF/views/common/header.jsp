@@ -104,7 +104,7 @@
      <sec:authorize access="isAuthenticated()">
 	<div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-auto" role="document">
-	    <div class="modal-content"  style="border-radius: 1.3em; left:36rem; top:3rem; width:55%; ">
+	    <div class="modal-content"  style="background:#625c55; border-radius: 1.3em; left:36rem; top:3rem; width:55%; ">
 	      <div class="modal-header" style="background: #30D795; border-radius: 1.3em;">
 	        <h5 class="modal-title" id="exampleModalLabel">
 	        	<div>
@@ -119,19 +119,19 @@
 	      <div class="modal-body">
 	      	<div class="col-sm-10 mb-2">
 	    	    <a href="${pageContext.request.contextPath }/member/memberProfile.do">
-	    	    	<i class="fas fa-user-alt"></i>
+	    	    	<i class="fas fa-user-alt"></i>&nbsp;
 	    	    	마이프로필
 	    	    </a>
 	      	</div>
 	      	<div class="col-sm-10 mb-2">
 		        <a href="#">
-		        	<i class="fas fa-history"></i>
+		        	<i class="fas fa-history"></i>&nbsp;
 		        	예약관리
 		        </a>
 	      	 </div>
 	      	 <div class="col-sm-10 mb-2">
 		        <a href="${pageContext.request.contextPath }/member/memberProfile.do">
-		        	<i class="fas fa-heart"></i> &nbsp;
+		        	<i class="fas fa-heart"></i>&nbsp;
 		        	위시리스트
 		        </a>
 	      	 </div>
