@@ -127,7 +127,7 @@
       <div class="accordion" id="accordionExample">
        <div class="card">
     	<div class="card-heading-active" id="btn-wrap">
-   			<a class="icon-arrow_drop_down_circle" data-toggle="collapse" data-target="#collapseOne">
+   			<a class="icon-arrow_drop_down_circle" data-toggle="collapse" aria-expanded="false" aria-controls="#collapseOne" data-target="#collapseOne">
                             <b>더 많은 옵션</b>
             </a>
             <br />

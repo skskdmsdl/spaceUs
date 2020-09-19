@@ -164,7 +164,7 @@ input[type="text"]:focus {
         <div class="more-option">
             <div class="accordion" id="accordionExample">
                 <div class="card">
-                    <div class="card-heading active">
+                    <div class="card-heading active" id="option-toggler">
                         <a data-toggle="collapse" data-target="#collapseOne">
                             더 많은 옵션
                         </a>
