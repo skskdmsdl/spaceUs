@@ -81,7 +81,7 @@ input[type="text"]:focus {
       			<div class="text text-center mx-auto" style="margin-bottom:25%;">
           			<h1 class="mb-4">FAQs</h1>
           			<p></p>
-     					<div class="col-lg-10 align-items-end" style="margin-top:-20px">
+     					<div style="margin-top:-20px">
      						<div id="wrap">
 							  <form id="searchFrm" action="" autocomplete="on">
 							  <input id="search_keyword" name="search_keyword" type="text" placeholder="검색어를 입력해주세요. ex)예약하는 방법 ">
