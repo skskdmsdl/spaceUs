@@ -141,13 +141,13 @@
 	    	    </a>
 	      	</div>
 	      	<div class="col-sm-10 mb-2">
-		        <a href="#">
+		        <a href="${pageContext.request.contextPath }/member/usageHistory.do">
 		           🧭 예약관리
 		        </a>
 	      	 </div>
 	      	 <div class="col-sm-10 mb-2">
-		        <a href="${pageContext.request.contextPath }/member/memberProfile.do">
-		         	 ❤    위시리스트
+		        <a href="${pageContext.request.contextPath }/member/wishList.do">
+		         	 ❤   위시리스트
 		        </a>
 	      	 </div>
 	      	 <!-- admin 권한 -->
