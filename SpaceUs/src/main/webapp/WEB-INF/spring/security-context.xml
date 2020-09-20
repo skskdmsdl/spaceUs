@@ -12,7 +12,7 @@
 		  id="bcryptPasswordEncoder"/>
 	
 	<!-- #8.3 사용자 요청 url 관련 설정 -->
-	<http auto-config="true">		
+	<http auto-config="true" use-expressions="true">		
 		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
 		<intercept-url pattern="/resources/**" access="permitAll"/>
