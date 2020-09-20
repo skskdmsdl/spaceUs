@@ -72,7 +72,6 @@ $(function(){
     $("#heart-a").click(function(){
 
 		var $heart = $("#heart-a");
-        
     	if($heart.html().indexOf("far fa-heart") != -1) {
     		$heart.html("<i class='fas fa-heart'></i>");
     	}
