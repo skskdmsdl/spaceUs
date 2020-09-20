@@ -134,6 +134,11 @@
 	    	    </a>
 	      	</div>
 	      	<div class="col-sm-10 mb-2">
+	    	    <a href="${pageContext.request.contextPath }/space/insertSpace.do">
+	    	            💒 공간 등록
+	    	    </a>
+	      	</div>
+	      	<div class="col-sm-10 mb-2">
 		        <a href="#">
 		           🧭 예약관리
 		        </a>

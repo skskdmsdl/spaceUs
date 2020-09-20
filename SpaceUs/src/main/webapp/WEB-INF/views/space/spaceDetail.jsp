@@ -31,13 +31,12 @@
 .fab {margin-right:5px;}
 a:hover {opacity: 0.3; color:black;}
 
-.fade1 {
+.fade1 {	
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
   animation-name: fade;
   animation-duration: 1.5s;
 }
-
 @-webkit-keyframes fade1 {
   from {opacity: .4} 
   to {opacity: 1}
@@ -190,8 +189,13 @@ function urlcopy(){
 <div class="tab-content" id="detail-tabContent">
  <!-- 공간설명 시작-->
    <div class="tab-pane fade" id="detail-manufacturer" role="tabpanel" aria-labelledby="detail-manufacturer-tab">
-    <p>공간설명 1</p>
-    <p>공간설명 2</p>
+    <p style="font-size: 18px">
+    	1,2층으로 나뉘어져 있으며 <br/>
+    	대관시 2층의 엔틱, 빈티지 분위기의 유니크한 인테리어를 이용하여 각종 행사/ 전시/ 스튜디어 대관/ 쇼핑몰 대관등을 진행하고 있습니다.
+    </p>
+    <p style="font-size: 18px">
+    	2층 단독 화장실도 있기 때문에 장소를 이용하기에 방해 없이 장소를 즐기 실 수 있습니다🎁
+    </p>
    </div>
  <!-- 공간설명 끝-->
  
@@ -200,23 +204,23 @@ function urlcopy(){
    	<div class="row">
    		<div class="col-md-4">
    			<ul class="features">
-   				<li class="check"><span class="ion-ios-checkmark"></span>Lot Area: 1,250 SQ FT</li>
-   				<li class="check"><span class="ion-ios-checkmark"></span>Bed Rooms: 4</li>
-   				<li class="check"><span class="ion-ios-checkmark"></span>Bath Rooms: 4</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>주류반입가능</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>WIFI</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>블루투스 스피커</li>
    			</ul>
    		</div>
    		<div class="col-md-4">
    			<ul class="features">
-   				<li class="check"><span class="ion-ios-checkmark"></span>Floor Area: 1,300 SQ FT</li>
-   				<li class="check"><span class="ion-ios-checkmark"></span>Year Build:: 2019</li>
-   				<li class="check"><span class="ion-ios-checkmark"></span>Water</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>화장실</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>유료주차장</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>엔틱분위기</li>
    			</ul>
    		</div>
    		<div class="col-md-4">
    			<ul class="features">
-   				<li class="check"><span class="ion-ios-checkmark"></span>Floor Area: 1,300 SQ FT</li>
-   				<li class="check"><span class="ion-ios-checkmark"></span>Year Build:: 2019</li>
-   				<li class="check"><span class="ion-ios-checkmark"></span>Water</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>빈티지분위기</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>왕의자</li>
+   				<li class="check"><span class="ion-ios-checkmark"></span>애완견동반가능</li>
    			</ul>
    		</div>
    	</div>
