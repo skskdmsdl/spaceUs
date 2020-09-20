@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequestMapping("/member")
-public class memberController {
+public class MemberController {
 	
 	//프로필
 	@RequestMapping("/memberProfile.do")
@@ -55,7 +55,7 @@ public class memberController {
 	}
 	
 	//로그인 폼
-	@RequestMapping("/memberLoginForm.do")
+	@RequestMapping("memberLoginForm.do")
 	public String memberLoginForm() {
 		
 		return "member/memberLoginForm";
@@ -74,7 +74,6 @@ public class memberController {
 		
 		return "member/memberEnrollForm";
 	}
-	
 	
 	//로그아웃
 	@RequestMapping("/memberLogout.do")
