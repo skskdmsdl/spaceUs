@@ -135,56 +135,7 @@
 	               </div>
 	           </div>
                 <!-- 회원정보 끝 -->
-                
-                <!-- 회원정보2 -->
-                <div id="profileEditPage" class="ml-5 mr-5">
-                    <div class="card p-5">
-                       <div class="card-body">
-                        <div class="row"> 
-                         <div class="col-md-10">
-                             <h5 class="card-title">나의 정보</h5>
-                             <h6 class="card-subtitle mb-5">회원정보를 확인하세요</h6>
-                         </div>
-	                    </div>
-						 <table class="table table-striped table-hover">
-							<tr>
-								<th class="align-middle">닉네임</th>
-								<th><input type="text" class="col-8 input-group-text mr-5 pull-right" value="<sec:authentication property="principal.username"/>" required /></th>
-							</tr>
-						    <tr>
-						      <td class="align-middle">이메일 계정</td>
-						      <td><input type="email" class="col-8 input-group-text mr-5 pull-right" value="honggd@naver.com" required /></td>
-							</tr>
-						    <tr>
-						      <td class="align-middle">생일</td>
-						      <td><input type="date" class="col-8 input-group-text mr-5 pull-right" value="2020-08-08" /></td>
-							</tr>
-						    <tr>
-						      <td class="align-middle">핸드폰</td>
-						      <td><input type="tel" class="col-8 input-group-text mr-5 pull-right" maxlength="11" value="01012341234" required /></td>
-							</tr>
-						</table>
-						  <div class="mt-5" style="border-top: 1px solid #bbbbbb" ></div>
-						  <h6 class="card-subtitle mt-3 mb-5">비밀번호를 입력해주세요.</h6>
-						  <table class="table table-striped table-hover mb-5">
-							<tr>
-						      <td class="align-middle">새 비밀번호</td>
-						      <td><input type="password" class="col-8 input-group-text ml-auto mr-5" value="" /></td>
-							</tr>
-						    <tr>
-						      <td class="align-middle">새 비밀번호 확인</td>
-						      <td><input type="password" class="col-8 input-group-text ml-auto mr-5"value="" required /></td>
-							</tr>
-						</table>
-						<div class="mt-3 pull-right mr-5">
-					      <input type="submit" class="btn btn-outline-success btn-lg p-3 pl-4 pr-4" value="회원 수정">&nbsp;
-					      <input type="reset" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4" value="변경사항 없음">
-						</div>
-	                   </div>
-	               </div>
-	           </div>
-	           <!-- 회원정보2 끝 -->
-             
+
                 <!-- 위시리스트 -->  
                 <div id="wishListPage" class="ml-5 mr-5">
 	                <div class="card p-4">
