@@ -20,8 +20,8 @@
             <div class="ftco-footer-widget mb-4 ml-md-4">
               <h2 class="ftco-heading-2">About Us</h2>
               <ul class="list-unstyled">
-                <li><a href=""><span class="icon-long-arrow-right mr-2"></span>Space Us 소개</a></li>
-                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
+                <li><a href="${pageContext.request.contextPath}/aboutus/aboutSpaceUs.do"><span class="icon-long-arrow-right mr-2"></span>Space Us 소개</a></li>
+                <li><a href="${pageContext.request.contextPath}/aboutus/contact.do"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
                 <li><a href="${pageContext.request.contextPath}/aboutus/faqs.do"><span class="icon-long-arrow-right mr-2"></span>FAQs</a></li>
               </ul>
             </div>
