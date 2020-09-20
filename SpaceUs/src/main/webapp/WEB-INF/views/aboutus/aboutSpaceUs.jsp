@@ -194,6 +194,18 @@ input[type="text"] {
                     <div class="d-flex align-items-center">
                     	<div class="user-img" style="background-image: url(${pageContext.request.contextPath }/resources/images/person_2.jpg)"></div>
                     	<div class="pl-3">
+		                    <p class="name">이은호</p>
+		                  </div>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap py-4">
+                  <div class="text">
+                    <div class="d-flex align-items-center">
+                    	<div class="user-img" style="background-image: url(${pageContext.request.contextPath }/resources/images/person_2.jpg)"></div>
+                    	<div class="pl-3">
 		                    <p class="name">김남선</p>
 		                  </div>
 	                  </div>
