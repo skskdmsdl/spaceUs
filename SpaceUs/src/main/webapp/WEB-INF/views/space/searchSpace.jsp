@@ -397,5 +397,5 @@ function searchSpace(){
 	alert('지금 만나러 갑니다...');
 	
 }
-</script>
+</script>	
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
