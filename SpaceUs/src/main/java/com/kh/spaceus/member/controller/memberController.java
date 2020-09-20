@@ -12,11 +12,25 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/member")
 public class memberController {
 	
-	
+	//프로필
 	@RequestMapping("/memberProfile.do")
 	public String memberProfile () {
 		
 		return "member/memberProfile";
+	}
+	
+	//이용내역
+	@RequestMapping("/usageHistory.do")
+	public String usageHistory () {
+		
+		return "member/usageHistory";
+	}
+	
+	//위시리스트
+	@RequestMapping("/wishList.do")
+	public String wishList () {
+		
+		return "member/wishList";
 	}
 	
 	//로그인 폼
