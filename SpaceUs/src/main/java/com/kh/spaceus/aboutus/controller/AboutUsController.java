@@ -10,9 +10,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AboutUsController {
 
+	//FAQ
 	@RequestMapping("/faqs.do")
 	public String faqList() {
 		return "aboutus/faqs";
+	}
+	
+	//SpaceUs소개
+	@RequestMapping("/aboutSpaceUs.do")
+	public String aboutSpaceUs() {
+		return "aboutus/aboutSpaceUs";
 	}
 
 }
