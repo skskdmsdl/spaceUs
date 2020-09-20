@@ -137,7 +137,7 @@
 	      	</div>
 	      	<div class="col-sm-10 mb-2">
 	    	    <a href="${pageContext.request.contextPath }/space/insertSpace.do">
-	    	            💒 공간 등록
+	    	            💒 공간 등록2
 	    	    </a>
 	      	</div>
 	      	<div class="col-sm-10 mb-2">
