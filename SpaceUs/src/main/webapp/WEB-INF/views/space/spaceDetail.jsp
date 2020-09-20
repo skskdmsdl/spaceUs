@@ -52,10 +52,9 @@ a:hover {opacity: 0.3; color:black;}
 }
 </style>
 <script>
-	var url = $(location).attr('href');
+var url = $(location).attr('href');
 	
 $(function(){
-
 	$("#url-input").attr('value', url);
 	
     $("[data-toggle=popover]").popover({
@@ -69,15 +68,18 @@ $(function(){
           return $(title).children(".popover-heading").html();
         }
     });
-    
-	$("#heart-a").click(function(){
-		if($("#heart-a").html() == '<i class="far fa-heart"></i>') {
-			$("#heart-a").html("<i class='fas fa-heart'></i>");
-		}
-		else if($("#heart-a").html() == '<i class="fas fa-heart"></i>') {
-			$("#heart-a").html("<i class='far fa-heart'></i>");
-		}
-	});
+
+    $("#heart-a").click(function(){
+
+		var $heart = $("#heart-a");
+        
+    	if($heart.html().indexOf("far fa-heart") != -1) {
+    		$heart.html("<i class='fas fa-heart'></i>");
+    	}
+    	else {
+    		$heart.html("<i class='far fa-heart'></i>");
+    	}
+    });
 });
 
 function urlcopy(){
@@ -91,7 +93,6 @@ function urlcopy(){
 
 	alert("url 복사완료!");
 }
-
 
 </script>
 <section class="ftco-section ftco-property-details">

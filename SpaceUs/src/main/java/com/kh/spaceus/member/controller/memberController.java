@@ -20,7 +20,7 @@ public class memberController {
 	}
 	
 	//로그인 폼
-	@RequestMapping("memberLoginForm.do")
+	@RequestMapping("/memberLoginForm.do")
 	public String memberLoginForm() {
 		
 		return "member/memberLoginForm";
@@ -39,6 +39,7 @@ public class memberController {
 		
 		return "member/memberEnrollForm";
 	}
+	
 	
 	//로그아웃
 	@RequestMapping("/memberLogout.do")
