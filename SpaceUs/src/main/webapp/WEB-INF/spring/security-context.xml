@@ -23,7 +23,7 @@
 		<intercept-url pattern="/space/searchSpace.do" access="permitAll"/><!-- 방 목록 페이지 -->
 		<intercept-url pattern="/assets/**" access="permitAll"/><!-- 이녀석은... 로그인할때 자꾸 넘어가는데...  -->
 	
-		<intercept-url pattern="/**" access="hasRole('USER')"/>
+		<intercept-url pattern="/**" access="hasAnyRole('USER','ADMIN')"/>
 		
 		<!-- 시큐리티와 커스텀 로그인 "페이지"만 연결 -->
 		<form-login
@@ -55,7 +55,7 @@
 				<user name="admin"
 				      password="$2a$10$vY8lYMy7Xt.Qz9sTUH4V6uu2tYllGHtM2ehm39at.sbIVo4JBW4Ta" 
 
-				      authorities="ROLE_USER,ROLE_ADMIN"
+				      authorities="ROLE_ADMIN"
 				      />
 			</user-service>
 		</authentication-provider>
