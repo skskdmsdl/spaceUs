@@ -112,7 +112,7 @@ input[type="text"] {
     </div>
   </section>
   <!-- 지도 -->
-      <div class="row justify-content-center" style="margin-top: -100px;">
+      <div class="row justify-content-center" style="margin-top: -100px; margin-bottom:100px">
       	<div class="col-md-7">
       		<div id="map" class="bg-white"></div>
       	</div>
