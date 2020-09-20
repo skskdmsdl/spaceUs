@@ -20,7 +20,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 </style>
 <!-- 컨텐츠 시작 -->
     <div class="hero-wrap ftco-degree-bg"
-    	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_1.jpg');
+    	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_2.jpg');
     	 		height: 400px"
     	 data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
@@ -54,17 +54,19 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             <div class="pf-location">
                                 <h4>공간주소</h4>
                                 <div style="display:inline-block; width:40%">
-	                                <input class="address-input" type="text"/>
+	                                <input class="zipCode-input" type="text" placeholder="우편번호"/>
 	                            </div>
                                 <div style="display:inline-block; width:40%">
 		                            <button class="btn">주소 검색</button>
 	                            </div>
                                 <input class="address-input" type="text">
-                                <input class="address-input" type="text">
+                                <input class="detail-address-input" type="text" placeholder="상세주소를 입력해주세요">
                             </div>
                             <div class="pf-phone" style="margin-bottom: 45px;">
                                 <h4>공간전화번호</h4>
-                                <input type="text">
+                                 	<input type='tel' name='phone1' style="width: 10%"/>&emsp;-&emsp;
+							        <input type='tel' name='phone2' style="width: 10%"/>&emsp;-&emsp;
+							        <input type='tel' name='phone3' style="width: 10%"/>
                             </div>
                             <div class="pf-type">
                                 <h4>카테고리 선택</h4>
@@ -98,20 +100,33 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             <div class="pf-status">
                                 <h4>가능시간</h4>
                                 <div class="status-item">
-                                    <label for="ps-rent">For rent
-                                        <input type="checkbox" id="ps-rent">
-                                        <span class="checkbox"></span>
+                                    <label for="ps-rent">월요일
+                                    	&emsp;<select></select>
                                     </label>
-                                    <label for="ps-sale">For sale
-                                        <input type="checkbox" id="ps-sale">
-                                        <span class="checkbox"></span>
+                                    <label for="ps-sale">화요일
+                                        &emsp;<select></select>
+                                    </label>
+                                    <label for="ps-sale">수요일
+                                        &emsp;<select></select>
+                                    </label>
+                                    <label for="ps-sale">목요일
+                                        &emsp;<select></select>
+                                    </label>
+                                    <label for="ps-sale">금요일
+                                        &emsp;<select></select>
+                                    </label>
+                                    <label for="ps-sale">토요일
+                                        &emsp;<select></select>
+                                    </label>
+                                    <label for="ps-sale">일요일
+                                        &emsp;<select></select>
                                     </label>
                                 </div>
                             </div>
                             <div class="pf-feature-price">
                                 <h4>가격 (시간당)</h4>
                                 <div class="fp-inputs">
-                                    <input type="number" placeholder="Price">
+                                    <input type="number" placeholder="Price">원
                                 </div>
                             </div>
                             <div class="pf-feature">
