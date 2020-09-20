@@ -70,8 +70,12 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 								<th><input type="date" name="" id="" /></th>
 							</tr>
 						    <tr>
-						      <td>예약 시간</td>
+						      <td>예약 시작시간</td>
 						      <td><select name="" id=""></select></td>
+							</tr>
+							<tr>
+						       <td>예약 종료시간</td>
+						       <td><select name="" id=""></select></td>
 							</tr>
 						    <tr>
 						      <td>예약 인원</td>
