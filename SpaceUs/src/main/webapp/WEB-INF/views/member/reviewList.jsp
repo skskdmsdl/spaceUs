@@ -82,7 +82,7 @@
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">마이페이지</a></li>
-                                <li class="breadcrumb-item active">나의 정보</li>
+                                <li class="breadcrumb-item active">리뷰</li>
                             </ol>
                         </div>
                     </div>
@@ -200,7 +200,6 @@
 </div>
 </div>
 </div>
-
 
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
