@@ -46,12 +46,12 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" id="profileEditBtn" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"  >나의 정보</span></a></li>
-                        <li> <a class="waves-effect waves-dark" id="wishListBtn" aria-expanded="false"><i class="fa fa-heart"></i><span class="hide-menu"></span>위시리스트</a></li>
-                        <li> <a class="waves-effect waves-dark" id="couponListBtn" aria-expanded="false"><i class="fa fa-gift"></i><span class="hide-menu"></span>쿠폰함</a></li>
-                        <li> <a class="waves-effect waves-dark" id="usageHistoryListBtn" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu"></span>사용내역</a></li>
-                        <li> <a class="waves-effect waves-dark" id="reviewListBtn" aria-expanded="false"><i class="fa fa-comments"></i><span class="hide-menu"></span>리뷰</a></li>
-                        <li> <a class="waves-effect waves-dark" id="stampEventBtn" aria-expanded="false"><i class="fa fa-stamp"></i><span class="hide-menu"></span>출석이벤트</a></li>
+                    	<li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/memberProfile.do"><i class="fa fa-user"></i><span class="hide-menu">나의 정보</span></a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/wishList.do"><i class="fa fa-heart"></i><span class="hide-menu"></span>위시리스트</a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/couponList.do"><i class="fa fa-gift"></i><span class="hide-menu"></span>쿠폰함</a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/usageHistory.do"><i class="fa fa-table"></i><span class="hide-menu"></span>사용내역</a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/reviewList.do"><i class="fa fa-comments"></i><span class="hide-menu"></span>리뷰</a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/stampEvent.do"><i class="fa fa-stamp"></i><span class="hide-menu"></span>출석이벤트</a></li>
                         <div class="text-center m-t-30">
                             <a href="https://wrappixel.com/templates/elegant-admin/" class="btn waves-effect waves-light btn-success hidden-md-down"> Upgrade to Pro</a>
                         </div>
