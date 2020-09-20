@@ -33,6 +33,27 @@ public class memberController {
 		return "member/wishList";
 	}
 	
+	//쿠폰함
+	@RequestMapping("/couponList.do")
+	public String couponList () {
+		
+		return "member/couponList";
+	}
+	
+	//리뷰목록
+	@RequestMapping("/reviewList.do")
+	public String reviewList () {
+		
+		return "member/reviewList";
+	}
+	
+	//출석이벤트
+	@RequestMapping("/stampEvent.do")
+	public String stampEvent () {
+		
+		return "member/stampEvent";
+	}
+	
 	//로그인 폼
 	@RequestMapping("memberLoginForm.do")
 	public String memberLoginForm() {
