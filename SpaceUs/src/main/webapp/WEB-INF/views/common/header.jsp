@@ -130,20 +130,22 @@
 	      <div class="modal-body">
 	      	<div class="col-sm-10 mb-2">
 	    	    <a href="${pageContext.request.contextPath }/member/memberProfile.do">
-	    	    	<i class="fas fa-user-alt"></i>&nbsp;
-	    	    	마이프로필
+	    	            👩🏻 마이 프로필
 	    	    </a>
 	      	</div>
 	      	<div class="col-sm-10 mb-2">
-		        <a href="#">
-		        	<i class="fas fa-history"></i>&nbsp;
-		        	예약관리
+	    	    <a href="${pageContext.request.contextPath }/space/insertSpace.do">
+	    	            💒 공간 등록
+	    	    </a>
+	      	</div>
+	      	<div class="col-sm-10 mb-2">
+		        <a href="${pageContext.request.contextPath }/member/usageHistory.do">
+		           🧭 예약관리
 		        </a>
 	      	 </div>
 	      	 <div class="col-sm-10 mb-2">
-		        <a href="${pageContext.request.contextPath }/member/memberProfile.do">
-		        	<i class="fas fa-heart"></i>&nbsp;
-		        	위시리스트
+		        <a href="${pageContext.request.contextPath }/member/wishList.do">
+		         	 ❤   위시리스트
 		        </a>
 	      	 </div>
 	      </div>

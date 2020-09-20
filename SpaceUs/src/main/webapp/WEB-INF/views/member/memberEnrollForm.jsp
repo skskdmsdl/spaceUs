@@ -44,39 +44,30 @@ a:hover {
 					
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="email" name="email">
-						<span class="focus-input100"></span>
-						<span class="label-input100">이메일</span>
+						<input class="input100" type="email" name="email" placeholder="email">
+						<span class="focus-input100">email</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pass">
-						<span class="focus-input100"></span>
-						<span class="label-input100">비밀번호</span>
+						<input class="input100" type="password" name="password" placeholder="password">
+						<span class="focus-input100">password</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pass">
-						<span class="focus-input100"></span>
-						<span class="label-input100">비밀번호 확인</span>
+						<input class="input100" type="password" name="passwordChk" placeholder="password Check">
+						<span class="focus-input100">password Check</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="address">
-						<span class="focus-input100"></span>
-						<span class="label-input100">닉네임</span>
+						<input class="input100" type="text" name="nickName" placeholder="nickName">
+						<span class="focus-input100">nickName</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="tel" name="phone">
-						<span class="focus-input100"></span>
-						<span class="label-input100">휴대폰번호</span>
+						<input class="input100" type="tel" name="phone" placeholder="mobile">
+						<span class="focus-input100">mobile</span>
 					</div>
-						<div class="text-right p-b-10">
-						<a href="javascript:;" class="txt1">
-							휴대폰 인증
-						</a>
-					</div>
+				
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" onclick="${pageContext.request.contextPath}">
 							회원가입
@@ -84,7 +75,7 @@ a:hover {
 					</div>
 					
 					<div class="text-center p-t-46 p-b-20">
-						<a href="${pageContext.request.contextPath }/member/memberLogin.do" class="txt1">
+						<a href="${pageContext.request.contextPath }/member/memberLoginForm.do" class="txt1">
 							이미 가입하셨나요?
 						</a>
 						<br /><br />

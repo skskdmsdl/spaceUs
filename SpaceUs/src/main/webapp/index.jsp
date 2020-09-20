@@ -18,11 +18,12 @@ font-family: 'NEXON Lv1 Gothic OTF';
 @import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
 
 #wrap {
-  margin: 50px 78px;
+  /* margin: 50px 78px; */
+  top: 2em;
   display: inline-block;
   position: relative;
   height: 60px;
-  float: right;
+  flaot: left;
   padding: 0;
   position: relative;
 }
@@ -89,7 +90,7 @@ input[type="text"]:focus {
           			<h1 class="mb-4">어떤 공간을<br>찾고 있나요?</h1>
           			<p></p>
      					<div style="margin-top:-20px">
-     						<div id="wrap" class="col-md-6">
+     						<div id="wrap">
 							  <form id="searchFrm" onsubmit="searchSpace();" action="" autocomplete="on">
 							  <input id="search_keyword" name="search_keyword" type="text" placeholder="키워드를 입력하세요">
 							  <i class="fas fa-search fa-2x" id="search_submit" type="submit" style="color:#00C89E"></i>

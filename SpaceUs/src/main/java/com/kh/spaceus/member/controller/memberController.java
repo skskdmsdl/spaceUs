@@ -12,15 +12,50 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/member")
 public class memberController {
 	
-	
+	//프로필
 	@RequestMapping("/memberProfile.do")
 	public String memberProfile () {
 		
 		return "member/memberProfile";
 	}
 	
+	//이용내역
+	@RequestMapping("/usageHistory.do")
+	public String usageHistory () {
+		
+		return "member/usageHistory";
+	}
+	
+	//위시리스트
+	@RequestMapping("/wishList.do")
+	public String wishList () {
+		
+		return "member/wishList";
+	}
+	
+	//쿠폰함
+	@RequestMapping("/couponList.do")
+	public String couponList () {
+		
+		return "member/couponList";
+	}
+	
+	//리뷰목록
+	@RequestMapping("/reviewList.do")
+	public String reviewList () {
+		
+		return "member/reviewList";
+	}
+	
+	//출석이벤트
+	@RequestMapping("/stampEvent.do")
+	public String stampEvent () {
+		
+		return "member/stampEvent";
+	}
+	
 	//로그인 폼
-	@RequestMapping("memberLoginForm.do")
+	@RequestMapping("/memberLoginForm.do")
 	public String memberLoginForm() {
 		
 		return "member/memberLoginForm";
@@ -39,6 +74,7 @@ public class memberController {
 		
 		return "member/memberEnrollForm";
 	}
+	
 	
 	//로그아웃
 	@RequestMapping("/memberLogout.do")
