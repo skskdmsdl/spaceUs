@@ -157,6 +157,19 @@ input[type="text"]:focus {
     </section>	
 <!-- 사용법 목록 끝-->
 <!-- FAQ목차 시작 -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+	<li class="nav-item" role="presentation">
+		<a class="nav-link active" id="member-tab" data-toggle="tab" href="#member" role="tab" aria-controls="member" aria-selected="true">회원</a>
+	</li>
+	<li class="nav-item" role="presentation">
+		<a class="nav-link" id="reserve-tab" data-toggle="tab" href="#reserve" role="tab" aria-controls="reserve" aria-selected="false">예약</a>
+	</li>
+	<li class="nav-item" role="presentation">
+		<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+	</li>
+</ul>
+
+
 	<div class="accordion w-auto mb-5" id="accordionExample">
 	  <div class="card">
 	    <div class="card-header" id="headingOne">
