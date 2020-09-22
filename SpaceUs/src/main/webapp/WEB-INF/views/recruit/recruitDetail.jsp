@@ -60,116 +60,62 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	 <div class="row m-5">
                  <!-- column -->
                  <div class="col-12">
-                         <div class="m-5">
-                             <div class="d-flex">
-								</div>
+                         <div class="m-5" style="border-bottom: 1px solid #dddddd;">
 								
-                                  <input type="radio" name="radio" class="m-r-10 ml-3" >전체
-                                  <input type="radio" name="radio" class="m-r-10 ml-3">구인
-                                  <input type="radio" name="radio" class="m-r-10 ml-3">구직
-                                 <div class="input-group mb-4 col-4 pull-right">
-								  <input type="text" class="input-group-text" style="background-color: white;">
-								  <div class="input-group-append">
-								    <button type="submit" class="btn btn-outline-secondary"><span><i class="fa fa-search fa-search mr-2"></i> </span>검색</button>
-								  </div>
-                             </div>
                          
-                         <div class="table-responsive">
-                             <table class="table table-hover">
-                                 <thead>
-                                     <tr>
-                                         <th class="text-center">#</th>
-                                         <th>제목</th>
-                                         <th>작성일</th>
-                                         <th>작성자</th>
-                                     </tr>
-                                 </thead>
-                                 <tbody>
-                                     <tr>
-                                         <td class="text-center">1</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">니모</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">2</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>슬로베니아에서 영상제작 및 편집 가능자 모집합니다. (3개월 수습 후 정식 채용)</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">니모</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">3</td>
-                                         <td class="txt-oflo"><span class="text-info mr-2">[구직]</span>경력직같은 신입 지원합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">도리</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">4</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">도리</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">5</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td><span class="txt-oflo">효리</span></td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">6</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">효리</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">7</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">바다</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">8</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">바다</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">9</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">효리</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">10</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">효리</td>
-                                     </tr>
-                                 </tbody>
-                             </table>
-                             <div class="container">
-			                 <nav class="mt-5" >
-			                 	<a href="${pageContext.request.contextPath }/recruit/recruitEnrollForm.do" class="btn waves-effect waves-light btn-success hidden-md-down m-1 pull-right"> 글 등록</a>
-								  <ul class="justify-content-center pagination">
-								    <!-- <li class="page-item disabled">
-								      <span class="page-link m-1">&lt;</span>
-								    </li> -->
-								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">&lt;</a></li>
-								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">1</a></li>
-								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">2</a></li>
-								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">3</a></li>
-								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">4</a></li>
-								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">5</a></li>
-								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">></a></li>
-								    <li class="page-item">
-								      <!-- <a class="page-link m-1 text-black-50" href="#">></a> -->
-								    </li>
-								  </ul>
-	                            
-								</nav>
-							 </div>
+                         <div style="border-bottom: 1px solid #dddddd; padding-bottom: 15px;">
+                            <p class="h4">집에서 간단한 환전업무도와주시고 주마다 2번 300만원이상벌어가실분</p>
+                         	<table>
+                                <tr>
+                                    <th><i class="fa fa-user"></i> 작성자 </th>
+                                    <th class="col-xl-auto">|</th>
+                                    <th><i class="fa fa-calendar"></i> 2020.09.22</th>
+                                    <th class="col-xl-auto">|</th>
+                                    <th><i class="fa fa-eye"></i> 조회수</th>
+                                </tr>
+                            </table>
+                         </div>
+                         <div class="m-5">
+                         <div class="mb-5">
+                         
+				                         곧명절이니 돈벌어가셔서 도움되셨으면 좋겠습니다.<br/><br/>
+				
+							안녕하세요 코로나때문에 모든나라가힘든시점에서 경제적인사회생활도,직장도잃으신분들이계시고 <br/>
+							
+							피해보신분들이많습니다 상담한번에 좋은기회를만나보실수있습니다.<br/> <br/>
+							
+							밑에내용글에소개해드리겠습니다 <br/><br/>
+							
+							 문의는 카카오톡모바일에서 아이디친추하기에 밑에제아이디를적으시고 메세지주시면됩니다 .<br/><br/>
+							
+							1" 집에서하시는일입니다 1시간정도시간내시면되십니다 주마다2번씩합니다 돈은당일로바로받으실수있습니다<br/>
+							 불법아닙니다 환전업무입니다 메세지주실때 지역,나이,성별 기재부탁드립니다 <br/><br/>
+							
+							
+							2" PC,휴대폰 있으면누구나가능합니다 지역상관없습니다 나이상관없습니다 해외송금,한국송금모두가능합니다<br/> <br/>
+							
+							
+							3" 주마다2번씩 500이상 환전입금받으신돈에서 저에게 30프로,40프로를주시면됩니다 일이매우쉽고 간편합니다<br/><br/>
+							
+							
+							4" 카톡주시면저는 아내,아가들있는 40대가장입니다 떳떳하게 좋은인연맺고싶습니다 신용있는분들과<br/>
+							  코로나힘듬잊으시고 저와웃으면서 일해보실분구합니다 .<br/><br/>
+							  문의는 카카오톡모바일에서 아이디친추하기에 밑에제아이디를적으시고 메세지주시면됩니다 .<br/><br/>
+                         </div>
+                         
+                         
+                         <div style="background-color: #fafafa; height: 200px; border: 1px solid #edeceb; ">
+                         <div class="pl-5 pr-5 pt-4">
+                         		<p>댓글 0개</p>
+                         		 <textarea class="col-lg-11" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+                           		<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+                           </div>
                          </div>
                          </div>
+                         </div>
+                         <div class="text-center">
+			                 	<a href='${pageContext.request.contextPath }/recruit/recruitList.do' class="btn m-1" style="background-color: #00c89e; font-size:20px; color:white;"><i class="fa fa-list"></i> 목록</a>
+                             </div>
                      </div>
                  </div>
              </section>

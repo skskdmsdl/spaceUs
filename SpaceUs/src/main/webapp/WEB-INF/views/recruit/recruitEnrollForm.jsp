@@ -82,7 +82,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                      </tr>
                              </table>
                              <div class="text-center">
-			                 	<a href='javascript:void(0);' onclick="submitContents();" class="btn m-1" style="background-color: #00c89e; color:white;"> 글 등록</a>
+			                 	<a href='javascript:void(0);' onclick="submitContents();" class="btn " style="margin-top:50px; background-color: #00c89e; font-size:18px; color:white;"> 글 등록</a>
                              </div>
 							 </div>
                          </div>
