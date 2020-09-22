@@ -28,7 +28,6 @@ font-family: 'NEXON Lv1 Gothic OTF';
   position: relative;
 }
 
-
 input[type="text"] {
   height: 40px;
   font-size: 20px;
@@ -261,7 +260,7 @@ input[type="text"]:focus {
       </div>
     </div>
     <div class="row">
-    	    	<div class="col-md-4">
+    	  <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
     			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
     			<div class="text">
