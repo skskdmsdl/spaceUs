@@ -39,7 +39,7 @@ a:hover {
 				<form class="login100-form validate-form"
 					  action="${pageContext.request.contextPath}">
 					<span class="login100-form-title p-b-43">
-						<a class="navbar-brand" href="${pageContext.request.contextPath }">Space Us</a>
+						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 					</span>
 					
 					
