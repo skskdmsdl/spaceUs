@@ -27,7 +27,7 @@
         <header class="topbar">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header">
-                    <a style="color:black" class="navbar-brand" href="${pageContext.request.contextPath }">Space Us</a>
+                    <a style="color:black" class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
                 </div>
                 <div class="navbar-collapse">
                </div>
