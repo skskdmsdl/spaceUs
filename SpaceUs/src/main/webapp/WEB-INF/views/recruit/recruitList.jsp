@@ -72,7 +72,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                  <thead>
                                      <tr>
                                          <th class="text-center">#</th>
-                                         <th>내용</th>
+                                         <th>제목</th>
                                          <th>작성일</th>
                                          <th>작성자</th>
                                      </tr>
@@ -143,19 +143,18 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                              <div class="container">
 			                 <nav class="mt-5" >
 								  <ul class="justify-content-center pagination">
-								    <li class="page-item disabled">
+								    <!-- <li class="page-item disabled">
 								      <span class="page-link m-1">&lt;</span>
-								    </li>
-								    <li class="page-item"><a class="page-link m-1" href="#">1</a></li>
-								    <li class="page-item active" aria-current="page">
-								      <span class="page-link m-1">
-								        2
-								        <span class="sr-only">(current)</span>
-								      </span>
-								    </li>
-								    <li class="page-item"><a class="page-link m-1" href="#">3</a></li>
+								    </li> -->
+								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">&lt;</a></li>
+								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">1</a></li>
+								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">2</a></li>
+								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">3</a></li>
+								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">4</a></li>
+								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">5</a></li>
+								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">></a></li>
 								    <li class="page-item">
-								      <a class="page-link m-1" href="#">></a>
+								      <!-- <a class="page-link m-1 text-black-50" href="#">></a> -->
 								    </li>
 								  </ul>
 								</nav>
