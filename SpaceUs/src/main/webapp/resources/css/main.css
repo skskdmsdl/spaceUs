@@ -255,6 +255,7 @@ button:hover {
   margin-right: 20px;
   margin-bottom: 10px;
   float:left;
+  background-position: right;
 }
 
 .wrap-input {

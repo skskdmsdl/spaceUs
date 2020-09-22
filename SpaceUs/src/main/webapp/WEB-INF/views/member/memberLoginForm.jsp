@@ -23,16 +23,12 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
 </head>
-<style>
-.wrap-input100 {
-	width: 100%
-}
-</style>
 <body style="background-color: #666666;">
 	
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg-01.jpg');">
+			<div class="wrap-login100" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg-01.jpg');
+											 background-position: right">
 				<form:form 
 							action="${pageContext.request.contextPath }/member/memberLogin.do"
 							class="login100-form validate-form" >

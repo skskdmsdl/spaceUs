@@ -23,7 +23,8 @@
 	
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_2.jpg');">
+			<div class="wrap-login100" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_2.jpg');
+											background-position: right;">
 				<form class="login100-form validate-form"
 					  action="${pageContext.request.contextPath}">
 					<span class="login100-form-title p-b-43">
