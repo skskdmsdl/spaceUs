@@ -140,25 +140,26 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                      </tr>
                                  </tbody>
                              </table>
-                 <nav>
-					  <ul class="pagination">
-					    <li>
-					      <a href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
-					    <li><a href="#">1</a></li>
-					    <li><a href="#">2</a></li>
-					    <li><a href="#">3</a></li>
-					    <li><a href="#">4</a></li>
-					    <li><a href="#">5</a></li>
-					    <li>
-					      <a href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					  </ul>
-					</nav>
+                             <div class="container">
+			                 <nav class="mt-5" >
+								  <ul class="justify-content-center pagination">
+								    <li class="page-item disabled">
+								      <span class="page-link m-1">&lt;</span>
+								    </li>
+								    <li class="page-item"><a class="page-link m-1" href="#">1</a></li>
+								    <li class="page-item active" aria-current="page">
+								      <span class="page-link m-1">
+								        2
+								        <span class="sr-only">(current)</span>
+								      </span>
+								    </li>
+								    <li class="page-item"><a class="page-link m-1" href="#">3</a></li>
+								    <li class="page-item">
+								      <a class="page-link m-1" href="#">></a>
+								    </li>
+								  </ul>
+								</nav>
+							 </div>
                          </div>
                          </div>
                      </div>
