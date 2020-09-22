@@ -91,7 +91,7 @@
 		        </ul>
 		      </div>
 	      </sec:authorize>
-	      <sec:authorize access="hasAnyRole('USER','ADMIN')">
+	      <sec:authorize access="hasAnyRole('USER','ADMIN', 'HOST')">
 	        <div class="collapse navbar-collapse" id="ftco-nav"  data-toggle="modal" data-target="#exampleModal">
 	        	<div class="navbar-nav ml-auto" style="cursor: pointer !important;">
 	        		<div>반갑습니다. &nbsp;</div>
@@ -114,7 +114,7 @@
     <!-- user 권한 -->
     <!-- Modal -->
      <%-- <sec:authorize access="isAuthenticated()"> --%>
-     <sec:authorize access="hasRole('USER')">
+     <sec:authorize access="hasAnyRole('USER', 'HOST')">
 	<div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-auto" role="document">
 	    <div class="modal-content"  style="background:#625c55; border-radius: 1.3em; left:36rem; top:3rem; width:55%; ">
@@ -150,15 +150,26 @@
 		         	 ❤   위시리스트
 		        </a>
 	      	 </div>
+	      	 
+	      	 <!-- host 권한 -->
+			 <sec:authorize access="hasRole('ROLE_HOST')">
+				<div class="col-sm-10 mb-2">
+					<a href="${pageContext.request.contextPath }/host/hostManage.do">
+						🎫 호스트 센터
+					</a>
+				</div>
+	      	 </sec:authorize>
+	      	 <!-- host 권한 끝 -->
+	      	 
 	      	 <!-- admin 권한 -->
 	      	 <sec:authorize access="hasRole('ROLE_ADMIN')">
 	      	 	<div class="col-sm-10 mb-2">
 		        <a href="${pageContext.request.contextPath }/admin/memberManage.do">
 		         	 👨‍👨‍👧‍👧	 SpaceUs 관리       
 		        </a>
-	      	 </div>
+	      	    </div>
 	      	 </sec:authorize>
-	      	 <!-- /admin 권한 -->
+	      	 <!-- admin 권한 끝 -->
 	      </div>
 	      <div class="modal-footer">
 	      	 <form:form action="${ pageContext.request.contextPath }/member/memberLogout.do">

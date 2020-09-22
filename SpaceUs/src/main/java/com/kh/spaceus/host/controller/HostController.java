@@ -19,4 +19,10 @@ public class HostController {
 		return "host/settlementDetails";
 	}
 	
+	@RequestMapping("/hostManage.do")
+	public String ManageSpace() {
+		
+		return "host/hostManage";
+	}
+	
 }
