@@ -24,12 +24,8 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
 </head>
 <style>
-.login100-form-btn {
-	background-color: #00C89E;
-}
-a:hover {
-    text-decoration: none;
-    color: #00C89E;
+.wrap-input100 {
+	width: 100%
 }
 </style>
 <body style="background-color: #666666;">
@@ -43,6 +39,14 @@ a:hover {
 					<span class="login100-form-title p-b-43">
 						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 					</span>
+					<button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg"/>&nbsp;네이버로 로그인하기</button>
+						<button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/google-icon.png"/>&nbsp;구글로 로그인하기</button>
+						<button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/facebook-icon.png"/>&nbsp;페이스북으로 로그인하기</button>
+						<div class="text-center p-t-46 p-b-20">
+						<p class="txt1">
+							또는
+						</p><br />
+						</div>
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="email" placeholder="email">
 						<span class="focus-input100">email</span>
@@ -81,24 +85,12 @@ a:hover {
 						<a href="${pageContext.request.contextPath }/member/memberEnrollForm.do" class="txt1">
 							아직 회원이 아니신가요?
 						</a>
-						<br /><br />
-						<span class="txt2">
-							Social Login
-						</span>
 					</div>
 
-					<div class="login100-form-social flex-c-m">
-						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-							<i class="fa fa-facebook-f" aria-hidden="true"></i>
-						</a>
-
-						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-							<i class="fa fa-twitter" aria-hidden="true"></i>
-						</a>
-					</div>
 				</form:form>
 
-				<div class="login100-more" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg-01.jpg');">
+				<div class="login100-more" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg-01.jpg');
+												width:750px;">
 				</div>
 			</div>
 		</div>
