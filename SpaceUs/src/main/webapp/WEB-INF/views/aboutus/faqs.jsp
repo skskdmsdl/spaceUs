@@ -9,24 +9,26 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 	  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 	  crossorigin="anonymous">
-
-<!-- test -->
-<!-- 사용자작성 css -->
 <style>
 h1 {
 font-family: 'NEXON Lv1 Gothic OTF';
 }
+
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
 @import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
+
 #wrap {
-  margin: 50px 78px;
+  /* margin: 50px 78px; */
+  top: 2em;
   display: inline-block;
   position: relative;
   height: 60px;
-  float: right;
+  flaot: left;
   padding: 0;
   position: relative;
 }
+
+
 input[type="text"] {
   height: 40px;
   font-size: 20px;
@@ -48,12 +50,15 @@ input[type="text"] {
   transition: .4s cubic-bezier(0.5, 0.795, 0.5, 0.50);
   cursor: pointer;
 }
+
 #search_keyword {
 	color: black;
 }
+
 #search_keyword:focus:hover {
   border-bottom: 1px solid black;
 }
+
 input[type="text"]:focus {
   width: 400px;
   z-index: 1;
@@ -63,15 +68,20 @@ input[type="text"]:focus {
   top: 55px;
   text-align: center;
 }
+
 #search_submit:hover {
   opacity: 0.8;
 }
+.space-price{
+  color: #007bff;
+}
+
 </style>
 <!-- 컨텐츠 시작 -->
 <!-- FAQ검색 시작 -->
 <div class="hero-wrap ftco-degree-bg"
 	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_3.jpg');
-	 		height: 600px"
+	 		height: 600px;"
 	 data-stellar-background-ratio="0.5">
 	<div class="overlay">
 	</div>
@@ -84,7 +94,7 @@ input[type="text"]:focus {
      					<div style="margin-top:-20px">
      						<div id="wrap">
 							  <form id="searchFrm" action="" autocomplete="on">
-							  <input id="search_keyword" name="search_keyword" type="text" placeholder="검색어를 입력해주세요. ex)예약하는 방법 ">
+							  <input id="search_keyword" name="search_keyword" type="text" placeholder="검색어를 입력해주세요.">
 							  <i class="fas fa-search fa-2x" id="search_submit" type="submit" style="color:#00C89E"></i>
 							  </form>
 							</div>
@@ -115,9 +125,10 @@ input[type="text"]:focus {
           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
               <div class="text">
-                <a href="blog-single.html" class="block-20 im" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon1.PNG');">
-	              </a>
-                <h3 class="heading text-center"><a href="#">회원</a></h3>
+                <div class="block-20 img" 
+                	 style="background-image: url('${pageContext.request.contextPath }/resources/images/icon1.PNG');">
+	              </div>
+                <h3 class="heading text-center">회원</h3>
                 <p class="text-center">회원등록, 회원탈퇴, 회원정보 수정 방법을<br>알 수 있습니다.</p>
               </div>
             </div>
@@ -125,9 +136,9 @@ input[type="text"]:focus {
           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
               <div class="text">
-                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon2.PNG');">
-	              </a>
-                <h3 class="heading text-center"><a href="#">예약</a></h3>
+                <div class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon2.PNG');">
+	              </div>
+                <h3 class="heading text-center">예약</h3>
                 <p class="text-center">예약 방법, 예약 변경, 예약 취소 방법을<br>알 수 있습니다.</p>
               </div>
             </div>
@@ -135,9 +146,9 @@ input[type="text"]:focus {
           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
               <div class="text">
-                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon3.PNG');">
-	              </a>
-                <h3 class="heading text-center"><a href="#">공간 등록</a></h3>
+                <div class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon3.PNG');">
+	              </div>
+                <h3 class="heading text-center">공간 등록</h3>
                 <p class="text-center">공간등록 방법, 호스트 계정에 대해<br>알 수 있습니다.</p>
               </div>
             </div>
@@ -145,9 +156,9 @@ input[type="text"]:focus {
           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
               <div class="text">
-                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon4.PNG');">
-	              </a>
-                <h3 class="heading text-center"><a href="#">리뷰</a></h3>
+                <div class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon4.PNG');">
+	              </div>
+                <h3 class="heading text-center">리뷰</h3>
                 <p class="text-center">리뷰등록, 리뷰수정, 리뷰삭제 방법에 대해<br>알 수 있습니다.</p>
               </div>
             </div>
@@ -158,6 +169,7 @@ input[type="text"]:focus {
 <!-- 사용법 목록 끝-->
 <!-- FAQ목차 시작 -->
 <!-- nav 탭 -->
+<section class="ftco-section goto-here">
 <ul class="nav nav-tabs" id="myTab" role="tablist">
 	<li class="nav-item" role="presentation">
 		<a class="nav-link active" id="member-tab" data-toggle="tab" href="#member" role="tab" aria-controls="member" aria-selected="true">회원</a>
@@ -172,7 +184,7 @@ input[type="text"]:focus {
 		<a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">리뷰</a>
 	</li>
 </ul>
-
+</section>
 <!-- 탭 내용 -->
 <div class="tab-content" id="myTabContent">
   <!-- 1.회원 -->
