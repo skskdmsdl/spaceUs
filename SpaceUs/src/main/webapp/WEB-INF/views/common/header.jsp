@@ -9,7 +9,7 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8">
-    <title>Space Us</title>
+    <title>SpaceUs</title>
     
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -77,17 +77,18 @@
   <body>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="${pageContext.request.contextPath }">Space Us</a>
+	      <a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span>
 	      </button>
 	      <sec:authorize access="isAnonymous()">
 		      <div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav ml-auto">
-		          <li class="nav-item"><a href="${pageContext.request.contextPath }/recruit/recruitList.do" class="nav-link">커뮤니티</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/recruit/recruitList.do" class="nav-link">커뮤니티</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberLoginForm.do" class="nav-link">로그인</a></li>
-		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberEnrollForm.do" class="nav-link">회원가입</a></li>
+		          <li class="nav-item"><a href="${pageCo=ntext.request.contextPath }/member/memberEnrollForm.do" class="nav-link">회원가입</a></li>
 		        </ul>
 		      </div>
 	      </sec:authorize>

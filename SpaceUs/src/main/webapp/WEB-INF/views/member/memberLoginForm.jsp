@@ -41,7 +41,7 @@ a:hover {
 							action="${pageContext.request.contextPath }/member/memberLogin.do"
 							class="login100-form validate-form" >
 					<span class="login100-form-title p-b-43">
-						<a class="navbar-brand">Space Us</a>
+						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 					</span>
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="email" placeholder="email">
