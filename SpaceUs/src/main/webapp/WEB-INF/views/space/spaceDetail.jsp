@@ -428,12 +428,6 @@ function urlcopy(){
 		   			</p>
 		   		</div>
 	   		</div>
-	   		<br />
-   			<div class="rating-wrap">
-	   			<h3 class="head">포토리뷰</h3>
-	   			<div class="wrap">
-		   		</div>
-	   		</div>
    		</div>
    	</div>
    </div>
@@ -447,9 +441,9 @@ function urlcopy(){
     <!-- 추천시스템 시작 -->
     <div class="container" style="border-top: 1px solid rgba(0, 0, 0, 0.1)">
 		<div class="row justify-content-center">
-      <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+      <div class="col-md-12 mt-5 heading-section text-center ftco-animate mb-5">
       	<span class="subheading">카테고리 추천</span>
-        <h2 class="mb-2">카페를 찾고 계신가요?</h2>
+        <h2 class="mb-2">다른 카페(은/는) 어떠신가요?</h2>
       </div>
     </div>
     <div class="row">
