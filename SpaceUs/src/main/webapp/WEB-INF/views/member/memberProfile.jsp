@@ -19,9 +19,6 @@
             <p class="loader__label">Elegant admin</p>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <div id="main-wrapper">
         <!-- 마이페이지 헤더 -->
         <header class="topbar">
