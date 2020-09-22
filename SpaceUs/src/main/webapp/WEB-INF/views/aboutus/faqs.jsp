@@ -349,10 +349,8 @@ input[type="text"]:focus {
 	      </div>
 	    </div>
 	  </div>
-
 	</div>
   </div>
-  
 </div>
 
 
