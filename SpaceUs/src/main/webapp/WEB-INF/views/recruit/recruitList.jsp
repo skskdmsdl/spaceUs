@@ -40,103 +40,132 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
       </div>
     </div>
 
-    <!-- 공간 예약 폼 시작-->
-        <!-- Blog Section Begin -->
-<section class="blog-section spad">
- <div class="row">
-                    <!-- column -->
-                    <div class="col-12">
-                            <div class="">
-                                <div class="d-flex">
-                                    <div>
-                                        <h5 class="card-title">Sales Overview</h5>
-                                        <h6 class="card-subtitle">Check the monthly sales </h6>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <select class="custom-select b-0">
-                                            <option>January</option>
-                                            <option value="1">February</option>
-                                            <option value="2" selected="">March</option>
-                                            <option value="3">April</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">#</th>
-                                            <th>NAME</th>
-                                            <th>DATE</th>
-                                            <th>PRICE</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                            <td class="txt-oflo">Elite admin</td>
-                                            <td class="txt-oflo">April 18, 2017</td>
-                                            <td><span class="text-success">$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">2</td>
-                                            <td class="txt-oflo">Real Homes WP Theme</td>
-                                            <td class="txt-oflo">April 19, 2017</td>
-                                            <td><span class="text-info">$1250</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">3</td>
-                                            <td class="txt-oflo">Ample Admin</td>
-                                            <td class="txt-oflo">April 19, 2017</td>
-                                            <td><span class="text-info">$1250</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">4</td>
-                                            <td class="txt-oflo">Medical Pro WP Theme</td>
-                                            <td class="txt-oflo">April 20, 2017</td>
-                                            <td><span class="text-danger">-$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">5</td>
-                                            <td class="txt-oflo">Hosting press html</td>
-                                            <td class="txt-oflo">April 21, 2017</td>
-                                            <td><span class="text-success">$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">6</td>
-                                            <td class="txt-oflo">Digital Agency PSD</td>
-                                            <td class="txt-oflo">April 23, 2017</td>
-                                            <td><span class="text-danger">-$14</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">7</td>
-                                            <td class="txt-oflo">Helping Hands WP Theme</td>
-                                            <td class="txt-oflo">April 22, 2017</td>
-                                            <td><span class="text-success">$64</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">8</td>
-                                            <td class="txt-oflo">Helping Hands WP Theme</td>
-                                            <td class="txt-oflo">April 22, 2017</td>
-                                            <td><span class="text-success">$64</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">9</td>
-                                            <td class="txt-oflo">Ample Admin</td>
-                                            <td class="txt-oflo">April 19, 2017</td>
-                                            <td><span class="text-info">$1250</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- 구인구직 시작-->
+	<section class="blog-section spad">
+	 <div class="row m-5">
+                 <!-- column -->
+                 <div class="col-12">
+                         <div class="m-5">
+                             <div class="d-flex">
+								</div>
+								
+                                  <input type="radio" name="radio" class="m-r-10 ml-3" >전체
+                                  <input type="radio" name="radio" class="m-r-10 ml-3">구인
+                                  <input type="radio" name="radio" class="m-r-10 ml-3">구직
+                                 <div class="input-group mb-4 col-4 pull-right">
+								  <input type="text" class="input-group-text" style="background-color: white;">
+								  <div class="input-group-append">
+								    <button type="submit" class="btn btn-outline-secondary"><span><i class="fa fa-search fa-search mr-2"></i> </span>검색</button>
+								  </div>
+                                <!--  <div class="ml-auto">
+									<form class="navbar-form navbar-left" role="search">
+									  <span class="form-group">
+									    <input type="text" class="form-control" placeholder="Search">
+									  </span>
+									  <button type="submit" class="btn btn-outline-secondary"><span><i class="fa fa-search fa-search mr-2"></i> </span>검색</button>
+									</form>
+                                 </div> -->
+                             </div>
+                         
+                         <div class="table-responsive">
+                             <table class="table table-hover">
+                                 <thead>
+                                     <tr>
+                                         <th class="text-center">#</th>
+                                         <th>내용</th>
+                                         <th>작성일</th>
+                                         <th>작성자</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr>
+                                         <td class="text-center">1</td>
+                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
+                                         <td class="txt-oflo">2020.09.22</td>
+                                         <td class="txt-oflo">니모</td>
+                                     </tr>
+                                     <tr>
+                                         <td class="text-center">2</td>
+                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>슬로베니아에서 영상제작 및 편집 가능자 모집합니다. (3개월 수습 후 정식 채용)</td>
+                                         <td class="txt-oflo">2020.09.22</td>
+                                         <td class="txt-oflo">니모</td>
+                                     </tr>
+                                     <tr>
+                                         <td class="text-center">3</td>
+                                         <td class="txt-oflo"><span class="text-info mr-2">[구직]</span>경력직같은 신입 지원합니다</td>
+                                         <td class="txt-oflo">2020.09.22</td>
+                                         <td class="txt-oflo">도리</td>
+                                     </tr>
+                                     <tr>
+                                         <td class="text-center">4</td>
+                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
+                                         <td class="txt-oflo">2020.09.22</td>
+                                         <td class="txt-oflo">도리</td>
+                                     </tr>
+                                     <tr>
+                                         <td class="text-center">5</td>
+                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
+                                         <td class="txt-oflo">2020.09.22</td>
+                                         <td><span class="txt-oflo">효리</span></td>
+                                     </tr>
+                                     <tr>
+                                         <td class="text-center">6</td>
+                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
+                                         <td class="txt-oflo">2020.09.22</td>
+                                         <td class="txt-oflo">효리</td>
+                                     </tr>
+                                     <tr>
+                                         <td class="text-center">7</td>
+                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
+                                         <td class="txt-oflo">2020.09.22</td>
+                                         <td class="txt-oflo">바다</td>
+                                     </tr>
+                                     <tr>
+                                         <td class="text-center">8</td>
+                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
+                                         <td class="txt-oflo">2020.09.22</td>
+                                         <td class="txt-oflo">바다</td>
+                                     </tr>
+                                     <tr>
+                                         <td class="text-center">9</td>
+                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
+                                         <td class="txt-oflo">2020.09.22</td>
+                                         <td class="txt-oflo">효리</td>
+                                     </tr>
+                                     <tr>
+                                         <td class="text-center">10</td>
+                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
+                                         <td class="txt-oflo">2020.09.22</td>
+                                         <td class="txt-oflo">효리</td>
+                                     </tr>
+                                 </tbody>
+                             </table>
+                             <div class="container">
+			                 <nav class="mt-5" >
+								  <ul class="justify-content-center pagination">
+								    <li class="page-item disabled">
+								      <span class="page-link m-1">&lt;</span>
+								    </li>
+								    <li class="page-item"><a class="page-link m-1" href="#">1</a></li>
+								    <li class="page-item active" aria-current="page">
+								      <span class="page-link m-1">
+								        2
+								        <span class="sr-only">(current)</span>
+								      </span>
+								    </li>
+								    <li class="page-item"><a class="page-link m-1" href="#">3</a></li>
+								    <li class="page-item">
+								      <a class="page-link m-1" href="#">></a>
+								    </li>
+								  </ul>
+								</nav>
+							 </div>
+                         </div>
+                         </div>
+                     </div>
+                 </div>
              </section>
-    <!-- Blog Section End -->
-    <!-- 공간 예약 폼 끝-->
-	
+    <!-- 구인구직 리스트 끝-->
 
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
