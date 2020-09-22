@@ -82,13 +82,18 @@
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span>
 	      </button>
+		      <div class="collapse navbar-collapse" id="ftco-nav">
+		        <ul class="navbar-nav ml-auto">
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
+		        </ul>
+		      </div>
 	      <sec:authorize access="isAnonymous()">
 		      <div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav ml-auto">
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberLoginForm.do" class="nav-link">로그인</a></li>
-		          <li class="nav-item"><a href="${pageCo=ntext.request.contextPath }/member/memberEnrollForm.do" class="nav-link">회원가입</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberEnrollForm.do" class="nav-link">회원가입</a></li>
 		        </ul>
 		      </div>
 	      </sec:authorize>

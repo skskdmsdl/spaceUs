@@ -44,12 +44,12 @@ a:hover {
 					
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="email" name="email" placeholder="email">
+						<input class="input100" type="email" name="email" placeholder="email *">
 						<span class="focus-input100">email</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="password" placeholder="password">
+						<input class="input100" type="password" name="password" placeholder="password *">
 						<span class="focus-input100">password</span>
 					</div>
 					
@@ -59,13 +59,17 @@ a:hover {
 					</div>
 					
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="nickName" placeholder="nickName">
+						<input class="input100" type="text" name="nickName" placeholder="nickName *">
 						<span class="focus-input100">nickName</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="tel" name="phone" placeholder="mobile">
+						<input class="input100" type="tel" name="phone" placeholder="mobile *">
 						<span class="focus-input100">mobile</span>
+					</div>
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="tel" name="phone" placeholder="인증번호 입력 *">
+						<span class="focus-input100">인증번호 입력</span>
 					</div>
 				
 					<div class="container-login100-form-btn">
