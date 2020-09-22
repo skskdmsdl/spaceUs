@@ -32,7 +32,7 @@
 	
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100">
+			<div class="wrap-login100" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg-01.jpg');">
 				<form:form 
 							action="${pageContext.request.contextPath }/member/memberLogin.do"
 							class="login100-form validate-form" >
@@ -89,9 +89,6 @@
 
 				</form:form>
 
-				<div class="login100-more" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg-01.jpg');
-												width:750px;">
-				</div>
 			</div>
 		</div>
 	</div>
