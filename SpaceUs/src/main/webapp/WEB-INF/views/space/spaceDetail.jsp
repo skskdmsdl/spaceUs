@@ -16,18 +16,16 @@
   top: 30%;
   width: auto;
   padding: 30px;
-  color: white;
+  color: white; !important;
   font-weight: bold;
   font-size: 30px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
 }
 
-.next {margin-right: 16px}
-.prev, .next {color:white !important;}
-.next {right: 0; border-radius: 3px 0 0 3px;}
+.next {margin-right: 16px; right: 0; border-radius: 3px 0 0 3px;}
 .prev:hover, .next:hover {opacity: 0.3;}
-.far, .fas {color:black; font-size:25px;}
+.fa-share-square, .fa-heart {color:black; font-size:25px; margin-right:10px;}
 .fab {margin-right:5px;}
 a:hover {opacity: 0.3; color:black;}
 
