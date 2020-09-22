@@ -85,7 +85,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                      </tr>
                                  </thead>
                                  <tbody>
-                                     <tr style="cursor: pointer;" onclick = "location.href='${pageContext.request.contextPath }/recruit/recruitDetail.do'">
+                                     <tr>
                                          <td class="text-center">1</td>
                                          <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
                                          <td class="txt-oflo">2020.09.22</td>

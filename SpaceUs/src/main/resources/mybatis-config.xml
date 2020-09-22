@@ -23,4 +23,5 @@
   	<typeHandler handler="com.kh.spaceus.common.typehandler.StringArrayTypeHandler"/>
   </typeHandlers>
   
+  
 </configuration>
