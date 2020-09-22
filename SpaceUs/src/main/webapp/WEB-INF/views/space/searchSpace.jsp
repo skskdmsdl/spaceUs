@@ -84,15 +84,120 @@
   background-color: #f8f9fa;
   padding-top: 20px;
 }
+
+
+
+
+
+h1 {
+font-family: 'NEXON Lv1 Gothic OTF';
+}
+
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+@import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
+
+#wrap {
+  /* margin: 50px 78px; */
+  top: 2em;
+  display: inline-block;
+  position: relative;
+  height: 60px;
+  flaot: left;
+  padding: 0;
+  position: relative;
+}
+
+
+input[type="text"] {
+  height: 40px;
+  font-size: 20px;
+  display: inline-block;
+  font-family: "NEXON Lv1 Gothic OTF";
+  font-weight: 100;
+  border: none;
+  outline: none;
+  color: black;
+  padding: 3px;
+  padding-right: 60px;
+  padding-left: 60px;
+  width: 0px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  z-index: 3;
+  transition: .4s cubic-bezier(0.5, 0.795, 0.5, 0.50);
+  cursor: pointer;
+}
+
+#search_keyword {
+	color: black;
+}
+
+#search_keyword:focus:hover {
+  border-bottom: 1px solid black;
+}
+
+input[type="text"]:focus {
+  width: 400px;
+  z-index: 1;
+  border-bottom: 1px solid black;
+  cursor: text;
+  left: -180px;
+  top: 55px;
+  text-align: center;
+}
+
+#search_submit:hover {
+  opacity: 0.8;
+}
+.space-price{
+  color: #007bff;
+}
+
 </style>
 <section class="ftco-section goto-here">
+	<!-- 컨텐츠 시작 -->
+	<div class="hero-wrap ftco-degree-bg"
+		 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_bg.jpg');
+		 		height: 600px"
+		 data-stellar-background-ratio="0.5">
+	  <div class="overlay"></div>
+	  	<div class="container">
+	    	<div class="row no-gutters slider-text justify-content-center align-items-center">
+	      		<div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-end">
+	      			<div class="text text-center mx-auto" style="margin-bottom:25%;">
+	      				<!-- 검색결과 시작 -->
+	          			<div class="container col-md-12 heading-section text-center mb-5">
+				      		<span class="txt_keyword">${ keyword }</span>
+				      		<span class="txt_result">(으)로 검색한 결과입니다.</span>
+				        	
+				    	</div>
+				    	<!-- 검색결과 끝 -->
+	          			
+	     					<div style="margin-top:-20px">
+	     						<div id="wrap">
+								  <form id="searchFrm" onsubmit="searchSpace();" action="" autocomplete="on">
+								  <input id="search_keyword" name="search_keyword" type="text" placeholder="키워드를 입력하세요">
+								  <i class="fas fa-search fa-2x" id="search_submit" type="submit" style="color:#00C89E"></i>
+								  </form>
+								</div>
+	         				</div>
+	       			</div>
+	     		</div>
+	   		</div>
+	  <div class="mouse">
+		<a href="#" class="mouse-icon">
+			<div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
+		</a>
+	</div>
+	 </div>
+	</div>
+	<!-- 컨텐츠 끝 -->
+
+	
 	<div class="container">
-      	<div class="col-md-12 heading-section text-center mb-5">
-      		<span class="txt_keyword">${ keyword }</span>
-      		<span class="txt_result">(으)로 검색한 결과입니다.</span>
-        	
-    	</div>
-		<div class="search-form-content">
+		<div class="search-form-content" style="margin-top:100px;">
 			<div class="flex-wrap">
 			   <div class="search-category">공간유형</div>
 			   <div class="search-category">지역</div>
