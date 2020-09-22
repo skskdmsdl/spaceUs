@@ -9,7 +9,7 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8">
-    <title>Space Us</title>
+    <title>SpaceUs</title>
     
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -37,7 +37,6 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/dist/css/style.css">
     <!-- Dashboard 1 Page CSS -->
-    <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/dist/css/pages/dashboard1.css">
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link rel="canonical" href="https://www.wrappixel.com/templates/elegant-admin-lite/" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
@@ -78,16 +77,17 @@
   <body>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="${pageContext.request.contextPath }">Space Us</a>
+	      <a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span>
 	      </button>
 	      <sec:authorize access="isAnonymous()">
 		      <div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav ml-auto">
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberLoginForm.do" class="nav-link">로그인</a></li>
-		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberEnrollForm.do" class="nav-link">회원가입</a></li>
+		          <li class="nav-item"><a href="${pageCo=ntext.request.contextPath }/member/memberEnrollForm.do" class="nav-link">회원가입</a></li>
 		        </ul>
 		      </div>
 	      </sec:authorize>

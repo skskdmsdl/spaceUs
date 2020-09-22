@@ -16,28 +16,28 @@
 		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
 		<intercept-url pattern="/resources/**" access="permitAll"/>
-		<intercept-url pattern="/assets/**" access="permitAll"/>
+		<intercept-url pattern="/assets/**" access="permitAll"/> 
 		<intercept-url pattern="/member/**" access="permitAll"/>
 		<intercept-url pattern="/aboutus/**" access="permitAll"/>
-		<intercept-url pattern="/space/spaceDetail.do" access="permitAll"/> <!-- 방 세부페이지 -->
-		<intercept-url pattern="/space/searchSpace.do" access="permitAll"/><!-- 방 목록 페이지 -->
-		<intercept-url pattern="/assets/**" access="permitAll"/><!-- 이녀석은... 로그인할때 자꾸 넘어가는데...  -->
+		<intercept-url pattern="/space/spaceDetail.do" access="permitAll"/>
+		<intercept-url pattern="/index.jsp" access="permitAll"/>
+		<intercept-url pattern="/space/searchSpace.do" access="permitAll"/>
+		<intercept-url pattern="/assets/**" access="permitAll"/> 
 	
-		<intercept-url pattern="/**" access="hasAnyRole('USER','ADMIN')"/>
+		<intercept-url pattern="/**" access="permitAll"/>		
 		
 		<!-- 시큐리티와 커스텀 로그인 "페이지"만 연결 -->
-		<form-login
+		 <form-login
 			login-page="/member/memberLoginForm.do"
 			login-processing-url="/member/memberLogin.do" 
 			username-parameter="email"
 			password-parameter="password"
-		
 		/>
 		
 		<logout
 			logout-url="/member/memberLogout.do"
 			logout-success-url="/"
-		/>
+		/> 
 		
 	</http>
 	

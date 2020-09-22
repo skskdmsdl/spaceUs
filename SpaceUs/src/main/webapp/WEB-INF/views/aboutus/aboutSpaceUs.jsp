@@ -75,7 +75,7 @@ input[type="text"] {
     	<div class="row no-gutters slider-text justify-content-center align-items-center">
       		<div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-end">
       			<div class="text text-center mx-auto" style="margin-bottom:50%;">
-          			<h1 class="mb-4">About Space Us</h1>
+          			<h1 class="mb-4">About SpaceUs</h1>
           			<p></p>
        			</div>
      		</div>
@@ -94,7 +94,7 @@ input[type="text"] {
                 <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon1.PNG');">
 	              </a>
                 <h3 class="heading text-center"><a href="#">1000명 이상의 고객</a></h3>
-                <p class="text-center">많은 고객분들이 저희 Space Us의 <br>공간예약 서비스를 이용하고 있습니다.</p>
+                <p class="text-center">많은 고객분들이 저희 SpaceUs의 <br>공간예약 서비스를 이용하고 있습니다.</p>
               </div>
             </div>
             </div>
@@ -142,7 +142,7 @@ input[type="text"] {
           <div class="main_title_2">
 			<span><em></em></span>
 			<br />
-            	<h2>Space Us 이야기</h2>
+            	<h2>SpaceUs 이야기</h2>
 			</div>
           </div>
         </div>
