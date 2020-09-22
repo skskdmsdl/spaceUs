@@ -126,7 +126,7 @@ input[type="text"]:focus {
           	<div class="blog-entry justify-content-end">
               <div class="text">
                 <div class="block-20 img" 
-                	 style="background-image: url('${pageContext.request.contextPath }/resources/images/icon1.PNG');">
+                	 style="background-image: url('${pageContext.request.contextPath }/resources/images/icons/icon1.PNG');">
 	              </div>
                 <h3 class="heading text-center">회원</h3>
                 <p class="text-center">회원등록, 회원탈퇴, 회원정보 수정 방법을<br>알 수 있습니다.</p>
@@ -136,7 +136,7 @@ input[type="text"]:focus {
           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
               <div class="text">
-                <div class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon2.PNG');">
+                <div class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icons/icon2.PNG');">
 	              </div>
                 <h3 class="heading text-center">예약</h3>
                 <p class="text-center">예약 방법, 예약 변경, 예약 취소 방법을<br>알 수 있습니다.</p>
@@ -146,7 +146,7 @@ input[type="text"]:focus {
           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
               <div class="text">
-                <div class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon3.PNG');">
+                <div class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icons/icon3.PNG');">
 	              </div>
                 <h3 class="heading text-center">공간 등록</h3>
                 <p class="text-center">공간등록 방법, 호스트 계정에 대해<br>알 수 있습니다.</p>
@@ -156,7 +156,7 @@ input[type="text"]:focus {
           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
               <div class="text">
-                <div class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon4.PNG');">
+                <div class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icons/icon4.PNG');">
 	              </div>
                 <h3 class="heading text-center">리뷰</h3>
                 <p class="text-center">리뷰등록, 리뷰수정, 리뷰삭제 방법에 대해<br>알 수 있습니다.</p>

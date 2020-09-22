@@ -91,7 +91,7 @@ input[type="text"] {
           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
           	<div class="text">
-                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon1.PNG');">
+                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icons/icon1.PNG');">
 	              </a>
                 <h3 class="heading text-center"><a href="#">1000명 이상의 고객</a></h3>
                 <p class="text-center">많은 고객분들이 저희 SpaceUs의 <br>공간예약 서비스를 이용하고 있습니다.</p>
@@ -101,7 +101,7 @@ input[type="text"] {
           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
               <div class="text">
-                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon3.PNG');">
+                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icons/icon3.PNG');">
 	              </a>
                 <h3 class="heading text-center"><a href="#">500개 이상의 숙소</a></h3>
                 <p class="text-center">500개 이상의 공간 정보를 가지고 있습니다.</p>
@@ -111,7 +111,7 @@ input[type="text"] {
           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
               <div class="text">
-                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon2.PNG');">
+                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icons/icon2.PNG');">
 	              </a>
                 <h3 class="heading text-center"><a href="#">공간 등록</a></h3>
                 <p class="text-center">높은 보안의 결제 시스템을 이용하여<br>안전한 결제 시스템을 제공하고 있습니다.</p>
@@ -121,7 +121,7 @@ input[type="text"] {
           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
               <div class="text">
-                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icon4.PNG');">
+                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/icons/icon4.PNG');">
 	              </a>
                 <h3 class="heading text-center"><a href="#">편리한 채팅상담</a></h3>
                 <p class="text-center">문의 사항은 채팅 상담을 이용하여<br>빠르게 문의사항을 해결 할 수 있습니다.</p>
