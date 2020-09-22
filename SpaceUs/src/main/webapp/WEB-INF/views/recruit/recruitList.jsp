@@ -61,7 +61,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
@@ -129,6 +129,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
                             </div>
                         </div>
                     </div>

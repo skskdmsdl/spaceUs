@@ -94,16 +94,23 @@
 	      </sec:authorize>
 	      <sec:authorize access="hasAnyRole('USER','ADMIN')">
 	        <div class="collapse navbar-collapse" id="ftco-nav"  data-toggle="modal" data-target="#exampleModal">
-	        	<div class="navbar-nav ml-auto" style="cursor: pointer !important;">
+        	 <ul class="navbar-nav ml-auto">
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/recruit/recruitList.do" class="nav-link">커뮤니티</a></li>
+	        	  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
 	        		<div>반갑습니다. &nbsp;</div>
 	        		<div>
 	        			<sec:authentication property="principal.username"/> 님!
 	        		</div>
+	        	   </div>
+	          </ul>
 	        		&nbsp;
 	        		<div class="user_profile_icon" data-subscribe-type="PRO" 
 	        		     style="background: #22B47B; border-radius: 90%; width: 40px;  height: 40px;">
 	        			<img src="https://resource.miricanvas.com/image/common/profile_argo.svg">
 	        		</div>
+	        	
 	        	</div>
 		      </div>
 		  </sec:authorize>
