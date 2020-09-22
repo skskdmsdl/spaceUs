@@ -394,8 +394,7 @@
 </section>
 <script>
 function searchSpace(){
-	alert('지금 만나러 갑니다...');
-	
+	location.href='${pageContext.request.contextPath}/space/searchSpace.do?search_keyword=${keyword}';	
 }
 </script>	
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
