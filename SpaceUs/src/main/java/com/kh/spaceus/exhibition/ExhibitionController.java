@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/exhibition")
 public class ExhibitionController {
 	
-	//기획전
+	//기획전리스트
 	@RequestMapping("/exhibition.do")
 	public String exhibition( ) {
 		return "exhibition/exhibition";

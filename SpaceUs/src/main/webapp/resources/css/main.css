@@ -74,7 +74,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #6675df;
+  color: #00C89E;
 }
 
 /*---------------------------------------------*/
@@ -256,7 +256,7 @@ iframe {
 [ Form ]*/
 
 .login100-form {
-  width: 560px;
+  width: 755px;
   min-height: 100vh;
   display: block;
   background-color: #f7f7f7;
@@ -286,12 +286,74 @@ iframe {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
-  width: 100%;
+  width: 70%;
   height: 80px;
   position: relative;
   border: 1px solid #e6e6e6;
   border-radius: 10px;
+  margin-right: 20px;
   margin-bottom: 10px;
+  float:left;
+}
+
+.wrap-input {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  position: relative;
+  border-radius: 10px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  float:left;
+}
+.wrap-input2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 70%;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  position: relative;
+  border-radius: 10px;
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  float:left;
+}
+
+.wrap-input .txt1{
+	text-decoration: underline;
+}
+
+.btn-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  width: 150px;
+  height: 80px;
+  position: relative;
+  margin
+  margin-bottom: 10px;
+  float:left;
+}
+
+.btn-wrap p {
+	margin: 0 auto;
+    position: absolute;
+    top: 40%;
+    font-size: 13px;
+    color: red;
 }
 
 .label-input100 {
@@ -331,6 +393,15 @@ input.input100 {
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
   transition: all 0.4s;
+}
+/* 모달 */
+
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 500px;
+    overflow-y: auto;
 }
 
 /*---------------------------------------------*/
@@ -438,7 +509,7 @@ input.input100 {
   height: 18px;
   border-radius: 2px;
   background: #fff;
-  border: 1px solid #6675df;
+  border: 1px solid #00C89E;
   left: 0;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -449,7 +520,7 @@ input.input100 {
 }
 
 .input-checkbox100:checked + .label-checkbox100::before {
-  color: #6675df;
+  color: #00C89E;
 }
 
 
@@ -478,7 +549,8 @@ input.input100 {
   width: 100%;
   height: 50px;
   border-radius: 10px;
-  background: #6675df;
+  background-color: #00C89E;
+  margin-bottom: 10px;
 
   font-family: Montserrat-Bold;
   font-size: 12px;
@@ -497,6 +569,65 @@ input.input100 {
   background: #333333;
 }
 
+.social-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 50px;
+  border: 1px solid rgb(195, 195, 195);
+  background-color: #fff;
+  margin-bottom: 10px;
+
+  font-family: Montserrat-Bold;
+  font-size: 12px;
+  color: #666666;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.social-btn img {
+	width: 30px;
+	height: 30px;
+}
+
+.phone-btn {
+	display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  width: 300px;
+  height: 50px;
+  border: 1px solid rgb(195, 195, 195);
+  background-color: #fff;
+  margin-bottom: 10px;
+
+  font-family: Montserrat-Bold;
+  font-size: 12px;
+  color: #666666;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
 
 
 /*------------------------------------------------------------------
