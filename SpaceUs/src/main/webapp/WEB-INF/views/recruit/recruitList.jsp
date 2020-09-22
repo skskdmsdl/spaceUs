@@ -21,15 +21,30 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 </style>
 <!-- 컨텐츠 시작 -->
 <!-- 헤더 -->
+<section class="ftco-section ftco-agent">
+
+ <div class="navbar justify-content-center navbar-dark bg-dark">
+	  <ul class="nav">
+		  <li class="nav-item">
+		    <a class="nav-link active" href="#">소모임</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" href="#">구인/구직</a>
+		  </li>
+		</ul>
+	</div>
+	</section>
     <div class="hero-wrap ftco-degree-bg"
     	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_1.jpg');
     	 		height: 400px"
     	 data-stellar-background-ratio="0.5">
+	
       <div class="overlay"></div>
+	
       <div class="container">
         <div class="row no-gutters slider-text justify-content-center align-items-center">
           <div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-end">
-          	<div class="text text-center mx-auto" style="margin-bottom:50%;">
+          	<div class="text text-center mx-auto" style="margin-bottom:80%;">
 	            <h1 class="mb-4">구인/구직</h1>
 	            <p class="h6">구인ㆍ구직 게시판은 각 숙소에서의 스태프(매니저, 아르바이트, 주방 아주머니 등)의
 				구인/구직 관련 정보를 교환하는 게시판으로, SpaceUs에서는 정보교환의 온라인 공간을 제공할 뿐 중개에 관여하지 않으며,

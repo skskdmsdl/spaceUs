@@ -115,8 +115,9 @@
 		      </div>
 		  </sec:authorize>
 
-	     
 	  </nav>
+	 
+	     
     <!-- END nav -->
     
     <!-- user 권한 -->
