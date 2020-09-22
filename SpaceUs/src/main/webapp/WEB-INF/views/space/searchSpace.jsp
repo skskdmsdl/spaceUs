@@ -160,7 +160,7 @@ input[type="text"]:focus {
 	<!-- 컨텐츠 시작 -->
 	<div class="hero-wrap ftco-degree-bg"
 		 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_bg.jpg');
-		 		height: 600px"
+		 		height: 500px"
 		 data-stellar-background-ratio="0.5">
 	  <div class="overlay"></div>
 	  	<div class="container">
@@ -493,6 +493,187 @@ input[type="text"]:focus {
 	    			</div>
 	    		</div>
 	    	</div>
+	    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="icon-people"></span>최대3인</li>
+    					<li><span class="icon-heart"></span>55</li>
+    					<li><span class="icon-comments"></span>29</li>
+    				</ul>
+    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
+    				<small><span class="icon-my_location">문발리</span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="icon-people"></span>최대3인</li>
+    					<li><span class="icon-heart"></span>55</li>
+    					<li><span class="icon-comments"></span>29</li>
+    				</ul>
+    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
+    				<small><span class="icon-my_location">문발리</span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="icon-people"></span>최대3인</li>
+    					<li><span class="icon-heart"></span>55</li>
+    					<li><span class="icon-comments"></span>29</li>
+    				</ul>
+    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
+    				<small><span class="icon-my_location">문발리</span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="icon-people"></span>최대3인</li>
+    					<li><span class="icon-heart"></span>55</li>
+    					<li><span class="icon-comments"></span>29</li>
+    				</ul>
+    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
+    				<small><span class="icon-my_location">문발리</span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="icon-people"></span>최대3인</li>
+    					<li><span class="icon-heart"></span>55</li>
+    					<li><span class="icon-comments"></span>29</li>
+    				</ul>
+    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
+    				<small><span class="icon-my_location">문발리</span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="icon-people"></span>최대3인</li>
+    					<li><span class="icon-heart"></span>55</li>
+    					<li><span class="icon-comments"></span>29</li>
+    				</ul>
+    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
+    				<small><span class="icon-my_location">문발리</span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="icon-people"></span>최대3인</li>
+    					<li><span class="icon-heart"></span>55</li>
+    					<li><span class="icon-comments"></span>29</li>
+    				</ul>
+    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
+    				<small><span class="icon-my_location">문발리</span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="icon-people"></span>최대3인</li>
+    					<li><span class="icon-heart"></span>55</li>
+    					<li><span class="icon-comments"></span>29</li>
+    				</ul>
+    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
+    				<small><span class="icon-my_location">문발리</span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="icon-people"></span>최대3인</li>
+    					<li><span class="icon-heart"></span>55</li>
+    					<li><span class="icon-comments"></span>29</li>
+    				</ul>
+    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
+    				<small><span class="icon-my_location">문발리</span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="icon-people"></span>최대3인</li>
+    					<li><span class="icon-heart"></span>55</li>
+    					<li><span class="icon-comments"></span>29</li>
+    				</ul>
+    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
+    				<small><span class="icon-my_location">문발리</span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	
 	    	
 	      </div>
       </div>

@@ -110,8 +110,7 @@
 					</div>
 				</form>
 
-				<div class="login100-more" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_2.jpg');
-												width:750px;">
+				<div class="login100-more" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_2.jpg'); width:1000px;">
 				</div>
 			</div>
 		</div>
