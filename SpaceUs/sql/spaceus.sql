@@ -7,18 +7,45 @@ purge recyclebin; -- bin 비우기
 -----------------------------
 create table member(
 		member_email varchar2(256),
+        password varchar2(300) not null,
 		nickname varchar2(256) not null,
-		password varchar2(300) not null,
 		member_phone char(11) not null,
 		birthday date,
 		member_regdate date default sysdate,
 		attendance_cnt number default 0,
-        authority char(1) default 'U' not null,
-		constraints pk_member_email primary key(member_email),
-        constraints ck_member_auth check (authority in ('U', 'H', 'A'))
+		constraints pk_member_email primary key(member_email)
 );
 
 select * from member;
+
+--권한 컬럼 삭제
+ALTER TABLE member DROP COLUMN authority;
+
+insert into member values(
+    'honggd@naver.com',
+    '홍길동',
+    '1234',
+    '01012341234',
+    null,
+    default,
+    default
+);
+
+commit;
+
+
+-----------------------------
+----------- 권한 ------------
+-----------------------------
+
+create table auth (
+    member_email varchar2(256),
+    authority varchar2(20),
+    constraint pk_auth primary key(member_email, authority),
+    constraint fk_auth_member_email foreign key(member_email) references member(member_email)
+);
+
+select * from auth;
 
 
 -----------------------------

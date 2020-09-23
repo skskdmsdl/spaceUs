@@ -19,12 +19,16 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
 	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 </head>
+<style>
+.alert-p {display:none;}
+
+</style>
 <body style="background-color: #666666;">
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_2.jpg');
 											background-position: right;">
-				<form class="login100-form validate-form"
+				<form class="login100-form validate-form" id="memberEnrollFrm"
 					  action="${pageContext.request.contextPath}">
 					<span class="login100-form-title p-b-43">
 						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
@@ -39,47 +43,57 @@
 						</div>
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="email" name="email" placeholder="email *">
+						<input class="input100" type="email" id="memberEmail" placeholder="email *" required>
+						<input type="hidden" id="emailValid" value="0"/>
 						<span class="focus-input100">email</span>
 					</div>
 					<div class="btn-wrap">
-						<p>이메일이 중복입니다.</p>				
+						<p class="alert-p emailDuplicate">이메일이 중복입니다.</p>				
+						<p class="alert-p emailRegex">이메일 형식이 아닙니다.</p>				
 					</div>
 					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="password" placeholder="password *">
+					<div class="wrap-input100 validate-input" data-validate="Password is required" >
+						<input class="input100" type="password" id="password" placeholder="password *" required>
 						<span class="focus-input100">password</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="passwordChk" placeholder="password Check">
+						<input class="input100" type="password" id="passwordChk" placeholder="password Check" required>
 						<span class="focus-input100">password Check</span>
 					</div>
 					<div class="btn-wrap">
-						<p>비밀번호가 맞지않습니다.</p>				
+						<p class="alert-p" id="pw-alert">비밀번호가 맞지않습니다.</p>				
 					</div>
 					
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="nickName" placeholder="nickName *">
+						<input class="input100" type="text" id="nickName" placeholder="nickName *" required>
+						<input type="hidden" id="nickNameValid" value="0"/>
 						<span class="focus-input100">nickName</span>
 					</div>
 					<div class="btn-wrap">
-						<p>닉네임이 중복입니다.</p>				
+						<p class="alert-p nickNameDuplicate">닉네임이 중복입니다.</p>			
+						<p class="alert-p nickNameRegex">공백을 입력할 수 없습니다.</p>			
 					</div>
 					
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="tel" name="phone" placeholder="mobile *">
+						<input class="input100" type="date" placeholder="birthday" required>
+						<span class="focus-input100">Birthday</span>
+					</div>
+					
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="tel" id="phone" placeholder="mobile *" required>
+						<input type="hidden" id="phoneValid" value="0"/>
 						<span class="focus-input100">mobile</span>
 					</div>
 					<div class="btn-wrap">
 						<button class="phone-btn">휴대폰 인증</button>				
 					</div>
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="tel" name="phone" placeholder="인증번호 입력 *">
+						<input class="input100" type="tel" id="phoneChk" placeholder="인증번호 입력 *" required>
 						<span class="focus-input100">인증번호 입력</span>
 					</div>
 					<div class="btn-wrap">
-						<p>인증번호가 틀립니다.</p>				
+						<p class="alert-p phoneChk">인증번호가 틀립니다.</p>				
 					</div>
 					<div class="wrap-input2">
 						<div class="contact100-form-checkbox">
@@ -211,4 +225,127 @@
 </div>
 
 <!-- 개인정보 처리방침 모달 끝 -->
+
+
+<script>
+//비밀번호 체크
+$("#passwordChk").blur(function(){
+	var $p1 = $("#password"), $p2 = $("#passwordChk");
+	
+	if($p1.val() != $p2.val()){
+		$("#pw-alert").css('display', 'block');
+		$p2.focus();	
+	}
+	else {
+		$("#pw-alert").css('display', 'none');
+	}
+});
+
+//멤버이메일 검사 
+$("#memberEmail").blur(function(){
+
+	//이메일 형식 유효성검사
+ 	var emailRegex = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	if(emailRegex.test($(this).val()) == false) {
+		$(".emailRegex").show();
+		$("#emailValid").val(0);
+		$("#memberEmail").val('').focus();
+		return;
+	}else {
+		$(".emailRegex").hide();
+	}
+
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/member/checkEmailDuplicate.do",
+		data : {
+			memberEmail : $(this).val()
+		},
+		dataType : "json",
+		success : function(data){
+
+			if(data.isUsable == true) {
+				$(".emailDuplicate").hide();
+				$("#emailValid").val(1);
+			}
+			else {
+				$(".emailDuplicate").show();
+				$("#memberEmail").val('').focus();
+				$("#emailValid").val(0);
+			}
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	});
+});
+
+
+//닉네임 검사
+$("#nickName").blur(function(){
+
+	//닉네임 유효성검사 : 공백, 특수문자 입력불가
+ 	//var nickNameRegex = /^\s+|\s+$/g;
+	if($(this).val().search(/\s/) != -1) {
+		$(".nickNameRegex").show();
+		$("#nickNameValid").val(0);
+		$("#nickName").val('').focus();
+		return;
+	}else {
+		$(".nickNameRegex").hide();
+	}
+
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/member/checkNickNameDuplicate.do",
+		data : {
+			nickName : $(this).val()
+		},
+		dataType : "json",
+		success : function(data){
+
+			if(data.isUsable == true) {
+				$(".nickNameDuplicate").hide();
+				$("#nickNameValid").val(1);
+			}
+			else {
+				$(".nickNameDuplicate").show();
+				$("#nickName").val('').focus();
+				$("#nickNameValid").val(0);
+			}
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	});
+});
+
+
+//문자인증
+$(".phone-btn").click(function(){
+
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/member/sendSms.do",
+		data : {
+			phone : $("#phone").val()
+		},
+		dataType : "json",
+		success : function(data){
+			console.log(data);
+			alert("인증번호를 전송했습니다.");
+			
+			if(data.text != $("#phoneChk").val()){
+				$(".phoneChk").show();
+				$("#phoneValid").val(0);
+				$("#phoneChk").val('').focus();
+			}
+			else {
+				$(".phoneChk").hide();
+				$("#phoneValid").val(1);
+			}
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	});
+});
+</script>
 </html>

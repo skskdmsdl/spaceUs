@@ -210,6 +210,20 @@
 		    <version>2.11.0</version>
 		</dependency>
 		
+		<!-- 문자메세지인증 -->
+		<dependency>
+		    <groupId>net.nurigo</groupId>
+		    <artifactId>javaSDK</artifactId>
+		    <version>2.2</version>
+		</dependency>
+		
+		<!-- 랜덤메시지 생성 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.4</version>
+		</dependency>
+		
 	</dependencies>
     <build>
         <plugins>
