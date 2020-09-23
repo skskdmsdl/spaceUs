@@ -16,18 +16,16 @@
   top: 30%;
   width: auto;
   padding: 30px;
-  color: white;
+  color: white; !important;
   font-weight: bold;
   font-size: 30px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
 }
 
-.next {margin-right: 16px}
-.prev, .next {color:white !important;}
-.next {right: 0; border-radius: 3px 0 0 3px;}
+.next {margin-right: 16px; right: 0; border-radius: 3px 0 0 3px;}
 .prev:hover, .next:hover {opacity: 0.3;}
-.far, .fas {color:black; font-size:25px;}
+.fa-share-square, .fa-heart {color:black; font-size:25px; margin-right:10px;}
 .fab {margin-right:5px;}
 a:hover {opacity: 0.3; color:black;}
 
@@ -430,12 +428,6 @@ function urlcopy(){
 		   			</p>
 		   		</div>
 	   		</div>
-	   		<br />
-   			<div class="rating-wrap">
-	   			<h3 class="head">포토리뷰</h3>
-	   			<div class="wrap">
-		   		</div>
-	   		</div>
    		</div>
    	</div>
    </div>
@@ -449,9 +441,9 @@ function urlcopy(){
     <!-- 추천시스템 시작 -->
     <div class="container" style="border-top: 1px solid rgba(0, 0, 0, 0.1)">
 		<div class="row justify-content-center">
-      <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+      <div class="col-md-12 mt-5 heading-section text-center ftco-animate mb-5">
       	<span class="subheading">카테고리 추천</span>
-        <h2 class="mb-2">카페를 찾고 계신가요?</h2>
+        <h2 class="mb-2">다른 카페(은/는) 어떠신가요?</h2>
       </div>
     </div>
     <div class="row">
