@@ -71,7 +71,7 @@
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">관리</a></li>
-                                <li class="breadcrumb-item active">회원 관리</li>
+                                <li class="breadcrumb-item active">공간 관리</li>
                             </ol>
                         </div>
                     </div>

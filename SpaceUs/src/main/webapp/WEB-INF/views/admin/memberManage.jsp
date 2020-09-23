@@ -12,15 +12,6 @@
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
 <style>
-.btn.btn-primary, .search-btn:hover {
-	color: #fff;
-	background-color: #B596FD;
-	border-color: #B596FD;
-	box-shadow: 0 2px 2px 0 rgba(156, 39, 176, 0.14), 0 3px 1px -2px
-		rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12);
-	border-radius: 30px;
-}
-
 .btn, .search-btn {
 	display: inline-block;
 	width: 100px;
@@ -134,13 +125,6 @@ div#search-userName {
                 <div id="memberManagePage" class="ml-5 mr-5">
                     <div class="card p-5">
                        <div class="card-body">
-	                        <!-- <div class="row"> 
-		                         <div class="col-md-10">
-		                             <h5 class="card-title">나의 정보</h5>
-		                             <h6 class="card-subtitle mb-5">회원정보를 확인하세요</h6>
-		                         </div>
-		                    </div> -->
-		                    
 		                    <!-- 입력창  시작-->
 		                    <div class="search-container" style="display: inline-block;">
 								<select id="searchType">
@@ -154,7 +138,7 @@ div#search-userName {
 										<input type="text" class="textbox"
 											name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요"
 					                	   		<%-- value="<%="userId".equals(searchType) ? searchKeyword : ""%>" --%> />
-										<button type="submit" class="search-btn">검색</button>
+										<button type="submit" class="search-btn button">검색</button>
 									</form>
 								</div>
 								<div id="search-userName">
