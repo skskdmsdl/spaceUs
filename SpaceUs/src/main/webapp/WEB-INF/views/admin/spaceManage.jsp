@@ -82,91 +82,23 @@
                 <div id="spaceApprovalPage" class="ml-5 mr-5">
 	                <div class="card p-4">
 		                <div class="card-body">
-		                <div class="col-md-10">
-                            <h5 class="card-title">공간 승인</h5>
-                        </div>
-                        <div class="row">
-						<div class="col-md-3">
-						    <div class="thumbnail block-20" >
-						    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
-						</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p style="width:250px;">분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
-					     </div>
-						  </div>
-						  <div class="col-md-3">
-						    <div class="thumbnail block-20" >
-						    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_2.jpg" alt="..."> 
-						</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
-					     </div>
-						  </div>
-						  <div class="col-md-3">
-						    <div class="thumbnail block-20" >
-						    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_3.jpg" alt="..."> 
-						</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
-					     </div>
-						  </div>
-						  <div class="col-md-3">
-						    <div class="thumbnail block-20" >
-						    	<img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_4.jpg" alt="..."> 
+			                <div class="col-md-10">
+	                            <h5 class="card-title">공간 승인</h5>
+	                        </div>
+	                        <div class="row">
+								<div class="col-md-3">
+								    <div class="thumbnail block-20" >
+								    	<img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
+									</div> 
+							     	<div class="caption">
+							        	<h4>카페두드림 Do dream</h4>
+							        	<h6>등록요청일 : 2020-10-23 </h6>
+							        	<h6>호스트 : rhkim10@naver.com </h6>
+							        	<p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
+							     	</div>
+								 </div>
+						 
 							</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
-					     </div>
-						  </div>
-						  <div class="col-md-3">
-						    <div class="thumbnail block-20" >
-							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_5.jpg" alt="..."> 
-							</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
-					     </div>
-						  </div>
-						  <div class="col-md-3">
-						    <div class="thumbnail block-20" >
-							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_6.jpg" alt="..."> 
-							</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
-					     </div>
-						  </div>
-						  <div class="col-md-3">
-						    <div class="thumbnail block-20" >
-							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_7.jpg" alt="..."> 
-							</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
-					     </div>
-						  </div>
-						  <div class="col-md-3">
-						    <div class="thumbnail block-20" >
-							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_8.jpg" alt="..."> 
-							</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
-					     </div>
-						  </div>
-						</div>
 						</div>
 					</div>
 				</div>

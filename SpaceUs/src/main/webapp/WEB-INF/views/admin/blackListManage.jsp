@@ -11,6 +11,50 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
+<style>
+.btn, .search-btn {
+	display: inline-block;
+	width: 100px;
+	height: 33px;
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	user-select: none;
+	border: 1px solid transparent;
+	padding: 0.46875rem 1rem;
+	font-size: 15px;
+	line-height: 1.5;
+	border-radius: 0.25rem;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+		border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+/*검색*/
+div#search-container {
+	margin: 0 auto;
+	padding: 3px;
+	background-color: rgba(0, 188, 212, 0.3);
+	width: 100%;
+}
+
+div#search-userId {
+	display: inline-block;
+}
+
+div#search-userName {
+	display: none;
+}
+</style>
+<script>
+	$(function() {
+		$("#searchType").change(function() {
+			$("#search-userId, #search-userName").hide();
+			$("#search-" + $(this).val()).css("display", "inline-block");
+		});
+	});
+</script>
+
+
 
 <div class="skin-default-dark fixed-layout">
     <div class="preloader">
@@ -71,50 +115,100 @@
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">관리</a></li>
-                                <li class="breadcrumb-item active">블랙리스트 관리</li>
+                                <li class="breadcrumb-item active">회원 관리</li>
                             </ol>
                         </div>
                     </div>
                 </div>
                 
-                
-            <div id="blackListPage" class="ml-5 mr-5">
-                   <div class="card p-5">
-                      <div class="card-body">
-                        <div class="row"> 
-	                         <div class="col-md-10">
-	                             <h5 class="card-title">블랙 리스트</h5>
-	                             <h6 class="card-subtitle mb-5">회원정보를 확인하세요</h6>
-	                         </div>
-	                    </div>
+                <!-- 회원관리 -->
+                <div id="memberManagePage" class="ml-5 mr-5">
+                    <div class="card p-5">
+                       <div class="card-body">
+		                    <!-- 입력창  시작-->
+		                    <div class="search-container" style="display: inline-block;">
+								<select id="searchType">
+									<option value="userId">EMAIL</option>
+									<option value="userName">NAME</option>
+								</select>
+								<div id="search-userId">
+									<form <%-- action="<%=request.getContextPath()%>/admin/userFinder" --%>>
+										<input type="hidden" class="textbox" name="searchType"
+											value="userId"> 
+										<input type="text" class="textbox"
+											name="searchKeyword" size="25" placeholder="검색할 이메일를 입력하세요"
+					                	   		<%-- value="<%="userId".equals(searchType) ? searchKeyword : ""%>" --%> />
+										<button type="submit" class="search-btn button">검색</button>
+									</form>
+								</div>
+								<div id="search-userName">
+									<form <%-- action="<%=request.getContextPath()%>/admin/userFinder" --%>>
+										<input type="hidden" class="textbox" name="searchType"
+											value="userName"> 
+										<input type="search" class="textbox"
+											name="searchKeyword" size="25" placeholder="검색할 이름을 입력하세요."
+											<%-- value="<%="userName".equals(searchType) ? searchKeyword : ""%>" --%> />
+										<button type="submit" class="search-btn">검색</button>
+									</form>
+								</div>
+							</div>
+		                    <!-- 입력창 끝 -->
+		             
+		                    
+	                    <div class="btn-div" style="display: inline-block; float: right; text-align: center;">
+							<form action="<%=request.getContextPath()%>/admin/userFinder">
+								<input type="hidden" name="searchType" value="userRole" />
+								<button type="submit" class="btn btn-primary" name="searchKeyword" value="T">전체 보기</button>
+								<button type="submit" class="btn btn-primary" name="searchKeyword" value="U">구인/구직</button>
+								<button type="submit" class="btn btn-primary" name="searchKeyword" value="P">소모임</button>
+							</form>
+						</div>
+		                  
+	                    <br />
+	                    <br />
 						<table class="table table-stripped table-bordered ">
 						  <thead>
 						    <tr>
-						      <th scope="col">#</th>
-						      <th scope="col">회원 이름</th>
-						      <th scope="col">회원 이메일</th>
-						      <th scope="col">가입연도</th>
+						      <th scope="col">No</th>
+						      <th scope="col">블랙맴버 이메일</th>
+						      <th scope="col">블랙당한 게시물</th>
+						      <th scope="col">게시물 보기</th>
 						    </tr>
 						  </thead>
 						  <tbody>
 						    <tr>
 						      <th scope="row">1</th>
-						      <td>Mark</td>
-						      <td>Otto</td>
-						      <td>@mdo</td>
+						      <td>rhkim10@naver.com</td>
+						      <td>구직게시물 1</td>
+						      <td>
+						      	<button class="button">보기</button>
+						      </td>
 						    </tr>
 						    <tr>
-						      <th scope="row">2</th>
-						      <td>Jacob</td>
-						      <td>Thornton</td>
-						      <td>@fat</td>
+						      <th scope="row">1</th>
+						      <td>rhkim10@naver.com</td>
+						      <td>구직게시물 2</td>
+						      <td>
+						      	<button class="button">보기</button>
+						      </td>
 						    </tr>
 						    <tr>
-						      <th scope="row">3</th>
-						      <td>Larry the Bird</td>
-						      <td>Larry the Bird</td>
-						      <td>@twitter</td>
+						      <th scope="row">1</th>
+						      <td>rhkim10@naver.com</td>
+						      <td>소모임 1</td>
+						      <td>
+						      	<button class="button">보기</button>
+						      </td>
 						    </tr>
+						    <tr>
+						      <th scope="row">1</th>
+						      <td>rhkim10@naver.com</td>
+						      <td>구직게시물 1</td>
+						      <td>
+						      	<button class="button">보기</button>
+						      </td>
+						    </tr>
+						 
 						  </tbody>
 						</table>
                    </div>
