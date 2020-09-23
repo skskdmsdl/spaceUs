@@ -3,4 +3,26 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
+
+<select id="selectOneMember" resultMap="memberMap">
+	select
+		* 
+	from
+		member
+	where
+		member_email = #{ memberEmail }
+</select>
+
+<select id="selectOneNickName" resultMap="memberMap">
+	select
+		* 
+	from
+		member
+	where
+		nickname = #{ nickName }
+</select>
+
+
+<resultMap type="member" id="memberMap">
+</resultMap>
 </mapper>
