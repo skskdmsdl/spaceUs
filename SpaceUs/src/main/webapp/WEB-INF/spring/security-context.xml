@@ -20,9 +20,7 @@
 		<intercept-url pattern="/member/**" access="permitAll"/>
 		<intercept-url pattern="/aboutus/**" access="permitAll"/>
 		<intercept-url pattern="/space/spaceDetail.do" access="permitAll"/>
-		<intercept-url pattern="/index.jsp" access="permitAll"/>
 		<intercept-url pattern="/space/searchSpace.do" access="permitAll"/>
-		<intercept-url pattern="/assets/**" access="permitAll"/> 
 	
 		<intercept-url pattern="/**" access="permitAll"/>		
 		
@@ -40,7 +38,7 @@
 		/> 
 		<headers>
          <frame-options disabled="true"></frame-options>
-    </headers>
+    </headers> 
 	</http>
 	
 
