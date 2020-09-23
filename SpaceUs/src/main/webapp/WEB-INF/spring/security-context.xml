@@ -59,6 +59,9 @@
 
 				      authorities="ROLE_ADMIN"
 				      />
+				<user name="host"
+					   password="$2a$10$vY8lYMy7Xt.Qz9sTUH4V6uu2tYllGHtM2ehm39at.sbIVo4JBW4Ta"
+					   authorities="ROLE_HOST"/>
 			</user-service>
 		</authentication-provider>
 	</authentication-manager>
