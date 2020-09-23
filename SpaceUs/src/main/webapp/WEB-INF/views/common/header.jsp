@@ -93,18 +93,35 @@
 		        </ul>
 		      </div>
 	      </sec:authorize>
-	      <sec:authorize access="hasAnyRole('USER','ADMIN', 'HOST')">
+		  <sec:authorize access="hasRole('ROLE_HOST')">
+		  <div class="collapse navbar-collapse" id="ftco-nav"  data-toggle="modal" data-target="#exampleModal">
+        	 <ul class="navbar-nav ml-auto">
+		  	  <li class="nav-item"><a href="${pageContext.request.contextPath }/host/hostManage.do" class="nav-link">호스트 센터</a></li>
+		      <li class="nav-item"><a href="${pageContext.request.contextPath }/recruit/recruitList.do" class="nav-link">커뮤니티</a></li>
+		      <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
+		      
+			  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
+	        	<div>반갑습니다. &nbsp;</div>
+	        		<div>
+	        			<sec:authentication property="principal.username"/> 님!
+	        		</div>
+	          </div>  	 
+		  	</ul>
+		  </div>
+		  </sec:authorize>
+	      <sec:authorize access="hasAnyRole('USER','ADMIN')">
 	        <div class="collapse navbar-collapse" id="ftco-nav"  data-toggle="modal" data-target="#exampleModal">
         	 <ul class="navbar-nav ml-auto">
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/recruit/recruitList.do" class="nav-link">커뮤니티</a></li>
+		   
 	        	  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
 	        		<div>반갑습니다. &nbsp;</div>
 	        		<div>
 	        			<sec:authentication property="principal.username"/> 님!
 	        		</div>
-	        	   </div>
+	        	  </div>
 	          </ul>
 	        		&nbsp;
 	        		<div class="user_profile_icon" data-subscribe-type="PRO" 
@@ -112,10 +129,9 @@
 	        			<img src="https://resource.miricanvas.com/image/common/profile_argo.svg">
 	        		</div>
 	        	
-	        	</div>
-		      </div>
+	        </div>
 		  </sec:authorize>
-
+		      </div>  
 	  </nav>
 	 
 	     
@@ -160,16 +176,6 @@
 		         	 💚  위시리스트
 		        </a>
 	      	 </div>
-	      	 
-	      	 <!-- host 권한 -->
-			 <sec:authorize access="hasRole('ROLE_HOST')">
-				<div class="col-sm-10 mb-2">
-					<a href="${pageContext.request.contextPath }/host/hostManage.do">
-						🎫 호스트 센터
-					</a>
-				</div>
-	      	 </sec:authorize>
-	      	 <!-- host 권한 끝 -->
 	      	 
 	      	 <!-- admin 권한 -->
 	      	 <sec:authorize access="hasRole('ROLE_ADMIN')">
