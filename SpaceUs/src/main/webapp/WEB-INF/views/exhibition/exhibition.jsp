@@ -107,6 +107,11 @@ function exhibitionList () {
   				</div>
  				</div>
      	</div>
+     </div>
+     <!-- 더보기버튼 -->
+     <button class="more-btn">더보기</button>
+     
+     <div class="row more-list">
      	<div class="col-md-4">
      		<div class="agent space7">
  					<div class="img">
