@@ -55,6 +55,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/jquery-ui.min.css">
 
+
     <!-- icons -->
     <script src="https://kit.fontawesome.com/b74a25ff1b.js" crossorigin="anonymous"></script>
 
@@ -115,8 +116,9 @@
 		      </div>
 		  </sec:authorize>
 
-	     
 	  </nav>
+	 
+	     
     <!-- END nav -->
     
     <!-- user 권한 -->
@@ -155,7 +157,7 @@
 	      	 </div>
 	      	 <div class="col-sm-10 mb-2">
 		        <a href="${pageContext.request.contextPath }/member/wishList.do">
-		         	 ❤   위시리스트
+		         	 💚  위시리스트
 		        </a>
 	      	 </div>
 	      	 

@@ -23,18 +23,13 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
 </head>
-<style>
-.wrap-input100 {
-	width: 100%
-}
-</style>
-<body style="background-color: #666666;">
+<body>
 	
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100">
-				<form:form 
-							action="${pageContext.request.contextPath }/member/memberLogin.do"
+			<div class="wrap-login100" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg-01.jpg');
+											 background-position: right">
+				<form:form action="${pageContext.request.contextPath }/member/memberLogin.do"
 							class="login100-form validate-form" >
 					<span class="login100-form-title p-b-43">
 						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
@@ -47,13 +42,15 @@
 							또는
 						</p><br />
 						</div>
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz"
+						style="width: 100%;">
 						<input class="input100" type="text" name="email" placeholder="email">
 						<span class="focus-input100">email</span>
 						<span class="focus-output100"></span>
 					</div>
 					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
+					<div class="wrap-input100 validate-input" data-validate="Password is required"
+						 style="width: 100%;">
 						<input class="input100" type="password" name="password" placeholder="password">
 						<span class="focus-input100">password</span>
 						
@@ -68,7 +65,8 @@
 						</div>
 
 						<div>
-							<a href="#" class="txt1">
+							<a class="txt1" href=""
+								onclick="window.open('${pageContext.request.contextPath}/member/passwordFinder.do','_blank','top=1,left=500,width=600,height=450')">
 								비밀번호를 잊으셨나요?
 							</a>
 						</div>
@@ -89,9 +87,6 @@
 
 				</form:form>
 
-				<div class="login100-more" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg-01.jpg');
-												width:750px;">
-				</div>
 			</div>
 		</div>
 	</div>

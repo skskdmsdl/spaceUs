@@ -20,10 +20,10 @@
 	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 </head>
 <body style="background-color: #666666;">
-	
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100">
+			<div class="wrap-login100" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_2.jpg');
+											background-position: right;">
 				<form class="login100-form validate-form"
 					  action="${pageContext.request.contextPath}">
 					<span class="login100-form-title p-b-43">
@@ -91,8 +91,8 @@
 					</div>
 					<div class="wrap-input2">
 						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox">
-							<label class="label-checkbox100" for="ckb1" data-toggle="modal" data-target="#modalLong2">
+							<input class="input-checkbox100" id="ckb2" type="checkbox">
+							<label class="label-checkbox100" for="ckb2" data-toggle="modal" data-target="#modalLong2">
 								개인정보 처리 방침 (필수)
 							</label>
 						</div>
@@ -109,10 +109,6 @@
 						</a>
 					</div>
 				</form>
-
-				<div class="login100-more" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_2.jpg');
-												width:750px;">
-				</div>
 			</div>
 		</div>
 	</div>

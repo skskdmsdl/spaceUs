@@ -21,15 +21,30 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 </style>
 <!-- 컨텐츠 시작 -->
 <!-- 헤더 -->
+<section class="ftco-section ftco-agent">
+
+ <div class="navbar justify-content-center navbar-dark bg-dark">
+	  <ul class="nav">
+		  <li class="nav-item">
+		    <a class="nav-link active" href="#">소모임</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" href="#">구인/구직</a>
+		  </li>
+		</ul>
+	</div>
+	</section>
     <div class="hero-wrap ftco-degree-bg"
     	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_1.jpg');
     	 		height: 400px"
     	 data-stellar-background-ratio="0.5">
+	
       <div class="overlay"></div>
+	
       <div class="container">
         <div class="row no-gutters slider-text justify-content-center align-items-center">
           <div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-end">
-          	<div class="text text-center mx-auto" style="margin-bottom:50%;">
+          	<div class="text text-center mx-auto" style="margin-bottom:80%;">
 	            <h1 class="mb-4">구인/구직</h1>
 	            <p class="h6">구인ㆍ구직 게시판은 각 숙소에서의 스태프(매니저, 아르바이트, 주방 아주머니 등)의
 				구인/구직 관련 정보를 교환하는 게시판으로, SpaceUs에서는 정보교환의 온라인 공간을 제공할 뿐 중개에 관여하지 않으며,
@@ -57,14 +72,6 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 								  <div class="input-group-append">
 								    <button type="submit" class="btn btn-outline-secondary"><span><i class="fa fa-search fa-search mr-2"></i> </span>검색</button>
 								  </div>
-                                <!--  <div class="ml-auto">
-									<form class="navbar-form navbar-left" role="search">
-									  <span class="form-group">
-									    <input type="text" class="form-control" placeholder="Search">
-									  </span>
-									  <button type="submit" class="btn btn-outline-secondary"><span><i class="fa fa-search fa-search mr-2"></i> </span>검색</button>
-									</form>
-                                 </div> -->
                              </div>
                          
                          <div class="table-responsive">
@@ -78,7 +85,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                      </tr>
                                  </thead>
                                  <tbody>
-                                     <tr>
+                                     <tr style="cursor: pointer;" onclick = "location.href='${pageContext.request.contextPath }/recruit/recruitDetail.do'">
                                          <td class="text-center">1</td>
                                          <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
                                          <td class="txt-oflo">2020.09.22</td>
@@ -142,6 +149,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                              </table>
                              <div class="container">
 			                 <nav class="mt-5" >
+			                 	<a href="${pageContext.request.contextPath }/recruit/recruitEnrollForm.do" class="btn waves-effect waves-light hidden-md-down m-1 pull-right" style="font-size:18px;background-color: #00c89e;  color:white;"> 글 등록</a>
 								  <ul class="justify-content-center pagination">
 								    <!-- <li class="page-item disabled">
 								      <span class="page-link m-1">&lt;</span>
@@ -157,6 +165,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 								      <!-- <a class="page-link m-1 text-black-50" href="#">></a> -->
 								    </li>
 								  </ul>
+	                            
 								</nav>
 							 </div>
                          </div>
@@ -165,6 +174,5 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                  </div>
              </section>
     <!-- 구인구직 리스트 끝-->
-
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

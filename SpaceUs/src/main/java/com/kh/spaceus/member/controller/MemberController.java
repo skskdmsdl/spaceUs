@@ -68,6 +68,12 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	//비밀번호찾기 창
+	@RequestMapping("/passwordFinder.do")
+	public String passwordFinder() {
+		return "member/passwordFinder";
+	}
+	
 	//회원가입
 	@RequestMapping("/memberEnrollForm.do")
 	public String memberEnroll() {

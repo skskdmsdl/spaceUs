@@ -38,7 +38,9 @@
 			logout-url="/member/memberLogout.do"
 			logout-success-url="/"
 		/> 
-		
+		<headers>
+         <frame-options disabled="true"></frame-options>
+    </headers>
 	</http>
 	
 
