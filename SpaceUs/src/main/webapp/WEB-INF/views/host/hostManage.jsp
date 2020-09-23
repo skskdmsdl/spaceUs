@@ -39,7 +39,7 @@
         <!-- 왼쪽 목록들 -->
         <aside class="left-sidebar">
             <div class="d-flex no-block nav-text-box align-items-center">
-                <span>마이페이지</span>
+                <span>공간 관리 페이지</span>
                 <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i class="ti-menu"></i></a>
                 <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
             </div>
@@ -48,14 +48,13 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/memberProfile.do"><i class="fa fa-user"></i><span class="hide-menu">나의 정보</span></a></li>
-                        <sec:authorize access="hasRole('USER')">
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/wishList.do"><i class="fa fa-heart"></i><span class="hide-menu"></span>위시리스트</a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/couponList.do"><i class="fa fa-gift"></i><span class="hide-menu"></span>쿠폰함</a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/usageHistory.do"><i class="fa fa-table"></i><span class="hide-menu"></span>사용내역</a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/reviewList.do"><i class="fa fa-comments"></i><span class="hide-menu"></span>리뷰</a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/stampEvent.do"><i class="fa fa-stamp"></i><span class="hide-menu"></span>출석이벤트</a></li>
-                        </sec:authorize>
+                       <!--  <sec:authorize access="hasRole('HOST')"> -->
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/spaceInfo.do"><i class="fa fa-user"></i><span class="hide-menu">공간 정보</span></a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/reservation.do"><i class="fa fa-heart"></i><span class="hide-menu"></span>공간 예약 현황</a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/checkArticle.do"><i class="fa fa-gift"></i><span class="hide-menu"></span>공간 리뷰 & QnA</a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/bottomLine.do"><i class="fa fa-table"></i><span class="hide-menu"></span>정산 내역</a></li>
+                     
+                    <!--     </sec:authorize> -->
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -71,13 +70,13 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor ml-5">마이페이지</h4>
+                        <h4 class="text-themecolor ml-5">호스트 센터</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:void(0)">마이페이지</a></li>
-                                <li class="breadcrumb-item active">나의 정보</li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0)">호스트 센터</a></li>
+                                <li class="breadcrumb-item active">공간 정보</li>
                             </ol>
                         </div>
                     </div>
@@ -153,10 +152,6 @@
 <!-- This page plugins -->
 <!-- ============================================================== -->
 <!--morris JavaScript -->
-
-
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	
 	
