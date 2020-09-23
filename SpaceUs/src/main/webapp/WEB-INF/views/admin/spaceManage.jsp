@@ -11,59 +11,6 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
-<style>
-.btn.btn-primary, .search-btn:hover {
-	color: #fff;
-	background-color: #B596FD;
-	border-color: #B596FD;
-	box-shadow: 0 2px 2px 0 rgba(156, 39, 176, 0.14), 0 3px 1px -2px
-		rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12);
-	border-radius: 30px;
-}
-
-.btn, .search-btn {
-	display: inline-block;
-	width: 100px;
-	height: 33px;
-	font-weight: 400;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: middle;
-	user-select: none;
-	border: 1px solid transparent;
-	padding: 0.46875rem 1rem;
-	font-size: 15px;
-	line-height: 1.5;
-	border-radius: 0.25rem;
-	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-		border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-/*검색*/
-div#search-container {
-	margin: 0 auto;
-	padding: 3px;
-	background-color: rgba(0, 188, 212, 0.3);
-	width: 100%;
-}
-
-div#search-userId {
-	display: inline-block;
-}
-
-div#search-userName {
-	display: none;
-}
-</style>
-<script>
-	$(function() {
-		$("#searchType").change(function() {
-			$("#search-userId, #search-userName").hide();
-			$("#search-" + $(this).val()).css("display", "inline-block");
-		});
-	});
-</script>
-
-
 
 <div class="skin-default-dark fixed-layout">
     <div class="preloader">
@@ -130,98 +77,102 @@ div#search-userName {
                     </div>
                 </div>
                 
-                <!-- 회원관리 -->
-                <div id="memberManagePage" class="ml-5 mr-5">
-                    <div class="card p-5">
-                       <div class="card-body">
-	                        <!-- <div class="row"> 
-		                         <div class="col-md-10">
-		                             <h5 class="card-title">나의 정보</h5>
-		                             <h6 class="card-subtitle mb-5">회원정보를 확인하세요</h6>
-		                         </div>
-		                    </div> -->
-		                    
-		                    <!-- 입력창  시작-->
-		                    <div class="search-container" style="display: inline-block;">
-								<select id="searchType">
-									<option value="userId">ID</option>
-									<option value="userName">NAME</option>
-								</select>
-								<div id="search-userId">
-									<form <%-- action="<%=request.getContextPath()%>/admin/userFinder" --%>>
-										<input type="hidden" class="textbox" name="searchType"
-											value="userId"> 
-										<input type="text" class="textbox"
-											name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요"
-					                	   		<%-- value="<%="userId".equals(searchType) ? searchKeyword : ""%>" --%> />
-										<button type="submit" class="search-btn">검색</button>
-									</form>
-								</div>
-								<div id="search-userName">
-									<form <%-- action="<%=request.getContextPath()%>/admin/userFinder" --%>>
-										<input type="hidden" class="textbox" name="searchType"
-											value="userName"> 
-										<input type="search" class="textbox"
-											name="searchKeyword" size="25" placeholder="검색할 이름을 입력하세요."
-											<%-- value="<%="userName".equals(searchType) ? searchKeyword : ""%>" --%> />
-										<button type="submit" class="search-btn">검색</button>
-									</form>
-								</div>
+
+                <!-- 공간 승인 시작 -->  
+                <div id="spaceApprovalPage" class="ml-5 mr-5">
+	                <div class="card p-4">
+		                <div class="card-body">
+		                <div class="col-md-10">
+                            <h5 class="card-title">공간 승인</h5>
+                        </div>
+                        <div class="row">
+						<div class="col-md-3">
+						    <div class="thumbnail block-20" >
+						    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
+						</div>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p style="width:250px;">분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
+					     </div>
+						  </div>
+						  <div class="col-md-3">
+						    <div class="thumbnail block-20" >
+						    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_2.jpg" alt="..."> 
+						</div>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
+					     </div>
+						  </div>
+						  <div class="col-md-3">
+						    <div class="thumbnail block-20" >
+						    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_3.jpg" alt="..."> 
+						</div>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
+					     </div>
+						  </div>
+						  <div class="col-md-3">
+						    <div class="thumbnail block-20" >
+						    	<img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_4.jpg" alt="..."> 
 							</div>
-		                    <!-- 입력창 끝 -->
-		             
-		                    
-		                    <div class="btn-div" style="display: inline-block; float: right;">
-								<form action="<%=request.getContextPath()%>/admin/userFinder">
-									<input type="hidden" name="searchType" value="userRole" />
-									<button type="submit" class="btn btn-primary" name="searchKeyword" value="T">전체 보기</button>
-									<button type="submit" class="btn btn-primary" name="searchKeyword" value="U">일반 맴버</button>
-									<button type="submit" class="btn btn-primary" name="searchKeyword" value="P">호스트</button>
-								</form>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
+					     </div>
+						  </div>
+						  <div class="col-md-3">
+						    <div class="thumbnail block-20" >
+							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_5.jpg" alt="..."> 
 							</div>
-		                    <br />
-		                    <br />
-		                    
-		                    
-		                    <!-- 회원관리 시작 -->
-							<table class="table table-stripped table-bordered ">
-							  <thead>
-							    <tr>
-							      <th scope="col">이메일</th>
-							      <th scope="col">닉네임</th>
-							      <th scope="col">전화번호</th>
-							      <th scope="col">생일</th>							      
-							      <th scope="col">가입일자</th>
-							    </tr>
-							  </thead>
-							  <tbody>
-							    <tr>
-							      <td>rhkim10@naver.com</td>
-							      <td>Mark</td>
-							      <td>Otto</td>
-							      <td>@mdo</td>
-							      <td>@mdo</td>
-							    </tr>
-							    <tr>
-							      <td>rhkim10@naver.com</td>
-							      <td>Mark</td>
-							      <td>Otto</td>
-							      <td>@mdo</td>
-							      <td>@mdo</td>
-							    </tr>
-							    <tr>
-							      <td>rhkim10@naver.com</td>
-							      <td>Mark</td>
-							      <td>Otto</td>
-							      <td>@mdo</td>
-							      <td>@mdo</td>
-							    </tr>							
-							  </tbody>
-							</table>
-	                   </div>
-	               </div>
-	           </div>
-              <!-- 회원관리 끝 -->
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
+					     </div>
+						  </div>
+						  <div class="col-md-3">
+						    <div class="thumbnail block-20" >
+							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_6.jpg" alt="..."> 
+							</div>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
+					     </div>
+						  </div>
+						  <div class="col-md-3">
+						    <div class="thumbnail block-20" >
+							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_7.jpg" alt="..."> 
+							</div>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
+					     </div>
+						  </div>
+						  <div class="col-md-3">
+						    <div class="thumbnail block-20" >
+							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_8.jpg" alt="..."> 
+							</div>
+					     <div class="caption">
+					        <h4>카페두드림 Do dream</h4>
+					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
+					        <p><a href="#" class="btn btn-primary" role="button">승인</a> <a href="#" class="btn btn-default" role="button">승인거절</a></p>
+					     </div>
+						  </div>
+						</div>
+						</div>
+					</div>
+				</div>
+                <!-- 공간승인 끝-->
+
+
     </div>
 </div>
 </div>

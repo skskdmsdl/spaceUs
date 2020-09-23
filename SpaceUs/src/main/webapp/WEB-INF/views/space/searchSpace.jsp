@@ -160,7 +160,7 @@ input[type="text"]:focus {
 	<!-- 컨텐츠 시작 -->
 	<div class="hero-wrap ftco-degree-bg"
 		 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_bg.jpg');
-		 		height: 500px"
+		 		height: 600px"
 		 data-stellar-background-ratio="0.5">
 	  <div class="overlay"></div>
 	  	<div class="container">
@@ -169,13 +169,13 @@ input[type="text"]:focus {
 	      			<div class="text text-center mx-auto" style="margin-bottom:25%;">
 	      				<!-- 검색결과 시작 -->
 	          			<div class="container col-md-12 heading-section text-center mb-5">
-				      		<span class="txt_keyword">${ keyword }</span>
-				      		<span class="txt_result">(으)로 검색한 결과입니다.</span>
+				      		<span class="txt_keyword" style="font-size:40px !important;">${ keyword }</span>
+				      		<span class="txt_result" style="font-size:20px !important;">(으)로 검색한 결과입니다.</span>
 				        	
 				    	</div>
 				    	<!-- 검색결과 끝 -->
 	          			
-	     					<div style="margin-top:-20px">
+	     					<div>
 	     						<div id="wrap">
 								  <form id="searchFrm" onsubmit="searchSpace();" action="" autocomplete="on">
 								  <input id="search_keyword" name="search_keyword" type="text" placeholder="키워드를 입력하세요">
