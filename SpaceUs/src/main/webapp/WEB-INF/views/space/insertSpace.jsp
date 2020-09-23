@@ -37,39 +37,39 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
     <!-- Breadcrumb Section End -->
 
     <!-- 공간 등록 폼 -->
-    <section class="property-submit-section spad">
-        <div class="container">
-            <div class="row">
+    <section class="property-submit-section spad m-5">
+        <div class="container ">
+            <div class="row m-5">
                 <div class="col-lg-12">
                     <div class="property-submit-form">
                         <form action="#">
                             <div class="pf-title">
-                                <h4>공간이름</h4>
+                                <h4>공간이름<span class="text-danger">*</span></h4>
                                 <input type="text">
                             </div>
                             <div class="pf-summernote">
-                                <h4>공간설명</h4>
-                                <textarea name="example" style="width:100%; height:200px"></textarea>
+                                <h4>공간설명<span class="text-danger">*</span></h4>
+                                <textarea name="example" style="width:100%; height:350px; resize: none;"></textarea>
                             </div>
                             <div class="pf-location">
-                                <h4>공간주소</h4>
+                                <h4>공간주소<span class="text-danger">*</span></h4>
                                 <div style="display:inline-block; width:40%">
 	                                <input class="zipCode-input" type="text" placeholder="우편번호"/>
 	                            </div>
                                 <div style="display:inline-block; width:40%">
-		                            <button class="btn">주소 검색</button>
+		                            <button class="btn btn-primary ml-4 p-10">주소 검색</button>
 	                            </div>
                                 <input class="address-input" type="text">
                                 <input class="detail-address-input" type="text" placeholder="상세주소를 입력해주세요">
                             </div>
                             <div class="pf-phone" style="margin-bottom: 45px;">
-                                <h4>공간전화번호</h4>
+                                <h4>공간전화번호<span class="text-danger">*</span></h4>
                                  	<input type='tel' name='phone1' style="width: 10%"/>&emsp;-&emsp;
 							        <input type='tel' name='phone2' style="width: 10%"/>&emsp;-&emsp;
 							        <input type='tel' name='phone3' style="width: 10%"/>
                             </div>
                             <div class="pf-type">
-                                <h4>카테고리 선택</h4>
+                                <h4>카테고리 선택<span class="text-danger">*</span></h4>
                                 <div class="type-item">
                                     <label for="pt-apart">카페
                                         <input type="checkbox" id="pt-apart">
@@ -98,7 +98,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 </div>
                             </div>
                             <div class="pf-status">
-                                <h4>가능시간</h4>
+                                <h4>가능시간<span class="text-danger">*</span></h4>
                                 <div class="status-item">
                                     <label for="ps-rent">월요일
                                     	&emsp;<select></select>
@@ -124,7 +124,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 </div>
                             </div>
                             <div class="pf-feature-price">
-                                <h4>가격 (시간당)</h4>
+                                <h4>가격 (시간당)<span class="text-danger">*</span></h4>
                                 <div class="fp-inputs">
                                     <input type="number" placeholder="Price">원
                                 </div>
@@ -191,7 +191,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 </div>
                             </div>
                             <div class="pf-feature-image">
-                                <h4>공간이미지</h4>
+                                <h4>공간이미지<span class="text-danger">*</span></h4>
                                 <div class="image-div">
 	                                <div>
 	                                	<i class="fas fa-plus"></i>
@@ -213,11 +213,11 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             </div>
                             <div class="pf-account" style="margin-bottom: 45px;">
 	                            <div style="display:inline-block; width:40%">
-	                                <h4>사업자등록증</h4>
+	                                <h4>사업자등록증<span class="text-danger">*</span></h4>
 	                                <input type="text"/>
 	                            </div>
 	                            <div style="display:inline-block; width:40%; margin-left: 14em;">
-	                                <h4>계좌번호</h4>
+	                                <h4>계좌번호<span class="text-danger">*</span></h4>
 	                                <input type="text"/>
 	                            </div>
                             </div>
