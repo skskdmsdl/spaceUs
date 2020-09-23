@@ -57,7 +57,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                <input class="zipCode-input" type="text" placeholder="우편번호"/>
 	                            </div>
                                 <div style="display:inline-block; width:40%">
-		                            <button type="button" class="btn btn-primary ml-4 p-10">주소 검색</button>
+		                            <button type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">주소 검색</button>
 	                            </div>
                                 <input class="address-input" type="text">
                                 <input class="detail-address-input" type="text" placeholder="상세주소를 입력해주세요">
@@ -90,34 +90,79 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 										<th style="width:25%;">코워킹 스페이스</th>	                                
                                 	</tr>
                                 </table>
-                               
                             </div>
+                            
                             <div class="pf-status">
                                 <h4>가능시간<span class="text-danger">*</span></h4>
-                                <div class="status-item">
-	                                    <label for="ps-rent">월요일
-	                                    	&emsp;
+                                
+                                <div class="jumbotron pb-1 pt-1 status-item">
+	                                    <label for="mon" class="mr-5" style="font-size: 15px;">월요일
+	                                    <input type="checkbox" id="mon">
+                                        <span class="checkbox mt-1"></span>
 	                                    </label>
-                                    <label for="ps-sale">화요일
-                                        &emsp;
+                                    <label for="tue" class="mr-5" style="font-size: 15px;">화요일
+	                                    <input type="checkbox" id="tue">
+	                                    <span class="checkbox mt-1"></span>
                                     </label>
-                                    <label for="ps-sale">수요일
-                                        &emsp;
+                                    <label for="wed" class="mr-5" style="font-size: 15px;">수요일
+	                                    <input type="checkbox" id="wed">
+	                                    <span class="checkbox mt-1"></span>
                                     </label>
-                                    <label for="ps-sale">목요일
-                                        &emsp;
+                                    <label for="thu" class="mr-5" style="font-size: 15px;">목요일
+	                                    <input type="checkbox" id="thu">
+	                                    <span class="checkbox mt-1"></span>
                                     </label>
-                                    <label for="ps-sale">금요일
-                                        &emsp;
+                                    <label for="fri" class="mr-5" style="font-size: 15px;">금요일
+	                                    <input type="checkbox" id="fri">
+	                                    <span class="checkbox mt-1"></span>
                                     </label>
-                                    <label for="ps-sale">토요일
-                                        &emsp;
+                                    <label for="sat" class="mr-5" style="font-size: 15px;">토요일
+	                                    <input type="checkbox" id="sat">
+	                                    <span class="checkbox mt-1"></span>
                                     </label>
-                                    <label for="ps-sale">일요일
-                                        &emsp;
+                                    <label for="sun" class="mr-5" style="font-size: 15px;">일요일
+	                                    <input type="checkbox" id="sun">
+	                                    <span class="checkbox mt-1"></span>
                                     </label>
                                 </div>
+                                <table class="table table-bordered" style="cursor: pointer;" id="availableTime">
+                                	<tr>
+										<th style="width:16.6%;">00:00 - 01:00</th>	                                
+										<th style="width:16.6%;">01:00 - 02:00</th>	                                
+										<th style="width:16.6%;">02:00 - 03:00</th>	                                
+										<th style="width:16.6%;">03:00 - 04:00</th>	                                
+										<th style="width:16.6%;">04:00 - 05:00</th>	                                
+										<th style="width:16.6%;">05:00 - 06:00</th>	                                
+                                	</tr>
+                                	<tr>
+										<th>06:00 - 07:00</th>	                                
+										<th>07:00 - 08:00</th>	                                
+										<th>08:00 - 09:00</th>	                                
+										<th>09:00 - 10:00</th>	                                
+										<th>10:00 - 11:00</th>	                                
+										<th>11:00 - 12:00</th>	                                
+                                	</tr>
+                                	<tr>
+										<th>12:00 - 13:00</th>	                                
+										<th>13:00 - 14:00</th>	                                
+										<th>14:00 - 15:00</th>	                                
+										<th>15:00 - 16:00</th>	                                
+										<th>16:00 - 17:00</th>	                                
+										<th>17:00 - 18:00</th>	                                
+                                	</tr>
+                                	<tr>
+										<th>18:00 - 19:00</th>	                                
+										<th>19:00 - 20:00</th>	                                
+										<th>20:00 - 21:00</th>	                                
+										<th>21:00 - 22:00</th>	                                
+										<th>22:00 - 23:00</th>	                                
+										<th>23:00 - 24:00</th>	                                
+                                	</tr>
+                                </table>
+                                
                             </div>
+                            
+                            
                             <div class="pf-feature-price">
                                 <h4>공간 태그<span class="text-danger">*</span></h4>
                                 <div class="row">
@@ -125,7 +170,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                    <input id="tagName" type="text" placeholder="태그를 입력해주세요">
 	                                </div>
 	                                <div>
-			                            <button id="addTags" type="button" class="btn btn-primary ml-4 p-10">추가 ⅴ</button>
+			                            <button id="addTags" type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">추가 ⅴ</button>
 		                            </div>
 	                            </div>
 		                        <span id="tags"></span>
@@ -192,19 +237,36 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                            <input type="file" name="" id="" />
 	                            <input type="file" name="" id="" />
                             </div>
-                            <div class="pf-account" style="margin-bottom: 45px;">
-	                            <div style="display:inline-block; width:40%">
-	                                <h4>사업자등록증<span class="text-danger">*</span></h4>
-	                                <input type="text"/>
+                            <div class="pf-feature-price">
+                                <h4>사업자등록증<span class="text-danger">*</span></h4>
+                                <div class="row">
+	                                <div class="ml-3 mb-3" style="width:31%">
+	                                    <input id="tagName" type="text" placeholder="사업자 번호를 입력해주세요">
+	                                </div>
+	                                <div>
+			                            <button id="addTags" type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">조회</button>
+		                            </div>
 	                            </div>
-	                            <div style="display:inline-block; width:40%; margin-left: 14em;">
-	                                <h4>계좌번호<span class="text-danger">*</span></h4>
-	                                <input type="text"/>
-	                            </div>
+		                        <span id="tags"></span>
                             </div>
-                            <div class="pf-property-details">
+                            <div class="pf-feature-price">
+                                <h4>계좌정보<span class="text-danger">*</span></h4>
+                                <div class="row ml-1">
+									  <select  name="bank" style="height: 46px; width:100px; border-color:  #eaeaea;">
+									    <option value="">국민</option>
+									    <option value="">우리</option>
+									    <option value="">신한</option>
+									    <option value="">기업</option>
+									  </select>
+	                                <div class="ml-3 mb-3" style="width:31%">
+	                                    <input id="accountNo" type="text" placeholder="계좌번호를 입력해주세요">
+	                                </div>
+	                            </div>
+		                        <span id="tags"></span>
+                            </div>
+                            <div class="pf-property-details" style="text-align: center;" >
                             	<p>* 공간등록 심사는 2일 ~ 7일 소요됩니다.</p>
-                                <button type="submit" class="site-btn">공간등록</button>
+                                <button type="submit" class="site-btn col-lg-3">공간등록</button>
                             </div>
                         </form>
                     </div>
@@ -217,18 +279,25 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 <script>
 //카테고리테이블 클릭이벤트
 $("#categoryTb th").on("click", function(){
-	if($("#categoryTb th").hasClass("bg-light")){
-    	$("#categoryTb th").removeClass("bg-light");
-    	$(this).addClass("bg-light");
+	if($("#categoryTb th").hasClass("bg-primary")){
+    	$("#categoryTb th").removeClass("bg-primary");
+    	$(this).addClass("bg-primary");
 	}else
-    	$(this).addClass("bg-light");
+    	$(this).addClass("bg-primary");
 });
 //옵션테이블 클릭이벤트
 $("#optionTb th").on("click", function(){
-	if($(this).hasClass("bg-light"))
-    	$(this).removeClass("bg-light");
+	if($(this).hasClass("bg-primary"))
+    	$(this).removeClass("bg-primary");
 	else
-    	$(this).addClass("bg-light");
+    	$(this).addClass("bg-primary");
+});
+//가능시간 클릭이벤트
+$("#availableTime th").on("click", function(){
+	if($(this).hasClass("bg-primary"))
+    	$(this).removeClass("bg-primary");
+	else
+    	$(this).addClass("bg-primary");
 });
 //태그 추가 클릭이벤트
 $("#addTags").on('click', function(){
