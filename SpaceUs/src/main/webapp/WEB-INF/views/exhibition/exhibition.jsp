@@ -6,6 +6,15 @@
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<style>
+.img img {height: 350px;}
+.space1 {cursor: pointer;}
+</style>
+<script>
+function exhibitionList () {
+	location.href = "${pageContext.request.contextPath}/exhibition/exhibitionList.do";
+}
+</script>
 <section class="ftco-section ftco-agent">
   	<div class="container">
   	      <div class="col-md-12 heading-section text-center ftco-animate mb-5 mt-5">
@@ -14,9 +23,9 @@
       </div>
       <div class="row">
       	<div class="col-md-4">
-      		<div class="agent space1">
+      		<div class="agent space1" onclick="exhibitionList();">
   					<div class="img">
-    				<img src="${pageContext.request.contextPath}/resources/images/person_1.jpg" class="img-fluid" alt="Colorlib Template">
+    				<img src="https://kr.object.ncloudstorage.com/scloud-service/service/160042093_3c874989f2a7c83b4334157979430945.png">
   				</div>
   				<div class="desc">
   					<h3>스마트한 팀워크를 위한 
@@ -30,7 +39,7 @@
      	<div class="col-md-4">
      		<div class="agent space2">
  					<div class="img">
-   				<img src="${pageContext.request.contextPath}/resources/images/person_1.jpg" class="img-fluid" alt="Colorlib Template">
+   				<img src="https://kr.object.ncloudstorage.com/scloud-service/service/160067588_203975de09692ba4025f5c9b74792fae.png">
   				</div>
   				<div class="desc">
   					<h3>보컬 연습을 위한 
@@ -44,7 +53,7 @@
      	<div class="col-md-4">
      		<div class="agent space3">
  					<div class="img">
-   				<img src="${pageContext.request.contextPath}/resources/images/person_1.jpg" class="img-fluid" alt="Colorlib Template">
+   				<img src="https://kr.object.ncloudstorage.com/scloud-service/service/159712958_f90dcf8b3dc46c169a80aa8add859020.png">
   				</div>
   				<div class="desc">
   					<h3>1년에 한번, 
@@ -58,7 +67,7 @@
      	<div class="col-md-4">
      		<div class="agent space4">
  					<div class="img">
-   				<img src="${pageContext.request.contextPath}/resources/images/person_1.jpg" class="img-fluid" alt="Colorlib Template">
+   				<img src="https://kr.object.ncloudstorage.com/scloud-service/service/159643719_d4636399cc347f1d1941231a4e5b5dfd.png">
   				</div>
   				<div class="desc">
   					<h3>제일 잘하는 요리
@@ -73,7 +82,7 @@
      	<div class="col-md-4">
      		<div class="agent space5">
  					<div class="img">
-   				<img src="${pageContext.request.contextPath}/resources/images/person_1.jpg" class="img-fluid" alt="Colorlib Template">
+   				<img src="https://kr.object.ncloudstorage.com/scloud-service/service/159532056_649a9cb7c2cca44b647d032c43cadbea.png">
   				</div>
   				<div class="desc">
   					<h3>카메라 렌탈이 가능한
@@ -87,7 +96,7 @@
      	<div class="col-md-4">
      		<div class="agent space6">
  					<div class="img">
-   				<img src="${pageContext.request.contextPath}/resources/images/person_1.jpg" class="img-fluid" alt="Colorlib Template">
+   				<img src="https://kr.object.ncloudstorage.com/scloud-service/service/159427317_23a1ef690495d5fc4b30bf0faacad663.png">
   				</div>
   				<div class="desc">
   					<h3>영화, 영상 올나잇 파티
@@ -101,7 +110,7 @@
      	<div class="col-md-4">
      		<div class="agent space7">
  					<div class="img">
-   				<img src="${pageContext.request.contextPath}/resources/images/person_1.jpg" class="img-fluid" alt="Colorlib Template">
+   				<img src="https://kr.object.ncloudstorage.com/scloud-service/service/159056312_e21f3078f9b4f0477394e974d2d80beb.png">
   				</div>
   				<div class="desc">
   					<h3>뉴스몰의 시대,
@@ -115,7 +124,7 @@
      	<div class="col-md-4">
      		<div class="agent space8">
  					<div class="img">
-   				<img src="${pageContext.request.contextPath}/resources/images/person_1.jpg" class="img-fluid" alt="Colorlib Template">
+   				<img src="https://kr.object.ncloudstorage.com/scloud-service/service/159341899_882cab7c9250d22c64d63e0f68bad8c5.png">
   				</div>
   				<div class="desc">
   					<h3>종강을 맞이한
@@ -129,7 +138,7 @@
      	<div class="col-md-4">
      		<div class="agent space9">
  					<div class="img">
-   				<img src="${pageContext.request.contextPath}/resources/images/person_1.jpg" class="img-fluid" alt="Colorlib Template">
+   				<img src="https://kr.object.ncloudstorage.com/scloud-service/service/159281061_a2dd593a8f8234e2b8c715f61e58d6bd.png">
   				</div>
   				<div class="desc">
   					<h3>하루종일 공부할 
