@@ -279,7 +279,6 @@ $("#memberEmail").blur(function(){
 	});
 });
 
-
 //닉네임 검사
 $("#nickName").blur(function(){
 
@@ -317,7 +316,6 @@ $("#nickName").blur(function(){
 		}
 	});
 });
-
 
 //문자인증
 $(".phone-btn").click(function(){

@@ -21,17 +21,6 @@ select * from member;
 --권한 컬럼 삭제
 ALTER TABLE member DROP COLUMN authority;
 
-insert into member values(
-    'honggd@naver.com',
-    '홍길동',
-    '1234',
-    '01012341234',
-    null,
-    default,
-    default
-);
-
-commit;
 
 
 -----------------------------
