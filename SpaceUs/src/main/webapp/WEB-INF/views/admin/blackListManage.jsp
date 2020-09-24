@@ -128,7 +128,7 @@ div#search-userName {
 		                    <!-- 입력창  시작-->
 		                    <div class="search-container" style="display: inline-block;">
 								<select id="searchType">
-									<option value="userId">ID</option>
+									<option value="userId">EMAIL</option>
 									<option value="userName">NAME</option>
 								</select>
 								<div id="search-userId">
@@ -136,7 +136,7 @@ div#search-userName {
 										<input type="hidden" class="textbox" name="searchType"
 											value="userId"> 
 										<input type="text" class="textbox"
-											name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요"
+											name="searchKeyword" size="25" placeholder="검색할 이메일를 입력하세요"
 					                	   		<%-- value="<%="userId".equals(searchType) ? searchKeyword : ""%>" --%> />
 										<button type="submit" class="search-btn button">검색</button>
 									</form>
@@ -155,57 +155,67 @@ div#search-userName {
 		                    <!-- 입력창 끝 -->
 		             
 		                    
-		                    <div class="btn-div" style="display: inline-block; float: right;">
-								<form action="<%=request.getContextPath()%>/admin/userFinder">
-									<input type="hidden" name="searchType" value="userRole" />
-									<button type="submit" class="btn btn-primary" name="searchKeyword" value="T">전체 보기</button>
-									<button type="submit" class="btn btn-primary" name="searchKeyword" value="U">일반 맴버</button>
-									<button type="submit" class="btn btn-primary" name="searchKeyword" value="P">호스트</button>
-								</form>
-							</div>
-		                    <br />
-		                    <br />
-		                    
-		                    
-		                    <!-- 회원관리 시작 -->
-							<table class="table table-stripped table-bordered ">
-							  <thead>
-							    <tr>
-							      <th scope="col">이메일</th>
-							      <th scope="col">닉네임</th>
-							      <th scope="col">전화번호</th>
-							      <th scope="col">생일</th>							      
-							      <th scope="col">가입일자</th>
-							    </tr>
-							  </thead>
-							  <tbody>
-							    <tr>
-							      <td>rhkim10@naver.com</td>
-							      <td>Mark</td>
-							      <td>Otto</td>
-							      <td>@mdo</td>
-							      <td>@mdo</td>
-							    </tr>
-							    <tr>
-							      <td>rhkim10@naver.com</td>
-							      <td>Mark</td>
-							      <td>Otto</td>
-							      <td>@mdo</td>
-							      <td>@mdo</td>
-							    </tr>
-							    <tr>
-							      <td>rhkim10@naver.com</td>
-							      <td>Mark</td>
-							      <td>Otto</td>
-							      <td>@mdo</td>
-							      <td>@mdo</td>
-							    </tr>							
-							  </tbody>
-							</table>
-	                   </div>
-	               </div>
-	           </div>
-              <!-- 회원관리 끝 -->
+	                    <div class="btn-div" style="display: inline-block; float: right; text-align: center;">
+							<form action="<%=request.getContextPath()%>/admin/userFinder">
+								<input type="hidden" name="searchType" value="userRole" />
+								<button type="submit" class="btn btn-primary" name="searchKeyword" value="T">전체 보기</button>
+								<button type="submit" class="btn btn-primary" name="searchKeyword" value="U">구인/구직</button>
+								<button type="submit" class="btn btn-primary" name="searchKeyword" value="P">소모임</button>
+							</form>
+						</div>
+		                  
+	                    <br />
+	                    <br />
+						<table class="table table-stripped table-bordered ">
+						  <thead>
+						    <tr>
+						      <th scope="col">No</th>
+						      <th scope="col">블랙맴버 이메일</th>
+						      <th scope="col">블랙당한 게시물</th>
+						      <th scope="col">게시물 보기</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <th scope="row">1</th>
+						      <td>rhkim10@naver.com</td>
+						      <td>구직게시물 1</td>
+						      <td>
+						      	<button class="button">보기</button>
+						      </td>
+						    </tr>
+						    <tr>
+						      <th scope="row">1</th>
+						      <td>rhkim10@naver.com</td>
+						      <td>구직게시물 2</td>
+						      <td>
+						      	<button class="button">보기</button>
+						      </td>
+						    </tr>
+						    <tr>
+						      <th scope="row">1</th>
+						      <td>rhkim10@naver.com</td>
+						      <td>소모임 1</td>
+						      <td>
+						      	<button class="button">보기</button>
+						      </td>
+						    </tr>
+						    <tr>
+						      <th scope="row">1</th>
+						      <td>rhkim10@naver.com</td>
+						      <td>구직게시물 1</td>
+						      <td>
+						      	<button class="button">보기</button>
+						      </td>
+						    </tr>
+						 
+						  </tbody>
+						</table>
+                   </div>
+               </div>
+           </div>
+           <!-- 블랙리스트 끝 -->
+
     </div>
 </div>
 </div>

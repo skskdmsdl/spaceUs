@@ -1,5 +1,4 @@
 --spaceus
-
 purge recyclebin; -- bin 비우기
 
 -----------------------------
@@ -535,3 +534,4 @@ select * from monthly_sale;
 select * from yearly_sale;
 
 commit;
+>>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
