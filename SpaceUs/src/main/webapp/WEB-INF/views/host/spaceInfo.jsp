@@ -11,13 +11,8 @@
 </jsp:include>
 
 
+
 <div class="skin-default-dark fixed-layout">
-    <div class="preloader">
-        <div class="loader">
-            <div class="loader__figure"></div>
-            <p class="loader__label">Elegant admin</p>
-        </div>
-    </div>
     <div id="main-wrapper">
         <!-- 마이페이지 헤더 -->
         <header class="topbar">
@@ -39,7 +34,7 @@
         <!-- 왼쪽 목록들 -->
         <aside class="left-sidebar">
             <div class="d-flex no-block nav-text-box align-items-center">
-                <span>공간 관리 페이지</span>
+                <span> 호스트 센터</span>
                 <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i class="ti-menu"></i></a>
                 <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
             </div>
@@ -48,13 +43,13 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                       <!--  <sec:authorize access="hasRole('HOST')"> -->
+                       <sec:authorize access="hasRole('HOST')"> 
                         <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/spaceInfo.do"><i class="fa fa-user"></i><span class="hide-menu">공간 정보</span></a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/reservation.do"><i class="fa fa-heart"></i><span class="hide-menu"></span>공간 예약 현황</a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/checkArticle.do"><i class="fa fa-gift"></i><span class="hide-menu"></span>공간 리뷰 & QnA</a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/bottomLine.do"><i class="fa fa-table"></i><span class="hide-menu"></span>정산 내역</a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/hostReservation.do"><i class="fa fa-heart"></i><span class="hide-menu"></span>공간 예약 현황</a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/hostCheckArticle.do"><i class="fa fa-gift"></i><span class="hide-menu"></span>공간 리뷰 & QnA</a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/settlementDetails.do"><i class="fa fa-table"></i><span class="hide-menu"></span>정산 내역</a></li>
                      
-                    <!--     </sec:authorize> -->
+                       </sec:authorize>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -153,5 +148,7 @@
 <!-- ============================================================== -->
 <!--morris JavaScript -->
 
-	
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
 	

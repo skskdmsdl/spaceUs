@@ -94,7 +94,7 @@
 		  <sec:authorize access="hasRole('ROLE_HOST')">
 		  <div class="collapse navbar-collapse" id="ftco-nav"  data-toggle="modal" data-target="#exampleModal">
         	 <ul class="navbar-nav ml-auto">
-		  	  <li class="nav-item"><a href="${pageContext.request.contextPath }/host/hostManage.do" class="nav-link">호스트 센터</a></li>
+		  	  <li class="nav-item"><a href="${pageContext.request.contextPath }/host/spaceInfo.do" class="nav-link">호스트 센터</a></li>
 		      <li class="nav-item"><a href="${pageContext.request.contextPath }/recruit/recruitList.do" class="nav-link">커뮤니티</a></li>
 		      <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
 		      
