@@ -82,10 +82,23 @@
                        <div class="card-body">
                         <div class="row"> 
                          <div class="col-md-10">
-                             <h5 class="card-title">공간 정보</h5>
-                             <h6 class="card-subtitle mb-5">공간 정보를 확인하세요</h6>
+                             <h5 class="card-title">공간 최근 게시물</h5>
+                             <h6 class="card-subtitle mb-5">공간에 올라온 새 질문글과 리뷰를 확인하세요</h6>
                          </div>
 	                    </div>
+	                    <section id="article-header" class="sticky-top" style="height: auto;">
+	                    	<div class="" style="position: relative;" data-sticky-enabled="false">
+	                    		<div class="qna-filter-container">
+	                    			<dl class="" role="button">
+	                    				<dt class="filter-select-header">게시글 수</dt>
+	                    				<i class="fa-long-arrow-down"></i>
+	                    				<dd class="">20개</dd>
+	                    				
+	                    			</dl>
+	                    		 </div>
+	                          </div>
+	                    	</div>
+	                    </section>
 						 <table class="col-11">
 							<tr>
 								<th class="align-baseline">닉네임</th>
