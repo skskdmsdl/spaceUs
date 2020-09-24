@@ -330,6 +330,7 @@ create table recruit_comment (
     recruit_comment_content varchar2(2000),
     recruit_comment_level number default 1,
     recruit_comment_date date default sysdate,
+    
     constraints pk_recruit_comment_no primary key(recruit_comment_no),
     constraints fk_recruit_ref foreign key(recruit_ref) references recruit(recruit_no) on delete cascade,
     constraints fk_recruit_comment_ref foreign key(recruit_comment_ref) references recruit_comment(recruit_comment_no) on delete cascade,
@@ -340,21 +341,64 @@ create sequence seq_recruit_comment_no;
 
 select * from recruit_comment;
 
+-----------------------------
+--------- 게시판분류 ---------
+-----------------------------
+create table board (
+	board_no varchar2(256) not null,
+	board_name varchar2(256) not null,
+
+	constraints pk_board_no primary key(board_no) 
+);
+
+create sequence seq_board_no;
+
+select * from board;
 
 -----------------------------
 ----------- 소모임 ----------
 -----------------------------
+create table group_board (
+	group_board_no varchar2(256),
+	board_no varchar2(256),
+	member_email varchar2(256),
+	view_cnt number default 0,
+	group_board_title varchar2(256) not null,
+	group_board_content varchar2(1000) not null,
+	report_cnt number default 0,	
 
+	constraints pk_group_board_no primary key(group_board_no),
+	constraints fk_board_no foreign key(board_no) references board(board_no) on delete set null,
+	constraints fk_gorup_board_member_email foreign key(member_email) references member(member_email) on delete set null
+);
+
+create sequence seq_group_board_no;
+
+select * from group_board;
 
 -----------------------------
 --------- 소모임댓글 ---------
 -----------------------------
+create table group_board_comment (
+	group_board_comment_no varchar2(256),
+	writer varchar2(256),
+	group_board_ref varchar2(256),
+	private number default 0,
+	group_board_comment_ref varchar2(256),
+	group_board_content varchar2(2000),
+	group_board_comment_level number default 1,
+	group_board_date date default sysdate,
+	 	
 
+	constraints pk_group_board_comment_no primary key(group_board_comment_no),
+	constraints fk_group_board_ref foreign key(group_board_ref) references group_board(group_board_no) on delete set null,
+	constraints fk_group_board_comment_ref foreign key(group_board_comment_ref) references group_board_comment(group_board_comment_no) on delete set null,
+	constraints ck_gorup_board_private check(private in(0,1))
+);
 
------------------------------
---------- 게시판분류 ---------
------------------------------
+create sequence seq_group_board_comment_no;
 
+select * from group_board_comment;
 
 -----------------------------
 --------- 블랙리스트 --------
@@ -534,4 +578,3 @@ select * from monthly_sale;
 select * from yearly_sale;
 
 commit;
->>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
