@@ -74,16 +74,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                 	<!-- <div class="d-flex"></div> -->
                 	<aside id="sideinfo" class="w-25 pr-3">
 	                	<div class="list-group">
+	                		<c:forEach items="${boardList}" var="board" varStatus="vs">
 								<a href="#" class="list-group-item list-group-item-action">
-									멋쟁이
+									${board.boardName}
 									<span class="badge badge-primary badge-pill">14</span>
 									<i class="fas fa-caret-down" style="padding: 0; position: relative; right:0;"></i>
 								</a>
-								<a href="#" class="list-group-item list-group-item-action">
-									멋쟁이
-									<span class="badge badge-primary badge-pill">14</span>
-									<i class="fas fa-caret-down" style="padding: 0; position: relative; right:0;"></i>
-								</a>
+	                		</c:forEach>
 						</div>
                 	</aside>
                 	
