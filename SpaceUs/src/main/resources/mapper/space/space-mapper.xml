@@ -19,7 +19,7 @@
 		insert into 
 			tag 
 		values(
-			'TAG'+seq_memo_no.nextval, 
+			'TAG'||seq_tag_no.nextval, 
 			#{hashTag}
 		)
 	</insert>

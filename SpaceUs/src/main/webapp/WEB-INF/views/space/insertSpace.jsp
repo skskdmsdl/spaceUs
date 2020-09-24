@@ -306,23 +306,24 @@ $("#addTags").on('click', function(){
 		alert("최대 5개까지 입력 가능합니다");
 	}
 	else if($("#tagName").val()!=""){
-		alert($("#tagName").val());
 		
 		//태그 인서트
 		$.ajax({
 		url : "${ pageContext.request.contextPath }/space/insertHashTag.do",
 		data : {
-			hashTag : $("#tagName").val();
-		},
+			"hashTag" : $("#tagName").val()
+			}
+		,
 		dataType : "json",
 		success : function(data){
+			
 			$("#tags").append("<span class='label label-success m-2 p-2 small'>#"+$('#tagName').val() +" X</span>"); 
 	    	$("#tagName").val("");	
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
 		}
-		}); 
+		});  
 		
     	
     }

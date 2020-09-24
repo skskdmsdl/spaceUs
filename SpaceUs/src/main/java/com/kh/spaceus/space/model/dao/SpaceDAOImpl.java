@@ -15,7 +15,7 @@ public class SpaceDAOImpl implements SpaceDAO{
 
 	@Override
 	public HashTag selectOneTag(String hashTag) {
-		return sqlSession.selectOne("space.selectHashTag", hashTag);
+		return sqlSession.selectOne("space.selectOneTag", hashTag);
 	}
 	
 	@Override
