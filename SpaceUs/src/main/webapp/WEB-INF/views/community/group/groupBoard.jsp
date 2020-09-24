@@ -130,7 +130,20 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                    <c:forEach items="${groupBoardList}" var="gb" varStatus="vs">
 			                        <tr style="cursor: pointer;" onclick = "location.href='${pageContext.request.contextPath }/community/group/groupDetail.do'">
 			                            <td class="text-center">${vs.count}</td>
-			                            <td class="txt-oflo"><span class="text-success mr-2">${gb.groupBoardNo}</span>${gb.groupBoardTitle}</td>
+			                            <td class="txt-oflo">
+			                            	<span class="text-success mr-2">
+			                            		[${ gb.boardNo=="BOARD6"?
+			                            			"전체 크루원":gb.boardNo=="BOARD8"?
+			                            			"카페 크루원":gb.boardNo=="BOARD09"?
+			                            			"무비 크루원":gb.boardNo=="BOARD10"?
+			                            			"먹방 크루원":gb.boardNo=="BOARD11"?
+			                            			"전체공간 나눔":gb.boardNo=="BOARD12"?
+			                            			"카페공간 나눔":gb.boardNo=="BOARD13"?
+			                            			"식당공간 나눔":gb.boardNo=="BOARD14"?
+			                            			"소모임 자랑":"기타"}]
+			                            	</span>
+			                            		${gb.groupBoardTitle}
+			                            </td>
 			                            <td class="txt-oflo">${gb.groupBoardDate }</td>
 			                            <td class="txt-oflo">${gb.memberEmail}</td>
 			                        </tr>
