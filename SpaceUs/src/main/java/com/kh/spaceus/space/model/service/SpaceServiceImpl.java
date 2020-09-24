@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spaceus.space.model.dao.SpaceDAO;
-import com.kh.spaceus.space.model.vo.HashTag;
+import com.kh.spaceus.space.model.vo.Tag;
 
 @Service
 public class SpaceServiceImpl implements SpaceService{
@@ -13,7 +13,7 @@ public class SpaceServiceImpl implements SpaceService{
 	private SpaceDAO spaceDAO;
 
 	@Override
-	public HashTag selectOneTag(String hashTag) {
+	public Tag selectOneTag(String hashTag) {
 		return spaceDAO.selectOneTag(hashTag);
 	}
 	

@@ -1,10 +1,10 @@
 package com.kh.spaceus.space.model.dao;
 
-import com.kh.spaceus.space.model.vo.HashTag;
+import com.kh.spaceus.space.model.vo.Tag;
 
 public interface SpaceDAO {
 
-	HashTag selectOneTag(String hashTag);
+	Tag selectOneTag(String hashTag);
 
 	int insertHashTag(String hashTag);
 

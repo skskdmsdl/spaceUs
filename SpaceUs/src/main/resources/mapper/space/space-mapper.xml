@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="space">
-	<select id="selectOneTag" resultMap="hashTagMap">
+	<select id="selectOneTag" resultMap="tagMap">
 		select 
 			*
 		from 
@@ -11,8 +11,9 @@
 		where 
 			tag_name = #{ hashTag }
 	</select>
-	<resultMap type="hashTag" id="hashTagMap">
-	
+	<resultMap type="tag" id="tagMap">
+		<id column="tag_no" property="no"/>
+		<result column="tag_name" property="tag"/>
 	</resultMap>
 
  	<insert id="insertHashTag">

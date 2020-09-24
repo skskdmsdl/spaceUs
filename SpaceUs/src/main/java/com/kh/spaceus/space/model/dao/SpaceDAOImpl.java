@@ -4,7 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.spaceus.space.model.vo.HashTag;
+import com.kh.spaceus.space.model.vo.Tag;
 
 
 @Repository
@@ -14,7 +14,7 @@ public class SpaceDAOImpl implements SpaceDAO{
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public HashTag selectOneTag(String hashTag) {
+	public Tag selectOneTag(String hashTag) {
 		return sqlSession.selectOne("space.selectOneTag", hashTag);
 	}
 	

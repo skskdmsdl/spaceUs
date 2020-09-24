@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spaceus.space.model.service.SpaceService;
-import com.kh.spaceus.space.model.vo.HashTag;
+import com.kh.spaceus.space.model.vo.Tag;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,7 +38,7 @@ public class SpaceController {
 	public ModelAndView insertHashTag(ModelAndView mav, @RequestParam("hashTag") String hashTag) {
 		log.debug("해쉬태그 등록 요청");
 		//1.업무로직 : 중복체크
-    	HashTag tag = spaceService.selectOneTag(hashTag);
+    	Tag tag = spaceService.selectOneTag(hashTag);
     	if(tag!=null) {
 	    	mav.addObject("hashTag", hashTag);
 	    	mav.setViewName("jsonView");

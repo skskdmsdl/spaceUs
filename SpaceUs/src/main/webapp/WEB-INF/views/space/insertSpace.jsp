@@ -53,9 +53,11 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             </div>
                             <div class="pf-location">
                                 <h4>공간주소<span class="text-danger">*</span></h4>
+                                
                                 <div style="display:inline-block; width:40%">
 	                                <input class="zipCode-input" type="text" placeholder="우편번호"/>
 	                            </div>
+	                            
                                 <div style="display:inline-block; width:40%">
 		                            <button type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">주소 검색</button>
 	                            </div>

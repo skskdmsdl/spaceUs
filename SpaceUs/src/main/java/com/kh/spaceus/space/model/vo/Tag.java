@@ -14,7 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class HashTag implements Serializable{
+public class Tag implements Serializable{
 
 	private String no;
 	private String tag;
