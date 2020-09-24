@@ -24,4 +24,5 @@ public class GroupBoard implements Serializable {
 	private String groupBoardContent;
 	private int reportCnt;
 	private Date groupBoardDate;
+	private String nickname;
 }

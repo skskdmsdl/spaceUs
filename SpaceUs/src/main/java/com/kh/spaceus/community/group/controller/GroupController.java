@@ -31,6 +31,8 @@ public class GroupController {
 		List<GroupBoard> groupBoardList = groupService.selectListGroupBoard();
 		log.debug("groupBoard = {}", groupBoardList);
 		
+		System.out.println(groupBoardList);
+		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("groupBoardList", groupBoardList);
 		

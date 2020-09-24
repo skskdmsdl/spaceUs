@@ -145,7 +145,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                            		${gb.groupBoardTitle}
 			                            </td>
 			                            <td class="txt-oflo">${gb.groupBoardDate }</td>
-			                            <td class="txt-oflo">${gb.memberEmail}</td>
+			                            <td class="txt-oflo">${gb.nickname}</td>
 			                        </tr>
 			                    </c:forEach>			                      
 			                    </tbody>
