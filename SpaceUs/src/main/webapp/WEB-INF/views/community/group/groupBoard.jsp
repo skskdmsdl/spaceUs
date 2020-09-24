@@ -1,3 +1,6 @@
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.List"%>
+<%@page import="com.kh.spaceus.community.group.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,6 +9,8 @@
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<!-- icons -->
+<script src="https://kit.fontawesome.com/b74a25ff1b.js" crossorigin="anonymous"></script>
 
 <style>
 .image-div {
@@ -16,7 +21,7 @@
 	height: 200px;
 	margin-right: 20px;
 }
-.fas {position: absolute; padding: 90px;}
+.fas {float:right;}
 input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 .site-btn {width: 100%; font-size: 17px;}
 
@@ -69,18 +74,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                 	<!-- <div class="d-flex"></div> -->
                 	<aside id="sideinfo" class="w-25 pr-3">
 	                	<div class="list-group">
-							<a href="#" class="list-group-item list-group-item-action">
-								함께할 사람을 찾습니다
-								<span class="badge badge-primary badge-pill">14</span>
-							</a>
-							<a href="#" class="list-group-item list-group-item-action">
-								공간을 같이 쓸 사람을 찾습니다
-								<span class="badge badge-primary badge-pill">1</span>
-							</a>
-							<a href="#" class="list-group-item list-group-item-action">
-								소모임 자랑하기
-								<span class="badge badge-primary badge-pill">21</span>
-							</a>
+	                		<c:forEach items="${boardList}" var="board" varStatus="vs">
+								<a href="#" class="list-group-item list-group-item-action">
+									${board.boardName}
+									<span class="badge badge-primary badge-pill">14</span>
+									<i class="fas fa-caret-down" style="padding: 0; position: relative; right:0;"></i>
+								</a>
+	                		</c:forEach>
 						</div>
                 	</aside>
                 	

@@ -335,14 +335,35 @@ select * from recruit_comment;
 -----------------------------
 create table board (
 	board_no varchar2(256) not null,
+    board_ref varchar2(256),
 	board_name varchar2(256) not null,
+    board_level number default 1, --상위 게시판 1 / 하위 게시판 2
 
-	constraints pk_board_no primary key(board_no) 
+	constraints pk_board_no primary key(board_no),
+    constraints fk_board_ref foreign key(board_ref) references board(board_no)
 );
+
+
+
 
 create sequence seq_board_no;
 
+insert into board values ('BOARD'||seq_board_no.nextval,NULL,'함께할 사람을 찾습니다',1);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD6','바리스타 모임',2);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD6','영화 모임',2);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD6','먹방 모임',2);
+insert into board values ('BOARD'||seq_board_no.nextval,NULL,'공간을 같이 쓸 사람을 찾습니다',1);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD11','카페',2);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD11','식당',2);
+insert into board values ('BOARD'||seq_board_no.nextval,NULL,'소모임 자랑하기',1);
+
+commit;
+
+delete board where board_no = 4;
+
 select * from board;
+
+drop table board;
 
 -----------------------------
 ----------- 소모임 ----------
@@ -363,7 +384,11 @@ create table group_board (
 
 create sequence seq_group_board_no;
 
+
+
 select * from group_board;
+
+drop table group_board;
 
 -----------------------------
 --------- 소모임댓글 ---------
@@ -388,6 +413,8 @@ create table group_board_comment (
 create sequence seq_group_board_comment_no;
 
 select * from group_board_comment;
+
+drop table group_board_comment;
 
 -----------------------------
 --------- 블랙리스트 --------
