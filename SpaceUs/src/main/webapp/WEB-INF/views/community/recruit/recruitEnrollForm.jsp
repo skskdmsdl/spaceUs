@@ -27,10 +27,10 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
  <div class="navbar justify-content-center navbar-dark bg-dark">
 	  <ul class="nav">
 		  <li class="nav-item">
-		    <a class="nav-link active" href="#">소모임</a>
+		    <a class="nav-link active" href="${pageContext.request.contextPath }/community/group/groupList.do">소모임</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="${pageContext.request.contextPath }/recruit/recruitList.do">구인/구직</a>
+		    <a class="nav-link" href="${pageContext.request.contextPath }/community/recruit/recruitList.do">구인/구직</a>
 		  </li>
 		</ul>
 	</div>

@@ -26,10 +26,10 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
  <div class="navbar justify-content-center navbar-dark bg-dark">
 	  <ul class="nav">
 		  <li class="nav-item">
-		    <a class="nav-link active" href="#">소모임</a>
+		    <a class="nav-link active" href="${pageContext.request.contextPath }/community/group/groupList.do">소모임</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="${pageContext.request.contextPath }/recruit/recruitList.do">구인/구직</a>
+		    <a class="nav-link" href="${pageContext.request.contextPath }/community/recruit/recruitList.do">구인/구직</a>
 		  </li>
 		</ul>
 	</div>
@@ -85,7 +85,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                      </tr>
                                  </thead>
                                  <tbody>
-                                     <tr style="cursor: pointer;" onclick = "location.href='${pageContext.request.contextPath }/recruit/recruitDetail.do'">
+                                     <tr style="cursor: pointer;" onclick = "location.href='${pageContext.request.contextPath }/community/recruit/recruitDetail.do'">
                                          <td class="text-center">1</td>
                                          <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
                                          <td class="txt-oflo">2020.09.22</td>
@@ -149,7 +149,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                              </table>
                              <div class="container">
 			                 <nav class="mt-5" >
-			                 	<a href="${pageContext.request.contextPath }/recruit/recruitEnrollForm.do" class="btn waves-effect waves-light hidden-md-down m-1 pull-right" style="font-size:18px;background-color: #00c89e;  color:white;"> 글 등록</a>
+			                 	<a href="${pageContext.request.contextPath }/community/recruit/recruitEnrollForm.do" class="btn waves-effect waves-light hidden-md-down m-1 pull-right" style="font-size:18px;background-color: #00c89e;  color:white;"> 글 등록</a>
 								  <ul class="justify-content-center pagination">
 								    <!-- <li class="page-item disabled">
 								      <span class="page-link m-1">&lt;</span>
