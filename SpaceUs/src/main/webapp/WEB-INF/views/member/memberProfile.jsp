@@ -90,19 +90,19 @@
 						 <table class="col-11">
 							<tr>
 								<th class="align-baseline">닉네임</th>
-								<th><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.username"/>" required /></th>
+								<th><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.nickName"/>" required /></th>
 							</tr>
 						    <tr>
 						      <td class="align-baseline">이메일 계정</td>
-						      <td><input type="email" class="col-8 input-group-text mb-4 mr-5 pull-right" value="honggd@naver.com" required /></td>
+						      <td><input type="email" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.username"/>" required /></td>
 							</tr>
 						    <tr>
 						      <td class="align-baseline">생일</td>
-						      <td><input type="date" class="col-8 input-group-text mb-4 mr-5 pull-right" value="2020-08-08" /></td>
+						      <td><input type="date" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.birthDay"/>"/></td>
 							</tr>
 						    <tr>
 						      <td class="align-baseline">핸드폰</td>
-						      <td><input type="tel" class="col-8 input-group-text mb-4 mr-5 pull-right" maxlength="11" value="01012341234" required /></td>
+						      <td><input type="tel" class="col-8 input-group-text mb-4 mr-5 pull-right" maxlength="11" value="<sec:authentication property="principal.memberPhone"/>" required /></td>
 							</tr>
 						</table >
 						  <div class="mt-5" style="border-top: 1px solid #bbbbbb" ></div>

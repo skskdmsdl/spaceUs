@@ -24,7 +24,7 @@
 </head>
 <body style="background-color: #f7f7f7;">
 <div class="limiter">
-		<div class="container-login100">
+	<div class="container-login100">
 			<div class="wrap-login100" style="padding: 50px;">
 				<span class="login100-form-title p-b-43">
 					<p class="navbar-brand">비밀번호 찾기</p>

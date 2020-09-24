@@ -23,6 +23,12 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
 	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
+<script>
+	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
+	<c:if test="${ not empty msg }">
+		alert('${ msg }');	
+	</c:if>
+</script>
 </head>
 <style>
 .alert-p {display:none;}
@@ -39,12 +45,6 @@
 	border: 1px solid #d1001c;
 }
 </style>
-<script>
-<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
-<c:if test="${ not empty msg }">
-	alert('${ msg }');	
-</c:if>
-</script>
 <body style="background-color: #666666;">
 	<div class="limiter">
 		<div class="container-login100">
@@ -360,8 +360,13 @@ $(function(){
 			success : function(data){
 				text = data.text;
 				//console.log(text);
-				alert("인증번호를 전송했습니다.");
 				
+				if(data.text != undefined) {
+					alert("인증번호를 전송했습니다.");
+				} else {
+					alert("이미 등록된 번호입니다.");
+					$("#phone").val('').focus();
+				}
 			},
 			error : function(xhr, status, err){
 				console.log("처리실패", xhr, status, err);

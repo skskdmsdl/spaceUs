@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.kh.spaceus">
-		<level value="info"/>
+		<level value="trace"/>
 	</logger>
 	
 	<!-- log4jdbc logger -->

@@ -16,6 +16,7 @@ create table member(
 );
 
 select * from member;
+commit;
 
 --권한 컬럼 삭제
 ALTER TABLE member DROP COLUMN authority;
