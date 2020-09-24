@@ -21,7 +21,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 
-public class Member implements Serializable{
+public class Member implements Serializable, UserDetails{
 	
 	private String memberEmail;
 	private String password;
@@ -30,6 +30,31 @@ public class Member implements Serializable{
 	private Date birthDay; 
 	private Date memberRegDate; //가입일
 	private int attendanceCnt; //출석횟수
-	//private List<SimpleGrantedAuthority> authorities; //권한 ('U', 'H', 'A')
+	private List<SimpleGrantedAuthority> authorities; //권한 ('U', 'H', 'A')
 	
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+	@Override
+	public String getUsername() {
+		return memberEmail;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }

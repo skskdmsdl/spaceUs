@@ -39,6 +39,12 @@
 	border: 1px solid #d1001c;
 }
 </style>
+<script>
+<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
+<c:if test="${ not empty msg }">
+	alert('${ msg }');	
+</c:if>
+</script>
 <body style="background-color: #666666;">
 	<div class="limiter">
 		<div class="container-login100">

@@ -20,21 +20,19 @@ select * from member;
 --권한 컬럼 삭제
 ALTER TABLE member DROP COLUMN authority;
 
-
-
 -----------------------------
 ----------- 권한 ------------
 -----------------------------
 
 create table auth (
-    member_email varchar2(256),
-    authority varchar2(20),
+    member_email varchar2(256) not null,
+    authority varchar2(20) default 'ROLE_USER',
     constraint pk_auth primary key(member_email, authority),
-    constraint fk_auth_member_email foreign key(member_email) references member(member_email)
+    constraint fk_auth_member_email foreign key(member_email) references member(member_email),
+    constraints ck_authority check(authority in ('ROLE_USER','ROLE_HOST','ROLE_ADMIN'))
 );
 
 select * from auth;
-
 
 -----------------------------
 ---------- 카테고리 ----------
