@@ -22,13 +22,13 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/vendor/daterangepicker/daterangepicker.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
-</head>
 <script>
-<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
-<c:if test="${ not empty msg }">
-	alert('${ msg }');	
-</c:if>
+	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
+	<c:if test="${ not empty msg }">
+		alert('${ msg }');	
+	</c:if>
 </script>
+</head>
 <body>
 	<div class="limiter">
 		<div class="container-login100">
@@ -71,7 +71,7 @@
 
 						<div>
 							<a class="txt1" href=""
-								onclick="window.open('${pageContext.request.contextPath}/member/passwordFinder.do','_blank','top=1,left=500,width=600,height=450')">
+								onclick="window.open('${pageContext.request.contextPath}/member/passwordFinder.do','_blank', 'top=1,left=500,width=600,height=450', 'scrollbars=no')">
 								비밀번호를 잊으셨나요?
 							</a>
 						</div>

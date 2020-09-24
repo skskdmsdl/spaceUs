@@ -22,6 +22,15 @@
 		nickname = #{ nickName }
 </select>
 
+<select id="selectOnePhone" resultMap="memberMap">
+	select
+		* 
+	from
+		member
+	where
+		member_phone = #{ phone }
+</select>
+
 
 <insert id="insertMember">
 	insert all

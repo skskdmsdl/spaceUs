@@ -71,10 +71,10 @@
 <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
  <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
 <script>
-<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
-<c:if test="${ not empty msg }">
-	alert('${ msg }');	
-</c:if>
+	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
+	<c:if test="${ not empty msg }">
+		alert('${ msg }');	
+	</c:if>
 </script>
   </head>
   
@@ -90,7 +90,7 @@
 		        <ul class="navbar-nav ml-auto">
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
-		          <li class="nav-item"><a href="${pageContext.request.contextPath }/community/recruit/recruitList.do" class="nav-link">커뮤니티</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/community/group/groupList.do" class="nav-link">커뮤니티</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberLoginForm.do" class="nav-link">로그인</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberEnrollForm.do" class="nav-link">회원가입</a></li>
 		        </ul>
@@ -107,7 +107,7 @@
 			  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
 	        	<div>반갑습니다. &nbsp;</div>
 	        		<div>
-	        			<sec:authentication property="principal.username"/> 님!
+	        			<sec:authentication property="principal.nickName"/> 님!
 	        		</div>
 	          </div>  	 
 		  	</ul>
@@ -123,7 +123,7 @@
 	        	  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
 	        		<div>반갑습니다. &nbsp;</div>
 	        		<div>
-	        			<sec:authentication property="principal.username"/> 님!
+	        			<sec:authentication property="principal.nickName"/> 님!
 	        		</div>
 	        	  </div>
 	          </ul>
@@ -152,7 +152,7 @@
 	        <h5 class="modal-title" id="exampleModalLabel">
 	        	<div>
 		        	<img src="https://resource.miricanvas.com/image/common/profile_argo.svg" style="background: #22B47B; border-right: 0; border-radius: 90%; width: 40px;  height: 40px;">
-	        		<sec:authentication property="principal.username"/>@naver.com
+	        		<sec:authentication property="principal.nickName"/>님 
 	        	</div>
 	        </h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">

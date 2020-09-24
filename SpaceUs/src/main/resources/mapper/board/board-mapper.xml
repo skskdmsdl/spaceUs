@@ -6,11 +6,25 @@
 	<!-- boardList -->
 	<select id="selectListBoard" resultMap="boardMap">
 		select
-			*
+		*
 		from
-			board
+		board
 	</select>
 	<resultMap type="board" id="boardMap">
-	
+
 	</resultMap>
+
+	<!-- groupBoard List -->
+	<select id="selectListGroupBoard" resultMap="groupBoardMap">
+		select
+			G.*,
+			(select nickname from member where member_email= G.member_email) nickname
+		from
+			group_board G
+	</select>
+	<resultMap type="groupBoard" id="groupBoardMap">
+	</resultMap>
+
+	
+
 </mapper>
