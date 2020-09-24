@@ -334,8 +334,6 @@ $("#addTags").on('click', function(){
 $("#tags").on("click", function(){
    //내용작성하기 
 });
-//태그 인서트
-
 
 </script>
 
