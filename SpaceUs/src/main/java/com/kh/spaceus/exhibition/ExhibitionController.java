@@ -21,4 +21,10 @@ public class ExhibitionController {
 	public String exhibitionList() {
 		return "exhibition/exhibitionList";
 	}
+	
+	//기획전추가
+	@RequestMapping("/insertExhibition.do")
+	public String insertExhibition() {
+		return "exhibition/insertExhibition";
+	}
 }

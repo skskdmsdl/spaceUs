@@ -99,7 +99,7 @@ var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
  oAppRef: oEditors,
  elPlaceHolder: "ir1",
- sSkinURI: "${pageContext.request.contextPath}/resources/js/smartEditor/SmartEditor2Skin.html",
+ sSkinURI: "${pageContext.request.contextPath}/resources/js/smartEditor/SmartEditor2Skin.html",W
  fCreator: "createSEditor2",
  htParams : { 
 	 // 툴바 사용 여부 (true:사용/ false:사용하지 않음) 

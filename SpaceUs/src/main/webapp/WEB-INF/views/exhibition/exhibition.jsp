@@ -9,6 +9,7 @@
 <style>
 .img img {height: 350px;}
 .space1 {cursor: pointer;}
+.more-list {visibility:hidden;}
 </style>
 <script>
 function exhibitionList () {
@@ -20,9 +21,12 @@ function exhibitionList () {
   	      <div class="col-md-12 heading-section text-center ftco-animate mb-5 mt-5">
       	<span class="subheading">SpaceUs MD가 큐레이션한 기획전 입니다</span>
         <h2 class="mb-2">기획전</h2>
+        <!-- admin계정만 보이게 -->
+        <h1 class="text-right"><a href="${pageContext.request.contextPath}/exhibition/insertExhibition.do">+</a></h1>
       </div>
       <div class="row">
       	<div class="col-md-4">
+      	<button class="btn">삭제</button>
       		<div class="agent space1" onclick="exhibitionList();">
   					<div class="img">
     				<img src="https://kr.object.ncloudstorage.com/scloud-service/service/160042093_3c874989f2a7c83b4334157979430945.png">
@@ -107,6 +111,10 @@ function exhibitionList () {
   				</div>
  				</div>
      	</div>
+     </div>
+     <!-- 더보기버튼 -->
+     <button class="more-btn">더보기</button>
+     <div class="row more-list hidden">
      	<div class="col-md-4">
      		<div class="agent space7">
  					<div class="img">
@@ -150,6 +158,12 @@ function exhibitionList () {
  				</div>
      	</div>
      </div>
- 	</div>
-</section>
+     </div>
+     </section>
+<script>
+$(".more-btn").click(function(){
+	$(".more-list").css ('visibility', 'visible');
+	
+});
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
