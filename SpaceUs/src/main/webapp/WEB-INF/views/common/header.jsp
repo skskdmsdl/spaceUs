@@ -100,7 +100,7 @@
 		  <div class="collapse navbar-collapse" id="ftco-nav"  data-toggle="modal" data-target="#exampleModal">
         	 <ul class="navbar-nav ml-auto">
 		  	  <li class="nav-item"><a href="${pageContext.request.contextPath }/host/hostManage.do" class="nav-link">호스트 센터</a></li>
-		      <li class="nav-item"><a href="${pageContext.request.contextPath }/recruit/recruitList.do" class="nav-link">커뮤니티</a></li>
+		      <li class="nav-item"><a href="${pageContext.request.contextPath }/community/group/groupList.do" class="nav-link">커뮤니티</a></li>
 		      <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
 		      
 			  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
@@ -117,7 +117,7 @@
         	 <ul class="navbar-nav ml-auto">
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
-		          <li class="nav-item"><a href="${pageContext.request.contextPath }/recruit/recruitList.do" class="nav-link">커뮤니티</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/community/group/groupList.do" class="nav-link">커뮤니티</a></li>
 		   
 	        	  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
 	        		<div>반갑습니다. &nbsp;</div>
@@ -164,11 +164,11 @@
 	    	            👩🏻 마이 프로필
 	    	    </a>
 	      	</div>
-	      	<div class="col-sm-10 mb-2">
+	      <%-- 	<div class="col-sm-10 mb-2">
 	    	    <a href="${pageContext.request.contextPath }/space/insertSpace.do">
 	    	            💒 공간 등록 
 	    	    </a>
-	      	</div>
+	      	</div> --%>
 	      	<div class="col-sm-10 mb-2">
 		        <a href="${pageContext.request.contextPath }/member/usageHistory.do">
 		           🧭 예약관리
