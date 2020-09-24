@@ -71,8 +71,8 @@
 
 						<div>
 							<a class="txt1" href=""
-								onclick="window.open('${pageContext.request.contextPath}/member/idPasswordFinder.do','_blank','top=1,left=500,width=600,height=450')">
-								아이디/비밀번호를 잊으셨나요?
+								onclick="window.open('${pageContext.request.contextPath}/member/passwordFinder.do','_blank', 'top=1,left=500,width=600,height=450', 'scrollbars=no')">
+								비밀번호를 잊으셨나요?
 							</a>
 						</div>
 					</div>

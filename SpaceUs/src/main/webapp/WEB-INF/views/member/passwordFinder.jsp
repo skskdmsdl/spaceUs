@@ -22,32 +22,33 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
 </head>
-<body style="background-color: #f7f7f7;">
+<body style="background-color: #f7f7f7; overflow-x:hidden; overflow-y:hidden;">
+
 <div class="limiter">
 	<div class="container-login100">
-			<div class="wrap-login100" style="padding: 50px;">
-				<span class="login100-form-title p-b-43">
-					<p class="navbar-brand">비밀번호 찾기</p>
-				</span>
-				<div class="wrap-input100 validate-input" style="width: 100%; margin-right: 0px">
-					<input class="input100" type="text" name="email" placeholder="email">
-					<span class="focus-input100">email</span>
-					<span class="focus-output100"></span>
-				</div>
-					
-				<div class="text-left p-b-20" style="width:99%">
-					<p class="txt1">
-						가입 시 사용한 이메일 주소를 입력해주시면 임시비밀번호를 메일로 보내드립니다. <br />
-						네이버, 구글, 페이스북으로 가입하신 경우 비밀번호 찾기가 불가합니다.
-					</p><br />
-				</div>
-				<div class="container-login100-form-btn">
-					<button type="submit" class="login100-form-btn" onclick="${pageContext.request.contextPath}/member/memberLogin">
-						임시 비밀번호 전송
-					</button>
-				</div>
+		<div class="wrap-login100" style="padding: 50px; padding-top: 20px">
+			<span class="login100-form-title p-b-43">
+				<p class="navbar-brand">비밀번호 찾기</p>
+			</span>
+			<div class="wrap-input100 validate-input" style="width: 100%; margin-right: 0px">
+				<input class="input100" type="text" name="email" placeholder="email">
+				<span class="focus-input100">email</span>
+				<span class="focus-output100"></span>
+			</div>
+				
+			<div class="text-left p-b-20" style="width:99%">
+				<p class="txt1">
+					가입 시 사용한 이메일 주소를 입력해주시면 임시비밀번호를 메일로 보내드립니다. <br />
+					네이버, 구글, 페이스북으로 가입하신 경우 비밀번호 찾기가 불가합니다.
+				</p><br />
+			</div>
+			<div class="container-login100-form-btn">
+				<button type="submit" class="login100-form-btn" onclick="">
+					임시 비밀번호 전송
+				</button>
 			</div>
 		</div>
 	</div>
+</div>
 </body>
 </html>

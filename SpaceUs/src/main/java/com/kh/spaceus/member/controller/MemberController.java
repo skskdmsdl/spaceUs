@@ -139,10 +139,10 @@ public class MemberController {
 	}
 	
 	
-	//아이디, 비밀번호찾기 창
-	@RequestMapping("/idPasswordFinder.do")
-	public String idPasswordFinder() {
-		return "member/idPasswordFinder";
+	//비밀번호찾기 창
+	@RequestMapping("/passwordFinder.do")
+	public String passwordFinder() {
+		return "member/passwordFinder";
 	}
 	
 	//로그아웃
