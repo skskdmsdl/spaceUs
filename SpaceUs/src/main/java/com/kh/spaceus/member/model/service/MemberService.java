@@ -8,4 +8,6 @@ public interface MemberService {
 
 	Member selectOneNickName(String nickName);
 
+	int insertMember(Member member);
+
 }

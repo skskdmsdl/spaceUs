@@ -23,6 +23,21 @@
 </select>
 
 
+<insert id="insertMember">
+	insert into
+		member
+	values (
+		#{ memberEmail },
+		#{ nickName },
+		#{ password },
+		#{ memberPhone },
+		#{ birthDay },
+		default,
+		default
+	)
+</insert>
+
+
 <resultMap type="member" id="memberMap">
 </resultMap>
 </mapper>

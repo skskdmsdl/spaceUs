@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -21,15 +26,26 @@
 </head>
 <style>
 .alert-p {display:none;}
-
+.login100-form-btn {cursor:pointer;}
+.alert-div {
+	display:none;
+	background-color: #ff8796;
+	opacity: 0.5;
+	width: 100%;
+	height: 30px;
+	margin-bottom: 10px;
+	text-align: center;
+	color: black;
+	border: 1px solid #d1001c;
+}
 </style>
 <body style="background-color: #666666;">
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_2.jpg');
 											background-position: right;">
-				<form class="login100-form validate-form" id="memberEnrollFrm"
-					  action="">
+				<form:form class="login100-form validate-form" id="memberEnrollFrm"
+					  action="${pageContext.request.contextPath }/member/memberEnroll.do" method="post">
 					<span class="login100-form-title p-b-43">
 						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 					</span>
@@ -43,7 +59,7 @@
 						</div>
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="email" id="memberEmail" placeholder="email *" required>
+						<input class="input100" type="email" name="memberEmail" id="memberEmail" placeholder="email *" required>
 						<input type="hidden" id="emailValid" value="0"/>
 						<span class="focus-input100">email</span>
 					</div>
@@ -53,7 +69,7 @@
 					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required" >
-						<input class="input100" type="password" id="password" placeholder="password *" required>
+						<input class="input100" type="password" name="password" id="password" placeholder="password *" required>
 						<span class="focus-input100">password</span>
 					</div>
 					
@@ -66,7 +82,7 @@
 					</div>
 					
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" id="nickName" placeholder="nickName *" required>
+						<input class="input100" type="text" name="nickName" id="nickName" placeholder="nickName *" required>
 						<input type="hidden" id="nickNameValid" value="0"/>
 						<span class="focus-input100">nickName</span>
 					</div>
@@ -76,12 +92,12 @@
 					</div>
 					
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="date" placeholder="birthday" required>
+						<input class="input100" type="date" name="birthDay" placeholder="birthday" required>
 						<span class="focus-input100">Birthday</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="tel" id="phone" placeholder="mobile *" required>
+						<input class="input100" type="tel" name="memberPhone" id="phone" placeholder="mobile *" required>
 						<input type="hidden" id="phoneValid" value="0"/>
 						<span class="focus-input100">mobile</span>
 					</div>
@@ -97,7 +113,7 @@
 					</div>
 					<div class="wrap-input2">
 						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" required>
 							<label class="label-checkbox100" for="ckb1" data-toggle="modal" data-target="#modalLong1">
 								서비스 이용약관 (필수)
 							</label>
@@ -105,16 +121,22 @@
 					</div>
 					<div class="wrap-input2">
 						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb2" type="checkbox">
+							<input class="input-checkbox100" id="ckb2" type="checkbox" required>
 							<label class="label-checkbox100" for="ckb2" data-toggle="modal" data-target="#modalLong2">
 								개인정보 처리 방침 (필수)
 							</label>
 						</div>
 					</div>
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" onclick="${pageContext.request.contextPath}">
-							회원가입
-						</button>
+						<div class="alert-div">
+						<p style="font-size:16px; color:black; font-weight:bold">
+							휴대폰 인증을 완료해주세요.
+						</p>
+						</div>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<input class="login100-form-btn" type="submit" value="회원가입" />
 					</div>
 					
 					<div class="text-center p-t-46 p-b-20">
@@ -122,7 +144,7 @@
 							이미 가입하셨나요?
 						</a>
 					</div>
-				</form>
+				</form:form>
 			</div>
 		</div>
 	</div>
@@ -247,6 +269,7 @@ $("#memberEmail").blur(function(){
 	//이메일 형식 유효성검사
  	var emailRegex = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 	if(emailRegex.test($(this).val()) == false) {
+		$(".emailDuplicate").hide();
 		$(".emailRegex").show();
 		$("#emailValid").val(0);
 		$("#memberEmail").val('').focus();
@@ -282,8 +305,7 @@ $("#memberEmail").blur(function(){
 //닉네임 검사
 $("#nickName").blur(function(){
 
-	//닉네임 유효성검사 : 공백, 특수문자 입력불가
- 	//var nickNameRegex = /^\s+|\s+$/g;
+	//닉네임 유효성검사 : 공백 입력불가
 	if($(this).val().search(/\s/) != -1) {
 		$(".nickNameRegex").show();
 		$("#nickNameValid").val(0);
@@ -355,6 +377,38 @@ $(function(){
 			$("#phoneChk").val('').focus();
 		}
 	});
+});
+
+//회원가입 버튼눌렀을때
+$("#memberEnrollFrm").submit(function(){
+
+	var $alertDivP = $(".alert-div p");
+	var $alertDiv = $(".alert-div");
+
+	/* //이메일 중복검사여부
+	var $emailValid = $("#emailValid");
+	if($emailValid.val() == 0){
+		$alertDiv.show();
+		$alertDivP.text("이메일을 확인해주세요.")
+		return false;
+	}
+	
+	//닉네임 중복검사여부
+	var $nickNameValid = $("#nickNameValid");
+	if($nickNameValid.val() == 0){
+		$alertDiv.show();
+		$alertDivP.text("닉네임을 확인해주세요.")
+		return false;
+	}
+	 */
+	 
+	//휴대폰인증검사여부
+	var $phoneValid = $("#phoneValid");
+	if($phoneValid.val() == 0){
+		$alertDiv.show();
+		return false;
+	}
+	return true;
 });
 
 </script>
