@@ -12,7 +12,8 @@
   <!-- 타입 별칭 지정해줌 -->
   <typeAliases>
   	<typeAlias type="com.kh.spaceus.common.typehandler.StringArrayTypeHandler" alias="strArrTypeHandler"/>
-  	
+  	<typeAlias type="org.springframework.security.core.authority.SimpleGrantedAuthority"
+  			   alias="simpleGrantedAuthority"/>
   	<!-- 패키지 이하의 모든 클래스를 별칭지정함 -->
   	<package name="com.kh.spaceus"/>
   </typeAliases>

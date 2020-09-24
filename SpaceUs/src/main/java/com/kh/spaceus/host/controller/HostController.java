@@ -19,10 +19,22 @@ public class HostController {
 		return "host/settlementDetails";
 	}
 	
-	@RequestMapping("/hostManage.do")
+	@RequestMapping("/spaceInfo.do")
 	public String ManageSpace() {
 		
-		return "host/hostManage";
+		return "host/spaceInfo";
+	}
+	
+	@RequestMapping("/hostReservation.do")
+	public String ManageHostReservation() {
+		
+		return "host/hostReservation";
+	}	
+	
+	@RequestMapping("/hostCheckArticle.do")
+	public String CheckNewArticle() {
+		
+		return "host/hostCheckArticle";
 	}
 	
 }

@@ -6,8 +6,8 @@ purge recyclebin; -- bin 비우기
 -----------------------------
 create table member(
 		member_email varchar2(256),
+        nickname varchar2(256) not null,
         password varchar2(300) not null,
-		nickname varchar2(256) not null,
 		member_phone char(11) not null,
 		birthday date,
 		member_regdate date default sysdate,
@@ -20,32 +20,19 @@ select * from member;
 --권한 컬럼 삭제
 ALTER TABLE member DROP COLUMN authority;
 
-insert into member values(
-    'honggd@naver.com',
-    '홍길동',
-    '1234',
-    '01012341234',
-    null,
-    default,
-    default
-);
-
-commit;
-
-
 -----------------------------
 ----------- 권한 ------------
 -----------------------------
 
 create table auth (
-    member_email varchar2(256),
-    authority varchar2(20),
+    member_email varchar2(256) not null,
+    authority varchar2(20) default 'ROLE_USER',
     constraint pk_auth primary key(member_email, authority),
-    constraint fk_auth_member_email foreign key(member_email) references member(member_email)
+    constraint fk_auth_member_email foreign key(member_email) references member(member_email),
+    constraints ck_authority check(authority in ('ROLE_USER','ROLE_HOST','ROLE_ADMIN'))
 );
 
 select * from auth;
-
 
 -----------------------------
 ---------- 카테고리 ----------
@@ -330,6 +317,7 @@ create table recruit_comment (
     recruit_comment_content varchar2(2000),
     recruit_comment_level number default 1,
     recruit_comment_date date default sysdate,
+    
     constraints pk_recruit_comment_no primary key(recruit_comment_no),
     constraints fk_recruit_ref foreign key(recruit_ref) references recruit(recruit_no) on delete cascade,
     constraints fk_recruit_comment_ref foreign key(recruit_comment_ref) references recruit_comment(recruit_comment_no) on delete cascade,
@@ -340,21 +328,91 @@ create sequence seq_recruit_comment_no;
 
 select * from recruit_comment;
 
+-----------------------------
+--------- 게시판분류 ---------
+-----------------------------
+create table board (
+	board_no varchar2(256) not null,
+    board_ref varchar2(256),
+	board_name varchar2(256) not null,
+    board_level number default 1, --상위 게시판 1 / 하위 게시판 2
+
+	constraints pk_board_no primary key(board_no),
+    constraints fk_board_ref foreign key(board_ref) references board(board_no)
+);
+
+
+
+
+create sequence seq_board_no;
+
+insert into board values ('BOARD'||seq_board_no.nextval,NULL,'함께할 사람을 찾습니다',1);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD6','바리스타 모임',2);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD6','영화 모임',2);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD6','먹방 모임',2);
+insert into board values ('BOARD'||seq_board_no.nextval,NULL,'공간을 같이 쓸 사람을 찾습니다',1);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD11','카페',2);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD11','식당',2);
+insert into board values ('BOARD'||seq_board_no.nextval,NULL,'소모임 자랑하기',1);
+
+commit;
+
+delete board where board_no = 4;
+
+select * from board;
+
+drop table board;
 
 -----------------------------
 ----------- 소모임 ----------
 -----------------------------
+create table group_board (
+	group_board_no varchar2(256),
+	board_no varchar2(256),
+	member_email varchar2(256),
+	view_cnt number default 0,
+	group_board_title varchar2(256) not null,
+	group_board_content varchar2(1000) not null,
+	report_cnt number default 0,	
 
+	constraints pk_group_board_no primary key(group_board_no),
+	constraints fk_board_no foreign key(board_no) references board(board_no) on delete set null,
+	constraints fk_gorup_board_member_email foreign key(member_email) references member(member_email) on delete set null
+);
+
+create sequence seq_group_board_no;
+
+
+
+select * from group_board;
+
+drop table group_board;
 
 -----------------------------
 --------- 소모임댓글 ---------
 -----------------------------
+create table group_board_comment (
+	group_board_comment_no varchar2(256),
+	writer varchar2(256),
+	group_board_ref varchar2(256),
+	private number default 0,
+	group_board_comment_ref varchar2(256),
+	group_board_content varchar2(2000),
+	group_board_comment_level number default 1,
+	group_board_date date default sysdate,
+	 	
 
+	constraints pk_group_board_comment_no primary key(group_board_comment_no),
+	constraints fk_group_board_ref foreign key(group_board_ref) references group_board(group_board_no) on delete set null,
+	constraints fk_group_board_comment_ref foreign key(group_board_comment_ref) references group_board_comment(group_board_comment_no) on delete set null,
+	constraints ck_gorup_board_private check(private in(0,1))
+);
 
------------------------------
---------- 게시판분류 ---------
------------------------------
+create sequence seq_group_board_comment_no;
 
+select * from group_board_comment;
+
+drop table group_board_comment;
 
 -----------------------------
 --------- 블랙리스트 --------
@@ -534,4 +592,3 @@ select * from monthly_sale;
 select * from yearly_sale;
 
 commit;
->>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git

@@ -68,9 +68,14 @@
   <%-- <script src="${pageContext.request.contextPath }/resources/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="${pageContext.request.contextPath }/resources/js/google-map.js"></script> --%>
 
-  <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-   <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
-  
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+ <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
+<script>
+<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
+<c:if test="${ not empty msg }">
+	alert('${ msg }');	
+</c:if>
+</script>
   </head>
   
   <body>
@@ -85,7 +90,7 @@
 		        <ul class="navbar-nav ml-auto">
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
-		          <li class="nav-item"><a href="${pageContext.request.contextPath }/recruit/recruitList.do" class="nav-link">커뮤니티</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/community/recruit/recruitList.do" class="nav-link">커뮤니티</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberLoginForm.do" class="nav-link">로그인</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberEnrollForm.do" class="nav-link">회원가입</a></li>
 		        </ul>
@@ -94,8 +99,9 @@
 		  <sec:authorize access="hasRole('ROLE_HOST')">
 		  <div class="collapse navbar-collapse" id="ftco-nav"  data-toggle="modal" data-target="#exampleModal">
         	 <ul class="navbar-nav ml-auto">
-		  	  <li class="nav-item"><a href="${pageContext.request.contextPath }/host/hostManage.do" class="nav-link">호스트 센터</a></li>
-		      <li class="nav-item"><a href="${pageContext.request.contextPath }/recruit/recruitList.do" class="nav-link">커뮤니티</a></li>
+
+		  	  <li class="nav-item"><a href="${pageContext.request.contextPath }/host/spaceInfo.do" class="nav-link">호스트 센터</a></li>
+		      <li class="nav-item"><a href="${pageContext.request.contextPath }/community/group/groupList.do" class="nav-link">커뮤니티</a></li>
 		      <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
 		      
 			  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
@@ -112,7 +118,7 @@
         	 <ul class="navbar-nav ml-auto">
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
-		          <li class="nav-item"><a href="${pageContext.request.contextPath }/recruit/recruitList.do" class="nav-link">커뮤니티</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/community/group/groupList.do" class="nav-link">커뮤니티</a></li>
 		   
 	        	  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
 	        		<div>반갑습니다. &nbsp;</div>
@@ -156,17 +162,17 @@
 	      <div class="modal-body">
 	      	<div class="col-sm-10 mb-2">
 	    	    <a href="${pageContext.request.contextPath }/member/memberProfile.do">
-	    	            👩🏻 마이 프로필
+	    	            👩🏻 회원정보
 	    	    </a>
 	      	</div>
-	      	<div class="col-sm-10 mb-2">
+	      <%-- 	<div class="col-sm-10 mb-2">
 	    	    <a href="${pageContext.request.contextPath }/space/insertSpace.do">
 	    	            💒 공간 등록 
 	    	    </a>
-	      	</div>
+	      	</div> --%>
 	      	<div class="col-sm-10 mb-2">
 		        <a href="${pageContext.request.contextPath }/member/usageHistory.do">
-		           🧭 예약관리
+		           🧭 나의 예약내역
 		        </a>
 	      	 </div>
 	      	 <div class="col-sm-10 mb-2">
