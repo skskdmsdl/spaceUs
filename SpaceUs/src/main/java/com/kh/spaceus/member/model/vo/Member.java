@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
- @Getter
+@Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,7 +27,7 @@ public class Member implements Serializable{
 	private String password;
 	private String nickName;
 	private String memberPhone;
-	private Date birtDay; 
+	private Date birthDay; 
 	private Date memberRegDate; //가입일
 	private int attendanceCnt; //출석횟수
 	//private List<SimpleGrantedAuthority> authorities; //권한 ('U', 'H', 'A')

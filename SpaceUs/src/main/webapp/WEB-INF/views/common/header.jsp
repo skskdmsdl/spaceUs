@@ -68,9 +68,14 @@
   <%-- <script src="${pageContext.request.contextPath }/resources/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="${pageContext.request.contextPath }/resources/js/google-map.js"></script> --%>
 
-  <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-   <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
-  
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+ <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
+<script>
+<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
+<c:if test="${ not empty msg }">
+	alert('${ msg }');	
+</c:if>
+</script>
   </head>
   
   <body>

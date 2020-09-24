@@ -23,6 +23,12 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
 </head>
+<script>
+<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
+<c:if test="${ not empty msg }">
+	alert('${ msg }');	
+</c:if>
+</script>
 <body>
 	
 	<div class="limiter">

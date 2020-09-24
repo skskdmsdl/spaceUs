@@ -6,8 +6,8 @@ purge recyclebin; -- bin 비우기
 -----------------------------
 create table member(
 		member_email varchar2(256),
+        nickname varchar2(256) not null,
         password varchar2(300) not null,
-		nickname varchar2(256) not null,
 		member_phone char(11) not null,
 		birthday date,
 		member_regdate date default sysdate,
@@ -20,17 +20,6 @@ select * from member;
 --권한 컬럼 삭제
 ALTER TABLE member DROP COLUMN authority;
 
-insert into member values(
-    'honggd@naver.com',
-    '홍길동',
-    '1234',
-    '01012341234',
-    null,
-    default,
-    default
-);
-
-commit;
 
 
 -----------------------------
