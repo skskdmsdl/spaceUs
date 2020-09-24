@@ -15,4 +15,18 @@ public class AdminController {
 	public String memberManage() {
 		return "admin/memberManage";
 	}
+	
+	//공간관리 폼
+	@RequestMapping("/spaceManage.do")
+	public String spaceManage() {
+		return "admin/spaceManage";
+	}
+	
+	//블랙리스트관리 폼
+	@RequestMapping("/blackListManage.do")
+	public String blackListManage() {
+		return "admin/blackListManage";
+	}
+	
+	
 }
