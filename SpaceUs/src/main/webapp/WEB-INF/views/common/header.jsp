@@ -157,7 +157,7 @@
 	      <div class="modal-body">
 	      	<div class="col-sm-10 mb-2">
 	    	    <a href="${pageContext.request.contextPath }/member/memberProfile.do">
-	    	            👩🏻 마이 프로필
+	    	            👩🏻 회원정보
 	    	    </a>
 	      	</div>
 	      <%-- 	<div class="col-sm-10 mb-2">
@@ -167,7 +167,7 @@
 	      	</div> --%>
 	      	<div class="col-sm-10 mb-2">
 		        <a href="${pageContext.request.contextPath }/member/usageHistory.do">
-		           🧭 예약관리
+		           🧭 나의 예약내역
 		        </a>
 	      	 </div>
 	      	 <div class="col-sm-10 mb-2">

@@ -82,8 +82,8 @@
                        <div class="card-body">
                         <div class="row"> 
                          <div class="col-md-10">
-                             <h5 class="card-title">나의 정보</h5>
-                             <h6 class="card-subtitle mb-5">회원정보를 확인하세요</h6>
+                             <h5 class="card-title">공간 정보</h5>
+                             <h6 class="card-subtitle mb-5">공간 정보를 확인하세요</h6>
                          </div>
 	                    </div>
 						 <table class="col-11">
