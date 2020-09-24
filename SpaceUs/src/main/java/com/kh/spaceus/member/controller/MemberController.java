@@ -6,18 +6,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
@@ -31,8 +39,13 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 @RequestMapping("/member")
 public class MemberController {
 	
+	private Logger log = LoggerFactory.getLogger(MemberController.class);
+	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	//프로필
 	@RequestMapping("/memberProfile.do")
@@ -84,11 +97,49 @@ public class MemberController {
 	}
 	
 	//로그인
-	@RequestMapping("/memberLogin.do")
-	public String memberLogin () {
+	@RequestMapping(value = "/memberLogin.do",
+					method = RequestMethod.POST)
+	public String memberLogin(@RequestParam String memberEmail,
+							  @RequestParam String password,
+							  Model model,
+							  RedirectAttributes redirectAttr,
+							  HttpSession session) {		
 		
-		return "redirect:/";
+		log.debug("memberEmail@controller = {}",  memberEmail);
+		log.debug("password@controller = {}",  password);
+		
+		Member member = memberService.selectOneMember(memberEmail);
+		log.debug("member@controller = {}",  member);
+		
+		String location = "/";
+		
+		
+		//로그인 성공했을때
+		if(member != null && bcryptPasswordEncoder.matches(password, member.getPassword())) {
+			//Model을 통한 세션처리
+			model.addAttribute("loginMember", member);
+			
+			//세션에서 next값 가져오기
+//			String next = (String)session.getAttribute("next");
+//			location = next != null ? next: location;
+//			session.removeAttribute("next");
+		
+		//로그인 실패했을때
+		} else {
+			redirectAttr.addFlashAttribute("msg","아이디 또는 비밀번호가 맞지 않습니다.");
+		}
+		return "redirect:" + location;
 	}
+	
+	@PostMapping("/memberLoginFailure.do")
+	public String memberLoginFailure(RedirectAttributes redirectAttr) {
+		
+		//사용자피드백 전달
+		redirectAttr.addFlashAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+		
+		return "redirect:/member/memberLoginForm.do";
+	}
+	
 	
 	//비밀번호찾기 창
 	@RequestMapping("/passwordFinder.do")
@@ -96,17 +147,17 @@ public class MemberController {
 		return "member/passwordFinder";
 	}
 	
+	//로그아웃
+	@RequestMapping("/memberLogout.do")
+	public String memberLogout() {
+		return "redirect:/";
+	}
+	
 	//회원가입
 	@RequestMapping("/memberEnrollForm.do")
 	public String memberEnroll() {
 		
 		return "member/memberEnrollForm";
-	}
-	
-	//로그아웃
-	@RequestMapping("/memberLogout.do")
-	public String memberLogout() {
-		return "redirect:/";
 	}
 	
 	//이메일중복검사
@@ -158,24 +209,39 @@ public class MemberController {
 	    params.put("to", phone);
 	    params.put("from", "01045049209"); //무조건 자기번호 (인증)
 	    params.put("type", "SMS");
-	    params.put("text", "인증번호 : " + phoneChk);
+	    params.put("text", phoneChk);
 	    params.put("app_version", "spaceUs"); // application name and version
 
 	    try {
-    	//send() 는 메시지를 보내는 함수  
+    	//send() 는 메시지를 보내는 함수 
 	      JSONObject obj = (JSONObject) coolsms.send(params);
 	      log.debug(obj.toString());
 	    } catch (CoolsmsException e) {
 	      log.error("error", e);
 	  }
-		System.out.println("params = " + params);
 		return params;
 	}
 
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+	@RequestMapping(value = "/memberEnroll.do",
+			method = RequestMethod.POST)
+	public String memberEnroll(Member member, RedirectAttributes redirectAttr) {
+		
+//		log.debug("member@controller = {}", member);
+		
+		String rawPassword = member.getPassword();
+		String encryptPassword = bcryptPasswordEncoder.encode(rawPassword);
+		member.setPassword(encryptPassword);
+		
+//		log.debug("rawPassword@controller = {}", rawPassword);
+//		log.debug("encryptPassword@controller = {}", encryptPassword);
+		
+		int result = memberService.insertMember(member);
+		
+//		log.debug("result@controller =", result);
+		
+		String msg = (result > 0) ? "회원가입 성공!" : "회원가입 실패!";
+		redirectAttr.addFlashAttribute("msg", msg);
+		
+		return "member/memberLoginForm";
 	}
-	
 }

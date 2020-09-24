@@ -15,21 +15,46 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
- @Getter
+@Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 
-public class Member implements Serializable{
+public class Member implements Serializable, UserDetails{
 	
 	private String memberEmail;
 	private String password;
 	private String nickName;
 	private String memberPhone;
-	private Date birtDay; 
+	private Date birthDay; 
 	private Date memberRegDate; //가입일
 	private int attendanceCnt; //출석횟수
-	//private List<SimpleGrantedAuthority> authorities; //권한 ('U', 'H', 'A')
+	private List<SimpleGrantedAuthority> authorities; //권한 ('U', 'H', 'A')
 	
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+	@Override
+	public String getUsername() {
+		return memberEmail;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }

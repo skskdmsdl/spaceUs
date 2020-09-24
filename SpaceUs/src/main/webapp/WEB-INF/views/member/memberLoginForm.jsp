@@ -23,14 +23,19 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
 </head>
+<script>
+<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
+<c:if test="${ not empty msg }">
+	alert('${ msg }');	
+</c:if>
+</script>
 <body>
-	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg-01.jpg');
 											 background-position: right">
-				<form:form action="${pageContext.request.contextPath }/member/memberLogin.do"
-							class="login100-form validate-form" >
+				<form:form action="${pageContext.request.contextPath }/member/memberLogin.do" method="POST"
+							class="login100-form validate-form">
 					<span class="login100-form-title p-b-43">
 						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 					</span>
@@ -44,7 +49,7 @@
 						</div>
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz"
 						style="width: 100%;">
-						<input class="input100" type="text" name="email" placeholder="email">
+						<input class="input100" type="text" name="memberEmail" placeholder="email">
 						<span class="focus-input100">email</span>
 						<span class="focus-output100"></span>
 					</div>

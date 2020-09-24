@@ -25,4 +25,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectOneNickName(nickName);
 	}
 
+	@Override
+	public int insertMember(Member member) {
+		return memberDAO.insertMember(member);
+	}
+
 }

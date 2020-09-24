@@ -23,6 +23,25 @@
 </select>
 
 
+<insert id="insertMember">
+	insert all
+		into member values (
+			#{ memberEmail },
+			#{ nickName },
+			#{ password },
+			#{ memberPhone },
+			#{ birthDay },
+			default,
+			default
+		)
+		into auth values (
+			#{ memberEmail },
+			default
+		)
+	select * from dual
+</insert>
+
+
 <resultMap type="member" id="memberMap">
 </resultMap>
 </mapper>
