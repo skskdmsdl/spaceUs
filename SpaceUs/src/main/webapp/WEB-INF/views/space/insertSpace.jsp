@@ -162,9 +162,9 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 
                             </div>
                             
-                            
                             <div class="pf-feature-price">
                                 <h4>공간 태그<span class="text-danger">*</span></h4>
+                                
                                 <div class="row">
 	                                <div class="ml-3 mb-3" style="width:31%">
 	                                    <input id="tagName" type="text" placeholder="태그를 입력해주세요">
@@ -173,7 +173,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                            <button id="addTags" type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">추가 ⅴ</button>
 		                            </div>
 	                            </div>
-		                        <span id="tags"></span>
+		                        <span id="tags" style="cursor: pointer;"></span>
                             </div>
                             <div class="pf-feature-price">
                                 <h4>가격 (시간당)<span class="text-danger">*</span></h4>
@@ -241,13 +241,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 <h4>사업자등록증<span class="text-danger">*</span></h4>
                                 <div class="row">
 	                                <div class="ml-3 mb-3" style="width:31%">
-	                                    <input id="tagName" type="text" placeholder="사업자 번호를 입력해주세요">
+	                                    <input  type="text" placeholder="사업자 번호를 입력해주세요">
 	                                </div>
 	                                <div>
-			                            <button id="addTags" type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">조회</button>
+			                            <button  type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">조회</button>
 		                            </div>
 	                            </div>
-		                        <span id="tags"></span>
+		                        <span ></span>
                             </div>
                             <div class="pf-feature-price">
                                 <h4>계좌정보<span class="text-danger">*</span></h4>
@@ -306,10 +306,32 @@ $("#addTags").on('click', function(){
 		alert("최대 5개까지 입력 가능합니다");
 	}
 	else if($("#tagName").val()!=""){
-    	$("#tags").append("<span class='label label-success m-2 p-2 small'>#"+$('#tagName').val()+"</span>"); 
-    	$("#tagName").val("");
+		alert($("#tagName").val());
+		
+		//태그 인서트
+		$.ajax({
+		url : "${ pageContext.request.contextPath }/space/insertHashTag.do",
+		data : {
+			hashTag : $("#tagName").val();
+		},
+		dataType : "json",
+		success : function(data){
+			$("#tags").append("<span class='label label-success m-2 p-2 small'>#"+$('#tagName').val() +" X</span>"); 
+	    	$("#tagName").val("");	
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+		}); 
+		
+    	
     }
 });
+//태그 삭제 클릭이벤트
+$("#tags").on("click", function(){
+   //내용작성하기 
+});
+//태그 인서트
 
 
 </script>
