@@ -29,7 +29,7 @@
 			<div class="wrap-login100" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_2.jpg');
 											background-position: right;">
 				<form class="login100-form validate-form" id="memberEnrollFrm"
-					  action="${pageContext.request.contextPath}">
+					  action="">
 					<span class="login100-form-title p-b-43">
 						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 					</span>
@@ -316,34 +316,46 @@ $("#nickName").blur(function(){
 		}
 	});
 });
+$(function(){
+	var text;
 
-//문자인증
-$(".phone-btn").click(function(){
+	//문자인증
+	$(".phone-btn").click(function(){
 
-	$.ajax({
-		url : "${ pageContext.request.contextPath }/member/sendSms.do",
-		data : {
-			phone : $("#phone").val()
-		},
-		dataType : "json",
-		success : function(data){
-			console.log(data);
-			alert("인증번호를 전송했습니다.");
-			
-			if(data.text != $("#phoneChk").val()){
-				$(".phoneChk").show();
-				$("#phoneValid").val(0);
-				$("#phoneChk").val('').focus();
+		$.ajax({
+			url : "${ pageContext.request.contextPath }/member/sendSms.do",
+			async : false,
+			data : {
+				phone : $("#phone").val()
+			},
+			dataType : "json",
+			success : function(data){
+				text = data.text;
+				//console.log(text);
+				alert("인증번호를 전송했습니다.");
+				
+			},
+			error : function(xhr, status, err){
+				console.log("처리실패", xhr, status, err);
 			}
-			else {
-				$(".phoneChk").hide();
-				$("#phoneValid").val(1);
-			}
-		},
-		error : function(xhr, status, err){
-			console.log("처리실패", xhr, status, err);
+		});
+	});
+
+	$("#phoneChk").blur(function(){
+
+		//console.log(text);
+		
+		if(text == $("#phoneChk").val()){
+			$(".phoneChk").hide();
+			$("#phoneValid").val(1);
+		}
+		else {
+			$(".phoneChk").show();
+			$("#phoneValid").val(0);
+			$("#phoneChk").val('').focus();
 		}
 	});
 });
+
 </script>
 </html>

@@ -158,7 +158,7 @@ public class MemberController {
 	    params.put("to", phone);
 	    params.put("from", "01045049209"); //무조건 자기번호 (인증)
 	    params.put("type", "SMS");
-	    params.put("text", "인증번호 : " + phoneChk);
+	    params.put("text", phoneChk);
 	    params.put("app_version", "spaceUs"); // application name and version
 
 	    try {
@@ -168,7 +168,6 @@ public class MemberController {
 	    } catch (CoolsmsException e) {
 	      log.error("error", e);
 	  }
-		System.out.println("params = " + params);
 		return params;
 	}
 
