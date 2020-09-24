@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
 	xmlns:beans="http://www.springframework.org/schema/beans"
@@ -24,12 +25,13 @@
 	
 		<intercept-url pattern="/**" access="permitAll"/>		
 		
-		<!-- 시큐리티와 커스텀 로그인 "페이지"만 연결 -->
+		<!-- 시큐리티 로그인 -->
 		 <form-login
 			login-page="/member/memberLoginForm.do"
 			login-processing-url="/member/memberLogin.do" 
-			username-parameter="email"
+			username-parameter="memberEmail"
 			password-parameter="password"
+			authentication-failure-forward-url="/member/memberLoginFailure.do"
 		/>
 		
 		<logout
@@ -44,9 +46,9 @@
 
 	<!-- #8.4 사용자 인증 -->
 	<authentication-manager>
-		<authentication-provider>
+		 <!-- <authentication-provider>
 			<password-encoder ref="bcryptPasswordEncoder"/>
-			<!-- 1. in-memory 사용자 인증 -->
+			1. in-memory 사용자 인증
 			<user-service>
 				<user name="honggd"
 				      password="$2a$10$vY8lYMy7Xt.Qz9sTUH4V6uu2tYllGHtM2ehm39at.sbIVo4JBW4Ta" 
@@ -61,9 +63,13 @@
 					   password="$2a$10$vY8lYMy7Xt.Qz9sTUH4V6uu2tYllGHtM2ehm39at.sbIVo4JBW4Ta"
 					   authorities="ROLE_HOST"/>
 			</user-service>
+		</authentication-provider> -->
+		<!-- UserDetails 구현체를 통해 db에서 인증하기 -->
+		 <authentication-provider user-service-ref="securityService">
+			<password-encoder ref="bcryptPasswordEncoder"/>	
 		</authentication-provider>
 	</authentication-manager>
 	
-	<!-- 
-	<context:component-scan base-package="com.kh.security" /> -->
+	
+	<context:component-scan base-package="com.kh.security" />
 </beans:beans>

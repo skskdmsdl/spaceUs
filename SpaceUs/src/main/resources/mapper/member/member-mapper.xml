@@ -24,17 +24,21 @@
 
 
 <insert id="insertMember">
-	insert into
-		member
-	values (
-		#{ memberEmail },
-		#{ nickName },
-		#{ password },
-		#{ memberPhone },
-		#{ birthDay },
-		default,
-		default
-	)
+	insert all
+		into member values (
+			#{ memberEmail },
+			#{ nickName },
+			#{ password },
+			#{ memberPhone },
+			#{ birthDay },
+			default,
+			default
+		)
+		into auth values (
+			#{ memberEmail },
+			default
+		)
+	select * from dual
 </insert>
 
 
