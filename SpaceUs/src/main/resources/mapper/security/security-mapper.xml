@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="security">
+
+<select id="loadUserByUsername" resultMap="memberMap">
+	select
+	    *
+	from
+	    member M
+	  left join auth A
+	    on M.member_email = A.member_email
+	where 
+	    M.member_email = #{ username }
+</select>
+
+
+<resultMap type="member" id="memberMap">
+	<id column="member_email" property="memberEmail"/>
+	<result column="nickname" property="nickName"/>
+	<result column="password" property="password"/>
+	<result column="member_phone" property="memberPhone"/>
+	<result column="birthday" property="birthDay"/>
+	<result column="member_regdate" property="memberRegDate"/>
+	<result column="attendance_cnt" property="attendanceCnt"/>
+	<collection property="authorities"
+				column="member_email"
+				ofType="simpleGrantedAuthority">
+	<!-- 생성자호출코드 -->
+		<constructor>
+			<arg column="authority" javaType="string"/>
+		</constructor>
+	</collection>
+</resultMap>
+
+
+</mapper>

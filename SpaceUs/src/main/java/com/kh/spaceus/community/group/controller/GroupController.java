@@ -17,9 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/community/group")
 public class GroupController {
-	
+
 	@Autowired
-	GroupService groupService;
+	private GroupService groupService;
 	
 	// 소모임 게시판
 	@RequestMapping("/groupList.do")
