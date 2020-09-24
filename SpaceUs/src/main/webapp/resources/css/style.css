@@ -15272,3 +15272,6 @@ i[class^=icon-chevron]{
 #couponEnd, #couponEnd2{
 	margin-left:10px;
 }
+/* 공간등록 테이블들 */
+#categoryTb th:hover{background: #ececec; cursor: pointer;}
+#optionTb th:hover{background: #ececec; cursor: pointer;}

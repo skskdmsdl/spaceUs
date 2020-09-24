@@ -11,6 +11,19 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
+<style>	
+*{margin:0; padding:0;}
+.star{
+  display:inline-block;
+  width: 30px;height: 30px;
+  cursor: pointer;
+  background: url(http://gahyun.wooga.kr/main/img/testImg/star.png) no-repeat 0 0; 
+  background-size: 100%; 
+}
+.star.on{
+  background-image: url(http://gahyun.wooga.kr/main/img/testImg/star_on.png);
+}
+</style>
 
 <div class="skin-default-dark fixed-layout">
     <div class="preloader">
@@ -119,6 +132,36 @@
                                        </div>
                                    </div>
                                    </div>
+				                         <div class="pl-5 pr-5" style="height: 150px;">
+				                         	<div class="row pl-3 align-items-xl-center">
+				                         		<p class="m-1" style="font-size: 15px;">별점 &nbsp;&nbsp;:</p>
+				                         		<div class="star-box">
+												  <span class="star mt-2"></span>
+												  <span class="star "></span>
+												  <span class="star "></span>
+												 <span class="star "></span>
+												 <span class="star "></span>
+												</div>
+												<div>
+												</div>
+												<form name="boardFrm" 
+													  action="${pageContext.request.contextPath}/review/테스트.do" 
+													  method="post" 
+													  onsubmit="return boardValidate();"
+													  enctype="multipart/form-data"
+													  style="position: absolute;right: 53px;">
+													  <div class="input-group mb-3" style="padding:0px;">
+													  <div class="custom-file">
+													    <input type="file" class="custom-file-input" name="upFile" id="upFile1" >
+													    <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
+													  </div>
+													</div>
+												<!-- <div class="m-1" style="position: absolute;right: 60px;">+ 사진</div> -->
+												</form>
+				                         	</div>
+				                         		 <textarea class="col-lg-11" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+				                           		<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+				                           </div>
                                   </div>
                                   <div class="sl-item">
                                 <div class="row">
@@ -215,3 +258,27 @@
 <!-- This page plugins -->
 <!-- ============================================================== -->
 <!--morris JavaScript -->
+<script>
+$(".star").on('click',function(){
+	   var idx = $(this).index();
+	   $(".star").removeClass("on");
+	     for(var i=0; i<=idx; i++){
+	        $(".star").eq(i).addClass("on");
+	   }
+	 });
+//사진 첨부
+$(function(){
+	$("[name=upFile]").on("change", function(){
+		//input:file 내부에 저장된 file객체 가져오기
+		var file = $(this).prop("files")[0];
+		var $label = $(this).next('.custom-file-label');
+		
+		//label에 쓰기
+		if(file == undefined)
+			$label.html("파일을 선택하세요.");
+		else 
+			$label.html(file.name);
+		
+	});
+});
+</script>

@@ -71,8 +71,6 @@
   <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
   
-  
-   <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
   </head>
   
   <body>
