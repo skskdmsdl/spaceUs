@@ -104,18 +104,44 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                          </div>
                          
                          
+                         <!-- 댓글등록 시작 -->
                          <div style="background-color: #fafafa; height: 200px; border: 1px solid #edeceb; ">
-                         <div class="pl-5 pr-5 pt-4">
-                         		<p>댓글 0개</p>
-                         		 <textarea class="col-lg-11" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-                           		<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
-                           </div>
+	                         <div class="pl-5 pr-5 pt-4">
+	                       		<p>댓글 0개</p>
+	                       		<textarea class="col-lg-11" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+	                         	<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+	                         </div>
                          </div>
+                         <!-- 댓글등록 끝 -->
+                         
+                         <!-- 댓글시작 -->
+                         <div style="border-bottom: 2px solid #d0d0d0;padding-buttom:2px;padding-bottom: 10px;">
+		                    <div class="level1">
+								<td>
+									<sub class="comment-writer">
+										김양희
+									</sub>
+									<sub class="comment-date">
+										2020-1-2
+									</sub>
+									<br />
+										안녕하세여
+								</>
+								<div style="float:right;">
+									<button class="btn-reply button" value="ㅇㅇ">답글</button>
+									<button class="btn-delete btn-primary" value="ㅇㅇ">삭제</button>
+								</div>
+							 </div>
                          </div>
+                         <!-- 댓글 끝 -->
+                         
+                       
+                         
+                        
                          </div>
                          <div class="text-center">
-			                 	<a href='${pageContext.request.contextPath }/recruit/recruitList.do' class="btn m-1" style="background-color: #00c89e; font-size:20px; color:white;"><i class="fa fa-list"></i> 목록</a>
-                             </div>
+			                 	<a href='#' class="btn m-1" style="background-color: #00c89e; font-size:20px; color:white;"><i class="fa fa-list"></i> 목록</a>
+                         </div>
                      </div>
                  </div>
              </section>
