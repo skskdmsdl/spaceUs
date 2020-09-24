@@ -10,4 +10,6 @@ public interface MemberService {
 
 	int insertMember(Member member);
 
+	Member selectOnePhone(String phone);
+
 }

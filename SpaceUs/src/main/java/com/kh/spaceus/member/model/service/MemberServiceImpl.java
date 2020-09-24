@@ -30,4 +30,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.insertMember(member);
 	}
 
+	@Override
+	public Member selectOnePhone(String phone) {
+		return memberDAO.selectOnePhone(phone);
+	}
+
 }

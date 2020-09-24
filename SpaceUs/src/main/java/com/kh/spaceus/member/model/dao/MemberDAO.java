@@ -10,4 +10,6 @@ public interface MemberDAO {
 
 	int insertMember(Member member);
 
+	Member selectOnePhone(String phone);
+
 }

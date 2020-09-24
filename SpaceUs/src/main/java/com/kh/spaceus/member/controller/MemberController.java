@@ -114,9 +114,8 @@ public class MemberController {
 		String location = "/";
 		
 		
-		//로그인 성공했을때
+		//로그인 성공
 		if(member != null && bcryptPasswordEncoder.matches(password, member.getPassword())) {
-			//Model을 통한 세션처리
 			model.addAttribute("loginMember", member);
 			
 			//세션에서 next값 가져오기
@@ -124,9 +123,9 @@ public class MemberController {
 //			location = next != null ? next: location;
 //			session.removeAttribute("next");
 		
-		//로그인 실패했을때
+		//로그인 실패
 		} else {
-			redirectAttr.addFlashAttribute("msg","아이디 또는 비밀번호가 맞지 않습니다.");
+			redirectAttr.addFlashAttribute("msg","아이디 또는 비밀번호가 일치하지 않습니다.");
 		}
 		return "redirect:" + location;
 	}
@@ -134,7 +133,6 @@ public class MemberController {
 	@PostMapping("/memberLoginFailure.do")
 	public String memberLoginFailure(RedirectAttributes redirectAttr) {
 		
-		//사용자피드백 전달
 		redirectAttr.addFlashAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 		
 		return "redirect:/member/memberLoginForm.do";
@@ -197,36 +195,42 @@ public class MemberController {
 	//휴대폰인증전송
 	@RequestMapping("/sendSms.do")
 	@ResponseBody
-	public HashMap<String, String> sendSms(HttpServletRequest request, @RequestParam("phone") String phone) throws Exception {
+	public HashMap<String, String> sendSms(HttpServletRequest request, RedirectAttributes redirectAttr, 
+										   @RequestParam("phone") String phone) throws Exception {
 		
 		String api_key = "NCS6NKC9PWO2KDJA";
 	    String api_secret = "4NQ8EPL3E7ASKRNC54XECT5NTXMB0EPB";
 	    String phoneChk = RandomStringUtils.randomNumeric(4);
 	    
 	    Message coolsms = new Message(api_key, api_secret);
-
+	    
+	    Member member = memberService.selectOnePhone(phone);
+	    log.debug("phoneChk = {}", phoneChk);
+	    log.debug("member = {}", member);
+	    
 	    HashMap<String, String> params = new HashMap<>();
-	    params.put("to", phone);
-	    params.put("from", "01045049209"); //무조건 자기번호 (인증)
-	    params.put("type", "SMS");
-	    params.put("text", phoneChk);
-	    params.put("app_version", "spaceUs"); // application name and version
-
-	    try {
-    	//send() 는 메시지를 보내는 함수 
-	      JSONObject obj = (JSONObject) coolsms.send(params);
-	      log.debug(obj.toString());
-	    } catch (CoolsmsException e) {
-	      log.error("error", e);
-	  }
-		return params;
+	    
+	    if (member == null) {
+	    	params.put("to", phone);
+	    	params.put("from", "01045049209"); //무조건 자기번호 (인증)
+	    	params.put("type", "SMS");
+	    	params.put("text", phoneChk);
+	    	params.put("app_version", "spaceUs"); // application name and version
+	    	
+	    	try {
+	    		JSONObject obj = (JSONObject) coolsms.send(params);
+	    		log.debug(obj.toString());
+	    	} catch (CoolsmsException e) {
+	    		log.error("error", e);
+	    	}
+	    }
+	    
+	    return params;
 	}
 
 	@RequestMapping(value = "/memberEnroll.do",
 			method = RequestMethod.POST)
 	public String memberEnroll(Member member, RedirectAttributes redirectAttr) {
-		
-//		log.debug("member@controller = {}", member);
 		
 		String rawPassword = member.getPassword();
 		String encryptPassword = bcryptPasswordEncoder.encode(rawPassword);
@@ -242,6 +246,7 @@ public class MemberController {
 		String msg = (result > 0) ? "회원가입 성공!" : "회원가입 실패!";
 		redirectAttr.addFlashAttribute("msg", msg);
 		
-		return "member/memberLoginForm";
+//		return "member/memberLoginForm";
+		return "redirect:/member/memberLoginForm.do";
 	}
 }
