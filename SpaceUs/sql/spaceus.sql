@@ -1,8 +1,4 @@
 --spaceus
-
-<<<<<<< HEAD
-select * from category;
-=======
 purge recyclebin; -- bin 비우기
 
 -----------------------------
