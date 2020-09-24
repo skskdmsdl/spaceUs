@@ -13,4 +13,15 @@
 	<resultMap type="board" id="boardMap">
 	
 	</resultMap>
+	
+	<!-- groupBoard List -->
+	<select id="selectListGroupBoard" resultMap="groupBoardMap">
+		select
+			*
+		from
+			group_board
+	</select>
+	<resultMap type="groupBoard" id="groupBoardMap">
+	
+	</resultMap>
 </mapper>

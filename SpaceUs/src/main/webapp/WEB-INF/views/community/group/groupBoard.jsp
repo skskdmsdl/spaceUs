@@ -21,13 +21,23 @@
 	height: 200px;
 	margin-right: 20px;
 }
-.fas {float:right;}
+.fa-caret-down {float:right;}
+.fa-arrow-right {float:left; margin-right: 1.5em; padding-top:.4em;}
+/* .fa-arrow-right.click {
+	transform: rotate(180deg);
+}
+.fa-arrow-right.click {
+    height: 100%;
+    transition: transform 300ms ease-in-out;
+}
+ */
 input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 .site-btn {width: 100%; font-size: 17px;}
 
 #sideinfo {float:left;}
 #content  { background-color:#F5F5F5; float:right;}
 </style>
+
 
 <!-- 컨텐츠 시작 -->
 	<!-- 네브바 -->
@@ -74,13 +84,32 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                 	<!-- <div class="d-flex"></div> -->
                 	<aside id="sideinfo" class="w-25 pr-3">
 	                	<div class="list-group">
-	                		<c:forEach items="${boardList}" var="board" varStatus="vs">
-								<a href="#" class="list-group-item list-group-item-action">
-									${board.boardName}
-									<span class="badge badge-primary badge-pill">14</span>
-									<i class="fas fa-caret-down" style="padding: 0; position: relative; right:0;"></i>
-								</a>
-	                		</c:forEach>
+	                	<div class="list-group-item list-group-item-action">
+								전체보기
+								<span class="badge badge-primary badge-pill">14</span>
+						</div>
+	                <c:forEach items="${boardList}" var="board" varStatus="vs">
+		                <c:if test="${board.boardLevel == 1}">
+							<div class="list-group-item list-group-item-action upper-list" id="upper" onclick="upperList();">
+								${board.boardName}
+								<span class="badge badge-primary badge-pill">14</span>
+								<i class="fas fa-caret-down" style="padding: 0; position: relative; right:0;"></i>
+							</div>
+	                 	</c:if>
+	                 	<c:if test="${board.boardLevel == 2}">
+	                 		<div class="list-group-item list-group-item-action sub-list">
+		                 		<i class="fas fa-arrow-right"></i>
+								${board.boardName}
+								<span class="badge badge-primary badge-pill">14</span>
+							</div>
+	                 	</c:if>
+	                 	<script>
+							 function upperList(){
+								var element = document.getElementById("upper");
+								element.classList.toggle("click");			
+							}
+						</script>
+		            </c:forEach>
 						</div>
                 	</aside>
                 	
@@ -98,66 +127,14 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                        </tr>
 			                    </thead>
 			                    <tbody>
-			                        <tr>
-			                            <td class="text-center">1</td>
-			                            <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-			                            <td class="txt-oflo">2020.09.22</td>
-			                            <td class="txt-oflo">니모</td>
+			                    <c:forEach items="${groupBoardList}" var="gb" varStatus="vs">
+			                        <tr style="cursor: pointer;" onclick = "location.href='${pageContext.request.contextPath }/community/group/groupDetail.do'">
+			                            <td class="text-center">${vs.count}</td>
+			                            <td class="txt-oflo"><span class="text-success mr-2">${gb.groupBoardNo}</span>${gb.groupBoardTitle}</td>
+			                            <td class="txt-oflo">${gb.groupBoardDate }</td>
+			                            <td class="txt-oflo">${gb.memberEmail}</td>
 			                        </tr>
-			                        <tr>
-			                            <td class="text-center">2</td>
-			                            <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>슬로베니아에서 영상제작 및 편집 가능자 모집합니다. (3개월 수습 후 정식 채용)</td>
-			                            <td class="txt-oflo">2020.09.22</td>
-			                            <td class="txt-oflo">니모</td>
-			                        </tr>
-			                        <tr>
-			                            <td class="text-center">3</td>
-			                            <td class="txt-oflo"><span class="text-info mr-2">[구직]</span>경력직같은 신입 지원합니다</td>
-			                            <td class="txt-oflo">2020.09.22</td>
-			                            <td class="txt-oflo">도리</td>
-			                        </tr>
-			                        <tr>
-			                            <td class="text-center">4</td>
-			                            <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-			                            <td class="txt-oflo">2020.09.22</td>
-			                            <td class="txt-oflo">도리</td>
-			                        </tr>
-			                        <tr>
-			                            <td class="text-center">5</td>
-			                            <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-			                            <td class="txt-oflo">2020.09.22</td>
-			                            <td><span class="txt-oflo">효리</span></td>
-			                        </tr>
-			                        <tr>
-			                            <td class="text-center">6</td>
-			                            <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-			                            <td class="txt-oflo">2020.09.22</td>
-			                            <td class="txt-oflo">효리</td>
-			                        </tr>
-			                        <tr>
-			                            <td class="text-center">7</td>
-			                            <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-			                            <td class="txt-oflo">2020.09.22</td>
-			                            <td class="txt-oflo">바다</td>
-			                        </tr>
-			                        <tr>
-			                            <td class="text-center">8</td>
-			                            <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-			                            <td class="txt-oflo">2020.09.22</td>
-			                            <td class="txt-oflo">바다</td>
-			                        </tr>
-			                        <tr>
-			                            <td class="text-center">9</td>
-			                            <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-			                            <td class="txt-oflo">2020.09.22</td>
-			                            <td class="txt-oflo">효리</td>
-			                        </tr>
-			                        <tr>
-			                            <td class="text-center">10</td>
-			                            <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-			                            <td class="txt-oflo">2020.09.22</td>
-			                            <td class="txt-oflo">효리</td>
-			                        </tr>
+			                    </c:forEach>			                      
 			                    </tbody>
 							</table>
 		                	<div class="container">

@@ -363,32 +363,45 @@ delete board where board_no = 4;
 
 select * from board;
 
-drop table board;
-
 -----------------------------
 ----------- 소모임 ----------
 -----------------------------
 create table group_board (
-	group_board_no varchar2(256),
-	board_no varchar2(256),
-	member_email varchar2(256),
-	view_cnt number default 0,
-	group_board_title varchar2(256) not null,
-	group_board_content varchar2(1000) not null,
-	report_cnt number default 0,	
+	group_board_no varchar2(256), --소모임 게시판 pk 번호
+	board_no varchar2(256), --소모임 게시판 분류 번호
+	member_email varchar2(256), --멤버 이메일 fk
+	view_cnt number default 0, --조회수
+	group_board_title varchar2(256) not null, --소모임 게시판 제목
+	group_board_content varchar2(1000) not null, --소모임 게시판 내용
+	report_cnt number default 0, --소모임 신고횟수
 
 	constraints pk_group_board_no primary key(group_board_no),
 	constraints fk_board_no foreign key(board_no) references board(board_no) on delete set null,
 	constraints fk_gorup_board_member_email foreign key(member_email) references member(member_email) on delete set null
 );
 
+alter table group_board add group_board_date date default sysdate;
+
 create sequence seq_group_board_no;
 
-
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD8','honggd@naver.com',default,'바리스타 관심있나요?','바리스타에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD8','honggd@naver.com',default,'커피 관심있나요?','커피에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD9','honggd@naver.com',default,'영화 관심있나요?','영화에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD9','honggd@naver.com',default,'영화관 관심있나요?','영화관에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD10','honggd@naver.com',default,'먹방 관심있나요?','먹방에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD10','honggd@naver.com',default,'돼지 관심있나요?','돼지에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD12','honggd@naver.com',default,'카페바 관심있나요?','카페바에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD13','honggd@naver.com',default,'오돌뼈 관심있나요?','오돌뼈에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD14','honggd@naver.com',default,'댄스파티 관심있나요?','댄스파티에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD14','honggd@naver.com',default,'어학공부 관심있나요?','프랑스어에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
 
 select * from group_board;
 
-drop table group_board;
+delete from group_board where member_email = 'honggd@naver.com';
+drop sequence seq_group_board_no;
+
+commit;
+
 
 -----------------------------
 --------- 소모임댓글 ---------
