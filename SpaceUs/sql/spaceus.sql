@@ -1,1 +1,3 @@
 --spaceus
+
+select * from category;
