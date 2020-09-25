@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- 한글 인코딩처리 -->
 <!DOCTYPE html>
 <html lang="ko">
@@ -21,17 +23,28 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/vendor/daterangepicker/daterangepicker.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
+	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
+<script>
+	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
+	<c:if test="${ not empty msg }">
+		alert('${ msg }');	
+	</c:if>
+	<c:if test="${ not empty script }">
+		self.close();	
+	</c:if>
+</script>
 </head>
 <body style="background-color: #f7f7f7; overflow-x:hidden; overflow-y:hidden;">
 
 <div class="limiter">
 	<div class="container-login100">
+ 		<form:form action="${pageContext.request.contextPath}/member/sendMail.do" method="post">
 		<div class="wrap-login100" style="padding: 50px; padding-top: 20px">
 			<span class="login100-form-title p-b-43">
 				<p class="navbar-brand">비밀번호 찾기</p>
 			</span>
 			<div class="wrap-input100 validate-input" style="width: 100%; margin-right: 0px">
-				<input class="input100" type="text" name="email" placeholder="email">
+				<input class="input100" type="email" name="tomail" placeholder="email">
 				<span class="focus-input100">email</span>
 				<span class="focus-output100"></span>
 			</div>
@@ -43,11 +56,12 @@
 				</p><br />
 			</div>
 			<div class="container-login100-form-btn">
-				<button type="submit" class="login100-form-btn" onclick="">
+				<button type="submit" class="login100-form-btn">
 					임시 비밀번호 전송
 				</button>
 			</div>
 		</div>
+		</form:form>
 	</div>
 </div>
 </body>

@@ -1,5 +1,7 @@
 package com.kh.spaceus.member.model.dao;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -34,6 +36,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public Member selectOnePhone(String phone) {
 		return sqlSession.selectOne("member.selectOnePhone", phone);
 	}
-	
 
+	@Override
+	public int updatePassword(Map<String, Object> param) {
+		return sqlSession.update("member.updatePassword", param);
+	}
 }
