@@ -99,6 +99,10 @@
 		        </ul>
 		      </div>
 	      </sec:authorize>
+	      <c:if test="${sessionId != null}">
+			<h3>'${sessionId}' 님 환영합니다! </h3>
+	      </c:if>
+	      
 		  <sec:authorize access="hasRole('ROLE_HOST')">
 		  <div class="collapse navbar-collapse" id="ftco-nav"  data-toggle="modal" data-target="#exampleModal">
         	 <ul class="navbar-nav ml-auto">

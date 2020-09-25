@@ -36,7 +36,6 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Controller
 @Slf4j
-@Log4j
 @RequestMapping("/member")
 public class MemberController {
 	
