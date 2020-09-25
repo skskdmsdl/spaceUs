@@ -84,7 +84,7 @@
 	           		<div class="card p-5">
 	           			 <div class="card-body-wrapper">
 							<div class="btn-group">
-							  <button type="button" class="btn btn-primary alig-right">
+							  <button id="file-download" name="hostId" type="button" class="btn btn-primary alig-right" onclick="download();" value="${loginMember.principal.memberEmail}">
 							    정산 내역 내려받기
 							  </button>
 							 
@@ -159,7 +159,7 @@
     </div>
 </div>
 </div>
-</div>
+
 
 <script src="${pageContext.request.contextPath }/resources/js/Chart.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
@@ -182,6 +182,19 @@
 <script src="${ pageContext.request.contextPath }/resources/js/dashboard1.js"></script> --%>
 
 <script>
+
+function download(){
+	/* var hostId = $("#file-download").val(); */
+	
+	$("#file-download").attr("action", 
+	"${ pageContext.request.contextPath}/host/excelDown.do")
+	.attr("method", "POST")
+	.submit();	
+	
+	
+}
+
+
 let canvas = document.getElementById("bar-chart").getContext('2d');
 
 let ylabel= [0,0,0,0,0,9,9,9,9,9,10,10];

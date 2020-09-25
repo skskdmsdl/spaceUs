@@ -100,13 +100,13 @@
 		      </div>
 	      </sec:authorize>
 		  <sec:authorize access="hasRole('ROLE_HOST')">
-		  <div class="collapse navbar-collapse" id="ftco-nav"  data-toggle="modal" data-target="#exampleModal">
         	 <ul class="navbar-nav ml-auto">
 
 		  	  <li class="nav-item"><a href="${pageContext.request.contextPath }/host/spaceInfo.do" class="nav-link">호스트 센터</a></li>
 		      <li class="nav-item"><a href="${pageContext.request.contextPath }/community/group/groupList.do" class="nav-link">커뮤니티</a></li>
 		      <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
 		      
+		  <div class="collapse navbar-collapse" id="ftco-nav" data-toggle="modal" data-target="#exampleModal">
 			  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
 	        	<div>반갑습니다. &nbsp;</div>
 	        		<div>
@@ -114,15 +114,15 @@
 	        		</div>
 	          </div>  	 
 		  	</ul>
-		  </div>
 		  </sec:authorize>
+		  </div>
 	      <sec:authorize access="hasAnyRole('USER','ADMIN')">
-	        <div class="collapse navbar-collapse" id="ftco-nav"  data-toggle="modal" data-target="#exampleModal">
         	 <ul class="navbar-nav ml-auto">
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/community/group/groupList.do" class="nav-link">커뮤니티</a></li>
 		   
+	        <div class="collapse navbar-collapse" id="ftco-nav"  data-toggle="modal" data-target="#exampleModal">
 	        	  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
 	        		<div>반갑습니다. &nbsp;</div>
 	        		<div>
@@ -136,9 +136,9 @@
 	        			<img src="https://resource.miricanvas.com/image/common/profile_argo.svg">
 	        		</div>
 	        	
+		  	</sec:authorize>
 	        </div>
-		  </sec:authorize>
-		      </div>  
+		  </div>  
 	  </nav>
 	 
 	     
