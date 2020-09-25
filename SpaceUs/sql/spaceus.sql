@@ -49,6 +49,8 @@ create sequence seq_category_no;
 
 select * from category;
 
+insert into category values('cate'||seq_category_no.nextval,'카페');
+
 -----------------------------
 --------- 공간목록 ----------
 -----------------------------
@@ -77,10 +79,16 @@ CREATE TABLE space (
 
 create sequence seq_space_no;
 select * from space;
+select * from space where space_no = 'space2';
 
 --제약조건명 변경
 alter table space rename constraint pk_review_no to pk_space_no;
 commit;
+
+insert into space 
+values('space'||seq_space_no.nextval, 'cate2', 'sinsa@naver.com',
+        1111111, 'The Blue Sky Home', '경기도 파주시 금바위로',
+        '125-711-811', 70000, 0, sysdate, sysdate, 0, 0, 'O', 1111111111);
 
 -----------------------------
 -------- 공간첨부파일 --------
