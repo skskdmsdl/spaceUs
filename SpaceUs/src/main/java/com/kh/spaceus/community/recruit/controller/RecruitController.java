@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.kh.spaceus.community.recruit.model.service.RecruitService;
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
@@ -77,7 +79,6 @@ public class RecruitController {
 		
 		Recruit recruit = recruitService.selectOneRecruit(no);
 		log.debug("recruit = {}", recruit);
-		
 		model.addAttribute("recruit", recruit);
 		
 		return "community/recruit/recruitDetail";
@@ -100,7 +101,45 @@ public class RecruitController {
 		String msg = result > 0 ? "등록 성공!" : "등록실패";
 		redirectAttributes.addFlashAttribute("msg", msg);
 	
-	 return "redirect:/community/recruit/recruitDetail.do";
-	
+		return "redirect:/community/recruit/recruitDetail.do";
 	 }
+	 
+	 @RequestMapping("/recruitModify.do")
+	 public String recruitModify(@RequestParam("no") String no, Model model) {
+			Recruit recruit = recruitService.selectOneRecruit(no);
+			model.addAttribute("recruit", recruit);
+			return "community/recruit/updateRecruit";
+	 }
+	 
+	 //구인/구직 수정
+	/* @RequestMapping(value = "/updateRecruit.do",
+	      			 method = RequestMethod.POST)
+	 public ModelAndView updateRecruit(Recruit recruit,
+									  HttpServletRequest request){
+			//파라미터로 전달받지 않고 직접 객체 생성 또한 가능
+	    	//viewName 생성자에 전달 가능
+	    	ModelAndView mav = new ModelAndView("redirect:/community/recruit/updateRecruit.do");
+			log.debug("recruit = {}", recruit);
+			
+			//1.비지니스로직 실행
+			int result = recruitService.updateRecruit(recruit);
+			
+			//2.처리결과에 따라 view단 분기처리
+			String msg = "";
+			if(result>0){ 
+				msg="게시물 수정성공!";
+				Recruit updatedMember = recruitService.selectOneRecruit(Recruit.);
+				mav.addObject("loginMember", updatedMember);
+			}
+			else 
+				msg="게시물 수정실패!";
+			
+			//리다이렉트시 값전달하기
+			//RedirectAttributes와 동일하다.
+			FlashMap flashMap = RequestContextUtils.getOutputFlashMap(request);
+			flashMap.put("msg", msg);
+			
+			return mav;
+		}
+	 */
 }

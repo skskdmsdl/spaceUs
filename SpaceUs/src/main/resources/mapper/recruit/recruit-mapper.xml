@@ -45,7 +45,7 @@
 		)
 	</insert>
 	
-    <select id="selectOneRecruit" resultType="recruit">
+    <select id="selectOneRecruit" resultMap="recruitMap">
 		select 
 		   *
 		from 
