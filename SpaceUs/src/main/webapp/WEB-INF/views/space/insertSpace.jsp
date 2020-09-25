@@ -51,16 +51,34 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 <h4>공간설명<span class="text-danger">*</span></h4>
                                 <textarea name="example" style="width:100%; height:350px; border: 1px solid #ebebeb; resize: none;"></textarea>
                             </div>
+                           
+                           
+                            <!-- input type="text" id="sample6_postcode" placeholder="우편번호">
+							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+							<input type="text" id="sample6_address" placeholder="주소"><br>
+							<input type="text" id="sample6_detailAddress" placeholder="상세주소">
+							<input type="text" id="sample6_extraAddress" placeholder="참고항목"> -->
+							                           
+                           
+                           
+                           
+                           
                             <div class="pf-location">
                                 <h4>공간주소<span class="text-danger">*</span></h4>
+                                
                                 <div style="display:inline-block; width:40%">
-	                                <input class="zipCode-input" type="text" placeholder="우편번호"/>
+	                                <input class="zipCode-input" id="sample6_postcode" type="text" placeholder="우편번호"/>
 	                            </div>
                                 <div style="display:inline-block; width:40%">
-		                            <button type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">주소 검색</button>
+		                            <button type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10" onclick="sample6_execDaumPostcode()">주소 검색</button>
 	                            </div>
-                                <input class="address-input" type="text">
-                                <input class="detail-address-input" type="text" placeholder="상세주소를 입력해주세요">
+                                <input class="address-input mt-4" type="text" id="sample6_address">
+                                <div style="display:inline-block; width:48.5%" >
+                                	<input class="detail-address-input" type="text" id="sample6_extraAddress">
+                            	</div>
+                                <div style="display:inline-block; width:48.5%" class="ml-4">
+                                	<input class="detail-address-input" type="text" id="sample6_detailAddress" placeholder="상세주소를 입력해주세요">
+                            	</div>
                             </div>
                             <div class="pf-phone" style="margin-bottom: 45px;">
                                 <h4>공간전화번호<span class="text-danger">*</span></h4>
@@ -162,9 +180,9 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 
                             </div>
                             
-                            
                             <div class="pf-feature-price">
                                 <h4>공간 태그<span class="text-danger">*</span></h4>
+                                
                                 <div class="row">
 	                                <div class="ml-3 mb-3" style="width:31%">
 	                                    <input id="tagName" type="text" placeholder="태그를 입력해주세요">
@@ -173,7 +191,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                            <button id="addTags" type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">추가 ⅴ</button>
 		                            </div>
 	                            </div>
-		                        <span id="tags"></span>
+		                        <span id="tags" style="cursor: pointer;"></span>
                             </div>
                             <div class="pf-feature-price">
                                 <h4>가격 (시간당)<span class="text-danger">*</span></h4>
@@ -241,13 +259,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 <h4>사업자등록증<span class="text-danger">*</span></h4>
                                 <div class="row">
 	                                <div class="ml-3 mb-3" style="width:31%">
-	                                    <input id="tagName" type="text" placeholder="사업자 번호를 입력해주세요">
+	                                    <input  type="text" placeholder="사업자 번호를 입력해주세요">
 	                                </div>
 	                                <div>
-			                            <button id="addTags" type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">조회</button>
+			                            <button  type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">조회</button>
 		                            </div>
 	                            </div>
-		                        <span id="tags"></span>
+		                        <span ></span>
                             </div>
                             <div class="pf-feature-price">
                                 <h4>계좌정보<span class="text-danger">*</span></h4>
@@ -276,6 +294,58 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
     </section>
     <!-- Property Submit Section End -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
+
+
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("sample6_detailAddress").focus();
+            }
+        }).open();
+    }
+</script>
 <script>
 //카테고리테이블 클릭이벤트
 $("#categoryTb th").on("click", function(){
@@ -306,11 +376,32 @@ $("#addTags").on('click', function(){
 		alert("최대 5개까지 입력 가능합니다");
 	}
 	else if($("#tagName").val()!=""){
-    	$("#tags").append("<span class='label label-success m-2 p-2 small'>#"+$('#tagName').val()+"</span>"); 
-    	$("#tagName").val("");
+		
+		//태그 인서트
+		$.ajax({
+		url : "${ pageContext.request.contextPath }/space/insertHashTag.do",
+		data : {
+			"hashTag" : $("#tagName").val()
+			}
+		,
+		dataType : "json",
+		success : function(data){
+			
+			$("#tags").append("<span class='label label-success m-2 p-2 small'>#"+$('#tagName').val() +" X</span>"); 
+	    	$("#tagName").val("");	
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+		});  
+		
+    	
     }
 });
-
+//태그 삭제 클릭이벤트
+$("#tags").on("click", function(){
+   //내용작성하기 
+});
 
 </script>
 

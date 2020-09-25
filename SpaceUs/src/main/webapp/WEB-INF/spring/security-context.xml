@@ -19,6 +19,7 @@
 		<intercept-url pattern="/assets/**" access="permitAll"/> 
 		<intercept-url pattern="/member/**" access="permitAll"/>
 		<intercept-url pattern="/aboutus/**" access="permitAll"/>
+		<intercept-url pattern="/community/recruit/**" access="permitAll"/>
 		<intercept-url pattern="/space/spaceDetail.do" access="permitAll"/>
 		<intercept-url pattern="/space/searchSpace.do" access="permitAll"/>
 	
@@ -37,9 +38,9 @@
 			logout-url="/member/memberLogout.do"
 			logout-success-url="/"
 		/> 
-		<headers>
+		 <headers>
          <frame-options disabled="true"></frame-options>
-    </headers> 
+    </headers>  
 	</http>
 	
 

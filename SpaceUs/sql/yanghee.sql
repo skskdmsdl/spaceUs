@@ -16,7 +16,6 @@ create table member(
 );
 
 select * from member;
-commit;
 
 --권한 컬럼 삭제
 ALTER TABLE member DROP COLUMN authority;
@@ -300,8 +299,7 @@ create table recruit (
     constraints fk_recruit_email foreign key(member_email) references member(member_email) on delete set null,
     constraints ck_header check(header in ('구인', '구직'))
 );
-alter table recruit add title varchar2(256) NOT NULL;
-alter table recruit add content varchar2(2000) NOT NULL;
+
 create sequence seq_recruit_no;
 
 select * from recruit;
@@ -402,6 +400,15 @@ drop sequence seq_group_board_no;
 
 commit;
 
+--9/24---------------------------------------
+
+
+
+
+
+
+
+-----------------9/24-------------------------
 
 -----------------------------
 --------- 소모임댓글 ---------

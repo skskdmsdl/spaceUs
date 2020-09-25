@@ -23,7 +23,6 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 <!-- 컨텐츠 시작 -->
 <!-- 헤더 -->
 <section class="ftco-section ftco-agent">
-
  <div class="navbar justify-content-center navbar-dark bg-dark">
 	  <ul class="nav">
 		  <li class="nav-item">
@@ -59,31 +58,33 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                  <!-- column -->
                  <div class="col-12">
 						<p class="h3 mt-5 mb-3">글쓰기</p>
-                         
                          <div class="table-responsive">
+                         <form action="${pageContext.request.contextPath}/community/recruit/insertRecruit.do" id="recruitFrm" method="post">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                              <table class="table">
                                      <tr>
                                          <th >분류</th>
-                                         <th><select class="nice-select sm-width small">
-							                    <option value="">분류선택</option>
-							                    <option value="">구인</option>
-							                    <option value="">구직</option>
+                                         <th><select class="nice-select sm-width small" name="header">
+							                    <option value="" selected hidden>분류선택</option>
+							                    <option value="구인">구인</option>
+							                    <option value="구직">구직</option>
 							                </select></th>
                                      </tr>
                                      <tr>
                                          <td >제목</td>
-                                         <td><input type="text" placeholder="제목을 입력해주세요" style="border:none;"/></td>
+                                         <td><input type="text" placeholder="제목을 입력해주세요" style="border:none;" name="title"/></td>
                                      </tr>
                                      <tr>
                                      <td >내용</td>
                                         <td >
-							       			<textarea name="ir1" id="ir1" rows="15" style="width:100%;">내용을 입력해주세요.</textarea>
+							       			<textarea name="ir1" id="ir1" rows="15" style="width:100%;" ></textarea>
                                         </td>
                                      </tr>
                              </table>
                              <div class="text-center">
-			                 	<a href='javascript:void(0);' onclick="submitContents();" class="btn " style="margin-top:50px; background-color: #00c89e; font-size:18px; color:white;"> 글 등록</a>
+			                 	<button  id="insertBtn" class="btn " style="margin-top:50px; background-color: #00c89e; font-size:18px; color:white;"> 글 등록</button>
                              </div>
+                             </form>
 							 </div>
                          </div>
                      </div>
@@ -95,27 +96,42 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/smartEditor/js/HuskyEZCreator.js"></script>
 <script type="text/javascript"> 
-var oEditors = [];
+ var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
  oAppRef: oEditors,
  elPlaceHolder: "ir1",
- sSkinURI: "${pageContext.request.contextPath}/resources/js/smartEditor/SmartEditor2Skin.html",W
+ sSkinURI: "${pageContext.request.contextPath}/resources/js/smartEditor/SmartEditor2Skin.html",
  fCreator: "createSEditor2",
- htParams : { 
+  htParams : { 
 	 // 툴바 사용 여부 (true:사용/ false:사용하지 않음) 
 	 bUseToolbar : true, 
 	 // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음) 
 	 bUseVerticalResizer : false, 
 	 // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
 	 bUseModeChanger : false,
-	 fOnBeforeUnload : function(){ 
-	}},
+	 
+	  fOnBeforeUnload : function(){
+	 }  
+ },
 
-	 fOnAppLoad : function(){	 
+	   fOnAppLoad : function(){	 
+		//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
 		 oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+		} 
+}); 
+ $("#insertBtn").click( function(){
+	 if($("select[name=header]").val()==""){
+		alert("분류를 선택해주세요");
+		return false;
 		 }
-});
-
+	 if($("input[name=title]").val()==""){
+		alert("제목을 입력해주세요");
+		return false;
+		 }
+	 oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);  
+	$("#recruitFrm").submit(); 
+	 
+}); 
 
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
