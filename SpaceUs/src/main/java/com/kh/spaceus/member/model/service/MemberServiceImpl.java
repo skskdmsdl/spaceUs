@@ -1,5 +1,7 @@
 package com.kh.spaceus.member.model.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +36,11 @@ public class MemberServiceImpl implements MemberService {
 	public Member selectOnePhone(String phone) {
 		return memberDAO.selectOnePhone(phone);
 	}
+
+	@Override
+	public int updatePassword(Map<String, Object> param) {
+		return memberDAO.updatePassword(param);
+	}
+
 
 }

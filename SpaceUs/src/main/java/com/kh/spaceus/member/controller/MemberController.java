@@ -1,25 +1,23 @@
 package com.kh.spaceus.member.controller;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,25 +25,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
 
+import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Controller
 @Slf4j
+@Log4j
 @RequestMapping("/member")
 public class MemberController {
-	
-	private Logger log = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
 	private MemberService memberService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	
 	
 	//프로필
 	@RequestMapping("/memberProfile.do")
@@ -103,7 +106,8 @@ public class MemberController {
 							  @RequestParam String password,
 							  Model model,
 							  RedirectAttributes redirectAttr,
-							  HttpSession session) {		
+							  HttpSession session,
+							  HttpServletRequest request) {		
 		
 		log.debug("memberEmail@controller = {}",  memberEmail);
 		log.debug("password@controller = {}",  password);
@@ -111,23 +115,19 @@ public class MemberController {
 		Member member = memberService.selectOneMember(memberEmail);
 		log.debug("member@controller = {}",  member);
 		
-		String location = "/";
+		String referer = request.getHeader("referer");
+		log.debug("referer = {}", referer);
 		
 		
 		//로그인 성공
 		if(member != null && bcryptPasswordEncoder.matches(password, member.getPassword())) {
 			model.addAttribute("loginMember", member);
-			
-			//세션에서 next값 가져오기
-//			String next = (String)session.getAttribute("next");
-//			location = next != null ? next: location;
-//			session.removeAttribute("next");
 		
 		//로그인 실패
 		} else {
 			redirectAttr.addFlashAttribute("msg","아이디 또는 비밀번호가 일치하지 않습니다.");
 		}
-		return "redirect:" + location;
+		return "redirect:" + referer;
 	}
 	
 	@PostMapping("/memberLoginFailure.do")
@@ -144,6 +144,57 @@ public class MemberController {
 	public String passwordFinder() {
 		return "member/passwordFinder";
 	}
+	
+	//비밀번호찾기 메일보내기
+	@RequestMapping(value = "/sendMail.do")
+	  public String mailSending(HttpServletRequest request, RedirectAttributes redirectAttr,
+			  					@RequestParam("tomail") String tomail) {
+	   
+		//랜덤비밀번호
+		String newPassword = RandomStringUtils.randomAlphabetic(8);
+		//랜덤비밀번호 암호화처리
+		String encryptedNewPassword = bcryptPasswordEncoder.encode(newPassword);
+		
+	    String setfrom = "noreply.spaceus@gmail.com";         
+	    String title   = "SpaceUs : 임시비밀번호";
+	    String content = "새로운 비밀번호 : "+ newPassword  +"\n";
+     	content += "새로운 비밀번호로 로그인 후 비밀번호를 변경해주세요";
+     	
+     	//이메일확인
+     	Member member = memberService.selectOneMember(tomail);
+     	
+     	if(member != null) {
+     		Map<String, Object> param = new HashMap<>();
+     		param.put("tomail", tomail);
+     		param.put("encryptedNewPassword", encryptedNewPassword);
+     		
+     		//비밀번호를 임시비밀번호로 변경
+     		int result = memberService.updatePassword(param);
+     		
+ 		 try {
+ 		      MimeMessage message = mailSender.createMimeMessage();
+ 		      MimeMessageHelper messageHelper 
+ 		                        = new MimeMessageHelper(message, true, "UTF-8");
+ 		 
+ 		      messageHelper.setFrom(setfrom); 
+ 		      messageHelper.setTo(tomail);
+ 		      messageHelper.setSubject(title); 
+ 		      messageHelper.setText(content);
+ 		     
+ 		      mailSender.send(message);
+ 		      redirectAttr.addFlashAttribute("msg", "이메일이 전송되었습니다.");
+ 		      redirectAttr.addFlashAttribute("script", "self.close();");
+ 		      
+ 		    } catch(Exception e){
+ 		      log.error("e = {}", e);
+ 		    }
+     	}
+     	else {
+     		redirectAttr.addFlashAttribute("msg", "등록된 이메일이 없습니다.");
+     	}
+	    return "redirect:/member/passwordFinder.do";
+	  }
+	
 	
 	//로그아웃
 	@RequestMapping("/memberLogout.do")
@@ -172,7 +223,6 @@ public class MemberController {
 	map.put("memberEmail", memberEmail);
 	
 	return map;
-	
 	}
 	
 	//닉네임중복검사
@@ -189,7 +239,6 @@ public class MemberController {
 	map.put("nickName", nickName);
 	
 	return map;
-		
 	}
 	 
 	//휴대폰인증전송
@@ -205,8 +254,8 @@ public class MemberController {
 	    Message coolsms = new Message(api_key, api_secret);
 	    
 	    Member member = memberService.selectOnePhone(phone);
-	    log.debug("phoneChk = {}", phoneChk);
-	    log.debug("member = {}", member);
+	    log.info("phoneChk = {}", phoneChk);
+	    log.info("member = {}", member);
 	    
 	    HashMap<String, String> params = new HashMap<>();
 	    
