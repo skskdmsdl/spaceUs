@@ -17,6 +17,7 @@
 }
 .fas {position: absolute; padding: 90px;}
 input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
+#error, #duplicate, #ok{display: none;}
 </style>
 <!-- 컨텐츠 시작 -->
     <div class="hero-wrap ftco-degree-bg"
@@ -244,16 +245,20 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                            <input type="file" name="" id="" />
                             </div>
                             <div class="pf-feature-price">
-                                <h4>사업자등록증<span class="text-danger">*</span></h4>
+                                <h4>사업자등록번호<span class="text-danger">*</span></h4>
                                 <div class="row">
 	                                <div class="ml-3 mb-3" style="width:31%">
-	                                    <input  type="text" placeholder="사업자 번호를 입력해주세요">
+	                                    <input id="businessNum" type="text" placeholder="사업자 번호를 입력해주세요">
 	                                </div>
-	                                <div>
-			                            <button  type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">조회</button>
+	                                <div class="pt-2">
+	                                 	<span id="error" class="ml-4 text-danger">유효하지 않은 번호입니다.</span>
+	                                 	<span id="duplicate" class="ml-4 text-danger">이미 등록된 번호입니다.</span>
+	                                 	<span id="ok" class="ml-4 text-primary">사용가능한 번호입니다.</span>
+			                            <input type="hidden" id="idValid" value="0" />
+			                            <!-- <button type="button" id="numInfo" class="btn btn-primary ml-4 pr-4 pl-4 p-10">조회</button> -->
 		                            </div>
 	                            </div>
-		                        <span ></span>
+		                       
                             </div>
                             <div class="pf-feature-price">
                                 <h4>계좌정보<span class="text-danger">*</span></h4>
@@ -268,7 +273,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                    <input id="accountNo" type="text" placeholder="계좌번호를 입력해주세요">
 	                                </div>
 	                            </div>
-		                        <span id="tags"></span>
+		                        <span ></span>
                             </div>
                             <div class="pf-property-details" style="text-align: center;" >
                             	<p>* 공간등록 심사는 2일 ~ 7일 소요됩니다.</p>
@@ -382,15 +387,49 @@ $("#addTags").on('click', function(){
 			console.log("처리실패", xhr, status, err);
 		}
 		});  
-		
-    	
     }
 });
 //태그 삭제 클릭이벤트
 $("#tags").on("click", function(){
    //내용작성하기 
 });
+//사업자 등록정보 조회(중복조회)
+$("#businessNum").keyup(function(){
+	if(!/[0-9]{10}$/.test($(this).val())){
+		$("#duplicate").hide();
+		$("#ok").hide();
+		$("#error").show();
+		$("#idValid").val(0);
+		return;
+	}
+	 $.ajax({
+		url : "${ pageContext.request.contextPath }/space/checkIdDuplicate.do",
+		data : {
+			businessNum : $(this).val()
+		},
+		dataType : "json",
+		success : function(data){
+			console.log(data);
 
+			if(data.isUsable == true){
+				$("#error").hide();
+				$("#duplicate").hide();
+				$("#ok").show();
+				$("#idValid").val(1);
+			}
+			else {
+				$("#error").hide();
+				$("#duplicate").show();
+				$("#ok").hide();
+				$("#idValid").val(0);
+			}
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	}); 
+	
+});
 </script>
 
 <!-- 컨텐츠 끝 -->

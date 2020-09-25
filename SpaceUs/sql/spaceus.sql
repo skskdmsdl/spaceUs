@@ -57,7 +57,7 @@ CREATE TABLE space (
     space_no	varchar2(256)	,
     category_no	varchar2(256)	NOT NULL,
     member_email	varchar2(256)	NOT NULL,
-    business_license	number	NOT NULL,
+    business_license number	NOT NULL,
     space_name	varchar2(256)	NOT NULL,
     address	varchar2(256)	NOT NULL,
     space_phone	char(11)	NOT NULL,
@@ -75,6 +75,7 @@ CREATE TABLE space (
     constraints ck_status check(status in ('O','C','S'))
 );
 alter table space add(content varchar2(4000));
+alter table space add(bank varchar2(256));
 create sequence seq_space_no;
 select * from space;
 

@@ -77,8 +77,8 @@ public class RecruitController {
 	// 구인/구직 상세페이지
 	@GetMapping("/recruitDetail.do")
 	public String recruitDetail (@RequestParam("no") String no,
-			  					Model model) {
-		
+			  					Model model
+			  					) {
 		Recruit recruit = recruitService.selectOneRecruit(no);
 		log.debug("recruit = {}", recruit);
 		model.addAttribute("recruit", recruit);

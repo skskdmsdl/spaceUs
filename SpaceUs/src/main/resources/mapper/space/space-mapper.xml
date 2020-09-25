@@ -25,7 +25,33 @@
 		)
 	</insert>
       
-	
+	<select id="selectOneSpace" resultMap="spaceMap">
+		select 
+			*
+		from 
+			space
+		where 
+			business_license = #{ businessNo }
+	</select>
+	<resultMap type="space" id="spaceMap">
+		<id column="space_no" property="spaceNo"/>
+		<result column="category_no" property="categoryNo"/>
+		<result column="member_email" property="memberEmail"/>
+		<result column="business_license" property="businessNo"/>
+		<result column="space_name" property="spaceName"/>
+		<result column="address" property="address"/>
+		<result column="space_phone" property="phone"/>
+		<result column="hourly_price" property="hourlyPrice"/>
+		<result column="star_avg" property="starAvg"/>
+		<result column="enroll_date" property="enrollDate"/>
+		<result column="modification_date" property="modificationDate"/>
+		<result column="views" property="views"/>
+		<result column="like_cnt" property="likeCnt"/>
+		<result column="status" property="status"/>
+		<result column="account" property="account"/>
+		<result column="content" property="content"/>
+		<result column="bank" property="bank"/>
+	</resultMap>
 
 </mapper>
 

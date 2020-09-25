@@ -72,9 +72,11 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                     <th><i class="fa fa-calendar"></i><fmt:formatDate value="${recruit.enrollDate}" pattern="yyyy/MM/dd"/></th>
                                     <th class="col-xl-auto">|</th>
                                     <th><i class="fa fa-eye"></i>${ recruit.viewCnt}</th>
-                                    <th style="position: absolute;right: 110px; cursor: pointer;" class="mr-5" id="modifyBtn">수정하기</th>
-                                    <th class="col-xl-auto mr-5" style="position: absolute;right: 70px;">|</th>
-                                    <th style="position: absolute;right: 10px; cursor: pointer;" class="mr-5" onclick="deleteBtn('${ recruit.no }')">삭제하기</th>
+                                     <%-- <c:if test="${ principal.nickName != null && principal.nickName eq recruit.nickName}">  --%>
+	                                    <th style="position: absolute;right: 110px; cursor: pointer;" class="mr-5" id="modifyBtn">수정하기</th>
+	                                    <th class="col-xl-auto mr-5" style="position: absolute;right: 70px;">|</th>
+	                                    <th style="position: absolute;right: 10px; cursor: pointer;" class="mr-5" onclick="deleteBtn('${ recruit.no }')">삭제하기</th>
+                                	 <%-- </c:if>  --%>
                                 </tr>
                             </table>
                          </div>
