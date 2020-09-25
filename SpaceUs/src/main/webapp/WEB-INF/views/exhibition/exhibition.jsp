@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -22,11 +24,15 @@ function exhibitionList () {
       	<span class="subheading">SpaceUs MD가 큐레이션한 기획전 입니다</span>
         <h2 class="mb-2">기획전</h2>
         <!-- admin계정만 보이게 -->
+        <sec:authorize access="hasRole('ADMIN')">
         <h1 class="text-right"><a href="${pageContext.request.contextPath}/exhibition/insertExhibition.do">+</a></h1>
+        </sec:authorize>
       </div>
       <div class="row">
       	<div class="col-md-4">
+      	<sec:authorize access="hasRole('ADMIN')">
       	<button class="btn">삭제</button>
+      	</sec:authorize>
       		<div class="agent space1" onclick="exhibitionList();">
   					<div class="img">
     				<img src="https://kr.object.ncloudstorage.com/scloud-service/service/160042093_3c874989f2a7c83b4334157979430945.png">
