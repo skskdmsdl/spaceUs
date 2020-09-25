@@ -9,7 +9,14 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
+<style>
+.qna-filter-container{
+ 	text-align: right;
+ 	width:99%;
+ 	margin-top: 10px;
+}
 
+</style>
 
 
 <div class="skin-default-dark fixed-layout">
@@ -81,62 +88,44 @@
                     <div class="card p-5">
                        <div class="card-body">
                         <div class="row"> 
-                         <div class="col-md-10">
-                             <h5 class="card-title">공간 최근 게시물</h5>
-                             <h6 class="card-subtitle mb-5">공간에 올라온 새 질문글과 리뷰를 확인하세요</h6>
-                         </div>
-	                    </div>
-	                    <section id="article-header" class="sticky-top" style="height: auto;">
-	                    	<div class="" style="position: relative;" data-sticky-enabled="false">
-	                    		<div class="qna-filter-container">
-	                    			<dl class="" role="button">
-	                    				<dt class="filter-select-header">게시글 수</dt>
-	                    				<i class="fa-long-arrow-down"></i>
-	                    				<dd class="">20개</dd>
-	                    				
-	                    			</dl>
-	                    		 </div>
-	                          </div>
-	                    	</div>
-	                    </section>
-						 <table class="col-11">
-							<tr>
-								<th class="align-baseline">닉네임</th>
-								<th><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.username"/>" required /></th>
-							</tr>
-						    <tr>
-						      <td class="align-baseline">이메일 계정</td>
-						      <td><input type="email" class="col-8 input-group-text mb-4 mr-5 pull-right" value="honggd@naver.com" required /></td>
-							</tr>
-						    <tr>
-						      <td class="align-baseline">생일</td>
-						      <td><input type="date" class="col-8 input-group-text mb-4 mr-5 pull-right" value="2020-08-08" /></td>
-							</tr>
-						    <tr>
-						      <td class="align-baseline">핸드폰</td>
-						      <td><input type="tel" class="col-8 input-group-text mb-4 mr-5 pull-right" maxlength="11" value="01012341234" required /></td>
-							</tr>
-						</table >
-						  <div class="mt-5" style="border-top: 1px solid #bbbbbb" ></div>
-						  <h6 class="card-subtitle mt-3 mb-5">비밀번호를 입력해주세요.</h6>
-						  <table class="col-11">
-							<tr>
-						      <td class="align-baseline">새 비밀번호</td>
-						      <td><input type="password" class="col-8 input-group-text ml-auto mb-4 mr-5" value="" /></td>
-							</tr>
-						    <tr>
-						      <td class="align-baseline">새 비밀번호 확인</td>
-						      <td><input type="password" class="col-8 input-group-text ml-auto mb-5 mr-5"value="" required /></td>
-							</tr>
-						</table>
-						<div class="mt-5 pull-right mr-5">
-					      <input type="submit" class="btn btn-outline-success btn-lg p-3 pl-4 pr-4" value="회원 수정">&nbsp;
-					      <input type="reset" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4" value="변경사항 없음">
-						</div>
+                         <div class="col-md-11">
+                            <!--  <h5 class="card-title">공간 최근 게시물</h5> -->
+                             <ul class="nav nav-tabs">
+                             	<li class="nav-item"><a class="nav-link active" href="#">최근 질문 게시글</a></li>
+                             	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/host/hostCheckReview.do">최근 리뷰 게시글</a></li>
+                             </ul>
+	                    
+	                    <div class="">
+                    	     <div class="qna-filter-container">
+								  <button id="show-unreplied" class="btn btn-secondary btn-sm" type="button" onclick="unreplied();" value="${loginMember.principal.memberEmail }">
+								  <i id="check-unreplied" class=""></i>
+								    ${loginMember.principal.nickName }님의 답변을 기다리는 질문
+								  </button>
+                    		 </div>
+                          <!-- 질문글 시작 -->
+				          <div class="col-md-11 d-flex ftco-animate">
+				          	<div class="blog-entry justify-content-end">
+				              <div class="text">
+				                <h3 class="heading"><a href="#">질문제목제목제목</a></h3>
+				                <%-- <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');"> --%>
+					              </a>
+				                <p id="qna-content">질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용</p>
+				                <div class="meta mb-3">
+				                  <div><a href="#">깡</a></div>
+				                  <div><a href="#">July. 24, 2019</a></div>
+				                  <div><a href="#" class="meta-chat"><span class="fa fa-lock"></span> 비공개</a></div>
+				                </div>
+				              </div>
+				            </div>
+				          </div>
+				        <!-- 질문글 끝 -->
+                        </div>
+	            		  
 	                   </div>
 	               </div>
 	           </div>
-                <!-- 회원정보 끝 -->
+           </div>
+      </div>
     </div>
 </div>
 </div>
@@ -161,6 +150,33 @@
 <!-- ============================================================== -->
 <!--morris JavaScript -->
 
+<script>
+function unreplied(){
+	var hostId = $("#show-unreplied").val();
+	
+	console.log(hostId);
+	
+    $.ajax({
+        type: "GET",
+		url : "${pageContext.request.contextPath}/host/unreplied.do",
+		data :  {
+			hostId : hostId
+		},
+		dataType: "json",
+		success: function(data){
+			 console.log(data)
+			 $("#check-unreplied").addClass("fa fa-check");
+			 $("#show-unreplied").css('background-color','#20c997');
+			 $.each(data, function (i, item) {
+                 $('p#qna-content').append(item.content + '<br>');
+             })
+			},
+		error: function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+			}
+     });
+};
+</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 

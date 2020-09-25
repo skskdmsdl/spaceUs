@@ -24,6 +24,12 @@ public class GroupDAOImpl implements GroupDAO {
 	public List<GroupBoard> selectListGroupBoard() {
 		return session.selectList("board.selectListGroupBoard");
 	}
+
+	@Override
+	public List<GroupBoard> selectSortedListGroupBoard(String boardNo) {
+		return session.selectList("board.selectSortedListGroupBoard", boardNo);
+	}
+	
 	
 	
 	
