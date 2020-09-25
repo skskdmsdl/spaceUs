@@ -8,4 +8,8 @@ public interface MemberDAO {
 
 	Member selectOneNickName(String nickName);
 
+	int insertMember(Member member);
+
+	Member selectOnePhone(String phone);
+
 }

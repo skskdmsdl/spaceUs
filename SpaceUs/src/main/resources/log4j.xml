@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.kh.spaceus">
-		<level value="info" />
+		<level value="trace"/>
 	</logger>
 	
 	<!-- log4jdbc logger -->
@@ -44,6 +44,7 @@
 	<root>
 		<priority value="warn" />
 		<appender-ref ref="console" />
+		<appender-ref ref="fileLogger" />
 	</root>
 	
 </log4j:configuration>

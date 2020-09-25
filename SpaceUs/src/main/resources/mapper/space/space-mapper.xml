@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="space">
+	<select id="selectOneTag" resultMap="tagMap">
+		select 
+			*
+		from 
+			tag
+		where 
+			tag_name = #{ hashTag }
+	</select>
+	<resultMap type="tag" id="tagMap">
+		<id column="tag_no" property="no"/>
+		<result column="tag_name" property="tag"/>
+	</resultMap>
+
+ 	<insert id="insertHashTag">
+		insert into 
+			tag 
+		values(
+			'TAG'||seq_tag_no.nextval, 
+			#{hashTag}
+		)
+	</insert>
+      
+	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

@@ -13,12 +13,6 @@
 </jsp:include>
 
 <div class="skin-default-dark fixed-layout">
-    <div class="preloader">
-        <div class="loader">
-            <div class="loader__figure"></div>
-            <p class="loader__label">Elegant admin</p>
-        </div>
-    </div>
     <div id="main-wrapper">
         <!-- 마이페이지 헤더 -->
         <header class="topbar">
@@ -48,14 +42,14 @@
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/memberProfile.do"><i class="fa fa-user"></i><span class="hide-menu">나의 정보</span></a></li>
+ 					<ul id="sidebarnav">
                         <sec:authorize access="hasAnyRole('USER', 'HOST')">
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/wishList.do"><i class="fa fa-heart"></i><span class="hide-menu"></span>위시리스트</a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/memberProfile.do"><i class="fa fa-user"></i><span class="hide-menu">회원정보</span></a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/wishList.do"><i class="fa fa-heart"></i><span class="hide-menu">위시리스트</span></a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/usageHistory.do"><i class="fa fa-table"></i><span class="hide-menu"></span>나의 예약내역</a></li>
+  						<li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/reviewList.do"><i class="fa fa-book"></i><span class="hide-menu">내가 쓴 글 리스트</span></a></li>
                         <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/couponList.do"><i class="fa fa-gift"></i><span class="hide-menu"></span>쿠폰함</a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/usageHistory.do"><i class="fa fa-table"></i><span class="hide-menu"></span>사용내역</a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/reviewList.do"><i class="fa fa-comments"></i><span class="hide-menu"></span>리뷰</a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/stampEvent.do"><i class="fa fa-stamp"></i><span class="hide-menu"></span>출석이벤트</a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/stampEvent.do"><i class="fa fa-stamp"></i><span class="hide-menu"></span>출석체크</a></li>
                         </sec:authorize>
                     </ul>
                 </nav>
@@ -78,7 +72,7 @@
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">마이페이지</a></li>
-                                <li class="breadcrumb-item active">나의 정보</li>
+                                <li class="breadcrumb-item active">내 정보관리</li>
                             </ol>
                         </div>
                     </div>
@@ -96,19 +90,19 @@
 						 <table class="col-11">
 							<tr>
 								<th class="align-baseline">닉네임</th>
-								<th><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.username"/>" required /></th>
+								<th><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.nickName"/>" required /></th>
 							</tr>
 						    <tr>
 						      <td class="align-baseline">이메일 계정</td>
-						      <td><input type="email" class="col-8 input-group-text mb-4 mr-5 pull-right" value="honggd@naver.com" required /></td>
+						      <td><input type="email" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.username"/>" required /></td>
 							</tr>
 						    <tr>
 						      <td class="align-baseline">생일</td>
-						      <td><input type="date" class="col-8 input-group-text mb-4 mr-5 pull-right" value="2020-08-08" /></td>
+						      <td><input type="date" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.birthDay"/>"/></td>
 							</tr>
 						    <tr>
 						      <td class="align-baseline">핸드폰</td>
-						      <td><input type="tel" class="col-8 input-group-text mb-4 mr-5 pull-right" maxlength="11" value="01012341234" required /></td>
+						      <td><input type="tel" class="col-8 input-group-text mb-4 mr-5 pull-right" maxlength="11" value="<sec:authentication property="principal.memberPhone"/>" required /></td>
 							</tr>
 						</table >
 						  <div class="mt-5" style="border-top: 1px solid #bbbbbb" ></div>

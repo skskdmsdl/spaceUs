@@ -6,8 +6,8 @@ purge recyclebin; -- bin 비우기
 -----------------------------
 create table member(
 		member_email varchar2(256),
+        nickname varchar2(256) not null,
         password varchar2(300) not null,
-		nickname varchar2(256) not null,
 		member_phone char(11) not null,
 		birthday date,
 		member_regdate date default sysdate,
@@ -16,36 +16,24 @@ create table member(
 );
 
 select * from member;
+commit;
 
 --권한 컬럼 삭제
 ALTER TABLE member DROP COLUMN authority;
-
-insert into member values(
-    'honggd@naver.com',
-    '홍길동',
-    '1234',
-    '01012341234',
-    null,
-    default,
-    default
-);
-
-commit;
-
 
 -----------------------------
 ----------- 권한 ------------
 -----------------------------
 
 create table auth (
-    member_email varchar2(256),
-    authority varchar2(20),
+    member_email varchar2(256) not null,
+    authority varchar2(20) default 'ROLE_USER',
     constraint pk_auth primary key(member_email, authority),
-    constraint fk_auth_member_email foreign key(member_email) references member(member_email)
+    constraint fk_auth_member_email foreign key(member_email) references member(member_email),
+    constraints ck_authority check(authority in ('ROLE_USER','ROLE_HOST','ROLE_ADMIN'))
 );
 
 select * from auth;
-
 
 -----------------------------
 ---------- 카테고리 ----------
@@ -312,7 +300,8 @@ create table recruit (
     constraints fk_recruit_email foreign key(member_email) references member(member_email) on delete set null,
     constraints ck_header check(header in ('구인', '구직'))
 );
-
+alter table recruit add title varchar2(256) NOT NULL;
+alter table recruit add content varchar2(2000) NOT NULL;
 create sequence seq_recruit_no;
 
 select * from recruit;
@@ -330,6 +319,7 @@ create table recruit_comment (
     recruit_comment_content varchar2(2000),
     recruit_comment_level number default 1,
     recruit_comment_date date default sysdate,
+    
     constraints pk_recruit_comment_no primary key(recruit_comment_no),
     constraints fk_recruit_ref foreign key(recruit_ref) references recruit(recruit_no) on delete cascade,
     constraints fk_recruit_comment_ref foreign key(recruit_comment_ref) references recruit_comment(recruit_comment_no) on delete cascade,
@@ -340,21 +330,104 @@ create sequence seq_recruit_comment_no;
 
 select * from recruit_comment;
 
+-----------------------------
+--------- 게시판분류 ---------
+-----------------------------
+create table board (
+	board_no varchar2(256) not null,
+    board_ref varchar2(256),
+	board_name varchar2(256) not null,
+    board_level number default 1, --상위 게시판 1 / 하위 게시판 2
+
+	constraints pk_board_no primary key(board_no),
+    constraints fk_board_ref foreign key(board_ref) references board(board_no)
+);
+
+
+
+
+create sequence seq_board_no;
+
+insert into board values ('BOARD'||seq_board_no.nextval,NULL,'함께할 사람을 찾습니다',1);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD6','바리스타 모임',2);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD6','영화 모임',2);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD6','먹방 모임',2);
+insert into board values ('BOARD'||seq_board_no.nextval,NULL,'공간을 같이 쓸 사람을 찾습니다',1);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD11','카페',2);
+insert into board values ('BOARD'||seq_board_no.nextval,'BOARD11','식당',2);
+insert into board values ('BOARD'||seq_board_no.nextval,NULL,'소모임 자랑하기',1);
+
+commit;
+
+delete board where board_no = 4;
+
+select * from board;
 
 -----------------------------
 ----------- 소모임 ----------
 -----------------------------
+create table group_board (
+	group_board_no varchar2(256), --소모임 게시판 pk 번호
+	board_no varchar2(256), --소모임 게시판 분류 번호
+	member_email varchar2(256), --멤버 이메일 fk
+	view_cnt number default 0, --조회수
+	group_board_title varchar2(256) not null, --소모임 게시판 제목
+	group_board_content varchar2(1000) not null, --소모임 게시판 내용
+	report_cnt number default 0, --소모임 신고횟수
+
+	constraints pk_group_board_no primary key(group_board_no),
+	constraints fk_board_no foreign key(board_no) references board(board_no) on delete set null,
+	constraints fk_gorup_board_member_email foreign key(member_email) references member(member_email) on delete set null
+);
+
+alter table group_board add group_board_date date default sysdate;
+
+create sequence seq_group_board_no;
+
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD8','honggd@naver.com',default,'바리스타 관심있나요?','바리스타에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD8','honggd@naver.com',default,'커피 관심있나요?','커피에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD9','honggd@naver.com',default,'영화 관심있나요?','영화에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD9','honggd@naver.com',default,'영화관 관심있나요?','영화관에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD10','honggd@naver.com',default,'먹방 관심있나요?','먹방에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD10','honggd@naver.com',default,'돼지 관심있나요?','돼지에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD12','honggd@naver.com',default,'카페바 관심있나요?','카페바에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD13','honggd@naver.com',default,'오돌뼈 관심있나요?','오돌뼈에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD14','honggd@naver.com',default,'댄스파티 관심있나요?','댄스파티에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+insert into group_board values('G'||seq_group_board_no.nextval,'BOARD14','honggd@naver.com',default,'어학공부 관심있나요?','프랑스어에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다',default);
+
+select * from group_board;
+
+delete from group_board where member_email = 'honggd@naver.com';
+drop sequence seq_group_board_no;
+
+commit;
 
 
 -----------------------------
 --------- 소모임댓글 ---------
 -----------------------------
+create table group_board_comment (
+	group_board_comment_no varchar2(256),
+	writer varchar2(256),
+	group_board_ref varchar2(256),
+	private number default 0,
+	group_board_comment_ref varchar2(256),
+	group_board_content varchar2(2000),
+	group_board_comment_level number default 1,
+	group_board_date date default sysdate,
+	 	
 
+	constraints pk_group_board_comment_no primary key(group_board_comment_no),
+	constraints fk_group_board_ref foreign key(group_board_ref) references group_board(group_board_no) on delete set null,
+	constraints fk_group_board_comment_ref foreign key(group_board_comment_ref) references group_board_comment(group_board_comment_no) on delete set null,
+	constraints ck_gorup_board_private check(private in(0,1))
+);
 
------------------------------
---------- 게시판분류 ---------
------------------------------
+create sequence seq_group_board_comment_no;
 
+select * from group_board_comment;
+
+drop table group_board_comment;
 
 -----------------------------
 --------- 블랙리스트 --------
