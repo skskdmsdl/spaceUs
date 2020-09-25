@@ -39,9 +39,9 @@
    				<if test="boardRef != null and boardRef !=''">
    					board_no = #{boardNo}
    				</if>
-   				<if test="boardRef == null and boardRef ==''">
-	             	board_ref = #{boardNo}
-   				</if>          	
+   				<if test="boardRef.equals('')">
+	             	board_ref = #{boardNo}          	
+	             </if>	
              </where> 
              )
 	</select>

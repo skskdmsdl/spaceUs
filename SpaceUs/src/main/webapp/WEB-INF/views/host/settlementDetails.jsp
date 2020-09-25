@@ -49,7 +49,7 @@
                        <sec:authorize access="hasRole('HOST')"> 
                         <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/spaceInfo.do"><i class="fa fa-user"></i><span class="hide-menu">공간 정보</span></a></li>
                         <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/hostReservation.do"><i class="fa fa-heart"></i><span class="hide-menu"></span>공간 예약 현황</a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/hostCheckArticle.do"><i class="fa fa-gift"></i><span class="hide-menu"></span>공간 리뷰 & QnA</a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/hostCheckArticle.do"><i class="fa fa-gift"></i><span class="hide-menu"></span>공간 최근 게시물</a></li>
                         <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/settlementDetails.do"><i class="fa fa-table"></i><span class="hide-menu"></span>정산 내역</a></li>
                      
                        </sec:authorize>
@@ -178,45 +178,73 @@
 <!-- ============================================================== -->
 <!-- This page plugins -->
 <!-- ============================================================== -->
-<%-- <!--morris JavaScript -->
-<script src="${ pageContext.request.contextPath }/resources/js/dashboard1.js"></script> --%>
 
-<script>
+<!-- loader -->
+<%--   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  <script src="${pageContext.request.contextPath }/resources/js/aos.js"></script>
+  <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/raphael/raphael-min.js"></script>
+<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/morrisjs/morris.min.js"></script>
+<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
+<!--c3 JavaScript -->
 
-function download(){
-	/* var hostId = $("#file-download").val(); */
+<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/d3/d3.min.js"></script>
+<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/c3-master/c3.min.js"></script>
+<!-- Chart JS -->
+  <script src="${pageContext.request.contextPath }/resources/js/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/popper.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/jquery.easing.1.3.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/jquery.waypoints.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/jquery.stellar.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/owl.carousel.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/jquery.magnific-popup.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/jquery.animateNumber.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/bootstrap-datepicker.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/jquery.timepicker.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/scrollax.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/main.js"></script> --%>
+
+
+	<script>
 	
-	$("#file-download").attr("action", 
-	"${ pageContext.request.contextPath}/host/excelDown.do")
-	.attr("method", "POST")
-	.submit();	
+	function download(){
+		/* var hostId = $("#file-download").val(); */
+		
+		$("#file-download").attr("action", 
+		"${ pageContext.request.contextPath}/host/excelDown.do")
+		.attr("method", "POST")
+		.submit();	
+		
+		
+	}
 	
 	
-}
+	let canvas = document.getElementById("bar-chart").getContext('2d');
+	
+	let ylabel= [0,0,0,0,0,9,9,9,9,9,10,10];
+	let xdata = [1,2,3,4,5,6,7,8,9,10,11,12];
+	
+	
+	let barChart = new Chart(canvas, {
+		type:'bar',
+		data: {labels: ylabel,
+	    	datasets:[{
+	    		label: "2020",
+	    		backgroundColor: '#fe7096',
+	    		borderColor: '#58c5ed',
+	    		data: xdata,
+	    	}]
+	    	
+	    },
+	     options: {
+	         title: {
+	             text: "월간 매출 추이",
+	             display: true
+	         }
+	     }
+	 });
+	</script>
+  </body>
 
-
-let canvas = document.getElementById("bar-chart").getContext('2d');
-
-let ylabel= [0,0,0,0,0,9,9,9,9,9,10,10];
-let xdata = [1,2,3,4,5,6,7,8,9,10,11,12];
-
-
-let barChart = new Chart(canvas, {
-	type:'bar',
-	data: {labels: ylabel,
-    	datasets:[{
-    		label: "2020",
-    		backgroundColor: '#fe7096',
-    		borderColor: '#58c5ed',
-    		data: xdata,
-    	}]
-    	
-    },
-     options: {
-         title: {
-             text: "월간 매출 추이",
-             display: true
-         }
-     }
- });
-</script>
+</html>

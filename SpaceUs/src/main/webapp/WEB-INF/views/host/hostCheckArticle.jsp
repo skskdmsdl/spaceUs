@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 
 <%-- 한글 인코딩 처리 --%>
 <fmt:requestEncoding value="utf-8"/>
 
@@ -53,7 +54,7 @@
                        <sec:authorize access="hasRole('HOST')"> 
                         <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/spaceInfo.do"><i class="fa fa-user"></i><span class="hide-menu">공간 정보</span></a></li>
                         <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/hostReservation.do"><i class="fa fa-heart"></i><span class="hide-menu"></span>공간 예약 현황</a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/hostCheckArticle.do"><i class="fa fa-gift"></i><span class="hide-menu"></span>공간 리뷰 & QnA</a></li>
+                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/hostCheckArticle.do"><i class="fa fa-gift"></i><span class="hide-menu"></span>공간 최근 게시물</a></li>
                         <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/host/settlementDetails.do"><i class="fa fa-table"></i><span class="hide-menu"></span>정산 내역</a></li>
                      
                        </sec:authorize>
@@ -83,19 +84,19 @@
                         </div>
                     </div>
                 </div>
-                <!-- 회원정보 -->
-                <div id="profileEditPage" class="ml-5 mr-5">
-                    <div class="card p-5">
-                       <div class="card-body">
+                <!-- 공간 최근 게시물 -->
+                <div class="ml-5 mr-5">
+                       <div class="card-body-wrapper">
+	                    <div class="card p-5">
                         <div class="row"> 
                          <div class="col-md-11">
-                            <!--  <h5 class="card-title">공간 최근 게시물</h5> -->
+                           
                              <ul class="nav nav-tabs">
                              	<li class="nav-item"><a class="nav-link active" href="#">최근 질문 게시글</a></li>
                              	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/host/hostCheckReview.do">최근 리뷰 게시글</a></li>
                              </ul>
 	                    
-	                    <div class="">
+	                  
                     	     <div class="qna-filter-container">
 								  <button id="show-unreplied" class="btn btn-secondary btn-sm" type="button" onclick="unreplied();" value="${loginMember.principal.memberEmail }">
 								  <i id="check-unreplied" class=""></i>
@@ -103,12 +104,12 @@
 								  </button>
                     		 </div>
                           <!-- 질문글 시작 -->
-				          <div class="col-md-11 d-flex ftco-animate">
+				          <div class="col-md-10 d-flex ftco-animate">
 				          	<div class="blog-entry justify-content-end">
 				              <div class="text">
 				                <h3 class="heading"><a href="#">질문제목제목제목</a></h3>
-				                <%-- <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');"> --%>
-					              </a>
+				                <%-- <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');"> </a>--%>
+					              
 				                <p id="qna-content">질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용</p>
 				                <div class="meta mb-3">
 				                  <div><a href="#">깡</a></div>
@@ -119,8 +120,57 @@
 				            </div>
 				          </div>
 				        <!-- 질문글 끝 -->
-                        </div>
-	            		  
+                    	                          <!-- 질문글 시작 -->
+				          <div class="col-md-10 d-flex ftco-animate">
+				          	<div class="blog-entry justify-content-end">
+				              <div class="text">
+				                <h3 class="heading"><a href="#">질문제목제목제목</a></h3>
+				                <%-- <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');"> </a>--%>
+					              
+				                <p id="qna-content">질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용</p>
+				                <div class="meta mb-3">
+				                  <div><a href="#">깡</a></div>
+				                  <div><a href="#">July. 24, 2019</a></div>
+				                  <div><a href="#" class="meta-chat"><span class="fa fa-lock"></span> 비공개</a></div>
+				                </div>
+				              </div>
+				            </div>
+				          </div>
+				        <!-- 질문글 끝 -->
+				                                  <!-- 질문글 시작 -->
+				          <div class="col-md-10 d-flex ftco-animate">
+				          	<div class="blog-entry justify-content-end">
+				              <div class="text">
+				                <h3 class="heading"><a href="#">질문제목제목제목</a></h3>
+				                <%-- <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');"> </a>--%>
+					              
+				                <p id="qna-content">질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용</p>
+				                <div class="meta mb-3">
+				                  <div><a href="#">깡</a></div>
+				                  <div><a href="#">July. 24, 2019</a></div>
+				                  <div><a href="#" class="meta-chat"><span class="fa fa-lock"></span> 비공개</a></div>
+				                </div>
+				              </div>
+				            </div>
+				          </div>
+				        <!-- 질문글 끝 -->
+				                                  <!-- 질문글 시작 -->
+				          <div class="col-md-10 d-flex ftco-animate">
+				          	<div class="blog-entry justify-content-end">
+				              <div class="text">
+				                <h3 class="heading"><a href="#">질문제목제목제목</a></h3>
+				                <%-- <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');"> </a>--%>
+					              
+				                <p id="qna-content">질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용</p>
+				                <div class="meta mb-3">
+				                  <div><a href="#">깡</a></div>
+				                  <div><a href="#">July. 24, 2019</a></div>
+				                  <div><a href="#" class="meta-chat"><span class="fa fa-lock"></span> 비공개</a></div>
+				                </div>
+				              </div>
+				            </div>
+				          </div>
+				        <!-- 질문글 끝 -->
 	                   </div>
 	               </div>
 	           </div>
@@ -131,24 +181,31 @@
 </div>
 </div>
 
+<!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  <script src="${pageContext.request.contextPath }/resources/js/aos.js"></script>
+  <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/raphael/raphael-min.js"></script>
+<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/morrisjs/morris.min.js"></script>
+<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
+<!--c3 JavaScript -->
 
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
-<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
-<!-- Bootstrap popper Core JavaScript -->
-<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/popper/popper.min.js"></script>
-<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- slimscrollbar scrollbar JavaScript -->
-<script src="${ pageContext.request.contextPath }/resources/js/perfect-scrollbar.jquery.min.js"></script>
-<!--Wave Effects -->
-<script src="${ pageContext.request.contextPath }/resources/js/waves.js"></script>
-<!--Menu sidebar -->
-<script src="${ pageContext.request.contextPath }/resources/js/sidebarmenu.js"></script>
-<!--Custom JavaScript -->
-<script src="${ pageContext.request.contextPath }/resources/js/custom.min.js"></script>
-<!-- ============================================================== -->
-<!-- This page plugins -->
-<!-- ============================================================== -->
-<!--morris JavaScript -->
+<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/d3/d3.min.js"></script>
+<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/c3-master/c3.min.js"></script>
+<!-- Chart JS -->
+  <script src="${pageContext.request.contextPath }/resources/js/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/popper.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/jquery.easing.1.3.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/jquery.waypoints.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/jquery.stellar.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/owl.carousel.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/jquery.magnific-popup.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/jquery.animateNumber.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/bootstrap-datepicker.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/jquery.timepicker.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/scrollax.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
 
 <script>
 function unreplied(){
@@ -177,6 +234,5 @@ function unreplied(){
      });
 };
 </script>
-
-
-	
+</body>
+</html>
