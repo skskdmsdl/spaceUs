@@ -81,37 +81,41 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
     		<!-- column -->
         	<div class="col-12">
             	<div class="m-5">
-                	<!-- <div class="d-flex"></div> -->
-                	<aside id="sideinfo" class="w-25 pr-3">
+                	<!-- 사이드 바 메뉴 시작 -->
+	                <aside id="sideinfo" class="w-25 pr-3">
 	                	<div class="list-group">
 	                	<div class="list-group-item list-group-item-action">
-								전체보기
-								<span class="badge badge-primary badge-pill">14</span>
-						</div>
-	                <c:forEach items="${boardList}" var="board" varStatus="vs">
-		                <c:if test="${board.boardLevel == 1}">
-							<div class="list-group-item list-group-item-action upper-list" id="upper" onclick="upperList();">
-								${board.boardName}
-								<span class="badge badge-primary badge-pill">14</span>
-								<i class="fas fa-caret-down" style="padding: 0; position: relative; right:0;"></i>
+							전체보기
+						<span class="badge badge-primary badge-pill">14</span>
 							</div>
-	                 	</c:if>
-	                 	<c:if test="${board.boardLevel == 2}">
-	                 		<div class="list-group-item list-group-item-action sub-list">
-		                 		<i class="fas fa-arrow-right"></i>
-								${board.boardName}
-								<span class="badge badge-primary badge-pill">14</span>
-							</div>
-	                 	</c:if>
-	                 	<script>
-							 function upperList(){
-								var element = document.getElementById("upper");
-								element.classList.toggle("click");			
-							}
-						</script>
-		            </c:forEach>
-						</div>
-                	</aside>
+		                <c:forEach items="${boardList}" var="board" varStatus="vs">
+                			<form onclick = "location.href='${pageContext.request.contextPath }/community/group/groupList/${board.boardNo}.do'">
+			                	<c:if test="${board.boardLevel == 1}">
+									<div class="list-group-item list-group-item-action upper-list" id="upper">
+										${board.boardName}
+									<span class="badge badge-primary badge-pill">14</span>
+									<i class="fas fa-caret-down" style="padding: 0; position: relative; right:0;"></i>
+									</div>
+		                 		</c:if>
+		                 		<c:if test="${board.boardLevel == 2}">
+		                 			<div class="list-group-item list-group-item-action sub-list">
+			                 			<i class="fas fa-arrow-right"></i>
+											${board.boardName}
+										<span class="badge badge-primary badge-pill">14</span>
+									</div>
+		                 		</c:if>
+		                 		<script>
+								/*  function upperList(){
+									var element = document.getElementById("upper");
+									element.classList.toggle("click");			
+								} */
+								</script>
+                			</form>
+			            </c:forEach>
+						</div>							
+	                </aside>
+                	<!-- 사이드 바 메뉴 끝 -->
+                	
                 	
                 	<div></div>
                 	
@@ -120,9 +124,10 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 		                	<table class="table table-hover">
 			                    <thead>
 			                        <tr>
-			                            <th class="text-center">#</th>
-			                            <th>제목</th>
+			                            <th class="text-center">No</th>
+			                            <th class="text-center">제목</th>
 			                            <th>작성일</th>
+			                            <th>조회수</th>
 			                            <th>작성자</th>
 			                        </tr>
 			                    </thead>
@@ -145,6 +150,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                            		${gb.groupBoardTitle}
 			                            </td>
 			                            <td class="txt-oflo">${gb.groupBoardDate }</td>
+			                            <td class="txt-oflo">${gb.viewCnt}</td>
 			                            <td class="txt-oflo">${gb.nickname}</td>
 			                        </tr>
 			                    </c:forEach>			                      

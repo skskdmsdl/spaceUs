@@ -18,7 +18,7 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter{
 		
 		log.debug("======================= HANDLER =======================");
 		log.debug("{}", request.getRequestURI());
-		log.debug("--------------------------------------------------------");
+		/* log.debug("--------------------------------------------------------"); */
 		
 		return super.preHandle(request, response, handler);
 	}
@@ -28,9 +28,9 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter{
 			ModelAndView modelAndView) throws Exception {
 		super.postHandle(request, response, handler, modelAndView);
 		
-		log.debug("--------------------------------------------------------");
-		log.debug("mav = {}", modelAndView);
 		log.debug("------------------------- VIEW -------------------------");
+		log.debug("mav = {}", modelAndView);
+		/* log.debug("--------------------------------------------------------"); */
 	}
 
 	@Override

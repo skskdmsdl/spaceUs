@@ -10,6 +10,8 @@ public interface GroupService {
 	List<Board> selectListBoard();
 
 	List<GroupBoard> selectListGroupBoard();
+
+	List<GroupBoard> selectSortedListGroupBoard(String boardNo);
 	
 	
 
