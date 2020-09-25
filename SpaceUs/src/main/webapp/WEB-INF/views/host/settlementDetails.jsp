@@ -68,19 +68,66 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor ml-5">마이페이지</h4>
+                        <h4 class="text-themecolor ml-5">호스트 센터</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:void(0)">마이페이지</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0)">호스트 센터</a></li>
                                 <li class="breadcrumb-item active">정산 내역</li>
                             </ol>
                         </div>
                     </div>
                 </div>
-                <!-- 회원정보 -->
-                <div class="ml-5 mr-5">
+
+            	<div class="ml-5 mr-5">
+	           		<div class="card p-5">
+	           			 <div class="card-body-wrapper">
+							<div class="btn-group">
+							  <button type="button" class="btn btn-primary alig-right">
+							    정산 내역 내려받기
+							  </button>
+							 
+							</div>
+						 </div>
+
+	           			 	<div class="card-body">
+			                	<h5 class=" mb-1">일간 정산 내역</h5>
+			                	<table class="table table-hover">
+			                	   <thead class="thead-dark">
+				                	   <tr>
+				                		<th scope="col">공간 번호</th>
+				                		<th scope="col">날짜</th>
+				                		<th scope="col">일 이용시간</th>
+				                		<th scope="col">일매출</th>
+				                	   </tr>
+			                	   </thead>
+			                	   <tbody>
+				                	   <tr>
+				                		<th scope="row">S1001</th>
+				                		<td>2020/09/20</td>
+				                		<td>3</td>
+				                		<td>120,000</td>
+				                	   </tr>
+				                	   <tr>
+				                		<th scope="row">S1001</th>
+				                		<td>2020/09/21</td>
+				                		<td>2</td>
+				                		<td>80,000</td>
+				                	   </tr>					                   
+				                  </tbody>               		
+			                	</table>
+		                	</div>
+	           				<div class="card-body">
+	            				<h5 class="card-title">
+	            				월간 매출 추이 
+	            				</h5>
+				 		 	</div>
+						 	<canvas id="bar-chart">차트가 들어갈 자리</canvas>
+						</div>
+	 				</div>
+ 				</div>
+<!--                 <div class="ml-5 mr-5">
                     <div class="card p-5">
                         <div class="card-body">
                             <div class="col-md-10">
@@ -108,14 +155,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- 회원정보 끝 -->
+                </div> -->
     </div>
 </div>
 </div>
 </div>
 
-
+<script src="${pageContext.request.contextPath }/resources/js/Chart.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap popper Core JavaScript -->
@@ -132,5 +178,32 @@
 <!-- ============================================================== -->
 <!-- This page plugins -->
 <!-- ============================================================== -->
-<!--morris JavaScript -->
-<script src="${ pageContext.request.contextPath }/resources/js/dashboard1.js"></script>
+<%-- <!--morris JavaScript -->
+<script src="${ pageContext.request.contextPath }/resources/js/dashboard1.js"></script> --%>
+
+<script>
+let canvas = document.getElementById("bar-chart").getContext('2d');
+
+let ylabel= [0,0,0,0,0,9,9,9,9,9,10,10];
+let xdata = [1,2,3,4,5,6,7,8,9,10,11,12];
+
+
+let barChart = new Chart(canvas, {
+	type:'bar',
+	data: {labels: ylabel,
+    	datasets:[{
+    		label: "2020",
+    		backgroundColor: '#fe7096',
+    		borderColor: '#58c5ed',
+    		data: xdata,
+    	}]
+    	
+    },
+     options: {
+         title: {
+             text: "월간 매출 추이",
+             display: true
+         }
+     }
+ });
+</script>

@@ -28,8 +28,8 @@ public class HostController {
 	@Autowired
 	private HostService hostService;
 	
-	private Logger log = 
-			LoggerFactory.getLogger(HostController.class);
+//	private Logger log = 
+//			LoggerFactory.getLogger(HostController.class);
 	
 	
 	//정산내역
