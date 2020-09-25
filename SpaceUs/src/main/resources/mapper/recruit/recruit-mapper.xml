@@ -13,8 +13,8 @@
 			#{header},
 			default,
 			default,
-			content,
-			title
+			#{content},
+			#{title}
 		)
 	</insert>
 	
