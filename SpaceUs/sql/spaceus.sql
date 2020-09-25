@@ -535,17 +535,3 @@ select * from yearly_sale;
 
 commit;
 
-insert into 
-    space
-values();
-
-insert into 
-    space
-values(
-    space||seq_dev_no.nextval,
-    '홍길동',
-    3,
-    'honggd@naver.com',
-    'M',
-    'Java,C'
-);
