@@ -1,7 +1,9 @@
 package com.kh.spaceus.community.recruit.controller;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -95,13 +97,13 @@ public class RecruitController {
 		Member member = memberService.selectOneMember(principal.getName());
 		recruit.setEmail(principal.getName());
 		recruit.setNickName(member.getNickName());
-		System.out.println(recruit);
 		
 		int result = recruitService.insertRecruit(recruit);
+		System.out.println(recruit);
 		String msg = result > 0 ? "등록 성공!" : "등록실패";
 		redirectAttributes.addFlashAttribute("msg", msg);
 	
-		return "redirect:/community/recruit/recruitDetail.do";
+		return "redirect:/community/recruit/recruitList.do";
 	 }
 	 
 	 @RequestMapping("/recruitModify.do")
@@ -112,14 +114,13 @@ public class RecruitController {
 	 }
 	 
 	 //구인/구직 수정
-	/* @RequestMapping(value = "/updateRecruit.do",
+	 @RequestMapping(value = "/updateRecruit.do",
 	      			 method = RequestMethod.POST)
 	 public ModelAndView updateRecruit(Recruit recruit,
-									  HttpServletRequest request){
-			//파라미터로 전달받지 않고 직접 객체 생성 또한 가능
-	    	//viewName 생성자에 전달 가능
-	    	ModelAndView mav = new ModelAndView("redirect:/community/recruit/updateRecruit.do");
+									  HttpServletRequest request,
+									  ModelAndView mav){
 			log.debug("recruit = {}", recruit);
+			System.out.println(recruit.getNo());
 			
 			//1.비지니스로직 실행
 			int result = recruitService.updateRecruit(recruit);
@@ -128,8 +129,8 @@ public class RecruitController {
 			String msg = "";
 			if(result>0){ 
 				msg="게시물 수정성공!";
-				Recruit updatedMember = recruitService.selectOneRecruit(Recruit.);
-				mav.addObject("loginMember", updatedMember);
+				Recruit updateRecruit = recruitService.selectOneRecruit(recruit.getNo());
+				mav.addObject("recruit", updateRecruit);
 			}
 			else 
 				msg="게시물 수정실패!";
@@ -138,8 +139,20 @@ public class RecruitController {
 			//RedirectAttributes와 동일하다.
 			FlashMap flashMap = RequestContextUtils.getOutputFlashMap(request);
 			flashMap.put("msg", msg);
-			
+			mav.setViewName("community/recruit/recruitDetail");
 			return mav;
 		}
-	 */
+	 
+	 @RequestMapping(value = "/deleteRecruit.do",
+					 method = RequestMethod.GET)
+	 public String deleteRecruit(@RequestParam String no, 
+						 		 RedirectAttributes redirectAttr){
+	log.debug("게시물 삭제");
+	int result = recruitService.deleteRecruit(no);
+	String msg = (result > 0) ? "삭제 성공" : "삭제 실패";
+	redirectAttr.addFlashAttribute("msg", msg);
+	
+	return "redirect:/community/recruit/recruitList.do";
+}
+	 
 }

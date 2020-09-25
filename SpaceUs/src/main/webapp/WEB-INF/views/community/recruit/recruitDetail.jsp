@@ -62,7 +62,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                  <div class="col-12">
                          <div class="m-5" style="border-bottom: 1px solid #dddddd;">
 								
-                         <input type="hidden" name="no" id="no" value="${ recruit.no }"/>
+                         <%-- <input type="hidden" name="no" id="no" value="${ recruit.no }"/> --%>
                          <div style="border-bottom: 1px solid #dddddd; padding-bottom: 15px;">
                             <p class="h4">${recruit.title }</p>
                          	<table>
@@ -74,7 +74,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                     <th><i class="fa fa-eye"></i>${ recruit.viewCnt}</th>
                                     <th style="position: absolute;right: 110px; cursor: pointer;" class="mr-5" id="modifyBtn">수정하기</th>
                                     <th class="col-xl-auto mr-5" style="position: absolute;right: 70px;">|</th>
-                                    <th style="position: absolute;right: 10px; cursor: pointer;" class="mr-5" id="deleteBtn">삭제하기</th>
+                                    <th style="position: absolute;right: 10px; cursor: pointer;" class="mr-5" onclick="deleteBtn('${ recruit.no }')">삭제하기</th>
                                 </tr>
                             </table>
                          </div>
@@ -104,6 +104,9 @@ $("#modifyBtn").on('click', function(){
 	let no = $("[name=no]").val();
 	location.href="${pageContext.request.contextPath }/community/recruit/recruitModify.do?no="+no; 
 });
-
+function deleteBtn(no){
+	if(!confirm("정말 삭제하시겠습니까?")) return;
+	location.href="${pageContext.request.contextPath }/community/recruit/deleteRecruit.do?no="+no; 
+}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

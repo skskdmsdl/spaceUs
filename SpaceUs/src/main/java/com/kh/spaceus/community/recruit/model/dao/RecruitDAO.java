@@ -15,4 +15,8 @@ public interface RecruitDAO {
 
 	Recruit selectOneRecruit(String no);
 
+	int updateRecruit(Recruit recruit);
+
+	int deleteRecruit(String no);
+
 }

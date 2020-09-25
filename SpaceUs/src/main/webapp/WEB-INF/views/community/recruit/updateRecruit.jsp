@@ -57,13 +57,14 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                  <div class="col-12">
 						<p class="h3 mt-5 mb-3">수정하기</p>
                          <div class="table-responsive">
-                         <form action="${pageContext.request.contextPath}/community/recruit/insertRecruit.do" id="recruitFrm" method="post">
+                         <form action="${pageContext.request.contextPath}/community/recruit/updateRecruit.do" id="recruitFrm" method="post">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <input type="hidden" name="no" value="${recruit.no}"/>
                              <table class="table">
                                      <tr>
                                          <th >분류</th>
                                          <th><select class="nice-select sm-width small" name="header">
-							                    <option value="" selected disabled>분류선택</option>
+							                    <!-- <option value="" selected disabled>분류선택</option> -->
 							                    <option value="구인" ${recruit.header=='구인'?'selected':'' }>구인</option>
 							                    <option value="구직" ${recruit.header=='구직'?'selected':'' }>구직</option>
 							                </select></th>
@@ -80,7 +81,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                      </tr>
                              </table>
                              <div class="text-center">
-			                 	<button  id="insertBtn" class="btn " style="margin-top:50px; background-color: #00c89e; font-size:18px; color:white;"> 글 등록</button>
+			                 	<button  id="updateBtn" class="btn " style="margin-top:50px; background-color: #00c89e; font-size:18px; color:white;"> 수정</button>
                              </div>
                              </form>
 							 </div>
@@ -117,11 +118,7 @@ nhn.husky.EZCreator.createInIFrame({
 		 oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		} 
 }); 
- $("#insertBtn").click( function(){
-	 if($("select[name=header]").val()==""){
-		alert("분류를 선택해주세요");
-		return false;
-		 }
+ $("#updateBtn").click( function(){
 	 if($("input[name=title]").val()==""){
 		alert("제목을 입력해주세요");
 		return false;

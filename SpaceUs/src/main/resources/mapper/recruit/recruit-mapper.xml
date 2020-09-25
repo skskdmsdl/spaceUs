@@ -10,7 +10,7 @@
 		from
 			recruit
 		order by
-			recruit_no desc
+			enroll_date desc
 	</select>
 	<resultMap id="recruitMap" type="recruit">
 		<id column="recruit_no" property="no"/>
@@ -29,7 +29,7 @@
 	    	recruit	
 	</select>
 	
-	<insert id="insertRecruit">
+	<insert id="insertRecruit" >
 		insert into 
 			recruit 
 		values(
@@ -54,6 +54,23 @@
 			recruit_no = #{no}
 	</select>  
 	
+	<update id="updateRecruit">
+		update 
+			recruit 
+		set 
+			header = #{ header }, 
+			content = #{ content }, 
+			title = #{ title } 
+		where 
+			recruit_no = #{ no }
+	</update>
+	
+	<delete id="deleteRecruit">
+        delete from 
+        	recruit 
+     	where 
+     		recruit_no = #{no} 
+    </delete>
 
 </mapper>
 

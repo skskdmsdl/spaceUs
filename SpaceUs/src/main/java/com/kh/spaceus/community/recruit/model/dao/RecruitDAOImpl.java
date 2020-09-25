@@ -38,6 +38,16 @@ public class RecruitDAOImpl implements RecruitDAO{
 		return sqlSession.selectOne("recruit.selectOneRecruit", no);
 	}
 
+	@Override
+	public int updateRecruit(Recruit recruit) {
+		return sqlSession.update("recruit.updateRecruit", recruit);
+	}
+
+	@Override
+	public int deleteRecruit(String no) {
+		return sqlSession.delete("recruit.deleteRecruit", no);
+	}
+
 
 
 }

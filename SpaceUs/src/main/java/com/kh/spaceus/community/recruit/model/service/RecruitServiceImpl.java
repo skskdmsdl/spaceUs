@@ -36,6 +36,16 @@ public class RecruitServiceImpl implements RecruitService{
 		return recruitDAO.selectOneRecruit(no);
 	}
 
+	@Override
+	public int updateRecruit(Recruit recruit) {
+		return recruitDAO.updateRecruit(recruit);
+	}
+
+	@Override
+	public int deleteRecruit(String no) {
+		return recruitDAO.deleteRecruit(no);
+	}
+
 
 
 	
