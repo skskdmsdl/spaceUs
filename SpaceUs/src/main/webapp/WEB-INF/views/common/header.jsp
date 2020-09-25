@@ -75,6 +75,9 @@
 	<c:if test="${ not empty msg }">
 		alert('${ msg }');	
 	</c:if>
+	<c:if test="${ not empty script }">
+		self.close();	
+	</c:if>
 </script>
   </head>
   
