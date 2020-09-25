@@ -404,11 +404,42 @@ select
 			(select nickname from member where member_email= G.member_email) nickname
 		from
 			group_board G;
+        where
+            if boardNo == "BOARD6"
+                boardNo in('BOARD8','BOARD9');
 
 select * from member;
 
+		select
+			G.group_board_no,
+            (
+                case 
+                    when (G.board_no = 'BOARD6') then G.board_no = 'BOARD8'
+                ELSE
+                    G.board_no
+                END
+            ) as G.board_no,
+            G.member_email,
+            G.view_cnt,
+            G.group_board_title,
+            G.report_title,
+            G.group_board_date,
+			(select nickname from member where G.member_email = member_email) nickname
+		from
+			group_board G
+		where
+           G.board_no = 'BOARD6';
 
+------------------------------------------------------
 
+		select
+            board_no
+        from
+			group_board
+		where
+           board_no = 'BOARD6';
+           
+              
 
 -----------------9/24-------------------------
 
