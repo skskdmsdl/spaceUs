@@ -118,7 +118,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                 	
                 	<!-- 등록하기 버튼 시작 -->
                 	<div>
-                		<a href="${pageContext.request.contextPath }/community/recruit/recruitEnrollForm.do" 
+                		<a href="${pageContext.request.contextPath }/community/group/groupEnrollForm.do" 
                 		   class="btn waves-effect waves-light hidden-md-down m-1 pull-right" 
                 		   style="font-size:18px;background-color: #00c89e; color:white;"> 
                 		      	등록하기

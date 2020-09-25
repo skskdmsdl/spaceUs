@@ -35,6 +35,11 @@ public class GroupServiceImpl implements GroupService {
 	public int selectTotalCnt() {
 		return groupDAO.selectTotalCnt();
 	}
+
+	@Override
+	public List<GroupBoard> selectDetailBoard(String groupBoardNo) {
+		return groupDAO.selectDetailBoard(groupBoardNo);
+	}
 	
 	
 	

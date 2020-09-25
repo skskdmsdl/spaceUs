@@ -35,6 +35,11 @@ public class GroupDAOImpl implements GroupDAO {
 	public int selectTotalCnt() {
 		return session.selectOne("board.selectTotalCnt");
 	}
+
+	@Override
+	public List<GroupBoard> selectDetailBoard(String groupBoardNo) {
+		return session.selectList("board.selectDetailBoard", groupBoardNo);
+	}
 	
 	
 	

@@ -57,4 +57,14 @@
 			group_board
 	</select>
 
+	<!-- board Detail -->
+	<select id="selectDetailBoard" resultMap="groupBoardMap">
+		select
+			G.*,
+			(select nickname from member where member_email= G.member_email) nickname
+		from
+			group_board G
+		where
+			G.group_board_no=#{groupBoardNo}
+	</select>
 </mapper>
