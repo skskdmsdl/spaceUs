@@ -27,13 +27,23 @@
 
 	<!-- sorted groupBoard List -->
 	<select id="selectSortedListGroupBoard" resultMap="groupBoardMap">
-		select
-			G.*,
-			(select nickname from member where member_email= G.member_email) nickname
-		from
-			group_board G
-		where
-			G.board_no=#{boardNo}
+  		select 
+  			* 
+        from
+            (
+             select 
+             	* 
+             from 
+             	board join group_board using(board_no) 
+             <where>
+   				<if test="boardRef != null and boardRef !=''">
+   					board_no = #{boardNo}
+   				</if>
+   				<if test="boardRef == null and boardRef ==''">
+	             	board_ref = #{boardNo}
+   				</if>          	
+             </where> 
+             )
 	</select>
 
 </mapper>

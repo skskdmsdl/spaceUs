@@ -83,13 +83,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
             	<div class="m-5">
                 	<!-- 사이드 바 메뉴 시작 -->
 	                <aside id="sideinfo" class="w-25 pr-3">
-	                	<div class="list-group">
-	                	<div class="list-group-item list-group-item-action">
+	                	<div class="list-group" >
+	                	<div class="list-group-item list-group-item-action" onclick = "location.href='${pageContext.request.contextPath }/community/group/groupList.do'">
 							전체보기
-						<span class="badge badge-primary badge-pill">14</span>
-							</div>
+							<span class="badge badge-primary badge-pill">14</span>
+						</div>
 		                <c:forEach items="${boardList}" var="board" varStatus="vs">
-                			<form onclick = "location.href='${pageContext.request.contextPath }/community/group/groupList/${board.boardNo}.do'">
+                			<form onclick = "location.href='${pageContext.request.contextPath }/community/group/groupList/${board.boardNo}/${board.boardRef}.do'">
 			                	<c:if test="${board.boardLevel == 1}">
 									<div class="list-group-item list-group-item-action upper-list" id="upper">
 										${board.boardName}
@@ -139,7 +139,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                            	<span class="text-success mr-2">
 			                            		[${ gb.boardNo=="BOARD6"?
 			                            			"전체 크루원":gb.boardNo=="BOARD8"?
-			                            			"카페 크루원":gb.boardNo=="BOARD09"?
+			                            			"카페 크루원":gb.boardNo=="BOARD9"?
 			                            			"무비 크루원":gb.boardNo=="BOARD10"?
 			                            			"먹방 크루원":gb.boardNo=="BOARD11"?
 			                            			"전체공간 나눔":gb.boardNo=="BOARD12"?
