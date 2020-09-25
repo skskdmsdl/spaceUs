@@ -82,18 +82,18 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
         	<div class="col-12">
             	<div class="m-5">
                 	<!-- 사이드 바 메뉴 시작 -->
-	                <aside id="sideinfo" class="w-25 pr-3">
+	                <aside id="sideinfo" class="w-25 pr-3" style="margin-top: 60px;">
 	                	<div class="list-group" >
 	                	<div class="list-group-item list-group-item-action" onclick = "location.href='${pageContext.request.contextPath }/community/group/groupList.do'">
 							전체보기
-							<span class="badge badge-primary badge-pill">14</span>
+							<span class="badge badge-primary badge-pill">${totalCnt}</span>
 						</div>
 		                <c:forEach items="${boardList}" var="board" varStatus="vs">
                 			<form onclick = "location.href='${pageContext.request.contextPath }/community/group/groupList/${board.boardNo}/${board.boardRef}.do'">
 			                	<c:if test="${board.boardLevel == 1}">
 									<div class="list-group-item list-group-item-action upper-list" id="upper">
 										${board.boardName}
-									<span class="badge badge-primary badge-pill">14</span>
+									<!-- <span class="badge badge-primary badge-pill">14</span> -->
 									<i class="fas fa-caret-down" style="padding: 0; position: relative; right:0;"></i>
 									</div>
 		                 		</c:if>
@@ -101,7 +101,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 		                 			<div class="list-group-item list-group-item-action sub-list">
 			                 			<i class="fas fa-arrow-right"></i>
 											${board.boardName}
-										<span class="badge badge-primary badge-pill">14</span>
+										<!-- <span class="badge badge-primary badge-pill">14</span> -->
 									</div>
 		                 		</c:if>
 		                 		<script>
@@ -116,8 +116,17 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                </aside>
                 	<!-- 사이드 바 메뉴 끝 -->
                 	
+                	<!-- 등록하기 버튼 시작 -->
+                	<div>
+                		<a href="${pageContext.request.contextPath }/community/group/groupEnrollForm.do" 
+                		   class="btn waves-effect waves-light hidden-md-down m-1 pull-right" 
+                		   style="font-size:18px;background-color: #00c89e; color:white;"> 
+                		      	등록하기
+                		</a>
+                	</div>
+                	<!-- 등록하기 버튼 끝 -->
                 	
-                	<div></div>
+                	<br />
                 	
                 	<section id="content" class="w-75 p-3">
                 		<div class="table-responsive">
@@ -133,18 +142,18 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                    </thead>
 			                    <tbody>
 			                    <c:forEach items="${groupBoardList}" var="gb" varStatus="vs">
-			                        <tr style="cursor: pointer;" onclick = "location.href='${pageContext.request.contextPath }/community/group/groupDetail.do'">
+			                        <tr style="cursor: pointer;" onclick = "location.href='${pageContext.request.contextPath }/community/group/groupDetail/${gb.groupBoardNo}.do'">
 			                            <td class="text-center">${vs.count}</td>
 			                            <td class="txt-oflo">
 			                            	<span class="text-success mr-2">
-			                            		[${ gb.boardNo=="BOARD6"?
-			                            			"전체 크루원":gb.boardNo=="BOARD8"?
-			                            			"카페 크루원":gb.boardNo=="BOARD9"?
-			                            			"무비 크루원":gb.boardNo=="BOARD10"?
-			                            			"먹방 크루원":gb.boardNo=="BOARD11"?
-			                            			"전체공간 나눔":gb.boardNo=="BOARD12"?
-			                            			"카페공간 나눔":gb.boardNo=="BOARD13"?
-			                            			"식당공간 나눔":gb.boardNo=="BOARD14"?
+			                            		[${ gb.boardNo=="1"?
+			                            			"전체 크루원":gb.boardNo=="2"?
+			                            			"카페 크루원":gb.boardNo=="3"?
+			                            			"무비 크루원":gb.boardNo=="4"?
+			                            			"먹방 크루원":gb.boardNo=="5"?
+			                            			"전체공간 나눔":gb.boardNo=="6"?
+			                            			"카페공간 나눔":gb.boardNo=="7"?
+			                            			"식당공간 나눔":gb.boardNo=="9"?
 			                            			"소모임 자랑":"기타"}]
 			                            	</span>
 			                            		${gb.groupBoardTitle}
@@ -156,6 +165,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                    </c:forEach>			                      
 			                    </tbody>
 							</table>
+							<!-- 페이징처리 시작 -->
 		                	<div class="container">
 						    	<nav class="mt-5" >
 									<ul class="justify-content-center pagination">
@@ -170,20 +180,9 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 									</ul>
 								</nav>
 							</div>
+							<!-- 페이징 처리 끝 -->
 		                </div>
-                	</section>
-
-                    <!-- <input type="radio" name="radio" class="m-r-10 ml-3" >전체
-                    <input type="radio" name="radio" class="m-r-10 ml-3">구인
-                    <input type="radio" name="radio" class="m-r-10 ml-3">구직
-                    <div class="input-group mb-4 col-4 pull-right">
-						<input type="text" class="input-group-text" style="background-color: white;">
-						<div class="input-group-append">
-							<button type="submit" class="btn btn-outline-secondary"><span><i class="fa fa-search fa-search mr-2"></i> </span>검색</button>
-						</div>
-                  	</div> -->
-               
-	            	
+                	</section>      	
             	</div>
         	</div>
     	</div>
