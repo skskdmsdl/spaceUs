@@ -1,6 +1,7 @@
 package com.kh.spaceus.community.recruit.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,6 +9,8 @@ import org.apache.struts.action.SessionActionMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.session.SessionInformation;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,9 +41,26 @@ public class RecruitController {
 
 	// 구인/구직 목록
 	@RequestMapping("/recruitList.do")
-	public String recruitList () {
+	public ModelAndView recruitList (ModelAndView mav,
+							  @RequestParam(defaultValue = "1",
+						  		value = "cPage") int cPage) {
+		//1.사용자 입력값 
+		final int limit = 10; //사용용도는 numPerPage와 똑같음
+		int offset = (cPage - 1) * limit;
 		
-		return "community/recruit/recruitList";
+		//2. 업무로직
+		List<Recruit> list = recruitService.selectRecruitList(limit, offset);
+		log.debug("list = {}", list);
+		
+		//전체컨텐츠수 구하기
+		 int totalContents = recruitService.selectRecruitTotalContents(); 
+		
+		
+		//3. view단 처리
+		mav.addObject("totalContents", totalContents);
+		mav.addObject("list", list);
+		mav.setViewName("community/recruit/recruitList");
+		return mav;
 	}
 	
 	// 구인/구직 등록폼
@@ -51,8 +71,14 @@ public class RecruitController {
 	}
 	
 	// 구인/구직 상세페이지
-	@RequestMapping("/recruitDetail.do")
-	public String recruitDetail () {
+	@GetMapping("/recruitDetail.do")
+	public String recruitDetail (@RequestParam("no") String no,
+			  					Model model) {
+		
+		Recruit recruit = recruitService.selectOneRecruit(no);
+		log.debug("recruit = {}", recruit);
+		
+		model.addAttribute("recruit", recruit);
 		
 		return "community/recruit/recruitDetail";
 	}

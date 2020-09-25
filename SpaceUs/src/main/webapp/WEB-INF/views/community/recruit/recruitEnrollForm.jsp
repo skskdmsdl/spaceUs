@@ -49,8 +49,6 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
       </div>
     </div>
 
-
-
     <!-- 구인구직 시작-->
 	<section class="blog-section spad">
                  <div class="m-5">

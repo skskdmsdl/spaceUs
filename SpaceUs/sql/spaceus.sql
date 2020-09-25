@@ -74,7 +74,7 @@ CREATE TABLE space (
     constraints fk_member_email foreign key(member_email) references member(member_email) on delete set null,
     constraints ck_status check(status in ('O','C','S'))
 );
-
+alter table space add(content varchar2(4000));
 create sequence seq_space_no;
 select * from space;
 

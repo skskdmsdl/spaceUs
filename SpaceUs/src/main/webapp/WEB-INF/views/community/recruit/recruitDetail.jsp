@@ -64,44 +64,19 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 								
                          
                          <div style="border-bottom: 1px solid #dddddd; padding-bottom: 15px;">
-                            <p class="h4">집에서 간단한 환전업무도와주시고 주마다 2번 300만원이상벌어가실분</p>
+                            <p class="h4">${recruit.title }</p>
                          	<table>
                                 <tr>
-                                    <th><i class="fa fa-user"></i> 작성자 </th>
+                                    <th><i class="fa fa-user"></i> ${recruit.nickName } </th>
                                     <th class="col-xl-auto">|</th>
-                                    <th><i class="fa fa-calendar"></i> 2020.09.22</th>
+                                    <th><i class="fa fa-calendar"></i><fmt:formatDate value="${recruit.enrollDate}" pattern="yyyy/MM/dd"/></th>
                                     <th class="col-xl-auto">|</th>
-                                    <th><i class="fa fa-eye"></i> 조회수</th>
+                                    <th><i class="fa fa-eye"></i>${ recruit.viewCnt}</th>
                                 </tr>
                             </table>
                          </div>
                          <div class="m-5">
-                         <div class="mb-5">
-                         
-				                         곧명절이니 돈벌어가셔서 도움되셨으면 좋겠습니다.<br/><br/>
-				
-							안녕하세요 코로나때문에 모든나라가힘든시점에서 경제적인사회생활도,직장도잃으신분들이계시고 <br/>
-							
-							피해보신분들이많습니다 상담한번에 좋은기회를만나보실수있습니다.<br/> <br/>
-							
-							밑에내용글에소개해드리겠습니다 <br/><br/>
-							
-							 문의는 카카오톡모바일에서 아이디친추하기에 밑에제아이디를적으시고 메세지주시면됩니다 .<br/><br/>
-							
-							1" 집에서하시는일입니다 1시간정도시간내시면되십니다 주마다2번씩합니다 돈은당일로바로받으실수있습니다<br/>
-							 불법아닙니다 환전업무입니다 메세지주실때 지역,나이,성별 기재부탁드립니다 <br/><br/>
-							
-							
-							2" PC,휴대폰 있으면누구나가능합니다 지역상관없습니다 나이상관없습니다 해외송금,한국송금모두가능합니다<br/> <br/>
-							
-							
-							3" 주마다2번씩 500이상 환전입금받으신돈에서 저에게 30프로,40프로를주시면됩니다 일이매우쉽고 간편합니다<br/><br/>
-							
-							
-							4" 카톡주시면저는 아내,아가들있는 40대가장입니다 떳떳하게 좋은인연맺고싶습니다 신용있는분들과<br/>
-							  코로나힘듬잊으시고 저와웃으면서 일해보실분구합니다 .<br/><br/>
-							  문의는 카카오톡모바일에서 아이디친추하기에 밑에제아이디를적으시고 메세지주시면됩니다 .<br/><br/>
-                         </div>
+                         <div class="mb-5">${ recruit.content}</div>
                          
                          
                          <div style="background-color: #fafafa; height: 200px; border: 1px solid #edeceb; ">
