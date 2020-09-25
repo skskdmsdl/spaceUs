@@ -24,6 +24,11 @@ public class GroupServiceImpl implements GroupService {
 	public List<GroupBoard> selectListGroupBoard() {
 		return groupDAO.selectListGroupBoard();
 	}
+
+	@Override
+	public List<GroupBoard> selectSortedListGroupBoard(String boardNo) {
+		return groupDAO.selectSortedListGroupBoard(boardNo);
+	}
 	
 	
 		
