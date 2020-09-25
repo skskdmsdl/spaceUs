@@ -58,8 +58,9 @@ public class GroupController {
 		 listMap.put("boardNo", boardNo);
 		 listMap.put("boardRef", boardRef);
 		 
-		 List<GroupBoard> groupBoardList =
-		 groupService.selectSortedListGroupBoard(listMap);
+		 log.info("listMap={}",listMap);
+		 
+		 List<GroupBoard> groupBoardList = groupService.selectSortedListGroupBoard(listMap);
 		 log.info("groupBoardList = {}", groupBoardList);
 		  
 		 model.addAttribute("boardList", boardList);
