@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.spaceus.community.group.model.service.GroupService;
@@ -21,17 +23,33 @@ public class GroupController {
 	@Autowired
 	private GroupService groupService;
 	
-	// 소모임 게시판
-	@RequestMapping("/groupList.do")
+	// 소모임 게시판 전체 리스트
+	@GetMapping("/groupList.do")
 	public String groupList (Model model) {
 		
 		List<Board> boardList = groupService.selectListBoard();
-		log.debug("boardList = {}", boardList);
+		log.info("boardList = {}", boardList);
 		
 		List<GroupBoard> groupBoardList = groupService.selectListGroupBoard();
-		log.debug("groupBoard = {}", groupBoardList);
+		log.info("groupBoard = {}", groupBoardList);
 		
 		System.out.println(groupBoardList);
+		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("groupBoardList", groupBoardList);
+		
+		return "community/group/groupBoard";
+	}
+	
+	//소모임 게시판 분류별 리스트
+	@GetMapping("/groupList/{boardNo}.do")
+	public String groupBoardList(@PathVariable("boardNo") String boardNo, Model model) {
+		log.info(boardNo);
+		List<Board> boardList = groupService.selectListBoard();
+		log.info("boardList = {}", boardList);
+		
+		List<GroupBoard> groupBoardList = groupService.selectSortedListGroupBoard(boardNo);
+		log.info("groupBoardList = {}", groupBoardList);
 		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("groupBoardList", groupBoardList);
@@ -45,4 +63,6 @@ public class GroupController {
 		
 		return "community/group/groupDetail";
 	}
+	
+
 }
