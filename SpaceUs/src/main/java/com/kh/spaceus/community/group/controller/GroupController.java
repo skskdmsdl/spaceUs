@@ -35,8 +35,10 @@ public class GroupController {
 		List<GroupBoard> groupBoardList = groupService.selectListGroupBoard();
 		log.info("groupBoard = {}", groupBoardList);
 
-		System.out.println(groupBoardList);
+		int totalCnt = groupService.selectTotalCnt();
+		log.info("totalCnt = {}",totalCnt);
 
+		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("groupBoardList", groupBoardList);
 
@@ -48,8 +50,6 @@ public class GroupController {
 	public String groupBoardList(@PathVariable("boardNo") String boardNo, 
 								@PathVariable("boardRef") String boardRef,
 								Model model) {
-		log.info(boardNo);
-		log.info(boardRef);
 
 		 List<Board> boardList = groupService.selectListBoard();
 		 log.info("boardList = {}", boardList);
@@ -62,6 +62,9 @@ public class GroupController {
 		 
 		 List<GroupBoard> groupBoardList = groupService.selectSortedListGroupBoard(listMap);
 		 log.info("groupBoardList = {}", groupBoardList);
+		 
+		 int totalCnt = groupService.selectTotalCnt();
+		 log.info("totalCnt = {}",totalCnt);
 		  
 		 model.addAttribute("boardList", boardList);
 		 model.addAttribute("groupBoardList", groupBoardList);

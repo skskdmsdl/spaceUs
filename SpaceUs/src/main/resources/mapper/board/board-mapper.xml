@@ -6,9 +6,11 @@
 	<!-- boardList -->
 	<select id="selectListBoard" resultMap="boardMap">
 		select
-		*
+			*
 		from
-		board
+			board
+		order by
+			board_no asc
 	</select>
 	<resultMap type="board" id="boardMap">
 
@@ -28,7 +30,8 @@
 	<!-- sorted groupBoard List -->
 	<select id="selectSortedListGroupBoard" resultMap="groupBoardMap">
   		select 
-  			* 
+  			G.* ,
+  			(select nickname from member where member_email= G.member_email) nickname
         from
             (
              select 
@@ -43,7 +46,15 @@
 	             	board_ref = #{boardNo}          	
 	             </if>	
              </where> 
-             )
+             ) G
+	</select>
+	
+	<!-- total Baord Cnt -->
+	<select id="selectTotalCnt" resultType="_int">
+		select
+			count(*)
+		from
+			group_board
 	</select>
 
 </mapper>

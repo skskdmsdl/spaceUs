@@ -30,6 +30,11 @@ public class GroupDAOImpl implements GroupDAO {
 	public List<GroupBoard> selectSortedListGroupBoard(Map<String, String> listMap) {
 		return session.selectList("board.selectSortedListGroupBoard", listMap);
 	}
+
+	@Override
+	public int selectTotalCnt() {
+		return session.selectOne("board.selectTotalCnt");
+	}
 	
 	
 	

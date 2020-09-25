@@ -30,6 +30,11 @@ public class GroupServiceImpl implements GroupService {
 	public List<GroupBoard> selectSortedListGroupBoard(Map<String, String> listMap) {
 		return groupDAO.selectSortedListGroupBoard(listMap);
 	}
+
+	@Override
+	public int selectTotalCnt() {
+		return groupDAO.selectTotalCnt();
+	}
 	
 	
 	

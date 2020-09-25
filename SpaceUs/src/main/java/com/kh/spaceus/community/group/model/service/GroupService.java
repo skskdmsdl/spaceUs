@@ -13,6 +13,8 @@ public interface GroupService {
 	List<GroupBoard> selectListGroupBoard();
 
 	List<GroupBoard> selectSortedListGroupBoard(Map<String, String> listMap);
+
+	int selectTotalCnt();
 	
 	
 
