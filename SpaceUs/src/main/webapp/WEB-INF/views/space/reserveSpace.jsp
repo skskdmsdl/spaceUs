@@ -133,24 +133,24 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             <h6>결제 예정금액</h6>
                         </div>
                          <form action="#" class="calculator-form">
-                                <div class="filter-input">
-                                    <p>예약 날짜</p>
-                                    <input type="text">
-                                </div>
-                                <div class="filter-input">
-                                    <p>예약 시간</p>
-                                    <input type="text">
-                                </div>
-                                <div class="filter-input">
-                                    <p>예약 인원</p>
-                                    <input type="text">
-                                </div>
-                                <div class="filter-input">
-                                    <p>총 금액</p>
-                                    <input type="text">
-                                </div>
-                                <button type="submit" class="site-btn">결제하기</button>
-                            </form>
+	                         <div class="filter-input">
+	                             <p>예약 날짜</p>
+	                             <input type="text">
+	                         </div>
+	                         <div class="filter-input">
+	                             <p>예약 시간</p>
+	                             <input type="text">
+	                         </div>
+	                         <div class="filter-input">
+	                             <p>예약 인원</p>
+	                             <input type="text">
+	                         </div>
+	                         <div class="filter-input">
+	                             <p>총 금액</p>
+	                             <input type="text">
+	                         </div>
+	                         <button type="submit" class="site-btn">결제하기</button>
+						</form>
                     </div>
                 </div>
             </div>
@@ -159,7 +159,6 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 </section>
     <!-- Blog Section End -->
     <!-- 공간 예약 폼 끝-->
-	
 
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -534,4 +534,18 @@ select * from monthly_sale;
 select * from yearly_sale;
 
 commit;
->>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
+
+insert into 
+    space
+values();
+
+insert into 
+    space
+values(
+    space||seq_dev_no.nextval,
+    '홍길동',
+    3,
+    'honggd@naver.com',
+    'M',
+    'Java,C'
+);

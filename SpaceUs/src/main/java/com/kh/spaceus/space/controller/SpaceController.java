@@ -27,6 +27,7 @@ public class SpaceController {
 		return "space/spaceDetail";
 	}
 	
+	//예약하기버튼
 	@RequestMapping("/reserveSpace.do")
 	public String reserveSpace() {
 		
