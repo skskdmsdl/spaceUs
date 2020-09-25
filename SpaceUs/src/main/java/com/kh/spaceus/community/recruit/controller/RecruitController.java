@@ -74,7 +74,7 @@ public class RecruitController {
 		String msg = result > 0 ? "등록 성공!" : "등록실패";
 		redirectAttributes.addFlashAttribute("msg", msg);
 	
-	 return "redirect:/community/recruit/recruitEnrollForm.do";
+	 return "redirect:/community/recruit/recruitDetail.do";
 	
 	 }
 }

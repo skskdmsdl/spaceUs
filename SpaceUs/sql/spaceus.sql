@@ -303,6 +303,9 @@ create table recruit (
 alter table recruit add title varchar2(256) NOT NULL;
 alter table recruit add content varchar2(2000) NOT NULL;
 create sequence seq_recruit_no;
+alter table recruit rename column content to content2;
+alter table recruit add(content clob);
+alter table recruit drop column content2;
 
 select * from recruit;
 
