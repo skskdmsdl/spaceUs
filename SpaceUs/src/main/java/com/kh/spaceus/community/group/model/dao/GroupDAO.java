@@ -13,6 +13,10 @@ public interface GroupDAO {
 	List<GroupBoard> selectListGroupBoard();
 
 	List<GroupBoard> selectSortedListGroupBoard(Map<String, String> listMap);
+
+	int selectTotalCnt();
+
+	List<GroupBoard> selectDetailBoard(String groupBoardNo);
 	
 	
 }

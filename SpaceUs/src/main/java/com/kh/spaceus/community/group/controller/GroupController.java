@@ -35,8 +35,10 @@ public class GroupController {
 		List<GroupBoard> groupBoardList = groupService.selectListGroupBoard();
 		log.info("groupBoard = {}", groupBoardList);
 
-		System.out.println(groupBoardList);
+		int totalCnt = groupService.selectTotalCnt();
+		log.info("totalCnt = {}",totalCnt);
 
+		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("groupBoardList", groupBoardList);
 
@@ -48,8 +50,6 @@ public class GroupController {
 	public String groupBoardList(@PathVariable("boardNo") String boardNo, 
 								@PathVariable("boardRef") String boardRef,
 								Model model) {
-		log.info(boardNo);
-		log.info(boardRef);
 
 		 List<Board> boardList = groupService.selectListBoard();
 		 log.info("boardList = {}", boardList);
@@ -62,18 +62,40 @@ public class GroupController {
 		 
 		 List<GroupBoard> groupBoardList = groupService.selectSortedListGroupBoard(listMap);
 		 log.info("groupBoardList = {}", groupBoardList);
-		  
+		 
+		 int totalCnt = groupService.selectTotalCnt();
+		 log.info("totalCnt = {}",totalCnt);
+		 
+		 model.addAttribute("totalCnt", totalCnt);
 		 model.addAttribute("boardList", boardList);
 		 model.addAttribute("groupBoardList", groupBoardList);
-		 
+
 		return "community/group/groupBoard";
 	}
 
 	// 소모임 상세 게시판
-	@RequestMapping("/groupDetail.do")
-	public String groupDetail(Model model) {
-
+	@RequestMapping("/groupDetail/{groupBoardNo}.do")
+	public String groupDetail(@PathVariable("groupBoardNo") String groupBoardNo ,Model model) {
+		log.info("groupBoardNo= {}" , groupBoardNo);
+		
+		List<GroupBoard> list = groupService.selectDetailBoard(groupBoardNo);
+		log.info("list = {}", list);
+		
+		model.addAttribute("list", list);
 		return "community/group/groupDetail";
+	}
+	
+	// 게시판 등록 폼 
+	@RequestMapping("/groupEnrollForm.do")
+	public String groupEnrollForm(Model model) {
+		
+		List<Board> boardList = groupService.selectListBoard();
+		log.info("boardList = {}", boardList);
+		
+		
+		model.addAttribute("boardList", boardList);
+		
+		return "/community/group/groupEnrollForm";
 	}
 
 }
