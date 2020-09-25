@@ -1,8 +1,9 @@
 package com.kh.spaceus.community.recruit.model.service;
 
+import com.kh.spaceus.community.recruit.model.vo.Recruit;
 
 public interface RecruitService {
 
-	int insertRecruit(String header, String title, String ir1);
+	int insertRecruit(Recruit recruit);
 
 }

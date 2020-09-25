@@ -77,7 +77,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                      <tr>
                                      <td >내용</td>
                                         <td >
-							       			<textarea name="ir1" id="ir1" rows="15" style="width:100%;" ></textarea>
+							       			<textarea name="content" id="content" rows="15" style="width:100%;" ></textarea>
                                         </td>
                                      </tr>
                              </table>
@@ -99,7 +99,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
  var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
  oAppRef: oEditors,
- elPlaceHolder: "ir1",
+ elPlaceHolder: "content",
  sSkinURI: "${pageContext.request.contextPath}/resources/js/smartEditor/SmartEditor2Skin.html",
  fCreator: "createSEditor2",
   htParams : { 
@@ -116,7 +116,7 @@ nhn.husky.EZCreator.createInIFrame({
 
 	   fOnAppLoad : function(){	 
 		//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-		 oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+		 oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		} 
 }); 
  $("#insertBtn").click( function(){
@@ -128,7 +128,7 @@ nhn.husky.EZCreator.createInIFrame({
 		alert("제목을 입력해주세요");
 		return false;
 		 }
-	 oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);  
+	 oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);  
 	$("#recruitFrm").submit(); 
 	 
 }); 

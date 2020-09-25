@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="recruit">
+	<insert id="insertRecruit">
+		insert into 
+			recruit 
+		values(
+			'R'||seq_recruit_no.nextval,
+			#{email},
+			#{nickName},
+			#{header},
+			default,
+			default,
+			content,
+			title
+		)
+	</insert>
+	
+      
+	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

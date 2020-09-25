@@ -52,20 +52,8 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 <textarea name="example" style="width:100%; height:350px; border: 1px solid #ebebeb; resize: none;"></textarea>
                             </div>
                            
-                           
-                            <!-- input type="text" id="sample6_postcode" placeholder="우편번호">
-							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-							<input type="text" id="sample6_address" placeholder="주소"><br>
-							<input type="text" id="sample6_detailAddress" placeholder="상세주소">
-							<input type="text" id="sample6_extraAddress" placeholder="참고항목"> -->
-							                           
-                           
-                           
-                           
-                           
                             <div class="pf-location">
                                 <h4>공간주소<span class="text-danger">*</span></h4>
-                                
                                 <div style="display:inline-block; width:40%">
 	                                <input class="zipCode-input" id="sample6_postcode" type="text" placeholder="우편번호"/>
 	                            </div>
