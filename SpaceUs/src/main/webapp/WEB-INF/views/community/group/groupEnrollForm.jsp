@@ -60,8 +60,8 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                          <div class="table-responsive">
                          <form action="${pageContext.request.contextPath}/community/recruit/insertRecruit.do" id="recruitFrm" method="post">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            <c:forEach items="${boardList}" var="board">
 	                             <table class="table">
+                           			 <c:forEach items="${boardList}" var="board">
 	                                     <tr>
 	                                         <th >분류</th>
 	                                         <th><select class="nice-select sm-width small" name="header">
@@ -70,6 +70,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 								                </select>
 								             </th>
 	                                     </tr>
+	                                  </c:forEach>
 	                                     <tr>
 	                                         <td >제목</td>
 	                                         <td>
@@ -89,7 +90,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                        </td>
 	                                     </tr>
 	                             </table>
-                            </c:forEach>
+                          
                              <div class="text-center">
 			                 	<button  id="insertBtn" class="btn " style="margin-top:50px; background-color: #00c89e; font-size:18px; color:white;">글 등록 </button>
                              </div>
