@@ -28,9 +28,6 @@ public class HostController {
 	@Autowired
 	private HostService hostService;
 	
-	private Logger log = 
-			LoggerFactory.getLogger(HostController.class);
-	
 	
 	//정산내역
 	@RequestMapping("/settlementDetails.do")
@@ -39,18 +36,28 @@ public class HostController {
 		return "host/settlementDetails";
 	}
 	
+	//공간정보
 	@RequestMapping("/spaceInfo.do")
 	public String ManageSpace() {
 		
 		return "host/spaceInfo";
 	}
 	
+	//예약 현황 
 	@RequestMapping("/hostReservation.do")
 	public String ManageHostReservation() {
 		
 		return "host/hostReservation";
 	}	
 	
+	//정산 내역 다운로드
+	@RequestMapping(value="/excelDown.do" )
+	public void ExcelDown() {
+		
+		
+	}
+	
+	//공간 리뷰 조회
 	@RequestMapping("/hostCheckReview.do")
 	public String CheckNewReview(Principal principal, Model model) {
 		log.debug("principal = {}", principal);
@@ -59,6 +66,7 @@ public class HostController {
 		return "host/hostCheckReview";
 	}
 	
+	//공간 질문글 조회
 	@RequestMapping("/hostCheckArticle.do")
 	public String CheckNewArticle(Principal principal, Model model) {
 		log.debug("principal = {}", principal);
@@ -67,6 +75,7 @@ public class HostController {
 		return "host/hostCheckArticle";
 	}
 	
+	//공간 미답변 질문글 조회
 	@RequestMapping(value= "/unreplied.do", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Qna> SelectUnreplied(@RequestParam("hostId") String hostId) {

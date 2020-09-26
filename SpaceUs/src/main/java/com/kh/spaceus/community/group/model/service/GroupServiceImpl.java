@@ -1,6 +1,7 @@
 package com.kh.spaceus.community.group.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,9 +27,20 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	@Override
-	public List<GroupBoard> selectSortedListGroupBoard(String boardNo) {
-		return groupDAO.selectSortedListGroupBoard(boardNo);
+	public List<GroupBoard> selectSortedListGroupBoard(Map<String, String> listMap) {
+		return groupDAO.selectSortedListGroupBoard(listMap);
 	}
+
+	@Override
+	public int selectTotalCnt() {
+		return groupDAO.selectTotalCnt();
+	}
+
+	@Override
+	public List<GroupBoard> selectDetailBoard(String groupBoardNo) {
+		return groupDAO.selectDetailBoard(groupBoardNo);
+	}
+	
 	
 	
 		
