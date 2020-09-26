@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spaceus.space.model.service.SpaceService;
+import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Tag;
 
 import lombok.extern.slf4j.Slf4j;
@@ -71,7 +72,23 @@ public class SpaceController {
 		
 		return mav;
 	}
-	
+	//사업자등록증 조회
+	@GetMapping("/checkIdDuplicate.do")
+    public ModelAndView checkIdDuplicate1(ModelAndView mav,
+    									  @RequestParam("businessNum") int businessNum) {
+    	
+    	//1.업무로직 : 중복체크
+    	Space space = spaceService.selectOneSpace(businessNum);
+    	boolean isUsable = space == null;
+    	
+    	//2. model에 속성 등록
+    	mav.addObject("isUsable", isUsable);
+    	
+    	//3. viewName : jsonView빈 지정
+    	mav.setViewName("jsonView"); // /WEB-INF/views/jsonView.jsp
+    	
+    	return mav;
+    }
 	
 }
 

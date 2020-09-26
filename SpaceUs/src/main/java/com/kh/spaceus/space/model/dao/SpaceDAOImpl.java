@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Tag;
 
 
@@ -21,6 +22,11 @@ public class SpaceDAOImpl implements SpaceDAO{
 	@Override
 	public int insertHashTag(String hashTag) {
 		return sqlSession.insert("space.insertHashTag", hashTag);
+	}
+
+	@Override
+	public Space selectOneSpace(int businessNum) {
+		return sqlSession.selectOne("space.selectOneSpace", businessNum);
 	}
 
 
