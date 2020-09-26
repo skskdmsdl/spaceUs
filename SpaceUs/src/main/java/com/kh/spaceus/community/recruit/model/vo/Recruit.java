@@ -17,10 +17,13 @@ import lombok.ToString;
 public class Recruit implements Serializable{
 
 	private String no;
-	private String memberEmail;
+	private String email;
 	private String nickName;
+	private String title;
+	private String content;
 	private String header;
 	private int viewCnt;
 	private int reportCnt;
+	private Date enrollDate;
 }
 

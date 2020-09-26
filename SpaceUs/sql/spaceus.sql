@@ -59,7 +59,7 @@ CREATE TABLE space (
     space_no	varchar2(256)	,
     category_no	varchar2(256)	NOT NULL,
     member_email	varchar2(256)	NOT NULL,
-    business_license	number	NOT NULL,
+    business_license number	NOT NULL,
     space_name	varchar2(256)	NOT NULL,
     address	varchar2(256)	NOT NULL,
     space_phone	char(11)	NOT NULL,
@@ -76,7 +76,8 @@ CREATE TABLE space (
     constraints fk_member_email foreign key(member_email) references member(member_email) on delete set null,
     constraints ck_status check(status in ('O','C','S'))
 );
-
+alter table space add(content varchar2(4000));
+alter table space add(bank varchar2(256));
 create sequence seq_space_no;
 select * from space;
 select * from space where space_no = 'space2';
@@ -316,6 +317,9 @@ create table recruit (
 alter table recruit add title varchar2(256) NOT NULL;
 alter table recruit add content varchar2(2000) NOT NULL;
 create sequence seq_recruit_no;
+alter table recruit rename column content to content2;
+alter table recruit add(content clob);
+alter table recruit drop column content2;
 
 select * from recruit;
 
@@ -464,15 +468,31 @@ select * from blacklist;
 -----------------------------
 
 create table exhibition (
+    ex_no varchar2(256),
     ex_title varchar2(256) not null,
     ex_subtitle varchar2(256) not null,
-    tag varchar2(100) not null
+    tag varchar2(100) not null,
+    image varchar2(256) not null,
+    constraints pk_ex_no primary key(ex_no)
 );
-
-
-
+create sequence seq_ex;
 select * from exhibition;
 
+commit;
+
+insert into exhibition values(
+    seq_ex.nextval,
+    '스마트한 팀워크를 위한 공유오피스 모음',
+    '팀을 위한 공유 오피스',
+    '공부',
+    'https://kr.object.ncloudstorage.com/scloud-service/service/160042093_3c874989f2a7c83b4334157979430945.png');
+
+insert into exhibition values(
+seq_ex.nextval,
+'보컬 연습을 위한 녹음실 공간 모음',
+'녹음실 기획전',
+'노래',
+'https://kr.object.ncloudstorage.com/scloud-service/service/160067588_203975de09692ba4025f5c9b74792fae.png');
 
 
 -----------------------------

@@ -63,7 +63,6 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                          <div class="m-5">
                              <div class="d-flex">
 								</div>
-								
                                   <input type="radio" name="radio" class="m-r-10 ml-3" >전체
                                   <input type="radio" name="radio" class="m-r-10 ml-3">구인
                                   <input type="radio" name="radio" class="m-r-10 ml-3">구직
@@ -85,66 +84,14 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                      </tr>
                                  </thead>
                                  <tbody>
-                                     <tr style="cursor: pointer;" onclick = "location.href='${pageContext.request.contextPath }/community/recruit/recruitDetail.do'">
-                                         <td class="text-center">1</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">니모</td>
+                                 	<c:forEach items="${list}" var="recruit" varStatus="vs">
+                                     <tr style="cursor: pointer;" onclick="recruitDetailFrm('${ recruit.no }')">
+                                         <td class="text-center" >${ vs.count }</td>
+                                         <td class="txt-oflo"><span class="text-success mr-2">[${ recruit.header }]</span>${ recruit.title }</td>
+                                         <td class="txt-oflo"><fmt:formatDate value="${recruit.enrollDate}" pattern="yyyy/MM/dd"/></td>
+                                         <td class="txt-oflo">${ recruit.nickName }</td>
                                      </tr>
-                                     <tr>
-                                         <td class="text-center">2</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>슬로베니아에서 영상제작 및 편집 가능자 모집합니다. (3개월 수습 후 정식 채용)</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">니모</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">3</td>
-                                         <td class="txt-oflo"><span class="text-info mr-2">[구직]</span>경력직같은 신입 지원합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">도리</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">4</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">도리</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">5</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td><span class="txt-oflo">효리</span></td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">6</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">효리</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">7</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">바다</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">8</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">바다</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">9</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">효리</td>
-                                     </tr>
-                                     <tr>
-                                         <td class="text-center">10</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2">[구인]</span>최고의 조건에서 정직원 모집합니다</td>
-                                         <td class="txt-oflo">2020.09.22</td>
-                                         <td class="txt-oflo">효리</td>
-                                     </tr>
+                                     </c:forEach>
                                  </tbody>
                              </table>
                              <div class="container">
@@ -175,4 +122,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
              </section>
     <!-- 구인구직 리스트 끝-->
 <!-- 컨텐츠 끝 -->
+<script>
+function recruitDetailFrm(recruit_no){
+	let no = recruit_no;
+	location.href='${pageContext.request.contextPath }/community/recruit/recruitDetail.do?no='+no;
+
+/* $("tbody tr").click(function(){
+}); */
+}; 
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -26,7 +26,12 @@ public class SpaceDAOImpl implements SpaceDAO{
 
 	@Override
 	public Space selectOneSpace(String spaceNo) {
-		return sqlSession.selectOne("space.selectOneSpace", spaceNo);
+		return sqlSession.selectOne("space.selectOneSpaceNo", spaceNo);
+	}
+	
+	@Override
+	public Space selectOneSpace(int businessNum) {
+		return sqlSession.selectOne("space.selectOneSpace", businessNum);
 	}
 
 

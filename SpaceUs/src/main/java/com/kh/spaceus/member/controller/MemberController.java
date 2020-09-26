@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.common.Utils;
@@ -36,7 +37,6 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Controller
 @Slf4j
-@Log4j
 @RequestMapping("/member")
 public class MemberController {
 	
@@ -109,15 +109,10 @@ public class MemberController {
 							  HttpSession session,
 							  HttpServletRequest request) {		
 		
-		log.debug("memberEmail@controller = {}",  memberEmail);
-		log.debug("password@controller = {}",  password);
-		
 		Member member = memberService.selectOneMember(memberEmail);
 		log.debug("member@controller = {}",  member);
 		
 		String referer = request.getHeader("referer");
-		log.debug("referer = {}", referer);
-		
 		
 		//로그인 성공
 		if(member != null && bcryptPasswordEncoder.matches(password, member.getPassword())) {

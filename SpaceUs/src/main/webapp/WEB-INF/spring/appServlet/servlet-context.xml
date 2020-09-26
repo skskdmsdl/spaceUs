@@ -67,4 +67,7 @@
 		</beans:property>
 	</beans:bean>
 	
+	<!-- 네이버로그인 -->
+	<beans:bean id="naverLoginBO" class="com.kh.spaceus.social.NaverLoginBO" />
+	
 </beans:beans>

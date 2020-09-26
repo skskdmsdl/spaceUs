@@ -11,4 +11,7 @@ public interface SpaceDAO {
 
 	Space selectOneSpace(String spaceNo);
 
+	Space selectOneSpace(int businessNum);
+
+
 }

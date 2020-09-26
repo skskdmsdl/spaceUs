@@ -27,5 +27,10 @@ public class SpaceServiceImpl implements SpaceService{
 	public Space selectOneSpace(String spaceNo) {
 		return spaceDAO.selectOneSpace(spaceNo);
 	}
+	
+	@Override
+	public Space selectOneSpace(int businessNum) {
+		return spaceDAO.selectOneSpace(businessNum);
+	}
 
 }
