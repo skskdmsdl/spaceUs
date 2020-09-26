@@ -87,14 +87,16 @@ alter table space rename constraint pk_review_no to pk_space_no;
 commit;
 
 --insert into space 
---values('space'||seq_space_no.nextval, 'cate2', 'sinsa@naver.com',
---        1111111, 'The Blue Sky Home', '경기도 파주시 금바위로',
---        '125-711-811', 70000, 0, sysdate, sysdate, 0, 0, 'O', 1111111111);
+--values('space2', 'cate2', 'sinsa@naver.com',
+--        1111111, '예약테스트 카페', '경기도 파주시 금바위로',
+--        '125-711-811', 70000, 0, sysdate, sysdate, 0, 0, 'O',
+--        1111111111, '공간 설명 블라블라 ~~~~', '신한');
 --update space
 --set 
 --    address = '잘들어가는지 test'
 --where 
 --    space_no = 'space2';
+--DELETE FROM space WHERE space_no = 'space2';
 
 -----------------------------
 -------- 공간첨부파일 --------
@@ -153,17 +155,33 @@ select * from reservation;
 CREATE TABLE Reservation_avail (
 	day	varchar2(256)		NOT NULL,
 	space_no	varchar2(256)		NOT NULL,
-	start_hours	date		NOT NULL,
-	end_hours	date		NOT NULL,
+--	start_hours	date		NOT NULL,
+--	end_hours	date		NOT NULL,
+    start_hour	number		NOT NULL,
+	end_hour	number		NOT NULL,
 	constraints pk_R_avail_day primary key(day, space_no),
 	constraints fk_R_avail_space foreign key (space_no) 
                                      references space(space_no)
-                                     on delete set null
+                                     on delete cascade,
+    constraints ck_start_hour check(start_hour between 0 and 23),
+    constraints ck_end_hour check(end_hour between 0 and 23)
 );
 
-
 select * from reservation_avail;
-
+--DROP TABLE Reservation_avail;
+--insert into reservation_avail 
+--values('월','space2',to_date(09,'hh24'),to_date(18,'hh24'));
+--insert into reservation_avail 
+--values('월','space2',9,18);
+--insert into reservation_avail 
+--values('화','space2',20,0);
+--insert into reservation_avail 
+--values('수','space2',20,0);
+--insert into reservation_avail 
+--values('목','space2',20,0);
+--insert into reservation_avail 
+--values('금','space2',20,0);
+commit;
 
 -----------------------------
 ----------- 옵션 ------------
