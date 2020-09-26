@@ -22,6 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/vendor/daterangepicker/daterangepicker.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 <script>
 	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
 	<c:if test="${ not empty msg }">
@@ -39,9 +40,17 @@
 					<span class="login100-form-title p-b-43">
 						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 					</span>
-					<button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg"/>&nbsp;네이버로 로그인하기</button>
+					<div id="naver_id_login" style="text-align:center"><a href="${url}">
+						<img width="230" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
+					</div>
+					<br />
+					<div id="kkao_login" style="text-align:center">
+						<img width="230" src="${pageContext.request.contextPath }/resources/images/icons/kakao_login_btn.png"/></a>
+					</div>
+					<br />
+						<%-- <button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg"/><a href="${url}">&nbsp;네이버로 로그인하기</a></button>
 						<button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/google-icon.png"/>&nbsp;구글로 로그인하기</button>
-						<button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/facebook-icon.png"/>&nbsp;페이스북으로 로그인하기</button>
+						<button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/facebook-icon.png"/>&nbsp;페이스북으로 로그인하기</button> --%>
 						<div class="text-center p-t-46 p-b-20">
 						<p class="txt1">
 							또는
@@ -49,7 +58,7 @@
 						</div>
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz"
 						style="width: 100%;">
-						<input class="input100" type="text" name="memberEmail" placeholder="email">
+						<input class="input100" type="text" name="memberEmail" id="memberEmail" placeholder="email">
 						<span class="focus-input100">email</span>
 						<span class="focus-output100"></span>
 					</div>
@@ -63,8 +72,8 @@
 
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
 						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
+							<input class="input-checkbox100" id="idSaveCheck" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="idSaveCheck">
 								아이디 저장
 							</label>
 						</div>
@@ -104,6 +113,26 @@
 	<script src="${pageContext.request.contextPath }/resources/vendor/daterangepicker/daterangepicker.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/vendor/countdowntime/countdowntime.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
-
+<script>
+//아이디저장
+	$("#memberEmail").val(Cookies.get('key'));      
+	if($("#memberEmail").val() != ""){
+	    $("#idSaveCheck").attr("checked", true);
+	}
+	
+	$("#idSaveCheck").change(function(){
+	if($("#idSaveCheck").is(":checked")){
+	    Cookies.set('key', $("#memberEmail").val(), { expires: 7 });
+	}else{
+	      Cookies.remove('key');
+	}
+	});
+	 
+	$("#memberEmail").keyup(function(){
+	if($("#idSaveCheck").is(":checked")){
+	    Cookies.set('key', $("#memberEmail").val(), { expires: 7 });
+	}
+	});
+</script>
 </body>
 </html>

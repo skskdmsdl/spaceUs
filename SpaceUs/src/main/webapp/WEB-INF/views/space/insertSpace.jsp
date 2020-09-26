@@ -43,14 +43,18 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
             <div class="row m-5">
                 <div class="col-lg-12">
                     <div class="property-submit-form">
-                        <form action="#">
+                        <form name="spaceFrm" 
+							  action="${pageContext.request.contextPath}/space/insertSpace.do" 
+							  method="post" 
+							  onsubmit="return spaceValidate();"
+							  enctype="multipart/form-data">
                             <div class="pf-title">
                                 <h4>공간이름<span class="text-danger">*</span></h4>
-                                <input type="text">
+                                <input name="spaceName" type="text">
                             </div>
                             <div class="pf-summernote">
                                 <h4>공간설명<span class="text-danger">*</span></h4>
-                                <textarea name="example" style="width:100%; height:350px; border: 1px solid #ebebeb; resize: none;"></textarea>
+                                <textarea name="content" style="width:100%; height:350px; border: 1px solid #ebebeb; resize: none;"></textarea>
                             </div>
                            
                             <div class="pf-location">
@@ -68,18 +72,20 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 <div style="display:inline-block; width:48.5%" class="ml-4">
                                 	<input class="detail-address-input" type="text" id="sample6_detailAddress" placeholder="상세주소를 입력해주세요">
                             	</div>
+                            	<input type="hidden" name="address" value="" />
                             </div>
                             <div class="pf-phone" style="margin-bottom: 45px;">
                                 <h4>공간전화번호<span class="text-danger">*</span></h4>
                                  	<input type='tel' name='phone1' style="width: 10%"/>&emsp;ㅡ&emsp;
 							        <input type='tel' name='phone2' style="width: 10%"/>&emsp;ㅡ&emsp;
 							        <input type='tel' name='phone3' style="width: 10%"/>
+							        <input type="hidden" name="phone" value="" />
                             </div>
                             <div class="pf-type">
                                 <h4>카테고리 선택<span class="text-danger">*</span></h4>
                                 <table class="table table-bordered" id="categoryTb">
                                 	<tr>
-										<th >회의실</th>	                                
+										<th>회의실</th>	                                
 										<th>세미나실</th>	                                
 										<th>다목적홀</th>	                                
 										<th>작업실</th>	                                
@@ -429,6 +435,14 @@ $("#businessNum").keyup(function(){
 		}
 	}); 
 	
+});
+//주소 합치기
+$("#sample6_detailAddress").blur(function(){
+	$("[name=address]").val("우("+$("#sample6_postcode").val()+") "+$("#sample6_address").val()+" "+$("#sample6_extraAddress").val()+" "+$("#sample6_detailAddress").val());
+});
+//전화번호 합치기
+$("#[name=phone3]").blur(function(){
+	$("[name=phone]").val($("#phone1").val()+$("#phone2").val()+$("#phone3").val());
 });
 </script>
 

@@ -1,6 +1,7 @@
 package com.kh.spaceus.community.group.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,20 @@ public class GroupDAOImpl implements GroupDAO {
 	}
 
 	@Override
-	public List<GroupBoard> selectSortedListGroupBoard(String boardNo) {
-		return session.selectList("board.selectSortedListGroupBoard", boardNo);
+	public List<GroupBoard> selectSortedListGroupBoard(Map<String, String> listMap) {
+		return session.selectList("board.selectSortedListGroupBoard", listMap);
 	}
+
+	@Override
+	public int selectTotalCnt() {
+		return session.selectOne("board.selectTotalCnt");
+	}
+
+	@Override
+	public List<GroupBoard> selectDetailBoard(String groupBoardNo) {
+		return session.selectList("board.selectDetailBoard", groupBoardNo);
+	}
+	
 	
 	
 	
