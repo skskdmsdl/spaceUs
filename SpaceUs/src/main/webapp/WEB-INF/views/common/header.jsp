@@ -99,6 +99,10 @@
 		        </ul>
 		      </div>
 	      </sec:authorize>
+	      <c:if test="${sessionId != null}">
+			<h3>'${sessionId}' 님 환영합니다! </h3>
+	      </c:if>
+	      
 		  <sec:authorize access="hasRole('ROLE_HOST')">
 		  <div class="collapse navbar-collapse" id="ftco-nav">
         	 <ul class="navbar-nav ml-auto">
@@ -214,7 +218,7 @@
 	        <h5 class="modal-title" id="exampleModalLabel">
 	        	<div>
 		        	<img src="https://resource.miricanvas.com/image/common/profile_argo.svg" style="background: #22B47B; border-right: 0; border-radius: 90%; width: 40px;  height: 40px;">
-	        		<sec:authentication property="principal.username"/>@naver.com
+	        		<sec:authentication property="principal.nickName"/>님
 	        	</div>
 	        </h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">

@@ -40,9 +40,17 @@
 					<span class="login100-form-title p-b-43">
 						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 					</span>
-					<button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg"/>&nbsp;네이버로 로그인하기</button>
+					<div id="naver_id_login" style="text-align:center"><a href="${url}">
+						<img width="230" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
+					</div>
+					<br />
+					<div id="kkao_login" style="text-align:center">
+						<img width="230" src="${pageContext.request.contextPath }/resources/images/icons/kakao_login_btn.png"/></a>
+					</div>
+					<br />
+						<%-- <button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg"/><a href="${url}">&nbsp;네이버로 로그인하기</a></button>
 						<button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/google-icon.png"/>&nbsp;구글로 로그인하기</button>
-						<button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/facebook-icon.png"/>&nbsp;페이스북으로 로그인하기</button>
+						<button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/facebook-icon.png"/>&nbsp;페이스북으로 로그인하기</button> --%>
 						<div class="text-center p-t-46 p-b-20">
 						<p class="txt1">
 							또는
@@ -106,6 +114,7 @@
 	<script src="${pageContext.request.contextPath }/resources/vendor/countdowntime/countdowntime.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
 <script>
+//아이디저장
 	$("#memberEmail").val(Cookies.get('key'));      
 	if($("#memberEmail").val() != ""){
 	    $("#idSaveCheck").attr("checked", true);
