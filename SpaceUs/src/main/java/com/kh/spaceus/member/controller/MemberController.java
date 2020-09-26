@@ -108,15 +108,10 @@ public class MemberController {
 							  HttpSession session,
 							  HttpServletRequest request) {		
 		
-		log.debug("memberEmail@controller = {}",  memberEmail);
-		log.debug("password@controller = {}",  password);
-		
 		Member member = memberService.selectOneMember(memberEmail);
 		log.debug("member@controller = {}",  member);
 		
 		String referer = request.getHeader("referer");
-		log.debug("referer = {}", referer);
-		
 		
 		//로그인 성공
 		if(member != null && bcryptPasswordEncoder.matches(password, member.getPassword())) {
