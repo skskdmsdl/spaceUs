@@ -52,6 +52,10 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                        <div class="section-title sidebar-title-b mt-5">
 	                            <h6>공간 정보</h6>
 	                        </div>
+	                        <tr>
+								<th>공간명</th>
+								<th>${ spaceName }</th>
+							</tr>
 							<tr>
 								<th>공간카테고리</th>
 								<th>카페</th>

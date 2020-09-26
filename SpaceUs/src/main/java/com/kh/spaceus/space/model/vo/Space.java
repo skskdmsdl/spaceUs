@@ -22,7 +22,7 @@ public class Space implements Serializable{
 	private int businessNo;
 	private String spaceName;
 	private String address;
-	private String phone;
+	private String spacePhone;
 	private int hourlyPrice;
 	private float starAvg;
 	private String enrollDate;

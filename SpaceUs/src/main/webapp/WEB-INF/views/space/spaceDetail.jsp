@@ -129,10 +129,11 @@ function urlcopy(){
 					    <input type="submit" onclick="rvSubmit();" value="예약하기" class="btn py-3 px-5 btn-primary" style="margin-left: 70px">
 					    <form id="reserveFrm">
 	   						<input type="hidden" name="spaceNo" value="${ space.spaceNo }" />
+	   						<input type="hidden" name="spaceName" value="${ space.spaceName }" />
       					</form>
       				</div>
       					<span class="subheading">카페</span>
-      					<h2>The Blue Sky Home
+      					<h2>${ space.spaceName }
       					</h2>
       					<br />
       					<span class="subheading">
@@ -188,6 +189,7 @@ function urlcopy(){
  <!-- 공간설명 시작-->
    <div class="tab-pane fade" id="detail-manufacturer" role="tabpanel" aria-labelledby="detail-manufacturer-tab">
     <p style="font-size: 18px">
+    	${ space.content }
     	1,2층으로 나뉘어져 있으며 <br/>
     	대관시 2층의 엔틱, 빈티지 분위기의 유니크한 인테리어를 이용하여 각종 행사/ 전시/ 스튜디어 대관/ 쇼핑몰 대관등을 진행하고 있습니다.
     </p>
