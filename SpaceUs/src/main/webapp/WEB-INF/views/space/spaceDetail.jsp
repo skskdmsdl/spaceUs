@@ -128,7 +128,7 @@ function urlcopy(){
       				<!-- 예약버튼 -->
 					    <input type="submit" onclick="rvSubmit();" value="예약하기" class="btn py-3 px-5 btn-primary" style="margin-left: 70px">
 					    <form id="reserveFrm">
-	   						<input type="hidden" name="" />
+	   						<input type="hidden" name="spaceNo" value="${ space.spaceNo }" />
       					</form>
       				</div>
       					<span class="subheading">카페</span>
@@ -235,7 +235,7 @@ function urlcopy(){
               </div>
               <div class="ci-text">
                   <h5>주소</h5>
-                  <p>경기도 파주시 금바위로</p>
+                  <p>${ space.address }</p>
               </div>
           </div>
           <div class="ci-item">
@@ -245,7 +245,7 @@ function urlcopy(){
               <div class="ci-text">
                   <h5>문의전화</h5>
                   <ul>
-                      <li>125-711-811</li>
+                      <li>${ space.spacePhone }</li>
                   </ul>
               </div>
           </div>
@@ -508,7 +508,6 @@ function urlcopy(){
 <script>
 /* 예약버튼 */
 function rvSubmit() {
-/* 	$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserve?no=" + no) */
 	$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserveSpace.do")
 					.submit();
 }

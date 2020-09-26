@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,8 +61,13 @@ public class SpaceController {
 	
 	//예약하기버튼
 	@RequestMapping("/reserveSpace.do")
-	public String reserveSpace(Space space) {
-		System.out.println("space@reserveSpace= "+ space);
+	public String reserveSpace(Model model,
+							   @RequestParam("spaceNo") String spaceNo) {
+		//log.debug("spaceNo= {}",spaceNo);
+		
+		//spaceNo로 옵션정보가져와서 전달하기
+		
+		
 		
 		return "space/reserveSpace";
 	}

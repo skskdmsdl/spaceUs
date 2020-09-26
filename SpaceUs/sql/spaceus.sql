@@ -85,10 +85,15 @@ select * from space where space_no = 'space2';
 alter table space rename constraint pk_review_no to pk_space_no;
 commit;
 
-insert into space 
-values('space'||seq_space_no.nextval, 'cate2', 'sinsa@naver.com',
-        1111111, 'The Blue Sky Home', '경기도 파주시 금바위로',
-        '125-711-811', 70000, 0, sysdate, sysdate, 0, 0, 'O', 1111111111);
+--insert into space 
+--values('space'||seq_space_no.nextval, 'cate2', 'sinsa@naver.com',
+--        1111111, 'The Blue Sky Home', '경기도 파주시 금바위로',
+--        '125-711-811', 70000, 0, sysdate, sysdate, 0, 0, 'O', 1111111111);
+--update space
+--set 
+--    address = '잘들어가는지 test'
+--where 
+--    space_no = 'space2';
 
 -----------------------------
 -------- 공간첨부파일 --------
