@@ -59,7 +59,7 @@ public class SpaceController {
 		//log.debug("spaceNo= {}",spaceNo);
 		Space space = spaceService.selectOneSpace(spaceNo);
 		//log.debug("space= {}",space);
-		
+
 		model.addAttribute("space", space);
 		return "space/spaceDetail";
 	}
