@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.spaceus.community.group.model.service.GroupService;
 import com.kh.spaceus.community.group.model.vo.Board;
@@ -94,6 +96,21 @@ public class GroupController {
 		
 		
 		model.addAttribute("boardList", boardList);
+		
+		return "/community/group/groupEnrollForm";
+	}
+	
+	//게시판 등록
+	@PostMapping("/insertBoard.do")
+	public String insertBoard(GroupBoard gb,
+							  @RequestParam("groupBoardContent") String groupBoardContent) {
+		log.info("gb = {}" , gb);
+		log.info("groupBoardContent = {}" , groupBoardContent);		
+		
+		//GroupBoard gb = new GroupBoard(null, boardNo, memberEmail, 0, groupBoardTitle, groupBoardContent, 0, null, nickname);
+		
+		//int result = groupService.insertBoard(gb);
+		//log.info("result = {}",result);
 		
 		return "/community/group/groupEnrollForm";
 	}

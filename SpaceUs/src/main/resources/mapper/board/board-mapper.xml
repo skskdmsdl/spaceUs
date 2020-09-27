@@ -67,4 +67,20 @@
 		where
 			G.group_board_no=#{groupBoardNo}
 	</select>
+	
+	<!-- insert board -->
+	<insert id="insertBoard">
+		insert into
+			group_board
+		values(
+			'G'||seq_group_board_no.nextval,
+			#{boardNo},
+			#{memberEmail},
+			default,
+			#{groupBoardTitle},
+			default,
+			default,
+			#{groupBoardContent}
+		)
+	</insert>
 </mapper>

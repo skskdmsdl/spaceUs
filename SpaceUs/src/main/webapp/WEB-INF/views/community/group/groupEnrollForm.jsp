@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -34,9 +36,9 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 		</ul>
 	</div>
 	</section>
-    <div class="hero-wrap" style="height: 200px">
+    <div class="hero-wrap" style="height: 200px;">
       <div class="container">
-        <div class="row no-gutters slider-text justify-content-center align-items-center">
+        <div class="row no-gutters slider-text justify-content-center align-items-center" >
           <div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-end">
           	<div class="text text-center mx-auto" style="margin-bottom:80%;">
 	            <h1 class="mb-4">소모임 글등록</h1>
@@ -56,45 +58,51 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	 <div class="row m-5">
                  <!-- column -->
                  <div class="col-12">
-						<p class="h3 mt-5 mb-3">글쓰기</p>
+						<p class="h2 mt-5 mb-3 ">글쓰기</p>
                          <div class="table-responsive">
-                         <form action="${pageContext.request.contextPath}/community/recruit/insertRecruit.do" id="recruitFrm" method="post">
+                         <form action="${pageContext.request.contextPath}/community/group/insertBoard.do" id="boardFrm" method="post">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	                             <table class="table">
-                           			 <c:forEach items="${boardList}" var="board">
 	                                     <tr>
-	                                         <th >분류</th>
-	                                         <th><select class="nice-select sm-width small" name="header">
+	                                         <th style="width:7%;">분류</th>
+	                                         <th><select class="nice-select sm-width small" name="boardNo" id="boardNo">
 								                    <option value="" selected hidden>분류선택</option>
-								                    <option value="${board.boardNo }">${board.boardName}</option>
+                           							 <c:forEach items="${boardList}" var="board">
+								                    	<option value="${board.boardNo}">
+								                    		${board.boardName eq "함께할 사람을 찾습니다" || board.boardName eq "공간을 같이 쓸 사람을 찾습니다" || board.boardName eq "소모임 자랑하기"?
+								                    			" " : board.boardName}
+								                    	</option>
+	                                  				</c:forEach>
 								                </select>
 								             </th>
 	                                     </tr>
-	                                  </c:forEach>
 	                                     <tr>
 	                                         <td >제목</td>
 	                                         <td>
-	                                         	<input type="text" placeholder="제목을 입력해주세요" style="border:1px solid #d0d0d0; width:100%" name="title"/>
+	                                         	<input type="text" name="groupBoardTitle" id="groupBoardTitle" placeholder="제목을 입력해주세요" style="border:1px solid #d0d0d0; width:100%" name="title"/>
 	                                         </td>
 	                                     </tr>
 	                                     <tr>
 	                                         <td >글쓴이</td>
 	                                         <td>
-	                                         	<input type="text" value="로그인 하게되면 loginMember가져올것임" style="border:none;" name="nickname"/>
+	                                         	<input type="text" name="memberEmail" id="memberEmail" value='<sec:authentication property="principal.memberEmail"/>' style="border: none; width:100%;" name="nickname" readonly="readonly"/>
 	                                         </td>
 	                                     </tr>
 	                                     <tr>
 	                                     <td >내용</td>
-	                                        <td >
-								       			<textarea name="ir1" id="ir1" rows="15" style="width:100%;" ></textarea>
+	                                        <td>
+								       			<textarea name="groupBoardContent" id="groupBoardContent" rows="15" style="width:100%;"></textarea>
 	                                        </td>
 	                                     </tr>
 	                             </table>
-                          
-                             <div class="text-center">
-			                 	<button  id="insertBtn" class="btn " style="margin-top:50px; background-color: #00c89e; font-size:18px; color:white;">글 등록 </button>
-                             </div>
-                             </form>
+                             	<input type="hidden" name="nickname" id="nickname" value='<sec:authentication property="principal.nickName"/>' />
+
+								                          
+                           		<div class="text-center">
+			                 		<button id="insertBtn" class="btn btn-lg" style="margin-top:50px; background-color: #00c89e; font-size:18px; color:white;">글 등록 </button>
+                             	</div>
+                             	
+                           </form>
 							 </div>
                          </div>
                      </div>
@@ -109,7 +117,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
  var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
  oAppRef: oEditors,
- elPlaceHolder: "ir1",
+ elPlaceHolder: "groupBoardContent",
  sSkinURI: "${pageContext.request.contextPath}/resources/js/smartEditor/SmartEditor2Skin.html",
  fCreator: "createSEditor2",
   htParams : { 
@@ -126,20 +134,20 @@ nhn.husky.EZCreator.createInIFrame({
 
 	   fOnAppLoad : function(){	 
 		//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-		 oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+		 oEditors.getById["groupBoardContent"].exec("UPDATE_CONTENTS_FIELD", []);
 		} 
 }); 
  $("#insertBtn").click( function(){
-	 if($("select[name=header]").val()==""){
+	 if($("select[name=boardNo]").val()==""){
 		alert("분류를 선택해주세요");
 		return false;
 		 }
-	 if($("input[name=title]").val()==""){
+	 if($("input[name=groupBoardTitle]").val()==""){
 		alert("제목을 입력해주세요");
 		return false;
 		 }
-	 oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);  
-	$("#recruitFrm").submit(); 
+	 oEditors.getById["gropuBoardContent"].exec("UPDATE_CONTENTS_FIELD", []);  
+	$("#boardFrm").submit(); 
 	 
 }); 
 
