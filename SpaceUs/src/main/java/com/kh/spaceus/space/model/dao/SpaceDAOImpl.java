@@ -1,9 +1,12 @@
 package com.kh.spaceus.space.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Tag;
 
@@ -24,6 +27,11 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.insert("space.insertHashTag", hashTag);
 	}
 
+	@Override
+	public Space selectOneSpace(String spaceNo) {
+		return sqlSession.selectOne("space.selectOneSpaceNo", spaceNo);
+	}
+	
 	@Override
 	public Space selectOneSpace(int businessNum) {
 		return sqlSession.selectOne("space.selectOneSpace", businessNum);

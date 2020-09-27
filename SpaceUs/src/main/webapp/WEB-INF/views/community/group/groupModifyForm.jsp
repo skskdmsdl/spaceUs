@@ -67,7 +67,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                         <th style="width:7%;">분류</th>
 	                                         <th><select class="nice-select sm-width small" name="boardNo" id="boardNo">
 								                    <option value="" selected hidden>분류선택</option>
-                           							 <c:forEach items="${boardList}" var="board">
+                           							 <c:forEach items="${List}" var="board">
 								                    	<option value="${board.boardNo}">
 								                    		${board.boardName eq "함께할 사람을 찾습니다" || board.boardName eq "공간을 같이 쓸 사람을 찾습니다" || board.boardName eq "소모임 자랑하기"?
 								                    			" " : board.boardName}
@@ -76,10 +76,11 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 								                </select>
 								             </th>
 	                                     </tr>
+	                                    <c:forEach items="${gb}" var="gb">
 	                                     <tr>
 	                                         <td >제목</td>
 	                                         <td>
-	                                         	<input type="text" name="groupBoardTitle" id="groupBoardTitle" placeholder="제목을 입력해주세요" style="border:1px solid #d0d0d0; width:100%" name="title"/>
+	                                         	<input type="text" name="groupBoardTitle" id="groupBoardTitle" value="${gb.groupBoardTitle}" style="border:1px solid #d0d0d0; width:100%" name="title"/>
 	                                         </td>
 	                                     </tr>
 	                                     <tr>
@@ -91,9 +92,11 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                     <tr>
 	                                     <td >내용</td>
 	                                        <td>
-								       			<textarea name="groupBoardContent" id="gb" rows="15" style="width:100%;"></textarea>
+								       			<textarea name="groupBoardContent" id="gb" rows="15" style="width:100%;">${gb.groupBoardContent}</textarea>
 	                                        </td>
 	                                     </tr>
+	                            		</c:forEach>
+	                                   
 	                             </table>
                              	<input type="hidden" name="nickname" id="nickname" value='<sec:authentication property="principal.nickName"/>' />
                           
