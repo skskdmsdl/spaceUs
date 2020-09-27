@@ -50,10 +50,15 @@ public class GroupDAOImpl implements GroupDAO {
 	public int updateBoard(GroupBoard gb) {
 		return session.update("board.updateBoard", gb);
 	}
-	
-	
-	
-	
-	
+
+	@Override
+	public int deleteBoard(String groupBoardNo) {
+		return session.delete("board.deleteBoard", groupBoardNo);
+	}
+
+	@Override
+	public int increaseBoardReadCnt(String groupBoardNo) {
+		return session.update("board.increaseBoardReadCnt", groupBoardNo);
+	}	
 	
 }

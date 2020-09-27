@@ -97,4 +97,22 @@
 		where
 			board_no = #{boardNo}
 	</update>
+	
+	<!-- delete Board -->
+	<delete id="deleteBoard">
+		delete from
+			group_board
+		where
+			group_board_no = #{groupBoardNo}
+	</delete>
+	
+	<!-- increase Board ReadCnt -->
+	<update id="increaseBoardReadCnt">
+		update 
+			group_board
+		set
+			view_cnt = view_cnt + 1
+		where
+			group_board_no = #{groupBoardNo}
+	</update>
 </mapper>
