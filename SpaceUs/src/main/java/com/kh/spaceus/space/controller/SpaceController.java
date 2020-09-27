@@ -1,19 +1,18 @@
 package com.kh.spaceus.space.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.spaceus.reservation.model.service.ReservationService;
+import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Tag;
@@ -28,6 +27,8 @@ public class SpaceController {
 	@Autowired 
 	private SpaceService spaceService;
 	 
+	@Autowired 
+	private ReservationService reservationService;
 	
 	@RequestMapping("/insertSpace.do")
 	public String insertSpace() {
@@ -53,13 +54,33 @@ public class SpaceController {
 	}
 	
 	@RequestMapping("/spaceDetail.do")
-	public String spaceDetail() {
-		
+	public String spaceDetail(Model model,
+							  @RequestParam("spaceNo") String spaceNo) {
+		//log.debug("spaceNo= {}",spaceNo);
+		Space space = spaceService.selectOneSpace(spaceNo);
+		//log.debug("space= {}",space);
+
+		model.addAttribute("space", space);
 		return "space/spaceDetail";
 	}
 	
+	//예약하기버튼
 	@RequestMapping("/reserveSpace.do")
-	public String reserveSpace() {
+	public String reserveSpace(Model model,
+							   ModelAndView mav,
+							   @RequestParam("spaceNo") String spaceNo,
+							   @RequestParam("spaceName") String spaceName) {
+		//log.debug("spaceNo= {}",spaceNo);
+		//log.debug("spaceName= {}",spaceName);
+		
+		//spaceNo로 옵션정보가져와서 전달하기
+		
+		//spaceNo로 예약가능한 날짜 가져오기
+		List<ReservationAvail> availList = reservationService.selectListAvail(spaceNo);
+		//log.debug("rev={}",rev);
+		
+		model.addAttribute("spaceName", spaceName);
+		mav.addObject("availList",availList);
 		
 		return "space/reserveSpace";
 	}

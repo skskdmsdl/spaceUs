@@ -85,22 +85,22 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 <h4>카테고리 선택<span class="text-danger">*</span></h4>
                                 <table class="table table-bordered" id="categoryTb">
                                 	<tr>
-										<th>회의실</th>	                                
-										<th>세미나실</th>	                                
-										<th>다목적홀</th>	                                
-										<th>작업실</th>	                                
+										<th id="cate3">회의실</th>	                                
+										<th id="cate4">세미나실</th>	                                
+										<th id="cate5">다목적홀</th>	                                
+										<th id="cate6">작업실</th>	                                
                                 	</tr>
                                 	<tr>
-										<th>파티룸</th>	                                
-										<th>공연장</th>	                                
-										<th>연습실</th>	                                
-										<th>카페</th>	                                
+										<th id="cate7">파티룸</th>	                                
+										<th id="cate8">공연장</th>	                                
+										<th id="cate9">연습실</th>	                                
+										<th id="cate2">카페</th>	                                
                                 	</tr>
                                 	<tr>
-										<th>스터디룸</th>	                                
-										<th>엠티장소</th>	                                
-										<th style="width:25%;">독립 오피스</th>	                                
-										<th style="width:25%;">코워킹 스페이스</th>	                                
+										<th id="cate10">스터디룸</th>	                                
+										<th id="cate11">엠티장소</th>	                                
+										<th id="cate12" style="width:25%;">독립 오피스</th>	                                
+										<th id="cate13" style="width:25%;">코워킹 스페이스</th>	                                
                                 	</tr>
                                 </table>
                             </div>
@@ -196,6 +196,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             </div>
                             <div class="pf-feature">
                                 <h4>옵션선택</h4>
+                                <input type="hidden" name="" />
                                 <table class="table table-bordered" id="optionTb">
                                 	<tr>
 										<th style="width:25%;">TV/프로젝터</th>	                                
