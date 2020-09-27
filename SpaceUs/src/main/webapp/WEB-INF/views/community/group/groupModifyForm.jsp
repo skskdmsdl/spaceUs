@@ -69,7 +69,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                         <th><select class="nice-select sm-width small" name="boardNo" id="boardNo">
 								                    <option value="" selected hidden>분류선택</option>
                            							 <c:forEach items="${List}" var="board">
-								                    	<option value="${board.boardNo}" selected="selected">
+								                    	<option value="${board.boardNo}" ${board.boardNo == gb.boardNo ? 'selected' : ''}>
 								                    		${board.boardName eq "함께할 사람을 찾습니다" || board.boardName eq "공간을 같이 쓸 사람을 찾습니다" || board.boardName eq "소모임 자랑하기"?
 								                    			" " : board.boardName}
 								                    	</option>

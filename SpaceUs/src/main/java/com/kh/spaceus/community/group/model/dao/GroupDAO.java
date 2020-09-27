@@ -21,6 +21,9 @@ public interface GroupDAO {
 	int insertBoard(GroupBoard gb);
 
 	int updateBoard(GroupBoard gb);
-	
-	
+
+	int deleteBoard(String groupBoardNo);
+
+	int increaseBoardReadCnt(String groupBoardNo);
+
 }
