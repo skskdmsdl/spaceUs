@@ -109,6 +109,8 @@ public class RecruitController {
 	 @RequestMapping("/recruitModify.do")
 	 public String recruitModify(@RequestParam("no") String no, Model model) {
 			Recruit recruit = recruitService.selectOneRecruit(no);
+			System.out.println(no);
+			System.out.println(recruit);
 			model.addAttribute("recruit", recruit);
 			return "community/recruit/updateRecruit";
 	 }

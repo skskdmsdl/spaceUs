@@ -55,6 +55,8 @@ public class SpaceController {
 	@RequestMapping("/spaceDetail.do")
 	public String spaceDetail() {
 		
+		
+		
 		return "space/spaceDetail";
 	}
 	

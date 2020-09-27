@@ -38,6 +38,7 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 @Controller
 @Slf4j
 @RequestMapping("/member")
+@SessionAttributes(value={"nickName"})
 public class MemberController {
 	
 	@Autowired
@@ -52,8 +53,10 @@ public class MemberController {
 	
 	//프로필
 	@RequestMapping("/memberProfile.do")
-	public String memberProfile () {
-		
+	public String memberProfile (/*Model model,
+								 HttpServletRequest request*/) {
+		/*Member member = (Member)request.getSession().getAttribute("loginMember");
+		model.addAttribute("loginMember", member);*/
 		return "member/memberProfile";
 	}
 	
@@ -111,13 +114,11 @@ public class MemberController {
 		
 		Member member = memberService.selectOneMember(memberEmail);
 		log.debug("member@controller = {}",  member);
-		
 		String referer = request.getHeader("referer");
 		
 		//로그인 성공
 		if(member != null && bcryptPasswordEncoder.matches(password, member.getPassword())) {
 			model.addAttribute("loginMember", member);
-		
 		//로그인 실패
 		} else {
 			redirectAttr.addFlashAttribute("msg","아이디 또는 비밀번호가 일치하지 않습니다.");
