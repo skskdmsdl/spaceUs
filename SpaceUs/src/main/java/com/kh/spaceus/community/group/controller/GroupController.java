@@ -145,5 +145,23 @@ public class GroupController {
 		model.addAttribute("gb", gb);
 		return "/community/group/groupModifyForm";
 	}
+	
+	//게시물 수정
+	@RequestMapping("/updateBoard/{groupBoardNo}.do")
+	public String updateBoard(GroupBoard gb, RedirectAttributes redirectAtt, Model model) {
+		
+		log.info("gb = {}",gb);
+		int result = groupService.updateBoard(gb);
+		log.info("result={}",result);
+		
+		
+		List<GroupBoard> list = groupService.selectDetailBoard(gb.getGroupBoardNo());
+		//log.info("list = {}", list);
+
+		redirectAtt.addFlashAttribute("msg", result>0?"수정성공!":"수정실패!");
+		model.addAttribute("list", list);
+		return "redirect:/community/group/groupDetail";
+	}
+	
 
 }

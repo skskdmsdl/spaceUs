@@ -60,7 +60,8 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                  <div class="col-12">
 						<p class="h2 mt-5 mb-3 ">글쓰기</p>
                          <div class="table-responsive">
-                         <form action="${pageContext.request.contextPath}/community/group/insertBoard.do" id="boardFrm" method="post">
+                         <c:forEach items="${gb}" var="gb">
+                         <form action="${pageContext.request.contextPath}/community/group/updateBoard/${gb.groupBoardNo}.do" id="boardFrm" method="post">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	                             <table class="table">
 	                                     <tr>
@@ -68,7 +69,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                         <th><select class="nice-select sm-width small" name="boardNo" id="boardNo">
 								                    <option value="" selected hidden>분류선택</option>
                            							 <c:forEach items="${List}" var="board">
-								                    	<option value="${board.boardNo}">
+								                    	<option value="${board.boardNo}" selected="selected">
 								                    		${board.boardName eq "함께할 사람을 찾습니다" || board.boardName eq "공간을 같이 쓸 사람을 찾습니다" || board.boardName eq "소모임 자랑하기"?
 								                    			" " : board.boardName}
 								                    	</option>
@@ -76,7 +77,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 								                </select>
 								             </th>
 	                                     </tr>
-	                                    <c:forEach items="${gb}" var="gb">
+	                                    
 	                                     <tr>
 	                                         <td >제목</td>
 	                                         <td>
@@ -90,21 +91,22 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                         </td>
 	                                     </tr>
 	                                     <tr>
-	                                     <td >내용</td>
+	                                     <td>내용</td>
 	                                        <td>
 								       			<textarea name="groupBoardContent" id="gb" rows="15" style="width:100%;">${gb.groupBoardContent}</textarea>
 	                                        </td>
 	                                     </tr>
-	                            		</c:forEach>
+	                            		
 	                                   
 	                             </table>
                              	<input type="hidden" name="nickname" id="nickname" value='<sec:authentication property="principal.nickName"/>' />
                           
                            		<div class="text-center">
-			                 		<button id="insertBtn" class="btn btn-lg" style="margin-top:50px; background-color: #00c89e; font-size:18px; color:white;">글 등록 </button>
+			                 		<button id="insertBtn" class="btn btn-lg" style="margin-top:50px; background-color: #00c89e; font-size:18px; color:white;">글 수정 등록 </button>
                              	</div>
                              	
                            </form>
+                           </c:forEach>
 							 </div>
                          </div>
                      </div>
