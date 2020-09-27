@@ -23,7 +23,9 @@
 			(select nickname from member where member_email= G.member_email) nickname
 		from
 			group_board G
+		order by group_board_date
 	</select>
+	
 	<resultMap type="groupBoard" id="groupBoardMap">
 	</resultMap>
 
