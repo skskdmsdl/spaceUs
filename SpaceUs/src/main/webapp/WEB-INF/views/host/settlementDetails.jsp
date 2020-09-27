@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <%-- 한글 인코딩 처리 --%>
 <fmt:requestEncoding value="utf-8" />
 
@@ -84,11 +85,14 @@
 	           		<div class="card p-5">
 	           			 <div class="card-body-wrapper">
 							<div class="btn-group">
-								  <form id="excelForm" name="excelForm" method="post" action="${pageContext.request.contextPath }/host/excelDown.do" enctype="multipart/form-data">
+								   <sec:authorize access="hasRole('HOST')"> 
+								  <form:form id="excelForm" name="excelForm" method="post" action="${pageContext.request.contextPath }/host/excelDown.do" enctype="multipart/form-data">
 									  <button id="file-download" name="hostId" type="submit" class="btn btn-primary alig-right" value="${loginMember.principal.memberEmail}">
 									  	정산내역 다운받기(.xlsx)
 									  </button>
-								  </form>							 
+								  </form:form>	
+								  </sec:authorize>	
+												 
 							</div>
 						 </div>
 

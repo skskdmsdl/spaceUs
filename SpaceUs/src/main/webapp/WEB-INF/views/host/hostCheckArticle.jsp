@@ -88,7 +88,7 @@
                 <div class="ml-5 mr-5">
                        <div class="card-body-wrapper">
 	                    <div class="card p-5">
-                        <div class="row"> 
+                        <div id="qna-wrapper" class="row"> 
                          <div class="col-md-11">
                            
                              <ul class="nav nav-tabs">
@@ -104,6 +104,7 @@
 								  </button>
                     		 </div>
                           <!-- 질문글 시작 -->
+                          <div class="qna-container">
 				          <div class="col-md-10 d-flex ftco-animate">
 				          	<div class="blog-entry justify-content-end">
 				              <div class="text">
@@ -137,7 +138,7 @@
 				            </div>
 				          </div>
 				        <!-- 질문글 끝 -->
-				                                  <!-- 질문글 시작 -->
+				        <!-- 질문글 시작 -->
 				          <div class="col-md-10 d-flex ftco-animate">
 				          	<div class="blog-entry justify-content-end">
 				              <div class="text">
@@ -152,7 +153,7 @@
 				                </div>
 				              </div>
 				            </div>
-				          </div>
+				          </div>			          
 				        <!-- 질문글 끝 -->
 				                                  <!-- 질문글 시작 -->
 				          <div class="col-md-10 d-flex ftco-animate">
@@ -171,6 +172,7 @@
 				            </div>
 				          </div>
 				        <!-- 질문글 끝 -->
+				        </div>
 	                   </div>
 	               </div>
 	           </div>
@@ -225,8 +227,37 @@ function unreplied(){
 			 $("#check-unreplied").addClass("fa fa-check");
 			 $("#show-unreplied").css('background-color','#20c997');
 			 $.each(data, function (i, item) {
-                 $('p#qna-content').append(item.content + '<br>');
-             })
+				 $(".qna-container").remove();
+				 
+				 var html="";
+				 
+				 if(data!=null){
+					 html += "<div class=\"qna-container\">";
+			         html += "<div class=\"col-md-10 d-flex ftco-animate\">"; 
+		          	 html +="<div class=\"blog-entry justify-content-end\">";
+		          	 html +="<div class=\"text\">"; 
+		          	 html +="<h3 class=\"heading\"><a href=\"${pageContext.request.contextPath}/space/qna.do?no="+item.qnaNo+"";
+				     html +="\">"+item.content+"</a></h3>";
+				     html +="<p id=\"qna-content\">"+item.content+"</p>";
+				     html +="<div class=\"meta mb-3\">";
+				     html +="<div><a href=\"${pageContext.request.contextPath}/space/qna.do?no="+item.qnaNo+"\">";
+				     html +=""+item.name+"</a></div>";
+				     html +="<div>"+item.date+"</a></div>";
+				     html +="<div>";
+					
+					if(item.status==false){
+	             		    html+="<span class=\"fa fa-lock\"></span>공개</div>";
+						}else{
+						    html+="<span class=\"fa fa-lock\"></span>비공개</div>";}
+			    
+                html += "</div></div></div></div></div>";
+                    
+				 } else {
+					html += "답변을 기다리는 최근 질문이 없습니다.";					
+					 }
+				console.log(html);
+	            $(".col-md-11").append(html); 
+             });
 			},
 		error: function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
