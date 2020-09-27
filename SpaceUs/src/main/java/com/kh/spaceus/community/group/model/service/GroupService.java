@@ -17,6 +17,8 @@ public interface GroupService {
 	int selectTotalCnt();
 
 	List<GroupBoard> selectDetailBoard(String groupBoardNo);
+
+	int insertBoard(GroupBoard gb);
 	
 	
 
