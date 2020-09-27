@@ -262,7 +262,7 @@ $("#passwordChk").blur(function(){
 	
 	if($p1.val() != $p2.val()){
 		$("#pw-alert").css('display', 'block');
-		$p2.focus();	
+		$p2.val('').focus();	
 	}
 	else {
 		$("#pw-alert").css('display', 'none');
@@ -365,7 +365,7 @@ $(function(){
 					alert("인증번호를 전송했습니다.");
 				} else {
 					alert("이미 등록된 번호입니다.");
-					$("#phone").val('').focus();
+					$("#phone").val('');
 				}
 			},
 			error : function(xhr, status, err){
@@ -385,7 +385,7 @@ $(function(){
 		else {
 			$(".phoneChk").show();
 			$("#phoneValid").val(0);
-			$("#phoneChk").val('').focus();
+			$("#phoneChk").val('');
 		}
 	});
 });
