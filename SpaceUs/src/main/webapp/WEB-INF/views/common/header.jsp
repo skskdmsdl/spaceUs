@@ -171,9 +171,6 @@ conversation.setAttributes({
 		        </ul>
 		      </div>
 	      </sec:authorize>
-	      <c:if test="${sessionId != null}">
-			<h3>'${sessionId}' 님 환영합니다! </h3>
-	      </c:if>
 	      
 		  <sec:authorize access="hasRole('ROLE_HOST')">
 		  <div class="collapse navbar-collapse" id="ftco-nav">
@@ -206,12 +203,6 @@ conversation.setAttributes({
 	        		</div>
 	        	  </div>
 	          </ul>
-	        		&nbsp;
-	        		<div class="user_profile_icon" data-subscribe-type="PRO" 
-	        		     style="background: #22B47B; border-radius: 90%; width: 40px;  height: 40px;">
-	        			<img src="https://resource.miricanvas.com/image/common/profile_argo.svg">
-	        		</div>
-	        	
 	        </div>
 		  </sec:authorize>
 		      </div>  

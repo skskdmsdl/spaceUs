@@ -102,29 +102,28 @@ public class MemberController {
 		return "member/memberLoginForm";
 	}
 	
-	//로그인
-	@RequestMapping(value = "/memberLogin.do",
-					method = RequestMethod.POST)
-	public String memberLogin(@RequestParam String memberEmail,
-							  @RequestParam String password,
-							  Model model,
-							  RedirectAttributes redirectAttr,
-							  HttpSession session,
-							  HttpServletRequest request) {		
-		
-		Member member = memberService.selectOneMember(memberEmail);
-		log.debug("member@controller = {}",  member);
-		String referer = request.getHeader("referer");
-		
-		//로그인 성공
-		if(member != null && bcryptPasswordEncoder.matches(password, member.getPassword())) {
-			model.addAttribute("loginMember", member);
-		//로그인 실패
-		} else {
-			redirectAttr.addFlashAttribute("msg","아이디 또는 비밀번호가 일치하지 않습니다.");
-		}
-		return "redirect:" + referer;
-	}
+	/*
+	 * //로그인
+	 * 
+	 * @RequestMapping(value = "/memberLogin.do", method = RequestMethod.POST)
+	 * public String memberLogin(@RequestParam String memberEmail,
+	 * 
+	 * @RequestParam String password, Model model, RedirectAttributes redirectAttr,
+	 * HttpSession session, HttpServletRequest request) {
+	 * 
+	 * Member member = memberService.selectOneMember(memberEmail);
+	 * System.out.println("member@controller = " + member);
+	 * 
+	 * String referer = request.getHeader("referer");
+	 * 
+	 * //로그인 성공 if(member != null && bcryptPasswordEncoder.matches(password,
+	 * member.getPassword())) { model.addAttribute("loginMember", member);
+	 * System.out.println("member" + member);
+	 * 
+	 * //로그인 실패 } else {
+	 * redirectAttr.addFlashAttribute("msg","아이디 또는 비밀번호가 일치하지 않습니다."); } return
+	 * "redirect:" + referer; }
+	 */
 	
 	@PostMapping("/memberLoginFailure.do")
 	public String memberLoginFailure(RedirectAttributes redirectAttr) {
