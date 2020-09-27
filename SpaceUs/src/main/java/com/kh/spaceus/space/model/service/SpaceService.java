@@ -9,6 +9,10 @@ public interface SpaceService {
 
 	int insertHashTag(String hashTag);
 
+
+	Space selectOneSpace(String spaceNo);
+
 	Space selectOneSpace(int businessNum);
+
 
 }
