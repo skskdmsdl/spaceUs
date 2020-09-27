@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -34,7 +36,8 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 		  </li>
 		</ul>
 	</div>
-	</section>
+</section>
+
     <div class="hero-wrap ftco-degree-bg"
     	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_1.jpg');
     	 		height: 400px"
@@ -74,13 +77,20 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                    <th class="col-xl-auto">|</th>
 	                                    <th><i class="fa fa-eye"></i> 조회수 ${list.viewCnt}</th>
 	                                </tr>
+	                                <input type="hidden" name="groupBoardNo" value="${list.groupBoardNo}"/>
 	                            </table>
-	                          	<!-- 수정삭제 버튼시작 -->
-	                            <button id="modifyBtn" class="btn btn-sm" onclick="location.href='${pageContext.request.contextPath}/community/group/modifyBoard/${list.groupBoardNo}.do'" style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 40px; margin-top: 0;">글 수정 </button>
-	                           	<div style="display: inline-block;"></div>
-	                            <button id="deleteBtn" class="btn btn-sm" style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 50px; margin-top: 0;">글 삭제 </button>
-	                          	<!-- 수정삭제 버튼끝-->
-
+	                            
+		                        <!-- 수정삭제 버튼시작 -->
+		                        <sec:authorize access="hasAnyRole('USER','ADMIN')">
+		                        	<sec:authentication property="principal.username" var="loginMember"/>
+		                            <button id="modifyBtn" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/community/group/modifyBoard/${list.groupBoardNo}.do'" style="margin-top:50px; font-size:15px; color:white; float:right; margin-right: 35px; margin-top: 0;">신고하기 </button>	
+		                          	<c:if test="${loginMember != null && loginMember eq list.memberEmail }">
+			                            <button id="modifyBtn" class="btn btn-sm" onclick="location.href='${pageContext.request.contextPath}/community/group/modifyBoard/${list.groupBoardNo}.do'" style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 10px; margin-top: 0;">글 수정 </button>
+			                           	<div style="display: inline-block;"></div>
+			                            <button id="deleteBtn" class="btn btn-sm" style="margin-top:42px;background-color: #00c89e;font-size:15px;color:white;float:right;margin-right: 10px;margin-top: 0;border-right-width: 0px;padding-right: 9px;">글 삭제 </button>
+		                          	</c:if>	                          	
+		                        </sec:authorize>
+		                        <!-- 수정삭제 버튼끝-->
 	                         </div>
 	                         
 	                         <div class="m-5">
@@ -110,4 +120,11 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
              </section>
     <!-- 소모임 리스트 끝-->
 <!-- 컨텐츠 끝 -->
+<script type="text/javascript">
+$("#deleteBtn").click(function(){
+	let groupBoardNo = $("[name=groupBoardNo]").val();
+	if(!confirm('정말 삭제하시겠습니까??')) return;
+	location.href="${pageContext.request.contextPath }/community/group/deleteBoard.do?groupBoardNo="+groupBoardNo;
+});
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

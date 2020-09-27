@@ -45,9 +45,20 @@ public class GroupServiceImpl implements GroupService {
 	public int insertBoard(GroupBoard gb) {
 		return groupDAO.insertBoard(gb);
 	}
-	
-	
-	
-		
+
+	@Override
+	public int updateBoard(GroupBoard gb) {
+		return groupDAO.updateBoard(gb);
+	}
+
+	@Override
+	public int deleteBoard(String groupBoardNo) {
+		return groupDAO.deleteBoard(groupBoardNo);
+	}
+
+	@Override
+	public int increaseBoardReadCnt(String groupBoardNo) {
+		return groupDAO.increaseBoardReadCnt(groupBoardNo);
+	}
 
 }
