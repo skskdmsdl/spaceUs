@@ -115,7 +115,7 @@ p#qna-content > a:hover{
                           <div class="qna-container">
                         <c:if test="${ not empty list }">
 						<c:forEach items="${ list }" var="qna" varStatus="vs">
-				          <div class="col-md-10 d-flex ftco-animate">
+				          <div class="col-md-10 d-flex">
 				          	<div class="blog-entry justify-content-end">
 				              <div class="text">
 				                <h3 class="heading"><a href="${pageContext.request.contextPath}/space/qna.do?no=${qna.qnaNo}">${ qna.qnaNo }</a></h3>
@@ -126,7 +126,7 @@ p#qna-content > a:hover{
 				                ${ fn:substring(str, 0, 100) }</a></p>
 				                <div class="meta mb-3">
 				                  <div class="badge badge-secondary">${ qna.name }</div>
-				                  <div>${ qna.date }</div>
+				                  <div style="letter-spacing:1px;"><fmt:formatDate value="${ qna.date }" pattern="yyyy년 MM월 dd일 hh:mm"/></div>
 				                  <div>
 				                  <c:choose>
 				                  <c:when test="${ qna.status == false }">
@@ -204,34 +204,52 @@ function unreplied(){
 				//css변경
 					$("#check-unreplied").removeClass("fa fa-check");
 					$("#show-unreplied").css('background-color','#6c757d');
-					location.href("${pageContext.request.contextPath}/host/hostCheckArticle.do");
+					location.href="${pageContext.request.contextPath}/host/hostCheckArticle.do";
 					
 			 }else{
+				 $("div.qna-container").empty();
 				 //미답변 질문글 버튼이 눌려진 상태가 아닌 경우 class 속성 추가
 				 //css변경 
-			 $.each(data, function (i, item) {
-				 $("div.qna-container").empty();
-				 
+			 $.each(data, function(i, item){
 				 var html="";
 				 
 				 if(data!=null){
+					 var date = new Date(item.date);
+					 /**
+					  *  yyyyMMdd 포맷으로 반환
+					  */
+					 function getFormatDate(date){
+					     var year = date.getFullYear();              //yyyy
+					     var month = (1 + date.getMonth());          //M
+					     month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+					     var day = date.getDate();                   //d
+					     day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+						 var hh = date.getHours();
+						 hh = hh>=10 ? hh : '0' + hh;
+						 var mm = date.getMinutes();	
+							
+					     return ' '+year + '년 ' + month + '월 ' + day + '일 ' + hh + ':' + mm;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+					 }
+					 
 					 html += "<div class=\"qna-container\">";
 			         html += "<div class=\"col-md-10 d-flex\">"; 
 		          	 html +="<div class=\"blog-entry justify-content-end\">";
 		          	 html +="<div class=\"text\">"; 
 		          	 html +="<h3 class=\"heading\"><a href=\"${pageContext.request.contextPath}/space/qna.do?no="+item.qnaNo;
-				     html +="\">"+item.content+"</a></h3>";
-				     html +="<p id=\"qna-content\">"+item.content+"</p>";
+				     html +="\">"+item.qnaNo+"</a></h3>";
+				     html +="<p id=\"qna-content\"><a href=\"${pageContext.request.contextPath}/space/qna.do?no="+item.qnaNo+"\">";
+				     html += (item.content).substring(0,100);
+			         html +="</a></p>";
 				     html +="<div class=\"meta mb-3\">";
-				     html +="<div><a href=\"${pageContext.request.contextPath}/space/qna.do?no="+item.qnaNo+"\">";
-				     html +=item.name+"</a></div>";
-				     html +="<div>"+item.date+"</div>";
+				     html +="<div class=\"badge badge-secondary\">";
+				     html +=""+item.name+"</div>";
+				     html +="<div> "+getFormatDate(date)+"</div>";
 				     html +="<div>";
-					
+						
 					if(item.status==false){
-	             		    html+="<span class=\"fa fa-unlock\"></span>공개</div>";
+	             		    html+="<a class=\"meta-chat\"><span class=\"fa fa-unlock\"></span>공개</a></div>";
 						}else{
-						    html+="<span class=\"fa fa-lock\"></span>비공개</div>";}
+						    html+="<a class=\"meta-chat\"><span class=\"fa fa-lock\"></span>비공개</a></div>";}
 			    
                 html += "</div></div></div></div></div>";
                     
