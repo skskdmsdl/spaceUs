@@ -26,4 +26,9 @@ public class HostServiceImpl implements HostService {
 		return hostDAO.selectSettlementList(hostId);
 	}
 
+	@Override
+	public List<Qna> selectQuestionList(String hostId) {
+		return hostDAO.selectQuestionList(hostId);
+	}
+
 }

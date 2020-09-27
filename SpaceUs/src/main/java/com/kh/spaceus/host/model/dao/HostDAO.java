@@ -10,4 +10,6 @@ public interface HostDAO {
 	List<Qna> selectUnreplied(String hostId);
 
 	List<HashMap<String,Object>>selectSettlementList(String hostId);
+
+	List<Qna> selectQuestionList(String hostId);
 }

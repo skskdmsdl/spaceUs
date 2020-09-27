@@ -16,7 +16,7 @@
   	<id column="qna_status" property="status" javaType="java.lang.Boolean"/>
   </resultMap>
 	
-  <select id="selectQna" resultType="qna">
+  <select id="selectQuestionList" resultMap="qnaMap">
 	  	select 
 	        *
 		from 

@@ -16,6 +16,14 @@
  	width:99%;
  	margin-top: 10px;
 }
+p#qna-content > a{
+   color: #343a40;
+}
+p#qna-content > a:hover{
+   color: none;
+   text-decoration: underline;
+}
+
 
 </style>
 
@@ -99,79 +107,44 @@
 	                  
                     	     <div class="qna-filter-container">
 								  <button id="show-unreplied" class="btn btn-secondary btn-sm" type="button" onclick="unreplied();" value="${loginMember.principal.memberEmail }">
-								  <i id="check-unreplied" class=""></i>
+								  <i id="check-unreplied"></i>
 								    ${loginMember.principal.nickName }님의 답변을 기다리는 질문
 								  </button>
                     		 </div>
                           <!-- 질문글 시작 -->
                           <div class="qna-container">
+                        <c:if test="${ not empty list }">
+						<c:forEach items="${ list }" var="qna" varStatus="vs">
 				          <div class="col-md-10 d-flex ftco-animate">
 				          	<div class="blog-entry justify-content-end">
 				              <div class="text">
-				                <h3 class="heading"><a href="#">질문제목제목제목</a></h3>
+				                <h3 class="heading"><a href="${pageContext.request.contextPath}/space/qna.do?no=${qna.qnaNo}">${ qna.qnaNo }</a></h3>
 				                <%-- <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');"> </a>--%>
 					              
-				                <p id="qna-content">질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용</p>
+				                <p id="qna-content"><a href="${pageContext.request.contextPath}/space/qna.do?no=${qna.qnaNo}">
+				                <c:set var="str" value="${qna.content }"/>
+				                ${ fn:substring(str, 0, 100) }</a></p>
 				                <div class="meta mb-3">
-				                  <div><a href="#">깡</a></div>
-				                  <div><a href="#">July. 24, 2019</a></div>
-				                  <div><a href="#" class="meta-chat"><span class="fa fa-lock"></span> 비공개</a></div>
+				                  <div class="badge badge-secondary">${ qna.name }</div>
+				                  <div>${ qna.date }</div>
+				                  <div>
+				                  <c:choose>
+				                  <c:when test="${ qna.status == false }">
+				                  <a class="meta-chat"><span class="fa fa-unlock"></span>공개</a>
+				                  </c:when>
+				                  <c:otherwise>
+				                  <a class="meta-chat"><span class="fa fa-lock"></span>비공개</a>
+				                  </c:otherwise>
+				                  </c:choose>
+				                  </div>
 				                </div>
 				              </div>
 				            </div>
 				          </div>
 				        <!-- 질문글 끝 -->
-                    	                          <!-- 질문글 시작 -->
-				          <div class="col-md-10 d-flex ftco-animate">
-				          	<div class="blog-entry justify-content-end">
-				              <div class="text">
-				                <h3 class="heading"><a href="#">질문제목제목제목</a></h3>
-				                <%-- <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');"> </a>--%>
-					              
-				                <p id="qna-content">질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용</p>
-				                <div class="meta mb-3">
-				                  <div><a href="#">깡</a></div>
-				                  <div><a href="#">July. 24, 2019</a></div>
-				                  <div><a href="#" class="meta-chat"><span class="fa fa-lock"></span> 비공개</a></div>
-				                </div>
-				              </div>
-				            </div>
-				          </div>
-				        <!-- 질문글 끝 -->
-				        <!-- 질문글 시작 -->
-				          <div class="col-md-10 d-flex ftco-animate">
-				          	<div class="blog-entry justify-content-end">
-				              <div class="text">
-				                <h3 class="heading"><a href="#">질문제목제목제목</a></h3>
-				                <%-- <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');"> </a>--%>
-					              
-				                <p id="qna-content">질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용</p>
-				                <div class="meta mb-3">
-				                  <div><a href="#">깡</a></div>
-				                  <div><a href="#">July. 24, 2019</a></div>
-				                  <div><a href="#" class="meta-chat"><span class="fa fa-lock"></span> 비공개</a></div>
-				                </div>
-				              </div>
-				            </div>
-				          </div>			          
-				        <!-- 질문글 끝 -->
-				                                  <!-- 질문글 시작 -->
-				          <div class="col-md-10 d-flex ftco-animate">
-				          	<div class="blog-entry justify-content-end">
-				              <div class="text">
-				                <h3 class="heading"><a href="#">질문제목제목제목</a></h3>
-				                <%-- <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');"> </a>--%>
-					              
-				                <p id="qna-content">질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용질문내용내용내용</p>
-				                <div class="meta mb-3">
-				                  <div><a href="#">깡</a></div>
-				                  <div><a href="#">July. 24, 2019</a></div>
-				                  <div><a href="#" class="meta-chat"><span class="fa fa-lock"></span> 비공개</a></div>
-				                </div>
-				              </div>
-				            </div>
-				          </div>
-				        <!-- 질문글 끝 -->
+				        </c:forEach>
+                    	</c:if>
+				         </div>
 				        </div>
 	                   </div>
 	               </div>
@@ -223,30 +196,40 @@ function unreplied(){
 		},
 		dataType: "json",
 		success: function(data){
-			 console.log(data)
-			 $("#check-unreplied").addClass("fa fa-check");
-			 $("#show-unreplied").css('background-color','#20c997');
+			 console.log(data);
+			 console.log($("#check-unreplied").attr('class'));
+			 
+			 if($("#check-unreplied").attr('class')=="fa fa-check") {
+				//눌려진 상태라면 추가된 class 속성을 제거한다.
+				//css변경
+					$("#check-unreplied").removeClass("fa fa-check");
+					$("#show-unreplied").css('background-color','#6c757d');
+					location.href("${pageContext.request.contextPath}/host/hostCheckArticle.do");
+					
+			 }else{
+				 //미답변 질문글 버튼이 눌려진 상태가 아닌 경우 class 속성 추가
+				 //css변경 
 			 $.each(data, function (i, item) {
-				 $(".qna-container").remove();
+				 $("div.qna-container").empty();
 				 
 				 var html="";
 				 
 				 if(data!=null){
 					 html += "<div class=\"qna-container\">";
-			         html += "<div class=\"col-md-10 d-flex ftco-animate\">"; 
+			         html += "<div class=\"col-md-10 d-flex\">"; 
 		          	 html +="<div class=\"blog-entry justify-content-end\">";
 		          	 html +="<div class=\"text\">"; 
-		          	 html +="<h3 class=\"heading\"><a href=\"${pageContext.request.contextPath}/space/qna.do?no="+item.qnaNo+"";
+		          	 html +="<h3 class=\"heading\"><a href=\"${pageContext.request.contextPath}/space/qna.do?no="+item.qnaNo;
 				     html +="\">"+item.content+"</a></h3>";
 				     html +="<p id=\"qna-content\">"+item.content+"</p>";
 				     html +="<div class=\"meta mb-3\">";
 				     html +="<div><a href=\"${pageContext.request.contextPath}/space/qna.do?no="+item.qnaNo+"\">";
-				     html +=""+item.name+"</a></div>";
-				     html +="<div>"+item.date+"</a></div>";
+				     html +=item.name+"</a></div>";
+				     html +="<div>"+item.date+"</div>";
 				     html +="<div>";
 					
 					if(item.status==false){
-	             		    html+="<span class=\"fa fa-lock\"></span>공개</div>";
+	             		    html+="<span class=\"fa fa-unlock\"></span>공개</div>";
 						}else{
 						    html+="<span class=\"fa fa-lock\"></span>비공개</div>";}
 			    
@@ -256,8 +239,14 @@ function unreplied(){
 					html += "답변을 기다리는 최근 질문이 없습니다.";					
 					 }
 				console.log(html);
-	            $(".col-md-11").append(html); 
+	            $(".qna-container").append(html);
              });
+				 $("#check-unreplied").addClass("fa fa-check");
+				 $("#show-unreplied").css('background-color','#20c997');
+										
+				 }
+
+			 
 			},
 		error: function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);

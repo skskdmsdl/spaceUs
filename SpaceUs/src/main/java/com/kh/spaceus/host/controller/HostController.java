@@ -6,7 +6,9 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
@@ -15,13 +17,17 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spaceus.host.model.service.HostService;
 import com.kh.spaceus.host.model.vo.Qna;
+import com.kh.spaceus.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -66,12 +72,19 @@ public class HostController {
 	}
 	
 	//공간 질문글 조회
-	@RequestMapping("/hostCheckArticle.do")
-	public String CheckNewArticle(Principal principal, Model model) {
+	@RequestMapping(value="/hostCheckArticle.do", method=RequestMethod.GET)
+	public ModelAndView CheckNewArticle(Principal principal, ModelAndView mav){
 		log.debug("principal = {}", principal);
-		model.addAttribute("loginMember", principal);
 		
-		return "host/hostCheckArticle";
+		String hostId = principal.getName();
+		
+		List<Qna> list = hostService.selectQuestionList(hostId);
+		
+		mav.addObject("loginMember", principal);
+		mav.addObject("list", list);
+		mav.setViewName("host/hostCheckArticle");
+		
+		return mav;
 	}
 	
 	//공간 미답변 질문글 조회

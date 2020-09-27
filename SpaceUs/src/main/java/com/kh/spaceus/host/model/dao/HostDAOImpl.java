@@ -30,5 +30,10 @@ public class HostDAOImpl implements HostDAO {
 		return session.selectList("host.selectSettlementList", hostId);
 	}
 
+	@Override
+	public List<Qna> selectQuestionList(String hostId) {
+		return session.selectList("host.selectQuestionList", hostId);
+	}
+
 	
 }

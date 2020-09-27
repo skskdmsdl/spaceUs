@@ -11,5 +11,7 @@ public interface HostService {
 	List<Qna> selectUnreplied(String spaceId);
 
 	List<HashMap<String,Object>> selectSettlementList(String hostId);
+
+	List<Qna> selectQuestionList(String hostId);
 	
 }
