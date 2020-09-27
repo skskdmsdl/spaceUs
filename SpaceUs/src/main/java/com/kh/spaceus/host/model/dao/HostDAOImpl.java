@@ -1,6 +1,8 @@
 package com.kh.spaceus.host.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -20,6 +22,11 @@ public class HostDAOImpl implements HostDAO {
 		
 		
 		return session.selectList("host.selectUnreplied");
+	}
+
+	@Override
+	public List<HashMap<String,Object>> selectSettlementList(String hostId) {
+		return session.selectList("host.selectSettlementList");
 	}
 
 	

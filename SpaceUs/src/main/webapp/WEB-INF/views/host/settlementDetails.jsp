@@ -84,10 +84,11 @@
 	           		<div class="card p-5">
 	           			 <div class="card-body-wrapper">
 							<div class="btn-group">
-							  <button id="file-download" name="hostId" type="button" class="btn btn-primary alig-right" onclick="download();" value="${loginMember.principal.memberEmail}">
-							    정산 내역 내려받기
-							  </button>
-							 
+								  <form id="excelForm" name="excelForm" method="post" action="${pageContext.request.contextPath }/host/excelDown.do" enctype="multipart/form-data">
+									  <button id="file-download" name="hostId" type="submit" class="btn btn-primary alig-right" value="${loginMember.principal.memberEmail}">
+									  	정산내역 다운받기(.xlsx)
+									  </button>
+								  </form>							 
 							</div>
 						 </div>
 
@@ -215,8 +216,7 @@
 		"${ pageContext.request.contextPath}/host/excelDown.do")
 		.attr("method", "POST")
 		.submit();	
-		
-		
+	
 	}
 	
 	

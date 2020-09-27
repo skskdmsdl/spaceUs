@@ -1,12 +1,17 @@
 package com.kh.spaceus.host.controller;
 
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.xssf.streaming.SXSSFCell;
+import org.apache.poi.xssf.streaming.SXSSFRow;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,12 +55,6 @@ public class HostController {
 		return "host/hostReservation";
 	}	
 	
-	//정산 내역 다운로드
-	@RequestMapping(value="/excelDown.do" )
-	public void ExcelDown() {
-		
-		
-	}
 	
 	//공간 리뷰 조회
 	@RequestMapping("/hostCheckReview.do")
@@ -88,4 +87,70 @@ public class HostController {
 		return list;
 	}
 	
+	//정산 내역 엑셀 파일 다운로드
+	@RequestMapping(value="/excelDown.do", method = RequestMethod.POST)
+	public SXSSFWorkbook ExcelDownload(@RequestParam String hostId, HttpServletResponse response, Model model)
+			throws Exception {
+		
+		SXSSFWorkbook objWorkBook = new SXSSFWorkbook();
+		SXSSFSheet objSheet = null;
+		SXSSFRow objRow = null;
+		SXSSFCell objCell = null; // 셀 생성
+		
+		objSheet = objWorkBook.createSheet("일별 정산내역"); // 워크시트 생성
+		
+		List<HashMap<String,Object>> rowList = hostService.selectSettlementList(hostId);
+		
+		// 1행
+		objRow = objSheet.createRow(0);
+		objRow.setHeight((short) 0x150);
+	
+		objCell = objRow.createCell(0);
+		objCell.setCellValue("공간 번호");
+		
+		objCell = objRow.createCell(1);
+		objCell.setCellValue("공간 명");
+		
+		objCell = objRow.createCell(2);
+		objCell.setCellValue("총 이용시간");
+		
+		objCell = objRow.createCell(3);
+		objCell.setCellValue("정산 액수");
+		
+		int index = 1;
+		for (HashMap<String,Object> map : rowList) {
+			objRow = objSheet.createRow(index);
+			objRow.setHeight((short) 0x150);
+			
+			objCell = objRow.createCell(0);
+			objCell.setCellValue((String)map.get("spaceNo"));
+			
+			objCell = objRow.createCell(1);
+			objCell.setCellValue((String)map.get("spaceName"));
+			
+			objCell = objRow.createCell(2);
+			objCell.setCellValue((String)map.get("totalHour"));
+			
+			objCell = objRow.createCell(3);
+			objCell.setCellValue((String)map.get("revenue"));
+			index++;
+		}
+		
+		for (int i = 0; i < rowList.size(); i++) {
+			objSheet.autoSizeColumn(i);
+		}
+		
+		response.setContentType("Application/Msexcel");
+		response.setHeader("Content-Disposition", "ATTachment; Filename="
+				+ URLEncoder.encode(hostId, "UTF-8") + ".xlsx");
+		
+		OutputStream fileOut = response.getOutputStream();
+		objWorkBook.write(fileOut);
+		fileOut.close();
+		
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
+		
+		return objWorkBook;
+	}
 }
