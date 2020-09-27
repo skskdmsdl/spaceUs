@@ -19,6 +19,8 @@ public interface GroupDAO {
 	List<GroupBoard> selectDetailBoard(String groupBoardNo);
 
 	int insertBoard(GroupBoard gb);
+
+	int updateBoard(GroupBoard gb);
 	
 	
 }

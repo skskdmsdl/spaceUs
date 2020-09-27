@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -34,7 +36,8 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 		  </li>
 		</ul>
 	</div>
-	</section>
+</section>
+
     <div class="hero-wrap ftco-degree-bg"
     	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_1.jpg');
     	 		height: 400px"
@@ -58,6 +61,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 
     <!-- 소모임 시작-->
 	<section class="blog-section spad">
+	<sec:authentication property="principal.username" var="loginMember"/>
 	 <div class="row m-5">
                  <!-- column -->
                  <c:forEach items="${list}" var="list">
@@ -75,12 +79,14 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                    <th><i class="fa fa-eye"></i> 조회수 ${list.viewCnt}</th>
 	                                </tr>
 	                            </table>
-	                          	<!-- 수정삭제 버튼시작 -->
-	                            <button id="modifyBtn" class="btn btn-sm" onclick="location.href='${pageContext.request.contextPath}/community/group/modifyBoard/${list.groupBoardNo}.do'" style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 40px; margin-top: 0;">글 수정 </button>
-	                           	<div style="display: inline-block;"></div>
-	                            <button id="deleteBtn" class="btn btn-sm" style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 50px; margin-top: 0;">글 삭제 </button>
-	                          	<!-- 수정삭제 버튼끝-->
-
+	                            	
+		                        <!-- 수정삭제 버튼시작 -->
+	                          	<c:if test="${loginMember != null && loginMember eq list.memberEmail }">
+		                            <button id="modifyBtn" class="btn btn-sm" onclick="location.href='${pageContext.request.contextPath}/community/group/modifyBoard/${list.groupBoardNo}.do'" style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 40px; margin-top: 0;">글 수정 </button>
+		                           	<div style="display: inline-block;"></div>
+		                            <button id="deleteBtn" class="btn btn-sm" style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 50px; margin-top: 0;">글 삭제 </button>
+	                          	</c:if>	                          	
+		                        <!-- 수정삭제 버튼끝-->
 	                         </div>
 	                         
 	                         <div class="m-5">

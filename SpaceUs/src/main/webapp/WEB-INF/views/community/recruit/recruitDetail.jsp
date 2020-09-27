@@ -71,6 +71,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                     <th class="col-xl-auto">|</th>
                                     <th><i class="fa fa-calendar"></i><fmt:formatDate value="${recruit.enrollDate}" pattern="yyyy/MM/dd"/></th>
                                     <th class="col-xl-auto">|</th>
+
                                     <th><i class="fa fa-eye"></i> ${ recruit.viewCnt}</th>
                                     <th><i class="fa fa-siren"></i>신고하기</th>
                                      <%-- <c:if test="${ principal.nickName != null && principal.nickName eq recruit.nickName}">  --%>

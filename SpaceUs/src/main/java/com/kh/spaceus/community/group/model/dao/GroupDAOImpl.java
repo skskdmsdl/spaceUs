@@ -45,6 +45,12 @@ public class GroupDAOImpl implements GroupDAO {
 	public int insertBoard(GroupBoard gb) {
 		return session.insert("board.insertBoard", gb);
 	}
+
+	@Override
+	public int updateBoard(GroupBoard gb) {
+		return session.update("board.updateBoard", gb);
+	}
+	
 	
 	
 	
