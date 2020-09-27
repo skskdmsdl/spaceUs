@@ -61,7 +61,7 @@ function deleteEx(exNo){
 			exNo : $("#exNo").val()
 		},
 		success : function(data){
-			console.log(data);
+			//console.log(data);
 			alert('삭제가 완료되었습니다.');
 			window.location.reload();
 		},

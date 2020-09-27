@@ -30,7 +30,7 @@ function exhibitionList () {
                     <div class="property-submit-form">
                         <form action="#">
                             <div class="pf-title">
-                                <h4>기획전 제목</h4>
+                                <h4>기획전 제목<span class="text-danger">*</span></h4>
                                 <input type="text">
                             </div>
                             <div class="pf-title">
@@ -38,11 +38,11 @@ function exhibitionList () {
                                 <input type="text">
                             </div>
                             <div class="pf-title">
-                                <h4>태그</h4>
+                                <h4>태그<span class="text-danger">*</span></h4>
                                 <input type="text">
                             </div>
                             <div class="pf-title">
-                                <h4>이미지 Url</h4>
+                                <h4>이미지 등록</h4>
                                 <input type="text">
                             </div>
                             <div class="pf-property-details">
