@@ -23,7 +23,9 @@
 			(select nickname from member where member_email= G.member_email) nickname
 		from
 			group_board G
+		order by group_board_date
 	</select>
+	
 	<resultMap type="groupBoard" id="groupBoardMap">
 	</resultMap>
 
@@ -67,4 +69,20 @@
 		where
 			G.group_board_no=#{groupBoardNo}
 	</select>
+	
+	<!-- insert board -->
+	<insert id="insertBoard">
+		insert into
+			group_board
+		values(
+			'G'||seq_group_board_no.nextval,
+			#{boardNo},
+			#{memberEmail},
+			default,
+			#{groupBoardTitle},
+			default,
+			default,
+			#{groupBoardContent}
+		)
+	</insert>
 </mapper>

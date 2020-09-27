@@ -40,6 +40,11 @@ public class GroupServiceImpl implements GroupService {
 	public List<GroupBoard> selectDetailBoard(String groupBoardNo) {
 		return groupDAO.selectDetailBoard(groupBoardNo);
 	}
+
+	@Override
+	public int insertBoard(GroupBoard gb) {
+		return groupDAO.insertBoard(gb);
+	}
 	
 	
 	

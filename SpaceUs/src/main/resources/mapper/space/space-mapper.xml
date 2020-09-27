@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="space">
+<!-- Tag -->
 	<select id="selectOneTag" resultMap="tagMap">
 		select 
 			*
@@ -25,6 +26,17 @@
 		)
 	</insert>
       
+
+<!-- space -->
+	<select id="selectOneSpaceNo" resultType="space">
+		select 
+			*
+		from 
+			space
+		where 
+			space_no = #{ spaceNo }
+	</select>
+
 	<select id="selectOneSpace" resultMap="spaceMap">
 		select 
 			*
@@ -40,7 +52,7 @@
 		<result column="business_license" property="businessNo"/>
 		<result column="space_name" property="spaceName"/>
 		<result column="address" property="address"/>
-		<result column="space_phone" property="phone"/>
+		<result column="space_phone" property="spacePhone"/>
 		<result column="hourly_price" property="hourlyPrice"/>
 		<result column="star_avg" property="starAvg"/>
 		<result column="enroll_date" property="enrollDate"/>
@@ -52,6 +64,7 @@
 		<result column="content" property="content"/>
 		<result column="bank" property="bank"/>
 	</resultMap>
+
 
 </mapper>
 

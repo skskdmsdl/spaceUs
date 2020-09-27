@@ -40,6 +40,11 @@ public class GroupDAOImpl implements GroupDAO {
 	public List<GroupBoard> selectDetailBoard(String groupBoardNo) {
 		return session.selectList("board.selectDetailBoard", groupBoardNo);
 	}
+
+	@Override
+	public int insertBoard(GroupBoard gb) {
+		return session.insert("board.insertBoard", gb);
+	}
 	
 	
 	

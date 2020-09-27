@@ -15,6 +15,23 @@
 function exhibitionList () {
 	location.href = "${pageContext.request.contextPath}/exhibition/exhibitionList.do";
 }
+
+$(function(){
+	
+    $("[data-toggle=popover]").popover({
+        html : true,
+        content: function() {
+          var content = $(this).attr("data-popover-content");
+          return $(content).children(".popover-body").html();
+        },
+        title: function() {
+          var title = $(this).attr("data-popover-content");
+          return $(title).children(".popover-heading").html();
+        }
+    });
+
+});
+
 </script>
 <section class="ftco-section ftco-agent">
   	<div class="container">
@@ -24,36 +41,38 @@ function exhibitionList () {
       </div>
 <!-- 기획전 등록폼 시작-->
 <section class="property-submit-section spad m-5">
-        <div class="container ">
-            <div class="row m-5">
-                <div class="col-lg-12">
-                    <div class="property-submit-form">
-                        <form action="#">
-                            <div class="pf-title">
-                                <h4>기획전 제목<span class="text-danger">*</span></h4>
-                                <input type="text">
-                            </div>
-                            <div class="pf-title">
-                                <h4>기획전 소제목</h4>
-                                <input type="text">
-                            </div>
-                            <div class="pf-title">
-                                <h4>태그<span class="text-danger">*</span></h4>
-                                <input type="text">
-                            </div>
-                            <div class="pf-title">
-                                <h4>이미지 등록</h4>
-                                <input type="text">
-                            </div>
-                            <div class="pf-property-details">
-                                <button type="submit" class="site-btn">기획전등록</button>
-                            </div>
-                        </form>
-                    </div>
+    <div class="container ">
+        <div class="row m-5">
+            <div class="col-lg-12">
+                <div class="property-submit-form">
+                    <form action="#">
+                        <div class="pf-title">
+                            <h4>기획전 제목<span class="text-danger">*</span></h4>
+                            <input type="text">
+                        </div>
+                        <div class="pf-title">
+                            <h4>기획전 소제목</h4>
+                            <input type="text">
+                        </div>
+                        <div class="pf-title">
+                            <h4>태그<span class="text-danger">*</span></h4>
+                            <input type="text">
+                        </div>
+                        <div class="pf-title">
+                            <h4>이미지 등록</h4>
+                        </div>
+                        
+                        <!-- 이미지업로드 팝오버시작 -->
+                        <!-- 이미지업로드 팝오버끝-->
+                        <div class="pf-property-details">
+                            <button type="submit" class="site-btn">기획전등록</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 <!-- 기획전 등록폼 끝-->
       
       

@@ -38,6 +38,7 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 @Controller
 @Slf4j
 @RequestMapping("/member")
+@SessionAttributes(value={"nickName"})
 public class MemberController {
 	
 	@Autowired
@@ -52,8 +53,10 @@ public class MemberController {
 	
 	//프로필
 	@RequestMapping("/memberProfile.do")
-	public String memberProfile () {
-		
+	public String memberProfile (/*Model model,
+								 HttpServletRequest request*/) {
+		/*Member member = (Member)request.getSession().getAttribute("loginMember");
+		model.addAttribute("loginMember", member);*/
 		return "member/memberProfile";
 	}
 	
@@ -99,6 +102,7 @@ public class MemberController {
 		return "member/memberLoginForm";
 	}
 	
+<<<<<<< HEAD
 	/*
 	 * //로그인
 	 * 

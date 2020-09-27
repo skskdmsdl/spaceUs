@@ -125,6 +125,7 @@
 	               </div>
 	           </div>
                 <!-- 회원정보 끝 -->
+                
     </div>
 </div>
 </div>
@@ -149,34 +150,3 @@
 <!-- ============================================================== -->
 <!--morris JavaScript -->
 
-
-<!-- 호스트 정산내역 그래프 활용 ?
-<div class="col-lg-8">
-    <div class="card oh">
-        <div class="card-body">
-            <div class="d-flex m-b-30 align-items-center no-block">
-                <h5 class="card-title ">Yearly Sales</h5>
-                <div class="ml-auto">
-                    <ul class="list-inline font-12">
-                        <li><i class="fa fa-circle text-info"></i> Iphone</li>
-                        <li><i class="fa fa-circle text-primary"></i> Ipad</li>
-                    </ul>
-                </div>
-            </div>
-            <div id="morris-area-chart" style="height: 350px;"></div>
-        </div>
-        <div class="card-body bg-light">
-            <div class="row text-center m-b-20">
-                <div class="col-lg-4 col-md-4 m-t-20">
-                    <h2 class="m-b-0 font-light">6000</h2><span class="text-muted">Total sale</span>
-                </div>
-                <div class="col-lg-4 col-md-4 m-t-20">
-                    <h2 class="m-b-0 font-light">4000</h2><span class="text-muted">Iphone</span>
-                </div>
-                <div class="col-lg-4 col-md-4 m-t-20">
-                    <h2 class="m-b-0 font-light">2000</h2><span class="text-muted">Ipad</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
