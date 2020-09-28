@@ -19,10 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.community.group.model.service.GroupService;
 import com.kh.spaceus.community.group.model.vo.Board;
-import com.kh.spaceus.community.group.model.vo.Report;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
+import com.kh.spaceus.community.group.model.vo.Report;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,25 +37,34 @@ public class GroupController {
 
 	// 소모임 게시판 전체 리스트
 	@GetMapping("/groupList.do")
-	public String groupList(Model model) {
+	public String groupList(HttpServletRequest request ,Model model,
+							@RequestParam(defaultValue = "1", value="cPage") int cPage) {
 
 		List<Board> boardList = groupService.selectListBoard();
 
-		List<GroupBoard> groupBoardList = groupService.selectListGroupBoard();
+		//페이징 처리
+		final int limit = 10;
+		int offset = (cPage -1) * limit;
+		
+		List<GroupBoard> groupBoardList = groupService.selectListGroupBoard(limit,offset);
 
 		int totalCnt = groupService.selectTotalCnt();
-
+		String url = request.getRequestURI() + "?";
+		String pageBar = Utils.getPageBarHtml(cPage, limit, totalCnt, url);
+		log.info("totalCnt = {}", totalCnt);
+		
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("groupBoardList", groupBoardList);
-
+		model.addAttribute("pageBar", pageBar);
 		return "community/group/groupBoard";
 	}
 
 	// 소모임 게시판 분류별 리스트
 	@GetMapping("/groupList/{boardNo}/{boardRef}.do")
-	public String groupBoardList(@PathVariable("boardNo") String boardNo, @PathVariable("boardRef") String boardRef,
-			Model model) {
+	public String groupBoardList(@PathVariable("boardNo") String boardNo, 
+								 @PathVariable("boardRef") String boardRef,
+								 Model model) {
 
 		List<Board> boardList = groupService.selectListBoard();
 
@@ -143,19 +153,9 @@ public class GroupController {
 
 		int result = groupService.insertBoard(gb);
 
-		List<Board> boardList = groupService.selectListBoard();
-
-		List<GroupBoard> groupBoardList = groupService.selectListGroupBoard();
-
-		int totalCnt = groupService.selectTotalCnt();
-
 		String msg = (result > 0) ? "게시물 등록!" : "등록 실패!";
 		
 		redirectAtt.addFlashAttribute("msg", msg);
-
-		model.addAttribute("totalCnt", totalCnt);
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("groupBoardList", groupBoardList);
 
 		return "redirect:/community/group/groupList.do";
 	}
@@ -197,17 +197,13 @@ public class GroupController {
 		
 		List<Board> boardList = groupService.selectListBoard();
 
-		List<GroupBoard> groupBoardList = groupService.selectListGroupBoard();
-
-		int totalCnt = groupService.selectTotalCnt();
+	
 
 		String msg = (result > 0) ? "게시물 삭제 성공!" : "게시물 삭제 실패!";
 		
 		redirectAtt.addFlashAttribute("msg", msg);
 
-		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("boardList", boardList);
-		model.addAttribute("groupBoardList", groupBoardList);
 
 		return "redirect:/community/group/groupList.do";
 	}
