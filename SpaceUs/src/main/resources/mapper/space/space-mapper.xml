@@ -64,7 +64,14 @@
 		<result column="content" property="content"/>
 		<result column="bank" property="bank"/>
 	</resultMap>
-
+	<select resultMap="tagMap" id="selectListSpaceTag">
+		select
+			*
+		from
+			tag T join space_tag ST
+			using(tag_no)
+		where ST.space_no = #{ spaceNo } 
+	</select>
 
 </mapper>
 
