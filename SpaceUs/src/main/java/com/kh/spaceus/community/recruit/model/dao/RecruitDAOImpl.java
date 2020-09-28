@@ -1,6 +1,7 @@
 package com.kh.spaceus.community.recruit.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
+import com.kh.spaceus.community.recruit.model.vo.ReportRecruit;
 import com.kh.spaceus.space.model.vo.Tag;
 
 
@@ -46,6 +48,24 @@ public class RecruitDAOImpl implements RecruitDAO{
 	@Override
 	public int deleteRecruit(String no) {
 		return sqlSession.delete("recruit.deleteRecruit", no);
+	}
+
+	@Override
+	public ReportRecruit selectOneReport(String no, String memberEmail) {
+		ReportRecruit reportRecruit = new ReportRecruit();
+		reportRecruit.setBoardNo(no);
+		reportRecruit.setMemberEmail(memberEmail);
+		return sqlSession.selectOne("recruit.selectOneReport", reportRecruit);
+	}
+
+	@Override
+	public int insertReport(ReportRecruit report) {
+		return sqlSession.insert("recruit.insertReport", report);
+	}
+
+	@Override
+	public int updateReport(String no) {
+		return sqlSession.update("recruit.updateReport", no);
 	}
 
 

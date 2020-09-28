@@ -1,8 +1,10 @@
 package com.kh.spaceus.community.recruit.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
+import com.kh.spaceus.community.recruit.model.vo.ReportRecruit;
 import com.kh.spaceus.space.model.vo.Tag;
 
 public interface RecruitDAO {
@@ -18,5 +20,12 @@ public interface RecruitDAO {
 	int updateRecruit(Recruit recruit);
 
 	int deleteRecruit(String no);
+
+	ReportRecruit selectOneReport(String no, String memberEmail);
+
+	int insertReport(ReportRecruit report);
+
+	int updateReport(String no);
+
 
 }

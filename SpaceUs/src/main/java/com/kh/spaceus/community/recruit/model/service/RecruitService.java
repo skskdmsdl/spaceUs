@@ -1,8 +1,10 @@
 package com.kh.spaceus.community.recruit.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
+import com.kh.spaceus.community.recruit.model.vo.ReportRecruit;
 
 public interface RecruitService {
 
@@ -17,5 +19,12 @@ public interface RecruitService {
 	int updateRecruit(Recruit recruit);
 
 	int deleteRecruit(String no);
+
+	ReportRecruit selectOneReport(String no, String memberEmail);
+
+	int insertReport(ReportRecruit report);
+
+	int updateReport(String no);
+
 
 }
