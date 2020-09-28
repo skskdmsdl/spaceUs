@@ -39,5 +39,10 @@ public class SpaceServiceImpl implements SpaceService{
 	public List<Tag> selectListSpaceTag(String spaceNo) {
 		return spaceDAO.selectListSpaceTag(spaceNo);
 	}
+
+	/*@Override
+	public List<Space> selectListSpaceCollection(String email) {
+		return spaceDAO.selectListSpaceCollection(email);
+	}*/
 	
 }

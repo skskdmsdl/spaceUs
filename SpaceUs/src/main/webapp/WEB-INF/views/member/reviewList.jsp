@@ -289,6 +289,7 @@ $("#reviewBtn").on("click", function(){
 		$(this).addClass("btn-primary");
 	}	
 });
+//리뷰 제출
 
 
 </script>
