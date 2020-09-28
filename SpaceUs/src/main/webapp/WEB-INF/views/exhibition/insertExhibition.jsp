@@ -10,6 +10,10 @@
 .img img {height: 350px;}
 .space1 {cursor: pointer;}
 .more-list {visibility:hidden;}
+.pills {margin-top:0px;}
+.pf-title h4 {cursor: pointer;}
+.pf-title h4:hover {color: #00C89E;}
+
 </style>
 <script>
 function exhibitionList () {
@@ -59,11 +63,59 @@ $(function(){
                             <input type="text">
                         </div>
                         <div class="pf-title">
-                            <h4>이미지 등록</h4>
+                            <h4 data-toggle="modal" data-target="#imageModal">이미지 등록</h4>
                         </div>
                         
-                        <!-- 이미지업로드 팝오버시작 -->
-                        <!-- 이미지업로드 팝오버끝-->
+                        <!-- 이미지업로드 모달시작 -->
+                        <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						       	<div class="row">
+						   		<div class="col-md-12 pills">
+									<div class="bd-example bd-example-tabs">
+								       <div class="d-flex justify-content-center">
+										  <ul class="nav nav-pills mb-3" id="detail-tab" role="tablist">
+										    <li class="nav-item">
+										      <a class="nav-link" id="url-upload-tab" data-toggle="pill"
+										      	 href="#url-upload" role="tab" aria-controls="url-upload"
+										      	 aria-expanded="true">Url로 업로드</a>
+										    </li>
+										    <li class="nav-item">
+										      <a class="nav-link active" id="file-upload-tab" data-toggle="pill"
+										      	 href="#file-upload" role="tab" aria-controls="file-upload"
+										      	 aria-expanded="true">이미지로 업로드</a>
+										    </li>
+										  </ul>
+										</div>
+						      		</div>
+						      </div>
+						      <!-- 모달바디 시작 -->
+						      <div class="modal-body">
+						      	<div class="tab-content" id="detail-tabContent">
+								   <div class="tab-pane fade" id="url-upload" role="tabpanel" aria-labelledby="url-upload-tab">
+								    	<input type="text" name="" id="" placeholder="url을 입력하세요"/>
+								   </div>
+								   <div class="tab-pane fade" id="file-upload" role="tabpanel" aria-labelledby="file-upload-tab">
+								    	<div class="input-group mb-3" style="padding:0px;">
+										  <div class="custom-file">
+										    <input type="file" class="custom-file-input" name="upFile" id="upFile1" >
+										    <label class="custom-file-label" for="upFile1">이미지를 선택하세요</label>
+										  </div>
+										</div>
+								   </div>
+						   		</div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-primary">업로드</button>
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+				   	</div>
+			   </div>
+		   </div>
+                        <!-- 이미지업로드 모달끝-->
                         <div class="pf-property-details">
                             <button type="submit" class="site-btn">기획전등록</button>
                         </div>

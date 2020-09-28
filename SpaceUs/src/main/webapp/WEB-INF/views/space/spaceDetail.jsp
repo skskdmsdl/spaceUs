@@ -22,6 +22,7 @@
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
 }
+.tagcloud a {coursor:none;}
 
 .next {margin-right: 16px; right: 0; border-radius: 3px 0 0 3px;}
 .prev:hover, .next:hover {opacity: 0.3;}
