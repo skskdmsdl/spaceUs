@@ -36,6 +36,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 
 #sideinfo {float:left;}
 #content  { background-color:#F5F5F5; float:right;}
+.cPage{
+	margin-right:9px;
+	margin-left:9px;
+}
+.page-link{
+	margin-top:-5px;
+}
 </style>
 
 
@@ -166,8 +173,8 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                    </tbody>
 							</table>
 							<!-- 페이징처리 시작 -->
-            				<nav aria-label="Page navigation" style="display:inline-block; text-align: center; margin: 0 auto;">
-							  <ul class="pagination">
+            				<nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 50%;">
+							  <ul class="pagination" style="border:0; margin-right:10px;">
 							    ${pageBar}
 							  </ul>
 							</nav>
