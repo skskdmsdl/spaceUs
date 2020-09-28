@@ -1,5 +1,6 @@
 package com.kh.spaceus.community.group.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.community.group.model.service.GroupService;
 import com.kh.spaceus.community.group.model.vo.Board;
+import com.kh.spaceus.community.group.model.vo.Report;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 
 import lombok.extern.slf4j.Slf4j;
@@ -161,7 +163,7 @@ public class GroupController {
 	//게시물 수정 폼
 	@RequestMapping("/modifyBoard/{groupBoardNo}.do")
 	public String modifyBoard(@PathVariable("groupBoardNo") String groupBoardNo, Model model) {
-		log.info("groupBoardNo={}",groupBoardNo);
+		//log.info("groupBoardNo={}",groupBoardNo);
 		
 		List<GroupBoard> gb = groupService.selectDetailBoard(groupBoardNo);
 		log.info("gb= {}", gb);
@@ -177,9 +179,9 @@ public class GroupController {
 	@RequestMapping("/updateBoard/{groupBoardNo}.do")
 	public String updateBoard(GroupBoard gb, RedirectAttributes redirectAtt, Model model) {
 		
-		log.info("gb = {}",gb);
+		//log.info("gb = {}",gb);
 		int result = groupService.updateBoard(gb);
-		log.info("result={}",result);
+		//log.info("result={}",result);
 		
 		redirectAtt.addFlashAttribute("msg", result>0?"수정성공!":"수정실패!");
 		
@@ -191,7 +193,7 @@ public class GroupController {
 	public String deleteBoard(@RequestParam("groupBoardNo") String groupBoardNo ,RedirectAttributes redirectAtt, Model model) {
 		
 		int result = groupService.deleteBoard(groupBoardNo);
-		log.info("result = {}",result);
+		//log.info("result = {}",result);
 		
 		List<Board> boardList = groupService.selectListBoard();
 
@@ -207,6 +209,44 @@ public class GroupController {
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("groupBoardList", groupBoardList);
 
+		return "redirect:/community/group/groupList.do";
+	}
+	
+	//게시물 신고하기
+	@RequestMapping("/alertBoard.do")
+	public String alertBoard(@RequestParam("groupBoardNo") String groupBoardNo,
+						     Report report,
+							 Principal principal, 
+							 RedirectAttributes redirectAtt, Model model) {
+		
+		//아이디 하나당 게시물을 한번만 신고가능함
+		report.setBoardNo(groupBoardNo);
+		report.setMemberEmail(principal.getName());
+		log.info("report = {}",report);
+		
+		Map<Object,Object> map = new HashMap<>();
+		map.put("memberEmail", principal.getName());
+		map.put("boardNo", groupBoardNo);
+		
+		//report테이블에서 아이디 + 게시물 이 있는지 없는지 확인 
+		List<Report> gbReport = groupService.selectOne(map);
+		log.info("gbReport = {}", gbReport);
+		
+		String msg = "";
+		
+		if(gbReport.isEmpty()) {
+			// 없었다면 update하여서 +1 추가
+			int result1 = groupService.insertReport(report);
+			int result2 = groupService.updateCnt(map);
+			
+			msg = "성공적으로 신고 접수를 하였습니다";
+		}
+		else {
+			msg = "이미 신고 접수 건이 존재합니다";
+		}
+		
+		redirectAtt.addFlashAttribute("msg", msg);
+		
 		return "redirect:/community/group/groupList.do";
 	}
 	
