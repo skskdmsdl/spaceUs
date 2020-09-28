@@ -48,16 +48,16 @@
 					  action="${pageContext.request.contextPath }/member/memberEnroll.do" method="post">
 					
 					<span class="login100-form-title p-b-43">
-						<h4 class="navbar-brand">네이버로 시작하기</h4>
+						<h4 class="navbar-brand">카카오로 시작하기</h4>
 						<p class="txt1">
 						<br />
-							필요한 추가 정보 입력 후 네이버로 로그인하실 수 있습니다.
+							필요한 추가 정보 입력 후 카카오로 로그인하실 수 있습니다.
 						</p><br />
 					</span>
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="email" name="memberEmail" id="memberEmail"
-								value="${ naverLoginMember.email }" placeholder="email *" required>
+								value="${ email }" placeholder="email *" required>
 						<input type="hidden" id="emailValid" value="0"/>
 						<span class="focus-input100">email</span>
 					</div>
@@ -81,7 +81,7 @@
 					
 					<div class="wrap-input100 validate-input">
 						<input class="input100" type="text" name="nickName" id="nickName"
-								value="${ naverLoginMember.name }" placeholder="nickName *" required>
+								value="${ nickname }" placeholder="nickName *" required>
 						<input type="hidden" id="nickNameValid" value="0"/>
 						<span class="focus-input100">nickName</span>
 					</div>

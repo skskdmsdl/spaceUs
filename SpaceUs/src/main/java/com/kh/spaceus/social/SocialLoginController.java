@@ -1,6 +1,8 @@
 package com.kh.spaceus.social;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -12,8 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
@@ -34,6 +38,9 @@ public class SocialLoginController {
     }
     
     @Autowired
+    private KakaoController kakaoController;
+    
+    @Autowired
 	private MemberService memberService;
  
     //로그인 첫 화면 요청 메소드
@@ -42,12 +49,18 @@ public class SocialLoginController {
         /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
         
+        //카카오
+        String kakaoUrl = kakaoController.getAuthorizationUrl(session);
+        
         //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
         //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
         log.info("네이버 : {}", naverAuthUrl);
         
         //네이버 
-        model.addAttribute("url", naverAuthUrl);
+        model.addAttribute("naver_url", naverAuthUrl);
+        
+        //카카오
+        model.addAttribute("kakao_url", kakaoUrl);
  
         /* 생성한 인증 URL을 View로 전달 */
         return "/member/memberLoginForm";
@@ -91,12 +104,33 @@ public class SocialLoginController {
     	Member member = memberService.selectOneMember(memberEmail);
     	//log.info("member = {}", member);
     	
-    	if(member != null)
+    	if(member != null) {
     		return "/member/memberLoginForm";
-    	
-    	
-    	
+    	}
         return "/member/naverMemberEnrollForm";
     }
+    
+    @RequestMapping("/member/kakaoLogin.do")
+    public String getKakaoSignIn(Model model,@RequestParam("code") String code, HttpSession session) throws Exception {
 
+      log.info("code = {}", code);
+		
+      JsonNode userInfo = kakaoController.getKakaoUserInfo(code);
+	  JsonNode accessToken = userInfo.get("access_token");
+      
+	  log.info("userInfo = {}", userInfo);
+
+      String email = userInfo.get("kaccount_email").toString();
+      String nickname = userInfo.get("properties").get("nickname").toString();
+
+      log.debug("email = {}", email);
+      log.debug("nickname = {}", nickname);
+
+      model.addAttribute("k_userInfo", userInfo);
+      model.addAttribute("email", email);
+      model.addAttribute("nickname", nickname);
+
+      return "/member/kakaoMemberEnrollForm";
+    }
+   
 }
