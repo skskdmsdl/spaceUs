@@ -55,9 +55,30 @@
 					<span class="login100-form-title p-b-43">
 						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 					</span>
-						<button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg"/>&nbsp;네이버로 시작하기</button>
-						<button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/google-icon.png"/>&nbsp;구글로 시작하기</button>
-						<button class="social-btn"><img src="${pageContext.request.contextPath }/resources/images/icons/facebook-icon.png"/>&nbsp;페이스북으로 시작하기</button>
+						<div id="naver_id_login" style="text-align:center">
+							<a href="${url}">
+								<div class="social-btn">
+									<img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg"/>
+										&nbsp;네이버로 시작하기
+								</div>
+							</a>
+						</div>
+						<div id="naver_id_login" style="text-align:center">
+							<a href="${url}">
+								<div class="social-btn">
+									<img src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png"/>
+										&nbsp;카카오로 시작하기
+								</div>
+							</a>
+						</div>
+						<div id="naver_id_login" style="text-align:center">
+							<a href="${url}">
+								<div class="social-btn">
+									<img src="${pageContext.request.contextPath }/resources/images/icons/google-icon.png"/>
+									&nbsp;구글로 시작하기
+								</div>
+							</a>
+						</div>
 						<div class="text-center p-t-46 p-b-20">
 						<p class="txt1">
 							또는

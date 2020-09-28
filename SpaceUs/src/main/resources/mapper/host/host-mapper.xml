@@ -5,24 +5,64 @@
 <mapper namespace="host">
 
   <resultMap id="qnaMap" type="qna">
-  	
+  	<id column="qna_no" property="qnaNo" />
+  	<id column="space_no" property="spaceNo" />
+  	<id column="member_email" property="email" />
+  	<id column="nickname" property="name" />
+  	<id column="qna_pw" property="password" />
+  	<id column="qna_content" property="content" />
+  	<id column="qna_answer" property="answer" />
+  	<id column="qna_date" property="date" />
+  	<id column="qna_status" property="status" javaType="java.lang.Boolean"/>
   </resultMap>
+	
+  <select id="selectQuestionList" resultMap="qnaMap">
+	  	select 
+	        *
+		from 
+		qna join space 
+		    on qna.space_no=space.space_no
+		where space.member_email=#{hostId}
+  </select>
 
-  <select id="selectUnreplied" resultType="qna">
-	select 
-		rownum,
+  <select id="selectUnreplied" resultMap="qnaMap">
+	select 	
 		Q.*
 	from(	
-		select
-			*
-		from
-			qna
-		where
+		select 
+            *
+		from 
+		qna join space 
+		    on qna.space_no=space.space_no
+		where space.member_email=#{hostId} and
 			qna_answer is null
 		order by
 			qna_date desc 
 			) Q
-	where rownum between 1 and 50 
+	where rownum between 1 and 50
+  </select>
+  
+  <resultMap id="settlementMap" type="HashMap">
+  	<id column="space_no" property="spaceNo" />
+  	<id column="space_name" property="spaceName" />
+  	<id column="settlement_date" property="date" />
+  	<id column="daily_total_hour" property="totalHour" />
+  	<id column="daily_revenue" property="revenue" />
+  	
+  </resultMap>
+  
+  <select id="selectSettlementList" resultMap= "settlementMap">
+	select 
+		space.space_no,
+		space_name,
+		settlement_date,
+		daily_total_hour,
+		daily_revenue		
+	from 
+		daily_sale join space 
+	    on daily_sale.space_no=space.space_no
+	where 
+		member_email=#{hostId}
   </select>
 
 </mapper>
