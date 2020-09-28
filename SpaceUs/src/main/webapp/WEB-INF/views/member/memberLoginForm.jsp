@@ -28,6 +28,9 @@
 	<c:if test="${ not empty msg }">
 		alert('${ msg }');	
 	</c:if>
+	<c:if test="${ not empty naverLoginMember }">
+		alert('이미 가입하신 이메일입니다. 로그인해주세요.');
+	</c:if>
 </script>
 </head>
 <body>
@@ -44,7 +47,7 @@
 						<a href="${url}">
 							<div class="social-btn">
 								<img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg"/>
-									&nbsp;네이버로 로그인하기
+									&nbsp;네이버로 시작하기
 							</div>
 						</a>
 					</div>
@@ -52,7 +55,7 @@
 						<a href="${url}">
 							<div class="social-btn">
 								<img src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png"/>
-									&nbsp;카카오로 로그인하기
+									&nbsp;카카오로 시작하기
 							</div>
 						</a>
 					</div>
@@ -60,7 +63,7 @@
 						<a href="${url}">
 							<div class="social-btn">
 								<img src="${pageContext.request.contextPath }/resources/images/icons/google-icon.png"/>
-									&nbsp;구글로 로그인하기
+									&nbsp;구글로 시작하기
 							</div>
 						</a>
 					</div>

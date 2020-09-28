@@ -56,15 +56,6 @@ public class MemberController {
 		 */
 		
 		
-		String name = (String) session.getAttribute("name");
-		if(name != null)  {
-			
-			model.addAttribute("name", name);
-			
-			return "member/naverMemberProfile";
-		}
-		
-		
 		return "member/memberProfile";
 	}
 

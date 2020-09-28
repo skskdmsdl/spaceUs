@@ -1,6 +1,6 @@
 package com.kh.spaceus.social;
 import java.io.IOException;
- 
+
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -12,8 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
- 
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.kh.spaceus.member.model.service.MemberService;
+import com.kh.spaceus.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +32,9 @@ public class SocialLoginController {
     private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
         this.naverLoginBO = naverLoginBO;
     }
+    
+    @Autowired
+	private MemberService memberService;
  
     //로그인 첫 화면 요청 메소드
     @RequestMapping(value = "/member/memberLoginForm.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -49,7 +55,8 @@ public class SocialLoginController {
  
     //네이버 로그인 성공시 callback호출 메소드
     @RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
-    public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+    public String callback(RedirectAttributes redirectAttr, Model model,
+    						@RequestParam String code, @RequestParam String state, HttpSession session)
             throws IOException, ParseException {
     	
     	OAuth2AccessToken oauthToken;	
@@ -68,17 +75,28 @@ public class SocialLoginController {
     	JSONObject jsonObj = (JSONObject) obj;
     	
     	//3. 데이터 파싱
-    	//Top레벨 단계 _response 파싱
+    	//response 파싱
     	JSONObject response_obj = (JSONObject)jsonObj.get("response");
-    	//response의 name값 파싱
-    	String name = (String)response_obj.get("name");
-    	log.info("name = {}", name);
+//    	//response의 email값 파싱
+    	String memberEmail = (String)response_obj.get("email");
+    	log.info("memberEmail = {}", memberEmail);
     	
-    	//4.파싱 닉네임 세션으로 저장
-    	session.setAttribute("name",name); //세션 생성
-    	model.addAttribute("result", apiResult);
     	
-        return "redirect:/";
+    	//4.모델에 저장 
+    	model.addAttribute("naverLoginMember", response_obj);
+    	session.setAttribute("memberEmail", memberEmail);
+    	//log.info("naverLoginMember = {}", response_obj);
+    	
+    	//이메일이 이미 가입되어있을 경우 로그인으로 가게 함
+    	Member member = memberService.selectOneMember(memberEmail);
+    	//log.info("member = {}", member);
+    	
+    	if(member != null)
+    		return "/member/memberLoginForm";
+    	
+    	
+    	
+        return "/member/naverMemberEnrollForm";
     }
 
 }
