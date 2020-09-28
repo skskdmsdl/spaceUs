@@ -166,20 +166,11 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                    </tbody>
 							</table>
 							<!-- 페이징처리 시작 -->
-		                	<div class="container">
-						    	<nav class="mt-5" >
-									<ul class="justify-content-center pagination">
-										<li class="page-item"><a class="page-link m-1 text-black-50" href="#">&lt;</a></li>
-										<li class="page-item"><a class="page-link m-1 text-black-50" href="#">1</a></li>
-										<li class="page-item"><a class="page-link m-1 text-black-50" href="#">2</a></li>
-										<li class="page-item"><a class="page-link m-1 text-black-50" href="#">3</a></li>
-										<li class="page-item"><a class="page-link m-1 text-black-50" href="#">4</a></li>
-										<li class="page-item"><a class="page-link m-1 text-black-50" href="#">5</a></li>
-										<li class="page-item"><a class="page-link m-1 text-black-50" href="#">></a></li>
-										<li class="page-item"></li>
-									</ul>
-								</nav>
-							</div>
+            				<nav aria-label="Page navigation" style="display:inline-block; text-align: center; margin: 0 auto;">
+							  <ul class="pagination">
+							    ${pageBar}
+							  </ul>
+							</nav>
 							<!-- 페이징 처리 끝 -->
 		                </div>
                 	</section>      	

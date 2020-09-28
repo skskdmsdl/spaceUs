@@ -23,8 +23,8 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	@Override
-	public List<GroupBoard> selectListGroupBoard() {
-		return groupDAO.selectListGroupBoard();
+	public List<GroupBoard> selectListGroupBoard(int limit, int offset) {
+		return groupDAO.selectListGroupBoard(limit,offset);
 	}
 
 	@Override
@@ -75,8 +75,7 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public int updateCnt(Map<Object, Object> map) {
 		return groupDAO.updateCnt(map);
-	}
-	
+	}	
 	
 
 }
