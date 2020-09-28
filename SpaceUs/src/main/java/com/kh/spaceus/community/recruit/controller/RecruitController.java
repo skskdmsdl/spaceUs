@@ -7,17 +7,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.struts.action.SessionActionMapping;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.session.SessionInformation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,10 +21,9 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.kh.spaceus.community.recruit.model.service.RecruitService;
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
-import com.kh.spaceus.member.controller.MemberController;
+import com.kh.spaceus.community.recruit.model.vo.ReportRecruit;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
-import com.kh.spaceus.space.model.service.SpaceService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -145,16 +140,49 @@ public class RecruitController {
 			return mav;
 		}
 	 
+	 //삭제
 	 @RequestMapping(value = "/deleteRecruit.do",
 					 method = RequestMethod.GET)
 	 public String deleteRecruit(@RequestParam String no, 
 						 		 RedirectAttributes redirectAttr){
-	log.debug("게시물 삭제");
-	int result = recruitService.deleteRecruit(no);
-	String msg = (result > 0) ? "삭제 성공" : "삭제 실패";
-	redirectAttr.addFlashAttribute("msg", msg);
-	
-	return "redirect:/community/recruit/recruitList.do";
-}
+		log.debug("게시물 삭제");
+		int result = recruitService.deleteRecruit(no);
+		String msg = (result > 0) ? "삭제 성공" : "삭제 실패";
+		redirectAttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/community/recruit/recruitList.do";
+	}
+	 
+	 //신고
+	 @GetMapping("/recruitReport.do")
+    public ModelAndView recruitReport(ModelAndView mav,
+    								  Principal principal,
+									  @RequestParam("no") String no,
+									  @RequestParam("nickName") String nickName,
+									  @RequestParam("reportReason") String reportReason) {
+		 
+		ReportRecruit report = new ReportRecruit();
+		report.setBoardNo(no);
+		System.out.println(principal.getName());
+		report.setMemberEmail(principal.getName());
+		report.setReportReason(reportReason);
+		
+		String memberEmail = principal.getName();
+		
+		ReportRecruit reportResult = recruitService.selectOneReport(no, memberEmail);
+    	
+		if(reportResult==null){ 
+			int resultReport = recruitService.insertReport(report); 
+			int result = recruitService.updateReport(no);
+			mav.addObject("duplication", 0);
+			mav.setViewName("jsonView"); // /WEB-INF/views/jsonView.jsp
+		}
+		else {
+			mav.addObject("duplication", 1);
+			mav.setViewName("jsonView"); // /WEB-INF/views/jsonView.jsp
+		
+		}
+    	return mav;
+    }
 	 
 }

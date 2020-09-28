@@ -71,6 +71,39 @@
      	where 
      		recruit_no = #{no} 
     </delete>
+    
+    <!-- 신고된 적이 있는지 없는지 조회 -->
+	<select id="selectOneReport" resultMap="reportReportMap">
+		select
+			*
+		from
+			report
+		where
+			member_email = #{memberEmail} 
+			and board_no = #{boardNo}
+	</select>
+	 <resultMap type="reportRecruit" id="reportReportMap">
+	
+	</resultMap> 
+	
+	<insert id="insertReport">
+		insert into
+			report
+		values (
+			#{memberEmail},
+			#{boardNo},
+			#{reportReason}
+		)
+	</insert>
+	
+	<update id="updateReport">
+		update 
+			recruit
+		set
+			report_cnt = report_cnt + 1
+		where
+			recruit_no = #{no}
+	</update>
 
 </mapper>
 

@@ -140,19 +140,20 @@ function deleteBtn(no){
 	location.href="${pageContext.request.contextPath }/community/recruit/deleteRecruit.do?no="+no; 
 };
 function reportBtn(){
-	alert($("input[name=reportCon]:checked").val());
 	$.ajax({
 		url : "${ pageContext.request.contextPath }/community/recruit/recruitReport.do",
 		data : {
 			no : $("[name=no]").val(),
 			nickName : $("#reportNick").val(),
-			content : $("input[name=reportCon]:checked").val()
+			reportReason : $("input[name=reportCon]:checked").val()
 		},
 		dataType : "json",
 		success : function(data){
 			console.log(data);
-
+			if(data.duplication != 1)
 			alert("신고가 완료되었습니다!");
+			else
+			alert("이미 신고된 게시물 입니다!");
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
