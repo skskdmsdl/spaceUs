@@ -9,6 +9,8 @@
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<!-- icons -->
+<script src="https://kit.fontawesome.com/b74a25ff1b.js" crossorigin="anonymous"></script>
 <style>
 .image-div {
 	background-color:#f7f7f7;
@@ -21,6 +23,7 @@
 .fas {position: absolute; padding: 90px;}
 input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 .site-btn {width: 100%; font-size: 17px;}
+
 </style>
 <!-- 컨텐츠 시작 -->
 <!-- 헤더 -->
@@ -66,20 +69,23 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                  <c:forEach items="${list}" var="list">
 	                 <div class="col-12">
 	                         <div class="m-5" style="border-bottom: 1px solid #dddddd;">
-									
+	                         <c:forEach items="${boardList}" var="board">
+							 <div style="color: #00c89e; cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/community/group/groupList/${board.boardNo}/${board.boardRef}.do'">${board.boardName} > </div>		
+	                         </c:forEach>
 	                         <div style="border-bottom: 1px solid #dddddd; padding-bottom: 15px;">
 	                            <p class="h4">${list.groupBoardTitle}</p>
 	                         	<table style="display: inline-block;">
 	                                <tr>
 	                                    <th><i class="fa fa-user"></i>&nbsp; ${list.nickname}</th>
 	                                    <th class="col-xl-auto">|</th>
-	                                    <th><i class="fa fa-calendar"></i>${list.groupBoardDate}</th>
+	                                    <th><i class="fa fa-calendar"></i>&nbsp; ${list.groupBoardDate}</th>
 	                                    <th class="col-xl-auto">|</th>
-	                                    <th><i class="fa fa-eye"></i> 조회수 ${list.viewCnt}</th>
+	                                    <th><i class="fa fa-eye"></i> 조회수 &nbsp; ${list.viewCnt}</th>
+	                                    <th class="col-xl-auto">|</th>
+	                                    <th><i class="fa fa-comment"></i> 댓글수 &nbsp; ${list.viewCnt}</th>
 	                                </tr>
 	                                <input type="hidden" name="groupBoardNo" value="${list.groupBoardNo}"/>
 	                            </table>
-	                            
 		                        <!-- 수정삭제 버튼시작 -->
 		                        <sec:authorize access="hasAnyRole('USER','ADMIN')">
 		                        	<sec:authentication property="principal.username" var="loginMember"/>
@@ -97,28 +103,55 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 		                        <!-- 수정삭제 버튼끝-->
 	                         </div>
 	                         
-	                         <div class="m-5">
-	                         <div class="mb-5">
-	                   			${list.groupBoardContent}
+	                         <!-- 본문 시작 -->
+		                         <div class="m-5">
+			                         <div class="mb-5">
+			                   			${list.groupBoardContent}
+			                         </div>	                         
+		                         </div>
 	                         </div>
+	                         <!-- 본문 끝 -->
 	                         
 	                         
 	                         <!-- 댓글 시작 -->
-	                         <div style="background-color: #fafafa; height: 200px; border: 1px solid #edeceb; ">
+	                         <p style="margin-left:5%;"><i class="fa fa-comment"></i> 댓글수 &nbsp; ${list.viewCnt}</p>
+                         	
+	                         <div style="background-color: #fafafa; width:90%; margin: auto;">
 	                         	<div class="pl-5 pr-5 pt-4">
-	                         		<p>댓글 0개</p>
-	                         		 <textarea class="col-lg-11" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-	                           		<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+	                         		<div class="form-check" style="display: block;">
+									  <input class="form-check-input" type="checkbox" name="private" id="private" value="private">
+									  <label class="form-check-label" for="private">비밀글</label>
+									</div>
+									<div >
+		                         		<textarea class="col-lg-11" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+		                           		<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+									</div>
+	                           		
+	                           		<!-- 댓글보기시작 -->
+	                           		<div>
+		                           		<tr class="col-md-1">
+		                                    <th><b>양희</b></th>
+		                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"> 2020.10.23</p></th>
+		                                    <th>|</th>
+		                                    <th><a href="#" style="color: #6d6d6d !important; font-size: 13px; margin-left: 8px;">답글쓰기</a></th>
+	                                	</tr>
+		                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">안녕하세요</div>
+		                         	</div>
+	                           		<!-- 댓글보기끝-->
+	                           		
 	                           </div>
 	                         </div>
 	                         <!-- 댓글 끝 -->
-	                         </div>
-	                         </div>
+	                         
+	                         
 	                         <div class="text-center">
-				                 	<a href='${pageContext.request.contextPath }/community/group/groupList.do' class="btn m-1" style="background-color: #00c89e; font-size:20px; color:white;"><i class="fa fa-list"></i> 목록</a>
-	                             </div>
+				                <a href='${pageContext.request.contextPath }/community/group/groupList.do' class="btn m-1" style="background-color: #00c89e; font-size:20px; color:white;"><i class="fa fa-list"></i> 목록</a>
+	                         </div>
 	                     </div>
-	                      <!-- Modal -->
+	                     
+	                     
+	                     
+	                   <!-- Modal -->
                        <div class="modal fade" id="intro" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
                            <div class="modal-dialog">
                                <div class="modal-content">
@@ -141,6 +174,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                </div>
                            </div>
                        </div>
+                       <!-- Modal end -->
                    </c:forEach>
           
                  </div>

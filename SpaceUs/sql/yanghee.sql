@@ -326,6 +326,8 @@ create table recruit_comment (
 
 create sequence seq_recruit_comment_no;
 
+alter table recruit_comment rename column private to secret;
+
 select * from recruit_comment;
 
 -----------------------------
@@ -414,14 +416,14 @@ commit;
 --------- 소모임댓글 ---------
 -----------------------------
 create table group_board_comment (
-	group_board_comment_no varchar2(256),
-	writer varchar2(256),
-	group_board_ref varchar2(256),
-	private number default 0,
-	group_board_comment_ref varchar2(256),
-	group_board_content varchar2(2000),
-	group_board_comment_level number default 1,
-	group_board_date date default sysdate,
+	group_board_comment_no varchar2(256), --댓글번호 pk
+	writer varchar2(256), -- 작성자
+	group_board_ref varchar2(256),--게시물 번호
+	private number default 0, --비밀글 여부
+	group_board_comment_ref varchar2(256), -- 대댓글인 경우 , 참조중인 댓글 번호 | 댓글인 경우, null 
+	group_board_content varchar2(2000), -- 댓글 내용
+	group_board_comment_level number default 1, -- 댓글(1)/대댓글(2) 여부 판단
+	group_board_date date default sysdate, --댓글 날짜
 	 	
 
 	constraints pk_group_board_comment_no primary key(group_board_comment_no),
@@ -430,11 +432,35 @@ create table group_board_comment (
 	constraints ck_gorup_board_private check(private in(0,1))
 );
 
+alter table group_board_comment rename column private to secret;
+
 create sequence seq_group_board_comment_no;
+
+delete from group_board_comment where group_board_comment_no = 2;
 
 select * from group_board_comment;
 
+insert into group_board_comment values(seq_group_board_comment_no.nextval,'honggd@naver.com','G5',default,null,'먹방 좋아합니다~~',1,default);
+insert into group_board_comment values(seq_group_board_comment_no.nextval,'honggd@naver.com','G5',default,1,'먹방 은 최고~~',2,default);
+insert into group_board_comment values(seq_group_board_comment_no.nextval,'honggd@naver.com','G5',default,null,'먹방 예쓰!!!!~~',1,default);
+
+commit;
+
 drop table group_board_comment;
+
+--계층형쿼리
+--행과 행 사이에 부모/자식관계를 맺음
+--댓글구조, 조작도, 메뉴등에 사용할 수 있다
+
+--start with : 부모 조건절 작성
+--connect by : 부모 / 자식 관계 조건절 작성 prior키워드 쪽이 부모행을 가리킴
+
+select * 
+from group_board_comment
+where group_board_ref = 'G5'
+start with group_board_comment_level = 1
+connect by prior group_board_comment_no = group_board_comment_ref
+order siblings by group_board_comment_no asc;
 
 -----------------------------
 --------- 신고 ---------------
@@ -454,36 +480,7 @@ ALTER TABLE report DROP constraints fk_group_board_no;
 commit;
 select * from report;
 
----------------------------------------
--- 9/28
-select
-    R.member_email,
-    R.board_no,
-    R.report_reason,
-    G.report_cnt
-from 
-    report R join group_board G
-                   on R.member_email = G.member_email and
-                    R.board_no = G.group_board_no;
 
-
-
-select * 
-from 
-    ( select rownum rnum, 
-             u.* 
-      from  (
-                select * 
-                from users 
-                order by user_role
-            )u
-    )u 
-where quit_yn='N' and 
-      rnum between ? and ?
-      
-      
-      
-      
 -----------------------------
 --------- 블랙리스트 --------
 -----------------------------

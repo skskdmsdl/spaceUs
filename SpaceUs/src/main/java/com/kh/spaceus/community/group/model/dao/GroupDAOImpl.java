@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.community.group.model.vo.Board;
+import com.kh.spaceus.community.group.model.vo.GBComment;
 import com.kh.spaceus.community.group.model.vo.Report;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 
@@ -78,5 +79,16 @@ public class GroupDAOImpl implements GroupDAO {
 	public int updateCnt(Map<Object, Object> map) {
 		return session.update("board.updateCnt", map);
 	}
+
+	@Override
+	public List<Board> selectBaordOne(String groupBoardNo) {
+		return session.selectList("board.selectBoardOne", groupBoardNo);
+	}
+
+	@Override
+	public List<GBComment> selectAllComment(String groupBoardNo) {
+		return session.selectList("board.selectAllComment", groupBoardNo);
+	}
+	
 	
 }
