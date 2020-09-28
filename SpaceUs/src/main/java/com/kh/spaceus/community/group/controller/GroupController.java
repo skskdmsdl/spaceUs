@@ -51,7 +51,8 @@ public class GroupController {
 		int totalCnt = groupService.selectTotalCnt();
 		String url = request.getRequestURI() + "?";
 		String pageBar = Utils.getPageBarHtml(cPage, limit, totalCnt, url);
-
+		log.info("totalCnt = {}", totalCnt);
+		
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("groupBoardList", groupBoardList);
