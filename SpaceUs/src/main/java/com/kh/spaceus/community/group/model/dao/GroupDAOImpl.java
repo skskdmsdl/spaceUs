@@ -65,6 +65,16 @@ public class GroupDAOImpl implements GroupDAO {
 	@Override
 	public List<Report> selectOne(Map<Object, Object> map) {
 		return session.selectList("board.selectOne", map);
+	}
+
+	@Override
+	public int insertReport(Report report) {
+		return session.insert("board.insertReport", report);
+	}
+
+	@Override
+	public int updateCnt(Map<Object, Object> map) {
+		return session.update("board.updateCnt", map);
 	}	
 	
 	

@@ -83,7 +83,8 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 		                        <!-- 수정삭제 버튼시작 -->
 		                        <sec:authorize access="hasAnyRole('USER','ADMIN')">
 		                        	<sec:authentication property="principal.username" var="loginMember"/>
-		                            <button id="alertBtn" class="btn btn-sm btn-danger"  
+		                            <button class="btn btn-sm btn-danger"  
+		                            		data-toggle="modal" data-target="#intro"
 		                            		style="margin-top:50px; font-size:15px; color:white; float:right; margin-right: 35px; margin-top: 0;">
 		                            		신고하기 
 		                            </button>	
@@ -117,10 +118,34 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 				                 	<a href='${pageContext.request.contextPath }/community/group/groupList.do' class="btn m-1" style="background-color: #00c89e; font-size:20px; color:white;"><i class="fa fa-list"></i> 목록</a>
 	                             </div>
 	                     </div>
+	                      <!-- Modal -->
+                       <div class="modal fade" id="intro" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
+                           <div class="modal-dialog">
+                               <div class="modal-content">
+                                   <div class="modal-header">
+                                       <h4 class="modal-title">신고하기</h4>
+                                   </div>
+                                   <div class="modal-body">
+                                      <p style=" padding-top: 20px; font-size: 16px; margin-bottom:0;">신고 게시물 : <input style="border: none; color:#666; font-size: 16px;" type="text" value="${list.groupBoardTitle }" /></p>
+                                       <p style="border-bottom: 1px solid #efefef; font-size: 16px; padding-bottom: 30px;">작&nbsp;&nbsp;&nbsp;  성&nbsp;&nbsp;&nbsp;  자 &nbsp;: <input id="reportNick" style="border: none; color:#666; font-size: 16px;" type="text" value="${list.nickname }" /></p>
+                                       <p style=" font-size: 16px;">사 유&nbsp; 선 택 &nbsp;: <span style="font-size: 12px; color:#888;">여러 사유에 해당되는 경우, 대표적인 사유 1개를 선택해 주세요.</span></p>
+                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="부적절한 홍보 게시글"/> 부적절한 홍보 게시글<br/>
+                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="음란성 또는 청소년에게 부적합한 내용"/> 음란성 또는 청소년에게 부적합한 내용<br/>
+                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="명예훼손/사생활 침해 및 저작권침해등"/> 명예훼손/사생활 침해 및 저작권침해등<br/>
+                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="기타"/> 기타
+                                   </div>
+                                   <div class="modal-footer">
+                                       <button type="submit" class="btn btn-primary" data-dismiss="modal" id="alertBtn">신고</button>
+                                       <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
                    </c:forEach>
           
                  </div>
              </section>
+               
     <!-- 소모임 리스트 끝-->
 <!-- 컨텐츠 끝 -->
 <script type="text/javascript">
@@ -133,8 +158,9 @@ $("#deleteBtn").click(function(){
 
 $("#alertBtn").click(function(){
 	let groupBoardNo = $("[name=groupBoardNo]").val();
-	if(!confirm('정말 해당 게시물을  신고하시겠습니까?')) return;
-	location.href="${pageContext.request.contextPath }/community/group/alertBoard.do?groupBoardNo="+groupBoardNo;
+	let reportReason = $("[name=reportReason]:checked").val();
+	
+	location.href="${pageContext.request.contextPath }/community/group/alertBoard.do?groupBoardNo="+groupBoardNo+"&reportReason="+reportReason;
 });
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

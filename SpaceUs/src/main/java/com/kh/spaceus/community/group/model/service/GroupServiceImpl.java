@@ -66,6 +66,16 @@ public class GroupServiceImpl implements GroupService {
 	public List<Report> selectOne(Map<Object, Object> map) {
 		return groupDAO.selectOne(map);
 	}
+
+	@Override
+	public int insertReport(Report report) {
+		return groupDAO.insertReport(report);
+	}
+
+	@Override
+	public int updateCnt(Map<Object, Object> map) {
+		return groupDAO.updateCnt(map);
+	}
 	
 	
 

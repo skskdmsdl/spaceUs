@@ -29,4 +29,8 @@ public interface GroupDAO {
 
 	List<Report> selectOne(Map<Object, Object> map);
 
+	int insertReport(Report report);
+
+	int updateCnt(Map<Object, Object> map);
+
 }

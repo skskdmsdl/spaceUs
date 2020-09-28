@@ -129,4 +129,23 @@
 	<resultMap type="report" id="reportMap">
 	
 	</resultMap>
+	
+	<insert id="insertReport">
+		insert into
+			report
+		values (
+			#{memberEmail},
+			#{boardNo},
+			#{reportReason}
+		)
+	</insert>
+	
+	<update id="updateCnt">
+		update 
+			group_board
+		set
+			report_cnt = report_cnt + 1
+		where
+			group_board_no = #{boardNo}
+	</update>
 </mapper>

@@ -400,7 +400,7 @@ insert into group_board values('G'||seq_group_board_no.nextval,'7','honggd@naver
 insert into group_board values('G'||seq_group_board_no.nextval,'9','honggd@naver.com',default,'댄스파티 관심있나요?',default,default,'댄스파티에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다');
 insert into group_board values('G'||seq_group_board_no.nextval,'9','honggd@naver.com',default,'어학공부 관심있나요?',default,default,'프랑스어에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다');
 
-select * from group_board;
+select * from group_board where member_email = 'honggd@naver.com' and view_cnt = 3;
 select * from member;
 
 delete from group_board where member_email = 'honggd@naver.com' ;
@@ -452,13 +452,14 @@ create table report (
 ---------------------------------------
 -- 9/28
 select
-    member_email, board_no, 
+    R.member_email,
+    R.board_no,
+    R.report_reason,
+    G.report_cnt
 from 
-    report R left join group_board G
-                    using(member_email),
-              left join group_board G
-                    on R.board_no = G.group_board_no;
-
+    report R join group_board G
+                   on R.member_email = G.member_email and
+                    R.board_no = G.group_board_no;
 
 
 

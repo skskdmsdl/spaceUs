@@ -214,11 +214,15 @@ public class GroupController {
 	
 	//게시물 신고하기
 	@RequestMapping("/alertBoard.do")
-	public String alertBoard(@RequestParam("groupBoardNo") String groupBoardNo, Principal principal, 
+	public String alertBoard(@RequestParam("groupBoardNo") String groupBoardNo,
+						     Report report,
+							 Principal principal, 
 							 RedirectAttributes redirectAtt, Model model) {
+		
 		//아이디 하나당 게시물을 한번만 신고가능함
-		//log.info(principal.getName()); //아이디 
-		//log.info("groupBoardNo = {}", groupBoardNo); //게시물
+		report.setBoardNo(groupBoardNo);
+		report.setMemberEmail(principal.getName());
+		log.info("report = {}",report);
 		
 		Map<Object,Object> map = new HashMap<>();
 		map.put("memberEmail", principal.getName());
@@ -230,17 +234,20 @@ public class GroupController {
 		
 		String msg = "";
 		
-		if(gbReport == null) {
+		if(gbReport.isEmpty()) {
 			// 없었다면 update하여서 +1 추가
-			System.out.println("이미 신고 접수 건이 존재하지 않습니다");
+			int result1 = groupService.insertReport(report);
+			int result2 = groupService.updateCnt(map);
+			
+			msg = "성공적으로 신고 접수를 하였습니다";
 		}
 		else {
 			msg = "이미 신고 접수 건이 존재합니다";
-			System.out.println("이미 신고 접수 건이 존재합니다");
 		}
 		
-		return "";
-		//return "redirect:/community/group/groupList.do";
+		redirectAtt.addFlashAttribute("msg", msg);
+		
+		return "redirect:/community/group/groupList.do";
 	}
 	
 
