@@ -275,7 +275,11 @@ function urlcopy(){
      <div class="row">
    		<div class="col-md-10">
    			<h3 class="head">5개의 Q&A</h3>
+   			<form action="${pageContext.request.contextPath }/space/insertQuestion.do">
+   			<button name="memberEmail" id="ask-question" class="primary-btn" type="submit" onclick="ask();" style="float:right; margin-right:10px; letter-spacing: 2px;" value="${loginMember.principal.memberEmail }">문의하기</button>
+   			</form>
    			<div class="review d-flex">
+   				
 		   		<div class="desc">
 		   			<h4>
 		   				<span class="text-left">질문자 닉네임</span>
@@ -506,9 +510,17 @@ function urlcopy(){
     	</div>
     </div>
 	</div>
-</section>
+
     <!-- 추천시스템 끝 -->
 <script>
+function ask(){
+	var memberEmail = $("#ask-question").val();
+
+	$("#ask-question").attr("action", 
+	"${ pageContext.request.contextPath}/space/insertQuestion.do")
+	.attr("method", "GET");
+}
+
 /* 예약버튼 */
 function rvSubmit() {
 	$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserveSpace.do")

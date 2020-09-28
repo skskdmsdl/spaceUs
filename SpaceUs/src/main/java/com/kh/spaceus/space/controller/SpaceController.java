@@ -1,7 +1,6 @@
 package com.kh.spaceus.space.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +34,14 @@ public class SpaceController {
 		
 		return "space/insertSpace";
 	}
+	
+	@GetMapping("/insertQuestion.do")
+	public String insertQuestion(@RequestParam String memberEmail) {
+				
+		
+		return "space/insertQuestion";
+	}
+	
 	
 	@GetMapping("/insertHashTag.do")
 	public ModelAndView insertHashTag(ModelAndView mav, @RequestParam("hashTag") String hashTag) {
