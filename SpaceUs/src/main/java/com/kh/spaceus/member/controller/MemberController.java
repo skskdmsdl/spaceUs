@@ -1,5 +1,6 @@
 package com.kh.spaceus.member.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,14 +49,9 @@ public class MemberController {
 
 	// 프로필
 	@RequestMapping("/memberProfile.do")
-	public String memberProfile(HttpSession session, Model model) {
-			/** Model model, HttpServletRequest request) {
-		/*
-		 * Member member = (Member)request.getSession().getAttribute("loginMember");
-		 * model.addAttribute("loginMember", member);
-		 */
-		
-		
+	public String memberProfile (Model model, Principal principal) {
+		Member member = memberService.selectOneMember(principal.getName());
+		model.addAttribute("member", member);
 		return "member/memberProfile";
 	}
 
@@ -82,8 +78,10 @@ public class MemberController {
 
 	// 리뷰목록
 	@RequestMapping("/reviewList.do")
-	public String reviewList() {
-
+	public String reviewList (Model model, Principal principal) {
+		Member member = memberService.selectOneMember(principal.getName());
+		
+		model.addAttribute("member", member);
 		return "member/reviewList";
 	}
 
