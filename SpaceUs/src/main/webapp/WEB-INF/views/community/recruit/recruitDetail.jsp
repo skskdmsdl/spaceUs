@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -67,13 +68,15 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             <p class="h4">${recruit.title }</p>
                          	<table>
                                 <tr>
-                                    <th><i class="fa fa-user"></i> ${recruit.nickName } </th>
+                                    <th><i class="fa fa-user"></i>&nbsp;${recruit.nickName } </th>
                                     <th class="col-xl-auto">|</th>
-                                    <th><i class="fa fa-calendar"></i><fmt:formatDate value="${recruit.enrollDate}" pattern="yyyy/MM/dd"/></th>
+                                    <th><i class="fa fa-calendar"></i>&nbsp;<fmt:formatDate value="${recruit.enrollDate}" pattern="yyyy/MM/dd"/></th>
                                     <th class="col-xl-auto">|</th>
-
-                                    <th><i class="fa fa-eye"></i> ${ recruit.viewCnt}</th>
-                                    <th><i class="fa fa-siren"></i>신고하기</th>
+                                    <th><i class="fa fa-eye"></i>&nbsp;${ recruit.viewCnt}</th>
+                                    <th class="col-xl-auto">|</th>
+                                    <th><i class="fa fa-bullhorn"></i>
+                                    	<button style="border: none; background: none; color:#666; cursor: pointer;" data-toggle="modal" data-target="#intro">&nbsp;신고하기</button>
+                                    </th>
                                      <%-- <c:if test="${ principal.nickName != null && principal.nickName eq recruit.nickName}">  --%>
 	                                    <th style="position: absolute;right: 110px; cursor: pointer;" class="mr-5" id="modifyBtn">수정하기</th>
 	                                    <th class="col-xl-auto mr-5" style="position: absolute;right: 70px;">|</th>
@@ -81,7 +84,31 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 	 <%-- </c:if>  --%>
                                 </tr>
                             </table>
-                         </div>
+                            <!-- Modal -->
+					        <div class="modal fade" id="intro" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
+					            <div class="modal-dialog">
+					                <div class="modal-content">
+					                    <div class="modal-header">
+					                        <h4 class="modal-title">신고하기</h4>
+					                    </div>
+					                    <div class="modal-body">
+					                    	<p style=" padding-top: 20px; font-size: 16px; margin-bottom:0;">신고 게시물 : <input style="border: none; color:#666; font-size: 16px;" type="text" value="${recruit.title }" /></p>
+					                        <p style="border-bottom: 1px solid #efefef; font-size: 16px; padding-bottom: 30px;">작&nbsp;&nbsp;&nbsp;  성&nbsp;&nbsp;&nbsp;  자 &nbsp;: <input id="reportNick" style="border: none; color:#666; font-size: 16px;" type="text" value="${recruit.nickName }" /></p>
+					                        <p style=" font-size: 16px;">사 유&nbsp; 선 택 &nbsp;: <span style="font-size: 12px; color:#888;">여러 사유에 해당되는 경우, 대표적인 사유 1개를 선택해 주세요.</span></p>
+					                        <input type="radio" name="reportCon" style="margin-left:85px;" value="부적절한 홍보 게시글"/> 부적절한 홍보 게시글<br/>
+					                        <input type="radio" name="reportCon" style="margin-left:85px;" value="음란성 또는 청소년에게 부적합한 내용"/> 음란성 또는 청소년에게 부적합한 내용<br/>
+					                        <input type="radio" name="reportCon" style="margin-left:85px;" value="명예훼손/사생활 침해 및 저작권침해등"/> 명예훼손/사생활 침해 및 저작권침해등<br/>
+					                        <input type="radio" name="reportCon" style="margin-left:85px;" value="기타"/> 기타
+					                    </div>
+					                    <div class="modal-footer">
+					                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="reportBtn();">신고</button>
+					                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					                    </div>
+					                </div>
+					            </div>
+					        </div>
+
+
                          <div class="m-5">
                          <div class="mb-5">${ recruit.content}</div>
                          
@@ -111,6 +138,26 @@ $("#modifyBtn").on('click', function(){
 function deleteBtn(no){
 	if(!confirm("정말 삭제하시겠습니까?")) return;
 	location.href="${pageContext.request.contextPath }/community/recruit/deleteRecruit.do?no="+no; 
-}
+};
+function reportBtn(){
+	alert($("input[name=reportCon]:checked").val());
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/community/recruit/recruitReport.do",
+		data : {
+			no : $("[name=no]").val(),
+			nickName : $("#reportNick").val(),
+			content : $("input[name=reportCon]:checked").val()
+		},
+		dataType : "json",
+		success : function(data){
+			console.log(data);
+
+			alert("신고가 완료되었습니다!");
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	});
+};
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
