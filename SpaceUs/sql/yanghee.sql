@@ -400,7 +400,7 @@ insert into group_board values('G'||seq_group_board_no.nextval,'7','honggd@naver
 insert into group_board values('G'||seq_group_board_no.nextval,'9','honggd@naver.com',default,'댄스파티 관심있나요?',default,default,'댄스파티에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다');
 insert into group_board values('G'||seq_group_board_no.nextval,'9','honggd@naver.com',default,'어학공부 관심있나요?',default,default,'프랑스어에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다');
 
-select * from group_board;
+select * from group_board where member_email = 'honggd@naver.com' and view_cnt = 3;
 select * from member;
 
 delete from group_board where member_email = 'honggd@naver.com' ;
@@ -435,6 +435,36 @@ select * from group_board_comment;
 drop table group_board_comment;
 
 -----------------------------
+--------- 신고 ---------------
+-----------------------------
+create table report (
+    member_email varchar2(256),
+    board_no varchar2(256),
+    report_reason varchar2(256),
+    
+    constraints pk_report primary key(member_email, board_no),
+    constraints fk_report_member_email foreign key(member_email) references member(member_email) on delete cascade,
+    constraints fk_group_board_no foreign key(board_no) references group_board(group_board_no) on delete cascade,
+    constraints fk_recruit_board_no foreign key(board_no) references recruit(recruit_no) on delete cascade
+);
+
+
+---------------------------------------
+-- 9/28
+select
+    R.member_email,
+    R.board_no,
+    R.report_reason,
+    G.report_cnt
+from 
+    report R join group_board G
+                   on R.member_email = G.member_email and
+                    R.board_no = G.group_board_no;
+
+
+
+
+-----------------------------
 --------- 블랙리스트 --------
 -----------------------------
 
@@ -464,7 +494,6 @@ create table exhibition (
 
 
 select * from exhibition;
-
 
 
 -----------------------------

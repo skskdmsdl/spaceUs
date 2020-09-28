@@ -115,4 +115,37 @@
 		where
 			group_board_no = #{groupBoardNo}
 	</update>
+	
+	<!-- 신고된 적이 있는지 없는지 조회 -->
+	<select id="selectOne" resultMap="reportMap">
+		select
+			*
+		from
+			report
+		where
+			member_email = #{memberEmail} and
+			board_no = #{boardNo}
+	</select>
+	<resultMap type="report" id="reportMap">
+	
+	</resultMap>
+	
+	<insert id="insertReport">
+		insert into
+			report
+		values (
+			#{memberEmail},
+			#{boardNo},
+			#{reportReason}
+		)
+	</insert>
+	
+	<update id="updateCnt">
+		update 
+			group_board
+		set
+			report_cnt = report_cnt + 1
+		where
+			group_board_no = #{boardNo}
+	</update>
 </mapper>
