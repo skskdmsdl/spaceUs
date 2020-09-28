@@ -91,6 +91,8 @@
 							<tr>
 								<th class="align-baseline">닉네임</th>
 								<th><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.nickName"/>" required /></th>
+								<th><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="${ name }" required /></th>
+								
 							</tr>
 						    <tr>
 						      <td class="align-baseline">이메일 계정</td>

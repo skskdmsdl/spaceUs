@@ -160,7 +160,26 @@ conversation.setAttributes({
 	      <button class="navbar-toggler" type="button">
 	        <span class="oi oi-menu"></span>
 	      </button>
+	      
+	      <c:if test="${not empty name }">
+		   	<div class="collapse navbar-collapse" id="ftco-nav">
+        	 <ul class="navbar-nav ml-auto">
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
+		          <li class="nav-item"><a href="${pageContext.request.contextPath }/community/group/groupList.do" class="nav-link">커뮤니티</a></li>
+		   
+	        	  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
+	        		<div  data-toggle="modal" data-target="#exampleModal">
+	        			 <div style="display: inline-block;">반갑습니다. ${ name }님!</div>
+	        		</div>
+	        	  </div>
+	          </ul>
+	        </div>
+		  </c:if>
+	      
+	      <c:if test="${ empty name }">
 	      <sec:authorize access="isAnonymous()">
+	      
 		      <div class="collapse navbar-collapse">
 		        <ul class="navbar-nav ml-auto">
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
@@ -205,7 +224,8 @@ conversation.setAttributes({
 	          </ul>
 	        </div>
 		  </sec:authorize>
-		      </div>  
+		  </c:if>
+		      </div> 
 	  </nav>
 	 
 	
@@ -214,6 +234,48 @@ conversation.setAttributes({
     <!-- user 권한 -->
     <!-- Modal -->
      <%-- <sec:authorize access="isAuthenticated()"> --%>
+     <c:if test="${not empty name }">
+     <div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-auto" role="document">
+	    <div class="modal-content"  style="background:#625c55; border-radius: 1.3em; left:36rem; top:3rem; width:55%; ">
+	      <div class="modal-header" style="background: #30D795; border-radius: 1.3em;">
+	        <h5 class="modal-title" id="exampleModalLabel">
+	        	<div data-toggle="modal" data-target="#exampleModal">
+		        	<img src="https://resource.miricanvas.com/image/common/profile_argo.svg" style="background: #22B47B; border-right: 0; border-radius: 90%; width: 40px;  height: 40px;">
+	        		${ name }님
+	        	</div>
+	        </h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="col-sm-10 mb-2">
+	    	    <a href="${pageContext.request.contextPath }/member/memberProfile.do">
+	    	            👩🏻 회원정보
+	    	    </a>
+	      	</div>
+	      	<div class="col-sm-10 mb-2">
+		        <a href="${pageContext.request.contextPath }/member/usageHistory.do">
+		           🧭 나의 예약내역
+		        </a>
+	      	 </div>
+	      	 <div class="col-sm-10 mb-2">
+		        <a href="${pageContext.request.contextPath }/member/wishList.do">
+		         	 💚  위시리스트
+		        </a>
+	      	 </div>
+	      </div>
+	      <div class="modal-footer">
+	      	 <form:form action="${ pageContext.request.contextPath }/member/memberLogout.do">
+	      	 	 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">로그아웃</button>
+	      	 </form:form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+     
+     </c:if>
      <sec:authorize access="hasAnyRole('USER', 'HOST')">
 	<div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-auto" role="document">
@@ -222,7 +284,7 @@ conversation.setAttributes({
 	        <h5 class="modal-title" id="exampleModalLabel">
 	        	<div data-toggle="modal" data-target="#exampleModal">
 		        	<img src="https://resource.miricanvas.com/image/common/profile_argo.svg" style="background: #22B47B; border-right: 0; border-radius: 90%; width: 40px;  height: 40px;">
-	        		<sec:authentication property="principal.nickName"/>님 
+	        		<sec:authentication property="principal.nickName"/>님
 	        	</div>
 	        </h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -250,7 +312,6 @@ conversation.setAttributes({
 		         	 💚  위시리스트
 		        </a>
 	      	 </div>
-	      	 
 	      	 <!-- admin 권한 -->
 	      	 <sec:authorize access="hasRole('ROLE_ADMIN')">
 	      	 	<div class="col-sm-10 mb-2">
