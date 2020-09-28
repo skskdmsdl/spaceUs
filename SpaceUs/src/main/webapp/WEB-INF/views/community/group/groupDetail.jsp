@@ -71,7 +71,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                            <p class="h4">${list.groupBoardTitle}</p>
 	                         	<table style="display: inline-block;">
 	                                <tr>
-	                                    <th><i class="fa fa-user"></i>${list.nickname}</th>
+	                                    <th><i class="fa fa-user"></i>&nbsp; ${list.nickname}</th>
 	                                    <th class="col-xl-auto">|</th>
 	                                    <th><i class="fa fa-calendar"></i>${list.groupBoardDate}</th>
 	                                    <th class="col-xl-auto">|</th>
@@ -83,7 +83,10 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 		                        <!-- 수정삭제 버튼시작 -->
 		                        <sec:authorize access="hasAnyRole('USER','ADMIN')">
 		                        	<sec:authentication property="principal.username" var="loginMember"/>
-		                            <button id="modifyBtn" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/community/group/modifyBoard/${list.groupBoardNo}.do'" style="margin-top:50px; font-size:15px; color:white; float:right; margin-right: 35px; margin-top: 0;">신고하기 </button>	
+		                            <button id="alertBtn" class="btn btn-sm btn-danger"  
+		                            		style="margin-top:50px; font-size:15px; color:white; float:right; margin-right: 35px; margin-top: 0;">
+		                            		신고하기 
+		                            </button>	
 		                          	<c:if test="${loginMember != null && loginMember eq list.memberEmail }">
 			                            <button id="modifyBtn" class="btn btn-sm" onclick="location.href='${pageContext.request.contextPath}/community/group/modifyBoard/${list.groupBoardNo}.do'" style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 10px; margin-top: 0;">글 수정 </button>
 			                           	<div style="display: inline-block;"></div>
@@ -121,10 +124,17 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
     <!-- 소모임 리스트 끝-->
 <!-- 컨텐츠 끝 -->
 <script type="text/javascript">
+
 $("#deleteBtn").click(function(){
 	let groupBoardNo = $("[name=groupBoardNo]").val();
-	if(!confirm('정말 삭제하시겠습니까??')) return;
+	if(!confirm('정말 삭제하시겠습니까?')) return;
 	location.href="${pageContext.request.contextPath }/community/group/deleteBoard.do?groupBoardNo="+groupBoardNo;
+});
+
+$("#alertBtn").click(function(){
+	let groupBoardNo = $("[name=groupBoardNo]").val();
+	if(!confirm('정말 해당 게시물을  신고하시겠습니까?')) return;
+	location.href="${pageContext.request.contextPath }/community/group/alertBoard.do?groupBoardNo="+groupBoardNo;
 });
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

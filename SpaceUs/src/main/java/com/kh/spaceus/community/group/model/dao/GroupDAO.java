@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.spaceus.community.group.model.vo.Board;
+import com.kh.spaceus.community.group.model.vo.Report;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 
 public interface GroupDAO {
@@ -25,5 +26,7 @@ public interface GroupDAO {
 	int deleteBoard(String groupBoardNo);
 
 	int increaseBoardReadCnt(String groupBoardNo);
+
+	List<Report> selectOne(Map<Object, Object> map);
 
 }

@@ -435,6 +435,35 @@ select * from group_board_comment;
 drop table group_board_comment;
 
 -----------------------------
+--------- 신고 ---------------
+-----------------------------
+create table report (
+    member_email varchar2(256),
+    board_no varchar2(256),
+    report_reason varchar2(256),
+    
+    constraints pk_report primary key(member_email, board_no),
+    constraints fk_report_member_email foreign key(member_email) references member(member_email) on delete cascade,
+    constraints fk_group_board_no foreign key(board_no) references group_board(group_board_no) on delete cascade,
+    constraints fk_recruit_board_no foreign key(board_no) references recruit(recruit_no) on delete cascade
+);
+
+
+---------------------------------------
+-- 9/28
+select
+    member_email, board_no, 
+from 
+    report R left join group_board G
+                    using(member_email),
+              left join group_board G
+                    on R.board_no = G.group_board_no;
+
+
+
+
+
+-----------------------------
 --------- 블랙리스트 --------
 -----------------------------
 
@@ -464,7 +493,6 @@ create table exhibition (
 
 
 select * from exhibition;
-
 
 
 -----------------------------

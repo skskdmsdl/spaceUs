@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.community.group.model.vo.Board;
+import com.kh.spaceus.community.group.model.vo.Report;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 
 @Repository
@@ -59,6 +60,12 @@ public class GroupDAOImpl implements GroupDAO {
 	@Override
 	public int increaseBoardReadCnt(String groupBoardNo) {
 		return session.update("board.increaseBoardReadCnt", groupBoardNo);
+	}
+
+	@Override
+	public List<Report> selectOne(Map<Object, Object> map) {
+		return session.selectList("board.selectOne", map);
 	}	
+	
 	
 }

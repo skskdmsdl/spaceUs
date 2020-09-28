@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spaceus.community.group.model.dao.GroupDAO;
 import com.kh.spaceus.community.group.model.vo.Board;
+import com.kh.spaceus.community.group.model.vo.Report;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 
 @Service
@@ -60,5 +61,12 @@ public class GroupServiceImpl implements GroupService {
 	public int increaseBoardReadCnt(String groupBoardNo) {
 		return groupDAO.increaseBoardReadCnt(groupBoardNo);
 	}
+
+	@Override
+	public List<Report> selectOne(Map<Object, Object> map) {
+		return groupDAO.selectOne(map);
+	}
+	
+	
 
 }
