@@ -122,13 +122,13 @@
                                    	<div class="row"> 
                                         <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
                                         <div class="col-md-9">
-                                            <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
-                                            <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
+                                            <a id="reviewBtn" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
+                                            <a id="modifyBtn" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
                                         </div>
                                        </div>
                                    </div>
                                    </div>
-				                         <div class="pl-5 pr-5" style="height: 150px;">
+				                         <div class="pl-5 pr-5" style="height: 150px; display: none;" id="reviewFrm" >
 				                         	<div class="row pl-3 align-items-xl-center">
 				                         		<p class="m-1" style="font-size: 15px;">별점 &nbsp;&nbsp;:</p>
 				                         		<div class="star-box">
@@ -277,4 +277,18 @@ $(function(){
 		
 	});
 });
+//리뷰등록 버튼
+$("#reviewBtn").on("click", function(){
+	if($(this).hasClass("btn-primary")){
+		$("#reviewFrm").hide();
+		/* $("#reviewFrm").css("position","block"); */
+		$(this).removeClass("btn-primary");
+	}
+	else{
+		$("#reviewFrm").show();
+		$(this).addClass("btn-primary");
+	}	
+});
+
+
 </script>
