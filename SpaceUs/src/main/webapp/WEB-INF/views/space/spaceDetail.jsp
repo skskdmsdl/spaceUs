@@ -22,7 +22,6 @@
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
 }
-.tagcloud a {coursor:none;}
 
 .next {margin-right: 16px; right: 0; border-radius: 3px 0 0 3px;}
 .prev:hover, .next:hover {opacity: 0.3;}
@@ -139,10 +138,9 @@ function urlcopy(){
       					<br />
       					<span class="subheading">
 			              <div class="tagcloud">
-			                <a href="#" class="tag-cloud-link">#감성적인</a>
-			                <a href="#" class="tag-cloud-link">#바다가 보이는</a>
-			                <a href="#" class="tag-cloud-link">#조용한</a>
-			                <a href="#" class="tag-cloud-link">#힐링</a>
+			              <c:forEach items="${ tag }" var="tag">
+			                <a href="#" class="tag-cloud-link">#${ tag.tag }</a>
+			              </c:forEach>
 			              </div>
       					</span>
       				</div>
@@ -275,11 +273,7 @@ function urlcopy(){
      <div class="row">
    		<div class="col-md-10">
    			<h3 class="head">5개의 Q&A</h3>
-   			<form action="${pageContext.request.contextPath }/space/insertQuestion.do">
-   			<button name="memberEmail" id="ask-question" class="primary-btn" type="submit" onclick="ask();" style="float:right; margin-right:10px; letter-spacing: 2px;" value="${loginMember.principal.memberEmail }">문의하기</button>
-   			</form>
    			<div class="review d-flex">
-   				
 		   		<div class="desc">
 		   			<h4>
 		   				<span class="text-left">질문자 닉네임</span>
@@ -510,17 +504,9 @@ function urlcopy(){
     	</div>
     </div>
 	</div>
-
+</section>
     <!-- 추천시스템 끝 -->
 <script>
-function ask(){
-	var memberEmail = $("#ask-question").val();
-
-	$("#ask-question").attr("action", 
-	"${ pageContext.request.contextPath}/space/insertQuestion.do")
-	.attr("method", "GET");
-}
-
 /* 예약버튼 */
 function rvSubmit() {
 	$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserveSpace.do")
