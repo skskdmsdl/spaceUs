@@ -37,13 +37,10 @@ public class GroupController {
 	public String groupList(Model model) {
 
 		List<Board> boardList = groupService.selectListBoard();
-		//log.info("boardList = {}", boardList);
 
 		List<GroupBoard> groupBoardList = groupService.selectListGroupBoard();
-		//log.info("groupBoard = {}", groupBoardList);
 
 		int totalCnt = groupService.selectTotalCnt();
-		//log.info("totalCnt = {}", totalCnt);
 
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("boardList", boardList);
@@ -58,20 +55,16 @@ public class GroupController {
 			Model model) {
 
 		List<Board> boardList = groupService.selectListBoard();
-		//log.info("boardList = {}", boardList);
 
 		Map<String, String> listMap = new HashMap<>();
 		listMap.put("boardNo", boardNo);
 		listMap.put("boardRef", boardRef);
 
-		//log.info("listMap={}", listMap);
-
 		List<GroupBoard> groupBoardList = groupService.selectSortedListGroupBoard(listMap);
-		//log.info("groupBoardList = {}", groupBoardList);
+		
 
 		int totalCnt = groupService.selectTotalCnt();
-		//log.info("totalCnt = {}", totalCnt)
-
+		
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("groupBoardList", groupBoardList);
@@ -83,46 +76,51 @@ public class GroupController {
 	@RequestMapping("/groupDetail/{groupBoardNo}.do")
 	public String groupDetail(HttpServletRequest request, HttpServletResponse response,
 							 @PathVariable("groupBoardNo") String groupBoardNo, Model model) {
-		//쿠키검사 : boardCookie
-		Cookie[] cookies = request.getCookies();
-		String boardCookieVal = "";
-		boolean hasRead = false;
-		
-		if(cookies != null) {
-			for(Cookie c : cookies) {
-				String name = c.getName();
-				String value = c.getValue();
-				
-				if("boardCookie".equals(name)) {
-					boardCookieVal = value;
+		try {
+			
+			//쿠키검사 : boardCookie
+			Cookie[] cookies = request.getCookies();
+			String boardCookieVal = "";
+			boolean hasRead = false;
+			
+			if(cookies != null) {
+				for(Cookie c : cookies) {
+					String name = c.getName();
+					String value = c.getValue();
 					
-					if(value.contains("[" + groupBoardNo + "]"))
-						hasRead = true;
+					if("boardCookie".equals(name)) {
+						boardCookieVal = value;
+						
+						if(value.contains("[" + groupBoardNo + "]"))
+							hasRead = true;
+					}
 				}
 			}
-		}
-		if(!hasRead) {
-		//boardCookie생성
-		Cookie boardCookie = new Cookie("boardCookie", boardCookieVal + "["+groupBoardNo +"]");
-			boardCookie.setPath("${pageContext.request.contextPath}");
-			//브라우져가 종료되면 쿠키 삭제
-			boardCookie.setMaxAge(-1);
-			response.addCookie(boardCookie);
-		}
-		
-		//조회수 증가
-		if(!hasRead) {
-			int result = groupService.increaseBoardReadCnt(groupBoardNo);
-			log.info("result = {}",result);			
-		}
+			if(!hasRead) {
+				//boardCookie생성
+				Cookie boardCookie = new Cookie("boardCookie", boardCookieVal + "["+groupBoardNo +"]");
+				boardCookie.setPath(request.getContextPath()+"/community/group");
+				//브라우져가 종료되면 쿠키 삭제
+				boardCookie.setMaxAge(-1);//브라우저가 끄면 사라짐
+				response.addCookie(boardCookie);
 
-		//브라우져가 종료되면 쿠키 삭제
-		
-		List<GroupBoard> list = groupService.selectDetailBoard(groupBoardNo);
-		//log.info("list = {}", list);
-		
-		
-		model.addAttribute("list", list);
+			}
+			
+			//조회수 증가
+			if(!hasRead) {
+				int result = groupService.increaseBoardReadCnt(groupBoardNo);
+				log.info("result = {}",result);			
+			}
+			
+			//브라우져가 종료되면 쿠키 삭제
+			
+			List<GroupBoard> list = groupService.selectDetailBoard(groupBoardNo);
+			
+			model.addAttribute("list", list);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "community/group/groupDetail";
 	}
 
@@ -131,7 +129,6 @@ public class GroupController {
 	public String groupEnrollForm(Model model) {
 
 		List<Board> boardList = groupService.selectListBoard();
-		//log.info("boardList = {}", boardList);
 
 		model.addAttribute("boardList", boardList);
 
@@ -142,20 +139,13 @@ public class GroupController {
 	@PostMapping("/insertBoard.do")
 	public String insertBoard(GroupBoard gb, Model model, RedirectAttributes redirectAtt) {
 
-		// GroupBoard gb = new GroupBoard(null, boardNo, memberEmail, 0,
-		// groupBoardTitle, groupBoardContent, 0, null, nickname);
-
 		int result = groupService.insertBoard(gb);
-		//log.info("result = {}", result);
 
 		List<Board> boardList = groupService.selectListBoard();
-		//log.info("boardList = {}", boardList);
 
 		List<GroupBoard> groupBoardList = groupService.selectListGroupBoard();
-		//log.info("groupBoard = {}", groupBoardList);
 
 		int totalCnt = groupService.selectTotalCnt();
-		//log.info("totalCnt = {}", totalCnt);
 
 		String msg = (result > 0) ? "게시물 등록!" : "등록 실패!";
 		
@@ -177,7 +167,6 @@ public class GroupController {
 		log.info("gb= {}", gb);
 		
 		List<Board> boardList = groupService.selectListBoard();
-		//log.info("boardList = {}", boardList);
 
 		model.addAttribute("List", boardList);
 		model.addAttribute("gb", gb);
@@ -205,13 +194,10 @@ public class GroupController {
 		log.info("result = {}",result);
 		
 		List<Board> boardList = groupService.selectListBoard();
-		//log.info("boardList = {}", boardList);
 
 		List<GroupBoard> groupBoardList = groupService.selectListGroupBoard();
-		//log.info("groupBoard = {}", groupBoardList);
 
 		int totalCnt = groupService.selectTotalCnt();
-		//log.info("totalCnt = {}", totalCnt);
 
 		String msg = (result > 0) ? "게시물 삭제 성공!" : "게시물 삭제 실패!";
 		
