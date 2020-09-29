@@ -17,5 +17,7 @@ public interface SpaceDAO {
 
 	List<Tag> selectListSpaceTag(String spaceNo);
 
+	/* List<Space> selectListSpaceCollection(String email); */
+
 
 }

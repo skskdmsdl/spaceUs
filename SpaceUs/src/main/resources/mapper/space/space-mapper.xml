@@ -72,6 +72,7 @@
 			using(tag_no)
 		where ST.space_no = #{ spaceNo } 
 	</select>
+	
 
 </mapper>
 
