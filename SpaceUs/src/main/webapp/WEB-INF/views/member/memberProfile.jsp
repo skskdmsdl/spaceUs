@@ -12,77 +12,7 @@
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
 <%-- <jsp:include page="/WEB-INF/views/common/myPageHeader.jsp" /> --%>
-<!-- <script>
-let userName =${member.nickName =='admin'?'상담사':'회원'};
-/* talkJS */
-(function(t,a,l,k,j,s){
-s=a.createElement('script');s.async=1;s.src="https://cdn.talkjs.com/talk.js";a.head.appendChild(s)
-;k=t.Promise;t.Talk={v:3,ready:{then:function(f){if(k)return new k(function(r,e){l.push([f,r,e])});l
-.push([f])},catch:function(){return k&&new k()},c:l}};})(window,document,[]);
-
-Talk.ready.then(function() {
-    var me = new Talk.User({
-        id: ${member.nickName},
-        name: userName,
-        email: ${member.nickName},
-        photoUrl: "http://localhost:9090/spaceus/",
-        welcomeMessage: "대화를 시작하세요 :-)"
-    });
-    window.talkSession = new Talk.Session({
-        appId: "t9ROalbH",
-        me: me
-    });
-    var other = new Talk.User({
-        id: "admin",
-        name: "상담사",
-        email: "admin@spaceus.com",
-        photoUrl: "http://localhost:9090/spaceus/",
-        welcomeMessage: "무엇을 도와드릴까요?"
-    });
-
-    var conversation = talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other))
-    conversation.setParticipant(me);
-    conversation.setParticipant(other);
-
-    if(${member.nickName == 'admin'}){
-	    var inbox = talkSession.createInbox({selected: conversation});
-	    inbox.mount(document.getElementById("talkjs-container"));
-    }
-    else{
-
-        var conversation = window.talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other));
-        conversation.setParticipant(me);
-        conversation.setParticipant(other);
-        var popup = window.talkSession.createPopup(conversation, { keepOpen: false });
-        popup.mount({ show: false });
-
-        var button = document.getElementById("btn-getInTouch");
-        button.addEventListener("click", function(event) {
-            event.preventDefault();
-            popup.show();
-        });
-    }
-});
-
-var other = new Talk.User({
-	 id: ${member.nickName},
-     name: userName,
-     email: ${member.nickName},
-     photoUrl: "http://localhost:9090/spaceus/",
-     welcomeMessage: "무엇을 도와드릴까요?"
-});
-
-var conversation = talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other));
-conversation.setParticipant(me);
-conversation.setParticipant(other);
-
-var conversation = talkSession.getOrCreateConversation(user);
-
-conversation.setAttributes({
-    subject: "Hair Wax 5 Gallons"
-}); 
  
-</script>  --> 
 <script>
 (function(t,a,l,k,j,s){
 s=a.createElement('script');s.async=1;s.src="https://cdn.talkjs.com/talk.js";a.head.appendChild(s)
@@ -192,7 +122,7 @@ conversation.setAttributes({
                         <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/memberProfile.do"><i class="fa fa-user"></i><span class="hide-menu">회원정보</span></a></li>
                         <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/wishList.do"><i class="fa fa-heart"></i><span class="hide-menu">위시리스트</span></a></li>
                         <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/usageHistory.do"><i class="fa fa-table"></i><span class="hide-menu"></span>나의 예약내역</a></li>
-  						<li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/reviewList.do"><i class="fa fa-book"></i><span class="hide-menu">내가 쓴 글 리스트</span></a></li>
+  						<li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/reviewList.do"><i class="fa fa-book"></i><span class="hide-menu">리뷰목록</span></a></li>
                         <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/couponList.do"><i class="fa fa-gift"></i><span class="hide-menu"></span>쿠폰함</a></li>
                         <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/stampEvent.do"><i class="fa fa-stamp"></i><span class="hide-menu"></span>출석체크</a></li>
                         </sec:authorize>

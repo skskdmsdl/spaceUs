@@ -132,11 +132,11 @@
 				                         	<div class="row pl-3 align-items-xl-center">
 				                         		<p class="m-1" style="font-size: 15px;">별점 &nbsp;&nbsp;:</p>
 				                         		<div class="star-box">
-												  <span class="star mt-2"></span>
-												  <span class="star "></span>
-												  <span class="star "></span>
-												 <span class="star "></span>
-												 <span class="star "></span>
+												  <span class="star mt-2" id="star1"></span>
+												  <span class="star" id="star2"></span>
+												  <span class="star" id="star3"></span>
+												 <span class="star" id="star4"></span>
+												 <span class="star" id="star5"></span>
 												</div>
 												<div>
 												</div>
@@ -145,7 +145,8 @@
 													  method="post" 
 													  onsubmit="return boardValidate();"
 													  enctype="multipart/form-data"
-													  style="position: absolute;right: 53px;">
+													  style="position: absolute;right: 5%;">
+													  
 													  <div class="input-group mb-3" style="padding:0px;">
 													  <div class="custom-file">
 													    <input type="file" class="custom-file-input" name="upFile" id="upFile1" >
@@ -153,11 +154,11 @@
 													  </div>
 													</div>
 												<!-- <div class="m-1" style="position: absolute;right: 60px;">+ 사진</div> -->
-												</form>
 				                         	</div>
 				                         		 <textarea class="col-lg-11" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-				                           		<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+				                           		<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;" id="reviewSubmit">등록</button>
 				                           </div>
+												</form>
                                   </div>
                                   <div class="sl-item">
                                 <div class="row">
@@ -289,6 +290,27 @@ $("#reviewBtn").on("click", function(){
 		$(this).addClass("btn-primary");
 	}	
 });
-
+//리뷰 제출
+$("#reviewSubmit").on("click", function(){
+	 $.ajax({
+		url : "${ pageContext.request.contextPath }/community/recruit/insertReview.do",
+		data : {
+			no : $("[name=no]").val(),
+			nickName : $("#reportNick").val(),
+			reportReason : $("input[name=reportCon]:checked").val()
+		},
+		dataType : "json",
+		success : function(data){
+			console.log(data);
+			if(data.duplication != 1)
+			alert("신고가 완료되었습니다!");
+			else
+			alert("이미 신고된 게시물 입니다!");
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	}); 
+})
 
 </script>

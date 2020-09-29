@@ -2,6 +2,7 @@ package com.kh.spaceus.member.controller;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -27,6 +28,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.space.model.service.SpaceService;
+import com.kh.spaceus.space.model.vo.Space;
 
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.api.Message;
@@ -40,6 +43,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private SpaceService spaceService;
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -80,6 +86,8 @@ public class MemberController {
 	@RequestMapping("/reviewList.do")
 	public String reviewList (Model model, Principal principal) {
 		Member member = memberService.selectOneMember(principal.getName());
+//		List<Space> space = spaceService.selectListSpaceCollection(principal.getName());
+		
 		
 		model.addAttribute("member", member);
 		return "member/reviewList";
