@@ -23,7 +23,31 @@
 .fas {position: absolute; padding: 90px;}
 input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 .site-btn {width: 100%; font-size: 17px;}
-
+/*드롭*/
+body{
+    margin:0;
+    padding:0;
+}
+/* ul, li 요소 초기화 */
+.main-menu,.sub-menu {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+    float: right;
+    margin-top: 10px;
+}
+.sub-menu{
+	position:absolute;
+	display: block;
+	border: 1px solid #000;
+	padding: 10px;
+	background: #fff;
+	box-shadow: 1px 1px 1px 1px;
+}
+.click .sub-menu{
+	opacity: 1;
+	visibility: visible;	
+}
 </style>
 <!-- 컨텐츠 시작 -->
 <!-- 헤더 -->
@@ -86,6 +110,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                </tr>
 	                                <input type="hidden" name="groupBoardNo" value="${list.groupBoardNo}"/>
 	                            </table>
+	                            
 		                        <!-- 수정삭제 버튼시작 -->
 		                        <sec:authorize access="hasAnyRole('USER','ADMIN')">
 		                        	<sec:authentication property="principal.username" var="loginMember"/>
@@ -128,12 +153,65 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 									</div>
 	                           		
 	                           		<!-- 댓글보기시작 -->
-	                           		<div>
+	                           		<div class="level1" style="margin-top: 10px;">
 		                           		<tr class="col-md-1">
 		                                    <th><b>양희</b></th>
 		                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"> 2020.10.23</p></th>
 		                                    <th>|</th>
 		                                    <th><a href="#" style="color: #6d6d6d !important; font-size: 13px; margin-left: 8px;">답글쓰기</a></th>
+	                                         <th>
+	                                    	
+		                                    	<ul class="main-menu" id="main-menu1" onclick="menu1();">
+		                                    		<li>
+		                                    			<i class="fa fa-ellipsis-v layerMore">
+			                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu1">
+			                                    				<li><a href="#">신고하기</a></li>
+			                                    			</ul>
+		                                    			</i>
+		                                    		</li>
+		                                    	</ul>
+	                                    
+	                                    	</th>
+	                                	</tr>
+		                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">안녕하세요</div>
+		                         	</div>
+		                         	<div class="level2" style="margin: 10px 0 0 3%;">
+		                         		<tr class="col-md-1">
+		                                    <th><b>양희</b></th>
+		                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"> 2020.10.23</p></th>
+		                                     <th>
+		                                    	<ul class="main-menu" id="main-menu2" onclick="menu2();">
+		                                    		<li>
+		                                    			<i class="fa fa-ellipsis-v layerMore">
+			                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu2">
+			                                    				<li><a href="#">신고하기</a></li>
+			                                    			</ul>
+		                                    			</i>
+		                                    		</li>
+		                                    	</ul>
+		                                    </th>
+	                                	</tr>
+		                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">안녕하세요</div>
+		                         	</div>
+		                         	<div class="level1" style="margin-top: 10px;">
+		                           		<tr class="col-md-1">
+		                                    <th><b>양희</b></th>
+		                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"> 2020.10.23</p></th>
+		                                    <th>|</th>
+		                                    <th><a href="#" style="color: #6d6d6d !important; font-size: 13px; margin-left: 8px;">답글쓰기</a></th>
+		                                    <th>
+		                                    	
+		                                    	<ul class="main-menu" id="main-menu3" onclick="menu3();">
+		                                    		<li>
+		                                    			<i class="fa fa-ellipsis-v layerMore">
+			                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu3">
+			                                    				<li><a href="#">신고하기</a></li>
+			                                    			</ul>
+		                                    			</i>
+		                                    		</li>
+		                                    	</ul>
+		                                    
+		                                    </th>
 	                                	</tr>
 		                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">안녕하세요</div>
 		                         	</div>
@@ -196,5 +274,21 @@ $("#alertBtn").click(function(){
 	
 	location.href="${pageContext.request.contextPath }/community/group/alertBoard.do?groupBoardNo="+groupBoardNo+"&reportReason="+reportReason;
 });
+
+
+$(function(){
+	$('.sub-menu').hide();	
+});
+
+function menu1(){
+	var element = document.getElementById("main-menu1");
+	element.classList.toggle("click");
+
+    if($('#main-menu1').hasClass("click")){
+	   $('#sub-menu1').show();
+    }else{
+   	   $('#sub-menu1').hide();
+    }
+}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
