@@ -14,9 +14,11 @@ public interface SpaceService {
 
 	Space selectOneSpace(String spaceNo);
 
-	Space selectOneSpace(int businessNum);
+	Space selectOneSpace(int businessNo);
 
 	List<Tag> selectListSpaceTag(String spaceNo);
+
+	/* List<Space> selectListSpaceCollection(String email); */
 
 
 }

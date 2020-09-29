@@ -31,13 +31,18 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 	
 	@Override
-	public Space selectOneSpace(int businessNum) {
-		return spaceDAO.selectOneSpace(businessNum);
+	public Space selectOneSpace(int businessNo) {
+		return spaceDAO.selectOneSpace(businessNo);
 	}
 
 	@Override
 	public List<Tag> selectListSpaceTag(String spaceNo) {
 		return spaceDAO.selectListSpaceTag(spaceNo);
 	}
+
+	/*@Override
+	public List<Space> selectListSpaceCollection(String email) {
+		return spaceDAO.selectListSpaceCollection(email);
+	}*/
 	
 }

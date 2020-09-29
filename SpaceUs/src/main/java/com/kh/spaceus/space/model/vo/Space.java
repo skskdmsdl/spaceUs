@@ -2,6 +2,7 @@ package com.kh.spaceus.space.model.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,12 +26,14 @@ public class Space implements Serializable{
 	private String spacePhone;
 	private int hourlyPrice;
 	private float starAvg;
-	private String enrollDate;
-	private String modificationDate;
+	private Date enrollDate;
+	private Date modificationDate;
 	private int views;
 	private int likeCnt;
 	private String status;
 	private int account;
 	private String content;
 	private String bank;
+	
+	private List<Attachment> attachList;
 }

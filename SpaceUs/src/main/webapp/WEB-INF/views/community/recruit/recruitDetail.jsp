@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -73,15 +74,18 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                     <th><i class="fa fa-calendar"></i>&nbsp;<fmt:formatDate value="${recruit.enrollDate}" pattern="yyyy/MM/dd"/></th>
                                     <th class="col-xl-auto">|</th>
                                     <th><i class="fa fa-eye"></i>&nbsp;${ recruit.viewCnt}</th>
+                                     <sec:authorize access="hasAnyRole('USER','HOST','ADMIN')">
+                                     <sec:authentication property="principal.username" var="loginMember"/>
                                     <th class="col-xl-auto">|</th>
                                     <th><i class="fa fa-bullhorn"></i>
                                     	<button style="border: none; background: none; color:#666; cursor: pointer;" data-toggle="modal" data-target="#intro">&nbsp;신고하기</button>
                                     </th>
-                                     <%-- <c:if test="${ principal.nickName != null && principal.nickName eq recruit.nickName}">  --%>
+                                    	<c:if test="${loginMember != null && loginMember eq recruit.email }">
 	                                    <th style="position: absolute;right: 110px; cursor: pointer;" class="mr-5" id="modifyBtn">수정하기</th>
 	                                    <th class="col-xl-auto mr-5" style="position: absolute;right: 70px;">|</th>
 	                                    <th style="position: absolute;right: 10px; cursor: pointer;" class="mr-5" onclick="deleteBtn('${ recruit.no }')">삭제하기</th>
-                                	 <%-- </c:if>  --%>
+                               			</c:if>	
+                               		</sec:authorize>
                                 </tr>
                             </table>
                             <!-- Modal -->
@@ -110,7 +114,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 
 
                          <div class="m-5">
-                         <div class="mb-5">${ recruit.content}</div>
+                         <div class="mb-5">${recruit.reportCnt >=10 ? "게시글이 비공개 처리 되었습니다." : recruit.content}</div>
                          
                          
                          <div style="background-color: #fafafa; height: 200px; border: 1px solid #edeceb; ">
@@ -140,19 +144,20 @@ function deleteBtn(no){
 	location.href="${pageContext.request.contextPath }/community/recruit/deleteRecruit.do?no="+no; 
 };
 function reportBtn(){
-	alert($("input[name=reportCon]:checked").val());
 	$.ajax({
 		url : "${ pageContext.request.contextPath }/community/recruit/recruitReport.do",
 		data : {
 			no : $("[name=no]").val(),
 			nickName : $("#reportNick").val(),
-			content : $("input[name=reportCon]:checked").val()
+			reportReason : $("input[name=reportCon]:checked").val()
 		},
 		dataType : "json",
 		success : function(data){
 			console.log(data);
-
+			if(data.duplication != 1)
 			alert("신고가 완료되었습니다!");
+			else
+			alert("이미 신고된 게시물 입니다!");
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
