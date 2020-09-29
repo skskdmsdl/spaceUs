@@ -1,4 +1,5 @@
-
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="org.springframework.security.core.Authentication"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,6 +12,11 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <!-- icons -->
 <script src="https://kit.fontawesome.com/b74a25ff1b.js" crossorigin="anonymous"></script>
+<%
+Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+String loginMember = auth.getName();
+pageContext.setAttribute("loginMember",loginMember);
+%>
 <style>
 .image-div {
 	background-color:#f7f7f7;
@@ -39,14 +45,18 @@ body{
 .sub-menu{
 	position:absolute;
 	display: block;
-	border: 1px solid #000;
+	border: 1px solid #d0d0d0;
+	border-radius: 10px;
 	padding: 10px;
 	background: #fff;
-	box-shadow: 1px 1px 1px 1px;
+	box-shadow: 0px 0px 10px .1px #d0d0d0;
 }
 .click .sub-menu{
 	opacity: 1;
 	visibility: visible;	
+}
+.sub-menu > li {
+	padding: 10px;
 }
 </style>
 <!-- 컨텐츠 시작 -->
@@ -113,12 +123,14 @@ body{
 	                            
 		                        <!-- 수정삭제 버튼시작 -->
 		                        <sec:authorize access="hasAnyRole('USER','ADMIN')">
-		                        	<sec:authentication property="principal.username" var="loginMember"/>
-		                            <button class="btn btn-sm btn-danger"  
-		                            		data-toggle="modal" data-target="#intro"
-		                            		style="margin-top:50px; font-size:15px; color:white; float:right; margin-right: 35px; margin-top: 0;">
-		                            		신고하기 
-		                            </button>	
+		                        	<%-- <sec:authentication property="principal.username" var="loginMember"/> --%>
+		                        	<c:if test="${loginMember != list.memberEmail}">
+			                            <button class="btn btn-sm btn-danger"  
+			                            		data-toggle="modal" data-target="#intro"
+			                            		style="margin-top:50px; font-size:15px; color:white; float:right; margin-right: 35px; margin-top: 0;">
+			                            		신고하기 
+			                            </button>	
+		                        	</c:if>
 		                          	<c:if test="${loginMember != null && loginMember eq list.memberEmail }">
 			                            <button id="modifyBtn" class="btn btn-sm" onclick="location.href='${pageContext.request.contextPath}/community/group/modifyBoard/${list.groupBoardNo}.do'" style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 10px; margin-top: 0;">글 수정 </button>
 			                           	<div style="display: inline-block;"></div>
@@ -143,15 +155,22 @@ body{
                          	
 	                         <div style="background-color: #fafafa; width:90%; margin: auto;">
 	                         	<div class="pl-5 pr-5 pt-4">
-	                         		<div class="form-check" style="display: block;">
-									  <input class="form-check-input" type="checkbox" name="private" id="private" value="private">
-									  <label class="form-check-label" for="private">비밀글</label>
-									</div>
-									<div >
-		                         		<textarea class="col-lg-11" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-		                           		<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
-									</div>
-	                           		
+	                         		<form:form action="${pageContext.request.contextPath}/community/group/insertComment.do" method="post">
+	                         			<input type="hidden" name="groupBoardRef" value="${list.groupBoardNo}"/>
+	                         			<input type="hidden" name="memberEamil" value="${list.memberEmail}"/>
+	                         			<input type="hidden" name="groupBoardCommentLevel" value="1" />
+	                         			<input type="hidden" name="groupBoardCommentRef" value="0" />
+	                         		
+		                         		<div class="form-check" style="display: block;">
+										  <input class="form-check-input" type="checkbox" name="private" id="private" value="private">
+										  <label class="form-check-label" for="private">비밀글</label>
+										</div>
+										<div >
+			                         		<textarea class="col-lg-11 textarea1" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+			                           		<button type="submit" class="btn insertCmt" id="insertCmt"style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+										</div>
+	                         		</form:form>
+	                         		
 	                           		<!-- 댓글보기시작 -->
 	                           		<div class="level1" style="margin-top: 10px;">
 		                           		<tr class="col-md-1">
@@ -166,6 +185,8 @@ body{
 		                                    			<i class="fa fa-ellipsis-v layerMore">
 			                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu1">
 			                                    				<li><a href="#">신고하기</a></li>
+			                                    				<li><a href="#">수정</a></li>
+			                                    				<li><a href="#">삭제</a></li>
 			                                    			</ul>
 		                                    			</i>
 		                                    		</li>
@@ -185,6 +206,8 @@ body{
 		                                    			<i class="fa fa-ellipsis-v layerMore">
 			                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu2">
 			                                    				<li><a href="#">신고하기</a></li>
+			                                    				<li><a href="#">수정</a></li>
+			                                    				<li><a href="#">삭제</a></li>
 			                                    			</ul>
 		                                    			</i>
 		                                    		</li>
@@ -206,6 +229,8 @@ body{
 		                                    			<i class="fa fa-ellipsis-v layerMore">
 			                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu3">
 			                                    				<li><a href="#">신고하기</a></li>
+			                                    				<li><a href="#">수정</a></li>
+			                                    				<li><a href="#">삭제</a></li>
 			                                    			</ul>
 		                                    			</i>
 		                                    		</li>
@@ -274,8 +299,7 @@ $("#alertBtn").click(function(){
 	
 	location.href="${pageContext.request.contextPath }/community/group/alertBoard.do?groupBoardNo="+groupBoardNo+"&reportReason="+reportReason;
 });
-
-
+//댓글 삼지창
 $(function(){
 	$('.sub-menu').hide();	
 });
@@ -290,5 +314,16 @@ function menu1(){
    	   $('#sub-menu1').hide();
     }
 }
+
+$(".textarea1").click(function(){
+	alert('${loginMember}');
+ 	if('${loginMember}' == 'anonymousUser'){
+		alert("로그인 후 사용해 주세요");
+		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+	}
+	else{
+		return;
+	}
+});
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
