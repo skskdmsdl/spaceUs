@@ -25,8 +25,8 @@ public class Space implements Serializable{
 	private String spacePhone;
 	private int hourlyPrice;
 	private float starAvg;
-	private String enrollDate;
-	private String modificationDate;
+	private Date enrollDate;
+	private Date modificationDate;
 	private int views;
 	private int likeCnt;
 	private String status;

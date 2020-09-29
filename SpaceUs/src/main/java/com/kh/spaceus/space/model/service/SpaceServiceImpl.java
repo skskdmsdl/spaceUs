@@ -29,8 +29,8 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 	
 	@Override
-	public Space selectOneSpace(int businessNum) {
-		return spaceDAO.selectOneSpace(businessNum);
+	public Space selectOneSpace(int businessNo) {
+		return spaceDAO.selectOneSpace(businessNo);
 	}
 
 }

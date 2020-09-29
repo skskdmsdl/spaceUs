@@ -1,6 +1,7 @@
 package com.kh.spaceus.space.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +30,16 @@ public class SpaceController {
 	@Autowired 
 	private ReservationService reservationService;
 	
-	@RequestMapping("/insertSpace.do")
+	//공간등록하기 화면
+	@RequestMapping(value="/insertSpace.do",method = RequestMethod.GET)
 	public String insertSpace() {
-		
+		return "space/insertSpace";
+	}
+	//공간등록 제출
+	@RequestMapping(value="/insertSpace.do",method = RequestMethod.POST)
+	public String insertSpace(Space space) {
+		System.out.println("post메핑");
+		System.out.println(space);
 		return "space/insertSpace";
 	}
 	
@@ -103,10 +111,10 @@ public class SpaceController {
 	//사업자등록증 조회
 	@GetMapping("/checkIdDuplicate.do")
     public ModelAndView checkIdDuplicate1(ModelAndView mav,
-    									  @RequestParam("businessNum") int businessNum) {
+    									  @RequestParam("businessNo") int businessNo) {
     	
     	//1.업무로직 : 중복체크
-    	Space space = spaceService.selectOneSpace(businessNum);
+    	Space space = spaceService.selectOneSpace(businessNo);
     	boolean isUsable = space == null;
     	
     	//2. model에 속성 등록
