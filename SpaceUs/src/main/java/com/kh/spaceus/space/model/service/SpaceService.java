@@ -18,5 +18,7 @@ public interface SpaceService {
 
 	List<Tag> selectListSpaceTag(String spaceNo);
 
+	/* List<Space> selectListSpaceCollection(String email); */
+
 
 }

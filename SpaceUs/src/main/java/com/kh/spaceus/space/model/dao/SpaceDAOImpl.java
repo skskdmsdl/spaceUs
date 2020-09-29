@@ -42,4 +42,9 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.selectList("space.selectListSpaceTag", spaceNo);
 	}
 
+	/*@Override
+	public List<Space> selectListSpaceCollection(String email) {
+		return sqlSession.selectList("space.selectListSpaceCollection", email);
+	}*/
+
 }

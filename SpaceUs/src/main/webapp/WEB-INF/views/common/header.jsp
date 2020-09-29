@@ -79,78 +79,7 @@
 		self.close();	
 	</c:if>
 </script>
-<!-- <script>
-/* talkJS */
-(function(t,a,l,k,j,s){
-s=a.createElement('script');s.async=1;s.src="https://cdn.talkjs.com/talk.js";a.head.appendChild(s)
-;k=t.Promise;t.Talk={v:3,ready:{then:function(f){if(k)return new k(function(r,e){l.push([f,r,e])});l
-.push([f])},catch:function(){return k&&new k()},c:l}};})(window,document,[]);
 
-
-Talk.ready.then(function() {
-let user = ${loginMember};
-let userName = user.equals('관리자') ? '상담사' : '유저' ;
-    var me = new Talk.User({
-        id: user,
-        name: userName,
-        email: user,
-        photoUrl: "http://localhost:9090/spaceus/",
-        welcomeMessage: "대화를 시작하세요 :-)"
-    });
-    window.talkSession = new Talk.Session({
-        appId: "t9ROalbH",
-        me: me
-    });
-    var other = new Talk.User({
-        id: "관리자",
-        name: "상담사",
-        email: "admin@spaceus.com",
-        photoUrl: "http://localhost:9090/spaceus/",
-        welcomeMessage: "무엇을 도와드릴까요?"
-    });
-
-    var conversation = talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other))
-    conversation.setParticipant(me);
-    conversation.setParticipant(other);
-
-    if(user.equals('관리자')){
-	    var inbox = talkSession.createInbox({selected: conversation});
-	    inbox.mount(document.getElementById("talkjs-container"));
-    }
-    else{
-
-        var conversation = window.talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other));
-        conversation.setParticipant(me);
-        conversation.setParticipant(other);
-        var popup = window.talkSession.createPopup(conversation, { keepOpen: false });
-        popup.mount({ show: false });
-
-        var button = document.getElementById("btn-getInTouch");
-        button.addEventListener("click", function(event) {
-            event.preventDefault();
-            popup.show();
-        });
-    }
-});
-
-var other = new Talk.User({
-	 id: user,
-     name: userName,
-     email: user,
-     photoUrl: "http://localhost:9090/spaceus/",
-     welcomeMessage: "무엇을 도와드릴까요?"
-});
-
-var conversation = talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other));
-conversation.setParticipant(me);
-conversation.setParticipant(other);
-
-var conversation = talkSession.getOrCreateConversation(user);
-
-conversation.setAttributes({
-    subject: "Hair Wax 5 Gallons"
-}); 
-</script> -->
   </head>
   
   <body>
@@ -215,7 +144,8 @@ conversation.setAttributes({
     
     <!-- user 권한 -->
     <!-- Modal -->
-     <%-- <sec:authorize access="isAuthenticated()"> --%>
+     <sec:authorize access="isAuthenticated()"> 
+     
      <div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-auto" role="document">
 	    <div class="modal-content"  style="background:#625c55; border-radius: 1.3em; left:36rem; top:3rem; width:55%; ">
@@ -223,7 +153,7 @@ conversation.setAttributes({
 	        <h5 class="modal-title" id="exampleModalLabel">
 	        	<div data-toggle="modal" data-target="#exampleModal">
 		        	<img src="https://resource.miricanvas.com/image/common/profile_argo.svg" style="background: #22B47B; border-right: 0; border-radius: 90%; width: 40px;  height: 40px;">
-	        		${ name }님
+	        		<sec:authentication property="principal.nickName"/> 님
 	        	</div>
 	        </h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -255,7 +185,7 @@ conversation.setAttributes({
 	    </div>
 	  </div>
 	</div>
-     
+     </sec:authorize>
      <sec:authorize access="hasAnyRole('USER', 'HOST')">
 	<div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-auto" role="document">
@@ -367,8 +297,6 @@ conversation.setAttributes({
 
 	</sec:authorize>
 	<!-- /admin 권한 끝 -->
-<!-- <div id="talkjs-container" style="right:30px;">
-	<i>Loading chat...</i>
-</div>	 -->
+
 
 	
