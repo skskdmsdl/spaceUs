@@ -271,14 +271,46 @@ function urlcopy(){
 <!-- contact 끝 -->
 
 <!-- qna시작 -->
+
 <div class="tab-pane fade" id="detail-qna" role="tabpanel" aria-labelledby="detail-qna-tab">
      <div class="row">
    		<div class="col-md-10">
    			<h3 class="head">5개의 Q&A</h3>
-   			<form action="${pageContext.request.contextPath }/space/insertQuestion.do">
-   			<button name="memberEmail" id="ask-question" class="primary-btn" type="submit" onclick="ask();" style="float:right; margin-right:10px; letter-spacing: 2px;" value="${loginMember.principal.memberEmail }">문의하기</button>
-   			</form>
-   			<div class="review d-flex">
+					   			
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#qnaModal" data-whatever="@fat">문의하기</button>
+				
+				<div class="modal fade" id="qnaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel" style="letter-spacing:2px;">문의하기</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+						<form action="${pageContext.request.contextPath }/space/insertQuestion.do">
+				      
+				          <div class="form-group">
+				            <label for="recipient-name" class="col-form-label">문의 공간명</label>
+				            <input type="text" class="form-control" id="recipient-name">
+				          </div>
+				          <div class="form-group">
+				            <label for="message-text" class="col-form-label">내용</label>
+				            <textarea class="form-control" id="message-text"></textarea>
+				          </div>
+				        </form>
+		   			</form>	 
+				      </div>
+		   			<button name="memberEmail" id="ask-question" class="primary-btn" type="submit" onclick="ask();" style="float:right; margin-right:10px; letter-spacing: 2px;" value="${loginMember.principal.memberEmail }">문의하기</button>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				        <button type="submit" class="btn btn-primary">전송</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				   			<div class="review d-flex">
    				
 		   		<div class="desc">
 		   			<h4>

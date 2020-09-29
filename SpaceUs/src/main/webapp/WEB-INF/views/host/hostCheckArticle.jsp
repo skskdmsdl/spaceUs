@@ -113,13 +113,13 @@ p#qna-content > a:hover{
                     		 </div>
                           <!-- 질문글 시작 -->
                           <div class="qna-container">
-                        <c:if test="${ not empty list }">
+                         <c:if test="${ not empty list }">
 						<c:forEach items="${ list }" var="qna" varStatus="vs">
 				          <div class="col-md-10 d-flex">
 				          	<div class="blog-entry justify-content-end">
 				              <div class="text">
 				                <h3 class="heading"><a href="${pageContext.request.contextPath}/space/qna.do?no=${qna.qnaNo}">${ qna.qnaNo }</a></h3>
-				                <%-- <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');"> </a>--%>
+				              <%--   <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');"> </a> --%>
 					              
 				                <p id="qna-content"><a href="${pageContext.request.contextPath}/space/qna.do?no=${qna.qnaNo}">
 				                <c:set var="str" value="${qna.content }"/>
@@ -143,7 +143,7 @@ p#qna-content > a:hover{
 				          </div>
 				        <!-- 질문글 끝 -->
 				        </c:forEach>
-                    	</c:if>
+                    	</c:if> 
 				         </div>
 				        </div>
 	                   </div>
@@ -208,15 +208,14 @@ function unreplied(){
 					
 			 }else{
 				 $("div.qna-container").empty();
-				 //미답변 질문글 버튼이 눌려진 상태가 아닌 경우 class 속성 추가
-				 //css변경 
 			 $.each(data, function(i, item){
+				 
 				 var html="";
 				 
 				 if(data!=null){
 					 var date = new Date(item.date);
 					 /**
-					  *  yyyyMMdd 포맷으로 반환
+					  *  yyyy년 MM 월 dd일 hh:mm 포맷으로 반환
 					  */
 					 function getFormatDate(date){
 					     var year = date.getFullYear();              //yyyy
@@ -254,14 +253,20 @@ function unreplied(){
                 html += "</div></div></div></div></div>";
                     
 				 } else {
-					html += "답변을 기다리는 최근 질문이 없습니다.";					
+					html = "답변을 기다리는 최근 질문이 없습니다.";
+										
 					 }
-				console.log(html);
-	            $(".qna-container").append(html);
-             });
+					console.log(html);
+		            $(".qna-container").append(html);
+			 });
+				 
+           
+             
+				 //미답변 질문글 버튼이 눌려진 상태가 아닌 경우 class 속성 추가
+				 //css변경 
 				 $("#check-unreplied").addClass("fa fa-check");
 				 $("#show-unreplied").css('background-color','#20c997');
-										
+					 				
 				 }
 
 			 
