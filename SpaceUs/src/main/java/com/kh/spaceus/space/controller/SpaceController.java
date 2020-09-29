@@ -37,9 +37,11 @@ public class SpaceController {
 	}
 	//공간등록 제출
 	@RequestMapping(value="/insertSpace.do",method = RequestMethod.POST)
-	public String insertSpace(Space space) {
+	public String insertSpace(Space space,
+							  @RequestParam String optionNo) {
 		System.out.println("post메핑");
 		System.out.println(space);
+		System.out.println(optionNo);
 		return "space/insertSpace";
 	}
 	

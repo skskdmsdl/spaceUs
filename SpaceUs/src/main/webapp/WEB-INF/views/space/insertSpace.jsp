@@ -113,32 +113,32 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 <h4>가능시간<span class="text-danger">*</span></h4>
                                 
                                 <div class="jumbotron pb-1 pt-1 status-item">
-	                                    <label for="mon" class="mr-5" style="font-size: 15px;">월요일
-	                                    <input type="checkbox" id="mon">
+	                                <label for="mon" class="mr-5" style="font-size: 15px;">월요일
+	                                    <input type="radio" name="radio" id="mon">
                                         <span class="checkbox mt-1"></span>
-	                                    </label>
+	                                </label>
                                     <label for="tue" class="mr-5" style="font-size: 15px;">화요일
-	                                    <input type="checkbox" id="tue">
+	                                    <input type="radio" name="radio" id="tue">
 	                                    <span class="checkbox mt-1"></span>
                                     </label>
                                     <label for="wed" class="mr-5" style="font-size: 15px;">수요일
-	                                    <input type="checkbox" id="wed">
+	                                    <input type="radio" name="radio" id="wed">
 	                                    <span class="checkbox mt-1"></span>
                                     </label>
                                     <label for="thu" class="mr-5" style="font-size: 15px;">목요일
-	                                    <input type="checkbox" id="thu">
+	                                    <input type="radio" name="radio" id="thu">
 	                                    <span class="checkbox mt-1"></span>
                                     </label>
                                     <label for="fri" class="mr-5" style="font-size: 15px;">금요일
-	                                    <input type="checkbox" id="fri">
+	                                    <input type="radio" name="radio" id="fri">
 	                                    <span class="checkbox mt-1"></span>
                                     </label>
                                     <label for="sat" class="mr-5" style="font-size: 15px;">토요일
-	                                    <input type="checkbox" id="sat">
+	                                    <input type="radio" name="radio" id="sat">
 	                                    <span class="checkbox mt-1"></span>
                                     </label>
                                     <label for="sun" class="mr-5" style="font-size: 15px;">일요일
-	                                    <input type="checkbox" id="sun">
+	                                    <input type="radio" name="radio" id="sun">
 	                                    <span class="checkbox mt-1"></span>
                                     </label>
                                 </div>
@@ -204,35 +204,36 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 <table class="table table-bordered" id="optionTb">
                                 	<tr>
 										<th id='option1' style="width:25%;">TV/프로젝터</th>	                                
-										<th style="width:25%;">인터넷/와이파이</th>	                                
-										<th style="width:25%;">복사/인쇄기</th>	                                
-										<th style="width:25%;">화이트보드</th>	                                
+										<th id='option2' style="width:25%;">인터넷/와이파이</th>	                                
+										<th id='option3' style="width:25%;">복사/인쇄기</th>	                                
+										<th id='option4' style="width:25%;">화이트보드</th>	                                
                                 	</tr>
                                 	<tr>
-										<th>음향/마이크</th>	                                
-										<th>취사시설</th>	                                
-										<th>음식물반입가능</th>	                                
-										<th>주류반입가능</th>	                                
+										<th id='option5'>음향/마이크</th>	                                
+										<th id='option6'>취사시설</th>	                                
+										<th id='option7'>음식물반입가능</th>	                                
+										<th id='option8'>주류반입가능</th>	                                
                                 	</tr>
                                 	<tr>
-										<th>샤워시설</th>	                                
-										<th>주차</th>	                                
-										<th>금연</th>	                                
-										<th>반려동물 동반가능</th>	                                
-                                	</tr>
-                                	<tr>
-										<th>PC/노트북</th>	                                
-										<th>의자/테이블</th>	                                
-										<th>내부화장실</th>	                                
-										<th>탈의실</th>	                                
-                                	</tr>
-                                	<tr>
-										<th>테라스/루프탑</th>	                                
-										<th>공용라운지</th>	                                
-										<th>전신거울</th>	                                
-										<th>바베큐시설</th>	                                
+										<th id='option9'>샤워시설</th>	                                
+										<th id='option10'>주차</th>	                                
+										<th id='option11'>금연</th>	                                
+										<th id='option12'>반려동물 동반가능</th>	                                
+                                	</tr> 
+                                	<tr>    
+										<th id='option13'>PC/노트북</th>	                                
+										<th id='option14'>의자/테이블</th>	                                
+										<th id='option15'>내부화장실</th>	                                
+										<th id='option16'>탈의실</th>	                                
+                                	</tr>  
+                                	<tr>   
+										<th id='option17'>테라스/루프탑</th>	                                
+										<th id='option18'>공용라운지</th>	                                
+										<th id='option19'>전신거울</th>	                                
+										<th id='option20'>바베큐시설</th>	                                
                                 	</tr>
                                 </table>
+                                <input type="hidden" name="optionNo" value="" />
                             </div>
                             <div class="pf-feature-image">
                                 <h4>공간이미지<span class="text-danger">*</span></h4>
@@ -301,7 +302,9 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- 주소 script -->
 <script>
+	//주소검색
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -349,8 +352,19 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
             }
         }).open();
     }
+
+  //주소 합치기
+    $("#sample6_detailAddress").blur(function(){
+    	$("[name=address]").val("우("+$("#sample6_postcode").val()+") "+$("#sample6_address").val()+" "+$("#sample6_extraAddress").val()+" "+$("#sample6_detailAddress").val());
+    });
 </script>
+
+<!-- 전화번호, 카테고리, 옵션 script -->
 <script>
+//전화번호 합치기
+$("#phone1").blur(function(){
+	$("[name=spacePhone]").val($("#phone1").val()+$("#phone2").val()+$("#phone3").val());
+});
 //카테고리테이블 클릭이벤트
 $("#categoryTb th").on("click", function(){
 	if($("#categoryTb th").hasClass("bg-primary"))
@@ -359,14 +373,23 @@ $("#categoryTb th").on("click", function(){
    	$(this).addClass("bg-primary");
    	//console.log($(this).attr("id"));
    	$("[name=categoryNo]").val($(this).attr("id"));
-	
 });
 //옵션테이블 클릭이벤트
 $("#optionTb th").on("click", function(){
 	if($(this).hasClass("bg-primary"))
     	$(this).removeClass("bg-primary");
-	else
-    	$(this).addClass("bg-primary");
+	
+    $(this).addClass("bg-primary");
+   	$("[name=optionNo]").val($(this).attr("id"));
+});
+</script>
+
+
+<!-- 시간선택 script -->
+<script>
+//요일 선택클릭 이벤트
+$("#mon").on("click", function(){
+	console.log($(this).attr("id"));
 });
 //가능시간 클릭이벤트
 $("#availableTime th").on("click", function(){
@@ -375,6 +398,10 @@ $("#availableTime th").on("click", function(){
 	else
     	$(this).addClass("bg-primary");
 });
+</script>
+
+<!-- 태그 script -->
+<script>
 //태그 추가 클릭이벤트
 $("#addTags").on('click', function(){
 	if($("#tagName").val()==""){alert("내용을 입력해주세요");};
@@ -407,6 +434,8 @@ $("#tags").on("click", function(){
    //내용작성하기 
 });
 </script>
+
+<!-- 사업자등록 script -->
 <script>
 //사업자 등록정보 조회(중복조회)
 $("#businessNo").keyup(function(){
@@ -445,14 +474,9 @@ $("#businessNo").keyup(function(){
 	}); 
 	
 });
-//주소 합치기
-$("#sample6_detailAddress").blur(function(){
-	$("[name=address]").val("우("+$("#sample6_postcode").val()+") "+$("#sample6_address").val()+" "+$("#sample6_extraAddress").val()+" "+$("#sample6_detailAddress").val());
-});
-//전화번호 합치기
-$("#phone1").blur(function(){
-	$("[name=spacePhone]").val($("#phone1").val()+$("#phone2").val()+$("#phone3").val());
-});
+</script>
+<script>
+
 //제출전 확인
 /* $("#spaceFrm").submit(function(){
 
