@@ -22,7 +22,6 @@
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
 }
-.tagcloud a {coursor:none;}
 
 .next {margin-right: 16px; right: 0; border-radius: 3px 0 0 3px;}
 .prev:hover, .next:hover {opacity: 0.3;}
@@ -139,10 +138,9 @@ function urlcopy(){
       					<br />
       					<span class="subheading">
 			              <div class="tagcloud">
-			                <a href="#" class="tag-cloud-link">#감성적인</a>
-			                <a href="#" class="tag-cloud-link">#바다가 보이는</a>
-			                <a href="#" class="tag-cloud-link">#조용한</a>
-			                <a href="#" class="tag-cloud-link">#힐링</a>
+			              <c:forEach items="${ tag }" var="tag">
+			                <a href="#" class="tag-cloud-link">#${ tag.tag }</a>
+			              </c:forEach>
 			              </div>
       					</span>
       				</div>

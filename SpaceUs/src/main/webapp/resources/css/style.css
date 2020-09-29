@@ -2316,11 +2316,11 @@ fieldset:disabled a.btn {
 
 .btn-outline-success {
   color: #28a745;
-  border-color: #28a745; }
+  border-color: #00c89e; }
   .btn-outline-success:hover {
     color: #fff;
-    background-color: #28a745;
-    border-color: #28a745; }
+    background-color: #00c89e;
+    border-color: #00c89e; }
   .btn-outline-success:focus, .btn-outline-success.focus {
     -webkit-box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
     box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); }
@@ -10807,6 +10807,7 @@ a:hover,
 a:focus {
   text-decoration: none;
   outline: none;
+  color: #fff;
 }
 
 ul,
@@ -15274,3 +15275,20 @@ i[class^=icon-chevron]{
 /* 공간등록 테이블들 */
 #categoryTb th:hover{background: #ececec; cursor: pointer;}
 #optionTb th:hover{background: #ececec; cursor: pointer;}
+/*채팅*/
+-webkit-transform: translateZ(0)
+#talkjs-container{position: fixed; z-index: 10;}
+#chatBtn{
+	width:55px;
+	height:55px;
+	line-height: 10px;
+	font-size: 50px;
+	color:white;
+	border:none;
+	position:fixed;
+	right:100px;
+	bottom: 30px;
+	z-index:10;
+	background-color: rgba(0,0,0,0);
+	
+}

@@ -468,7 +468,22 @@ from
 
 
 
-
+select * 
+from 
+    ( select rownum rnum, 
+             u.* 
+      from  (
+                select * 
+                from users 
+                order by user_role
+            )u
+    )u 
+where quit_yn='N' and 
+      rnum between ? and ?
+      
+      
+      
+      
 -----------------------------
 --------- 블랙리스트 --------
 -----------------------------
