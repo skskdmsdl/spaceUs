@@ -1,8 +1,7 @@
 package com.kh.spaceus.social;
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -14,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -64,6 +62,7 @@ public class SocialLoginController {
  
         /* 생성한 인증 URL을 View로 전달 */
         return "/member/memberLoginForm";
+    	
     }
  
     //네이버 로그인 성공시 callback호출 메소드

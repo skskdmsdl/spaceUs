@@ -44,8 +44,6 @@
 			<artifactId>poi-ooxml</artifactId> 
 			<version>3.16</version> 
 		</dependency>
-
-		
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -102,7 +100,6 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
-
 		<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>
