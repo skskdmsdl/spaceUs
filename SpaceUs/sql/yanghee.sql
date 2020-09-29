@@ -443,6 +443,7 @@ select * from group_board_comment;
 insert into group_board_comment values(seq_group_board_comment_no.nextval,'honggd@naver.com','G5',default,null,'먹방 좋아합니다~~',1,default);
 insert into group_board_comment values(seq_group_board_comment_no.nextval,'honggd@naver.com','G5',default,1,'먹방 은 최고~~',2,default);
 insert into group_board_comment values(seq_group_board_comment_no.nextval,'honggd@naver.com','G5',default,null,'먹방 예쓰!!!!~~',1,default);
+insert into group_board_comment values(seq_group_board_comment_no.nextval,'honggd@naver.com','G5',default,null,'먹방 예쓰!!!1!!!!!~~',default,default);
 
 commit;
 
