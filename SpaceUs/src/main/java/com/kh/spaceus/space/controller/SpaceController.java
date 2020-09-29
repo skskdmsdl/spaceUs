@@ -73,9 +73,10 @@ public class SpaceController {
 							  @RequestParam("spaceNo") String spaceNo) {
 		//log.debug("spaceNo= {}",spaceNo);
 		Space space = spaceService.selectOneSpace(spaceNo);
-		//log.debug("space= {}",space);
-
+		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
+		
 		model.addAttribute("space", space);
+		model.addAttribute("tag", tag);
 		return "space/spaceDetail";
 	}
 	

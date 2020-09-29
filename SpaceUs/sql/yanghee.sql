@@ -400,11 +400,13 @@ insert into group_board values('G'||seq_group_board_no.nextval,'7','honggd@naver
 insert into group_board values('G'||seq_group_board_no.nextval,'9','honggd@naver.com',default,'댄스파티 관심있나요?',default,default,'댄스파티에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다');
 insert into group_board values('G'||seq_group_board_no.nextval,'9','honggd@naver.com',default,'어학공부 관심있나요?',default,default,'프랑스어에 관심있으시면 저에게 연락주세요. 대표번호는 031-123-1233입니다');
 
-select * from group_board where member_email = 'honggd@naver.com' and view_cnt = 3;
+select * from group_board;
 select * from member;
 
 delete from group_board where member_email = 'honggd@naver.com' ;
 drop sequence seq_group_board_no;
+
+update group_board set report_cnt = report_cnt +9 where group_board_no = 'G6';
 
 commit;
 
@@ -447,7 +449,10 @@ create table report (
     constraints fk_group_board_no foreign key(board_no) references group_board(group_board_no) on delete cascade,
     constraints fk_recruit_board_no foreign key(board_no) references recruit(recruit_no) on delete cascade
 );
+ALTER TABLE report DROP constraints fk_group_board_no;
 
+commit;
+select * from report;
 
 ---------------------------------------
 -- 9/28
@@ -463,7 +468,22 @@ from
 
 
 
-
+select * 
+from 
+    ( select rownum rnum, 
+             u.* 
+      from  (
+                select * 
+                from users 
+                order by user_role
+            )u
+    )u 
+where quit_yn='N' and 
+      rnum between ? and ?
+      
+      
+      
+      
 -----------------------------
 --------- 블랙리스트 --------
 -----------------------------

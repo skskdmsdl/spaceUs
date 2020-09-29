@@ -11,7 +11,7 @@ public interface GroupDAO {
 
 	List<Board> selectListBoard();
 
-	List<GroupBoard> selectListGroupBoard();
+	List<GroupBoard> selectListGroupBoard(int limit, int offset);
 
 	List<GroupBoard> selectSortedListGroupBoard(Map<String, String> listMap);
 

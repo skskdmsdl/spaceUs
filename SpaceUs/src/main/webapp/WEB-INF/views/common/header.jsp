@@ -161,23 +161,6 @@ conversation.setAttributes({
 	        <span class="oi oi-menu"></span>
 	      </button>
 	      
-	      <c:if test="${not empty name }">
-		   	<div class="collapse navbar-collapse" id="ftco-nav">
-        	 <ul class="navbar-nav ml-auto">
-		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
-		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
-		          <li class="nav-item"><a href="${pageContext.request.contextPath }/community/group/groupList.do" class="nav-link">커뮤니티</a></li>
-		   
-	        	  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
-	        		<div  data-toggle="modal" data-target="#exampleModal">
-	        			 <div style="display: inline-block;">반갑습니다. ${ name }님!</div>
-	        		</div>
-	        	  </div>
-	          </ul>
-	        </div>
-		  </c:if>
-	      
-	      <c:if test="${ empty name }">
 	      <sec:authorize access="isAnonymous()">
 	      
 		      <div class="collapse navbar-collapse">
@@ -224,7 +207,6 @@ conversation.setAttributes({
 	          </ul>
 	        </div>
 		  </sec:authorize>
-		  </c:if>
 		      </div> 
 	  </nav>
 	 
@@ -234,7 +216,6 @@ conversation.setAttributes({
     <!-- user 권한 -->
     <!-- Modal -->
      <%-- <sec:authorize access="isAuthenticated()"> --%>
-     <c:if test="${not empty name }">
      <div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-auto" role="document">
 	    <div class="modal-content"  style="background:#625c55; border-radius: 1.3em; left:36rem; top:3rem; width:55%; ">
@@ -275,7 +256,6 @@ conversation.setAttributes({
 	  </div>
 	</div>
      
-     </c:if>
      <sec:authorize access="hasAnyRole('USER', 'HOST')">
 	<div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-auto" role="document">

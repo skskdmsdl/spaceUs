@@ -11,7 +11,152 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
+<%-- <jsp:include page="/WEB-INF/views/common/myPageHeader.jsp" /> --%>
+<!-- <script>
+let userName =${member.nickName =='admin'?'상담사':'회원'};
+/* talkJS */
+(function(t,a,l,k,j,s){
+s=a.createElement('script');s.async=1;s.src="https://cdn.talkjs.com/talk.js";a.head.appendChild(s)
+;k=t.Promise;t.Talk={v:3,ready:{then:function(f){if(k)return new k(function(r,e){l.push([f,r,e])});l
+.push([f])},catch:function(){return k&&new k()},c:l}};})(window,document,[]);
 
+Talk.ready.then(function() {
+    var me = new Talk.User({
+        id: ${member.nickName},
+        name: userName,
+        email: ${member.nickName},
+        photoUrl: "http://localhost:9090/spaceus/",
+        welcomeMessage: "대화를 시작하세요 :-)"
+    });
+    window.talkSession = new Talk.Session({
+        appId: "t9ROalbH",
+        me: me
+    });
+    var other = new Talk.User({
+        id: "admin",
+        name: "상담사",
+        email: "admin@spaceus.com",
+        photoUrl: "http://localhost:9090/spaceus/",
+        welcomeMessage: "무엇을 도와드릴까요?"
+    });
+
+    var conversation = talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other))
+    conversation.setParticipant(me);
+    conversation.setParticipant(other);
+
+    if(${member.nickName == 'admin'}){
+	    var inbox = talkSession.createInbox({selected: conversation});
+	    inbox.mount(document.getElementById("talkjs-container"));
+    }
+    else{
+
+        var conversation = window.talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other));
+        conversation.setParticipant(me);
+        conversation.setParticipant(other);
+        var popup = window.talkSession.createPopup(conversation, { keepOpen: false });
+        popup.mount({ show: false });
+
+        var button = document.getElementById("btn-getInTouch");
+        button.addEventListener("click", function(event) {
+            event.preventDefault();
+            popup.show();
+        });
+    }
+});
+
+var other = new Talk.User({
+	 id: ${member.nickName},
+     name: userName,
+     email: ${member.nickName},
+     photoUrl: "http://localhost:9090/spaceus/",
+     welcomeMessage: "무엇을 도와드릴까요?"
+});
+
+var conversation = talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other));
+conversation.setParticipant(me);
+conversation.setParticipant(other);
+
+var conversation = talkSession.getOrCreateConversation(user);
+
+conversation.setAttributes({
+    subject: "Hair Wax 5 Gallons"
+}); 
+ 
+</script>  --> 
+<script>
+(function(t,a,l,k,j,s){
+s=a.createElement('script');s.async=1;s.src="https://cdn.talkjs.com/talk.js";a.head.appendChild(s)
+;k=t.Promise;t.Talk={v:3,ready:{then:function(f){if(k)return new k(function(r,e){l.push([f,r,e])});l
+.push([f])},catch:function(){return k&&new k()},c:l}};})(window,document,[]);
+</script>
+
+
+<input type="hidden" id="nick" value="${member.nickName}" />
+<input type="hidden" id="mail" value="${member.memberEmail}" />
+<input type="hidden" id="result" value="${member.nickName =='관리자'?'SpaceUs':'회원'}" />
+<script>
+
+Talk.ready.then(function() {
+    var me = new Talk.User({
+        id: $("#nick").val(),
+        name: $("#nick").val(),
+        email: $("#mail").val(),
+        photoUrl: "https://localhost:9090/spaceus/",
+        welcomeMessage: "Hey there! How are you? :-)"
+    });
+    window.talkSession = new Talk.Session({
+        appId: "t9ROalbH",
+        me: me
+    });
+    var other = new Talk.User({
+        id: "관리자",
+        name: "SpaceUs",
+        email: "admin@spaceus.com",
+        photoUrl: "https://localhost:9090/spaceus/",
+        welcomeMessage: "Hey, how can I help?"
+    });
+
+    var conversation = talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other))
+    conversation.setParticipant(me);
+    conversation.setParticipant(other);
+
+
+    if($("#nick").val() == '관리자'){
+    	 var inbox = talkSession.createInbox({selected: conversation});
+ 	    inbox.mount(document.getElementById("talkjs-container"));
+    }
+    else{
+    var conversation = window.talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other));
+    conversation.setParticipant(me);
+    conversation.setParticipant(other);
+    var popup = window.talkSession.createPopup(conversation, { keepOpen: false });
+    popup.mount({ show: false });
+
+    var button = document.getElementById("btn-getInTouch");
+    button.addEventListener("click", function(event) {
+        event.preventDefault();
+        popup.show();
+    });
+    }
+});
+var other = new Talk.User({
+	 id: $("#nick").val(),
+    name: $("#result").val(),
+    email: $("#mail").val(),
+    photoUrl: "http://localhost:9090/spaceus/",
+    welcomeMessage: "무엇을 도와드릴까요?"
+});
+
+var conversation = talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other));
+conversation.setParticipant(me);
+conversation.setParticipant(other);
+
+var conversation = talkSession.getOrCreateConversation(user);
+
+conversation.setAttributes({
+   subject: "Hair Wax 5 Gallons"
+}); 
+</script>
 <div class="skin-default-dark fixed-layout">
     <div id="main-wrapper">
         <!-- 마이페이지 헤더 -->
@@ -78,6 +223,15 @@
                     </div>
                 </div>
                 <!-- 회원정보 -->
+                <!-- 채팅 -->
+			 <div id="talkjs-container" style="background-color: rgba(0,0,0,0);margin-left: 300px; height: 500px; position: fixed; z-index: 10;box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px; display:none;">
+			    <i>Loading chat...</i>
+			</div> 
+			 <sec:authorize access="hasAnyRole('ADMIN')">
+			<div>
+				<button id="chatBtn">🧑</button>
+			</div>
+			</sec:authorize>
                 <div id="profileEditPage" class="ml-5 mr-5">
                     <div class="card p-5">
                        <div class="card-body">
@@ -91,8 +245,6 @@
 							<tr>
 								<th class="align-baseline">닉네임</th>
 								<th><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.nickName"/>" required /></th>
-								<th><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="${ name }" required /></th>
-								
 							</tr>
 						    <tr>
 						      <td class="align-baseline">이메일 계정</td>
@@ -151,4 +303,11 @@
 <!-- This page plugins -->
 <!-- ============================================================== -->
 <!--morris JavaScript -->
-
+<script>
+$(function(){
+	$("#chatBtn").click(function(){
+		$("#talkjs-container").toggle('show');
+	});
+	
+});
+</script>

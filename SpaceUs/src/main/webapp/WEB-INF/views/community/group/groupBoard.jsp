@@ -36,6 +36,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 
 #sideinfo {float:left;}
 #content  { background-color:#F5F5F5; float:right;}
+.cPage{
+	margin-right:9px;
+	margin-left:9px;
+}
+.page-link{
+	margin-top:-5px;
+}
 </style>
 
 
@@ -166,20 +173,11 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                    </tbody>
 							</table>
 							<!-- 페이징처리 시작 -->
-		                	<div class="container">
-						    	<nav class="mt-5" >
-									<ul class="justify-content-center pagination">
-										<li class="page-item"><a class="page-link m-1 text-black-50" href="#">&lt;</a></li>
-										<li class="page-item"><a class="page-link m-1 text-black-50" href="#">1</a></li>
-										<li class="page-item"><a class="page-link m-1 text-black-50" href="#">2</a></li>
-										<li class="page-item"><a class="page-link m-1 text-black-50" href="#">3</a></li>
-										<li class="page-item"><a class="page-link m-1 text-black-50" href="#">4</a></li>
-										<li class="page-item"><a class="page-link m-1 text-black-50" href="#">5</a></li>
-										<li class="page-item"><a class="page-link m-1 text-black-50" href="#">></a></li>
-										<li class="page-item"></li>
-									</ul>
-								</nav>
-							</div>
+            				<nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 50%;">
+							  <ul class="pagination" style="border:0; margin-right:10px;">
+							    ${pageBar}
+							  </ul>
+							</nav>
 							<!-- 페이징 처리 끝 -->
 		                </div>
                 	</section>      	
