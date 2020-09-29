@@ -17,6 +17,9 @@ create table member(
 
 select * from member;
 commit;
+--insert into member
+--values ('seung@naver.com','김승연','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu',
+--        '01012341234','2000/01/01',sysdate,0);
 
 --권한 컬럼 삭제
 ALTER TABLE member DROP COLUMN authority;
@@ -34,7 +37,8 @@ create table auth (
 );
 
 select * from auth;
-
+--insert into auth
+--values ('seung@naver.com','ROLE_USER');
 -----------------------------
 ---------- 카테고리 ----------
 -----------------------------
@@ -47,9 +51,20 @@ create table category (
 
 create sequence seq_category_no;
 
-select * from category;
+select * from category order by category_no;
 
+insert into category values('cate'||seq_category_no.nextval,'회의실');
+insert into category values('cate'||seq_category_no.nextval,'세미나실');
+insert into category values('cate'||seq_category_no.nextval,'다목적홀');
+insert into category values('cate'||seq_category_no.nextval,'작업실');
+insert into category values('cate'||seq_category_no.nextval,'파티룸');
+insert into category values('cate'||seq_category_no.nextval,'공연장');
+insert into category values('cate'||seq_category_no.nextval,'연습실');
 insert into category values('cate'||seq_category_no.nextval,'카페');
+insert into category values('cate'||seq_category_no.nextval,'스터디룸');
+insert into category values('cate'||seq_category_no.nextval,'엠티장소');
+insert into category values('cate'||seq_category_no.nextval,'독립 오피스');
+insert into category values('cate'||seq_category_no.nextval,'코워킹 스페이스');
 
 -----------------------------
 --------- 공간목록 ----------
@@ -93,7 +108,7 @@ commit;
 --        1111111111, '공간 설명 블라블라 ~~~~', '신한');
 --update space
 --set 
---    address = '잘들어가는지 test'
+--    category_no = 'cate8'
 --where 
 --    space_no = 'space2';
 --DELETE FROM space WHERE space_no = 'space2';

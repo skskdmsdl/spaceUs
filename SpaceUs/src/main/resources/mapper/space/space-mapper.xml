@@ -43,7 +43,7 @@
 		from 
 			space
 		where 
-			business_license = #{ businessNum }
+			business_license = #{ businessNo }
 	</select>
 	<resultMap type="space" id="spaceMap">
 		<id column="space_no" property="spaceNo"/>

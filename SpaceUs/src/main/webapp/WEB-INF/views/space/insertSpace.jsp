@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -43,14 +44,15 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
             <div class="row m-5">
                 <div class="col-lg-12">
                     <div class="property-submit-form">
-                        <form name="spaceFrm" 
+                        <form:form name="spaceFrm" id="spaceFrm" 
 							  action="${pageContext.request.contextPath}/space/insertSpace.do" 
-							  method="post" 
-							  onsubmit="return spaceValidate();"
-							  enctype="multipart/form-data">
+							  method="post">
+							  <!-- enctype="multipart/form-data"> -->
+<!-- 							  onsubmit="return spaceValidate();" -->
                             <div class="pf-title">
                                 <h4>공간이름<span class="text-danger">*</span></h4>
-                                <input name="spaceName" type="text">
+                                <!-- <h6>(공간이름은 수정이 불가능합니다 정확히 입력해주세요)</h6> -->
+                                <input type="text" name="spaceName">
                             </div>
                             <div class="pf-summernote">
                                 <h4>공간설명<span class="text-danger">*</span></h4>
@@ -59,6 +61,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                            
                             <div class="pf-location">
                                 <h4>공간주소<span class="text-danger">*</span></h4>
+                                <!-- <h6>(공간주소는 수정이 불가능합니다 정확히 입력해주세요)</h6> -->
                                 <div style="display:inline-block; width:40%">
 	                                <input class="zipCode-input" id="sample6_postcode" type="text" placeholder="우편번호"/>
 	                            </div>
@@ -76,33 +79,34 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             </div>
                             <div class="pf-phone" style="margin-bottom: 45px;">
                                 <h4>공간전화번호<span class="text-danger">*</span></h4>
-                                 	<input type='tel' name='phone1' style="width: 10%"/>&emsp;ㅡ&emsp;
-							        <input type='tel' name='phone2' style="width: 10%"/>&emsp;ㅡ&emsp;
-							        <input type='tel' name='phone3' style="width: 10%"/>
-							        <input type="hidden" name="phone" value="" />
+                                 	<input type='tel' id='phone1' style="width: 10%"/>&emsp;ㅡ&emsp;
+							        <input type='tel' id='phone2' style="width: 10%"/>&emsp;ㅡ&emsp;
+							        <input type='tel' id='phone3' style="width: 10%"/>
+							        <input type="hidden" name="spacePhone" value="" />
                             </div>
                             <div class="pf-type">
                                 <h4>카테고리 선택<span class="text-danger">*</span></h4>
                                 <table class="table table-bordered" id="categoryTb">
                                 	<tr>
-										<th id="cate3">회의실</th>	                                
-										<th id="cate4">세미나실</th>	                                
-										<th id="cate5">다목적홀</th>	                                
-										<th id="cate6">작업실</th>	                                
+										<th id="cate1">회의실</th>	                                
+										<th id="cate2">세미나실</th>	                                
+										<th id="cate3">다목적홀</th>	                                
+										<th id="cate4">작업실</th>	                                
                                 	</tr>
                                 	<tr>
-										<th id="cate7">파티룸</th>	                                
-										<th id="cate8">공연장</th>	                                
-										<th id="cate9">연습실</th>	                                
-										<th id="cate2">카페</th>	                                
+										<th id="cate5">파티룸</th>	                                
+										<th id="cate6">공연장</th>	                                
+										<th id="cate7">연습실</th>	                                
+										<th id="cate8">카페</th>	                                
                                 	</tr>
                                 	<tr>
-										<th id="cate10">스터디룸</th>	                                
-										<th id="cate11">엠티장소</th>	                                
-										<th id="cate12" style="width:25%;">독립 오피스</th>	                                
-										<th id="cate13" style="width:25%;">코워킹 스페이스</th>	                                
+										<th id="cate9">스터디룸</th>	                                
+										<th id="cate10">엠티장소</th>	                                
+										<th id="cate11" style="width:25%;">독립 오피스</th>	                                
+										<th id="cate12" style="width:25%;">코워킹 스페이스</th>	                                
                                 	</tr>
                                 </table>
+                                <input type="hidden" name="categoryNo" value="" />
                             </div>
                             
                             <div class="pf-status">
@@ -199,7 +203,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 <input type="hidden" name="" />
                                 <table class="table table-bordered" id="optionTb">
                                 	<tr>
-										<th style="width:25%;">TV/프로젝터</th>	                                
+										<th id='option1' style="width:25%;">TV/프로젝터</th>	                                
 										<th style="width:25%;">인터넷/와이파이</th>	                                
 										<th style="width:25%;">복사/인쇄기</th>	                                
 										<th style="width:25%;">화이트보드</th>	                                
@@ -255,7 +259,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 <h4>사업자등록번호<span class="text-danger">*</span></h4>
                                 <div class="row">
 	                                <div class="ml-3 mb-3" style="width:31%">
-	                                    <input id="businessNum" type="text" placeholder="사업자 번호를 입력해주세요">
+	                                    <input id="businessNo" type="text" placeholder="사업자 번호를 입력해주세요">
 	                                </div>
 	                                <div class="pt-2">
 	                                 	<span id="error" class="ml-4 text-danger">유효하지 않은 번호입니다.</span>
@@ -286,7 +290,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             	<p>* 공간등록 심사는 2일 ~ 7일 소요됩니다.</p>
                                 <button type="submit" class="site-btn col-lg-3">공간등록</button>
                             </div>
-                        </form>
+                        </form:form>
                     </div>
                 </div>
             </div>
@@ -349,11 +353,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 <script>
 //카테고리테이블 클릭이벤트
 $("#categoryTb th").on("click", function(){
-	if($("#categoryTb th").hasClass("bg-primary")){
+	if($("#categoryTb th").hasClass("bg-primary"))
     	$("#categoryTb th").removeClass("bg-primary");
-    	$(this).addClass("bg-primary");
-	}else
-    	$(this).addClass("bg-primary");
+
+   	$(this).addClass("bg-primary");
+   	//console.log($(this).attr("id"));
+   	$("[name=categoryNo]").val($(this).attr("id"));
+	
 });
 //옵션테이블 클릭이벤트
 $("#optionTb th").on("click", function(){
@@ -400,8 +406,10 @@ $("#addTags").on('click', function(){
 $("#tags").on("click", function(){
    //내용작성하기 
 });
+</script>
+<script>
 //사업자 등록정보 조회(중복조회)
-$("#businessNum").keyup(function(){
+$("#businessNo").keyup(function(){
 	if(!/[0-9]{10}$/.test($(this).val())){
 		$("#duplicate").hide();
 		$("#ok").hide();
@@ -412,7 +420,7 @@ $("#businessNum").keyup(function(){
 	 $.ajax({
 		url : "${ pageContext.request.contextPath }/space/checkIdDuplicate.do",
 		data : {
-			businessNum : $(this).val()
+			businessNo : $(this).val()
 		},
 		dataType : "json",
 		success : function(data){
@@ -442,9 +450,29 @@ $("#sample6_detailAddress").blur(function(){
 	$("[name=address]").val("우("+$("#sample6_postcode").val()+") "+$("#sample6_address").val()+" "+$("#sample6_extraAddress").val()+" "+$("#sample6_detailAddress").val());
 });
 //전화번호 합치기
-$("#[name=phone3]").blur(function(){
-	$("[name=phone]").val($("#phone1").val()+$("#phone2").val()+$("#phone3").val());
+$("#phone1").blur(function(){
+	$("[name=spacePhone]").val($("#phone1").val()+$("#phone2").val()+$("#phone3").val());
 });
+//제출전 확인
+/* $("#spaceFrm").submit(function(){
+
+	var $memberId = $("#memberId");
+	if(/^\w{4,}$/.test($memberId.val()) == false){
+		alert("아이디는 최소 4자리이상이어야 합니다.");
+		$memberId.focus();
+		return false;
+	}
+
+	//중복검사여부
+	var $idValid = $("#idValid");
+	if($idValid.val() == 0){
+		alert("아이디 중복검사 해주세요.");
+		return false;
+	} 
+	
+	
+	return true;
+}); */
 </script>
 
 <!-- 컨텐츠 끝 -->
