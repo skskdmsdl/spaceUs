@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
+import com.kh.spaceus.space.model.vo.Review;
+import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Tag;
 
@@ -40,6 +42,16 @@ public class SpaceDAOImpl implements SpaceDAO{
 	@Override
 	public List<Tag> selectListSpaceTag(String spaceNo) {
 		return sqlSession.selectList("space.selectListSpaceTag", spaceNo);
+	}
+
+	@Override
+	public int insertReview(Review review) {
+		return sqlSession.insert("space.insertReview", review);
+	}
+
+	@Override
+	public int insertReviewAttahment(ReviewAttachment attach) {
+		return sqlSession.insert("space.insertReviewAttahment", attach);
 	}
 
 	/*@Override

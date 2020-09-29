@@ -73,7 +73,51 @@
 		where ST.space_no = #{ spaceNo } 
 	</select>
 	
+	<insert id="insertReview">
+		insert into
+			review (
+				review_no,
+				space_no,
+				rev_no
+				nickname,
+				star_rating,
+				review_content
+			)
+		values (
+			'REVIEW'||seq_review_no.nextval,
+			#{ spaceNp },
+			#{ revNo },
+			#{ nickName },
+			#{ starRating },
+			#{ content }
+		)
+		
+		<selectKey keyProperty="no" resultType="_int" order="AFTER">
+			select
+				'REVIEW'||seq_review_no.currval
+			from 
+				dual
+		</selectKey>
+	
+	</insert>
 
+	<insert id="insertAttachment">
+		insert into
+			attachment (
+				re_img_no,
+				review_no,
+				re_original_filename,
+				re_renamed_filename
+			)
+		values (
+			'REIMG'||seq_review_image_no.nextval,
+			#{ reviewNo },
+			#{ oName },
+			#{ rName }
+		)
+	</insert>
+	
+	
 </mapper>
 
 
