@@ -549,7 +549,7 @@ function ask(){
 	var memberEmail = $("#ask-question").val();
 
 	$("#ask-question").attr("action", 
-	"${ pageContext.request.contextPath}/space/insertQuestion.do")
+	"${ pageContext.request.contextPath}/qna/insertQna.do")
 	.attr("method", "GET");
 }
 
