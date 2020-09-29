@@ -22,17 +22,20 @@ public class QnaController {
 	  @Autowired
       private QnaService qnaService;
 	
-	  @GetMapping("/insertQna.do") public String insertQna(@RequestParam
-	  String memberEmail, @ModelAttribute("memo") Qna qna, RedirectAttributes
-	  redirectAttr) { log.debug("질문 등록 요청");
+	  @GetMapping("/insertQna.do") 
+	  public String insertQna(@RequestParam("spaceNo") String spaceNo, 
+			  										@ModelAttribute("qna") Qna qna, 
+			  										RedirectAttributes redirectAttr) { 
+	     log.debug("질문 등록 요청");
+  
+	     log.debug("qna= {}", qna);
+		 int result = qnaService.insertQna(qna); 
+		
+		 String msg = result > 0 ? "등록 성공!" : "등록실패";
+		 redirectAttr.addFlashAttribute("msg", msg);
+			 
 	  
-			/* int result = qnaService.insertQna(); */
-			/*
-			 * String msg = result > 0 ? "등록 성공!" : "등록실패";
-			 * redirectAttr.addFlashAttribute("msg", msg);
-			 */
-	  
-	  return "redirect:/space/SpaceDetail.do"; 
+	  return "redirect:/space/SpaceDetail.do?spaceNo="+spaceNo; 
 	  
 	  }
 }

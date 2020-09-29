@@ -287,7 +287,7 @@ function urlcopy(){
 				        </button>
 				      </div>
 				      <div class="modal-body">
-						<form action="${pageContext.request.contextPath }/space/insertQuestion.do">
+						<form id="ask-question">
 				      
 				          <div class="form-group">
 				            <label for="recipient-name" class="col-form-label">문의 공간명</label>
@@ -298,12 +298,14 @@ function urlcopy(){
 				            <textarea class="form-control" id="message-text"></textarea>
 				          </div>
 				        </form>
-		   			</form>	 
+		   				 
 				      </div>
-		   			<button name="memberEmail" id="ask-question" class="primary-btn" type="submit" onclick="ask();" style="float:right; margin-right:10px; letter-spacing: 2px;" value="${loginMember.principal.memberEmail }">문의하기</button>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-				        <button type="submit" class="btn btn-primary">전송</button>
+		   			  <input class="primary-btn" value = "전송" type="submit" onclick="ask();" 
+		   					style="float:right; margin-right:10px; letter-spacing: 2px;" 
+		   					value="${ space.spaceNo }">
+				        
 				      </div>
 				    </div>
 				  </div>
@@ -544,11 +546,10 @@ function urlcopy(){
     <!-- 추천시스템 끝 -->
 <script>
 function ask(){
-	var memberEmail = $("#ask-question").val();
-
 	$("#ask-question").attr("action", 
 	"${ pageContext.request.contextPath}/qna/insertQna.do")
-	.attr("method", "GET");
+	.attr("method", "POST")
+	.submit();
 }
 
 /* 예약버튼 */
