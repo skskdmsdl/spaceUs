@@ -293,7 +293,7 @@ $("#reviewBtn").on("click", function(){
 //리뷰 제출
 $("#reviewSubmit").on("click", function(){
 	 $.ajax({
-		url : "${ pageContext.request.contextPath }/community/recruit/recruitReport.do",
+		url : "${ pageContext.request.contextPath }/community/recruit/insertReview.do",
 		data : {
 			no : $("[name=no]").val(),
 			nickName : $("#reportNick").val(),
