@@ -112,7 +112,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             <div class="pf-status">
                                 <h4>가능시간<span class="text-danger">*</span></h4>
                                 
-                                <div class="jumbotron pb-1 pt-1 status-item">
+                                <div class="jumbotron pb-1 pt-1 status-item" id="day">
 	                                <label for="mon" class="mr-5" style="font-size: 15px;">월요일
 	                                    <input type="radio" name="radio" id="mon">
                                         <span class="checkbox mt-1"></span>
@@ -144,37 +144,55 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 </div>
                                 <table class="table table-bordered" style="cursor: pointer;" id="availableTime">
                                 	<tr>
-										<th style="width:16.6%;">00:00 - 01:00</th>	                                
-										<th style="width:16.6%;">01:00 - 02:00</th>	                                
-										<th style="width:16.6%;">02:00 - 03:00</th>	                                
-										<th style="width:16.6%;">03:00 - 04:00</th>	                                
-										<th style="width:16.6%;">04:00 - 05:00</th>	                                
-										<th style="width:16.6%;">05:00 - 06:00</th>	                                
+										<th id=0 style="width:16.6%;">00:00 - 01:00</th>	                                
+										<th id=1 style="width:16.6%;">01:00 - 02:00</th>	                                
+										<th id=2 style="width:16.6%;">02:00 - 03:00</th>	                                
+										<th id=3 style="width:16.6%;">03:00 - 04:00</th>	                                
+										<th id=4 style="width:16.6%;">04:00 - 05:00</th>	                                
+										<th id=5 style="width:16.6%;">05:00 - 06:00</th>	                                
                                 	</tr>
                                 	<tr>
-										<th>06:00 - 07:00</th>	                                
-										<th>07:00 - 08:00</th>	                                
-										<th>08:00 - 09:00</th>	                                
-										<th>09:00 - 10:00</th>	                                
-										<th>10:00 - 11:00</th>	                                
-										<th>11:00 - 12:00</th>	                                
+										<th id=6>06:00 - 07:00</th>	                                
+										<th id=7>07:00 - 08:00</th>	                                
+										<th id=8>08:00 - 09:00</th>	                                
+										<th id=9>09:00 - 10:00</th>	                                
+										<th id=10>10:00 - 11:00</th>	                                
+										<th id=11>11:00 - 12:00</th>	                                
                                 	</tr>
                                 	<tr>
-										<th>12:00 - 13:00</th>	                                
-										<th>13:00 - 14:00</th>	                                
-										<th>14:00 - 15:00</th>	                                
-										<th>15:00 - 16:00</th>	                                
-										<th>16:00 - 17:00</th>	                                
-										<th>17:00 - 18:00</th>	                                
+										<th id=12>12:00 - 13:00</th>	                                
+										<th id=13>13:00 - 14:00</th>	                                
+										<th id=14>14:00 - 15:00</th>	                                
+										<th id=15>15:00 - 16:00</th>	                                
+										<th id=16>16:00 - 17:00</th>	                                
+										<th id=17>17:00 - 18:00</th>	                                
                                 	</tr>
                                 	<tr>
-										<th>18:00 - 19:00</th>	                                
-										<th>19:00 - 20:00</th>	                                
-										<th>20:00 - 21:00</th>	                                
-										<th>21:00 - 22:00</th>	                                
-										<th>22:00 - 23:00</th>	                                
-										<th>23:00 - 24:00</th>	                                
+										<th id=18>18:00 - 19:00</th>	                                
+										<th id=19>19:00 - 20:00</th>	                                
+										<th id=20>20:00 - 21:00</th>	                                
+										<th id=21>21:00 - 22:00</th>	                                
+										<th id=22>22:00 - 23:00</th>	                                
+										<th id=23>23:00 - 24:00</th>	                                
                                 	</tr>
+                                </table>
+                                <hr>
+                                <h6>익일</h6>
+                                <hr>
+                                <table class="table table-bordered" style="cursor: pointer;" id="availableTime2">
+                                	<tr>
+										<th id=24 style="width:16.6%;">00:00 - 01:00</th>	                                
+										<th id=25 style="width:16.6%;">01:00 - 02:00</th>	                                
+										<th id=26 style="width:16.6%;">02:00 - 03:00</th>	                                
+										<th id=27 style="width:16.6%;">03:00 - 04:00</th>	                                
+										<th id=28 style="width:16.6%;">04:00 - 05:00</th>	                                
+										<th id=29 style="width:16.6%;">05:00 - 06:00</th>	                                
+                                	</tr>
+                                	<tr>
+										<th id=30>06:00 - 07:00</th>	                                
+										<th id=31>07:00 - 08:00</th>	                                
+										<th id=32>08:00 - 09:00</th>
+									</tr>
                                 </table>
                                 
                             </div>
@@ -384,19 +402,90 @@ $("#optionTb th").on("click", function(){
 });
 </script>
 
-
 <!-- 시간선택 script -->
 <script>
+const dayTime = [
+	{ day: 'mon', start: 0, end: 0},
+	{ day: 'tue', start: 0, end: 0},
+	{ day: 'wed', start: 0, end: 0},
+	{ day: 'thu', start: 0, end: 0},
+	{ day: 'fri', start: 0, end: 0},
+	{ day: 'sat', start: 0, end: 0},	
+	{ day: 'sun', start: 0, end: 0}	
+];
+var day;
+var first;
+var flag=0;
 //요일 선택클릭 이벤트
-$("#mon").on("click", function(){
-	console.log($(this).attr("id"));
+$("#day input").on("click", function(){
+	//배열 인덱스 찾기
+	day = dayTime.findIndex(obj => obj.day == $(this).attr("id"));
+	console.log(day);
+	//셀 색 지우기
+	for(var i=0; i<33; i++)
+		$("#"+i).removeClass("bg-primary");
+
+	var s=dayTime[day].start;
+	//요일에 맞춰 색채우기
+	if(s == dayTime[day].end){
+		flag=0;
+		return;
+	}
+	if(s != 0 && dayTime[day].end==0){
+		flag=1;
+		$("#"+s).addClass("bg-primary");
+		return;
+	}
+	flag=2;
+	for(var i=s; i<=dayTime[day].end; i++)
+		$("#"+i).addClass("bg-primary");
 });
 //가능시간 클릭이벤트
 $("#availableTime th").on("click", function(){
-	if($(this).hasClass("bg-primary"))
-    	$(this).removeClass("bg-primary");
-	else
-    	$(this).addClass("bg-primary");
+	//요일선택
+	if(day==null){
+		alert("요일을 먼저 선택해주세요");
+		return;
+	}
+	
+	flag++;
+	//초기화하기
+	if(flag==3){
+		flag=0;
+		//배열값 초기화
+		dayTime[day].start=0;
+		dayTime[day].end=0;
+		console.log(dayTime);
+		//셀 색 지우기
+		for(var i=0; i<33; i++)
+    		$("#"+i).removeClass("bg-primary");
+		return;
+	};
+	//연속선택
+	if(flag==2){
+		//선택한 셀의 아이디 찾기
+		var last = Number($(this).attr("id"));
+		//셀 값 배열에 넣기
+		dayTime[day].end=last;
+		console.log(dayTime);
+		//셀 색 바꾸기
+		if(last<first){
+			var temp = first;
+			first = last;
+			last = temp;
+		}	
+		for(var i=first; i<=last; i++)
+			$("#"+i).addClass("bg-primary");
+		return;
+	};
+
+	//선택한 셀의 아이디 찾기
+	first = Number($(this).attr("id"));
+	//셀 값 배열에 넣기
+	dayTime[day].start=first;
+	console.log(dayTime);
+	//셀 색 바꾸기
+    $(this).addClass("bg-primary");
 });
 </script>
 
