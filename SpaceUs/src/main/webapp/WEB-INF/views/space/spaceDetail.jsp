@@ -345,7 +345,7 @@ function urlcopy(){
 		   		<div class="desc">
 		   			<h4>
 		   				<span class="text-left">${ review.nickName }</span>
-		   				<span class="text-right">14 March 2018</span>
+		   				<span class="text-right"><fmt:formatDate value="${review.enrollDate}" pattern="yyyy-MM-dd"/></span>
 		   			</h4>
 		   			<p class="star">
 		   				<span>
@@ -359,14 +359,32 @@ function urlcopy(){
 		   			</p>
 		   			<div class="reviewToggle">
 		   			<div class="row reviewDetailBtn" style="cursor: pointer;">
-			   			<div style="background-image: url(/spaceus/resources/images/work-1.jpg); background-size: cover; width:110px; height: 100px;margin-left: 10px;"></div>
-			   			<p style="position: absolute; margin:0 85px 0 135px; overflow: hidden; text-overflow: ellipsis; width:60%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-						<p style="margin: 75px 0 0 15px; font-weight: 600;" class="detailBtn">더보기</p>
+		   				<c:choose>
+				   			<c:when test="${ review.image != null }">
+					   			<div style="background-image: url(${pageContext.request.contextPath}/resources/upload/review/${review.image}); background-size: cover; width:110px; height: 100px;margin-left: 10px;"></div>
+					   			<p style="position: absolute; margin:0 85px 0 135px; overflow: hidden; text-overflow: ellipsis; width:60%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">${ review.content }</p>
+								<p style="margin: 75px 0 0 15px; font-weight: 600;" class="detailBtn">더보기</p>
+				   			</c:when>
+				   			<c:otherwise>
+				   				<p style="position: absolute; margin:0 85px 0 15px; overflow: hidden; text-overflow: ellipsis; width:80%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">${ review.content }</p>
+								<p style="margin: 75px 0 0 15px; font-weight: 600;" class="detailBtn">더보기</p>
+    						</c:otherwise>
+			   			</c:choose>
 		   			</div>
+		   			
 		   			<div class="reviewSimpleBtn" style="cursor: pointer; display:none; height: 100%">
-			   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-						<p style="font-weight: 600;" class="simpleBtn">접기</p>
-			   			<div style="background-image: url(/spaceus/resources/images/work-1.jpg);  width: 500px;height: 350px;background-size: cover;"></div>
+		   			<c:choose>
+				   			<c:when test="${ review.image != null }">
+					   			<p>${ review.content }</p>
+								<p style="font-weight: 600;" class="simpleBtn">접기</p>
+					   			<div style="background-image: url(${pageContext.request.contextPath}/resources/upload/review/${review.image});  width: 500px;height: 350px;background-size: cover;"></div>
+				   			</c:when>
+				   			<c:otherwise>
+				   				<p>${ review.content }</p>
+								<p style="font-weight: 600;" class="simpleBtn">접기</p>
+    						</c:otherwise>
+			   			</c:choose>
+			   			
 		   			</div>
 		   			</div>
 		   		</div>
@@ -377,7 +395,7 @@ function urlcopy(){
 		   	
 		   	
 		   	
-		   	<div class="review d-flex">
+		  <!--  	<div class="review d-flex" style="clear: both;">
 		   		<div class="desc">
 		   			<h4>
 		   				<span class="text-left">Jacob Webb</span>
@@ -418,7 +436,7 @@ function urlcopy(){
 		   			</p>
 		   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
 		   		</div>
-		   	</div>
+		   	</div> -->
    		</div>
    		<div class="col-md-5">
    			<div class="rating-wrap">
