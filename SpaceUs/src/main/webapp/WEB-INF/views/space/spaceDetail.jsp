@@ -594,6 +594,14 @@ $(document).ready(function (){
 		$(".detailBtn").css('text-decoration', 'none');
 	});
 });
+$(document).ready(function (){
+	$(".reviewSimpleBtn").mouseenter(function(){
+		$(this).children(".simpleBtn").css('text-decoration', 'underline');
+	});
+	$(".reviewSimpleBtn").mouseleave(function(){
+		$(".simpleBtn").css('text-decoration', 'none');
+	});
+});
 /* 리뷰 디테일 */
 $(".reviewToggle").on('click', function(){
 	$(this).children(".reviewDetailBtn").toggle('show');
