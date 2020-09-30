@@ -255,11 +255,4 @@ public class GroupController {
 		return "redirect:/community/group/groupList.do";
 	}
 	
-	//댓글 등록하기
-	@PostMapping("/insertComment.do")
-	@ResponseBody
-	public String insertComment(@RequestBody GBComment param) {
-		log.info("param = {}",param);
-		return "";
-	}
 }
