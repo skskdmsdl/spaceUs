@@ -23,7 +23,7 @@ public class Review implements Serializable{
 	private String revNo;
 	private String nickName;
 	private String reviewComment;
-	private String starRating;
+	private int starRating;
 	private String content;
 	private Date enrollDate;
 	private String image;

@@ -349,11 +349,9 @@ function urlcopy(){
 		   			</h4>
 		   			<p class="star">
 		   				<span>
-		   					<i class="ion-ios-star"></i>
-		   					<i class="ion-ios-star"></i>
-		   					<i class="ion-ios-star"></i>
-		   					<i class="ion-ios-star"></i>
-		   					<i class="ion-ios-star"></i>
+		   					<c:forEach begin="1" end="${ review.starRating }">
+			   					<i class="ion-ios-star"></i>
+		   					</c:forEach>
 	   					</span>
 	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
 		   			</p>
