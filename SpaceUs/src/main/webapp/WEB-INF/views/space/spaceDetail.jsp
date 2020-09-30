@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -355,7 +356,10 @@ function urlcopy(){
 			   					<i class="ion-ios-star"></i>
 		   					</c:forEach>
 	   					</span>
-	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+	   					<sec:authentication property="principal.username" var="loginMember"/>
+	   					<c:if test="${loginMember != null && loginMember eq space.memberEmail }">
+	   						<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+		   				</c:if>
 		   			</p>
 		   			<div class="reviewToggle">
 			   			<div class="row reviewDetailBtn" style="cursor: pointer;">
@@ -385,7 +389,10 @@ function urlcopy(){
 			   					<i class="ion-ios-star"></i>
 		   					</c:forEach>
 	   					</span>
+	   					<sec:authentication property="principal.username" var="loginMember"/>
+	   					<c:if test="${loginMember != null && loginMember eq space.memberEmail }">
 	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+	   					</c:if>
 		   			</p>
 		   			<div class="reviewToggle">
 		   			<div class="row reviewDetailBtn" style="cursor: pointer;">
