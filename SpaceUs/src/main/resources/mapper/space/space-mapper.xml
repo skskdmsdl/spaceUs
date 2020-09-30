@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="space">
-<!-- Tag -->
+	<!-- Tag -->
 	<select id="selectOneTag" resultMap="tagMap">
 		select 
 			*
@@ -64,6 +64,7 @@
 		<result column="content" property="content"/>
 		<result column="bank" property="bank"/>
 	</resultMap>
+	
 	<select resultMap="tagMap" id="selectListSpaceTag">
 		select
 			*
@@ -116,6 +117,52 @@
 			#{ rName }
 		)
 	</insert>
+	
+	<select resultMap="reviewMap" id="selectListReview">
+		select
+			R.*,
+			(select re_renamed_filename  from review_image where review_no=R.review_no) image
+		from
+			review R
+		where space_no = #{ spaceNo } 
+		order by R.review_date desc
+	</select>
+	<resultMap type="review" id="reviewMap">
+		<id column="review_no" property="reviewNo"/>
+		<result column="space_no" property="spaceNo"/>
+		<result column="rev_no" property="revNo"/>
+		<result column="nickname" property="nickName"/>
+		<result column="review_comment" property="reviewComment"/>
+		<result column="star_rating" property="starRating"/>
+		<result column="review_content" property="content"/>
+		<result column="review_date" property="enrollDate"/>
+		<result column="image" property="image"/>
+		<result column="star1" property="star1"/>
+		<result column="star2" property="star2"/>
+		<result column="star3" property="star3"/>
+		<result column="star4" property="star4"/>
+		<result column="star5" property="star5"/>
+	</resultMap>
+	
+	<select id="selectReviewTotalContents" resultType="_int">
+	    select 
+	    	count(*) 
+	    from 
+	    	review
+	    where 
+	    	space_no = #{spaceNo} 	
+	</select>
+	
+	<select id="selectStar" resultType="star">
+		select 
+			count(case when star_rating=1 then 1 end) star1,
+			count(case when star_rating=2 then 1 end) star2,
+			count(case when star_rating=3 then 1 end) star3,
+			count(case when star_rating=4 then 1 end) star4,
+			count(case when star_rating=5 then 1 end) star5
+		from 
+			review
+	</select>
 	
 	
 </mapper>

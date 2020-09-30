@@ -2,6 +2,7 @@ package com.kh.spaceus.space.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,7 @@ import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
 
 
@@ -52,6 +54,22 @@ public class SpaceDAOImpl implements SpaceDAO{
 	@Override
 	public int insertReviewAttahment(ReviewAttachment attach) {
 		return sqlSession.insert("space.insertReviewAttahment", attach);
+	}
+
+	@Override
+	public List<Review> selectListReview(String spaceNo, int limit, int offset) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("space.selectListReview", spaceNo, rowBounds);
+	}
+
+	@Override
+	public int selectReviewTotalContents(String spaceNo) {
+		return sqlSession.selectOne("space.selectReviewTotalContents", spaceNo);
+	}
+
+	@Override
+	public Star selectStar() {
+		return sqlSession.selectOne("space.selectStar");
 	}
 
 	/*@Override
