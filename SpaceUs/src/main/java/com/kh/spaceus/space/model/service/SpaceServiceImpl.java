@@ -62,7 +62,7 @@ public class SpaceServiceImpl implements SpaceService{
 		if(attachList != null) {
 			for(ReviewAttachment attach : attachList) {
 				attach.setReviewNo(review.getReviewNo());
-				
+				System.out.println("@@@@@@@"+attach);
 				log.debug("attach = {}", attach);
 				result = spaceDAO.insertReviewAttahment(attach);
 			}
@@ -70,7 +70,9 @@ public class SpaceServiceImpl implements SpaceService{
 		
 		return result;
 	}
-
+	
+	
+	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {
 		return spaceDAO.selectListSpaceCollection(email);

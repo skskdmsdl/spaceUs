@@ -24,6 +24,7 @@
   background-image: url(http://gahyun.wooga.kr/main/img/testImg/star_on.png);
 }
 </style>
+
 <div class="skin-default-dark fixed-layout">
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
@@ -155,7 +156,7 @@
 													</div>
 												<!-- <div class="m-1" style="position: absolute;right: 60px;">+ 사진</div> -->
 				                         	</div>
-				                         		 <textarea class="col-lg-11" id="reviewCon" name="contnent" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+				                         		 <textarea class="col-lg-11" id="reviewCon" name="content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
 				                           		<input type="submit" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #ddd;width: 70px;" value="등록">
 				                           </div>
 												</form>

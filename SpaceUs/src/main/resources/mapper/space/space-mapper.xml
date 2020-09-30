@@ -78,32 +78,32 @@
 			review (
 				review_no,
 				space_no,
-				rev_no
+				rev_no,
 				nickname,
 				star_rating,
 				review_content
 			)
 		values (
 			'REVIEW'||seq_review_no.nextval,
-			#{ spaceNp },
+			#{ spaceNo },
 			#{ revNo },
 			#{ nickName },
 			#{ starRating },
 			#{ content }
 		)
 		
-		<selectKey keyProperty="no" resultType="_int" order="AFTER">
+		 <selectKey keyProperty="reviewNo" resultType="string" order="AFTER">
 			select
 				'REVIEW'||seq_review_no.currval
 			from 
 				dual
-		</selectKey>
+		</selectKey> 
 	
 	</insert>
 
-	<insert id="insertAttachment">
+	<insert id="insertReviewAttahment">
 		insert into
-			attachment (
+			review_image (
 				re_img_no,
 				review_no,
 				re_original_filename,

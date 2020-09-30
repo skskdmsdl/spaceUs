@@ -309,6 +309,7 @@ public class MemberController {
 							  HttpServletRequest request,
 							  RedirectAttributes redirectAttr) {
 		
+		System.out.println(review);
 		//1. 파일을 서버컴퓨터에 저장
 		List<ReviewAttachment> attachList  = new ArrayList<>();
 		String saveDirectory = request.getServletContext()
@@ -337,11 +338,12 @@ public class MemberController {
 		}
 		
 		//***********예약 부분 완료 이후 수정 필요함!!!!!
-		
+		review.setSpaceNo("space2");
+		review.setRevNo("REV1");
 		
 		review.setReviewAtt(attachList);
 		log.debug("reveiw = {}", review);
-		
+		System.out.println(review);
 		
 		//2. 게시글, 첨부파일정보를 DB에 저장
 		try {
