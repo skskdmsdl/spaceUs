@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.community.group.model.service.GroupService;
 import com.kh.spaceus.community.group.model.vo.Board;
+import com.kh.spaceus.community.group.model.vo.GBComment;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
 
@@ -127,9 +128,13 @@ public class GroupController {
 			//브라우져가 종료되면 쿠키 삭제
 			
 			List<GroupBoard> list = groupService.selectDetailBoard(groupBoardNo);
+			List<Board> boardList = groupService.selectBoardOne(groupBoardNo);
+			List<GBComment> commentList = groupService.selectAllComment(groupBoardNo);
+			
+			log.info("commentList={}",commentList);
 			
 			model.addAttribute("list", list);
-			
+			model.addAttribute("boardList", boardList);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -79,7 +79,10 @@
 		self.close();	
 	</c:if>
 </script>
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
   </head>
   
   <body>
@@ -130,7 +133,7 @@
 	        	  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
 	        		<div  data-toggle="modal" data-target="#exampleModal">
 		        		<div style="display: inline-block;">반갑습니다. &nbsp;</div>
-	        			<sec:authentication property="principal.nickName"/> 님!
+	        			 <sec:authentication property="principal.nickName"/> 님!
 	        		</div>
 	        	  </div>
 	          </ul>
@@ -194,7 +197,7 @@
 	        <h5 class="modal-title" id="exampleModalLabel">
 	        	<div data-toggle="modal" data-target="#exampleModal">
 		        	<img src="https://resource.miricanvas.com/image/common/profile_argo.svg" style="background: #22B47B; border-right: 0; border-radius: 90%; width: 40px;  height: 40px;">
-	        		<sec:authentication property="principal.nickName"/>님
+	        	<sec:authentication property="principal.nickName"/> 님
 	        	</div>
 	        </h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -252,7 +255,7 @@
 	        <h5 class="modal-title" id="exampleModalLabel">
 	        	<div>
 		        	<img src="https://resource.miricanvas.com/image/common/profile_argo.svg" style="background: #22B47B; border-right: 0; border-radius: 90%; width: 40px;  height: 40px;">
-	        		<sec:authentication property="principal.nickName"/>님
+	        		<sec:authentication property="principal.nickName"/> 님
 	        	</div>
 	        </h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
