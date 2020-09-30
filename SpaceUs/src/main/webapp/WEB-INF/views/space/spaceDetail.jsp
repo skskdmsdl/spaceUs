@@ -356,15 +356,17 @@ function urlcopy(){
 	   					</span>
 	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
 		   			</p>
+		   			<div class="reviewToggle">
 		   			<div class="row reviewDetailBtn" style="cursor: pointer;">
 			   			<div style="background-image: url(/spaceus/resources/images/work-1.jpg); background-size: cover; width:110px; height: 100px;margin-left: 10px;"></div>
 			   			<p style="position: absolute; margin:0 85px 0 135px; overflow: hidden; text-overflow: ellipsis; width:60%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
 						<p style="margin: 75px 0 0 15px; font-weight: 600;" class="detailBtn">더보기</p>
 		   			</div>
-		   			<div class="" style="cursor: pointer; height: 100%">
+		   			<div class="reviewSimpleBtn" style="cursor: pointer; display:none; height: 100%">
 			   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
 						<p style="font-weight: 600;" class="simpleBtn">접기</p>
 			   			<div style="background-image: url(/spaceus/resources/images/work-1.jpg);  width: 500px;height: 350px;background-size: cover;"></div>
+		   			</div>
 		   			</div>
 		   		</div>
 		   	</div>
@@ -592,7 +594,12 @@ $(document).ready(function (){
 		$(".detailBtn").css('text-decoration', 'none');
 	});
 });
-
+/* 리뷰 디테일 */
+$(".reviewToggle").on('click', function(){
+	$(this).children(".reviewDetailBtn").toggle('show');
+	$(this).children(".reviewSimpleBtn").toggle('show');
+	
+});
 </script>
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
