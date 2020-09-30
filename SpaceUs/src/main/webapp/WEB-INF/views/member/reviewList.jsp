@@ -132,21 +132,22 @@
 				                         	<div class="row pl-3 align-items-xl-center">
 				                         		<p class="m-1" style="font-size: 15px;">별점 &nbsp;&nbsp;:</p>
 				                         		<div class="star-box">
-												  <span class="star mt-2" id="star1"></span>
-												  <span class="star" id="star2"></span>
-												  <span class="star" id="star3"></span>
-												 <span class="star" id="star4"></span>
-												 <span class="star" id="star5"></span>
+												  <span class="star mt-2 star1" ></span>
+												  <span class="star star2"></span>
+												  <span class="star star3"></span>
+												 <span class="star star4"></span>
+												 <span class="star star5"></span>
 												</div>
 												<div>
 												</div>
 												<form name="boardFrm" 
-													  action="${pageContext.request.contextPath}/review/테스트.do" 
+													  action="${pageContext.request.contextPath}/member/insertReview.do" 
 													  method="post" 
-													  onsubmit="return boardValidate();"
+													  onsubmit="return reviewValidate();"
 													  enctype="multipart/form-data"
 													  style="position: absolute;right: 5%;">
-													  
+													  <input type="hidden" name="starRating" required/>
+													  <input type="hidden" name="nickName" value="${member.nickName}" />
 													  <div class="input-group mb-3" style="padding:0px;">
 													  <div class="custom-file">
 													    <input type="file" class="custom-file-input" name="upFile" id="upFile1" >
@@ -155,8 +156,8 @@
 													</div>
 												<!-- <div class="m-1" style="position: absolute;right: 60px;">+ 사진</div> -->
 				                         	</div>
-				                         		 <textarea class="col-lg-11" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-				                           		<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;" id="reviewSubmit">등록</button>
+				                         		 <textarea class="col-lg-11" id="reviewCon" name="content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+				                           		<input type="submit" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #ddd;width: 70px;" value="등록">
 				                           </div>
 												</form>
                                   </div>
@@ -290,27 +291,23 @@ $("#reviewBtn").on("click", function(){
 		$(this).addClass("btn-primary");
 	}	
 });
-//리뷰 제출
-$("#reviewSubmit").on("click", function(){
-	 $.ajax({
-		url : "${ pageContext.request.contextPath }/community/recruit/insertReview.do",
-		data : {
-			no : $("[name=no]").val(),
-			nickName : $("#reportNick").val(),
-			reportReason : $("input[name=reportCon]:checked").val()
-		},
-		dataType : "json",
-		success : function(data){
-			console.log(data);
-			if(data.duplication != 1)
-			alert("신고가 완료되었습니다!");
-			else
-			alert("이미 신고된 게시물 입니다!");
-		},
-		error : function(xhr, status, err){
-			console.log("처리실패", xhr, status, err);
-		}
-	}); 
-})
+//별 받기
+ $(".star-box span").on("click", function(){
+	/* alert($(this).hasClass("star1")?"1":$(this).hasClass("star2")?"2":$(this).hasClass("star3")?"3":$(this).hasClass("star4")?"4":"5"); */
+	$("[name=starRating]").val($(this).hasClass("star1")?"1":$(this).hasClass("star2")?"2":$(this).hasClass("star3")?"3":$(this).hasClass("star4")?"4":"5");
+}); 
+
+ //리뷰 유효성 검사
+function reviewValidate(){
+	if($("[name=starRating]").val()==""){
+		alert("별점을 선택해주세요");
+		return false;
+	}
+	if($("#reviewCon").val().length<10){
+		alert("내용을 최소 10자 이상 입력해주세요");
+		return false;
+	}
+	return true;
+} 
 
 </script>

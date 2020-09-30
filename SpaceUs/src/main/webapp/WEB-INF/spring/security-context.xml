@@ -41,7 +41,7 @@
 			logout-success-url="/"
 		/> 
 	
-		
+		<csrf disabled="true"/>
 		 <headers>
          	<frame-options disabled="true"></frame-options>
    		 </headers>  

@@ -25,7 +25,9 @@
     <meta name="keywords" content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 4 admin, bootstrap 4, css3 dashboard, bootstrap 4 dashboard, AdminWrap lite admin bootstrap 4 dashboard, frontend, responsive bootstrap 4 admin template, Elegant admin lite design, Elegant admin lite dashboard bootstrap 4 dashboard template">
     <meta name="description" content="Elegant Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    
+    <!-- csrf토큰 -->
+    <%-- <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+    <meta id="csrf_header" name="_csrf_header" content="${_csrf.headerName }" /> --%>
 
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${ pageContext.request.contextPath }/assets/images/favicon.png">

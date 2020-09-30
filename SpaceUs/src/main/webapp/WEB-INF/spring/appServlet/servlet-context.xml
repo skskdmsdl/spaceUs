@@ -47,6 +47,11 @@
 	<!-- aop 어노테이션 처리용 -->
 	<aop:aspectj-autoproxy />
 	
+	<!-- file upload를 처리할 빈 등록 : id - multipartResolver -->
+	<beans:bean id="multipartResolver"
+				class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</beans:bean>
+	
 	<!-- jsonView 빈등록 및 BeanNameViewResolver 등록 -->
 	<beans:bean class="net.sf.json.spring.web.servlet.view.JsonView"
 				id="jsonView"/>
