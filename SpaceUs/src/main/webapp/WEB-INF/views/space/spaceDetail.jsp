@@ -334,10 +334,10 @@ function urlcopy(){
    			<h3 class="head">23개의 리뷰</h3>
    			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 			  <label class="btn btn-secondary active reviewLabel" >
-			    <input type="radio" name="options" id="option1" autocomplete="off" checked>포토리뷰 ON
+			    <input type="radio" name="options" id="option1" autocomplete="off" checked>포토리뷰 OFF
 			  </label>
 			  <label class="btn btn-secondary reviewLabel">
-			    <input type="radio" name="options" id="option2" autocomplete="off">포토리뷰 OFF
+			    <input type="radio" name="options" id="option2" autocomplete="off">포토리뷰 ON
 			  </label>
 			</div>
    		</div>
@@ -357,7 +357,11 @@ function urlcopy(){
 	   					</span>
 	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
 		   			</p>
-		   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+		   			<div class="row">
+			   			<div style="background-image: url(/spaceus/resources/images/work-1.jpg); background-size: cover; width:110px; height: 100px;margin-left: 10px;"></div>
+			   			<p style="position: absolute; margin-left: 130px; margin-right: 85px; overflow: hidden; text-overflow: ellipsis; width:60%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+  <!--   height: 3.6em; -->
+		   			</div>
 		   		</div>
 		   	</div>
 		   	<div class="review d-flex">
