@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.service.SpaceService;
+import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Tag;
 
@@ -74,9 +75,12 @@ public class SpaceController {
 		//log.debug("spaceNo= {}",spaceNo);
 		Space space = spaceService.selectOneSpace(spaceNo);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
+		List<Review> review = spaceService.selectListReview(spaceNo);
+		System.out.println(review);
 		
 		model.addAttribute("space", space);
 		model.addAttribute("tag", tag);
+		model.addAttribute("review", review);
 		return "space/spaceDetail";
 	}
 	

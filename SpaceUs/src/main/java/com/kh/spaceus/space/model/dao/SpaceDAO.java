@@ -23,6 +23,8 @@ public interface SpaceDAO {
 
 	int insertReviewAttahment(ReviewAttachment attach);
 
+	List<Review> selectListReview(String spaceNo);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

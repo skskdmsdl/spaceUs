@@ -70,6 +70,11 @@ public class SpaceServiceImpl implements SpaceService{
 		
 		return result;
 	}
+
+	@Override
+	public List<Review> selectListReview(String spaceNo) {
+		return spaceDAO.selectListReview(spaceNo);
+	}
 	
 	
 	

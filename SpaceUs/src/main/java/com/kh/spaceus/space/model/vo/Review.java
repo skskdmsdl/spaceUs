@@ -26,7 +26,7 @@ public class Review implements Serializable{
 	private String starRating;
 	private String content;
 	private Date enrollDate;
-	
+	private String image;
 	private List<ReviewAttachment> reviewAtt;
 }
 

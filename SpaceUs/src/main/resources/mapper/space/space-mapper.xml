@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="space">
-<!-- Tag -->
+	<!-- Tag -->
 	<select id="selectOneTag" resultMap="tagMap">
 		select 
 			*
@@ -64,6 +64,7 @@
 		<result column="content" property="content"/>
 		<result column="bank" property="bank"/>
 	</resultMap>
+	
 	<select resultMap="tagMap" id="selectListSpaceTag">
 		select
 			*
@@ -116,6 +117,26 @@
 			#{ rName }
 		)
 	</insert>
+	
+	<select resultMap="reviewMap" id="selectListReview">
+		select
+			R.*,
+			(select re_renamed_filename  from review_image where review_no=R.review_no) image
+		from
+			review R
+		where space_no = #{ spaceNo } 
+	</select>
+	<resultMap type="review" id="reviewMap">
+		<id column="review_no" property="reviewNo"/>
+		<result column="space_no" property="spaceNo"/>
+		<result column="rev_no" property="revNo"/>
+		<result column="nickname" property="nickName"/>
+		<result column="review_comment" property="reviewComment"/>
+		<result column="star_rating" property="starRating"/>
+		<result column="review_content" property="content"/>
+		<result column="review_date" property="enrollDate"/>
+		<result column="image" property="image"/>
+	</resultMap>
 	
 	
 </mapper>
