@@ -447,6 +447,7 @@ insert into group_board_comment values(seq_group_board_comment_no.nextval,'hongg
 
 commit;
 
+drop sequence seq_group_board_comment_no;
 drop table group_board_comment;
 
 --계층형쿼리
@@ -457,11 +458,12 @@ drop table group_board_comment;
 --connect by : 부모 / 자식 관계 조건절 작성 prior키워드 쪽이 부모행을 가리킴
 
 select * 
-from group_board_comment
+from group_board_comment C join member M 
+            on C.writer = m.member_email
 where group_board_ref = 'G5'
 start with group_board_comment_level = 1
 connect by prior group_board_comment_no = group_board_comment_ref
-order siblings by group_board_comment_no asc;
+order siblings by group_board_comment_no desc;
 
 -----------------------------
 --------- 신고 ---------------
