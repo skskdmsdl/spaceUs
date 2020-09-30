@@ -89,7 +89,7 @@ public class SpaceController {
 		
 		//별점조회
 		Star star = spaceService.selectStar();
-	
+		star.setSumStar(star.getStar1()+star.getStar2()+star.getStar3()+star.getStar4()+star.getStar5());
 		
 		model.addAttribute("space", space);
 		model.addAttribute("tag", tag);

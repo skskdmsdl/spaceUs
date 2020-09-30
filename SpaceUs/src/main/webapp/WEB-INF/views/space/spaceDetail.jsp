@@ -416,7 +416,7 @@ function urlcopy(){
 		   					<i class="ion-ios-star"></i>
 		   					<i class="ion-ios-star"></i>
 		   					<i class="ion-ios-star"></i>
-		   					(98%)
+		   					(${ star.star5/star.sumStar*100 }%)
 	   					</span>
 	   					<span>${ star.star5 } Reviews</span>
 		   			</p>
@@ -426,7 +426,7 @@ function urlcopy(){
 		   					<i class="ion-ios-star"></i>
 		   					<i class="ion-ios-star"></i>
 		   					<i class="ion-ios-star"></i>
-		   					(85%)
+		   					(${ star.star4/star.sumStar*100 }%)
 	   					</span>
 	   					<span>${ star.star4 } Reviews</span>
 		   			</p>
@@ -435,7 +435,7 @@ function urlcopy(){
 		   					<i class="ion-ios-star"></i>
 		   					<i class="ion-ios-star"></i>
 		   					<i class="ion-ios-star"></i>
-		   					(70%)
+		   					(${ star.star3/star.sumStar*100 }%)
 	   					</span>
 	   					<span>${ star.star3 } Reviews</span>
 		   			</p>
@@ -443,14 +443,14 @@ function urlcopy(){
 		   				<span>
 		   					<i class="ion-ios-star"></i>
 		   					<i class="ion-ios-star"></i>
-		   					(10%)
+		   					(${ star.star2/star.sumStar*100 }%)
 	   					</span>
 	   					<span>${ star.star2 } Reviews</span>
 		   			</p>
 		   			<p class="star">
 		   				<span>
 		   					<i class="ion-ios-star"></i>
-		   					(0%)
+		   					(${ star.star1/star.sumStar*100 }%)
 	   					</span>
 	   					<span>${ star.star1 } Reviews</span>
 		   			</p>

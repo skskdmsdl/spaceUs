@@ -23,5 +23,7 @@ public class Star implements Serializable{
 	private int star3;
 	private int star4;
 	private int star5;
+	private int sumStar;
+	
 }
 
