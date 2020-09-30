@@ -16,18 +16,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Review implements Serializable{
+public class Star implements Serializable{
 
-	private String reviewNo;
-	private String spaceNo;
-	private String revNo;
-	private String nickName;
-	private String reviewComment;
-	private int starRating;
-	private String content;
-	private Date enrollDate;
-	private String image;
-	private List<ReviewAttachment> reviewAtt;
 	private int star1;
 	private int star2;
 	private int star3;

@@ -418,7 +418,7 @@ function urlcopy(){
 		   					<i class="ion-ios-star"></i>
 		   					(98%)
 	   					</span>
-	   					<span>20 Reviews</span>
+	   					<span>${ star.star5 } Reviews</span>
 		   			</p>
 		   			<p class="star">
 		   				<span>
@@ -428,7 +428,7 @@ function urlcopy(){
 		   					<i class="ion-ios-star"></i>
 		   					(85%)
 	   					</span>
-	   					<span>10 Reviews</span>
+	   					<span>${ star.star4 } Reviews</span>
 		   			</p>
 		   			<p class="star">
 		   				<span>
@@ -437,7 +437,7 @@ function urlcopy(){
 		   					<i class="ion-ios-star"></i>
 		   					(70%)
 	   					</span>
-	   					<span>5 Reviews</span>
+	   					<span>${ star.star3 } Reviews</span>
 		   			</p>
 		   			<p class="star">
 		   				<span>
@@ -445,14 +445,14 @@ function urlcopy(){
 		   					<i class="ion-ios-star"></i>
 		   					(10%)
 	   					</span>
-	   					<span>0 Reviews</span>
+	   					<span>${ star.star2 } Reviews</span>
 		   			</p>
 		   			<p class="star">
 		   				<span>
 		   					<i class="ion-ios-star"></i>
 		   					(0%)
 	   					</span>
-	   					<span>0 Reviews</span>
+	   					<span>${ star.star1 } Reviews</span>
 		   			</p>
 		   		</div>
 	   		</div>

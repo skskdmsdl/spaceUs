@@ -10,6 +10,7 @@ import com.kh.spaceus.space.model.dao.SpaceDAO;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
 
 import lombok.extern.slf4j.Slf4j;
@@ -79,6 +80,11 @@ public class SpaceServiceImpl implements SpaceService{
 	@Override
 	public int selectReviewTotalContents(String spaceNo) {
 		return  spaceDAO.selectReviewTotalContents(spaceNo);
+	}
+
+	@Override
+	public Star selectStar() {
+		return spaceDAO.selectStar();
 	}
 	
 	

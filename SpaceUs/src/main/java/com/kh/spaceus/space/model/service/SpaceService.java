@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
 
 public interface SpaceService {
@@ -24,6 +25,8 @@ public interface SpaceService {
 	List<Review> selectListReview(String spaceNo, int limit, int offset);
 
 	int selectReviewTotalContents(String spaceNo);
+
+	Star selectStar();
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

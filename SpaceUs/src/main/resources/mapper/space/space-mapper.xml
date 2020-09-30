@@ -137,6 +137,11 @@
 		<result column="review_content" property="content"/>
 		<result column="review_date" property="enrollDate"/>
 		<result column="image" property="image"/>
+		<result column="star1" property="star1"/>
+		<result column="star2" property="star2"/>
+		<result column="star3" property="star3"/>
+		<result column="star4" property="star4"/>
+		<result column="star5" property="star5"/>
 	</resultMap>
 	
 	<select id="selectReviewTotalContents" resultType="_int">
@@ -146,6 +151,17 @@
 	    	review
 	    where 
 	    	space_no = #{spaceNo} 	
+	</select>
+	
+	<select id="selectStar" resultType="star">
+		select 
+			count(case when star_rating=1 then 1 end) star1,
+			count(case when star_rating=2 then 1 end) star2,
+			count(case when star_rating=3 then 1 end) star3,
+			count(case when star_rating=4 then 1 end) star4,
+			count(case when star_rating=5 then 1 end) star5
+		from 
+			review
 	</select>
 	
 	
