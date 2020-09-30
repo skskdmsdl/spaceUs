@@ -79,10 +79,6 @@
 		self.close();	
 	</c:if>
 </script>
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
   </head>
   
   <body>

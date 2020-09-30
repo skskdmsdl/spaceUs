@@ -172,74 +172,56 @@ body{
 	                         		</form:form>
 	                         		
 	                           		<!-- 댓글보기시작 -->
-	                           		<div class="level1" style="margin-top: 10px;">
-		                           		<tr class="col-md-1">
-		                                    <th><b>양희</b></th>
-		                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"> 2020.10.23</p></th>
-		                                    <th>|</th>
-		                                    <th><a href="#" style="color: #6d6d6d !important; font-size: 13px; margin-left: 8px;">답글쓰기</a></th>
-	                                         <th>
-	                                    	
-		                                    	<ul class="main-menu" id="main-menu1" onclick="menu1();">
-		                                    		<li>
-		                                    			<i class="fa fa-ellipsis-v layerMore">
-			                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu1">
-			                                    				<li><a href="#">신고하기</a></li>
-			                                    				<li><a href="#">수정</a></li>
-			                                    				<li><a href="#">삭제</a></li>
-			                                    			</ul>
-		                                    			</i>
-		                                    		</li>
-		                                    	</ul>
-	                                    
-	                                    	</th>
-	                                	</tr>
-		                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">안녕하세요</div>
-		                         	</div>
-		                         	<div class="level2" style="margin: 10px 0 0 3%;">
-		                         		<tr class="col-md-1">
-		                                    <th><b>양희</b></th>
-		                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"> 2020.10.23</p></th>
-		                                     <th>
-		                                    	<ul class="main-menu" id="main-menu2" onclick="menu2();">
-		                                    		<li>
-		                                    			<i class="fa fa-ellipsis-v layerMore">
-			                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu2">
-			                                    				<li><a href="#">신고하기</a></li>
-			                                    				<li><a href="#">수정</a></li>
-			                                    				<li><a href="#">삭제</a></li>
-			                                    			</ul>
-		                                    			</i>
-		                                    		</li>
-		                                    	</ul>
-		                                    </th>
-	                                	</tr>
-		                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">안녕하세요</div>
-		                         	</div>
-		                         	<div class="level1" style="margin-top: 10px;">
-		                           		<tr class="col-md-1">
-		                                    <th><b>양희</b></th>
-		                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"> 2020.10.23</p></th>
-		                                    <th>|</th>
-		                                    <th><a href="#" style="color: #6d6d6d !important; font-size: 13px; margin-left: 8px;">답글쓰기</a></th>
-		                                    <th>
-		                                    	
-		                                    	<ul class="main-menu" id="main-menu3" onclick="menu3();">
-		                                    		<li>
-		                                    			<i class="fa fa-ellipsis-v layerMore">
-			                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu3">
-			                                    				<li><a href="#">신고하기</a></li>
-			                                    				<li><a href="#">수정</a></li>
-			                                    				<li><a href="#">삭제</a></li>
-			                                    			</ul>
-		                                    			</i>
-		                                    		</li>
-		                                    	</ul>
-		                                    
-		                                    </th>
-	                                	</tr>
-		                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">안녕하세요</div>
-		                         	</div>
+	                           		<c:forEach items="${commentList}" var="cm" varStatus="vs">
+	                           			<c:if test="${cm.groupBoardCommentLevel eq '1' }">
+			                           		<div class="level1" style="margin-top: 10px;">
+				                           		<tr class="col-md-1">
+				                                    <th><b>${cm.nickname}</b></th>
+				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
+				                                    <th>|</th>
+				                                    <th><a href="#" style="color: #6d6d6d !important; font-size: 13px; margin-left: 8px;">답글쓰기</a></th>
+			                                         <th>
+			                                    	
+				                                    	<ul class="main-menu" id="main-menu1" onclick="menu1();">
+				                                    		<li>
+				                                    			<i class="fa fa-ellipsis-v layerMore">
+					                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu1">
+					                                    				<li><a href="#">신고하기</a></li>
+					                                    				<li><a href="#">수정</a></li>
+					                                    				<li><a href="#">삭제</a></li>
+					                                    			</ul>
+				                                    			</i>
+				                                    		</li>
+				                                    	</ul>
+			                                    
+			                                    	</th>
+			                                	</tr>
+				                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
+				                         	</div>
+	                           			</c:if>
+										<c:if test="${cm.groupBoardCommentLevel eq '2' }">
+				                         	<div class="level2" style="margin: 10px 0 0 3%;">
+				                         		<tr class="col-md-1">
+				                                    <th><b>${list.nickname}</b></th>
+				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
+				                                     <th>
+				                                    	<ul class="main-menu" id="main-menu2" onclick="menu2();">
+				                                    		<li>
+				                                    			<i class="fa fa-ellipsis-v layerMore">
+					                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu2">
+					                                    				<li><a href="#">신고하기</a></li>
+					                                    				<li><a href="#">수정</a></li>
+					                                    				<li><a href="#">삭제</a></li>
+					                                    			</ul>
+				                                    			</i>
+				                                    		</li>
+				                                    	</ul>
+				                                    </th>
+			                                	</tr>
+				                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
+				                         	</div>
+										</c:if>			                         	
+		                         	</c:forEach>		                         	
 	                           		<!-- 댓글보기끝-->
 	                           		
 	                           </div>

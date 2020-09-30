@@ -24,6 +24,6 @@ public class GBComment implements Serializable {
 	private String groupBoardContent; //댓글내용
 	private String groupBoardCommentLevel; //댓글(1), 대댓글(2) 여부판단
 	private Date groupBoardDate; 
-	
+	private String nickname;
 	
 }
