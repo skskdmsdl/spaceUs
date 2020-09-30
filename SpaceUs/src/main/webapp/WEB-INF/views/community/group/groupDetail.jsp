@@ -132,7 +132,8 @@ body{
 			                            </button>	
 		                        	</c:if>
 		                          	<c:if test="${loginMember != null && loginMember eq list.memberEmail }">
-			                            <button id="modifyBtn" class="btn btn-sm" onclick="location.href='${pageContext.request.contextPath}/community/group/modifyBoard/${list.groupBoardNo}.do'" style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 10px; margin-top: 0;">글 수정 </button>
+			                            <button id="modifyBtn" class="btn btn-sm" onclick="location.href='${pageContext.request.contextPath}/community/group/modifyBoard/${list.groupBoardNo}.do'" 
+			                            		style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 10px; margin-top: 0;">글 수정 </button>
 			                           	<div style="display: inline-block;"></div>
 			                            <button id="deleteBtn" class="btn btn-sm" style="margin-top:42px;background-color: #00c89e;font-size:15px;color:white;float:right;margin-right: 10px;margin-top: 0;border-right-width: 0px;padding-right: 9px;">글 삭제 </button>
 		                          	</c:if>	                          	
@@ -172,74 +173,94 @@ body{
 	                         		</form:form>
 	                         		
 	                           		<!-- 댓글보기시작 -->
-	                           		<div class="level1" style="margin-top: 10px;">
-		                           		<tr class="col-md-1">
-		                                    <th><b>양희</b></th>
-		                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"> 2020.10.23</p></th>
-		                                    <th>|</th>
-		                                    <th><a href="#" style="color: #6d6d6d !important; font-size: 13px; margin-left: 8px;">답글쓰기</a></th>
-	                                         <th>
-	                                    	
-		                                    	<ul class="main-menu" id="main-menu1" onclick="menu1();">
-		                                    		<li>
-		                                    			<i class="fa fa-ellipsis-v layerMore">
-			                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu1">
-			                                    				<li><a href="#">신고하기</a></li>
-			                                    				<li><a href="#">수정</a></li>
-			                                    				<li><a href="#">삭제</a></li>
-			                                    			</ul>
-		                                    			</i>
-		                                    		</li>
-		                                    	</ul>
-	                                    
-	                                    	</th>
-	                                	</tr>
-		                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">안녕하세요</div>
-		                         	</div>
-		                         	<div class="level2" style="margin: 10px 0 0 3%;">
-		                         		<tr class="col-md-1">
-		                                    <th><b>양희</b></th>
-		                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"> 2020.10.23</p></th>
-		                                     <th>
-		                                    	<ul class="main-menu" id="main-menu2" onclick="menu2();">
-		                                    		<li>
-		                                    			<i class="fa fa-ellipsis-v layerMore">
-			                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu2">
-			                                    				<li><a href="#">신고하기</a></li>
-			                                    				<li><a href="#">수정</a></li>
-			                                    				<li><a href="#">삭제</a></li>
-			                                    			</ul>
-		                                    			</i>
-		                                    		</li>
-		                                    	</ul>
-		                                    </th>
-	                                	</tr>
-		                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">안녕하세요</div>
-		                         	</div>
-		                         	<div class="level1" style="margin-top: 10px;">
-		                           		<tr class="col-md-1">
-		                                    <th><b>양희</b></th>
-		                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"> 2020.10.23</p></th>
-		                                    <th>|</th>
-		                                    <th><a href="#" style="color: #6d6d6d !important; font-size: 13px; margin-left: 8px;">답글쓰기</a></th>
-		                                    <th>
-		                                    	
-		                                    	<ul class="main-menu" id="main-menu3" onclick="menu3();">
-		                                    		<li>
-		                                    			<i class="fa fa-ellipsis-v layerMore">
-			                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu3">
-			                                    				<li><a href="#">신고하기</a></li>
-			                                    				<li><a href="#">수정</a></li>
-			                                    				<li><a href="#">삭제</a></li>
-			                                    			</ul>
-		                                    			</i>
-		                                    		</li>
-		                                    	</ul>
-		                                    
-		                                    </th>
-	                                	</tr>
-		                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">안녕하세요</div>
-		                         	</div>
+	                           		<c:forEach items="${commentList}" var="cm" varStatus="vs">
+	                           			<c:if test="${cm.groupBoardCommentLevel eq '1' }">
+			                           		<div class="level1" style="margin-top: 10px;">
+				                           		<tr class="col-md-1">
+				                                    <th><b>${cm.nickname}</b></th>
+				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
+				                                    <th>|</th>
+				                                    <th><a href="#" style="color: #6d6d6d !important; font-size: 13px; margin-left: 8px;">답글쓰기</a></th>
+			                                         
+			                                        <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
+				                                         <th>			                                    	
+					                                    	<ul class="main-menu" id="main-menu${cm.groupBoardCommentNo}" onclick="menu${cm.groupBoardCommentNo}();">
+					                                    		<li>
+					                                    			<i class="fa fa-ellipsis-v layerMore">
+						                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
+						                                    				<c:if test="${loginMember != list.memberEmail}">
+						                                    					<li><a href="#">신고하기</a></li>
+						                                    				</c:if>
+						                                    				<c:if test="${loginMember == list.memberEmail}">
+						                                    					<li><a href="#">수정</a></li>
+						                                    					<li><a href="#">삭제</a></li>
+						                                    				</c:if>
+						                                    			</ul>
+					                                    			</i>
+					                                    		</li>
+					                                    	</ul>
+				                                    	</th>
+				                                    	<script type="text/javascript">
+					                                    	function menu${cm.groupBoardCommentNo}(){
+					                                    		var element = document.getElementById("main-menu${cm.groupBoardCommentNo}");
+					                                    		element.classList.toggle("click");
+	
+					                                    	    if($('#main-menu${cm.groupBoardCommentNo}').hasClass("click")){
+					                                    		   $('#sub-menu${cm.groupBoardCommentNo}').show();
+					                                    	    }else{
+					                                    	   	   $('#sub-menu${cm.groupBoardCommentNo}').hide();
+					                                    	    }
+					                                    	}
+														</script>
+			                                    	</sec:authorize>
+			                                	</tr>
+			                                	
+				                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
+				                         	</div>
+	                           			</c:if>
+										<c:if test="${cm.groupBoardCommentLevel eq '2' }">
+				                         	<div class="level2" style="margin: 10px 0 0 3%;">
+				                         		<tr class="col-md-1">
+				                                    <th><b>${list.nickname}</b></th>
+				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
+				                                     
+				                                     <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
+					                                     <th>
+					                                    	<ul class="main-menu" id="main-menu${cm.groupBoardCommentNo}" onclick="menu${cm.groupBoardCommentNo}();">
+					                                    		<li>
+					                                    			<i class="fa fa-ellipsis-v layerMore">
+						                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
+						                                    				<c:if test="${loginMember != list.memberEmail}">
+						                                    					<li><a href="#">신고하기</a></li>
+						                                    				</c:if>
+						                                    				<c:if test="${loginMember == list.memberEmail}">
+						                                    					<li><a href="#">수정</a></li>
+						                                    					<li><a href="#">삭제</a></li>
+						                                    				</c:if>
+						                                    			</ul>
+					                                    			</i>
+					                                    		</li>
+					                                    	</ul>
+					                                    </th>
+					                                    <script type="text/javascript">
+					                                    	function menu${cm.groupBoardCommentNo}(){
+					                                    		var element = document.getElementById("main-menu${cm.groupBoardCommentNo}");
+					                                    		element.classList.toggle("click");
+	
+					                                    	    if($('#main-menu${cm.groupBoardCommentNo}').hasClass("click")){
+					                                    		   $('#sub-menu${cm.groupBoardCommentNo}').show();
+					                                    	    }else{
+					                                    	   	   $('#sub-menu${cm.groupBoardCommentNo}').hide();
+					                                    	    }
+					                                    	}
+														</script>
+				                                    </sec:authorize>
+				                                    
+			                                	</tr>
+				                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
+				                         	</div>
+										</c:if>			                         	
+		                         	</c:forEach>		                         	
 	                           		<!-- 댓글보기끝-->
 	                           		
 	                           </div>
@@ -304,7 +325,7 @@ $(function(){
 	$('.sub-menu').hide();	
 });
 
-function menu1(){
+/* function menu1(){
 	var element = document.getElementById("main-menu1");
 	element.classList.toggle("click");
 
@@ -313,7 +334,7 @@ function menu1(){
     }else{
    	   $('#sub-menu1').hide();
     }
-}
+} */
 
 $(".textarea1").click(function(){
 	alert('${loginMember}');

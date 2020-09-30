@@ -135,6 +135,7 @@ public class GroupController {
 			
 			model.addAttribute("list", list);
 			model.addAttribute("boardList", boardList);
+			model.addAttribute("commentList", commentList);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

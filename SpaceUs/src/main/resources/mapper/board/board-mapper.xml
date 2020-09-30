@@ -85,12 +85,19 @@
 	
 	<!-- board Detail 에서  comment aLL select-->
 	<select id="selectAllComment" resultMap="gbCommentMap">
-		select
-			*
-		from
-			group_board_comment
-		where
-			group_board_ref = #{groupBoardNo}	
+		select 
+			c.*, M.nickname 
+		from 
+			group_board_comment  C join member M 
+            	on C.writer = m.member_email
+		where 
+			group_board_ref = #{groupBoardNo}
+		start with 
+			group_board_comment_level = 1
+		connect by prior 
+			group_board_comment_no = group_board_comment_ref
+		order siblings by
+			 group_board_comment_no desc
 	</select>
 	<resultMap type="gBComment" id="gbCommentMap">
 	</resultMap>
