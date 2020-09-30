@@ -48,6 +48,17 @@ a:hover {opacity: 0.3; color:black;}
 @media only screen and (max-width: 300px) {
   .prev, .next,.text {font-size: 11px}
 }
+/* 리뷰 */
+.btn-group-toggle{
+	height: 30px;
+    position: absolute;
+    right: 85px;
+	
+}
+.reviewLabel{
+	font-size: 11px;
+}
+
 </style>
 <script>
 var url = $(location).attr('href');
@@ -319,7 +330,17 @@ function urlcopy(){
    <div class="tab-pane fade" id="detail-review" role="tabpanel" aria-labelledby="detail-review-tab">
      <div class="row">
    		<div class="col-md-7">
+   		<div class="row">
    			<h3 class="head">23개의 리뷰</h3>
+   			<div class="btn-group btn-group-toggle" data-toggle="buttons">
+			  <label class="btn btn-secondary active reviewLabel" >
+			    <input type="radio" name="options" id="option1" autocomplete="off" checked>포토리뷰 ON
+			  </label>
+			  <label class="btn btn-secondary reviewLabel">
+			    <input type="radio" name="options" id="option2" autocomplete="off">포토리뷰 OFF
+			  </label>
+			</div>
+   		</div>
    			<div class="review d-flex">
 		   		<div class="desc">
 		   			<h4>
@@ -542,6 +563,7 @@ function showSlides(n) {
 }
 /* 이미지 슬라이드 끝 */
 
+/* 포토리뷰 */
 </script>
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
