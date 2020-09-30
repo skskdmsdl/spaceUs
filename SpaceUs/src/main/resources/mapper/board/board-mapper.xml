@@ -72,6 +72,35 @@
 			G.group_board_no=#{groupBoardNo}
 	</select>
 	
+	<!-- board Detail 에서 윗부분  board 분류 -->
+	<select id="selectBoardOne" resultMap="boardMap">
+	 	select
+        	B.*
+      	from 
+      		board B join group_board G
+                        on B.board_no = G.board_no
+      	where 
+      		G.group_board_no = #{groupBoardNo}
+	</select>
+	
+	<!-- board Detail 에서  comment aLL select-->
+	<select id="selectAllComment" resultMap="gbCommentMap">
+		select 
+			c.*, M.nickname 
+		from 
+			group_board_comment  C join member M 
+            	on C.writer = m.member_email
+		where 
+			group_board_ref = #{groupBoardNo}
+		start with 
+			group_board_comment_level = 1
+		connect by prior 
+			group_board_comment_no = group_board_comment_ref
+		order siblings by
+			 group_board_comment_no desc
+	</select>
+	<resultMap type="gBComment" id="gbCommentMap">
+	</resultMap>
 	<!-- insert board -->
 	<insert id="insertBoard">
 		insert into

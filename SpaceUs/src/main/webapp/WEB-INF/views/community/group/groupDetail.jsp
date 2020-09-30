@@ -1,4 +1,5 @@
-
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="org.springframework.security.core.Authentication"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,6 +10,13 @@
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<!-- icons -->
+<script src="https://kit.fontawesome.com/b74a25ff1b.js" crossorigin="anonymous"></script>
+<%
+Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+String loginMember = auth.getName();
+pageContext.setAttribute("loginMember",loginMember);
+%>
 <style>
 .image-div {
 	background-color:#f7f7f7;
@@ -21,6 +29,35 @@
 .fas {position: absolute; padding: 90px;}
 input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 .site-btn {width: 100%; font-size: 17px;}
+/*드롭*/
+body{
+    margin:0;
+    padding:0;
+}
+/* ul, li 요소 초기화 */
+.main-menu,.sub-menu {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+    float: right;
+    margin-top: 10px;
+}
+.sub-menu{
+	position:absolute;
+	display: block;
+	border: 1px solid #d0d0d0;
+	border-radius: 10px;
+	padding: 10px;
+	background: #fff;
+	box-shadow: 0px 0px 10px .1px #d0d0d0;
+}
+.click .sub-menu{
+	opacity: 1;
+	visibility: visible;	
+}
+.sub-menu > li {
+	padding: 10px;
+}
 </style>
 <!-- 컨텐츠 시작 -->
 <!-- 헤더 -->
@@ -66,30 +103,37 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                  <c:forEach items="${list}" var="list">
 	                 <div class="col-12">
 	                         <div class="m-5" style="border-bottom: 1px solid #dddddd;">
-									
+	                         <c:forEach items="${boardList}" var="board">
+							 <div style="color: #00c89e; cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/community/group/groupList/${board.boardNo}/${board.boardRef}.do'">${board.boardName} > </div>		
+	                         </c:forEach>
 	                         <div style="border-bottom: 1px solid #dddddd; padding-bottom: 15px;">
 	                            <p class="h4">${list.groupBoardTitle}</p>
 	                         	<table style="display: inline-block;">
 	                                <tr>
 	                                    <th><i class="fa fa-user"></i>&nbsp; ${list.nickname}</th>
 	                                    <th class="col-xl-auto">|</th>
-	                                    <th><i class="fa fa-calendar"></i>${list.groupBoardDate}</th>
+	                                    <th><i class="fa fa-calendar"></i>&nbsp; ${list.groupBoardDate}</th>
 	                                    <th class="col-xl-auto">|</th>
-	                                    <th><i class="fa fa-eye"></i> 조회수 ${list.viewCnt}</th>
+	                                    <th><i class="fa fa-eye"></i> 조회수 &nbsp; ${list.viewCnt}</th>
+	                                    <th class="col-xl-auto">|</th>
+	                                    <th><i class="fa fa-comment"></i> 댓글수 &nbsp; ${list.viewCnt}</th>
 	                                </tr>
 	                                <input type="hidden" name="groupBoardNo" value="${list.groupBoardNo}"/>
 	                            </table>
 	                            
 		                        <!-- 수정삭제 버튼시작 -->
 		                        <sec:authorize access="hasAnyRole('USER','ADMIN')">
-		                        	<sec:authentication property="principal.username" var="loginMember"/>
-		                            <button class="btn btn-sm btn-danger"  
-		                            		data-toggle="modal" data-target="#intro"
-		                            		style="margin-top:50px; font-size:15px; color:white; float:right; margin-right: 35px; margin-top: 0;">
-		                            		신고하기 
-		                            </button>	
+		                        	<%-- <sec:authentication property="principal.username" var="loginMember"/> --%>
+		                        	<c:if test="${loginMember != list.memberEmail}">
+			                            <button class="btn btn-sm btn-danger"  
+			                            		data-toggle="modal" data-target="#intro"
+			                            		style="margin-top:50px; font-size:15px; color:white; float:right; margin-right: 35px; margin-top: 0;">
+			                            		신고하기 
+			                            </button>	
+		                        	</c:if>
 		                          	<c:if test="${loginMember != null && loginMember eq list.memberEmail }">
-			                            <button id="modifyBtn" class="btn btn-sm" onclick="location.href='${pageContext.request.contextPath}/community/group/modifyBoard/${list.groupBoardNo}.do'" style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 10px; margin-top: 0;">글 수정 </button>
+			                            <button id="modifyBtn" class="btn btn-sm" onclick="location.href='${pageContext.request.contextPath}/community/group/modifyBoard/${list.groupBoardNo}.do'" 
+			                            		style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 10px; margin-top: 0;">글 수정 </button>
 			                           	<div style="display: inline-block;"></div>
 			                            <button id="deleteBtn" class="btn btn-sm" style="margin-top:42px;background-color: #00c89e;font-size:15px;color:white;float:right;margin-right: 10px;margin-top: 0;border-right-width: 0px;padding-right: 9px;">글 삭제 </button>
 		                          	</c:if>	                          	
@@ -97,28 +141,141 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 		                        <!-- 수정삭제 버튼끝-->
 	                         </div>
 	                         
-	                         <div class="m-5">
-	                         <div class="mb-5">
-	                   			${list.groupBoardContent}
+	                         <!-- 본문 시작 -->
+		                         <div class="m-5">
+			                         <div class="mb-5">
+			                   			${list.groupBoardContent}
+			                         </div>	                         
+		                         </div>
 	                         </div>
+	                         <!-- 본문 끝 -->
 	                         
 	                         
 	                         <!-- 댓글 시작 -->
-	                         <div style="background-color: #fafafa; height: 200px; border: 1px solid #edeceb; ">
+	                         <p style="margin-left:5%;"><i class="fa fa-comment"></i> 댓글수 &nbsp; ${list.viewCnt}</p>
+                         	
+	                         <div style="background-color: #fafafa; width:90%; margin: auto;">
 	                         	<div class="pl-5 pr-5 pt-4">
-	                         		<p>댓글 0개</p>
-	                         		 <textarea class="col-lg-11" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-	                           		<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+	                         		<form:form action="${pageContext.request.contextPath}/community/group/insertComment.do" method="post">
+	                         			<input type="hidden" name="groupBoardRef" value="${list.groupBoardNo}"/>
+	                         			<input type="hidden" name="memberEamil" value="${list.memberEmail}"/>
+	                         			<input type="hidden" name="groupBoardCommentLevel" value="1" />
+	                         			<input type="hidden" name="groupBoardCommentRef" value="0" />
+	                         		
+		                         		<div class="form-check" style="display: block;">
+										  <input class="form-check-input" type="checkbox" name="private" id="private" value="private">
+										  <label class="form-check-label" for="private">비밀글</label>
+										</div>
+										<div >
+			                         		<textarea class="col-lg-11 textarea1" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+			                           		<button type="submit" class="btn insertCmt" id="insertCmt"style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+										</div>
+	                         		</form:form>
+	                         		
+	                           		<!-- 댓글보기시작 -->
+	                           		<c:forEach items="${commentList}" var="cm" varStatus="vs">
+	                           			<c:if test="${cm.groupBoardCommentLevel eq '1' }">
+			                           		<div class="level1" style="margin-top: 10px;">
+				                           		<tr class="col-md-1">
+				                                    <th><b>${cm.nickname}</b></th>
+				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
+				                                    <th>|</th>
+				                                    <th><a href="#" style="color: #6d6d6d !important; font-size: 13px; margin-left: 8px;">답글쓰기</a></th>
+			                                         
+			                                        <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
+				                                         <th>			                                    	
+					                                    	<ul class="main-menu" id="main-menu${cm.groupBoardCommentNo}" onclick="menu${cm.groupBoardCommentNo}();">
+					                                    		<li>
+					                                    			<i class="fa fa-ellipsis-v layerMore">
+						                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
+						                                    				<c:if test="${loginMember != list.memberEmail}">
+						                                    					<li><a href="#">신고하기</a></li>
+						                                    				</c:if>
+						                                    				<c:if test="${loginMember == list.memberEmail}">
+						                                    					<li><a href="#">수정</a></li>
+						                                    					<li><a href="#">삭제</a></li>
+						                                    				</c:if>
+						                                    			</ul>
+					                                    			</i>
+					                                    		</li>
+					                                    	</ul>
+				                                    	</th>
+				                                    	<script type="text/javascript">
+					                                    	function menu${cm.groupBoardCommentNo}(){
+					                                    		var element = document.getElementById("main-menu${cm.groupBoardCommentNo}");
+					                                    		element.classList.toggle("click");
+	
+					                                    	    if($('#main-menu${cm.groupBoardCommentNo}').hasClass("click")){
+					                                    		   $('#sub-menu${cm.groupBoardCommentNo}').show();
+					                                    	    }else{
+					                                    	   	   $('#sub-menu${cm.groupBoardCommentNo}').hide();
+					                                    	    }
+					                                    	}
+														</script>
+			                                    	</sec:authorize>
+			                                	</tr>
+			                                	
+				                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
+				                         	</div>
+	                           			</c:if>
+										<c:if test="${cm.groupBoardCommentLevel eq '2' }">
+				                         	<div class="level2" style="margin: 10px 0 0 3%;">
+				                         		<tr class="col-md-1">
+				                                    <th><b>${list.nickname}</b></th>
+				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
+				                                     
+				                                     <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
+					                                     <th>
+					                                    	<ul class="main-menu" id="main-menu${cm.groupBoardCommentNo}" onclick="menu${cm.groupBoardCommentNo}();">
+					                                    		<li>
+					                                    			<i class="fa fa-ellipsis-v layerMore">
+						                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
+						                                    				<c:if test="${loginMember != list.memberEmail}">
+						                                    					<li><a href="#">신고하기</a></li>
+						                                    				</c:if>
+						                                    				<c:if test="${loginMember == list.memberEmail}">
+						                                    					<li><a href="#">수정</a></li>
+						                                    					<li><a href="#">삭제</a></li>
+						                                    				</c:if>
+						                                    			</ul>
+					                                    			</i>
+					                                    		</li>
+					                                    	</ul>
+					                                    </th>
+					                                    <script type="text/javascript">
+					                                    	function menu${cm.groupBoardCommentNo}(){
+					                                    		var element = document.getElementById("main-menu${cm.groupBoardCommentNo}");
+					                                    		element.classList.toggle("click");
+	
+					                                    	    if($('#main-menu${cm.groupBoardCommentNo}').hasClass("click")){
+					                                    		   $('#sub-menu${cm.groupBoardCommentNo}').show();
+					                                    	    }else{
+					                                    	   	   $('#sub-menu${cm.groupBoardCommentNo}').hide();
+					                                    	    }
+					                                    	}
+														</script>
+				                                    </sec:authorize>
+				                                    
+			                                	</tr>
+				                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
+				                         	</div>
+										</c:if>			                         	
+		                         	</c:forEach>		                         	
+	                           		<!-- 댓글보기끝-->
+	                           		
 	                           </div>
 	                         </div>
 	                         <!-- 댓글 끝 -->
-	                         </div>
-	                         </div>
+	                         
+	                         
 	                         <div class="text-center">
-				                 	<a href='${pageContext.request.contextPath }/community/group/groupList.do' class="btn m-1" style="background-color: #00c89e; font-size:20px; color:white;"><i class="fa fa-list"></i> 목록</a>
-	                             </div>
+				                <a href='${pageContext.request.contextPath }/community/group/groupList.do' class="btn m-1" style="background-color: #00c89e; font-size:20px; color:white;"><i class="fa fa-list"></i> 목록</a>
+	                         </div>
 	                     </div>
-	                      <!-- Modal -->
+	                     
+	                     
+	                     
+	                   <!-- Modal -->
                        <div class="modal fade" id="intro" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
                            <div class="modal-dialog">
                                <div class="modal-content">
@@ -141,6 +298,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                </div>
                            </div>
                        </div>
+                       <!-- Modal end -->
                    </c:forEach>
           
                  </div>
@@ -161,6 +319,32 @@ $("#alertBtn").click(function(){
 	let reportReason = $("[name=reportReason]:checked").val();
 	
 	location.href="${pageContext.request.contextPath }/community/group/alertBoard.do?groupBoardNo="+groupBoardNo+"&reportReason="+reportReason;
+});
+//댓글 삼지창
+$(function(){
+	$('.sub-menu').hide();	
+});
+
+/* function menu1(){
+	var element = document.getElementById("main-menu1");
+	element.classList.toggle("click");
+
+    if($('#main-menu1').hasClass("click")){
+	   $('#sub-menu1').show();
+    }else{
+   	   $('#sub-menu1').hide();
+    }
+} */
+
+$(".textarea1").click(function(){
+	alert('${loginMember}');
+ 	if('${loginMember}' == 'anonymousUser'){
+		alert("로그인 후 사용해 주세요");
+		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+	}
+	else{
+		return;
+	}
 });
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
