@@ -58,7 +58,6 @@ a:hover {opacity: 0.3; color:black;}
 .reviewLabel{
 	font-size: 11px;
 }
-
 </style>
 <script>
 var url = $(location).attr('href');
@@ -357,10 +356,10 @@ function urlcopy(){
 	   					</span>
 	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
 		   			</p>
-		   			<div class="row">
+		   			<div class="row reviewDetailBtn" style="cursor: pointer;">
 			   			<div style="background-image: url(/spaceus/resources/images/work-1.jpg); background-size: cover; width:110px; height: 100px;margin-left: 10px;"></div>
-			   			<p style="position: absolute; margin-left: 130px; margin-right: 85px; overflow: hidden; text-overflow: ellipsis; width:60%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-  <!--   height: 3.6em; -->
+			   			<p style="position: absolute; margin:0 85px 0 135px; overflow: hidden; text-overflow: ellipsis; width:60%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+						<p style="margin: 75px 0 0 15px; font-weight: 600;" class="detailBtn">더보기</p>
 		   			</div>
 		   		</div>
 		   	</div>
@@ -380,7 +379,11 @@ function urlcopy(){
 	   					</span>
 	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
 		   			</p>
-		   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+		   			<div class="row reviewDetailBtn" style="cursor: pointer;">
+			   			<div style="background-image: url(); background-size: cover; width:110px; height: 100px;margin-left: 10px;"></div>
+			   			<p style="position: absolute; margin:0 85px 0 15px; overflow: hidden; text-overflow: ellipsis; width:80%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+						<p style="position: absolute; margin: 75px 0 0 15px; font-weight: 600;" class="detailBtn">더보기</p>
+		   			</div>
 		   		</div>
 		   	</div>
 		   	<div class="review d-flex">
@@ -568,6 +571,17 @@ function showSlides(n) {
 /* 이미지 슬라이드 끝 */
 
 /* 포토리뷰 */
+  
+/* 리뷰 디테일 호버 */
+$(document).ready(function (){
+	$(".reviewDetailBtn").mouseenter(function(){
+		$(this).children(".detailBtn").css('text-decoration', 'underline');
+	});
+	$(".reviewDetailBtn").mouseleave(function(){
+		$(".detailBtn").css('text-decoration', 'none');
+	});
+});
+
 </script>
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
