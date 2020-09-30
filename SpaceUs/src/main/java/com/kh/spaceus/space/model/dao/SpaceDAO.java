@@ -23,7 +23,9 @@ public interface SpaceDAO {
 
 	int insertReviewAttahment(ReviewAttachment attach);
 
-	List<Review> selectListReview(String spaceNo);
+	List<Review> selectListReview(String spaceNo, int limit, int offset);
+
+	int selectReviewTotalContents(String spaceNo);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

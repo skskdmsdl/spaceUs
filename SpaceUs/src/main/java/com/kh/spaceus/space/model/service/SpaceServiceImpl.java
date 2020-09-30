@@ -72,8 +72,13 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public List<Review> selectListReview(String spaceNo) {
-		return spaceDAO.selectListReview(spaceNo);
+	public List<Review> selectListReview(String spaceNo, int limit, int offset) {
+		return spaceDAO.selectListReview(spaceNo, limit, offset);
+	}
+
+	@Override
+	public int selectReviewTotalContents(String spaceNo) {
+		return  spaceDAO.selectReviewTotalContents(spaceNo);
 	}
 	
 	

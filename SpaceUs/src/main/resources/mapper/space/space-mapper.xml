@@ -139,6 +139,15 @@
 		<result column="image" property="image"/>
 	</resultMap>
 	
+	<select id="selectReviewTotalContents" resultType="_int">
+	    select 
+	    	count(*) 
+	    from 
+	    	review
+	    where 
+	    	space_no = #{spaceNo} 	
+	</select>
+	
 	
 </mapper>
 

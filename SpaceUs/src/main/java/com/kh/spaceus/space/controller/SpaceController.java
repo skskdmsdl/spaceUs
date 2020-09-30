@@ -71,16 +71,26 @@ public class SpaceController {
 	
 	@RequestMapping("/spaceDetail.do")
 	public String spaceDetail(Model model,
-							  @RequestParam("spaceNo") String spaceNo) {
+							  @RequestParam("spaceNo") String spaceNo,
+							  @RequestParam(defaultValue = "1",
+						  		value = "cPage") int cPage) {
 		//log.debug("spaceNo= {}",spaceNo);
 		Space space = spaceService.selectOneSpace(spaceNo);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
-		List<Review> review = spaceService.selectListReview(spaceNo);
-		System.out.println(review);
+		
+		//1.사용자 입력값 
+		final int limit = 5; //사용용도는 numPerPage와 똑같음
+		int offset = (cPage - 1) * limit;
+		List<Review> review = spaceService.selectListReview(spaceNo, limit, offset);
+		
+		//전체리뷰수 구하기
+		int reviewTotal = spaceService.selectReviewTotalContents(spaceNo);
+		
 		
 		model.addAttribute("space", space);
 		model.addAttribute("tag", tag);
 		model.addAttribute("review", review);
+		model.addAttribute("reviewTotal", reviewTotal);
 		return "space/spaceDetail";
 	}
 	

@@ -330,7 +330,7 @@ function urlcopy(){
      <div class="row">
    		<div class="col-md-7">
    		<div class="row">
-   			<h3 class="head ml-4">23개의 리뷰</h3>
+   			<h3 class="head ml-4">${ reviewTotal }개의 리뷰</h3>
    			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 			  <label class="btn btn-secondary active reviewLabel" >
 			    <a id="option1"><input type="radio" name="options" autocomplete="off" checked>포토리뷰 OFF</a>

@@ -21,7 +21,9 @@ public interface SpaceService {
 
 	int insertReview(Review review);
 
-	List<Review> selectListReview(String spaceNo);
+	List<Review> selectListReview(String spaceNo, int limit, int offset);
+
+	int selectReviewTotalContents(String spaceNo);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 
