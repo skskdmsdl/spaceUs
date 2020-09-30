@@ -361,8 +361,19 @@ function urlcopy(){
 			   			<p style="position: absolute; margin:0 85px 0 135px; overflow: hidden; text-overflow: ellipsis; width:60%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
 						<p style="margin: 75px 0 0 15px; font-weight: 600;" class="detailBtn">더보기</p>
 		   			</div>
+		   			<div class="" style="cursor: pointer; height: 100%">
+			   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+						<p style="font-weight: 600;" class="simpleBtn">접기</p>
+			   			<div style="background-image: url(/spaceus/resources/images/work-1.jpg);  width: 500px;height: 350px;background-size: cover;"></div>
+		   			</div>
 		   		</div>
 		   	</div>
+		   	
+		   	
+		   	
+		   	
+		   	
+		   	
 		   	<div class="review d-flex">
 		   		<div class="desc">
 		   			<h4>
