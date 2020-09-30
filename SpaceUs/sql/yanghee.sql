@@ -457,7 +457,7 @@ drop table group_board_comment;
 --start with : 부모 조건절 작성
 --connect by : 부모 / 자식 관계 조건절 작성 prior키워드 쪽이 부모행을 가리킴
 
-select * 
+select c.*, M.nickname 
 from group_board_comment C join member M 
             on C.writer = m.member_email
 where group_board_ref = 'G5'

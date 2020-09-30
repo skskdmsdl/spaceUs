@@ -158,13 +158,13 @@ body{
 	                         	<div class="pl-5 pr-5 pt-4">
 	                         		<form:form action="${pageContext.request.contextPath}/community/group/insertComment.do" method="post">
 	                         			<input type="hidden" name="groupBoardRef" value="${list.groupBoardNo}"/>
-	                         			<input type="hidden" name="memberEamil" value="${list.memberEmail}"/>
+	                         			<input type="hidden" name="memberEmail" value="${list.memberEmail}"/>
 	                         			<input type="hidden" name="groupBoardCommentLevel" value="1" />
 	                         			<input type="hidden" name="groupBoardCommentRef" value="0" />
 	                         		
 		                         		<div class="form-check" style="display: block;">
-										  <input class="form-check-input" type="checkbox" name="private" id="private" value="private">
-										  <label class="form-check-label" for="private">비밀글</label>
+										  <input class="form-check-input" type="checkbox" name="secret" id="secret" value="secret">
+										  <label class="form-check-label" for="secret">비밀글</label>
 										</div>
 										<div >
 			                         		<textarea class="col-lg-11 textarea1" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
@@ -345,6 +345,31 @@ $(".textarea1").click(function(){
 	else{
 		return;
 	}
+});
+
+/*댓글 등록 버튼 이벤트 ajax*/
+$(".insertCmt").click(function(){
+	var groupBoardRef = $("[name=groupBoardRef]").val();
+	var memberEmail = $("[name=memberEmail]").val();
+	var groupBoardCommentLevel = $("[name=groupBoardCommentLevel]").val();
+	var groupBoardCommentRef = $("[name=groupBoardCommentRef]").val();
+	/*비밀댓글 기본값*/
+	var secret = "0";
+	/*비밀체크 누르면*/
+	if($("[name=secret]").is(":checked")){
+		secret = "1";
+	}
+	var param = "groupBoardRef="+groupBoardRef+"&memberEmail="+memberEmail+
+				"&groupBoardCommentLevel="+groupBoardCommentLevel+
+				"groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret;
+	$.ajax({
+		type:"post",
+		url:"${pageContext.request.contextPath}/community/group/insertComment.do",
+		data:param,
+		success:function(){
+			alert("댓글이 정상적으로 등록되었습니다.");
+		}
+	});
 });
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
