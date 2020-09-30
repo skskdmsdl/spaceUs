@@ -340,10 +340,11 @@ function urlcopy(){
 			  </label>
 			</div>
    		</div>
+   		<c:forEach items="${review}" var="review" varStatus="vs">
    			<div class="review d-flex">
 		   		<div class="desc">
 		   			<h4>
-		   				<span class="text-left">Jacob Webb</span>
+		   				<span class="text-left">${ review.nickName }</span>
 		   				<span class="text-right">14 March 2018</span>
 		   			</h4>
 		   			<p class="star">
@@ -370,7 +371,7 @@ function urlcopy(){
 		   			</div>
 		   		</div>
 		   	</div>
-		   	
+		 </c:forEach>	
 		   	
 		   	
 		   	
