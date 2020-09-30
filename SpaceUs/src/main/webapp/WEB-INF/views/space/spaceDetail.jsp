@@ -330,17 +330,19 @@ function urlcopy(){
      <div class="row">
    		<div class="col-md-7">
    		<div class="row">
-   			<h3 class="head">23개의 리뷰</h3>
+   			<h3 class="head ml-4">23개의 리뷰</h3>
    			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 			  <label class="btn btn-secondary active reviewLabel" >
-			    <input type="radio" name="options" id="option1" autocomplete="off" checked>포토리뷰 OFF
+			    <a id="option1"><input type="radio" name="options" autocomplete="off" checked>포토리뷰 OFF</a>
 			  </label>
 			  <label class="btn btn-secondary reviewLabel">
-			    <input type="radio" name="options" id="option2" autocomplete="off">포토리뷰 ON
+			    <a id="option2"><input type="radio" name="options" autocomplete="off">포토리뷰 ON</a>
 			  </label>
 			</div>
    		</div>
-   		<c:forEach items="${review}" var="review" varStatus="vs">
+		 <c:forEach items="${review}" var="review" varStatus="vs">
+		 <c:choose>
+			<c:when test="${ review.image != null }">
    			<div class="review d-flex">
 		   		<div class="desc">
 		   			<h4>
@@ -356,85 +358,52 @@ function urlcopy(){
 	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
 		   			</p>
 		   			<div class="reviewToggle">
+			   			<div class="row reviewDetailBtn" style="cursor: pointer;">
+				   			<div style="background-image: url(${pageContext.request.contextPath}/resources/upload/review/${review.image}); background-size: cover; width:110px; height: 100px;margin-left: 10px;"></div>
+				   			<p style="position: absolute; margin:0 85px 0 135px; overflow: hidden; text-overflow: ellipsis; width:60%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">${ review.content }</p>
+							<p style="margin: 75px 0 0 15px; font-weight: 600;" class="detailBtn">더보기</p>
+			   			</div>
+			   			<div class="reviewSimpleBtn" style="cursor: pointer; display:none; height: 100%">
+				   			<p>${ review.content }</p>
+							<p style="font-weight: 600;" class="simpleBtn">접기</p>
+				   			<div style="background-image: url(${pageContext.request.contextPath}/resources/upload/review/${review.image});  width: 500px;height: 350px;background-size: cover;"></div>
+			   			</div>
+		   			</div>
+		   		</div>
+		   	</div>
+			</c:when>
+			<c:otherwise>
+   			<div class="review nullImg">
+		   		<div class="desc nullImg">
+		   			<h4>
+		   				<span class="text-left">${ review.nickName }</span>
+		   				<span class="text-right"><fmt:formatDate value="${review.enrollDate}" pattern="yyyy-MM-dd"/></span>
+		   			</h4>
+		   			<p class="star">
+		   				<span>
+		   					<c:forEach begin="1" end="${ review.starRating }">
+			   					<i class="ion-ios-star"></i>
+		   					</c:forEach>
+	   					</span>
+	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+		   			</p>
+		   			<div class="reviewToggle">
 		   			<div class="row reviewDetailBtn" style="cursor: pointer;">
-		   				<c:choose>
-				   			<c:when test="${ review.image != null }">
-					   			<div style="background-image: url(${pageContext.request.contextPath}/resources/upload/review/${review.image}); background-size: cover; width:110px; height: 100px;margin-left: 10px;"></div>
-					   			<p style="position: absolute; margin:0 85px 0 135px; overflow: hidden; text-overflow: ellipsis; width:60%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">${ review.content }</p>
-								<p style="margin: 75px 0 0 15px; font-weight: 600;" class="detailBtn">더보기</p>
-				   			</c:when>
-				   			<c:otherwise>
-				   				<p style="position: absolute; margin:0 85px 0 15px; overflow: hidden; text-overflow: ellipsis; width:80%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">${ review.content }</p>
-								<p style="margin: 75px 0 0 15px; font-weight: 600;" class="detailBtn">더보기</p>
-    						</c:otherwise>
-			   			</c:choose>
+		   				<p style="position: absolute; margin:0 85px 0 15px; overflow: hidden; text-overflow: ellipsis; width:80%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">${ review.content }</p>
+						<p style="margin: 75px 0 0 15px; font-weight: 600;" class="detailBtn">더보기</p>
 		   			</div>
 		   			
 		   			<div class="reviewSimpleBtn" style="cursor: pointer; display:none; height: 100%">
-		   			<c:choose>
-				   			<c:when test="${ review.image != null }">
-					   			<p>${ review.content }</p>
-								<p style="font-weight: 600;" class="simpleBtn">접기</p>
-					   			<div style="background-image: url(${pageContext.request.contextPath}/resources/upload/review/${review.image});  width: 500px;height: 350px;background-size: cover;"></div>
-				   			</c:when>
-				   			<c:otherwise>
-				   				<p>${ review.content }</p>
-								<p style="font-weight: 600;" class="simpleBtn">접기</p>
-    						</c:otherwise>
-			   			</c:choose>
-			   			
+		   				<p>${ review.content }</p>
+						<p style="font-weight: 600;" class="simpleBtn">접기</p>
 		   			</div>
 		   			</div>
 		   		</div>
 		   	</div>
-		 </c:forEach>	
+			</c:otherwise>
+			</c:choose>
+		 </c:forEach>	  	
 		   	
-		   	
-		   	
-		   	
-		   	
-		  <!--  	<div class="review d-flex" style="clear: both;">
-		   		<div class="desc">
-		   			<h4>
-		   				<span class="text-left">Jacob Webb</span>
-		   				<span class="text-right">14 March 2018</span>
-		   			</h4>
-		   			<p class="star">
-		   				<span>
-		   					<i class="ion-ios-star"></i>
-		   					<i class="ion-ios-star"></i>
-		   					<i class="ion-ios-star"></i>
-		   					<i class="ion-ios-star"></i>
-		   					<i class="ion-ios-star"></i>
-	   					</span>
-	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-		   			</p>
-		   			<div class="row reviewDetailBtn" style="cursor: pointer;">
-			   			<div style="background-image: url(); background-size: cover; width:110px; height: 100px;margin-left: 10px;"></div>
-			   			<p style="position: absolute; margin:0 85px 0 15px; overflow: hidden; text-overflow: ellipsis; width:80%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown BookmarksgroWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-						<p style="position: absolute; margin: 75px 0 0 15px; font-weight: 600;" class="detailBtn">더보기</p>
-		   			</div>
-		   		</div>
-		   	</div>
-		   	<div class="review d-flex">
-		   		<div class="desc">
-		   			<h4>
-		   				<span class="text-left">Jacob Webb</span>
-		   				<span class="text-right">14 March 2018</span>
-		   			</h4>
-		   			<p class="star">
-		   				<span>
-		   					<i class="ion-ios-star"></i>
-		   					<i class="ion-ios-star"></i>
-		   					<i class="ion-ios-star"></i>
-		   					<i class="ion-ios-star"></i>
-		   					<i class="ion-ios-star"></i>
-	   					</span>
-	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-		   			</p>
-		   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-		   		</div>
-		   	</div> -->
    		</div>
    		<div class="col-md-5">
    			<div class="rating-wrap">
@@ -601,7 +570,12 @@ function showSlides(n) {
 /* 이미지 슬라이드 끝 */
 
 /* 포토리뷰 */
-  
+$("#option1").on("click", function(){
+	$(".nullImg").removeClass("hide");
+});
+$("#option2").on("click", function(){
+	$(".nullImg").addClass("hide");
+});
 /* 리뷰 디테일 호버 */
 $(document).ready(function (){
 	$(".reviewDetailBtn").mouseenter(function(){
@@ -621,7 +595,7 @@ $(document).ready(function (){
 });
 /* 리뷰 디테일 */
 $(".reviewToggle").on('click', function(){
-	$(this).children(".reviewDetailBtn").toggle('show');
+	$(this).children(".reviewDetailBtn").toggle('hide');
 	$(this).children(".reviewSimpleBtn").toggle('show');
 	
 });

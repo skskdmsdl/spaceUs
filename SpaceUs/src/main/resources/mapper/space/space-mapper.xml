@@ -125,6 +125,7 @@
 		from
 			review R
 		where space_no = #{ spaceNo } 
+		order by R.review_date desc
 	</select>
 	<resultMap type="review" id="reviewMap">
 		<id column="review_no" property="reviewNo"/>
