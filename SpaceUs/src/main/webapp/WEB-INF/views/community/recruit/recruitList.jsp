@@ -98,19 +98,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                 <nav class="mt-5" >
 			                 	<a href="${pageContext.request.contextPath }/community/recruit/recruitEnrollForm.do" class="btn waves-effect waves-light hidden-md-down m-1 pull-right" style="font-size:18px;background-color: #00c89e;  color:white;"> 글 등록</a>
 								  <ul class="justify-content-center pagination">
-								    <!-- <li class="page-item disabled">
-								      <span class="page-link m-1">&lt;</span>
-								    </li> -->
-								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">&lt;</a></li>
-								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">1</a></li>
-								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">2</a></li>
-								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">3</a></li>
-								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">4</a></li>
-								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">5</a></li>
-								    <li class="page-item"><a class="page-link m-1 text-black-50" href="#">></a></li>
-								    <li class="page-item">
-								      <!-- <a class="page-link m-1 text-black-50" href="#">></a> -->
-								    </li>
+								    ${ pageBar }
 								  </ul>
 	                            
 								</nav>
