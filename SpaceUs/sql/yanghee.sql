@@ -463,7 +463,7 @@ from group_board_comment C join member M
 where group_board_ref = 'G5'
 start with group_board_comment_level = 1
 connect by prior group_board_comment_no = group_board_comment_ref
-order siblings by group_board_comment_no desc;
+order siblings by group_board_date desc, group_board_comment_no desc;
 
 -----------------------------
 --------- 신고 ---------------

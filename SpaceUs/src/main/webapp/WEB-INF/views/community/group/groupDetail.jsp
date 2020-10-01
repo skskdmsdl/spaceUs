@@ -189,10 +189,10 @@ body{
 					                                    		<li>
 					                                    			<i class="fa fa-ellipsis-v layerMore">
 						                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
-						                                    				<c:if test="${loginMember != list.memberEmail}">
+						                                    				<c:if test="${loginMember != cm.writer}">
 						                                    					<li><a href="#">신고하기</a></li>
 						                                    				</c:if>
-						                                    				<c:if test="${loginMember == list.memberEmail}">
+						                                    				<c:if test="${loginMember == cm.writer}">
 						                                    					<li><a href="#">수정</a></li>
 						                                    					<li><a href="#">삭제</a></li>
 						                                    				</c:if>
@@ -231,10 +231,10 @@ body{
 					                                    		<li>
 					                                    			<i class="fa fa-ellipsis-v layerMore">
 						                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
-						                                    				<c:if test="${loginMember != list.memberEmail}">
+						                                    				<c:if test="${loginMember != cm.writer}">
 						                                    					<li><a href="#">신고하기</a></li>
 						                                    				</c:if>
-						                                    				<c:if test="${loginMember == list.memberEmail}">
+						                                    				<c:if test="${loginMember == cm.writer}">
 						                                    					<li><a href="#">수정</a></li>
 						                                    					<li><a href="#">삭제</a></li>
 						                                    				</c:if>
