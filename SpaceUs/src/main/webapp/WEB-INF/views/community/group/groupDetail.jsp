@@ -181,7 +181,7 @@ body{
 				                                    <th><b>${cm.nickname}</b></th>
 				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
 				                                    <th>|</th>
-				                                    <th><a href="#" style="color: #6d6d6d !important; font-size: 13px; margin-left: 8px;">답글쓰기</a></th>
+				                                    <th><a role="button" id="replyComment${cm.groupBoardCommentNo}" name="replyComment${cm.groupBoardCommentNo}" style="color: #6d6d6d !important; font-size: 13px; margin-left: 8px;">답글쓰기</a></th>
 			                                         
 			                                        <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
 					                                         <th>			                                    	
@@ -223,7 +223,56 @@ body{
 				                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글입니다</div>
 				                                </c:if>
 				                         	</div>
+				                         	
+				                 
+				                         	
+	                 					<!-- 대댓글 폼 시작 -->
+		                           		<script type="text/javascript">
+											$("#replyComment${cm.groupBoardCommentNo}").click(function(){
+												if('${loginMember}' == 'anonymousUser'){
+													alert("로그인 후 사용해 주세요");
+													location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+												}
+												else{
+											
+													$('[name=replyComment${cm.groupBoardCommentNo}]').hide();
+													
+													let $div3 = $("<div></div>");
+													$div3.append("<input type='button' id='register1' class='register1' value='등록'>");
+													$div3.append("<input type='button' class='cancel' value='취소'>");
+											
+													let $div2 = $("<div style='border: 2px solid #d0d0d0; border-radius:6px; margin: 10px 0 0 22px; display: block; padding: 10px;'></div>");
+													$div2.append("<em style='display: block; font-style: normal; font-weight: 200px; color: #000;'>'${loginMember}'</em>");
+													$div2.append("<textarea placeholder='댓글을 남겨보세요' class='textarea2' style='font-size:15px; border:none; background-color:#fafafa; resize:none; overflow: hidden; width:100%; overflow-wrap:break-word;'></textarea>");
+													$div2.append($div3);
+											
+													let $tr = $("<tr></tr>");
+													$tr.append($div2);
+													$tr.append("<input type='hidden' name='groupBoardRef' value='${list.groupBoardNo}'/>");
+													$tr.append("<input type='hidden' name='memberEmail' value='${loginMember}'/>");
+													$tr.append("<input type='hidden' name='groupBoardCommentLevel' value='2' />");
+													$tr.append("<input type='hidden' name='groupBoardCommentRef' value='${cm.groupBoardCommentNo}' />");
+											
+													let $frm = $("<form id='reply'></form>");
+													$frm.append($div2);
+											
+													let $div1 = $("<div></div>");
+													$div1.append($frm);
+											
+													let $BoardCommentDiv = $(this).parent();
+													
+													$div1.insertAfter($BoardCommentDiv);
+
+													$('.textarea2').focus();
+																		
+												}
+											
+											});
+		                           		</script>		                           			
+	                           			<!-- 대댓글 폼 끝 -->
 	                           			</c:if>
+	                           			
+	                           			
 										<c:if test="${cm.groupBoardCommentLevel eq '2' }">
 				                         	<div class="level2" style="margin: 10px 0 0 3%;">
 				                         		<tr class="col-md-1">
@@ -334,18 +383,6 @@ $("#alertBtn").click(function(){
 //댓글 삼지창
 $(function(){
 	$('.sub-menu').hide();	
-});
-
-/* function menu1(){
-	var element = document.getElementById("main-menu1");
-	element.classList.toggle("click");
-
-    if($('#main-menu1').hasClass("click")){
-	   $('#sub-menu1').show();
-    }else{
-   	   $('#sub-menu1').hide();
-    }
-} */
 
 $(".textarea1").click(function(){
 	alert('${loginMember}');
@@ -361,6 +398,11 @@ $(".textarea1").click(function(){
 /*댓글 등록 버튼 이벤트 ajax*/
 $("#inserCommentFrm #insertCmt").click(function(){
 	var groupBoardContent = $("[name=textarea1]").val();
+	if(groupBoardContent == null || groupBoardContent == ''){
+		alert("댓글을 입력해주세요");
+		return;
+	}
+
 	var groupBoardRef = $("[name=groupBoardRef]").val();
 	var writer = $("[name=memberEmail]").val();
 	var groupBoardCommentLevel = $("[name=groupBoardCommentLevel]").val();
@@ -387,10 +429,18 @@ $("#inserCommentFrm #insertCmt").click(function(){
 			location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
 		},
 		error: function(x,h,r){
-			alert("댓글이 정상적으로 등록ㅌㅌㅌ.안됨");
+			alert("댓글이 정상적으로 등록이 되지 않았습니다.");
 			console.log(x,h,r);
 		}
 	});
+});
+
+/*대댓글 등록*/
+$("#register1").click(function(){
+	alert("ddd");
+});
+	
+
 });
 
 </script>
