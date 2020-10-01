@@ -356,10 +356,12 @@ function urlcopy(){
 			   					<i class="ion-ios-star"></i>
 		   					</c:forEach>
 	   					</span>
+	   					<sec:authorize access="hasAnyRole('USER','HOST','ADMIN')">
 	   					<sec:authentication property="principal.username" var="loginMember"/>
 	   					<c:if test="${loginMember != null && loginMember eq space.memberEmail }">
 	   						<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
 		   				</c:if>
+		   				</sec:authorize>
 		   			</p>
 		   			<div class="reviewToggle">
 			   			<div class="row reviewDetailBtn" style="cursor: pointer;">
@@ -389,10 +391,12 @@ function urlcopy(){
 			   					<i class="ion-ios-star"></i>
 		   					</c:forEach>
 	   					</span>
+	   					<sec:authorize access="hasAnyRole('USER','HOST','ADMIN')">
 	   					<sec:authentication property="principal.username" var="loginMember"/>
 	   					<c:if test="${loginMember != null && loginMember eq space.memberEmail }">
 	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
 	   					</c:if>
+	   					</sec:authorize>
 		   			</p>
 		   			<div class="reviewToggle">
 		   			<div class="row reviewDetailBtn" style="cursor: pointer;">
