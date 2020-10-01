@@ -184,23 +184,23 @@ body{
 				                                    <th><a href="#" style="color: #6d6d6d !important; font-size: 13px; margin-left: 8px;">답글쓰기</a></th>
 			                                         
 			                                        <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
-				                                         <th>			                                    	
-					                                    	<ul class="main-menu" id="main-menu${cm.groupBoardCommentNo}" onclick="menu${cm.groupBoardCommentNo}();">
-					                                    		<li>
-					                                    			<i class="fa fa-ellipsis-v layerMore">
-						                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
-						                                    				<c:if test="${loginMember != list.memberEmail}">
-						                                    					<li><a href="#">신고하기</a></li>
-						                                    				</c:if>
-						                                    				<c:if test="${loginMember == list.memberEmail}">
-						                                    					<li><a href="#">수정</a></li>
-						                                    					<li><a href="#">삭제</a></li>
-						                                    				</c:if>
-						                                    			</ul>
-					                                    			</i>
-					                                    		</li>
-					                                    	</ul>
-				                                    	</th>
+					                                         <th>			                                    	
+						                                    	<ul class="main-menu" id="main-menu${cm.groupBoardCommentNo}" onclick="menu${cm.groupBoardCommentNo}();">
+						                                    		<li>
+						                                    			<i class="fa fa-ellipsis-v layerMore">
+							                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
+							                                    				<c:if test="${loginMember != cm.writer}">
+							                                    					<li><a href="#">신고하기</a></li>
+							                                    				</c:if>
+							                                    				<c:if test="${loginMember == cm.writer}">
+							                                    					<li><a href="#">수정</a></li>
+							                                    					<li><a href="#">삭제</a></li>
+							                                    				</c:if>
+							                                    			</ul>
+						                                    			</i>
+						                                    		</li>
+						                                    	</ul>
+					                                    	</th>
 				                                    	<script type="text/javascript">
 					                                    	function menu${cm.groupBoardCommentNo}(){
 					                                    		var element = document.getElementById("main-menu${cm.groupBoardCommentNo}");
@@ -216,7 +216,12 @@ body{
 			                                    	</sec:authorize>
 			                                	</tr>
 			                                	
-				                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
+				                                <c:if test="${cm.secret eq '0' || cm.writer eq loginMember}">
+				                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
+				                                </c:if>
+				                                <c:if test="${cm.secret eq '1' && cm.writer != loginMember}">
+				                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글입니다</div>
+				                                </c:if>
 				                         	</div>
 	                           			</c:if>
 										<c:if test="${cm.groupBoardCommentLevel eq '2' }">
@@ -231,10 +236,10 @@ body{
 					                                    		<li>
 					                                    			<i class="fa fa-ellipsis-v layerMore">
 						                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
-						                                    				<c:if test="${loginMember != list.memberEmail}">
+						                                    				<c:if test="${loginMember != cm.writer}">
 						                                    					<li><a href="#">신고하기</a></li>
 						                                    				</c:if>
-						                                    				<c:if test="${loginMember == list.memberEmail}">
+						                                    				<c:if test="${loginMember == cm.writer}">
 						                                    					<li><a href="#">수정</a></li>
 						                                    					<li><a href="#">삭제</a></li>
 						                                    				</c:if>
@@ -258,7 +263,12 @@ body{
 				                                    </sec:authorize>
 				                                    
 			                                	</tr>
-				                         		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
+			                                	<c:if test="${cm.secret eq '0'}">
+				                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
+			                                	</c:if>
+			                                	<c:if test="${cm.secret eq '1'}">
+				                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글 입니다</div>
+			                                	</c:if>
 				                         	</div>
 										</c:if>			                         	
 		                         	</c:forEach>		                         	
