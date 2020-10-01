@@ -38,4 +38,6 @@ public interface GroupDAO {
 
 	List<GBComment> selectAllComment(String groupBoardNo);
 
+	int insertComment(GBComment param1);
+
 }

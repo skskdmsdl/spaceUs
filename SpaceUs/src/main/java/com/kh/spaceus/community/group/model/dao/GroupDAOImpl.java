@@ -89,6 +89,12 @@ public class GroupDAOImpl implements GroupDAO {
 	public List<GBComment> selectAllComment(String groupBoardNo) {
 		return session.selectList("board.selectAllComment", groupBoardNo);
 	}
+
+	@Override
+	public int insertComment(GBComment param1) {
+		return session.insert("board.insertComment", param1);
+	}
+	
 	
 	
 }

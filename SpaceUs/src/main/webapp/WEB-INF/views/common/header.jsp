@@ -26,6 +26,11 @@
     <meta name="description" content="Elegant Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
     
+    <!-- ajax 403에러 -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+	<!-- default header name is X-CSRF-TOKEN -->
+	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    
 
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${ pageContext.request.contextPath }/assets/images/favicon.png">
