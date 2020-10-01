@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -72,12 +74,45 @@ public class RecruitController {
 	// 구인/구직 상세페이지
 	@GetMapping("/recruitDetail.do")
 	public String recruitDetail (@RequestParam("no") String no,
-			  					Model model
+			  					Model model,
+			  					HttpServletRequest request,
+			  					HttpServletResponse response
 			  					) {
-		Recruit recruit = recruitService.selectOneRecruit(no);
-		log.debug("recruit = {}", recruit);
-		model.addAttribute("recruit", recruit);
-		
+		try {
+			//쿠키검사 : recruitCookie
+			Cookie[] cookies = request.getCookies();
+			String recruitCookieVal = "";
+			boolean hasRead = false;
+			
+			if(cookies != null) {
+				for(Cookie c : cookies) {
+					String name = c.getName();
+					String value = c.getValue();
+					
+					if("recruitCookie".equals(name)) {
+						recruitCookieVal = value;
+						
+						if(value.contains("[" + no + "]"))
+							hasRead = true;
+					}
+				}
+			}
+			if(!hasRead) {
+				//recruitCookie생성
+				Cookie recruitCookie = new Cookie("recruitCookie", recruitCookieVal + "["+ no +"]");
+				recruitCookie.setPath(request.getContextPath()+"/community/recruit");
+				recruitCookie.setMaxAge(24*60*60);
+				response.addCookie(recruitCookie);
+				int result = recruitService.increaseRecruitReadCnt(no);
+				log.info("result = {}",result);			
+			}
+			
+			Recruit recruit = recruitService.selectOneRecruit(no);
+			log.debug("recruit = {}", recruit);
+			model.addAttribute("recruit", recruit);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "community/recruit/recruitDetail";
 	}
 	
