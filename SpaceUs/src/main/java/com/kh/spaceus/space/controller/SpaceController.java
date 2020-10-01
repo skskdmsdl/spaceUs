@@ -14,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.service.SpaceService;
+import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
 
 import lombok.extern.slf4j.Slf4j;
@@ -70,13 +72,30 @@ public class SpaceController {
 	
 	@RequestMapping("/spaceDetail.do")
 	public String spaceDetail(Model model,
-							  @RequestParam("spaceNo") String spaceNo) {
+							  @RequestParam("spaceNo") String spaceNo,
+							  @RequestParam(defaultValue = "1",
+						  		value = "cPage") int cPage) {
 		//log.debug("spaceNo= {}",spaceNo);
 		Space space = spaceService.selectOneSpace(spaceNo);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
 		
+		//리뷰 한 페이지당 개수 제한
+		final int limit = 5; //사용용도는 numPerPage와 똑같음
+		int offset = (cPage - 1) * limit;
+		List<Review> review = spaceService.selectListReview(spaceNo, limit, offset);
+		
+		//전체리뷰수 구하기
+		int reviewTotal = spaceService.selectReviewTotalContents(spaceNo);
+		
+		//별점조회
+		Star star = spaceService.selectStar();
+		star.setSumStar(star.getStar1()+star.getStar2()+star.getStar3()+star.getStar4()+star.getStar5());
+		
 		model.addAttribute("space", space);
 		model.addAttribute("tag", tag);
+		model.addAttribute("review", review);
+		model.addAttribute("reviewTotal", reviewTotal);
+		model.addAttribute("star", star);
 		return "space/spaceDetail";
 	}
 	

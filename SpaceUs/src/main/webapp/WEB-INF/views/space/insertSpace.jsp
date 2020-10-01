@@ -114,31 +114,31 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 
                                 <div class="jumbotron pb-1 pt-1 status-item">
 	                                    <label for="mon" class="mr-5" style="font-size: 15px;">월요일
-	                                    <input type="checkbox" id="mon">
+	                                    <input type="radio" name="radio" id="mon">
                                         <span class="checkbox mt-1"></span>
 	                                    </label>
                                     <label for="tue" class="mr-5" style="font-size: 15px;">화요일
-	                                    <input type="checkbox" id="tue">
+	                                    <input type="radio" name="radio" id="tue">
 	                                    <span class="checkbox mt-1"></span>
                                     </label>
                                     <label for="wed" class="mr-5" style="font-size: 15px;">수요일
-	                                    <input type="checkbox" id="wed">
+	                                    <input type="radio" name="radio" id="wed">
 	                                    <span class="checkbox mt-1"></span>
                                     </label>
                                     <label for="thu" class="mr-5" style="font-size: 15px;">목요일
-	                                    <input type="checkbox" id="thu">
+	                                    <input type="radio" name="radio" id="thu">
 	                                    <span class="checkbox mt-1"></span>
                                     </label>
                                     <label for="fri" class="mr-5" style="font-size: 15px;">금요일
-	                                    <input type="checkbox" id="fri">
+	                                    <input type="radio" name="radio" id="fri">
 	                                    <span class="checkbox mt-1"></span>
                                     </label>
                                     <label for="sat" class="mr-5" style="font-size: 15px;">토요일
-	                                    <input type="checkbox" id="sat">
+	                                    <input type="radio" name="radio" id="sat">
 	                                    <span class="checkbox mt-1"></span>
                                     </label>
                                     <label for="sun" class="mr-5" style="font-size: 15px;">일요일
-	                                    <input type="checkbox" id="sun">
+	                                    <input type="radio" name="radio" id="sun">
 	                                    <span class="checkbox mt-1"></span>
                                     </label>
                                 </div>

@@ -31,7 +31,6 @@
 	<!-- default header name is X-CSRF-TOKEN -->
 	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     
-
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${ pageContext.request.contextPath }/assets/images/favicon.png">
     <!-- This page CSS -->

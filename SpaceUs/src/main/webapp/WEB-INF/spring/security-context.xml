@@ -44,7 +44,7 @@
 		<!-- 모든 post요청에 csrf토큰값 인증사용 -->
 		<csrf disabled="true"/>
 	
-		
+		<csrf disabled="true"/>
 		 <headers>
          	<frame-options disabled="true"></frame-options>
    		 </headers>  

@@ -11,50 +11,8 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
+<jsp:include page="/WEB-INF/views/common/mypageMenu.jsp" />
 
-<div class="skin-default-dark fixed-layout">
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div id="main-wrapper">
-        <!-- 마이페이지 헤더 -->
-        <header class="topbar">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header">
-                    <a style="color:black" class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
-                </div>
-                <div class="navbar-collapse">
-               </div>
-            </nav>
-        </header>
-        
-        <!-- 왼쪽 목록들 -->
-        <aside class="left-sidebar">
-            <div class="d-flex no-block nav-text-box align-items-center">
-                <span>마이페이지</span>
-                <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i class="ti-menu"></i></a>
-                <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-            </div>
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-               <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <sec:authorize access="hasAnyRole('USER', 'HOST')">
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/memberProfile.do"><i class="fa fa-user"></i><span class="hide-menu">회원정보</span></a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/wishList.do"><i class="fa fa-heart"></i><span class="hide-menu">위시리스트</span></a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/usageHistory.do"><i class="fa fa-table"></i><span class="hide-menu"></span>나의 예약내역</a></li>
-  						<li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/reviewList.do"><i class="fa fa-book"></i><span class="hide-menu">내가 쓴 글 리스트</span></a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/couponList.do"><i class="fa fa-gift"></i><span class="hide-menu"></span>쿠폰함</a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/stampEvent.do"><i class="fa fa-stamp"></i><span class="hide-menu"></span>출석체크</a></li>
-                        </sec:authorize>
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
-        <!-- 목록 끝 -->
 
         <div class="page-wrapper">
             <div class="container-fluid">
@@ -74,7 +32,15 @@
                         </div>
                     </div>
                 </div>
-
+				 <!-- 채팅 -->
+				 <div id="talkjs-container" style="background-color: rgba(0,0,0,0);margin-left: 300px; height: 500px; position: fixed; z-index: 10;box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px; display:none;">
+				    <i>Loading chat...</i>
+				</div> 
+				 <sec:authorize access="hasAnyRole('ADMIN')">
+				<div>
+					<button id="chatBtn">🧑</button>
+				</div>
+				</sec:authorize>
                 <!-- 위시리스트 -->  
                 <div id="wishListPage" class="ml-5 mr-5">
 	                <div class="card p-4">
