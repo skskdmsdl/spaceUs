@@ -86,7 +86,12 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public List<GBComment> selectAllComment(String groupBoardNo) {
 		return groupDAO.selectAllComment(groupBoardNo);
-	}	
+	}
+
+	@Override
+	public int insertComment(GBComment param1) {
+		return groupDAO.insertComment(param1);
+	}
 	
 	
 	

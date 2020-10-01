@@ -156,21 +156,22 @@ body{
                          	
 	                         <div style="background-color: #fafafa; width:90%; margin: auto;">
 	                         	<div class="pl-5 pr-5 pt-4">
-	                         		<form:form action="${pageContext.request.contextPath}/community/group/insertComment.do" method="post">
+	                         		<form id="inserCommentFrm">
 	                         			<input type="hidden" name="groupBoardRef" value="${list.groupBoardNo}"/>
-	                         			<input type="hidden" name="memberEamil" value="${list.memberEmail}"/>
+	                         			<input type="hidden" name="memberEmail" value="${loginMember}"/>
 	                         			<input type="hidden" name="groupBoardCommentLevel" value="1" />
-	                         			<input type="hidden" name="groupBoardCommentRef" value="0" />
+	                         			<input type="hidden" name="groupBoardCommentRef" value="" />
 	                         		
 		                         		<div class="form-check" style="display: block;">
-										  <input class="form-check-input" type="checkbox" name="private" id="private" value="private">
-										  <label class="form-check-label" for="private">비밀글</label>
+										  <input class="form-check-input" type="checkbox" name="secret" id="secret" value="secret">
+										  <label class="form-check-label" for="secret">비밀글</label>
 										</div>
 										<div >
-			                         		<textarea class="col-lg-11 textarea1" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-			                           		<button type="submit" class="btn insertCmt" id="insertCmt"style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+			                         		<textarea class="col-lg-11 textarea1" name="textarea1" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+			                           		<input type="button" class="btn insertCmt" id="insertCmt"
+			                           				style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;" value="등록">
 										</div>
-	                         		</form:form>
+	                         		</form>
 	                         		
 	                           		<!-- 댓글보기시작 -->
 	                           		<c:forEach items="${commentList}" var="cm" varStatus="vs">
@@ -346,5 +347,41 @@ $(".textarea1").click(function(){
 		return;
 	}
 });
+
+/*댓글 등록 버튼 이벤트 ajax*/
+$("#inserCommentFrm #insertCmt").click(function(){
+	var groupBoardContent = $("[name=textarea1]").val();
+	var groupBoardRef = $("[name=groupBoardRef]").val();
+	var writer = $("[name=memberEmail]").val();
+	var groupBoardCommentLevel = $("[name=groupBoardCommentLevel]").val();
+	var groupBoardCommentRef = $("[name=groupBoardCommentRef]").val();
+
+	var secret = "0";
+
+	if($("[name=secret]").is(":checked")){
+		secret = "1";
+	}
+	var param1 = "groupBoardContent="+groupBoardContent+
+				"&groupBoardRef="+groupBoardRef+"&writer="+writer+
+				"&groupBoardCommentLevel="+groupBoardCommentLevel+
+				"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret;
+	alert(param1);
+	
+	$.ajax({
+		method:"post",
+		url:"${pageContext.request.contextPath}/community/comment/insertComment/"+groupBoardRef+".do",
+		data:param1,
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		success:function(){
+			alert("댓글이 정상적으로 등록되었습니다.");
+			location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+		},
+		error: function(x,h,r){
+			alert("댓글이 정상적으로 등록ㅌㅌㅌ.안됨");
+			console.log(x,h,r);
+		}
+	});
+});
+
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

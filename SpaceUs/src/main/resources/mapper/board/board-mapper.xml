@@ -97,7 +97,7 @@
 		connect by prior 
 			group_board_comment_no = group_board_comment_ref
 		order siblings by
-			 group_board_comment_no desc
+			 group_board_date desc, group_board_comment_no desc
 	</select>
 	<resultMap type="gBComment" id="gbCommentMap">
 	</resultMap>
@@ -179,4 +179,20 @@
 		where
 			group_board_no = #{boardNo}
 	</update>
+	
+	<!-- comment insert -->
+	<insert id="insertComment">
+		insert into
+			group_board_comment
+		values(
+			seq_group_board_comment_no.nextval,
+			#{writer},
+			#{groupBoardRef},
+			#{secret},
+			#{groupBoardCommentRef},
+			#{groupBoardContent},
+			#{groupBoardCommentLevel},
+			default
+		)
+	</insert>
 </mapper>

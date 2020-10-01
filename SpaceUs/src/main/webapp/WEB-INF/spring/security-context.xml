@@ -21,6 +21,7 @@
 		<intercept-url pattern="/aboutus/**" access="permitAll"/>
 		<intercept-url pattern="/space/**" access="permitAll"/>
 		<intercept-url pattern="/community/recruit/**" access="permitAll"/>
+		<intercept-url pattern="/community/group/**" access="permitAll"/>
 		<intercept-url pattern="/space/spaceDetail.do" access="permitAll"/>
 		<intercept-url pattern="/space/searchSpace.do" access="permitAll"/>
 	
@@ -40,6 +41,8 @@
 			logout-url="/member/memberLogout.do"
 			logout-success-url="/"
 		/> 
+		<!-- 모든 post요청에 csrf토큰값 인증사용 -->
+		<csrf disabled="true"/>
 	
 		<csrf disabled="true"/>
 		 <headers>
