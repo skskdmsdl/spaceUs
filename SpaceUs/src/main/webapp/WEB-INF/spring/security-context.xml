@@ -42,6 +42,7 @@
 			logout-success-url="/"
 		/> 
 		<!-- 모든 post요청에 csrf토큰값 인증사용 -->
+		<!-- ajax post요청시 403에러 처리 -->
 		<csrf disabled="true"/>
 	
 		<csrf disabled="true"/>
