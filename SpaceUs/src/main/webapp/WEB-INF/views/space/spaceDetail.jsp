@@ -413,9 +413,12 @@ function urlcopy(){
 		   	</div>
 			</c:otherwise>
 			</c:choose>
-		 </c:forEach>	  	
-		   	
+		 </c:forEach>	
+		 <nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 45%; margin-top:50px;">
+			<ul class="pagination" style="border:0; margin-right:10px;"> ${pageBar}</ul>
+		</nav>
    		</div>
+   		
    		<div class="col-md-5">
    			<div class="rating-wrap">
 	   			<h3 class="head">별점 순</h3>
@@ -433,7 +436,6 @@ function urlcopy(){
 		   					<i class="ion-ios-star"></i>
 		   					<i class="ion-ios-star"></i>
 		   					(${ star5 }%)
-		   					
 	   					</span>
 	   					<span>${ star.star5 } Reviews</span>
 		   			</p>

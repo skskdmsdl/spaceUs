@@ -2,6 +2,8 @@ package com.kh.spaceus.space.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.service.SpaceService;
@@ -74,7 +77,8 @@ public class SpaceController {
 	public String spaceDetail(Model model,
 							  @RequestParam("spaceNo") String spaceNo,
 							  @RequestParam(defaultValue = "1",
-						  		value = "cPage") int cPage) {
+						  	  value = "cPage") int cPage,
+							  HttpServletRequest request) {
 		//log.debug("spaceNo= {}",spaceNo);
 		Space space = spaceService.selectOneSpace(spaceNo);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
@@ -90,12 +94,15 @@ public class SpaceController {
 		//별점조회
 		Star star = spaceService.selectStar();
 		star.setSumStar(star.getStar1()+star.getStar2()+star.getStar3()+star.getStar4()+star.getStar5());
+		String url = request.getRequestURI() + "?";
+		String pageBar = Utils.getPageBarHtml(cPage, limit, reviewTotal, url);
 		
 		model.addAttribute("space", space);
 		model.addAttribute("tag", tag);
 		model.addAttribute("review", review);
 		model.addAttribute("reviewTotal", reviewTotal);
 		model.addAttribute("star", star);
+		model.addAttribute("pageBar", pageBar);
 		return "space/spaceDetail";
 	}
 	
