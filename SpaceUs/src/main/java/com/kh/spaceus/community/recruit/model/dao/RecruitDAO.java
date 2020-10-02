@@ -27,5 +27,7 @@ public interface RecruitDAO {
 
 	int updateReport(String no);
 
+	int increaseRecruitReadCnt(String no);
+
 
 }

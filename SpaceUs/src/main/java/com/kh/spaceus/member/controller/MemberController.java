@@ -33,6 +33,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.reservation.model.service.ReservationService;
+import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
@@ -53,6 +55,9 @@ public class MemberController {
 	
 	@Autowired
 	private SpaceService spaceService;
+	
+	@Autowired
+	private ReservationService reservationService;
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -93,10 +98,9 @@ public class MemberController {
 	@RequestMapping("/reviewList.do")
 	public String reviewList (Model model, Principal principal) {
 		Member member = memberService.selectOneMember(principal.getName());
-//		List<Space> space = spaceService.selectListSpaceCollection(principal.getName());
-		//리뷰 등록을 위해서 예약테이블에 예약번호와(pk) 공간번호(fk)필요
-		//리뷰 목록불러오기 위해서 공간 테이블, 공간첨부파일 테이블의 정보필요
-		
+		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
+		//List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		//List<Review> reviewList = spaceService.selectListMyReview(member.getNickName());
 		
 		model.addAttribute("member", member);
 		return "member/reviewList";
