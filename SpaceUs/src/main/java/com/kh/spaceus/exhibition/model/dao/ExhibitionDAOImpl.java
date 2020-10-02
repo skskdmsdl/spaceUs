@@ -24,4 +24,9 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 		return sqlSession.delete("exhibition.deleteExhibition", exNo);
 	}
 
+	@Override
+	public int insertExhibition(Exhibition exhibition) {
+		return sqlSession.insert("exhibition.insertExhibition", exhibition);
+	}
+
 }

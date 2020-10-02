@@ -9,4 +9,6 @@ public interface ExhibitionService {
 	List<Exhibition> selectExList();
 
 	int deleteExhibition(String exNo);
+
+	int insertExhibition(Exhibition exhibition);
 }

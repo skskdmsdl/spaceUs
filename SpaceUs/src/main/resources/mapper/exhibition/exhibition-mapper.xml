@@ -19,6 +19,19 @@
 		ex_no = #{ exNo }
 </delete>
 
+<insert id="insertExhibition">
+	insert into
+		exhibition
+	values(
+		seq_ex.nextval,
+		#{exTitle},
+		#{exSubtitle},
+		#{tag},
+		#{imageUrl},
+		#{renamedFileName}
+	)
+</insert>
+
 <resultMap type="exhibition" id="exhibitionMap">
 </resultMap>
 </mapper>
