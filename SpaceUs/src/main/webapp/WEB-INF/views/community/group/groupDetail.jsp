@@ -1,4 +1,5 @@
-
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="org.springframework.security.core.Authentication"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,6 +10,13 @@
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<!-- icons -->
+<script src="https://kit.fontawesome.com/b74a25ff1b.js" crossorigin="anonymous"></script>
+<%
+Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+String loginMember = auth.getName();
+pageContext.setAttribute("loginMember",loginMember);
+%>
 <style>
 .image-div {
 	background-color:#f7f7f7;
@@ -21,6 +29,35 @@
 .fas {position: absolute; padding: 90px;}
 input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 .site-btn {width: 100%; font-size: 17px;}
+/*드롭*/
+body{
+    margin:0;
+    padding:0;
+}
+/* ul, li 요소 초기화 */
+.main-menu,.sub-menu {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+    float: right;
+    margin-top: 10px;
+}
+.sub-menu{
+	position:absolute;
+	display: block;
+	border: 1px solid #d0d0d0;
+	border-radius: 10px;
+	padding: 10px;
+	background: #fff;
+	box-shadow: 0px 0px 10px .1px #d0d0d0;
+}
+.click .sub-menu{
+	opacity: 1;
+	visibility: visible;	
+}
+.sub-menu > li {
+	padding: 10px;
+}
 </style>
 <!-- 컨텐츠 시작 -->
 <!-- 헤더 -->
@@ -66,30 +103,37 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                  <c:forEach items="${list}" var="list">
 	                 <div class="col-12">
 	                         <div class="m-5" style="border-bottom: 1px solid #dddddd;">
-									
+	                         <c:forEach items="${boardList}" var="board">
+							 <div style="color: #00c89e; cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/community/group/groupList/${board.boardNo}/${board.boardRef}.do'">${board.boardName} > </div>		
+	                         </c:forEach>
 	                         <div style="border-bottom: 1px solid #dddddd; padding-bottom: 15px;">
 	                            <p class="h4">${list.groupBoardTitle}</p>
 	                         	<table style="display: inline-block;">
 	                                <tr>
 	                                    <th><i class="fa fa-user"></i>&nbsp; ${list.nickname}</th>
 	                                    <th class="col-xl-auto">|</th>
-	                                    <th><i class="fa fa-calendar"></i>${list.groupBoardDate}</th>
+	                                    <th><i class="fa fa-calendar"></i>&nbsp; ${list.groupBoardDate}</th>
 	                                    <th class="col-xl-auto">|</th>
-	                                    <th><i class="fa fa-eye"></i> 조회수 ${list.viewCnt}</th>
+	                                    <th><i class="fa fa-eye"></i> 조회수 &nbsp; ${list.viewCnt}</th>
+	                                    <th class="col-xl-auto">|</th>
+	                                    <th><i class="fa fa-comment"></i> 댓글수 &nbsp; ${list.viewCnt}</th>
 	                                </tr>
 	                                <input type="hidden" name="groupBoardNo" value="${list.groupBoardNo}"/>
 	                            </table>
 	                            
 		                        <!-- 수정삭제 버튼시작 -->
 		                        <sec:authorize access="hasAnyRole('USER','ADMIN')">
-		                        	<sec:authentication property="principal.username" var="loginMember"/>
-		                            <button class="btn btn-sm btn-danger"  
-		                            		data-toggle="modal" data-target="#intro"
-		                            		style="margin-top:50px; font-size:15px; color:white; float:right; margin-right: 35px; margin-top: 0;">
-		                            		신고하기 
-		                            </button>	
+		                        	<%-- <sec:authentication property="principal.username" var="loginMember"/> --%>
+		                        	<c:if test="${loginMember != list.memberEmail}">
+			                            <button class="btn btn-sm btn-danger"  
+			                            		data-toggle="modal" data-target="#intro"
+			                            		style="margin-top:50px; font-size:15px; color:white; float:right; margin-right: 35px; margin-top: 0;">
+			                            		신고하기 
+			                            </button>	
+		                        	</c:if>
 		                          	<c:if test="${loginMember != null && loginMember eq list.memberEmail }">
-			                            <button id="modifyBtn" class="btn btn-sm" onclick="location.href='${pageContext.request.contextPath}/community/group/modifyBoard/${list.groupBoardNo}.do'" style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 10px; margin-top: 0;">글 수정 </button>
+			                            <button id="modifyBtn" class="btn btn-sm" onclick="location.href='${pageContext.request.contextPath}/community/group/modifyBoard/${list.groupBoardNo}.do'" 
+			                            		style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 10px; margin-top: 0;">글 수정 </button>
 			                           	<div style="display: inline-block;"></div>
 			                            <button id="deleteBtn" class="btn btn-sm" style="margin-top:42px;background-color: #00c89e;font-size:15px;color:white;float:right;margin-right: 10px;margin-top: 0;border-right-width: 0px;padding-right: 9px;">글 삭제 </button>
 		                          	</c:if>	                          	
@@ -97,28 +141,451 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 		                        <!-- 수정삭제 버튼끝-->
 	                         </div>
 	                         
-	                         <div class="m-5">
-	                         <div class="mb-5">
-	                   			${list.groupBoardContent}
+	                         <!-- 본문 시작 -->
+		                         <div class="m-5">
+			                         <div class="mb-5">
+			                   			${list.groupBoardContent}
+			                         </div>	                         
+		                         </div>
 	                         </div>
+	                         <!-- 본문 끝 -->
 	                         
 	                         
 	                         <!-- 댓글 시작 -->
-	                         <div style="background-color: #fafafa; height: 200px; border: 1px solid #edeceb; ">
+	                         <p style="margin-left:5%;"><i class="fa fa-comment"></i> 댓글수 &nbsp; ${list.viewCnt}</p>
+                         	
+	                         <div style="background-color: #fafafa; width:90%; margin: auto;">
 	                         	<div class="pl-5 pr-5 pt-4">
-	                         		<p>댓글 0개</p>
-	                         		 <textarea class="col-lg-11" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-	                           		<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+	                         		<form id="inserCommentFrm">
+	                         			<input type="hidden" name="groupBoardRef" value="${list.groupBoardNo}"/>
+	                         			<input type="hidden" name="memberEmail" value="${loginMember}"/>
+	                         			<input type="hidden" name="groupBoardCommentLevel" value="1" />
+	                         			<input type="hidden" name="groupBoardCommentRef" value="" />
+	                         			
+	                         		
+		                         		<div class="form-check" style="display: block;">
+										  <input class="form-check-input" type="checkbox" name="secret" id="secret" value="secret">
+										  <label class="form-check-label" for="secret">비밀글</label>
+										</div>
+										<div >
+			                         		<textarea class="col-lg-11 textarea1" name="textarea1" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+			                           		<input type="button" class="btn insertCmt" id="insertCmt"
+			                           				style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;" value="등록">
+										</div>
+	                         		</form>
+	                         		
+	                           		<!-- 댓글보기시작 -->
+	                           		<c:forEach items="${commentList}" var="cm" varStatus="vs">
+	                           			<c:if test="${cm.groupBoardCommentLevel eq '1' }">
+			                           		<div class="level1_${cm.groupBoardCommentNo}" style="margin-top: 10px;">
+			                           			<div class="level1__${cm.groupBoardCommentNo}">
+					                           		<tr class="col-md-1">                           		
+					                           			<input type="hidden" name="groupBoardCommentNo${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}" />
+					                           			
+					                                    <th><b>${cm.nickname}</b></th>
+					                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
+					                                    <th>|</th>
+					                                    <th><button role="button" id="replyComment${cm.groupBoardCommentNo}" 
+					                                    	   name="replyComment${cm.groupBoardCommentNo}" style="border:0; background:#fafafa; color: #6d6d6d !important; font-size: 13px; margin-left: 8px;" value="${cm.groupBoardCommentNo}">
+					                                    	   	답글쓰기
+					                                    	 </button>
+					                                   	</th>
+				                                         
+				                                        <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
+						                                         <th>			                                    	
+							                                    	<ul class="main-menu" id="main-menu${cm.groupBoardCommentNo}" onclick="menu${cm.groupBoardCommentNo}();">
+							                                    		<li>
+							                                    			<i class="fa fa-ellipsis-v layerMore">
+								                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
+								                                    				<c:if test="${loginMember != cm.writer}">
+								                                    					<li><a href="#">신고하기</a></li>
+								                                    				</c:if>
+								                                    				<c:if test="${loginMember == cm.writer}">
+								                                    					<li><button name="updateComment${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}"  style="border:0; background: #fafafa;">수정</button></li>
+								                                    					<li><button name="deleteComment"  style="border:0; background: #fafafa;">삭제</button></li>
+								                                    				</c:if>
+								                                    			</ul>
+							                                    			</i>
+							                                    		</li>
+							                                    	</ul>
+						                                    	</th>
+					                                    	<script type="text/javascript">
+						                                    	function menu${cm.groupBoardCommentNo}(){
+						                                    		var element = document.getElementById("main-menu${cm.groupBoardCommentNo}");
+						                                    		element.classList.toggle("click");
+		
+						                                    	    if($('#main-menu${cm.groupBoardCommentNo}').hasClass("click")){
+						                                    		   $('#sub-menu${cm.groupBoardCommentNo}').show();
+						                                    	    }else{
+						                                    	   	   $('#sub-menu${cm.groupBoardCommentNo}').hide();
+						                                    	    }
+						                                    	}
+															</script>
+				                                    	</sec:authorize>
+				                                	</tr>
+				                                	
+					                                <c:if test="${cm.secret eq '0' || cm.writer eq loginMember}">
+					                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
+					                                </c:if>
+					                                <c:if test="${cm.secret eq '1' && cm.writer != loginMember}">
+					                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글입니다</div>
+					                                </c:if>
+					                             
+				                               </div>
+				                         	</div>
+				                         	
+				                 
+				                         	
+	                 					<!-- 대댓글 폼 시작 -->
+		                           		<script type="text/javascript">
+											$("#replyComment${cm.groupBoardCommentNo}").click(function(){
+
+												/* alert($(this).val()); */
+												
+												if('${loginMember}' == 'anonymousUser'){
+													alert("로그인 후 사용해 주세요");
+													location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+												}
+												else{
+											
+													$('[name=replyComment${cm.groupBoardCommentNo}]').hide();
+													
+													let $div3 = $("<div></div>");
+													$div3.append("<input type='button'  onclick='replyComment();' value='등록'>");
+													$div3.append("<input type='button' onclick='replyCancel${cm.groupBoardCommentNo}();' class='cancel' value='취소'>");
+											
+													let $div2 = $("<div style='border: 2px solid #d0d0d0; border-radius:6px; margin: 10px 0 0 22px; display: block; padding: 10px;'></div>");
+													$div2.append("<em style='display: block; font-style: normal; font-weight: 200px; color: #000;'>'${loginMember}'</em>");
+													$div2.append("<textarea placeholder='댓글을 남겨보세요' class='textarea2' name='textarea2' style='font-size:15px; border:none; background-color:#fafafa; resize:none; overflow: hidden; width:100%; overflow-wrap:break-word;'></textarea>");
+													$div2.append("<input type='hidden' name='groupBoardRef_' value='${list.groupBoardNo}'/>");
+													$div2.append("<input type='hidden' name='memberEmail_' value='${loginMember}'/>");
+													$div2.append("<input type='hidden' name='groupBoardCommentLevel_' value='2' />");
+													$div2.append("<input type='hidden' name='groupBoardCommentRef_' value='"+$(this).val()+"' />");
+													
+													$div2.append($div3);
+											
+													let $tr = $("<tr></tr>");
+													$tr.append($div2);
+													
+											
+													let $frm = $("<form id='reply${cm.groupBoardCommentNo}'></form>");
+													$frm.append($div2);
+											
+													let $div1 = $("<div name='replyFrm${cm.groupBoardCommentNo}'></div>");
+													$div1.append($frm);
+											
+													let $BoardCommentDiv = $(this).parent();
+													
+													$div1.insertAfter($BoardCommentDiv);
+
+													$('.textarea2').focus();
+																		
+											
+												}
+
+											});
+
+											/*대댓글 등록*/
+											function replyComment(){
+
+												var groupBoardContent = $('[name=textarea2]').val();
+												
+												if(groupBoardContent == null || groupBoardContent == ''){
+													alert("댓글을 입력해주세요");
+													return;
+												}
+											
+												var groupBoardRef = $("[name=groupBoardRef_]").val();
+												var writer = $("[name=memberEmail_]").val();
+												var groupBoardCommentLevel = $("[name=groupBoardCommentLevel_]").val();
+												var groupBoardCommentRef = $('[name=groupBoardCommentRef_]').val();
+												
+											
+												var secret = "0";
+												
+												var param1 = "groupBoardContent="+groupBoardContent+
+															"&groupBoardRef="+groupBoardRef+"&writer="+writer+
+															"&groupBoardCommentLevel="+groupBoardCommentLevel+
+															"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret;
+												/* alert(param1); */
+												
+											$.ajax({
+													method:"post",
+													url:"${pageContext.request.contextPath}/community/comment/insertComment/"+groupBoardRef+".do",
+													data:param1,
+													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+													success:function(){
+														alert("댓글이 정상적으로 등록되었습니다.");
+														location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+													},
+													error: function(x,h,r){
+														alert("댓글이 정상적으로 등록이 되지 않았습니다.");
+														console.log(x,h,r);
+													}
+												});
+											} 
+											/*대댓글 취소*/
+											function replyCancel${cm.groupBoardCommentNo}(){
+												
+												$('[name=replyFrm${cm.groupBoardCommentNo}]').hide();
+												$('[name=replyComment${cm.groupBoardCommentNo}]').show();
+											}
+											
+
+											/*댓글 수정 폼 생성*/
+											$('[name=updateComment${cm.groupBoardCommentNo}]').click(function(){
+												
+												$(".level1__${cm.groupBoardCommentNo}").hide(); //댓글보기 안보이게 하기
+
+												let $div4 = $("<div class='form-check' style='display: inline;margin-left: 20px;'>");
+												$div4.append("<input class='form-check-input' type='checkbox' name='secret_${cm.groupBoardCommentNo}' id='secret' value='secret' ${cm.secret eq '1' ? 'checked':''}>");
+												$div4.append("<label class='form-check-label' for='secret'>비밀글</label>");
+												
+												let $div3 = $("<div style='display: inline;'></div>");
+												$div3.append("<input type='button'  onclick='updateCommentBtn_${cm.groupBoardCommentNo}();' value='등록'>");
+												$div3.append("<input type='button' onclick='replyCancel${cm.groupBoardCommentNo}();' class='cancel${cm.groupBoardCommentNo}' value='취소'>");
+												
+												let $div2 = $("<div style='border: 2px solid #d0d0d0; border-radius:6px; margin: 10px 0 0 0px; display: block; padding: 10px;'></div>");
+												$div2.append("<em style='display: block; font-style: normal; font-weight: 200px; color: #000;'>'${loginMember}'</em>");
+												$div2.append("<textarea placeholder='댓글을 남겨보세요' class='comment_${cm.groupBoardCommentNo}' name='comment_${cm.groupBoardCommentNo}' style='font-size:15px; border:none; background-color:#fafafa; resize:none; overflow: hidden; width:100%; overflow-wrap:break-word;'>${cm.groupBoardContent}</textarea>");
+												$div2.append("<input type='hidden' name='groupBoardRef_' value='${list.groupBoardNo}'/>");
+												$div2.append("<input type='hidden' name='memberEmail_' value='${loginMember}'/>");
+												$div2.append("<input type='hidden' name='groupBoardCommentLevel_' value='1' />");
+												$div2.append("<input type='hidden' name='groupBoardCommentRef_' value='"+$(this).val()+"' />");
+												
+
+												$div2.append($div3);
+												$div2.append($div4);
+												
+												let $tr = $("<tr></tr>");
+												$tr.append($div2);
+												
+										
+												let $frm = $("<form id='reply${cm.groupBoardCommentNo}'></form>");
+												$frm.append($div2);
+										
+												let $div1 = $("<div name='replyFrm${cm.groupBoardCommentNo}'></div>");
+												$div1.append($frm);
+
+												$div1.insertAfter('.level1_${cm.groupBoardCommentNo}');
+
+												
+												$('.cancel${cm.groupBoardCommentNo}').click(function(){
+													$(".level1__${cm.groupBoardCommentNo}").show();
+													$div1.remove();
+												});
+													
+											});
+
+											/*댓글 수정*/
+											function updateCommentBtn_${cm.groupBoardCommentNo} (){
+
+												var groupBoardContent = $('[name=comment_${cm.groupBoardCommentNo}]').val();
+												alert(groupBoardContent);
+												
+												if(groupBoardContent == null || groupBoardContent == ''){
+													alert("댓글을 입력해주세요");
+													return;
+												}
+
+												var groupBoardRef = $("[name=groupBoardRef]").val();
+												var writer = $("[name=memberEmail]").val();
+												var groupBoardCommentLevel = $("[name=groupBoardCommentLevel]").val();
+												var groupBoardCommentRef = $("[name=groupBoardCommentRef]").val();
+												var groupBoardCommentNo = $('[name=groupBoardCommentNo${cm.groupBoardCommentNo}]').val();
+
+												var secret = "0";
+
+												if($("[name=secret_${cm.groupBoardCommentNo}]").is(":checked")){
+													secret = "1";
+												}
+												var param1 = "groupBoardContent="+groupBoardContent+
+															"&groupBoardRef="+groupBoardRef+"&writer="+writer+
+															"&groupBoardCommentLevel="+groupBoardCommentLevel+
+															"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret+
+															"&groupBoardCommentNo="+groupBoardCommentNo;
+
+												alert(param1);
+												
+											$.ajax({
+													method:"post",
+													url:"${pageContext.request.contextPath}/community/comment/updateComment.do",
+													data:param1,
+													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+													success:function(){
+														alert("댓글이 정상적으로 수정되었습니다.");
+														location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+													},
+													error: function(x,h,r){
+														alert("댓글이 정상적으로 수정되지 않았습니다.");
+														console.log(x,h,r);
+													}
+												});
+											} 
+											
+										
+		                           		</script>		                           			
+	                           			<!-- 대댓글 폼 끝 -->
+	                           			</c:if>
+	                           			
+	                           			
+										<c:if test="${cm.groupBoardCommentLevel eq '2' }">
+										<div  class="level2_${cm.groupBoardCommentNo}">
+				                         	<div class="level2__${cm.groupBoardCommentNo}" style="margin: 10px 0 0 3%;">
+				                         		<tr class="col-md-1">
+				                         			<input type="hidden" name="groupBoardCommentNo${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}" />
+				                                    
+				                                    <th><b>${cm.nickname}</b></th>
+				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
+				                                     
+				                                     <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
+					                                     <th>
+					                                    	<ul class="main-menu" id="main-menu${cm.groupBoardCommentNo}" onclick="menu${cm.groupBoardCommentNo}();">
+					                                    		<li>
+					                                    			<i class="fa fa-ellipsis-v layerMore">
+						                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
+						                                    				<c:if test="${loginMember != cm.writer}">
+						                                    					<li><a href="#">신고하기</a></li>
+						                                    				</c:if>
+						                                    				<c:if test="${loginMember == cm.writer}">
+						                                    					<li><button name="updatereply_${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentRef}" style="border:0; background: #fafafa;">수정</button></li>
+								                                    			<li><button name="deleteComment" style="border:0; background: #fafafa;">삭제</button></li>
+						                                    				</c:if>
+						                                    			</ul>
+					                                    			</i>
+					                                    		</li>
+					                                    	</ul>
+					                                    </th>
+					                                    <script type="text/javascript">
+					                                    	function menu${cm.groupBoardCommentNo}(){
+					                                    		var element = document.getElementById("main-menu${cm.groupBoardCommentNo}");
+					                                    		element.classList.toggle("click");
+	
+					                                    	    if($('#main-menu${cm.groupBoardCommentNo}').hasClass("click")){
+					                                    		   $('#sub-menu${cm.groupBoardCommentNo}').show();
+					                                    	    }else{
+					                                    	   	   $('#sub-menu${cm.groupBoardCommentNo}').hide();
+					                                    	    }
+					                                    	}
+														</script>
+				                                    </sec:authorize>
+				                                    
+			                                	</tr>
+			                                	<c:if test="${cm.secret eq '0'}">
+				                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
+			                                	</c:if>
+			                                	<c:if test="${cm.secret eq '1'}">
+				                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글 입니다</div>
+			                                	</c:if>
+				                         	</div>
+				                         </div>
+				                         	<script type="text/javascript">
+												/*대댓글 수정 폼*/
+												$('[name=updatereply_${cm.groupBoardCommentNo}]').click(function(){
+
+													alert($(this).val()); 
+													
+													$(".level2__${cm.groupBoardCommentNo}").hide(); //댓글보기 안보이게 하기
+
+													let $div4 = $("<div class='form-check' style='display: inline;margin-left: 20px;'>");
+													$div4.append("<input class='form-check-input' type='checkbox' name='secret_${cm.groupBoardCommentNo}' id='secret' value='secret' ${cm.secret eq '1' ? 'checked':''}>");
+													$div4.append("<label class='form-check-label' for='secret'>비밀글</label>");
+													
+													let $div3 = $("<div style='display: inline;'></div>");
+													$div3.append("<input type='button'  onclick='updateReplyBtn_${cm.groupBoardCommentNo}();' value='등록'>");
+													$div3.append("<input type='button' onclick='replyCancel${cm.groupBoardCommentNo}();' class='cancel${cm.groupBoardCommentNo}' value='취소'>");
+													
+													let $div2 = $("<div style='border: 2px solid #d0d0d0; border-radius:6px; margin: 10px 0 0 0px; display: block; padding: 10px;'></div>");
+													$div2.append("<em style='display: block; font-style: normal; font-weight: 200px; color: #000;'>'${loginMember}'</em>");
+													$div2.append("<textarea placeholder='댓글을 남겨보세요' class='comment_${cm.groupBoardCommentNo}' name='comment_${cm.groupBoardCommentNo}' style='font-size:15px; border:none; background-color:#fafafa; resize:none; overflow: hidden; width:100%; overflow-wrap:break-word;'>${cm.groupBoardContent}</textarea>");
+													$div2.append("<input type='hidden' name='groupBoardRef__' value='${list.groupBoardNo}'/>");
+													$div2.append("<input type='hidden' name='memberEmail__' value='${loginMember}'/>");
+													$div2.append("<input type='hidden' name='groupBoardCommentLevel__' value='2' />");
+													$div2.append("<input type='hidden' name='groupBoardCommentRef__' value='"+$(this).val()+"' />");
+													
+
+													$div2.append($div3);
+													$div2.append($div4);
+													
+													let $tr = $("<tr></tr>");
+													$tr.append($div2);
+													
+											
+													let $frm = $("<form id='reply${cm.groupBoardCommentNo}'></form>");
+													$frm.append($div2);
+											
+													let $div1 = $("<div name='replyFrm${cm.groupBoardCommentNo}'></div>");
+													$div1.append($frm);
+
+													$div1.insertAfter('.level2_${cm.groupBoardCommentNo}');
+
+													
+													$('.cancel${cm.groupBoardCommentNo}').click(function(){
+														$(".level2__${cm.groupBoardCommentNo}").show();
+														$div1.remove();
+													});
+												});
+
+												/*대댓글 수정*/
+												function updateReplyBtn_${cm.groupBoardCommentNo}(){
+
+													var groupBoardContent = $('[name=comment_${cm.groupBoardCommentNo}]').val();
+													alert(groupBoardContent);
+													
+													if(groupBoardContent == null || groupBoardContent == ''){
+														alert("댓글을 입력해주세요");
+														return;
+													}
+
+													var groupBoardRef = $("[name=groupBoardRef__]").val();
+													var writer = $("[name=memberEmail__]").val();
+													var groupBoardCommentLevel = $("[name=groupBoardCommentLevel__]").val();
+													var groupBoardCommentRef = $("[name=groupBoardCommentRef__]").val();
+													var groupBoardCommentNo = $('[name=groupBoardCommentNo${cm.groupBoardCommentNo}]').val();
+
+													var secret = "0";
+													
+													var param1 = "groupBoardContent="+groupBoardContent+
+																"&groupBoardRef="+groupBoardRef+"&writer="+writer+
+																"&groupBoardCommentLevel="+groupBoardCommentLevel+
+																"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret+
+																"&groupBoardCommentNo="+groupBoardCommentNo;
+
+													alert(param1);
+													
+												 $.ajax({
+														method:"post",
+														url:"${pageContext.request.contextPath}/community/comment/updateComment.do",
+														data:param1,
+														contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+														success:function(){
+															alert("대댓글이 정상적으로 수정되었습니다.");
+															location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+														},
+														error: function(x,h,r){
+															alert("대댓글이 정상적으로 수정되지 않았습니다.");
+															console.log(x,h,r);
+														}
+													}); 
+												}
+				                         	</script>
+										</c:if>	                         	
+		                         	</c:forEach>		                         	
+	                           		<!-- 댓글보기끝-->
+	                           		
 	                           </div>
 	                         </div>
 	                         <!-- 댓글 끝 -->
-	                         </div>
-	                         </div>
+	                         
+	                         
 	                         <div class="text-center">
-				                 	<a href='${pageContext.request.contextPath }/community/group/groupList.do' class="btn m-1" style="background-color: #00c89e; font-size:20px; color:white;"><i class="fa fa-list"></i> 목록</a>
-	                             </div>
+				                <a href='${pageContext.request.contextPath }/community/group/groupList.do' class="btn m-1" style="background-color: #00c89e; font-size:20px; color:white;"><i class="fa fa-list"></i> 목록</a>
+	                         </div>
 	                     </div>
-	                      <!-- Modal -->
+	                     
+	                     
+	                     
+	                   <!-- Modal -->
                        <div class="modal fade" id="intro" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
                            <div class="modal-dialog">
                                <div class="modal-content">
@@ -141,6 +608,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                </div>
                            </div>
                        </div>
+                       <!-- Modal end -->
                    </c:forEach>
           
                  </div>
@@ -162,5 +630,64 @@ $("#alertBtn").click(function(){
 	
 	location.href="${pageContext.request.contextPath }/community/group/alertBoard.do?groupBoardNo="+groupBoardNo+"&reportReason="+reportReason;
 });
+//댓글 삼지창
+$(function(){
+	$('.sub-menu').hide();	
+
+$(".textarea1").click(function(){
+	/* alert('${loginMember}'); */
+ 	if('${loginMember}' == 'anonymousUser'){
+		alert("로그인 후 사용해 주세요");
+		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+	}
+	else{
+		return;
+	}
+});
+
+/*댓글 등록 버튼 이벤트 ajax*/
+$("#inserCommentFrm #insertCmt").click(function(){
+	var groupBoardContent = $("[name=textarea1]").val();
+	if(groupBoardContent == null || groupBoardContent == ''){
+		alert("댓글을 입력해주세요");
+		return;
+	}
+
+	var groupBoardRef = $("[name=groupBoardRef]").val();
+	var writer = $("[name=memberEmail]").val();
+	var groupBoardCommentLevel = $("[name=groupBoardCommentLevel]").val();
+	var groupBoardCommentRef = $("[name=groupBoardCommentRef]").val();
+
+	var secret = "0";
+
+	if($("[name=secret]").is(":checked")){
+		secret = "1";
+	}
+	var param1 = "groupBoardContent="+groupBoardContent+
+				"&groupBoardRef="+groupBoardRef+"&writer="+writer+
+				"&groupBoardCommentLevel="+groupBoardCommentLevel+
+				"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret;
+	/* alert(param1); */
+	
+	$.ajax({
+		method:"post",
+		url:"${pageContext.request.contextPath}/community/comment/insertComment/"+groupBoardRef+".do",
+		data:param1,
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		success:function(){
+			alert("댓글이 정상적으로 등록되었습니다.");
+			location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+		},
+		error: function(x,h,r){
+			alert("댓글이 정상적으로 등록이 되지 않았습니다.");
+			console.log(x,h,r);
+		}
+	});
+});
+
+
+
+});
+
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

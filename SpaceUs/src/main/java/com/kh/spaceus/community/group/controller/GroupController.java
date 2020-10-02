@@ -15,13 +15,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.community.group.model.service.GroupService;
 import com.kh.spaceus.community.group.model.vo.Board;
+import com.kh.spaceus.community.group.model.vo.GBComment;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
 
@@ -127,9 +131,14 @@ public class GroupController {
 			//브라우져가 종료되면 쿠키 삭제
 			
 			List<GroupBoard> list = groupService.selectDetailBoard(groupBoardNo);
+			List<Board> boardList = groupService.selectBoardOne(groupBoardNo);
+			List<GBComment> commentList = groupService.selectAllComment(groupBoardNo);
+			
+			log.info("commentList={}",commentList);
 			
 			model.addAttribute("list", list);
-			
+			model.addAttribute("boardList", boardList);
+			model.addAttribute("commentList", commentList);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -246,5 +255,11 @@ public class GroupController {
 		return "redirect:/community/group/groupList.do";
 	}
 	
-
+//	@PostMapping("/insertComment.do")
+//	@ResponseBody
+//	public String insertComment() {
+//		log.info("222222222222222222222222222222222222222222");
+//		return "";
+//	}
+	
 }

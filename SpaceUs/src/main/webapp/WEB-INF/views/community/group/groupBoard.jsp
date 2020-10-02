@@ -173,7 +173,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                    </tbody>
 							</table>
 							<!-- 페이징처리 시작 -->
-            				<nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 50%;">
+            				<nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 45%;">
 							  <ul class="pagination" style="border:0; margin-right:10px;">
 							    ${pageBar}
 							  </ul>
