@@ -92,8 +92,13 @@ public class GroupServiceImpl implements GroupService {
 	public int insertComment(GBComment param1) {
 		return groupDAO.insertComment(param1);
 	}
-	
-	
+
+	@Override
+	public int updateComment(GBComment param1) {
+		return groupDAO.updateComment(param1);
+	}
+
+		
 	
 
 }

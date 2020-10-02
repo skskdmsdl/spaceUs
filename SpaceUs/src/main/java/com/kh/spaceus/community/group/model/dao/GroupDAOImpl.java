@@ -94,6 +94,11 @@ public class GroupDAOImpl implements GroupDAO {
 	public int insertComment(GBComment param1) {
 		return session.insert("board.insertComment", param1);
 	}
+
+	@Override
+	public int updateComment(GBComment param1) {
+		return session.update("board.updateComment", param1);
+	}
 	
 	
 	
