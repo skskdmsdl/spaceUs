@@ -176,59 +176,60 @@ body{
 	                           		<!-- 댓글보기시작 -->
 	                           		<c:forEach items="${commentList}" var="cm" varStatus="vs">
 	                           			<c:if test="${cm.groupBoardCommentLevel eq '1' }">
-			                           		<div class="level1" style="margin-top: 10px;">
-				                           		<tr class="col-md-1">
-				                           		
-				                           			<input type="hidden" name="groupBoardCommentNo${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}" />
-				                           			
-				                                    <th><b>${cm.nickname}</b></th>
-				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
-				                                    <th>|</th>
-				                                    <th><button role="button" id="replyComment${cm.groupBoardCommentNo}" 
-				                                    	   name="replyComment${cm.groupBoardCommentNo}" style="border:0; background:#fafafa; color: #6d6d6d !important; font-size: 13px; margin-left: 8px;" value="${cm.groupBoardCommentNo}">
-				                                    	   	답글쓰기
-				                                    	 </button>
-				                                   	</th>
-			                                         
-			                                        <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
-					                                         <th>			                                    	
-						                                    	<ul class="main-menu" id="main-menu${cm.groupBoardCommentNo}" onclick="menu${cm.groupBoardCommentNo}();">
-						                                    		<li>
-						                                    			<i class="fa fa-ellipsis-v layerMore">
-							                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
-							                                    				<c:if test="${loginMember != cm.writer}">
-							                                    					<li><a href="#">신고하기</a></li>
-							                                    				</c:if>
-							                                    				<c:if test="${loginMember == cm.writer}">
-							                                    					<li><button name="updateComment">수정</button></li>
-							                                    					<li><button name="deleteComment">삭제</button></li>
-							                                    				</c:if>
-							                                    			</ul>
-						                                    			</i>
-						                                    		</li>
-						                                    	</ul>
-					                                    	</th>
-				                                    	<script type="text/javascript">
-					                                    	function menu${cm.groupBoardCommentNo}(){
-					                                    		var element = document.getElementById("main-menu${cm.groupBoardCommentNo}");
-					                                    		element.classList.toggle("click");
-	
-					                                    	    if($('#main-menu${cm.groupBoardCommentNo}').hasClass("click")){
-					                                    		   $('#sub-menu${cm.groupBoardCommentNo}').show();
-					                                    	    }else{
-					                                    	   	   $('#sub-menu${cm.groupBoardCommentNo}').hide();
-					                                    	    }
-					                                    	}
-														</script>
-			                                    	</sec:authorize>
-			                                	</tr>
-			                                	
-				                                <c:if test="${cm.secret eq '0' || cm.writer eq loginMember}">
-				                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
-				                                </c:if>
-				                                <c:if test="${cm.secret eq '1' && cm.writer != loginMember}">
-				                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글입니다</div>
-				                                </c:if>
+			                           		<div class="level1_${cm.groupBoardCommentNo}" style="margin-top: 10px;">
+			                           			<div class="level1__${cm.groupBoardCommentNo}">
+					                           		<tr class="col-md-1">                           		
+					                           			<input type="hidden" name="groupBoardCommentNo${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}" />
+					                           			
+					                                    <th><b>${cm.nickname}</b></th>
+					                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
+					                                    <th>|</th>
+					                                    <th><button role="button" id="replyComment${cm.groupBoardCommentNo}" 
+					                                    	   name="replyComment${cm.groupBoardCommentNo}" style="border:0; background:#fafafa; color: #6d6d6d !important; font-size: 13px; margin-left: 8px;" value="${cm.groupBoardCommentNo}">
+					                                    	   	답글쓰기
+					                                    	 </button>
+					                                   	</th>
+				                                         
+				                                        <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
+						                                         <th>			                                    	
+							                                    	<ul class="main-menu" id="main-menu${cm.groupBoardCommentNo}" onclick="menu${cm.groupBoardCommentNo}();">
+							                                    		<li>
+							                                    			<i class="fa fa-ellipsis-v layerMore">
+								                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
+								                                    				<c:if test="${loginMember != cm.writer}">
+								                                    					<li><a href="#">신고하기</a></li>
+								                                    				</c:if>
+								                                    				<c:if test="${loginMember == cm.writer}">
+								                                    					<li><button name="updateComment${cm.groupBoardCommentNo}">수정</button></li>
+								                                    					<li><button name="deleteComment">삭제</button></li>
+								                                    				</c:if>
+								                                    			</ul>
+							                                    			</i>
+							                                    		</li>
+							                                    	</ul>
+						                                    	</th>
+					                                    	<script type="text/javascript">
+						                                    	function menu${cm.groupBoardCommentNo}(){
+						                                    		var element = document.getElementById("main-menu${cm.groupBoardCommentNo}");
+						                                    		element.classList.toggle("click");
+		
+						                                    	    if($('#main-menu${cm.groupBoardCommentNo}').hasClass("click")){
+						                                    		   $('#sub-menu${cm.groupBoardCommentNo}').show();
+						                                    	    }else{
+						                                    	   	   $('#sub-menu${cm.groupBoardCommentNo}').hide();
+						                                    	    }
+						                                    	}
+															</script>
+				                                    	</sec:authorize>
+				                                	</tr>
+				                                	
+					                                <c:if test="${cm.secret eq '0' || cm.writer eq loginMember}">
+					                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
+					                                </c:if>
+					                                <c:if test="${cm.secret eq '1' && cm.writer != loginMember}">
+					                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글입니다</div>
+					                                </c:if>
+				                               </div>
 				                         	</div>
 				                         	
 				                 
@@ -328,14 +329,54 @@ body{
 											}
 
 											/*댓글 수정*/
+											$('[name=updateComment${cm.groupBoardCommentNo}]').click(function(){
+												
+												$(".level1__${cm.groupBoardCommentNo}").hide(); //댓글보기 안보이게 하기
+
+												let $div3 = $("<div></div>");
+												$div3.append("<input type='button'  onclick='replyComment();' value='등록'>");
+												$div3.append("<input type='button' onclick='replyCancel${cm.groupBoardCommentNo}();' class='cancel${cm.groupBoardCommentNo}' value='취소'>");
+										
+												let $div2 = $("<div style='border: 2px solid #d0d0d0; border-radius:6px; margin: 10px 0 0 0px; display: block; padding: 10px;'></div>");
+												$div2.append("<em style='display: block; font-style: normal; font-weight: 200px; color: #000;'>'${loginMember}'</em>");
+												$div2.append("<textarea placeholder='댓글을 남겨보세요' class='textarea2' name='textarea2' style='font-size:15px; border:none; background-color:#fafafa; resize:none; overflow: hidden; width:100%; overflow-wrap:break-word;'>${cm.groupBoardContent}</textarea>");
+												$div2.append("<input type='hidden' name='groupBoardRef_' value='${list.groupBoardNo}'/>");
+												$div2.append("<input type='hidden' name='memberEmail_' value='${loginMember}'/>");
+												$div2.append("<input type='hidden' name='groupBoardCommentLevel_' value='2' />");
+												$div2.append("<input type='hidden' name='groupBoardCommentRef_' value='"+$(this).val()+"' />");
+												
+												$div2.append($div3);
+										
+												let $tr = $("<tr></tr>");
+												$tr.append($div2);
+												
+										
+												let $frm = $("<form id='reply${cm.groupBoardCommentNo}'></form>");
+												$frm.append($div2);
+										
+												let $div1 = $("<div name='replyFrm${cm.groupBoardCommentNo}'></div>");
+												$div1.append($frm);
+
+												$div1.insertAfter('.level1_${cm.groupBoardCommentNo}');
+
+												
+												$('.cancel${cm.groupBoardCommentNo}').click(function(){
+													$(".level1__${cm.groupBoardCommentNo}").show();
+													$div1.remove();
+												});
+													
+											});
+
 											
+											
+										
 		                           		</script>		                           			
 	                           			<!-- 대댓글 폼 끝 -->
 	                           			</c:if>
 	                           			
 	                           			
 										<c:if test="${cm.groupBoardCommentLevel eq '2' }">
-				                         	<div class="level2" style="margin: 10px 0 0 3%;">
+				                         	<div class="level2_${cm.groupBoardCommentNo}" style="margin: 10px 0 0 3%;">
 				                         		<tr class="col-md-1">
 				                                    <th><b>${cm.nickname}</b></th>
 				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
@@ -496,11 +537,7 @@ $("#inserCommentFrm #insertCmt").click(function(){
 	});
 });
 
-/*대댓글 등록*/
-/* $("#register1").click(function(){
-	alert("ddd");
-});
-	 */
+
 
 });
 
