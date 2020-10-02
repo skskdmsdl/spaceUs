@@ -201,8 +201,8 @@ body{
 								                                    					<li><a href="#">신고하기</a></li>
 								                                    				</c:if>
 								                                    				<c:if test="${loginMember == cm.writer}">
-								                                    					<li><button name="updateComment${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}">수정</button></li>
-								                                    					<li><button name="deleteComment">삭제</button></li>
+								                                    					<li><button name="updateComment${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}"  style="border:0; background: #fafafa;">수정</button></li>
+								                                    					<li><button name="deleteComment"  style="border:0; background: #fafafa;">삭제</button></li>
 								                                    				</c:if>
 								                                    			</ul>
 							                                    			</i>
@@ -448,8 +448,8 @@ body{
 						                                    					<li><a href="#">신고하기</a></li>
 						                                    				</c:if>
 						                                    				<c:if test="${loginMember == cm.writer}">
-						                                    					<li><button name="updatereply_${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentRef}">수정</button></li>
-								                                    			<li><button name="deleteComment">삭제</button></li>
+						                                    					<li><button name="updatereply_${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentRef}" style="border:0; background: #fafafa;">수정</button></li>
+								                                    			<li><button name="deleteComment" style="border:0; background: #fafafa;">삭제</button></li>
 						                                    				</c:if>
 						                                    			</ul>
 					                                    			</i>
