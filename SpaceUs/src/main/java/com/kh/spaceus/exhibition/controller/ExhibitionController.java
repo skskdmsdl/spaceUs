@@ -119,7 +119,7 @@ public class ExhibitionController {
 		log.info("result = {}", result);
 		
 		
-		mav.setViewName("redirect:exhibition.do");
+		mav.setViewName("exhibition/exhibition");
 		return mav;
 	}
 }
