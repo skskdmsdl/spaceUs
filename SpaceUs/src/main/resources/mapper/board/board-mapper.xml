@@ -195,4 +195,15 @@
 			default
 		)
 	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateComment">
+		update
+			group_board_comment
+		set
+			secret = #{secret},
+			group_board_content = #{groupBoardContent}
+		where
+			group_board_comment_no = #{groupBoardCommentNo}
+	</update>
 </mapper>

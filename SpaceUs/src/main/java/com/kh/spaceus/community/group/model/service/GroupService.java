@@ -40,4 +40,6 @@ public interface GroupService {
 
 	int insertComment(GBComment param1);
 
+	int updateComment(GBComment param1);
+
 }

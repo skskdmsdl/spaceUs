@@ -40,4 +40,6 @@ public interface GroupDAO {
 
 	int insertComment(GBComment param1);
 
+	int updateComment(GBComment param1);
+
 }
