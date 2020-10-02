@@ -196,7 +196,7 @@
 		)
 	</insert>
 	
-	<!-- 댓글 수정 -->
+	<!-- 댓글/대댓글 수정 -->
 	<update id="updateComment">
 		update
 			group_board_comment
@@ -206,4 +206,12 @@
 		where
 			group_board_comment_no = #{groupBoardCommentNo}
 	</update>
+	
+	<!-- 댓글 /대댓글 삭제 -->
+	<delete id="deleteComment">
+		delete from
+			group_board_comment
+		where
+			group_board_comment_no = #{groupBoardCommentNo}
+	</delete>
 </mapper>

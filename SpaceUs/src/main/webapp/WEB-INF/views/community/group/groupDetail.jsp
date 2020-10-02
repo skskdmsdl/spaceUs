@@ -202,7 +202,7 @@ body{
 								                                    				</c:if>
 								                                    				<c:if test="${loginMember == cm.writer}">
 								                                    					<li><button name="updateComment${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}"  style="border:0; background: #fafafa;">수정</button></li>
-								                                    					<li><button name="deleteComment"  style="border:0; background: #fafafa;">삭제</button></li>
+								                                    					<li><button name="deleteComment${cm.groupBoardCommentNo}"  style="border:0; background: #fafafa;">삭제</button></li>
 								                                    				</c:if>
 								                                    			</ul>
 							                                    			</i>
@@ -316,7 +316,8 @@ body{
 													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 													success:function(){
 														alert("댓글이 정상적으로 등록되었습니다.");
-														location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+														/* location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do"; */
+														window.location.reload();
 													},
 													error: function(x,h,r){
 														alert("댓글이 정상적으로 등록이 되지 않았습니다.");
@@ -381,7 +382,7 @@ body{
 											function updateCommentBtn_${cm.groupBoardCommentNo} (){
 
 												var groupBoardContent = $('[name=comment_${cm.groupBoardCommentNo}]').val();
-												alert(groupBoardContent);
+												/* alert(groupBoardContent); */
 												
 												if(groupBoardContent == null || groupBoardContent == ''){
 													alert("댓글을 입력해주세요");
@@ -422,7 +423,30 @@ body{
 													}
 												});
 											} 
-											
+
+											/*댓글 삭제*/
+											$('[name=deleteComment${cm.groupBoardCommentNo}]').click(function(){
+												if(confirm("댓글을 삭제하시겠습니까?")==false) return;
+
+												var groupBoardCommentNo = $('[name=groupBoardCommentNo${cm.groupBoardCommentNo}]').val();
+
+												var param1 = "groupBoardCommentNo="+groupBoardCommentNo;
+												
+												 $.ajax({
+													method:"post",
+													url : "${pageContext.request.contextPath}/community/comment/deleteComment.do",
+													data : param1,
+													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+													success: function(data){
+														alert('댓글 삭제가 완료되었습니다');
+														window.location.reload();
+													} ,
+													errer: function(x,s,r){
+														alert('댓글 삭제가 실패하였습니다');
+														console.log("처리실패",x,s,r);
+													}
+												});
+											});
 										
 		                           		</script>		                           			
 	                           			<!-- 대댓글 폼 끝 -->
@@ -449,7 +473,7 @@ body{
 						                                    				</c:if>
 						                                    				<c:if test="${loginMember == cm.writer}">
 						                                    					<li><button name="updatereply_${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentRef}" style="border:0; background: #fafafa;">수정</button></li>
-								                                    			<li><button name="deleteComment" style="border:0; background: #fafafa;">삭제</button></li>
+								                                    			<li><button name="deleteComment${cm.groupBoardCommentNo}" style="border:0; background: #fafafa;">삭제</button></li>
 						                                    				</c:if>
 						                                    			</ul>
 					                                    			</i>
@@ -483,7 +507,7 @@ body{
 												/*대댓글 수정 폼*/
 												$('[name=updatereply_${cm.groupBoardCommentNo}]').click(function(){
 
-													alert($(this).val()); 
+													/* alert($(this).val()); */ 
 													
 													$(".level2__${cm.groupBoardCommentNo}").hide(); //댓글보기 안보이게 하기
 
@@ -505,7 +529,6 @@ body{
 													
 
 													$div2.append($div3);
-													$div2.append($div4);
 													
 													let $tr = $("<tr></tr>");
 													$tr.append($div2);
@@ -530,7 +553,7 @@ body{
 												function updateReplyBtn_${cm.groupBoardCommentNo}(){
 
 													var groupBoardContent = $('[name=comment_${cm.groupBoardCommentNo}]').val();
-													alert(groupBoardContent);
+													/* alert(groupBoardContent); */
 													
 													if(groupBoardContent == null || groupBoardContent == ''){
 														alert("댓글을 입력해주세요");
@@ -551,7 +574,7 @@ body{
 																"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret+
 																"&groupBoardCommentNo="+groupBoardCommentNo;
 
-													alert(param1);
+													/* alert(param1); */
 													
 												 $.ajax({
 														method:"post",
@@ -560,7 +583,8 @@ body{
 														contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 														success:function(){
 															alert("대댓글이 정상적으로 수정되었습니다.");
-															location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+															/* location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do"; */
+															window.location.reload();
 														},
 														error: function(x,h,r){
 															alert("대댓글이 정상적으로 수정되지 않았습니다.");
@@ -568,6 +592,30 @@ body{
 														}
 													}); 
 												}
+
+												/*대댓글 삭제*/
+												$('[name=deleteComment${cm.groupBoardCommentNo}]').click(function(){
+												if(confirm("댓글을 삭제하시겠습니까?")==false) return;
+
+												var groupBoardCommentNo = $('[name=groupBoardCommentNo${cm.groupBoardCommentNo}]').val();
+
+												var param1 = "groupBoardCommentNo="+groupBoardCommentNo;
+												
+												 $.ajax({
+													method:"post",
+													url : "${pageContext.request.contextPath}/community/comment/deleteComment.do",
+													data : param1,
+													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+													success: function(data){
+														alert('댓글 삭제가 완료되었습니다');
+														window.location.reload();
+													} ,
+													errer: function(x,s,r){
+														alert('댓글 삭제가 실패하였습니다');
+														console.log("처리실패",x,s,r);
+													}
+												});
+											});
 				                         	</script>
 										</c:if>	                         	
 		                         	</c:forEach>		                         	
@@ -676,7 +724,8 @@ $("#inserCommentFrm #insertCmt").click(function(){
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		success:function(){
 			alert("댓글이 정상적으로 등록되었습니다.");
-			location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+			/* location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do"; */
+			window.location.reload();
 		},
 		error: function(x,h,r){
 			alert("댓글이 정상적으로 등록이 되지 않았습니다.");

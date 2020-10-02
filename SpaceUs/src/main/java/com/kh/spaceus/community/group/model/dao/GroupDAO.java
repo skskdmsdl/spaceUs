@@ -42,4 +42,6 @@ public interface GroupDAO {
 
 	int updateComment(GBComment param1);
 
+	int deleteComment(GBComment param1);
+
 }

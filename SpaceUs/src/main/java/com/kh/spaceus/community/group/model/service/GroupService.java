@@ -42,4 +42,6 @@ public interface GroupService {
 
 	int updateComment(GBComment param1);
 
+	int deleteComment(GBComment param1);
+
 }

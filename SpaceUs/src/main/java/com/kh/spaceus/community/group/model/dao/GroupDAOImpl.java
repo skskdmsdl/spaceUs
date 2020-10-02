@@ -99,6 +99,11 @@ public class GroupDAOImpl implements GroupDAO {
 	public int updateComment(GBComment param1) {
 		return session.update("board.updateComment", param1);
 	}
+
+	@Override
+	public int deleteComment(GBComment param1) {
+		return session.delete("board.deleteComment", param1);
+	}
 	
 	
 	

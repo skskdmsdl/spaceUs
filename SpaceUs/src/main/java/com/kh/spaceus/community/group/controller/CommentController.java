@@ -57,4 +57,18 @@ public class CommentController {
 			log.error("댓글 수정 오류",e);
 		}
 	}
+	
+	@PostMapping("/deleteComment.do")
+	public void deleteComment(@ModelAttribute GBComment param1) {
+		log.info("groupBoardCommentNo = {}", param1);
+		
+		try {
+			int result = groupService.deleteComment(param1);
+			if(result>0) {
+				log.info("댓글 삭제 성공");
+			}
+		}catch(Exception e) {
+			log.error("댓글 삭제 오류",e);
+		}
+	}
 }
