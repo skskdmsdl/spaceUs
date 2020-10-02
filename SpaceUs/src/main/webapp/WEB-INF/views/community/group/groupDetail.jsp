@@ -152,7 +152,21 @@ body{
 	                         
 	                         
 	                         <!-- 댓글 시작 -->
-	                         <p style="margin-left:5%;"><i class="fa fa-comment"></i> 댓글수 &nbsp; ${list.viewCnt}</p>
+	                         <p style="margin-left:5%; display: inline;"><i class="fa fa-comment"></i> 댓글수 &nbsp; ${list.viewCnt}</p>
+	                         
+	                         <!-- 공유하기 팝오버 시작-->
+						       <a href=javascript:; data-toggle="popover" data-trigger="focus" data-placement="bottom"
+						          tabindex="0" title="공유하기" data-html="true" data-popover-content="#a1" >
+						       <i class="far fa-share-square" style="color:#d0d0d0 !important;"></i>
+						       </a>
+						       
+						       <div class="d-none" id="a1" style="position: relative;">
+								  <div class="popover-body">
+								    <input class="input-group-text w-100" type="text" id="url-input">
+								    <button class="btn btn-primary w-100" id="url-btn" onclick="urlcopy();">URL 복사</button>
+								  </div>
+							  	</div>
+      						<!-- 공유하기 팝오버 끝-->
                          	
 	                         <div style="background-color: #fafafa; width:90%; margin: auto;">
 	                         	<div class="pl-5 pr-5 pt-4">
@@ -734,9 +748,49 @@ $("#inserCommentFrm #insertCmt").click(function(){
 	});
 });
 
-
-
 });
+
+var url = $(location).attr('href');
+
+$(function(){
+	$("#url-input").attr('value', url);
+	
+    $("[data-toggle=popover]").popover({
+        html : true,
+        content: function() {
+          var content = $(this).attr("data-popover-content");
+          return $(content).children(".popover-body").html();
+        },
+        title: function() {
+          var title = $(this).attr("data-popover-content");
+          return $(title).children(".popover-heading").html();
+        }
+    });
+
+    $("#heart-a").click(function(){
+
+		var $heart = $("#heart-a");
+    	if($heart.html().indexOf("far fa-heart") != -1) {
+    		$heart.html("<i class='fas fa-heart'></i>");
+    	}
+    	else {
+    		$heart.html("<i class='far fa-heart'></i>");
+    	}
+    });
+});
+
+function urlcopy(){
+	var tempElem = document.createElement('textarea');
+
+	tempElem.value = url;  
+	document.body.appendChild(tempElem);
+	tempElem.select();
+	document.execCommand("copy");
+	document.body.removeChild(tempElem);
+
+	alert("url 복사완료!");
+}
+
 
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

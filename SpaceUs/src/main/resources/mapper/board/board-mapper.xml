@@ -25,7 +25,7 @@
 			group_board G
 		where
 			G.report_cnt <![CDATA[<]]> 10
-		order by group_board_date
+		order by group_board_date desc, group_board_no desc 
 	</select>
 	
 	<resultMap type="groupBoard" id="groupBoardMap">
