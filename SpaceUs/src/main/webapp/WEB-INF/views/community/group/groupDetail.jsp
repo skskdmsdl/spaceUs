@@ -201,7 +201,7 @@ body{
 								                                    					<li><a href="#">신고하기</a></li>
 								                                    				</c:if>
 								                                    				<c:if test="${loginMember == cm.writer}">
-								                                    					<li><button name="updateComment${cm.groupBoardCommentNo}">수정</button></li>
+								                                    					<li><button name="updateComment${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}">수정</button></li>
 								                                    					<li><button name="deleteComment">삭제</button></li>
 								                                    				</c:if>
 								                                    			</ul>
@@ -350,7 +350,7 @@ body{
 												$div2.append("<textarea placeholder='댓글을 남겨보세요' class='comment_${cm.groupBoardCommentNo}' name='comment_${cm.groupBoardCommentNo}' style='font-size:15px; border:none; background-color:#fafafa; resize:none; overflow: hidden; width:100%; overflow-wrap:break-word;'>${cm.groupBoardContent}</textarea>");
 												$div2.append("<input type='hidden' name='groupBoardRef_' value='${list.groupBoardNo}'/>");
 												$div2.append("<input type='hidden' name='memberEmail_' value='${loginMember}'/>");
-												$div2.append("<input type='hidden' name='groupBoardCommentLevel_' value='2' />");
+												$div2.append("<input type='hidden' name='groupBoardCommentLevel_' value='1' />");
 												$div2.append("<input type='hidden' name='groupBoardCommentRef_' value='"+$(this).val()+"' />");
 												
 
@@ -430,8 +430,11 @@ body{
 	                           			
 	                           			
 										<c:if test="${cm.groupBoardCommentLevel eq '2' }">
-				                         	<div class="level2_${cm.groupBoardCommentNo}" style="margin: 10px 0 0 3%;">
+										<div  class="level2_${cm.groupBoardCommentNo}">
+				                         	<div class="level2__${cm.groupBoardCommentNo}" style="margin: 10px 0 0 3%;">
 				                         		<tr class="col-md-1">
+				                         			<input type="hidden" name="groupBoardCommentNo${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}" />
+				                                    
 				                                    <th><b>${cm.nickname}</b></th>
 				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
 				                                     
@@ -445,8 +448,8 @@ body{
 						                                    					<li><a href="#">신고하기</a></li>
 						                                    				</c:if>
 						                                    				<c:if test="${loginMember == cm.writer}">
-						                                    					<li><a href="#">수정</a></li>
-						                                    					<li><a href="#">삭제</a></li>
+						                                    					<li><button name="updatereply_${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentRef}">수정</button></li>
+								                                    			<li><button name="deleteComment">삭제</button></li>
 						                                    				</c:if>
 						                                    			</ul>
 					                                    			</i>
@@ -475,7 +478,98 @@ body{
 				                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글 입니다</div>
 			                                	</c:if>
 				                         	</div>
-										</c:if>			                         	
+				                         </div>
+				                         	<script type="text/javascript">
+												/*대댓글 수정 폼*/
+												$('[name=updatereply_${cm.groupBoardCommentNo}]').click(function(){
+
+													alert($(this).val()); 
+													
+													$(".level2__${cm.groupBoardCommentNo}").hide(); //댓글보기 안보이게 하기
+
+													let $div4 = $("<div class='form-check' style='display: inline;margin-left: 20px;'>");
+													$div4.append("<input class='form-check-input' type='checkbox' name='secret_${cm.groupBoardCommentNo}' id='secret' value='secret' ${cm.secret eq '1' ? 'checked':''}>");
+													$div4.append("<label class='form-check-label' for='secret'>비밀글</label>");
+													
+													let $div3 = $("<div style='display: inline;'></div>");
+													$div3.append("<input type='button'  onclick='updateReplyBtn_${cm.groupBoardCommentNo}();' value='등록'>");
+													$div3.append("<input type='button' onclick='replyCancel${cm.groupBoardCommentNo}();' class='cancel${cm.groupBoardCommentNo}' value='취소'>");
+													
+													let $div2 = $("<div style='border: 2px solid #d0d0d0; border-radius:6px; margin: 10px 0 0 0px; display: block; padding: 10px;'></div>");
+													$div2.append("<em style='display: block; font-style: normal; font-weight: 200px; color: #000;'>'${loginMember}'</em>");
+													$div2.append("<textarea placeholder='댓글을 남겨보세요' class='comment_${cm.groupBoardCommentNo}' name='comment_${cm.groupBoardCommentNo}' style='font-size:15px; border:none; background-color:#fafafa; resize:none; overflow: hidden; width:100%; overflow-wrap:break-word;'>${cm.groupBoardContent}</textarea>");
+													$div2.append("<input type='hidden' name='groupBoardRef__' value='${list.groupBoardNo}'/>");
+													$div2.append("<input type='hidden' name='memberEmail__' value='${loginMember}'/>");
+													$div2.append("<input type='hidden' name='groupBoardCommentLevel__' value='2' />");
+													$div2.append("<input type='hidden' name='groupBoardCommentRef__' value='"+$(this).val()+"' />");
+													
+
+													$div2.append($div3);
+													$div2.append($div4);
+													
+													let $tr = $("<tr></tr>");
+													$tr.append($div2);
+													
+											
+													let $frm = $("<form id='reply${cm.groupBoardCommentNo}'></form>");
+													$frm.append($div2);
+											
+													let $div1 = $("<div name='replyFrm${cm.groupBoardCommentNo}'></div>");
+													$div1.append($frm);
+
+													$div1.insertAfter('.level2_${cm.groupBoardCommentNo}');
+
+													
+													$('.cancel${cm.groupBoardCommentNo}').click(function(){
+														$(".level2__${cm.groupBoardCommentNo}").show();
+														$div1.remove();
+													});
+												});
+
+												/*대댓글 수정*/
+												function updateReplyBtn_${cm.groupBoardCommentNo}(){
+
+													var groupBoardContent = $('[name=comment_${cm.groupBoardCommentNo}]').val();
+													alert(groupBoardContent);
+													
+													if(groupBoardContent == null || groupBoardContent == ''){
+														alert("댓글을 입력해주세요");
+														return;
+													}
+
+													var groupBoardRef = $("[name=groupBoardRef__]").val();
+													var writer = $("[name=memberEmail__]").val();
+													var groupBoardCommentLevel = $("[name=groupBoardCommentLevel__]").val();
+													var groupBoardCommentRef = $("[name=groupBoardCommentRef__]").val();
+													var groupBoardCommentNo = $('[name=groupBoardCommentNo${cm.groupBoardCommentNo}]').val();
+
+													var secret = "0";
+													
+													var param1 = "groupBoardContent="+groupBoardContent+
+																"&groupBoardRef="+groupBoardRef+"&writer="+writer+
+																"&groupBoardCommentLevel="+groupBoardCommentLevel+
+																"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret+
+																"&groupBoardCommentNo="+groupBoardCommentNo;
+
+													alert(param1);
+													
+												 $.ajax({
+														method:"post",
+														url:"${pageContext.request.contextPath}/community/comment/updateComment.do",
+														data:param1,
+														contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+														success:function(){
+															alert("대댓글이 정상적으로 수정되었습니다.");
+															location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+														},
+														error: function(x,h,r){
+															alert("대댓글이 정상적으로 수정되지 않았습니다.");
+															console.log(x,h,r);
+														}
+													}); 
+												}
+				                         	</script>
+										</c:if>	                         	
 		                         	</c:forEach>		                         	
 	                           		<!-- 댓글보기끝-->
 	                           		
