@@ -103,7 +103,7 @@ public class ExhibitionController {
 		
 		log.info("result = {}", result);
 		
-		return "exhibition/exhibition";
+		return "redirect:exhibition.do";
 	}
 	
 	
@@ -112,12 +112,14 @@ public class ExhibitionController {
 	public ModelAndView deleteExhibition(ModelAndView mav,
 										@RequestParam("exNo") String exNo) {
 		
+		log.info("exNo = {}", exNo);
+		
 		int result = exhibitionService.deleteExhibition(exNo);
 		
 		log.info("result = {}", result);
 		
 		
-		mav.setViewName("exhibition/exhibition");
+		mav.setViewName("redirect:exhibition.do");
 		return mav;
 	}
 }

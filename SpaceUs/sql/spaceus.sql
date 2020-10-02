@@ -317,7 +317,7 @@ ALTER INDEX pk_review_no RENAME TO pk_space_no;
 
 CREATE TABLE Review_image (
     re_img_no varchar2(256),
-    review_no varchar2(256),
+    review_no varchar2(20),
     re_original_filename varchar2(256) NOT NULL,
     re_renamed_filename varchar2(256) NOT NULL,
     re_reg_date date default sysdate,

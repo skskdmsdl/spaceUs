@@ -6,8 +6,8 @@
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
-<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
 <style>
 img {width: 500px; margin-bottom:30px}
 .space1 {cursor: pointer;}
@@ -17,16 +17,13 @@ img {width: 500px; margin-bottom:30px}
 .btn-outline-danger {margin-bottom:10px}
 </style>
 <script>
-/* function insertExhibition () {
-	location.href = "${pageContext.request.contextPath}/exhibition/insertExhibition.do";
-} */
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+$(document).ajaxSend(function(e, xhr, options) {
+       xhr.setRequestHeader(header,token);
+});
 
 $(function(){
-	var token = $("meta[name='_csrf']").attr("content");
-	var header = $("meta[name='_csrf_header']").attr("content");
-	$(document).ajaxSend(function(e, xhr, options) {
-	      xhr.setRequestHeader(header, token);
-	});
 
    	$("[name=upFile]").on("change", function(){
    		var file = $(this).prop("files")[0];
@@ -69,7 +66,7 @@ $(function(){
 				$div.html("");
 		   	});
 	 	} else if($file != undefined || $label != "이미지를 선택하세요") {
-
+			var imageFile;
 	 		var imgData = new FormData();
 	 		imgData.append("upFile", $file)
 
@@ -81,9 +78,10 @@ $(function(){
 		 		contentType: false,
 		 		type: 'POST',
 		 		success: function(data){
+		 			imageFile = data;
 		 			$("#image-upload").attr("data-dismiss","modal");
-		 	 	  	$div.html(delBtn + "<img src='${pageContext.request.contextPath }/resources/upload/exhibition/"+ data +"'/>");
-		 	 	  	$("#renamedFileName").val(data);
+		 	 	  	$div.html(delBtn + "<img src='${pageContext.request.contextPath }/resources/upload/exhibition/"+ imageFile +"'/>");
+		 	 	  	$("#renamedFileName").val(imageFile);
 		 		},
 		 		error: function(xhr, status, err){
 					console.log("처리실패", xhr, status, err);
@@ -162,12 +160,12 @@ $(function(){
 								   </div>
 								   <div class="tab-pane fade" id="file-upload" role="tabpanel" aria-labelledby="file-upload-tab">
 								    	<div class="input-group mb-3" style="padding:0px;">
-								    	<!-- <form name="frm" method="post" enctype="multipart/form-data"> -->
+								    	 <!-- <form name="frm" method="post" enctype="multipart/form-data"> -->
 										  <div class="custom-file">
 										    <input type="file" class="custom-file-input" name="upFile" id="upFile">
 										    <label class="custom-file-label" for="upFile">이미지를 선택하세요</label>
 										  </div>
-										 <!-- </form> -->
+										<!-- </form> -->
 										</div>
 								   </div>
 						   		</div>
