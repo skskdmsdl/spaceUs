@@ -178,10 +178,17 @@ body{
 	                           			<c:if test="${cm.groupBoardCommentLevel eq '1' }">
 			                           		<div class="level1" style="margin-top: 10px;">
 				                           		<tr class="col-md-1">
+				                           		
+				                           			<input type="hidden" name="groupBoardCommentNo${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}" />
+				                           			
 				                                    <th><b>${cm.nickname}</b></th>
 				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
 				                                    <th>|</th>
-				                                    <th><a role="button" id="replyComment${cm.groupBoardCommentNo}" name="replyComment${cm.groupBoardCommentNo}" style="color: #6d6d6d !important; font-size: 13px; margin-left: 8px;">답글쓰기</a></th>
+				                                    <th><button role="button" id="replyComment${cm.groupBoardCommentNo}" 
+				                                    	   name="replyComment${cm.groupBoardCommentNo}" style="border:0; background:#fafafa; color: #6d6d6d !important; font-size: 13px; margin-left: 8px;" value="${cm.groupBoardCommentNo}">
+				                                    	   	답글쓰기
+				                                    	 </button>
+				                                   	</th>
 			                                         
 			                                        <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
 					                                         <th>			                                    	
@@ -229,6 +236,9 @@ body{
 	                 					<!-- 대댓글 폼 시작 -->
 		                           		<script type="text/javascript">
 											$("#replyComment${cm.groupBoardCommentNo}").click(function(){
+
+												/* alert($(this).val()); */
+												
 												if('${loginMember}' == 'anonymousUser'){
 													alert("로그인 후 사용해 주세요");
 													location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
@@ -238,25 +248,27 @@ body{
 													$('[name=replyComment${cm.groupBoardCommentNo}]').hide();
 													
 													let $div3 = $("<div></div>");
-													$div3.append("<input type='button' id='register1' class='register1' value='등록'>");
-													$div3.append("<input type='button' class='cancel' value='취소'>");
+													$div3.append("<input type='button'  onclick='replyComment();' value='등록'>");
+													$div3.append("<input type='button' onclick='replyCancel${cm.groupBoardCommentNo}();' class='cancel' value='취소'>");
 											
 													let $div2 = $("<div style='border: 2px solid #d0d0d0; border-radius:6px; margin: 10px 0 0 22px; display: block; padding: 10px;'></div>");
 													$div2.append("<em style='display: block; font-style: normal; font-weight: 200px; color: #000;'>'${loginMember}'</em>");
-													$div2.append("<textarea placeholder='댓글을 남겨보세요' class='textarea2' style='font-size:15px; border:none; background-color:#fafafa; resize:none; overflow: hidden; width:100%; overflow-wrap:break-word;'></textarea>");
+													$div2.append("<textarea placeholder='댓글을 남겨보세요' class='textarea2' name='textarea2' style='font-size:15px; border:none; background-color:#fafafa; resize:none; overflow: hidden; width:100%; overflow-wrap:break-word;'></textarea>");
+													$div2.append("<input type='hidden' name='groupBoardRef_' value='${list.groupBoardNo}'/>");
+													$div2.append("<input type='hidden' name='memberEmail_' value='${loginMember}'/>");
+													$div2.append("<input type='hidden' name='groupBoardCommentLevel_' value='2' />");
+													$div2.append("<input type='hidden' name='groupBoardCommentRef_' value='"+$(this).val()+"' />");
+													
 													$div2.append($div3);
 											
 													let $tr = $("<tr></tr>");
 													$tr.append($div2);
-													$tr.append("<input type='hidden' name='groupBoardRef' value='${list.groupBoardNo}'/>");
-													$tr.append("<input type='hidden' name='memberEmail' value='${loginMember}'/>");
-													$tr.append("<input type='hidden' name='groupBoardCommentLevel' value='2' />");
-													$tr.append("<input type='hidden' name='groupBoardCommentRef' value='${cm.groupBoardCommentNo}' />");
+													
 											
-													let $frm = $("<form id='reply'></form>");
+													let $frm = $("<form id='reply${cm.groupBoardCommentNo}'></form>");
 													$frm.append($div2);
 											
-													let $div1 = $("<div></div>");
+													let $div1 = $("<div name='replyFrm${cm.groupBoardCommentNo}'></div>");
 													$div1.append($frm);
 											
 													let $BoardCommentDiv = $(this).parent();
@@ -265,9 +277,57 @@ body{
 
 													$('.textarea2').focus();
 																		
+											
+												}
+
+											});
+
+											/*대댓글 등록*/
+											function replyComment(){
+
+												var groupBoardContent = $('[name=textarea2]').val();
+												
+												if(groupBoardContent == null || groupBoardContent == ''){
+													alert("댓글을 입력해주세요");
+													return;
 												}
 											
-											});
+												var groupBoardRef = $("[name=groupBoardRef_]").val();
+												var writer = $("[name=memberEmail_]").val();
+												var groupBoardCommentLevel = $("[name=groupBoardCommentLevel_]").val();
+												var groupBoardCommentRef = $('[name=groupBoardCommentRef_]').val();
+											
+												var secret = "0";
+												
+												var param1 = "groupBoardContent="+groupBoardContent+
+															"&groupBoardRef="+groupBoardRef+"&writer="+writer+
+															"&groupBoardCommentLevel="+groupBoardCommentLevel+
+															"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret;
+												/* alert(param1); */
+												
+											$.ajax({
+													method:"post",
+													url:"${pageContext.request.contextPath}/community/comment/insertComment/"+groupBoardRef+".do",
+													data:param1,
+													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+													success:function(){
+														alert("댓글이 정상적으로 등록되었습니다.");
+														location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+													},
+													error: function(x,h,r){
+														alert("댓글이 정상적으로 등록이 되지 않았습니다.");
+														console.log(x,h,r);
+													}
+												});
+											} 
+
+											function replyCancel${cm.groupBoardCommentNo}(){
+												
+												$('[name=replyFrm${cm.groupBoardCommentNo}]').hide();
+												$('[name=replyComment${cm.groupBoardCommentNo}]').show();
+											}
+										
+											
 		                           		</script>		                           			
 	                           			<!-- 대댓글 폼 끝 -->
 	                           			</c:if>
@@ -276,7 +336,7 @@ body{
 										<c:if test="${cm.groupBoardCommentLevel eq '2' }">
 				                         	<div class="level2" style="margin: 10px 0 0 3%;">
 				                         		<tr class="col-md-1">
-				                                    <th><b>${list.nickname}</b></th>
+				                                    <th><b>${cm.nickname}</b></th>
 				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
 				                                     
 				                                     <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
@@ -385,7 +445,7 @@ $(function(){
 	$('.sub-menu').hide();	
 
 $(".textarea1").click(function(){
-	alert('${loginMember}');
+	/* alert('${loginMember}'); */
  	if('${loginMember}' == 'anonymousUser'){
 		alert("로그인 후 사용해 주세요");
 		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
@@ -417,7 +477,7 @@ $("#inserCommentFrm #insertCmt").click(function(){
 				"&groupBoardRef="+groupBoardRef+"&writer="+writer+
 				"&groupBoardCommentLevel="+groupBoardCommentLevel+
 				"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret;
-	alert(param1);
+	/* alert(param1); */
 	
 	$.ajax({
 		method:"post",
@@ -436,10 +496,10 @@ $("#inserCommentFrm #insertCmt").click(function(){
 });
 
 /*대댓글 등록*/
-$("#register1").click(function(){
+/* $("#register1").click(function(){
 	alert("ddd");
 });
-	
+	 */
 
 });
 
