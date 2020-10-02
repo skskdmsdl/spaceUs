@@ -200,8 +200,8 @@ body{
 							                                    					<li><a href="#">신고하기</a></li>
 							                                    				</c:if>
 							                                    				<c:if test="${loginMember == cm.writer}">
-							                                    					<li><a href="#">수정</a></li>
-							                                    					<li><a href="#">삭제</a></li>
+							                                    					<li><button name="updateComment">수정</button></li>
+							                                    					<li><button name="deleteComment">삭제</button></li>
 							                                    				</c:if>
 							                                    			</ul>
 						                                    			</i>
@@ -320,13 +320,14 @@ body{
 													}
 												});
 											} 
-
+											/*대댓글 취소*/
 											function replyCancel${cm.groupBoardCommentNo}(){
 												
 												$('[name=replyFrm${cm.groupBoardCommentNo}]').hide();
 												$('[name=replyComment${cm.groupBoardCommentNo}]').show();
 											}
-										
+
+											/*댓글 수정*/
 											
 		                           		</script>		                           			
 	                           			<!-- 대댓글 폼 끝 -->
