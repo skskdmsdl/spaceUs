@@ -25,6 +25,9 @@ $(document).ajaxSend(function(e, xhr, options) {
 
 $(function(){
 
+	var $upUrl = $('#upUrl');
+	var $fileLable = $('.custom-file-label');
+
    	$("[name=upFile]").on("change", function(){
    		var file = $(this).prop("files")[0];
    		var $label = $(this).next('.custom-file-label');
@@ -36,12 +39,17 @@ $(function(){
    			$label.html(file.name);
    	});
 
+   	$("#imageModal").on('hide.bs.modal', function(){
+   		$fileLable.html("이미지를 선택하세요");
+   		$upUrl.val("");
+   	});
+
    	$("#url-upload-tab").click(function(){
-   		$('.custom-file-label').html("이미지를 선택하세요");
+   		$fileLable.html("이미지를 선택하세요");
   	});
   	
    	$("#file-upload-tab").click(function(){
-   		$('#upUrl').val("");
+   		$upUrl.val("");
   	});
 
    	$("#image-upload").click(function(){
@@ -60,7 +68,7 @@ $(function(){
  	 	   	$("#image-upload").attr("data-dismiss","modal");
  	 	  	$div.html(delBtn + "<img src='"+ $url +"'/>");
  	 	  	$("#imageUrl").val($url);
- 	 	  	console.log($("#imageUrl").val());
+ 	 	  	//console.log($("#imageUrl").val());
 
 			$(".btn-outline-danger").click(function(){
 				$div.html("");
