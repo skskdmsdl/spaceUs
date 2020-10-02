@@ -503,30 +503,16 @@ select * from blacklist;
 create table exhibition (
     ex_no varchar2(256),
     ex_title varchar2(256) not null,
-    ex_subtitle varchar2(256) not null,
+    ex_subtitle varchar2(256),
     tag varchar2(100) not null,
-    image varchar2(256) not null,
+    image_url varchar2(256),
+    renamedFileName varchar2(256),
     constraints pk_ex_no primary key(ex_no)
 );
 create sequence seq_ex;
+
 select * from exhibition;
-
 commit;
-
-insert into exhibition values(
-    seq_ex.nextval,
-    '스마트한 팀워크를 위한 공유오피스 모음',
-    '팀을 위한 공유 오피스',
-    '공부',
-    'https://kr.object.ncloudstorage.com/scloud-service/service/160042093_3c874989f2a7c83b4334157979430945.png');
-
-insert into exhibition values(
-seq_ex.nextval,
-'보컬 연습을 위한 녹음실 공간 모음',
-'녹음실 기획전',
-'노래',
-'https://kr.object.ncloudstorage.com/scloud-service/service/160067588_203975de09692ba4025f5c9b74792fae.png');
-
 
 -----------------------------
 ---- 좋아요(위시리스트) ------

@@ -60,4 +60,8 @@
 	<!-- 네이버로그인 -->
 	<beans:bean id="naverLoginBO" class="com.kh.spaceus.social.NaverLoginBO" />
 	<!-- <beans:bean id="excelDownload" class="com.kh.spaceus.host.controller.HostController"/> -->
+	
+	<!-- 파일업로드 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</beans:bean>
 </beans:beans>

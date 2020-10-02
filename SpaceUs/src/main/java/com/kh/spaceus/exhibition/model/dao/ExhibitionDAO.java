@@ -10,4 +10,6 @@ public interface ExhibitionDAO {
 
 	int deleteExhibition(String exNo);
 
+	int insertExhibition(Exhibition exhibition);
+
 }
