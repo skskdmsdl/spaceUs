@@ -414,7 +414,7 @@ body{
 													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 													success:function(){
 														alert("댓글이 정상적으로 수정되었습니다.");
-														/* location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do"; */
+														location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
 													},
 													error: function(x,h,r){
 														alert("댓글이 정상적으로 수정되지 않았습니다.");

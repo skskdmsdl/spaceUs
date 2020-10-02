@@ -200,11 +200,10 @@
 	<update id="updateComment">
 		update
 			group_board_comment
-		set(
+		set
 			secret = #{secret},
 			group_board_content = #{groupBoardContent}
-		)
 		where
-			group_board_comment_no = #(groupBoardCommentNo)
+			group_board_comment_no = #{groupBoardCommentNo}
 	</update>
 </mapper>
