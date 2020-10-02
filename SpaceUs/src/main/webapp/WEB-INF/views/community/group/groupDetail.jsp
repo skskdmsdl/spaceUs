@@ -229,6 +229,7 @@ body{
 					                                <c:if test="${cm.secret eq '1' && cm.writer != loginMember}">
 					                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글입니다</div>
 					                                </c:if>
+					                             
 				                               </div>
 				                         	</div>
 				                         	
@@ -328,15 +329,19 @@ body{
 												$('[name=replyComment${cm.groupBoardCommentNo}]').show();
 											}
 
-											/*댓글 수정*/
+											/*댓글 수정 폼 생성*/
 											$('[name=updateComment${cm.groupBoardCommentNo}]').click(function(){
 												
 												$(".level1__${cm.groupBoardCommentNo}").hide(); //댓글보기 안보이게 하기
 
-												let $div3 = $("<div></div>");
-												$div3.append("<input type='button'  onclick='replyComment();' value='등록'>");
+												let $div4 = $("<div class='form-check' style='display: inline;margin-left: 20px;'>");
+												$div4.append("<input class='form-check-input' type='checkbox' name='secret' id='secret' value='secret' ${cm.secret eq '1' ? 'checked':''}>");
+												$div4.append("<label class='form-check-label' for='secret'>비밀글</label>");
+												
+												let $div3 = $("<div style='display: inline;'></div>");
+												$div3.append("<input type='button'  onclick='replyComment_();' value='등록'>");
 												$div3.append("<input type='button' onclick='replyCancel${cm.groupBoardCommentNo}();' class='cancel${cm.groupBoardCommentNo}' value='취소'>");
-										
+												
 												let $div2 = $("<div style='border: 2px solid #d0d0d0; border-radius:6px; margin: 10px 0 0 0px; display: block; padding: 10px;'></div>");
 												$div2.append("<em style='display: block; font-style: normal; font-weight: 200px; color: #000;'>'${loginMember}'</em>");
 												$div2.append("<textarea placeholder='댓글을 남겨보세요' class='textarea2' name='textarea2' style='font-size:15px; border:none; background-color:#fafafa; resize:none; overflow: hidden; width:100%; overflow-wrap:break-word;'>${cm.groupBoardContent}</textarea>");
@@ -345,8 +350,10 @@ body{
 												$div2.append("<input type='hidden' name='groupBoardCommentLevel_' value='2' />");
 												$div2.append("<input type='hidden' name='groupBoardCommentRef_' value='"+$(this).val()+"' />");
 												
+
 												$div2.append($div3);
-										
+												$div2.append($div4);
+												
 												let $tr = $("<tr></tr>");
 												$tr.append($div2);
 												
@@ -367,7 +374,47 @@ body{
 													
 											});
 
-											
+											/*댓글 수정*/
+											function replyComment_(){
+
+												var groupBoardContent = $("[name=textarea1]").val();
+												if(groupBoardContent == null || groupBoardContent == ''){
+													alert("댓글을 입력해주세요");
+													return;
+												}
+
+												var groupBoardRef = $("[name=groupBoardRef]").val();
+												var writer = $("[name=memberEmail]").val();
+												var groupBoardCommentLevel = $("[name=groupBoardCommentLevel]").val();
+												var groupBoardCommentRef = $("[name=groupBoardCommentRef]").val();
+
+												var secret = "0";
+
+												if($("[name=secret]").is(":checked")){
+													secret = "1";
+												}
+												var param1 = "groupBoardContent="+groupBoardContent+
+															"&groupBoardRef="+groupBoardRef+"&writer="+writer+
+															"&groupBoardCommentLevel="+groupBoardCommentLevel+
+															"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret;
+
+												alert(param1);
+												
+											/* $.ajax({
+													method:"post",
+													url:"${pageContext.request.contextPath}/community/comment/insertComment/"+groupBoardRef+".do",
+													data:param1,
+													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+													success:function(){
+														alert("댓글이 정상적으로 등록되었습니다.");
+														location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+													},
+													error: function(x,h,r){
+														alert("댓글이 정상적으로 등록이 되지 않았습니다.");
+														console.log(x,h,r);
+													}
+												}); */
+											} 
 											
 										
 		                           		</script>		                           			
