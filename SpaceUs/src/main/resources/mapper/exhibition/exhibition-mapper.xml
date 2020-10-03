@@ -32,6 +32,15 @@
 	)
 </insert>
 
+<select id="selectOne" resultMap="exhibitionMap">
+	select 
+		*
+	from
+		exhibition
+	where
+		ex_no = #{exNo}
+</select>
+
 <resultMap type="exhibition" id="exhibitionMap">
 </resultMap>
 </mapper>

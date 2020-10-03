@@ -29,4 +29,9 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 		return sqlSession.insert("exhibition.insertExhibition", exhibition);
 	}
 
+	@Override
+	public Exhibition selectOne(String exNo) {
+		return sqlSession.selectOne("exhibition.selectOne", exNo);
+	}
+
 }

@@ -30,7 +30,8 @@
 		<!-- 시큐리티 로그인 -->
 		 <form-login
 			login-page="/member/memberLoginForm.do"
-			login-processing-url="/member/memberLogin.do" 
+			login-processing-url="/member/memberLogin.do"
+			default-target-url="/member/memberLogin.do"
 			username-parameter="memberEmail"
 			password-parameter="password"
 			authentication-failure-forward-url="/member/memberLoginFailure.do"
@@ -41,6 +42,9 @@
 			logout-url="/member/memberLogout.do"
 			logout-success-url="/"
 		/> 
+
+		
+		
 		<!-- 모든 post요청에 csrf토큰값 인증사용 -->
 		<!-- ajax post요청시 403에러 처리 -->
 		<csrf disabled="true"/>

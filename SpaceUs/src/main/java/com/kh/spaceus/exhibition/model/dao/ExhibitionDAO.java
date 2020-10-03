@@ -12,4 +12,6 @@ public interface ExhibitionDAO {
 
 	int insertExhibition(Exhibition exhibition);
 
+	Exhibition selectOne(String exNo);
+
 }

@@ -11,4 +11,6 @@ public interface ExhibitionService {
 	int deleteExhibition(String exNo);
 
 	int insertExhibition(Exhibition exhibition);
+
+	Exhibition selectOne(String exNo);
 }
