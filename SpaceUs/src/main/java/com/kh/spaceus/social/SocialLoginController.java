@@ -3,7 +3,6 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.util.URLEncoder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;

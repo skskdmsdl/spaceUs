@@ -62,7 +62,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	 <div class="row m-5">
                  <!-- column -->
                  <div class="col-12">
-                         <div class="m-5" style="border-bottom: 1px solid #dddddd;">
+                         <div class="m-5" >
 								
                          <input type="hidden" name="no" id="no" value="${ recruit.no }"/> 
                          <div style="border-bottom: 1px solid #dddddd; padding-bottom: 15px;">
@@ -120,13 +120,18 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                          <div style="background-color: #fafafa; height: 200px; border: 1px solid #edeceb; ">
                          <div class="pl-5 pr-5 pt-4">
                          		<p>댓글 0개</p>
+                         		<div class="form-check" style="display: block;">
+									  <input class="form-check-input mt-2" type="checkbox" name="secret" id="secret" value="secret">
+									  <label class="form-check-label" for="secret" style="font-size: 14px;">비밀글</label>
+									</div>
+									
                          		 <textarea class="col-lg-11" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
                            		<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
                            </div>
                          </div>
                          </div>
                          </div>
-                         <div class="text-center">
+                         <div class="text-center mt-4">
 			                 	<a href='${pageContext.request.contextPath }/community/recruit/recruitList.do' class="btn m-1" style="background-color: #00c89e; font-size:20px; color:white;"><i class="fa fa-list"></i> 목록</a>
                              </div>
                      </div>
