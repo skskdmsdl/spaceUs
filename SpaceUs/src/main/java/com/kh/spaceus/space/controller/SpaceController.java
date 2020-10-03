@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spaceus.reservation.model.service.ReservationService;
@@ -38,10 +40,13 @@ public class SpaceController {
 	//공간등록 제출
 	@RequestMapping(value="/insertSpace.do",method = RequestMethod.POST)
 	public String insertSpace(Space space,
-							  @RequestParam String optionNo) {
+							  @RequestParam String optionNo,
+							  ReservationAvail reservationAvail) {
 		System.out.println("post메핑");
 		System.out.println(space);
 		System.out.println(optionNo);
+		//for(int i=0; i<reservationAvail.length; i++)
+		System.out.println(reservationAvail);
 		return "space/insertSpace";
 	}
 	

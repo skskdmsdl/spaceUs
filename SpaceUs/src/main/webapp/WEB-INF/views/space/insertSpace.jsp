@@ -194,7 +194,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 										<th id=32>08:00 - 09:00</th>
 									</tr>
                                 </table>
-                                
+                                <input type="hidden" name="mon" value="" />
+                                <input type="hidden" name="tue" value="" />
+                                <input type="hidden" name="wed" value="" />
+                                <input type="hidden" name="thu" value="" />
+                                <input type="hidden" name="fri" value="" />
+                                <input type="hidden" name="sat" value="" />
+                                <input type="hidden" name="sun" value="" />
                             </div>
                             
                             <div class="pf-feature-price">
@@ -405,13 +411,13 @@ $("#optionTb th").on("click", function(){
 <!-- 시간선택 script -->
 <script>
 const dayTime = [
-	{ day: 'mon', start: 0, end: 0},
-	{ day: 'tue', start: 0, end: 0},
-	{ day: 'wed', start: 0, end: 0},
-	{ day: 'thu', start: 0, end: 0},
-	{ day: 'fri', start: 0, end: 0},
-	{ day: 'sat', start: 0, end: 0},	
-	{ day: 'sun', start: 0, end: 0}	
+	{ day: 'mon', startHour: 0, endHour: 0},
+	{ day: 'tue', startHour: 0, endHour: 0},
+	{ day: 'wed', startHour: 0, endHour: 0},
+	{ day: 'thu', startHour: 0, endHour: 0},
+	{ day: 'fri', startHour: 0, endHour: 0},
+	{ day: 'sat', startHour: 0, endHour: 0},	
+	{ day: 'sun', startHour: 0, endHour: 0}	
 ];
 var day;
 var first;
@@ -425,19 +431,19 @@ $("#day input").on("click", function(){
 	for(var i=0; i<33; i++)
 		$("#"+i).removeClass("bg-primary");
 
-	var s=dayTime[day].start;
+	var s=dayTime[day].startHour;
 	//요일에 맞춰 색채우기
-	if(s == dayTime[day].end){
+	if(s == dayTime[day].endHour){
 		flag=0;
 		return;
 	}
-	if(s != 0 && dayTime[day].end==0){
+	if(s != 0 && dayTime[day].endHour==0){
 		flag=1;
 		$("#"+s).addClass("bg-primary");
 		return;
 	}
 	flag=2;
-	for(var i=s; i<=dayTime[day].end; i++)
+	for(var i=s; i<=dayTime[day].endHour; i++)
 		$("#"+i).addClass("bg-primary");
 });
 //가능시간 클릭이벤트
@@ -453,8 +459,8 @@ $("#availableTime th").on("click", function(){
 	if(flag==3){
 		flag=0;
 		//배열값 초기화
-		dayTime[day].start=0;
-		dayTime[day].end=0;
+		dayTime[day].startHour=0;
+		dayTime[day].endHour=0;
 		console.log(dayTime);
 		//셀 색 지우기
 		for(var i=0; i<33; i++)
@@ -466,7 +472,7 @@ $("#availableTime th").on("click", function(){
 		//선택한 셀의 아이디 찾기
 		var last = Number($(this).attr("id"));
 		//셀 값 배열에 넣기
-		dayTime[day].end=last;
+		dayTime[day].endHour=last;
 		console.log(dayTime);
 		//셀 색 바꾸기
 		if(last<first){
@@ -482,7 +488,7 @@ $("#availableTime th").on("click", function(){
 	//선택한 셀의 아이디 찾기
 	first = Number($(this).attr("id"));
 	//셀 값 배열에 넣기
-	dayTime[day].start=first;
+	dayTime[day].startHour=first;
 	console.log(dayTime);
 	//셀 색 바꾸기
     $(this).addClass("bg-primary");
@@ -566,10 +572,28 @@ $("#businessNo").keyup(function(){
 </script>
 <script>
 
-//제출전 확인
-/* $("#spaceFrm").submit(function(){
+//제출전처리
+$("#spaceFrm").submit(function(){
 
-	var $memberId = $("#memberId");
+	//시간배열 넣기
+	$("[name=mon]").val(dayTime[0]);
+	$("[name=tue]").val(dayTime[1]);
+	$("[name=wed]").val(dayTime[2]);
+	$("[name=thu]").val(dayTime[3]);
+	$("[name=fri]").val(dayTime[4]);
+	$("[name=sat]").val(dayTime[5]);
+	$("[name=sun]").val(dayTime[6]);
+
+	/*  $.ajax({
+			url : "${pageContext.request.contextPath}/space/insertSpace.do",
+			data : {
+				businessNo : $(this).val()
+			},
+			dataType : "json",
+			success : function(data){
+				
+		});  */
+	/* var $memberId = $("#memberId");
 	if(/^\w{4,}$/.test($memberId.val()) == false){
 		alert("아이디는 최소 4자리이상이어야 합니다.");
 		$memberId.focus();
@@ -582,10 +606,10 @@ $("#businessNo").keyup(function(){
 		alert("아이디 중복검사 해주세요.");
 		return false;
 	} 
-	
+	 */
 	
 	return true;
-}); */
+});
 </script>
 
 <!-- 컨텐츠 끝 -->
