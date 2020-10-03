@@ -27,6 +27,25 @@ pageContext.setAttribute("loginMember",loginMember);
 .fas {position: absolute; padding: 90px;}
 input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 .site-btn {width: 100%; font-size: 17px;}
+#commentMenuBtn{
+	padding: 15px 0;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
+    list-style: none;
+    font-size: 14px;
+    display: none;
+}
+#commentMenuBtn li{
+	padding: 10px 20px;
+}
+#commentMenuBtn li:hover{
+	background-color: #efefef;
+	cursor: pointer;
+}
+.fa-ellipsis-v{
+	cursor: pointer;
+}
 </style>
 <!-- 컨텐츠 시작 -->
 <!-- 헤더 -->
@@ -151,21 +170,19 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                         
                                        <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
 	                                         <th>	
- 
-		                                    			<i class="fa fa-ellipsis-v pull-right">
-			                                    			 <ul class="dropdown-menu" role="menu" id="commentMenuBtn">
-															    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">신고</a></li>
-															  </ul>
-			                                    				<%-- <c:if test="${loginMember != list.email}">
-			                                    					<li><button name="alertComment" 
-			                                    								value="${list.no }" style="border:0; background: #fafafa;"
-			                                    								data-toggle="modal" data-target="#commentReport">신고하기</button></li>
-			                                    				</c:if> --%>
-			                                    				<%-- <c:if test="${loginMember == list.email}">
-			                                    					<li><button name="updateComment"   style="border:0; background: #fafafa;">수정</button></li>
-			                                    					<li><button name="deleteComment"  style="border:0; background: #fafafa;">삭제</button></li>
-			                                    				</c:if> --%>
-		                                    			</i>
+                                    			<i class="fa fa-ellipsis-v pull-right">
+                                    			 <ul class="pull-left mt-3" id="commentMenuBtn">
+	                                    			 <c:choose>
+		                                    			 <c:when test="${loginMember != list.email || loginMember == null}">
+														    <li><i class="fa fa-flag"></i> &nbsp;신고</li>
+		                                    			 </c:when>
+		                                    			 <c:when test="${loginMember == list.email}">
+														    <li style="padding: 5px 25px">수정</li>
+														    <li style="padding: 5px 25px">삭제</li>
+		                                    			 </c:when>
+	                                    			 </c:choose>
+												  </ul>
+                                    			</i>
 	                                    	</th>
                                     	
                                    	</sec:authorize>
@@ -302,7 +319,7 @@ $("#insertComment").click(function(){
 });
 //댓글 신고/수정/삭제 버튼 이벤트
 $('.fa-ellipsis-v').click(function(){
-	$('#commentMenuBtn').dropdown();
+	$('#commentMenuBtn').toggle();
 	
 });
 </script>
