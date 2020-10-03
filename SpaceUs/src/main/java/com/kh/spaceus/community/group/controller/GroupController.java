@@ -45,12 +45,16 @@ public class GroupController {
 							@RequestParam(defaultValue = "1", value="cPage") int cPage) {
 
 		List<Board> boardList = groupService.selectListBoard();
+		
 
 		//페이징 처리
 		final int limit = 10;
 		int offset = (cPage -1) * limit;
 		
 		List<GroupBoard> groupBoardList = groupService.selectListGroupBoard(limit,offset);
+		log.info("groupBoardList = {}",groupBoardList);
+		
+		
 
 		int totalCnt = groupService.selectTotalCnt();
 		String url = request.getRequestURI() + "?";
@@ -77,9 +81,9 @@ public class GroupController {
 		listMap.put("boardRef", boardRef);
 
 		List<GroupBoard> groupBoardList = groupService.selectSortedListGroupBoard(listMap);
-		
-
 		int totalCnt = groupService.selectTotalCnt();
+		
+		log.info("groupBoardList = {}",groupBoardList);
 		
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("boardList", boardList);
@@ -133,12 +137,16 @@ public class GroupController {
 			List<GroupBoard> list = groupService.selectDetailBoard(groupBoardNo);
 			List<Board> boardList = groupService.selectBoardOne(groupBoardNo);
 			List<GBComment> commentList = groupService.selectAllComment(groupBoardNo);
+			int commentCnt = groupService.selectCommentCnt(groupBoardNo);
 			
+			log.info("commentCnt={}",commentCnt);
+	
 			log.info("commentList={}",commentList);
 			
 			model.addAttribute("list", list);
 			model.addAttribute("boardList", boardList);
 			model.addAttribute("commentList", commentList);
+			model.addAttribute("commentCnt", commentCnt);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

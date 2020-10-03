@@ -115,8 +115,6 @@ body{
 	                                    <th><i class="fa fa-calendar"></i>&nbsp; ${list.groupBoardDate}</th>
 	                                    <th class="col-xl-auto">|</th>
 	                                    <th><i class="fa fa-eye"></i> 조회수 &nbsp; ${list.viewCnt}</th>
-	                                    <th class="col-xl-auto">|</th>
-	                                    <th><i class="fa fa-comment"></i> 댓글수 &nbsp; ${list.viewCnt}</th>
 	                                </tr>
 	                                <input type="hidden" name="groupBoardNo" value="${list.groupBoardNo}"/>
 	                            </table>
@@ -152,7 +150,24 @@ body{
 	                         
 	                         
 	                         <!-- 댓글 시작 -->
-	                         <p style="margin-left:5%;"><i class="fa fa-comment"></i> 댓글수 &nbsp; ${list.viewCnt}</p>
+	                         
+		                         <p style="margin-left:5%; display: inline;"><i class="fa fa-comment"></i> 댓글수 &nbsp; ${commentCnt}</p>
+	                         
+	                         <p style="display: inline; margin: 0 5px;">|</p>
+	                         <!-- 공유하기 팝오버 시작-->
+						       <a href=javascript:; data-toggle="popover" data-trigger="focus" data-placement="bottom"
+						          tabindex="0" title="공유하기" data-html="true" data-popover-content="#a1" >
+						       <i class="far fa-share-square" style="color:#d0d0d0 !important;"></i>
+						       <p style="display: inline;">공유하기</p>
+						       </a>
+						       
+						       <div class="d-none" id="a1" style="position: relative;">
+								  <div class="popover-body">
+								    <input class="input-group-text w-100" type="text" id="url-input">
+								    <button class="btn btn-primary w-100" id="url-btn" onclick="urlcopy();">URL 복사</button>
+								  </div>
+							  	</div>
+      						<!-- 공유하기 팝오버 끝-->
                          	
 	                         <div style="background-color: #fafafa; width:90%; margin: auto;">
 	                         	<div class="pl-5 pr-5 pt-4">
@@ -198,11 +213,13 @@ body{
 							                                    			<i class="fa fa-ellipsis-v layerMore">
 								                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
 								                                    				<c:if test="${loginMember != cm.writer}">
-								                                    					<li><a href="#">신고하기</a></li>
+								                                    					<li><button name="alertComment${cm.groupBoardCommentNo}" 
+								                                    								value="${cm.groupBoardCommentNo}" style="border:0; background: #fafafa;"
+								                                    								data-toggle="modal" data-target="#commentReport">신고하기</button></li>
 								                                    				</c:if>
 								                                    				<c:if test="${loginMember == cm.writer}">
 								                                    					<li><button name="updateComment${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}"  style="border:0; background: #fafafa;">수정</button></li>
-								                                    					<li><button name="deleteComment"  style="border:0; background: #fafafa;">삭제</button></li>
+								                                    					<li><button name="deleteComment${cm.groupBoardCommentNo}"  style="border:0; background: #fafafa;">삭제</button></li>
 								                                    				</c:if>
 								                                    			</ul>
 							                                    			</i>
@@ -316,7 +333,8 @@ body{
 													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 													success:function(){
 														alert("댓글이 정상적으로 등록되었습니다.");
-														location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+														/* location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do"; */
+														window.location.reload();
 													},
 													error: function(x,h,r){
 														alert("댓글이 정상적으로 등록이 되지 않았습니다.");
@@ -381,7 +399,7 @@ body{
 											function updateCommentBtn_${cm.groupBoardCommentNo} (){
 
 												var groupBoardContent = $('[name=comment_${cm.groupBoardCommentNo}]').val();
-												alert(groupBoardContent);
+												/* alert(groupBoardContent); */
 												
 												if(groupBoardContent == null || groupBoardContent == ''){
 													alert("댓글을 입력해주세요");
@@ -422,7 +440,30 @@ body{
 													}
 												});
 											} 
-											
+
+											/*댓글 삭제*/
+											$('[name=deleteComment${cm.groupBoardCommentNo}]').click(function(){
+												if(confirm("댓글을 삭제하시겠습니까?")==false) return;
+
+												var groupBoardCommentNo = $('[name=groupBoardCommentNo${cm.groupBoardCommentNo}]').val();
+
+												var param1 = "groupBoardCommentNo="+groupBoardCommentNo;
+												
+												 $.ajax({
+													method:"post",
+													url : "${pageContext.request.contextPath}/community/comment/deleteComment.do",
+													data : param1,
+													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+													success: function(data){
+														alert('댓글 삭제가 완료되었습니다');
+														window.location.reload();
+													} ,
+													errer: function(x,s,r){
+														alert('댓글 삭제가 실패하였습니다');
+														console.log("처리실패",x,s,r);
+													}
+												});
+											});
 										
 		                           		</script>		                           			
 	                           			<!-- 대댓글 폼 끝 -->
@@ -445,11 +486,11 @@ body{
 					                                    			<i class="fa fa-ellipsis-v layerMore">
 						                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
 						                                    				<c:if test="${loginMember != cm.writer}">
-						                                    					<li><a href="#">신고하기</a></li>
+						                                    					<li><button name="alertComment${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}" style="border:0; background: #fafafa;">신고하기</button></li>
 						                                    				</c:if>
 						                                    				<c:if test="${loginMember == cm.writer}">
 						                                    					<li><button name="updatereply_${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentRef}" style="border:0; background: #fafafa;">수정</button></li>
-								                                    			<li><button name="deleteComment" style="border:0; background: #fafafa;">삭제</button></li>
+								                                    			<li><button name="deleteComment${cm.groupBoardCommentNo}" style="border:0; background: #fafafa;">삭제</button></li>
 						                                    				</c:if>
 						                                    			</ul>
 					                                    			</i>
@@ -483,7 +524,7 @@ body{
 												/*대댓글 수정 폼*/
 												$('[name=updatereply_${cm.groupBoardCommentNo}]').click(function(){
 
-													alert($(this).val()); 
+													/* alert($(this).val()); */ 
 													
 													$(".level2__${cm.groupBoardCommentNo}").hide(); //댓글보기 안보이게 하기
 
@@ -505,7 +546,6 @@ body{
 													
 
 													$div2.append($div3);
-													$div2.append($div4);
 													
 													let $tr = $("<tr></tr>");
 													$tr.append($div2);
@@ -530,7 +570,7 @@ body{
 												function updateReplyBtn_${cm.groupBoardCommentNo}(){
 
 													var groupBoardContent = $('[name=comment_${cm.groupBoardCommentNo}]').val();
-													alert(groupBoardContent);
+													/* alert(groupBoardContent); */
 													
 													if(groupBoardContent == null || groupBoardContent == ''){
 														alert("댓글을 입력해주세요");
@@ -551,7 +591,7 @@ body{
 																"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret+
 																"&groupBoardCommentNo="+groupBoardCommentNo;
 
-													alert(param1);
+													/* alert(param1); */
 													
 												 $.ajax({
 														method:"post",
@@ -560,7 +600,8 @@ body{
 														contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 														success:function(){
 															alert("대댓글이 정상적으로 수정되었습니다.");
-															location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+															/* location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do"; */
+															window.location.reload();
 														},
 														error: function(x,h,r){
 															alert("대댓글이 정상적으로 수정되지 않았습니다.");
@@ -568,6 +609,30 @@ body{
 														}
 													}); 
 												}
+
+												/*대댓글 삭제*/
+												$('[name=deleteComment${cm.groupBoardCommentNo}]').click(function(){
+												if(confirm("댓글을 삭제하시겠습니까?")==false) return;
+
+												var groupBoardCommentNo = $('[name=groupBoardCommentNo${cm.groupBoardCommentNo}]').val();
+
+												var param1 = "groupBoardCommentNo="+groupBoardCommentNo;
+												
+												 $.ajax({
+													method:"post",
+													url : "${pageContext.request.contextPath}/community/comment/deleteComment.do",
+													data : param1,
+													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+													success: function(data){
+														alert('댓글 삭제가 완료되었습니다');
+														window.location.reload();
+													} ,
+													errer: function(x,s,r){
+														alert('댓글 삭제가 실패하였습니다');
+														console.log("처리실패",x,s,r);
+													}
+												});
+											});
 				                         	</script>
 										</c:if>	                         	
 		                         	</c:forEach>		                         	
@@ -585,7 +650,7 @@ body{
 	                     
 	                     
 	                     
-	                   <!-- Modal -->
+	                   <!-- 게시판 신고 Modal -->
                        <div class="modal fade" id="intro" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
                            <div class="modal-dialog">
                                <div class="modal-content">
@@ -609,6 +674,34 @@ body{
                            </div>
                        </div>
                        <!-- Modal end -->
+                       
+                       <!-- 댓글 신고 Modal -->
+                       <c:forEach items="${commentList}" var="comment">
+	                       <div class="modal fade" id="commentReport" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
+	                           <div class="modal-dialog">
+	                               <div class="modal-content">
+	                                   <div class="modal-header">
+	                                       <h4 class="modal-title">신고하기</h4>
+	                                   </div>
+	                                   <div class="modal-body">
+	                                      <p style=" padding-top: 20px; font-size: 16px; margin-bottom:0;">신고 게시물 : <input style="border: none; color:#666; font-size: 16px;" type="text" value="${comment.groupBoardContent }" /></p>
+	                                       <p style="border-bottom: 1px solid #efefef; font-size: 16px; padding-bottom: 30px;">작&nbsp;&nbsp;&nbsp;  성&nbsp;&nbsp;&nbsp;  자 &nbsp;: <input id="reportNick" style="border: none; color:#666; font-size: 16px;" type="text" value="${comment.nickname }" /></p>
+	                                       <p style=" font-size: 16px;">사 유&nbsp; 선 택 &nbsp;: <span style="font-size: 12px; color:#888;">여러 사유에 해당되는 경우, 대표적인 사유 1개를 선택해 주세요.</span></p>
+	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="부적절한 홍보 게시글"/> 부적절한 홍보 게시글<br/>
+	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="음란성 또는 청소년에게 부적합한 내용"/> 음란성 또는 청소년에게 부적합한 내용<br/>
+	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="명예훼손/사생활 침해 및 저작권침해등"/> 명예훼손/사생활 침해 및 저작권침해등<br/>
+	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="기타"/> 기타
+	                                   </div>
+	                                   <div class="modal-footer">
+	                                       <button type="submit" class="btn btn-primary" data-dismiss="modal" id="alertBtn">신고</button>
+	                                       <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+	                                   </div>
+	                               </div>
+	                           </div>
+	                       </div>
+	                       <!-- Modal end -->
+                       </c:forEach>
+                       
                    </c:forEach>
           
                  </div>
@@ -676,7 +769,8 @@ $("#inserCommentFrm #insertCmt").click(function(){
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		success:function(){
 			alert("댓글이 정상적으로 등록되었습니다.");
-			location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+			/* location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do"; */
+			window.location.reload();
 		},
 		error: function(x,h,r){
 			alert("댓글이 정상적으로 등록이 되지 않았습니다.");
@@ -685,9 +779,49 @@ $("#inserCommentFrm #insertCmt").click(function(){
 	});
 });
 
-
-
 });
+
+var url = $(location).attr('href');
+
+$(function(){
+	$("#url-input").attr('value', url);
+	
+    $("[data-toggle=popover]").popover({
+        html : true,
+        content: function() {
+          var content = $(this).attr("data-popover-content");
+          return $(content).children(".popover-body").html();
+        },
+        title: function() {
+          var title = $(this).attr("data-popover-content");
+          return $(title).children(".popover-heading").html();
+        }
+    });
+
+    $("#heart-a").click(function(){
+
+		var $heart = $("#heart-a");
+    	if($heart.html().indexOf("far fa-heart") != -1) {
+    		$heart.html("<i class='fas fa-heart'></i>");
+    	}
+    	else {
+    		$heart.html("<i class='far fa-heart'></i>");
+    	}
+    });
+});
+
+function urlcopy(){
+	var tempElem = document.createElement('textarea');
+
+	tempElem.value = url;  
+	document.body.appendChild(tempElem);
+	tempElem.select();
+	document.execCommand("copy");
+	document.body.removeChild(tempElem);
+
+	alert("url 복사완료!");
+}
+
 
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
