@@ -24,6 +24,9 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+	<!-- 구글 로긴 -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="778421516975-r2f80c2f91aalftfppl2kq4sqn1om06i.apps.googleusercontent.com">
 <script>
 	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
 	<c:if test="${ not empty msg }">
@@ -32,6 +35,31 @@
 	<c:if test="${ not empty naverLoginMember }">
 		alert('이미 가입하신 이메일입니다. 로그인해주세요.');
 	</c:if>
+
+	function onSignIn(googleUser) {
+
+		var id_token = googleUser.getAuthResponse().id_token;
+		var profile = googleUser.getBasicProfile();
+
+			console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+			console.log('Name: ' + profile.getName());
+			console.log('Image URL: ' + profile.getImageUrl());
+			console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+			console.log('id_token: ' + id_token); // id_token
+	
+			location.href='${pageContext.request.contextPath }/member/googleLogin.do?idtoken='+id_token;
+		/*
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', '${pageContext.request.contextPath }/member/googleLogin.do');
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		xhr.onload = function() {
+		  console.log('Signed in as: ' + xhr.responseText);
+		};
+		xhr.send('idtoken=' + id_token);
+		*/
+		
+	}
+	
 </script>
 </head>
 <body>
@@ -62,11 +90,22 @@
 					</div>
 					<div id="naver_id_login" style="text-align:center">
 						<a href="${facebook_url}">
-							<div class="social-btn">
+							<div class="g-signin2 social-btn" data-onsuccess="onSignIn">
 								<img src="${pageContext.request.contextPath }/resources/images/icons/facebook-icon.png"/>
-									&nbsp;페이스북으로 시작하기
+									&nbsp;구글로 시작하기
 							</div>
+							 
+							
 						</a>
+						<!-- <a href="#" onclick="signOut();">Sign out</a> --><!-- <a href="#" onclick="signOut();">Sign out</a> -->
+						<!-- <script>
+						  function signOut() {
+						    var auth2 = gapi.auth2.getAuthInstance();
+						    auth2.signOut().then(function () {
+						      console.log('User signed out.');
+						    });
+						  }
+						</script> -->
 					</div>
 						<div class="text-center p-t-46 p-b-20">
 						<p class="txt1">

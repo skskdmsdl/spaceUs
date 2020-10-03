@@ -49,10 +49,10 @@
 					  action="${pageContext.request.contextPath }/member/memberEnroll.do" method="post">
 					
 					<span class="login100-form-title p-b-43">
-						<h4 class="navbar-brand">페이스북으로 시작하기</h4>
+						<h4 class="navbar-brand">구글로 시작하기</h4>
 						<p class="txt1">
 						<br />
-							필요한 추가 정보 입력 후 페이스북으로 로그인하실 수 있습니다.
+							필요한 추가 정보 입력 후 구글로 로그인하실 수 있습니다.
 						</p><br />
 					</span>
 					
@@ -82,7 +82,7 @@
 					
 					<div class="wrap-input100 validate-input">
 						<input class="input100" type="text" name="nickName" id="nickName"
-								value="${ name }" placeholder="nickName *" required>
+								value="${ nickname }" placeholder="nickName *" required>
 						<input type="hidden" id="nickNameValid" value="0"/>
 						<span class="focus-input100">nickName</span>
 					</div>
