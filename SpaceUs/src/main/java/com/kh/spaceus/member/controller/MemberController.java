@@ -113,16 +113,16 @@ public class MemberController {
 		return "member/stampEvent";
 	}
 
-	// 로그인 폼
-//	@RequestMapping("memberLoginForm.do")
+//	// 로그인 폼
+//	@RequestMapping("/memberLoginForm.do")
 //	public String memberLoginForm() {
 //
 //		System.out.println("memberLoginForm.do...");
 //		return "member/memberLoginForm";
 //	}
-
-	// 로그인
-
+//
+//	// 로그인
+//
 //	@RequestMapping(value = "/memberLogin.do", method = RequestMethod.POST)
 //	public String memberLogin(@RequestParam String memberEmail, @RequestParam String password, Model model,
 //			RedirectAttributes redirectAttr, HttpSession session, HttpServletRequest request) {

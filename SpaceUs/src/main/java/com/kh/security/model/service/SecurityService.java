@@ -23,7 +23,7 @@ public class SecurityService implements UserDetailsService{
 									throws UsernameNotFoundException {
 		
 		Member member = securityDAO.loadUserByUsername(username);
-		log.info("member = {}", member);
+		log.info("memberrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr = {}", member);
 		
 		
 		if(member == null)
