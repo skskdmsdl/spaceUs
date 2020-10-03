@@ -121,7 +121,7 @@
 				writer,
 				recruit_no,
 				secret,
-				recruit_comment_content,
+				recruit_comment_content
 			)
 		values (
 			'RCOMMENT'||seq_recruit_comment_no.nextval,
@@ -134,9 +134,10 @@
 	
 	<select id="selectCommentList" resultMap="CommentMap">
 		select 
-			* 
+			RC.*,
+			(select member_email from member where nickname= RC.writer) email
 		from 
-			recruit_comment 
+			recruit_comment RC
 		where 
 			recruit_no = #{ no } 
 			start with recruit_comment_level = 1 
@@ -146,6 +147,7 @@
 	<resultMap type="recruitComment" id="CommentMap">
 		<id column="recruit_comment_no" property="no"/>
 		<result column="writer" property="nickName"/>
+		<result column="email" property="email"/>
 		<result column="recruit_no" property="recruitNo"/>
 		<result column="secret" property="secret"/>
 		<result column="recruit_comment_ref" property="commentRef"/>

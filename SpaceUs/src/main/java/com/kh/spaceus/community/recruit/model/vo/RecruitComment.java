@@ -18,6 +18,7 @@ public class RecruitComment implements Serializable{
 	
 	private String no;
 	private String nickName;
+	private String email;
 	private String recruitNo;
 	private int secret;
 	private String commentRef;

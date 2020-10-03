@@ -113,10 +113,10 @@ public class RecruitController {
 			}
 			
 			Recruit recruit = recruitService.selectOneRecruit(no);
-			List<RecruitComment> comment = recruitService.selectCommentList(no);
+			List<RecruitComment> commentList = recruitService.selectCommentList(no);
 			log.debug("recruit = {}", recruit);
 			model.addAttribute("recruit", recruit);
-			model.addAttribute("comment", comment);
+			model.addAttribute("commentList", commentList);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -231,15 +231,15 @@ public class RecruitController {
     public ModelAndView insertComment(ModelAndView mav,
 									  @RequestParam("recruitNo") String recruitNo,
 									  @RequestParam("email") String email,
-									  @RequestParam("secret") String secret,
+									  @RequestParam("secret") int secret,
 									  @RequestParam("content") String content) {
 		 
 		Member member = memberService.selectOneMember(email);
 		
 		RecruitComment comment = new RecruitComment();
 		comment.setNickName(member.getNickName());
-		comment.setNickName(recruitNo);
-		comment.setSecret(secret=="secret"?1:0);
+		comment.setRecruitNo(recruitNo);
+		comment.setSecret(secret);
 		comment.setContent(content);
 		
 		int result = recruitService.insertComment(comment);
