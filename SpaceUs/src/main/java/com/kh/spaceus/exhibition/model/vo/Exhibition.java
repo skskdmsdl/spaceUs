@@ -14,8 +14,10 @@ import lombok.Setter;
 public class Exhibition implements Serializable{
 	
 	private String exNo;
-	private String exTitle;
+	private String exTitle; //not null
 	private String exSubtitle;
-	private String tag;
-	private String image;
+	private String tag; //not null
+	private String imageUrl;
+	private String renamedFileName;
+	
 }

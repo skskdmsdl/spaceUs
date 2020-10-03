@@ -15,13 +15,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.community.group.model.service.GroupService;
 import com.kh.spaceus.community.group.model.vo.Board;
+import com.kh.spaceus.community.group.model.vo.GBComment;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
 
@@ -41,12 +45,16 @@ public class GroupController {
 							@RequestParam(defaultValue = "1", value="cPage") int cPage) {
 
 		List<Board> boardList = groupService.selectListBoard();
+		
 
 		//페이징 처리
 		final int limit = 10;
 		int offset = (cPage -1) * limit;
 		
 		List<GroupBoard> groupBoardList = groupService.selectListGroupBoard(limit,offset);
+		log.info("groupBoardList = {}",groupBoardList);
+		
+		
 
 		int totalCnt = groupService.selectTotalCnt();
 		String url = request.getRequestURI() + "?";
@@ -73,9 +81,9 @@ public class GroupController {
 		listMap.put("boardRef", boardRef);
 
 		List<GroupBoard> groupBoardList = groupService.selectSortedListGroupBoard(listMap);
-		
-
 		int totalCnt = groupService.selectTotalCnt();
+		
+		log.info("groupBoardList = {}",groupBoardList);
 		
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("boardList", boardList);
@@ -127,9 +135,18 @@ public class GroupController {
 			//브라우져가 종료되면 쿠키 삭제
 			
 			List<GroupBoard> list = groupService.selectDetailBoard(groupBoardNo);
+			List<Board> boardList = groupService.selectBoardOne(groupBoardNo);
+			List<GBComment> commentList = groupService.selectAllComment(groupBoardNo);
+			int commentCnt = groupService.selectCommentCnt(groupBoardNo);
+			
+			log.info("commentCnt={}",commentCnt);
+	
+			log.info("commentList={}",commentList);
 			
 			model.addAttribute("list", list);
-			
+			model.addAttribute("boardList", boardList);
+			model.addAttribute("commentList", commentList);
+			model.addAttribute("commentCnt", commentCnt);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -246,5 +263,11 @@ public class GroupController {
 		return "redirect:/community/group/groupList.do";
 	}
 	
-
+//	@PostMapping("/insertComment.do")
+//	@ResponseBody
+//	public String insertComment() {
+//		log.info("222222222222222222222222222222222222222222");
+//		return "";
+//	}
+	
 }

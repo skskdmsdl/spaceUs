@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.spaceus.community.group.model.vo.Board;
+import com.kh.spaceus.community.group.model.vo.GBComment;
 import com.kh.spaceus.community.group.model.vo.Report;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 
@@ -32,5 +33,17 @@ public interface GroupDAO {
 	int insertReport(Report report);
 
 	int updateCnt(Map<Object, Object> map);
+
+	List<Board> selectBaordOne(String groupBoardNo);
+
+	List<GBComment> selectAllComment(String groupBoardNo);
+
+	int insertComment(GBComment param1);
+
+	int updateComment(GBComment param1);
+
+	int deleteComment(GBComment param1);
+
+	int selectCommentCnt(String groupBoardNo);
 
 }

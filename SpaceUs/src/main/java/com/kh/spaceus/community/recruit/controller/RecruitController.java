@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.community.recruit.model.service.RecruitService;
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
 import com.kh.spaceus.community.recruit.model.vo.ReportRecruit;
@@ -42,7 +45,8 @@ public class RecruitController {
 	@RequestMapping("/recruitList.do")
 	public ModelAndView recruitList (ModelAndView mav,
 							  @RequestParam(defaultValue = "1",
-						  		value = "cPage") int cPage) {
+						  	  value = "cPage") int cPage,
+							  HttpServletRequest request) {
 		//1.사용자 입력값 
 		final int limit = 10; //사용용도는 numPerPage와 똑같음
 		int offset = (cPage - 1) * limit;
@@ -52,12 +56,14 @@ public class RecruitController {
 		log.debug("list = {}", list);
 		
 		//전체컨텐츠수 구하기
-		 int totalContents = recruitService.selectRecruitTotalContents(); 
-		
+		int totalContents = recruitService.selectRecruitTotalContents(); 
+		String url = request.getRequestURI() + "?";
+		String pageBar = Utils.getPageBarHtml(cPage, limit, totalContents, url);
 		
 		//3. view단 처리
 		mav.addObject("totalContents", totalContents);
 		mav.addObject("list", list);
+		mav.addObject("pageBar", pageBar);
 		mav.setViewName("community/recruit/recruitList");
 		return mav;
 	}
@@ -72,12 +78,45 @@ public class RecruitController {
 	// 구인/구직 상세페이지
 	@GetMapping("/recruitDetail.do")
 	public String recruitDetail (@RequestParam("no") String no,
-			  					Model model
+			  					Model model,
+			  					HttpServletRequest request,
+			  					HttpServletResponse response
 			  					) {
-		Recruit recruit = recruitService.selectOneRecruit(no);
-		log.debug("recruit = {}", recruit);
-		model.addAttribute("recruit", recruit);
-		
+		try {
+			//쿠키검사 : recruitCookie
+			Cookie[] cookies = request.getCookies();
+			String recruitCookieVal = "";
+			boolean hasRead = false;
+			
+			if(cookies != null) {
+				for(Cookie c : cookies) {
+					String name = c.getName();
+					String value = c.getValue();
+					
+					if("recruitCookie".equals(name)) {
+						recruitCookieVal = value;
+						
+						if(value.contains("[" + no + "]"))
+							hasRead = true;
+					}
+				}
+			}
+			if(!hasRead) {
+				//recruitCookie생성
+				Cookie recruitCookie = new Cookie("recruitCookie", recruitCookieVal + "["+ no +"]");
+				recruitCookie.setPath(request.getContextPath()+"/community/recruit");
+				recruitCookie.setMaxAge(24*60*60);
+				response.addCookie(recruitCookie);
+				int result = recruitService.increaseRecruitReadCnt(no);
+				log.info("result = {}",result);			
+			}
+			
+			Recruit recruit = recruitService.selectOneRecruit(no);
+			log.debug("recruit = {}", recruit);
+			model.addAttribute("recruit", recruit);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "community/recruit/recruitDetail";
 	}
 	

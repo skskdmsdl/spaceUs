@@ -25,7 +25,7 @@
 			group_board G
 		where
 			G.report_cnt <![CDATA[<]]> 10
-		order by group_board_date
+		order by group_board_date desc, group_board_no desc 
 	</select>
 	
 	<resultMap type="groupBoard" id="groupBoardMap">
@@ -70,6 +70,46 @@
 			group_board G
 		where
 			G.group_board_no=#{groupBoardNo}
+	</select>
+	
+	<!-- board Detail 에서 윗부분  board 분류 -->
+	<select id="selectBoardOne" resultMap="boardMap">
+	 	select
+        	B.*
+      	from 
+      		board B join group_board G
+                        on B.board_no = G.board_no
+      	where 
+      		G.group_board_no = #{groupBoardNo}
+	</select>
+	
+	<!-- board Detail 에서  comment aLL select-->
+	<select id="selectAllComment" resultMap="gbCommentMap">
+		select 
+			c.*, M.nickname 
+		from 
+			group_board_comment  C join member M 
+            	on C.writer = m.member_email
+		where 
+			group_board_ref = #{groupBoardNo}
+		start with 
+			group_board_comment_level = 1
+		connect by prior 
+			group_board_comment_no = group_board_comment_ref
+		order siblings by
+			 group_board_date desc, group_board_comment_no desc
+	</select>
+	<resultMap type="gBComment" id="gbCommentMap">
+	</resultMap>
+	
+	<!-- board Detail에서 Comment Cnt -->
+	<select id="selectCommentCnt" resultType="_int">
+		select
+			count(*)
+		from 
+			group_board_comment
+		where
+			group_board_ref = #{groupBoardNo}
 	</select>
 	
 	<!-- insert board -->
@@ -150,4 +190,39 @@
 		where
 			group_board_no = #{boardNo}
 	</update>
+	
+	<!-- comment insert -->
+	<insert id="insertComment">
+		insert into
+			group_board_comment
+		values(
+			seq_group_board_comment_no.nextval,
+			#{writer},
+			#{groupBoardRef},
+			#{secret},
+			#{groupBoardCommentRef},
+			#{groupBoardContent},
+			#{groupBoardCommentLevel},
+			default
+		)
+	</insert>
+	
+	<!-- 댓글/대댓글 수정 -->
+	<update id="updateComment">
+		update
+			group_board_comment
+		set
+			secret = #{secret},
+			group_board_content = #{groupBoardContent}
+		where
+			group_board_comment_no = #{groupBoardCommentNo}
+	</update>
+	
+	<!-- 댓글 /대댓글 삭제 -->
+	<delete id="deleteComment">
+		delete from
+			group_board_comment
+		where
+			group_board_comment_no = #{groupBoardCommentNo}
+	</delete>
 </mapper>

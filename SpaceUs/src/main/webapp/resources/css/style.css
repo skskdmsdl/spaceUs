@@ -8732,7 +8732,7 @@ h1, h2, h3, h4, h5,
       margin-left: 30px; }
       .pills .review .desc h4 {
         width: 100%;
-        margin-bottom: 10px; }
+        }
         .pills .review .desc h4 span {
           width: 49%;
           display: inline-block; }

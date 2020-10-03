@@ -22,5 +22,9 @@ public class ExhibitionServiceImpl implements ExhibitionService{
 	public int deleteExhibition(String exNo) {
 		return exhibitionDAO.deleteExhibition(exNo);
 	}
+	@Override
+	public int insertExhibition(Exhibition exhibition) {
+		return exhibitionDAO.insertExhibition(exhibition);
+	}
 
 }
