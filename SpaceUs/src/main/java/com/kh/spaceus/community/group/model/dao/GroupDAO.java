@@ -44,4 +44,6 @@ public interface GroupDAO {
 
 	int deleteComment(GBComment param1);
 
+	int selectCommentCnt(String groupBoardNo);
+
 }

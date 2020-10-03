@@ -115,8 +115,6 @@ body{
 	                                    <th><i class="fa fa-calendar"></i>&nbsp; ${list.groupBoardDate}</th>
 	                                    <th class="col-xl-auto">|</th>
 	                                    <th><i class="fa fa-eye"></i> 조회수 &nbsp; ${list.viewCnt}</th>
-	                                    <th class="col-xl-auto">|</th>
-	                                    <th><i class="fa fa-comment"></i> 댓글수 &nbsp; ${list.viewCnt}</th>
 	                                </tr>
 	                                <input type="hidden" name="groupBoardNo" value="${list.groupBoardNo}"/>
 	                            </table>
@@ -152,12 +150,15 @@ body{
 	                         
 	                         
 	                         <!-- 댓글 시작 -->
-	                         <p style="margin-left:5%; display: inline;"><i class="fa fa-comment"></i> 댓글수 &nbsp; ${list.viewCnt}</p>
 	                         
+		                         <p style="margin-left:5%; display: inline;"><i class="fa fa-comment"></i> 댓글수 &nbsp; ${commentCnt}</p>
+	                         
+	                         <p style="display: inline; margin: 0 5px;">|</p>
 	                         <!-- 공유하기 팝오버 시작-->
 						       <a href=javascript:; data-toggle="popover" data-trigger="focus" data-placement="bottom"
 						          tabindex="0" title="공유하기" data-html="true" data-popover-content="#a1" >
 						       <i class="far fa-share-square" style="color:#d0d0d0 !important;"></i>
+						       <p style="display: inline;">공유하기</p>
 						       </a>
 						       
 						       <div class="d-none" id="a1" style="position: relative;">
@@ -212,7 +213,9 @@ body{
 							                                    			<i class="fa fa-ellipsis-v layerMore">
 								                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
 								                                    				<c:if test="${loginMember != cm.writer}">
-								                                    					<li><a href="#">신고하기</a></li>
+								                                    					<li><button name="alertComment${cm.groupBoardCommentNo}" 
+								                                    								value="${cm.groupBoardCommentNo}" style="border:0; background: #fafafa;"
+								                                    								data-toggle="modal" data-target="#commentReport">신고하기</button></li>
 								                                    				</c:if>
 								                                    				<c:if test="${loginMember == cm.writer}">
 								                                    					<li><button name="updateComment${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}"  style="border:0; background: #fafafa;">수정</button></li>
@@ -483,7 +486,7 @@ body{
 					                                    			<i class="fa fa-ellipsis-v layerMore">
 						                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
 						                                    				<c:if test="${loginMember != cm.writer}">
-						                                    					<li><a href="#">신고하기</a></li>
+						                                    					<li><button name="alertComment${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}" style="border:0; background: #fafafa;">신고하기</button></li>
 						                                    				</c:if>
 						                                    				<c:if test="${loginMember == cm.writer}">
 						                                    					<li><button name="updatereply_${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentRef}" style="border:0; background: #fafafa;">수정</button></li>
@@ -647,7 +650,7 @@ body{
 	                     
 	                     
 	                     
-	                   <!-- Modal -->
+	                   <!-- 게시판 신고 Modal -->
                        <div class="modal fade" id="intro" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
                            <div class="modal-dialog">
                                <div class="modal-content">
@@ -671,6 +674,34 @@ body{
                            </div>
                        </div>
                        <!-- Modal end -->
+                       
+                       <!-- 댓글 신고 Modal -->
+                       <c:forEach items="${commentList}" var="comment">
+	                       <div class="modal fade" id="commentReport" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
+	                           <div class="modal-dialog">
+	                               <div class="modal-content">
+	                                   <div class="modal-header">
+	                                       <h4 class="modal-title">신고하기</h4>
+	                                   </div>
+	                                   <div class="modal-body">
+	                                      <p style=" padding-top: 20px; font-size: 16px; margin-bottom:0;">신고 게시물 : <input style="border: none; color:#666; font-size: 16px;" type="text" value="${comment.groupBoardContent }" /></p>
+	                                       <p style="border-bottom: 1px solid #efefef; font-size: 16px; padding-bottom: 30px;">작&nbsp;&nbsp;&nbsp;  성&nbsp;&nbsp;&nbsp;  자 &nbsp;: <input id="reportNick" style="border: none; color:#666; font-size: 16px;" type="text" value="${comment.nickname }" /></p>
+	                                       <p style=" font-size: 16px;">사 유&nbsp; 선 택 &nbsp;: <span style="font-size: 12px; color:#888;">여러 사유에 해당되는 경우, 대표적인 사유 1개를 선택해 주세요.</span></p>
+	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="부적절한 홍보 게시글"/> 부적절한 홍보 게시글<br/>
+	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="음란성 또는 청소년에게 부적합한 내용"/> 음란성 또는 청소년에게 부적합한 내용<br/>
+	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="명예훼손/사생활 침해 및 저작권침해등"/> 명예훼손/사생활 침해 및 저작권침해등<br/>
+	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="기타"/> 기타
+	                                   </div>
+	                                   <div class="modal-footer">
+	                                       <button type="submit" class="btn btn-primary" data-dismiss="modal" id="alertBtn">신고</button>
+	                                       <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+	                                   </div>
+	                               </div>
+	                           </div>
+	                       </div>
+	                       <!-- Modal end -->
+                       </c:forEach>
+                       
                    </c:forEach>
           
                  </div>

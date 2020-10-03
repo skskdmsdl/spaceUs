@@ -101,6 +101,17 @@
 	</select>
 	<resultMap type="gBComment" id="gbCommentMap">
 	</resultMap>
+	
+	<!-- board Detail에서 Comment Cnt -->
+	<select id="selectCommentCnt" resultType="_int">
+		select
+			count(*)
+		from 
+			group_board_comment
+		where
+			group_board_ref = #{groupBoardNo}
+	</select>
+	
 	<!-- insert board -->
 	<insert id="insertBoard">
 		insert into

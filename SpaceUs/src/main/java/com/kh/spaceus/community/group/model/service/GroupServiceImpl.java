@@ -103,6 +103,12 @@ public class GroupServiceImpl implements GroupService {
 		return groupDAO.deleteComment(param1);
 	}
 
+	@Override
+	public int selectCommentCnt(String groupBoardNo) {
+		return groupDAO.selectCommentCnt(groupBoardNo);
+	}
+
+	
 	
 	
 

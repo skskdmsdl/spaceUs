@@ -44,4 +44,6 @@ public interface GroupService {
 
 	int deleteComment(GBComment param1);
 
+	int selectCommentCnt(String groupBoardNo);
+
 }
