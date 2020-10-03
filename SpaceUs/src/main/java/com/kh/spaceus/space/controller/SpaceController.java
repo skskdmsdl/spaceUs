@@ -1,5 +1,6 @@
 package com.kh.spaceus.space.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,13 +64,14 @@ public class SpaceController {
 	
 	@RequestMapping("/spaceDetail.do")
 	public String spaceDetail(Model model,
-							  @RequestParam("spaceNo") String spaceNo) {
+							  @RequestParam("spaceNo") String spaceNo, Principal principal) {
 		//log.debug("spaceNo= {}",spaceNo);
 		Space space = spaceService.selectOneSpace(spaceNo);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
 		
 		model.addAttribute("space", space);
 		model.addAttribute("tag", tag);
+		model.addAttribute("loginMember", principal);
 		return "space/spaceDetail";
 	}
 	

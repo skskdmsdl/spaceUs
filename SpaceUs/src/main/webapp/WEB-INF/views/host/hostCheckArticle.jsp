@@ -208,64 +208,61 @@ function unreplied(){
 					
 			 }else{
 				 $("div.qna-container").empty();
-			 $.each(data, function(i, item){
+			 
+				 $.each(data, function(i, item){
 				 
-				 var html="";
-				 
-				 if(data!=null){
-					 var date = new Date(item.date);
-					 /**
-					  *  yyyy년 MM 월 dd일 hh:mm 포맷으로 반환
-					  */
-					 function getFormatDate(date){
-					     var year = date.getFullYear();              //yyyy
-					     var month = (1 + date.getMonth());          //M
-					     month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-					     var day = date.getDate();                   //d
-					     day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-						 var hh = date.getHours();
-						 hh = hh>=10 ? hh : '0' + hh;
-						 var mm = date.getMinutes();	
+					 var html="";
+	
+					 //미답변 질문글 버튼이 눌려진 상태가 아닌 경우 class 속성 추가
+					 //css변경 
+					 $("#check-unreplied").addClass("fa fa-check");
+					 $("#show-unreplied").css('background-color','#20c997');
+						 
+					 if(data!=null){
+						 var date = new Date(item.date);
+						 /**
+						  *  yyyy년 MM 월 dd일 hh:mm 포맷으로 반환
+						  */
+						 function getFormatDate(date){
+						     var year = date.getFullYear();              //yyyy
+						     var month = (1 + date.getMonth());          //M
+						     month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+						     var day = date.getDate();                   //d
+						     day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+							 var hh = date.getHours();
+							 hh = hh>=10 ? hh : '0' + hh;
+							 var mm = date.getMinutes();	
+								
+						     return ' '+year + '년 ' + month + '월 ' + day + '일 ' + hh + ':' + mm;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+						 }
+						 
+						 html += "<div class=\"qna-container_\">";
+				         html += "<div class=\"col-md-10 d-flex\">"; 
+			          	 html +="<div class=\"blog-entry justify-content-end\">";
+			          	 html +="<div class=\"text\">"; 
+			          	 html +="<h3 class=\"heading\"><a href=\"${pageContext.request.contextPath}/space/qna.do?no="+item.qnaNo;
+					     html +="\">"+item.qnaNo+"</a></h3>";
+					     html +="<p id=\"qna-content\"><a href=\"${pageContext.request.contextPath}/space/qna.do?no="+item.qnaNo+"\">";
+					     html += (item.content).substring(0,100);
+				         html +="</a></p>";
+					     html +="<div class=\"meta mb-3\">";
+					     html +="<div class=\"badge badge-secondary\">";
+					     html +=""+item.name+"</div>";
+					     html +="<div> "+getFormatDate(date)+"</div>";
+					     html +="<div>";
 							
-					     return ' '+year + '년 ' + month + '월 ' + day + '일 ' + hh + ':' + mm;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
-					 }
-					 
-					 html += "<div class=\"qna-container\">";
-			         html += "<div class=\"col-md-10 d-flex\">"; 
-		          	 html +="<div class=\"blog-entry justify-content-end\">";
-		          	 html +="<div class=\"text\">"; 
-		          	 html +="<h3 class=\"heading\"><a href=\"${pageContext.request.contextPath}/space/qna.do?no="+item.qnaNo;
-				     html +="\">"+item.qnaNo+"</a></h3>";
-				     html +="<p id=\"qna-content\"><a href=\"${pageContext.request.contextPath}/space/qna.do?no="+item.qnaNo+"\">";
-				     html += (item.content).substring(0,100);
-			         html +="</a></p>";
-				     html +="<div class=\"meta mb-3\">";
-				     html +="<div class=\"badge badge-secondary\">";
-				     html +=""+item.name+"</div>";
-				     html +="<div> "+getFormatDate(date)+"</div>";
-				     html +="<div>";
-						
-					if(item.status==false){
-	             		    html+="<a class=\"meta-chat\"><span class=\"fa fa-unlock\"></span>공개</a></div>";
-						}else{
-						    html+="<a class=\"meta-chat\"><span class=\"fa fa-lock\"></span>비공개</a></div>";}
-			    
-                html += "</div></div></div></div></div>";
-                    
-				 } else {
-					html = "답변을 기다리는 최근 질문이 없습니다.";
-										
-					 }
+						if(item.status==false){
+		             		    html+="<a class=\"meta-chat\"><span class=\"fa fa-unlock\"></span>공개</a></div>";
+							}else{
+							    html+="<a class=\"meta-chat\"><span class=\"fa fa-lock\"></span>비공개</a></div>";}
+				    
+	                html += "</div></div></div></div></div>";
+					 } else {
+						html += "답변을 기다리는 최근 질문이 없습니다.";										
+						 }
 					console.log(html);
-		            $(".qna-container").append(html);
-			 });
-				 
-           
-             
-				 //미답변 질문글 버튼이 눌려진 상태가 아닌 경우 class 속성 추가
-				 //css변경 
-				 $("#check-unreplied").addClass("fa fa-check");
-				 $("#show-unreplied").css('background-color','#20c997');
+		            $(".qna-container").append(html);                    
+				 });
 					 				
 				 }
 
