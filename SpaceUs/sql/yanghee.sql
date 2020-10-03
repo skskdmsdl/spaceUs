@@ -17,6 +17,10 @@ create table member(
 
 select * from member;
 
+commit;
+
+insert into member values('yang@naver.com','김양희','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','90/09/09','20/10/10',0);
+
 --권한 컬럼 삭제
 ALTER TABLE member DROP COLUMN authority;
 
@@ -436,9 +440,10 @@ alter table group_board_comment rename column private to secret;
 
 create sequence seq_group_board_comment_no;
 
-delete from group_board_comment where group_board_comment_no = 2;
+delete from group_board_comment where group_board_comment_no = 30;
 
 select * from group_board_comment;
+select * from member;
 
 insert into group_board_comment values(seq_group_board_comment_no.nextval,'honggd@naver.com','G5',default,null,'먹방 좋아합니다~~',1,default);
 insert into group_board_comment values(seq_group_board_comment_no.nextval,'honggd@naver.com','G5',default,1,'먹방 은 최고~~',2,default);
@@ -500,6 +505,11 @@ create table blackList (
 
 create sequence seq_blacklist_no;
 select * from blacklist;
+
+-----------------------------
+-- 댓글 신고 (소모임, 구인구직) --
+-----------------------------
+
 
 -----------------------------
 ---------- 기획전 -----------

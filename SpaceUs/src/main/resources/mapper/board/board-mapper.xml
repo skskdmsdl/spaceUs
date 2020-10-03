@@ -25,7 +25,7 @@
 			group_board G
 		where
 			G.report_cnt <![CDATA[<]]> 10
-		order by group_board_date
+		order by group_board_date desc, group_board_no desc 
 	</select>
 	
 	<resultMap type="groupBoard" id="groupBoardMap">
@@ -101,6 +101,17 @@
 	</select>
 	<resultMap type="gBComment" id="gbCommentMap">
 	</resultMap>
+	
+	<!-- board Detail에서 Comment Cnt -->
+	<select id="selectCommentCnt" resultType="_int">
+		select
+			count(*)
+		from 
+			group_board_comment
+		where
+			group_board_ref = #{groupBoardNo}
+	</select>
+	
 	<!-- insert board -->
 	<insert id="insertBoard">
 		insert into
@@ -196,7 +207,7 @@
 		)
 	</insert>
 	
-	<!-- 댓글 수정 -->
+	<!-- 댓글/대댓글 수정 -->
 	<update id="updateComment">
 		update
 			group_board_comment
@@ -206,4 +217,12 @@
 		where
 			group_board_comment_no = #{groupBoardCommentNo}
 	</update>
+	
+	<!-- 댓글 /대댓글 삭제 -->
+	<delete id="deleteComment">
+		delete from
+			group_board_comment
+		where
+			group_board_comment_no = #{groupBoardCommentNo}
+	</delete>
 </mapper>
