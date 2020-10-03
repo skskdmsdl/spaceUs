@@ -1,20 +1,29 @@
 package com.kh.spaceus.social;
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.util.URLEncoder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.MissingAuthorizationException;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.User;
+import org.springframework.social.facebook.api.UserOperations;
+import org.springframework.social.facebook.api.impl.FacebookTemplate;
+import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -28,7 +37,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SocialLoginController {
 	
-	 /* NaverLoginBO */
+	//네이버로그인관련
     private NaverLoginBO naverLoginBO;
     private String apiResult = null;
     
@@ -37,8 +46,16 @@ public class SocialLoginController {
         this.naverLoginBO = naverLoginBO;
     }
     
+    //카카오 로그인관련
     @Autowired
     private KakaoController kakaoController;
+    
+    //페이스북 로그인 관련
+    @Autowired
+    private FacebookConnectionFactory connectionFactory;
+    @Autowired
+    private OAuth2Parameters oAuth2Parameters;
+ 
     
     @Autowired
 	private MemberService memberService;
@@ -46,24 +63,28 @@ public class SocialLoginController {
     //로그인 첫 화면 요청 메소드
     @RequestMapping(value = "/member/memberLoginForm.do", method = { RequestMethod.GET, RequestMethod.POST })
     public String login(Model model, HttpSession session) {
-        /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+        //네이버 인증url 생성
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
         
-        //카카오
+        //카카오 인증url 생성
         String kakaoUrl = kakaoController.getAuthorizationUrl(session);
         
-        //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
-        //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-        log.info("네이버 : {}", naverAuthUrl);
+        //페이스북 인증url 생성
+        OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
+        String facebook_url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
         
         //네이버 
         model.addAttribute("naver_url", naverAuthUrl);
         
         //카카오
         model.addAttribute("kakao_url", kakaoUrl);
+        
+        //페이스북
+        model.addAttribute("facebook_url", facebook_url);
  
         /* 생성한 인증 URL을 View로 전달 */
         return "/member/memberLoginForm";
+    	
     }
  
     //네이버 로그인 성공시 callback호출 메소드
@@ -75,13 +96,8 @@ public class SocialLoginController {
     	OAuth2AccessToken oauthToken;	
     	oauthToken = naverLoginBO.getAccessToken(session, code, state);
     	
-    	//1. 로그인 사용자 정보를 읽어온다.
+    	//1. 로그인 사용자 정보를 읽어옴.
     	apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
-    	/** apiResult json 구조
-    	{"resultcode":"00",
-    	"message":"success",
-    	"response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
-    	**/
     	//2. String형식인 apiResult를 json형태로 바꿈
     	JSONParser parser = new JSONParser();
     	Object obj = parser.parse(apiResult);
@@ -132,5 +148,59 @@ public class SocialLoginController {
 
       return "/member/kakaoMemberEnrollForm";
     }
+    
+    
+    //페이스북 콜백
+    @RequestMapping(value = "/facebookSignInCallback", method = { RequestMethod.GET, RequestMethod.POST })
+    public String facebookSignInCallback(Model model, @RequestParam String code) throws Exception {
+ 
+        try {
+             String redirectUri = oAuth2Parameters.getRedirectUri();
+             log.info("Redirect URI  = {}", java.net.URLEncoder.encode(redirectUri));
+             log.info("Code  = {}", code);
+ 
+            OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
+            AccessGrant accessGrant = oauthOperations.exchangeForAccess(code, redirectUri, null);
+            String accessToken = accessGrant.getAccessToken();
+            log.info("AccessToken  = {}", accessToken);
+            Long expireTime = accessGrant.getExpireTime();
+        
+            
+            if (expireTime != null && expireTime < System.currentTimeMillis()) {
+                accessToken = accessGrant.getRefreshToken();
+                log.info("accessToken is expired. refresh token = {}", accessToken);
+            };
+            
+        
+            Connection<Facebook> connection = connectionFactory.createConnection(accessGrant);
+            Facebook facebook = connection == null ? new FacebookTemplate(accessToken) : connection.getApi();
+            UserOperations userOperations = facebook.userOperations();
+            
+            try
+ 
+            {            
+                String [] fields = { "id", "email",  "name"};
+                User userProfile = facebook.fetchObject("me", User.class, fields);
+                log.info("유저이메일 = {}", userProfile.getEmail());
+                log.info("유저 id  = {}", userProfile.getId());
+                log.info("유저 name = {}", userProfile.getName());
+                
+                model.addAttribute("email", userProfile.getEmail());
+                model.addAttribute("name", userProfile.getName());
+                
+            } catch (MissingAuthorizationException e) {
+                e.printStackTrace();
+            }
+ 
+        
+        } catch (Exception e) {
+ 
+            e.printStackTrace();
+ 
+        }
+        return "/member/facebookMemberEnrollForm";
+ 
+    }
+
    
 }

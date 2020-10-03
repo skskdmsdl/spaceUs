@@ -9,7 +9,7 @@
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <style>
-.img img {height: 350px;}
+.img img {height: 350px; width: 350px;}
 .space1 {cursor: pointer;}
 .more-list {visibility:hidden;}
 .btn-outline-danger {margin-bottom:5px;}
@@ -21,21 +21,25 @@
         <h2 class="mb-2">기획전</h2>
         <!-- admin계정만 보이게 -->
         <sec:authorize access="hasRole('ADMIN')">
-        <h1 class="text-right" style="height: 40px;"><a href="${pageContext.request.contextPath}/exhibition/insertExhibition.do">+</a></h1>
+        <h1 class="text-right" style="height: 40px;"><a href="${pageContext.request.contextPath}/exhibition/insertExhibitionFrm.do">+</a></h1>
         </sec:authorize>
       </div>
       <div class="row">
       	<c:forEach items="${ list }" var="list">
 	      	<div class="col-md-4">
 	      	<sec:authorize access="hasRole('ADMIN')">
-	      	<%-- <button onclick="deleteEx('${ list.exNo }');" type="button" class="btn">삭제</button> --%>
 	      	<button type="button" class="btn btn-outline-danger" onclick="deleteEx('${ list.exNo }');">삭제</button>
 	      	<br />
 	      	</sec:authorize>
 	      	<input type="hidden" id="exNo" value="${ list.exNo }"/>
 	      		<div class="agent space1" onclick="exhibitionList();">
-	  					<div class="img">
-	    				<img src="${ list.image }">
+  					<div class="img">
+	  					<c:if test="${ not empty list.imageUrl }">
+	    					<img src="${ list.imageUrl  }">
+	  					</c:if>
+	  					<c:if test="${ not empty list.renamedFileName }">
+	    					<img src="${pageContext.request.contextPath}/resources/upload/exhibition/${ list.renamedFileName  }">
+	  					</c:if>
 	  				</div>
 	  				<div class="desc">
 	  					<h3>${ list.exTitle }

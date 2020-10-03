@@ -300,6 +300,6 @@
 
 	</sec:authorize>
 	<!-- /admin 권한 끝 -->
-
-
-	
+<!-- <div id="talkjs-container" style="right:30px;">
+	<i>Loading chat...</i>
+</div>	 -->
