@@ -2,9 +2,8 @@ package com.kh.spaceus.host.model.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.kh.spaceus.host.model.vo.Qna;
+import com.kh.spaceus.qna.model.vo.Qna;
 
 public interface HostService {
 	
