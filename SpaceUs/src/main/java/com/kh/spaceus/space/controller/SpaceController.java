@@ -1,5 +1,6 @@
 package com.kh.spaceus.space.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,13 +49,6 @@ public class SpaceController {
 		return "space/insertSpace";
 	}
 	
-	@GetMapping("/insertQuestion.do")
-	public String insertQuestion(@RequestParam String memberEmail) {
-				
-		
-		return "space/insertQuestion";
-	}
-	
 	
 	@GetMapping("/insertHashTag.do")
 	public ModelAndView insertHashTag(ModelAndView mav, @RequestParam("hashTag") String hashTag) {
@@ -75,10 +69,11 @@ public class SpaceController {
 	
 	@RequestMapping("/spaceDetail.do")
 	public String spaceDetail(Model model,
-							  @RequestParam("spaceNo") String spaceNo,
+							  @RequestParam("spaceNo") String spaceNo, Principal principal,
 							  @RequestParam(defaultValue = "1",
 						  	  value = "cPage") int cPage,
 							  HttpServletRequest request) {
+
 		//log.debug("spaceNo= {}",spaceNo);
 		Space space = spaceService.selectOneSpace(spaceNo);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
@@ -99,10 +94,13 @@ public class SpaceController {
 		
 		model.addAttribute("space", space);
 		model.addAttribute("tag", tag);
+		model.addAttribute("loginMember", principal);
+
 		model.addAttribute("review", review);
 		model.addAttribute("reviewTotal", reviewTotal);
 		model.addAttribute("star", star);
 		model.addAttribute("pageBar", pageBar);
+
 		return "space/spaceDetail";
 	}
 	
