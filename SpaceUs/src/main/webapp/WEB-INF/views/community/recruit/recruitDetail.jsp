@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="org.springframework.security.core.Authentication"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -8,6 +10,11 @@
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<%
+Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+String loginMember = auth.getName();
+pageContext.setAttribute("loginMember",loginMember);
+%>
 <style>
 .image-div {
 	background-color:#f7f7f7;
@@ -65,6 +72,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                          <div class="m-5" >
 								
                          <input type="hidden" name="no" id="no" value="${ recruit.no }"/> 
+                         <input type="hidden" name="memberEmail" id="memberEmail" value="${ loginMember }"/> 
                          <div style="border-bottom: 1px solid #dddddd; padding-bottom: 15px;">
                             <p class="h4">${recruit.title }</p>
                          	<table>
@@ -119,15 +127,88 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                          
                          <div style="background-color: #fafafa; height: 200px; border: 1px solid #edeceb; ">
                          <div class="pl-5 pr-5 pt-4">
-                         		<p>댓글 0개</p>
-                         		<div class="form-check" style="display: block;">
-									  <input class="form-check-input mt-2" type="checkbox" name="secret" id="secret" value="secret">
-									  <label class="form-check-label" for="secret" style="font-size: 14px;">비밀글</label>
-									</div>
+                         	<p><i class="fa fa-comment mr-1"></i>댓글 0개</p>
+                         	<div class="form-check" style="display: block;">
+								 <input class="form-check-input mt-2" type="checkbox" name="secret" id="secret" value="secret">
+								 <label class="form-check-label" for="secret" style="font-size: 14px;">비밀글</label>
+							</div>
 									
-                         		 <textarea class="col-lg-11" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-                           		<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
-                           </div>
+                         	<textarea class="col-lg-11" id=content style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+                           	<button type="button" class="btn" id="insertComment" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+                           	<!-- 댓글 보기 -->
+							<%-- <table id="tbl-comment">
+							<% 
+								if(commentList != null && !commentList.isEmpty()){ 
+									for (BoardComment bc : commentList) {
+										if(bc.getBoardCommentLevel() == 1) {
+										//댓글
+							%>
+								<tr class="level1">
+									<td>
+										<sub class="comment-writer">
+											<%= bc.getBoardCommentWriter() %>
+										</sub>
+										<sub class="comment-date">
+											<%= bc.getBoardCommentDate() %>
+										</sub>
+										<br />
+										<%= bc.getBoardCommentContent() %>
+									</td>
+									<td>
+										<button class="btn-reply"
+												value="<%= bc.getBoardCommentNo() %>">답글</button>
+										<% if(
+											memberLoggedIn != null
+											&& (memberLoggedIn.getMemberId().equals(bc.getBoardCommentWriter())
+												|| memberLoggedIn.getMemberRole().equals(MemberService.MEMBER_ROLE_ADMIN))
+										
+											){ %>
+										<button class="btn-delete"
+												value="<%= bc.getBoardCommentNo() %>">삭제</button>
+										<% } %>
+									</td>
+								</tr>	
+							<% 
+										} else {
+										//대댓글
+							%>		
+								<tr class="level2">
+									<td>
+										<sub class="comment-writer">
+											<%= bc.getBoardCommentWriter() %>
+										</sub>
+										<sub class="comment-date">
+											<%= bc.getBoardCommentDate() %>
+										</sub>
+										<br />
+										<%= bc.getBoardCommentContent() %>
+									</td>
+									<td>
+										<% if(
+											memberLoggedIn != null
+											&& (memberLoggedIn.getMemberId().equals(bc.getBoardCommentWriter())
+												|| memberLoggedIn.getMemberRole().equals(MemberService.MEMBER_ROLE_ADMIN))
+										
+											){ %>
+										<button class="btn-delete"
+												value="<%= bc.getBoardCommentNo() %>">삭제</button>
+										<% } %>
+									</td>
+							<% 		
+										}
+									}
+								} 
+							%>
+								</tr>
+					
+							</table>
+							
+							<!-- 댓글 삭제 폼 -->
+							<form action="" name="deleteCommentFrm">
+								<input type="hidden" name="boardCommentNo" value="" />
+								<input type="hidden" name="boardNo" value="<%= board.getBoardNo() %>" />
+							</form>   --%>
+                         </div>
                          </div>
                          </div>
                          </div>
@@ -169,5 +250,26 @@ function reportBtn(){
 		}
 	});
 };
+//댓글 등록
+$("#insertComment").click(function(){
+	alert( $("#memberEmail").val()+ $("#secret:checked").val());
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/community/recruit/insertComment.do",
+		data : {
+			recruitNo : $("#no").val(),
+			email : $("#memberEmail").val(),
+			content : $("#content").val(),
+			secret : $("#secret:checked").val()
+		},
+		dataType : "json",
+		success : function(data){
+			alert(data.comment);
+			alert("댓글이 등록되었습니다!");
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	});
+});
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

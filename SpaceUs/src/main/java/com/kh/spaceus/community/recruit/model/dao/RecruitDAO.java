@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
+import com.kh.spaceus.community.recruit.model.vo.RecruitComment;
 import com.kh.spaceus.community.recruit.model.vo.ReportRecruit;
 import com.kh.spaceus.space.model.vo.Tag;
 
@@ -28,6 +29,10 @@ public interface RecruitDAO {
 	int updateReport(String no);
 
 	int increaseRecruitReadCnt(String no);
+
+	int insertComment(RecruitComment comment);
+
+	List<RecruitComment> selectCommentList(String no);
 
 
 }

@@ -113,6 +113,46 @@
 		where
 			recruit_no = #{no}
 	</update>
+	
+	<insert id="insertComment">
+		insert into
+			recruit_comment (
+				recruit_comment_no,
+				writer,
+				recruit_no,
+				secret,
+				recruit_comment_content,
+			)
+		values (
+			'RCOMMENT'||seq_recruit_comment_no.nextval,
+			#{nickName},
+			#{recruitNo},
+			#{secret},
+			#{content}
+		)
+	</insert>
+	
+	<select id="selectCommentList" resultMap="CommentMap">
+		select 
+			* 
+		from 
+			recruit_comment 
+		where 
+			recruit_no = #{ no } 
+			start with recruit_comment_level = 1 
+			connect by prior recruit_comment_no = recruit_comment_ref 
+		order siblings by recruit_comment_no asc	
+	</select>
+	<resultMap type="recruitComment" id="CommentMap">
+		<id column="recruit_comment_no" property="no"/>
+		<result column="writer" property="nickName"/>
+		<result column="recruit_no" property="recruitNo"/>
+		<result column="secret" property="secret"/>
+		<result column="recruit_comment_ref" property="commentRef"/>
+		<result column="recruit_comment_content" property="content"/>
+		<result column="recruit_comment_level" property="level"/>
+		<result column="recruit_comment_date" property="date"/>
+	</resultMap>
 
 </mapper>
 
