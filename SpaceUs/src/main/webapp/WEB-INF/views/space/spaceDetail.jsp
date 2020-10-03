@@ -280,11 +280,62 @@ function urlcopy(){
 <!-- contact 끝 -->
 
 <!-- qna시작 -->
+
 <div class="tab-pane fade" id="detail-qna" role="tabpanel" aria-labelledby="detail-qna-tab">
      <div class="row">
    		<div class="col-md-10">
    			<h3 class="head">5개의 Q&A</h3>
-   			<div class="review d-flex">
+					   			
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#qnaModal" data-whatever="@fat">문의하기</button>
+				
+				<div class="modal fade" id="qnaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				       <sec:authorize access="hasAnyRole('USER','HOST','ADMIN')"> 
+				        <h5 class="modal-title" id="exampleModalLabel" style="letter-spacing:2px;">문의하기</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				        </sec:authorize> 
+				      </div>
+				      <div class="modal-body">
+						<form id="ask-question">
+				      
+				          <div class="form-group">
+				            <label for="recipient-name" class="col-form-label">글쓴이</label>
+				            <input type="text" class="form-control" name ="qna-name" id="name" value="${loginMember.principal.nickName }" placeholder="${loginMember.principal.nickName }" readonly>
+				           
+				          </div>
+				          <div class="form-group">
+				            <label for="message-text" class="col-form-label">내용</label>
+				            <textarea class="form-control" id="message-text" name="content"></textarea>
+				          </div>
+				          <div class="form-group">
+				            <label for="qna-password" class="col-form-label">비밀번호</label>
+				            <input type="password" class="form-control" id="qna-password" name="password">
+				          </div>
+				            <div class="form-group">
+				            <label for="qna-status" >공개여부</label>
+				            <input type="radio" name = "status" class="form-control" style="width: 200px;" id="qna-status" value="checked ? false:true">
+				          </div>
+		   				 	<input type="hidden" name = "email" value="${loginMember.principal.memberEmail }" />
+		   				 	
+				        </form>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+		   			  <input class="primary-btn" value = "전송" type="submit" onclick="ask();" 
+		   					style="float:right; margin-right:10px; letter-spacing: 2px;" 
+		   					name="spaceNo"
+		   					value="${ space.spaceNo }">
+				        
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				   			<div class="review d-flex">
+   				
 		   		<div class="desc">
 		   			<h4>
 		   				<span class="text-left">질문자 닉네임</span>
@@ -550,9 +601,16 @@ function urlcopy(){
     	</div>
     </div>
 	</div>
-</section>
+
     <!-- 추천시스템 끝 -->
 <script>
+function ask(){
+	$("#ask-question").attr("action", 
+	"${ pageContext.request.contextPath}/qna/insertQna.do")
+	.attr("method", "POST")
+	.submit();
+}
+
 /* 예약버튼 */
 function rvSubmit() {
 	$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserveSpace.do")
