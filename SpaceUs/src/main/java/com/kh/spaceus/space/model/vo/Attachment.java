@@ -1,6 +1,7 @@
 package com.kh.spaceus.space.model.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,9 +14,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Tag implements Serializable{
+public class Attachment implements Serializable{
 
-	private String no;
-	private String tag;
+	private String fileNo;
+	private String spaceNo;
+	private String oName;
+	private String rName;
+	private Date uploadDate;
+	private int status;
 }
 

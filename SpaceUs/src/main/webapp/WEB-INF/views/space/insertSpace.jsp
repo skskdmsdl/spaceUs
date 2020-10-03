@@ -112,8 +112,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             <div class="pf-status">
                                 <h4>가능시간<span class="text-danger">*</span></h4>
                                 
+
                                 <div class="jumbotron pb-1 pt-1 status-item" id="day">
 	                                <label for="mon" class="mr-5" style="font-size: 15px;">월요일
+=======
+                                <div class="jumbotron pb-1 pt-1 status-item">
+	                                    <label for="mon" class="mr-5" style="font-size: 15px;">월요일
+
 	                                    <input type="radio" name="radio" id="mon">
                                         <span class="checkbox mt-1"></span>
 	                                </label>

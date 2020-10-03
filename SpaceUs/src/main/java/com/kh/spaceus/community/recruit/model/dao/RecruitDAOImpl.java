@@ -68,6 +68,11 @@ public class RecruitDAOImpl implements RecruitDAO{
 		return sqlSession.update("recruit.updateReport", no);
 	}
 
+	@Override
+	public int increaseRecruitReadCnt(String no) {
+		return sqlSession.update("recruit.increaseRecruitReadCnt", no);
+	}
+
 
 
 }

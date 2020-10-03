@@ -11,6 +11,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
+<jsp:include page="/WEB-INF/views/common/mypageMenu.jsp" />
 <style>	
 *{margin:0; padding:0;}
 .star{
@@ -24,56 +25,6 @@
   background-image: url(http://gahyun.wooga.kr/main/img/testImg/star_on.png);
 }
 </style>
-
-<div class="skin-default-dark fixed-layout">
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div id="main-wrapper">
-        <!-- 마이페이지 헤더 -->
-        <header class="topbar">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header">
-                    <a style="color:black" class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
-                </div>
-                <div class="navbar-collapse">
-                    
-                   <!-- <ul class="navbar-nav my-lg-0">
-                       <li class="nav-item dropdown">
-                           <a id="logout" class="m-r-30">로그아웃</a>
-                       </li>
-                   </ul> -->
-               </div>
-            </nav>
-        </header>
-        
-        <!-- 왼쪽 목록들 -->
-        <aside class="left-sidebar">
-            <div class="d-flex no-block nav-text-box align-items-center">
-                <span>마이페이지</span>
-                <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i class="ti-menu"></i></a>
-                <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-            </div>
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
- 					<ul id="sidebarnav">
-                        <sec:authorize access="hasAnyRole('USER', 'HOST')">
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/memberProfile.do"><i class="fa fa-user"></i><span class="hide-menu">회원정보</span></a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/wishList.do"><i class="fa fa-heart"></i><span class="hide-menu">위시리스트</span></a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/usageHistory.do"><i class="fa fa-table"></i><span class="hide-menu"></span>나의 예약내역</a></li>
-  						<li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/reviewList.do"><i class="fa fa-book"></i><span class="hide-menu">내가 쓴 글 리스트</span></a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/couponList.do"><i class="fa fa-gift"></i><span class="hide-menu"></span>쿠폰함</a></li>
-                        <li> <a class="waves-effect waves-dark" aria-expanded="false" href="${pageContext.request.contextPath }/member/stampEvent.do"><i class="fa fa-stamp"></i><span class="hide-menu"></span>출석체크</a></li>
-                        </sec:authorize>
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
-        <!-- 목록 끝 -->
 
         <div class="page-wrapper">
             <div class="container-fluid">
@@ -128,24 +79,27 @@
                                        </div>
                                    </div>
                                    </div>
+                                   		<!-- 리뷰등록 -->
 				                         <div class="pl-5 pr-5" style="height: 150px; display: none;" id="reviewFrm" >
 				                         	<div class="row pl-3 align-items-xl-center">
 				                         		<p class="m-1" style="font-size: 15px;">별점 &nbsp;&nbsp;:</p>
 				                         		<div class="star-box">
-												  <span class="star mt-2"></span>
-												  <span class="star "></span>
-												  <span class="star "></span>
-												 <span class="star "></span>
-												 <span class="star "></span>
+												  <span class="star mt-2 star1" ></span>
+												  <span class="star star2"></span>
+												  <span class="star star3"></span>
+												 <span class="star star4"></span>
+												 <span class="star star5"></span>
 												</div>
 												<div>
 												</div>
-												<form name="boardFrm" 
-													  action="${pageContext.request.contextPath}/review/테스트.do" 
+												<form name="ReviewFrm" 
+													  action="${pageContext.request.contextPath}/member/insertReview.do" 
 													  method="post" 
-													  onsubmit="return boardValidate();"
+													  onsubmit="return reviewValidate();"
 													  enctype="multipart/form-data"
-													  style="position: absolute;right: 53px;">
+													  style="position: absolute;right: 5%;">
+													  <input type="hidden" name="starRating" required/>
+													  <input type="hidden" name="nickName" value="${member.nickName}" />
 													  <div class="input-group mb-3" style="padding:0px;">
 													  <div class="custom-file">
 													    <input type="file" class="custom-file-input" name="upFile" id="upFile1" >
@@ -153,11 +107,45 @@
 													  </div>
 													</div>
 												<!-- <div class="m-1" style="position: absolute;right: 60px;">+ 사진</div> -->
-												</form>
 				                         	</div>
-				                         		 <textarea class="col-lg-11" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-				                           		<button type="button" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+				                         		 <textarea class="col-lg-11" id="reviewCon" name="content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+				                           		<input type="submit" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #ddd;width: 70px;" value="등록">
 				                           </div>
+												</form>
+												
+											<!-- 리뷰수정 -->	
+											<div class="pl-5 pr-5" style="height: 150px; display: none;" id="reviewUpdateFrm" >
+				                         	<div class="row pl-3 align-items-xl-center">
+				                         		<p class="m-1" style="font-size: 15px;">별점 &nbsp;&nbsp;:</p>
+				                         		<div class="star-box">
+												  <span class="star mt-2 star1" ></span>
+												  <span class="star star2"></span>
+												  <span class="star star3"></span>
+												 <span class="star star4"></span>
+												 <span class="star star5"></span>
+												</div>
+												<div>
+												</div>
+												<form name="ReviewUpdateFrm" 
+													  action="${pageContext.request.contextPath}/member/updateReview.do" 
+													  method="post" 
+													  onsubmit="return reviewValidate();"
+													  enctype="multipart/form-data"
+													  style="position: absolute;right: 5%;">
+													  <input type="hidden" name="starRating" required/>
+													  <input type="hidden" name="nickName" value="${member.nickName}" />
+													  <div class="input-group mb-3" style="padding:0px;">
+													  <div class="custom-file">
+													    <input type="file" class="custom-file-input" name="upFile" id="upFile1" >
+													    <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
+													  </div>
+													</div>
+												<!-- <div class="m-1" style="position: absolute;right: 60px;">+ 사진</div> -->
+				                         	</div>
+				                         		 <textarea class="col-lg-11" id="reviewCon" name="content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+				                           		<input type="submit" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #ddd;width: 70px;" value="수정">
+				                           </div>
+												</form>
                                   </div>
                                   <div class="sl-item">
                                 <div class="row">
@@ -289,6 +277,42 @@ $("#reviewBtn").on("click", function(){
 		$(this).addClass("btn-primary");
 	}	
 });
+//별 받기
+ $(".star-box span").on("click", function(){
+	/* alert($(this).hasClass("star1")?"1":$(this).hasClass("star2")?"2":$(this).hasClass("star3")?"3":$(this).hasClass("star4")?"4":"5"); */
+	$("[name=starRating]").val($(this).hasClass("star1")?"1":$(this).hasClass("star2")?"2":$(this).hasClass("star3")?"3":$(this).hasClass("star4")?"4":"5");
+}); 
 
+ //리뷰 유효성 검사
+function reviewValidate(){
+	if($("[name=starRating]").val()==""){
+		alert("별점을 선택해주세요");
+		return false;
+	}
+	if($("#reviewCon").val().length<10){
+		alert("내용을 최소 10자 이상 입력해주세요");
+		return false;
+	}
+	/* 금칙어 */
+	var reContent = $("#reviewCon").val();
+	var j=0;
+	var str = ["바보","멍청이"];
+	var keyRegExp = new RegExp('(' + str.join('|') + ')', 'g');
+	$("#reviewCon").val(reContent.replace(keyRegExp, "❤❤"));
+
+	return true;
+} 
+//리뷰수정 버튼
+$("#modifyBtn").on("click", function(){
+	if($(this).hasClass("btn-primary")){
+		$("#reviewFrm").hide();
+		/* $("#reviewFrm").css("position","block"); */
+		$(this).removeClass("btn-primary");
+	}
+	else{
+		$("#reviewFrm").show();
+		$(this).addClass("btn-primary");
+	}	
+});
 
 </script>

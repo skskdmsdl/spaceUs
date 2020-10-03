@@ -70,5 +70,19 @@
          </props>
       </property>
    </bean>
+   
+    <!-- Facebook 소셜 로그인 연결 설정 -->
+ 
+    <bean id="connectionFactory"
+        class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
+        <constructor-arg value="784567118989562" />
+        <constructor-arg value="1fd109c4ab25d3afcfabe48fc711c06a" />
+    </bean>
+ 
+    <bean id="oAuth2Parameters"
+        class="org.springframework.social.oauth2.OAuth2Parameters">
+        <property name="scope" value="email" />
+        <property name="redirectUri" value="https://localhost:9090/spaceus/facebook/callback" />
+    </bean>
 		
 </beans>

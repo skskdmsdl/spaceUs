@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spaceus.community.group.model.dao.GroupDAO;
 import com.kh.spaceus.community.group.model.vo.Board;
+import com.kh.spaceus.community.group.model.vo.GBComment;
 import com.kh.spaceus.community.group.model.vo.Report;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 
@@ -75,7 +76,40 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public int updateCnt(Map<Object, Object> map) {
 		return groupDAO.updateCnt(map);
-	}	
+	}
+
+	@Override
+	public List<Board> selectBoardOne(String groupBoardNo) {
+		return groupDAO.selectBaordOne(groupBoardNo);
+	}
+
+	@Override
+	public List<GBComment> selectAllComment(String groupBoardNo) {
+		return groupDAO.selectAllComment(groupBoardNo);
+	}
+
+	@Override
+	public int insertComment(GBComment param1) {
+		return groupDAO.insertComment(param1);
+	}
+
+	@Override
+	public int updateComment(GBComment param1) {
+		return groupDAO.updateComment(param1);
+	}
+
+	@Override
+	public int deleteComment(GBComment param1) {
+		return groupDAO.deleteComment(param1);
+	}
+
+	@Override
+	public int selectCommentCnt(String groupBoardNo) {
+		return groupDAO.selectCommentCnt(groupBoardNo);
+	}
+
+	
+	
 	
 
 }

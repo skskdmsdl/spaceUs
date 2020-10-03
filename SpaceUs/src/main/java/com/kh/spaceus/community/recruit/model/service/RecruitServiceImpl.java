@@ -64,6 +64,11 @@ public class RecruitServiceImpl implements RecruitService{
 		return recruitDAO.updateReport(no);
 	}
 
+	@Override
+	public int increaseRecruitReadCnt(String no) {
+		return recruitDAO.increaseRecruitReadCnt(no);
+	}
+
 
 
 	

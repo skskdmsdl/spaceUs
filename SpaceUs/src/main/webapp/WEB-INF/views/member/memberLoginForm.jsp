@@ -22,6 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/vendor/daterangepicker/daterangepicker.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 <script>
 	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
@@ -60,10 +61,10 @@
 						</a>
 					</div>
 					<div id="naver_id_login" style="text-align:center">
-						<a href="${url}">
+						<a href="${facebook_url}">
 							<div class="social-btn">
 								<img src="${pageContext.request.contextPath }/resources/images/icons/google-icon.png"/>
-									&nbsp;구글로 시작하기
+									&nbsp;페이스북으로 시작하기
 							</div>
 						</a>
 					</div>

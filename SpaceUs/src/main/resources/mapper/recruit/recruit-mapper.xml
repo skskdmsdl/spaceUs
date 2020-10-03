@@ -104,6 +104,15 @@
 		where
 			recruit_no = #{no}
 	</update>
+	
+	<update id="increaseRecruitReadCnt">
+		update 
+			recruit
+		set
+			view_cnt = view_cnt + 1
+		where
+			recruit_no = #{no}
+	</update>
 
 </mapper>
 
