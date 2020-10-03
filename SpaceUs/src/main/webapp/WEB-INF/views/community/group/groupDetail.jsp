@@ -150,7 +150,7 @@ body{
 	                         
 	                         
 	                         <!-- 댓글 시작 -->
-	                         
+	                       
 		                         <p style="margin-left:5%; display: inline;"><i class="fa fa-comment"></i> 댓글수 &nbsp; ${commentCnt}</p>
 	                         
 	                         <p style="display: inline; margin: 0 5px;">|</p>
