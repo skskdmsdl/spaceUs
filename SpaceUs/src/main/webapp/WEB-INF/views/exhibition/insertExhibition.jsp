@@ -6,8 +6,6 @@
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
-<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
 <style>
 img {width: 500px; margin-bottom:30px}
 .space1 {cursor: pointer;}
@@ -72,7 +70,10 @@ $(function(){
 
 			$(".btn-outline-danger").click(function(){
 				$div.html("");
+				$("#imageUrl").val("");
+				$("#renamedFileName").val("");
 		   	});
+		   	
 	 	} else if($file != undefined || $label != "이미지를 선택하세요") {
 			var imageFile;
 	 		var imgData = new FormData();

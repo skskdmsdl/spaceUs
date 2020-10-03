@@ -125,6 +125,8 @@ public class SocialLoginController {
         return "/member/naverMemberEnrollForm";
     }
     
+    
+    //카카오 콜백
     @RequestMapping("/member/kakaoLogin.do")
     public String getKakaoSignIn(Model model,@RequestParam("code") String code, HttpSession session) throws Exception {
 

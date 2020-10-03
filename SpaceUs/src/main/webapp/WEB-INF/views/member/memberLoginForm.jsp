@@ -63,7 +63,7 @@
 					<div id="naver_id_login" style="text-align:center">
 						<a href="${facebook_url}">
 							<div class="social-btn">
-								<img src="${pageContext.request.contextPath }/resources/images/icons/google-icon.png"/>
+								<img src="${pageContext.request.contextPath }/resources/images/icons/facebook-icon.png"/>
 									&nbsp;페이스북으로 시작하기
 							</div>
 						</a>
