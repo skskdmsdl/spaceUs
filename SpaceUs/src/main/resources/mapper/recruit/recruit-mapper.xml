@@ -121,14 +121,18 @@
 				writer,
 				recruit_no,
 				secret,
-				recruit_comment_content
+				recruit_comment_content,
+				recruit_comment_ref,
+				recruit_comment_level
 			)
 		values (
 			'RCOMMENT'||seq_recruit_comment_no.nextval,
 			#{nickName},
 			#{recruitNo},
 			#{secret},
-			#{content}
+			#{content},
+			#{commentRef},
+			#{level}
 		)
 	</insert>
 	
@@ -142,7 +146,7 @@
 			recruit_no = #{ no } 
 			start with recruit_comment_level = 1 
 			connect by prior recruit_comment_no = recruit_comment_ref 
-		order siblings by recruit_comment_no asc	
+		order siblings by recruit_comment_no desc	
 	</select>
 	<resultMap type="recruitComment" id="CommentMap">
 		<id column="recruit_comment_no" property="no"/>

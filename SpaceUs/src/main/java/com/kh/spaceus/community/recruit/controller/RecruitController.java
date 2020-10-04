@@ -241,22 +241,24 @@ public class RecruitController {
 		comment.setRecruitNo(recruitNo);
 		comment.setSecret(secret);
 		comment.setContent(content);
+		comment.setCommentRef(null);
+		comment.setLevel(1);
 		
 		int result = recruitService.insertComment(comment);
     	
-		mav.addObject("comment", comment);
 		mav.setViewName("jsonView"); // /WEB-INF/views/jsonView.jsp
 		
     	return mav;
     }
 	
-	//댓글 등록
+	//대댓글 등록
 	@GetMapping("/insertReply.do")
 	public ModelAndView insertReply(ModelAndView mav,
 			@RequestParam("recruitNo") String recruitNo,
 			@RequestParam("email") String email,
 			@RequestParam("secret") int secret,
-			@RequestParam("content") String content) {
+			@RequestParam("content") String content,
+			@RequestParam("commentRef") String commentRef) {
 		
 		Member member = memberService.selectOneMember(email);
 		
@@ -265,6 +267,8 @@ public class RecruitController {
 		comment.setRecruitNo(recruitNo);
 		comment.setSecret(secret);
 		comment.setContent(content);
+		comment.setCommentRef(commentRef);
+		comment.setLevel(2);
 		
 		int result = recruitService.insertComment(comment);
 		
