@@ -89,6 +89,11 @@ public class RecruitDAOImpl implements RecruitDAO{
 		return sqlSession.update("recruit.updateComment", comment);
 	}
 
+	@Override
+	public int deleteComment(String commentNo) {
+		return sqlSession.update("recruit.deleteComment", commentNo);
+	}
+
 
 
 

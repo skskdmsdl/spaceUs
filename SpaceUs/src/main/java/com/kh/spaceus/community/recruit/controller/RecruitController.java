@@ -276,6 +276,7 @@ public class RecruitController {
 		
 		return mav;
 	}
+	
 	//댓글 수정
 	@GetMapping("/updateComment.do")
 	public ModelAndView updateComment(ModelAndView mav,
@@ -293,6 +294,17 @@ public class RecruitController {
 		return mav;
 	}
 	
+	//댓글 삭제
+	@GetMapping("/deleteComment.do")
+	public ModelAndView deleteComment(ModelAndView mav,
+									  @RequestParam("commentNo") String commentNo) {
+		
+		int result = recruitService.deleteComment(commentNo);
+		
+		mav.setViewName("jsonView"); // /WEB-INF/views/jsonView.jsp
+		
+		return mav;
+	}
 	
 	
 	

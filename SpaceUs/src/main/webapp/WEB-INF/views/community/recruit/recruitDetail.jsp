@@ -181,8 +181,9 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 														    <li><i class="fa fa-flag"></i> &nbsp;신고</li>
 		                                    			 </c:when>
 		                                    			 <c:when test="${loginMember == list.email}">
-														    <li style="padding: 5px 25px" class="commentModify">수정<input type="hidden" name="commentNo" value="${list.no}" /></li>
-														    <li style="padding: 5px 25px">삭제</li>
+		                                    			 	<input type="hidden" name="commentNo" value="${list.no}" />
+														    <li style="padding: 5px 25px" class="commentModify">수정</li>
+														    <li style="padding: 5px 25px" class="commentDelete">삭제</li>
 		                                    			 </c:when>
 	                                    			 </c:choose>
 												  </ul>
@@ -232,8 +233,9 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 														    <li><i class="fa fa-flag"></i> &nbsp;신고</li>
 		                                    			 </c:when>
 		                                    			 <c:when test="${loginMember == list.email}">
-														    <li style="padding: 5px 25px">수정</li>
-														    <li style="padding: 5px 25px">삭제</li>
+		                                    			 	<input type="hidden" name="commentNo" value="${list.no}" />
+														    <li style="padding: 5px 25px" class="commentModify">수정</li>
+														    <li style="padding: 5px 25px" class="commentDelete">삭제</li>
 		                                    			 </c:when>
 	                                    			 </c:choose>
 												  </ul>
@@ -244,6 +246,12 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 	</tr>
                                 	<c:if test="${list.secret == 0 || loginMember eq list.email || loginMember eq recruit.email}">
 	                         			<div style="border-bottom : .5px solid #d0d0d0; ">${list.content}</div>
+	                         			<div class="modify${list.no} hide">
+	                         				<input type="hidden" name="commentRef" value="${list.no}" />
+				             				<input class="modifyCon" type="text" style=" border: none;border-bottom: 1px solid #d0d0d0; background-color: #efefef; width:85%; color:#666;" value="${list.content}"/>
+				                       		<button type="button" class="btn btn-secondary ml-4 commentModifyBtn">수정</button>
+				                       		<button type="button" class="btn btn-light commentModifyClose">X</button>
+			             				</div>
                                 	</c:if>
                                 	<c:if test="${list.secret == 1 && loginMember != list.email && loginMember != recruit.email }">
 	                         			<div style="border-bottom : .5px solid #d0d0d0; color: #9e9e9e;">비밀 댓글 입니다</div>
@@ -391,7 +399,7 @@ $(".replyBtn").click(function(){
 });
 //댓글 수정
 $(".commentModify").click(function(){
-	let commentNo = ".modify" + $(this).children("input").val();
+	let commentNo = ".modify" + $(this).siblings("input").val();
 	$(commentNo).siblings('div').addClass("hide");
 	$(commentNo).removeClass("hide");
 	
@@ -403,8 +411,6 @@ $(".commentModifyClose").click(function(){
 $(".commentModifyBtn").click(function(){
 	let content = $(this).siblings('.modifyCon').val();
 	let commentNo = $(this).siblings("input").val();
-	alert(commentNo);
-	alert(content);
 	$.ajax({
 		url : "${ pageContext.request.contextPath }/community/recruit/updateComment.do",
 		data : {
@@ -421,7 +427,25 @@ $(".commentModifyBtn").click(function(){
 		}
 	}); 
 });
-
+//댓글 삭제
+$(".commentDelete").click(function(){
+	if(!confirm("댓글을 삭제하시겠습니까?")) return;
+	let commentNo = $(this).siblings("input").val();
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/community/recruit/deleteComment.do",
+		data : {
+			commentNo : commentNo
+		},
+		dataType : "json",
+		success : function(data){
+			alert("댓글이 삭제되었습니다!");
+			location.reload();
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	}); 
+});
 
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

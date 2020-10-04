@@ -169,6 +169,12 @@
 			recruit_comment_no = #{no}
 	</update>
 
+	<delete id="deleteComment">
+		delete from 
+			recruit_comment
+		where
+			recruit_comment_no = #{commentNo}
+	</delete>
 
 
 </mapper>

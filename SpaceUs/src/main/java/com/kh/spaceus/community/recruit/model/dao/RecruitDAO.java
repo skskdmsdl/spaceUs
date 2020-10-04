@@ -36,5 +36,7 @@ public interface RecruitDAO {
 
 	int updateComment(RecruitComment comment);
 
+	int deleteComment(String commentNo);
+
 
 }

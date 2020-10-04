@@ -35,5 +35,7 @@ public interface RecruitService {
 
 	int updateComment(RecruitComment comment);
 
+	int deleteComment(String commentNo);
+
 
 }
