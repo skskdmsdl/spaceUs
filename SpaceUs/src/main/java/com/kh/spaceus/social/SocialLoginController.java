@@ -29,6 +29,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
 
+import antlr.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -100,11 +101,9 @@ public class SocialLoginController {
     	String email = (String)response_obj.get("email");
     	log.info("email = {}", email);
     	
-    	
     	//4.모델에 저장 
     	model.addAttribute("email", email);
     	model.addAttribute("closeFunction", "closeFunction");
-    	//log.info("naverLoginMember = {}", response_obj);
     	
     	//이메일이 이미 가입되어있을 경우 로그인으로 가게 함
     	Member member = memberService.selectOneMember(email);
@@ -113,7 +112,13 @@ public class SocialLoginController {
     	if(member != null) {
     		return "/member/memberLoginForm";
     	}
-        return "/member/naverMemberEnrollForm";
+    	else {
+    		String returnPath = "/member/naverMemberEnrollForm";
+    		model.addAttribute("returnPath", "returnPath");
+    		log.info("returnPath = {}", returnPath);
+    		
+    		return returnPath;
+    	}
     }
     
     
@@ -160,7 +165,13 @@ public class SocialLoginController {
      * @throws Exception
      */
     @RequestMapping("/member/googleLogin.do")
-    public String getGoogleSignIn(Model model, @RequestParam("idtoken") String idtoken, HttpSession session) throws Exception {
+    public String getGoogleSignIn(Model model
+    		, @RequestParam("idtoken") String idtoken
+    		, @RequestParam(required = false) String email
+    		, @RequestParam(required = false) String tokenEmail
+    		, HttpSession session) throws Exception {
+    	
+    	
     	HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
     	JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     	GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(httpTransport, JSON_FACTORY)
@@ -174,31 +185,40 @@ public class SocialLoginController {
 
     	GoogleIdToken idToken = verifier.verify(idtoken);
     	String userId = null;
-    	String email = null;
     	String name = null;
     	
     	
     	if (idToken != null) {
     	  Payload payload = idToken.getPayload();
     	  userId = payload.getSubject();
-    	  email = payload.getEmail();
     	  name = (String) payload.get("name");
     	  //log.info("name = {}", name);
     	  //log.info("email = {}", email);
-    	  
-    	  model.addAttribute("email", email);
     	} else {
     	  log.info("Invalid ID token.");
     	}
     	
+    	
     	//이메일이 이미 가입되어있을 경우 로그인으로 가게 함
-    	 Member member = memberService.selectOneMember(email);
-         //log.info("member = {}", member);
+    	Member member = memberService.selectOneMember(email);
+        log.info("member = {}", member);
      	
-   	  	if(member != null) {
+   	  	if(member != null) { //이미 가입
+   	  		model.addAttribute("email", email);
    	  		return "/member/memberLoginForm";
    	  	}
-   	  	
-    	return "/member/googleMemberEnrollForm";
+//   	  	else {
+//   	  		//이미 구글로그인
+//	   	  	if(!(null == tokenEmail || "".equals(tokenEmail))) { //회원가입
+//	   	  		log.info("이미 구글로그인 googleMemberEnrollForm...tokenEmail="+tokenEmail);
+//		   	  	model.addAttribute("email", tokenEmail);
+//	   	  		return "/member/googleMemberEnrollForm";
+//	   	  	}else {
+//	   	  		//로그인뷰에 머문다
+//	   	  		log.info("이미 구글로그인 memberLoginForm...");
+//	   	  		return "/member/memberLoginForm";
+//	   	  	}
+   	  		model.addAttribute("email", email);
+	   	  	return "/member/googleMemberEnrollForm";
     }
 }
