@@ -24,6 +24,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.community.recruit.model.service.RecruitService;
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
+import com.kh.spaceus.community.recruit.model.vo.RecruitComment;
 import com.kh.spaceus.community.recruit.model.vo.ReportRecruit;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
@@ -112,8 +113,10 @@ public class RecruitController {
 			}
 			
 			Recruit recruit = recruitService.selectOneRecruit(no);
+			List<RecruitComment> commentList = recruitService.selectCommentList(no);
 			log.debug("recruit = {}", recruit);
 			model.addAttribute("recruit", recruit);
+			model.addAttribute("commentList", commentList);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -202,7 +205,6 @@ public class RecruitController {
 		 
 		ReportRecruit report = new ReportRecruit();
 		report.setBoardNo(no);
-		System.out.println(principal.getName());
 		report.setMemberEmail(principal.getName());
 		report.setReportReason(reportReason);
 		
@@ -224,4 +226,59 @@ public class RecruitController {
     	return mav;
     }
 	 
+	//댓글 등록
+	@GetMapping("/insertComment.do")
+    public ModelAndView insertComment(ModelAndView mav,
+									  @RequestParam("recruitNo") String recruitNo,
+									  @RequestParam("email") String email,
+									  @RequestParam("secret") int secret,
+									  @RequestParam("content") String content) {
+		 
+		Member member = memberService.selectOneMember(email);
+		
+		RecruitComment comment = new RecruitComment();
+		comment.setNickName(member.getNickName());
+		comment.setRecruitNo(recruitNo);
+		comment.setSecret(secret);
+		comment.setContent(content);
+		comment.setCommentRef(null);
+		comment.setLevel(1);
+		
+		int result = recruitService.insertComment(comment);
+    	
+		mav.setViewName("jsonView"); // /WEB-INF/views/jsonView.jsp
+		
+    	return mav;
+    }
+	
+	//대댓글 등록
+	@GetMapping("/insertReply.do")
+	public ModelAndView insertReply(ModelAndView mav,
+			@RequestParam("recruitNo") String recruitNo,
+			@RequestParam("email") String email,
+			@RequestParam("secret") int secret,
+			@RequestParam("content") String content,
+			@RequestParam("commentRef") String commentRef) {
+		
+		Member member = memberService.selectOneMember(email);
+		
+		RecruitComment comment = new RecruitComment();
+		comment.setNickName(member.getNickName());
+		comment.setRecruitNo(recruitNo);
+		comment.setSecret(secret);
+		comment.setContent(content);
+		comment.setCommentRef(commentRef);
+		comment.setLevel(2);
+		
+		int result = recruitService.insertComment(comment);
+		
+		mav.addObject("comment", comment);
+		mav.setViewName("jsonView"); // /WEB-INF/views/jsonView.jsp
+		
+		return mav;
+	}
+	
+	
+	
+	
 }
