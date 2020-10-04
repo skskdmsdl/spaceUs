@@ -146,7 +146,7 @@
 			recruit_no = #{ no } 
 			start with recruit_comment_level = 1 
 			connect by prior recruit_comment_no = recruit_comment_ref 
-		order siblings by recruit_comment_no desc	
+		order siblings by recruit_comment_date desc	
 	</select>
 	<resultMap type="recruitComment" id="CommentMap">
 		<id column="recruit_comment_no" property="no"/>

@@ -154,14 +154,14 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 								 <input class="form-check-input mt-2" type="checkbox" name="secret" id="secret" value="secret">
 								 <label class="form-check-label" for="secret" style="font-size: 14px;">비밀글</label>
 							</div>
-							<div class="row" style="height: 120px;">
+							<div class="row" style="height: 110px;">
 	                         	<textarea class="col ml-2 mr-1 mt-1" id=content style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
 	                           	<button type="button" class="btn mt-1" id="insertComment" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
                          	</div>
                          <!-- 댓글 보기 -->
                          <c:forEach items="${commentList}" var="list" varStatus="vs">
                        			<c:if test="${list.level == 1 }">
-                         		<div style="margin-top: 10px;">
+                         		<div style="margin-top: 20px;">
                            		<tr class="col-md-1">                           		
                            			
                                     <th><b>${list.nickName}</b></th>
@@ -190,72 +190,65 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                    	</th>
                                    	</sec:authorize>
                                	</tr>
-                                <c:if test="${list.secret == 0 || list.email eq loginMember || loginMember eq recruit.email}">
+                                <c:if test="${list.secret == 0 || loginMember eq list.email || loginMember eq recruit.email}">
                          			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${list.content}</div>
                                 </c:if>
-                                <c:if test="${list.secret == 1 && list.email != loginMember}">
+                                <c:if test="${ list.secret == 1 && loginMember != list.email && loginMember != recruit.email}">
                          			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글입니다</div>
                                 </c:if>
                         	</div>
              				<!-- 대댓글 폼 시작 -->
              				<div class="${list.no} hide">
 	             				<input type="text" placeholder="답글을 입력해주세요" style="margin:20px 0 20px 30px;background-color: #efefef; border: none;border-bottom: 1px solid #666; width:78%;"/>
-	                       		<c:if test="${ list.secret == 1 && (loginMember == recruit.email || loginMember == list.email )}">
-		                       		<span class="hide"><i class="fa fa-lock"><input type="hidden" value="1" /></i></span>
-		                       		<span><i class="fa fa-unlock"><input type="hidden" value="0" /></i></span>
+	                       		<c:if test="${ list.secret == 1 && loginMember != null &&( loginMember eq recruit.email || loginMember == list.email )}">
+		                       		<span class="hide" style="cursor: pointer;"><i class="fa fa-lock"><input type="hidden" value="1" /></i></span>
+		                       		<span style="cursor: pointer;"><i class="fa fa-unlock"><input type="hidden" value="0" /></i></span>
 	                       		</c:if>
 	                       		<input type="hidden" name="commentRef" value="${list.no}" />
 	                       		<button type="button" class="btn btn-secondary ml-4 replyBtn">답글</button>
 	                       		<button type="button" class="btn btn-light closeBtn">X</button>
              				</div>
                        		<!-- 대댓글 폼 끝 -->
-                       			</c:if>
+                       		</c:if>
 	                           			
-										 <c:if test="${cm.groupBoardCommentLevel eq '2' }">
-										<div  class="level2_${cm.groupBoardCommentNo}">
-				                         	<div class="level2__${cm.groupBoardCommentNo}" style="margin: 10px 0 0 3%;">
-				                         		<tr class="col-md-1">
-				                         			<input type="hidden" name="groupBoardCommentNo${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}" />
-				                                    
-				                                    <th><b>${cm.nickname}</b></th>
-				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
-				                                     
-				                                     <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
-					                                     <th>
-					                                    	<ul class="main-menu" id="main-menu${cm.groupBoardCommentNo}" onclick="menu${cm.groupBoardCommentNo}();">
-					                                    		<li>
-					                                    			<i class="fa fa-ellipsis-v layerMore">
-						                                    			<ul class="sub-menu" name="sub-menu" id="sub-menu${cm.groupBoardCommentNo}">
-						                                    				<c:if test="${loginMember != cm.writer}">
-						                                    					<li><button name="alertComment${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}" style="border:0; background: #fafafa;">신고하기</button></li>
-						                                    				</c:if>
-						                                    				<c:if test="${loginMember == cm.writer}">
-						                                    					<li><button name="updatereply_${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentRef}" style="border:0; background: #fafafa;">수정</button></li>
-								                                    			<li><button name="deleteComment${cm.groupBoardCommentNo}" style="border:0; background: #fafafa;">삭제</button></li>
-						                                    				</c:if>
-						                                    			</ul>
-					                                    			</i>
-					                                    		</li>
-					                                    	</ul>
-					                                    </th>
-					                                   
-				                                    </sec:authorize>
-				                                    
-			                                	</tr>
-			                                	<c:if test="${cm.secret eq '0'}">
-				                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
-			                                	</c:if>
-			                                	<c:if test="${cm.secret eq '1'}">
-				                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글 입니다</div>
-			                                	</c:if>
-				                         	</div>
-				                         </div>
-				                         	
-										</c:if>	                       	
-		                         	</c:forEach>		                         	
-	                           		<!-- 댓글보기끝-->
-	                           		</div>
-	                         <!-- 댓글 끝 -->
+							 <c:if test="${list.level == 2 }">
+	                         	<div style="margin: 10px 0 0 3%;">
+	                         		<tr class="col-md-1">
+	                                    <th><b>${list.nickName}</b></th>
+	                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"><fmt:formatDate value="${list.date}" pattern="yyyy.MM.dd HH:mm"/></p></th>
+	                                     
+	                                     <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
+	                                         <th>	
+                                    			<i class="fa fa-ellipsis-v pull-right">
+                                    			 <ul class="pull-left commentMenu hide">
+	                                    			 <c:choose>
+		                                    			 <c:when test="${loginMember != list.email || loginMember == null}">
+														    <li><i class="fa fa-flag"></i> &nbsp;신고</li>
+		                                    			 </c:when>
+		                                    			 <c:when test="${loginMember == list.email}">
+														    <li style="padding: 5px 25px">수정</li>
+														    <li style="padding: 5px 25px">삭제</li>
+		                                    			 </c:when>
+	                                    			 </c:choose>
+												  </ul>
+                                    			</i>
+	                                    	</th>
+                                   	</sec:authorize>
+	                                    
+                                	</tr>
+                                	<c:if test="${list.secret == 0 || loginMember eq list.email || loginMember eq recruit.email}">
+	                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${list.content}</div>
+                                	</c:if>
+                                	<c:if test="${list.secret == 1 && loginMember != list.email && loginMember != recruit.email }">
+	                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글 입니다</div>
+                                	</c:if>
+	                         	</div>
+	                         	
+							</c:if>	                       	
+                        	</c:forEach>		                         	
+                         		<!-- 댓글보기끝-->
+                         		</div>
+                       <!-- 댓글 끝 -->
 	                           </div>
 	                         </div>
                          </div>
@@ -267,6 +260,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                      </div>
              </section>
     <!-- 구인구직 리스트 끝-->
+     <!-- || (list.email eq loginMember || loginMember eq recruit.email) -->
 <!-- 컨텐츠 끝 -->
 <script>
 $("#modifyBtn").on('click', function(){
