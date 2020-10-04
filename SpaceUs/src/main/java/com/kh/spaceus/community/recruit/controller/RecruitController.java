@@ -249,4 +249,32 @@ public class RecruitController {
 		
     	return mav;
     }
+	
+	//댓글 등록
+	@GetMapping("/insertReply.do")
+	public ModelAndView insertReply(ModelAndView mav,
+			@RequestParam("recruitNo") String recruitNo,
+			@RequestParam("email") String email,
+			@RequestParam("secret") int secret,
+			@RequestParam("content") String content) {
+		
+		Member member = memberService.selectOneMember(email);
+		
+		RecruitComment comment = new RecruitComment();
+		comment.setNickName(member.getNickName());
+		comment.setRecruitNo(recruitNo);
+		comment.setSecret(secret);
+		comment.setContent(content);
+		
+		int result = recruitService.insertComment(comment);
+		
+		mav.addObject("comment", comment);
+		mav.setViewName("jsonView"); // /WEB-INF/views/jsonView.jsp
+		
+		return mav;
+	}
+	
+	
+	
+	
 }
