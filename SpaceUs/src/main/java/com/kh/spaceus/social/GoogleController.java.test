@@ -24,10 +24,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-public class KakaoController {
+public class GoogleController {
 
-  private final static String K_CLIENT_ID = "c90a57f3e423118bdb575be6e3083e18";
-  private final static String K_REDIRECT_URI = "http://localhost:9090/spaceus/member/kakaoLogin.do";
+  private final static String CLIENT_ID = "c90a57f3e423118bdb575be6e3083e18";
+  private final static String REDIRECT_URI = "http://localhost:9090/spaceus/member/kakaoLogin.do";
 
   public String getAuthorizationUrl(HttpSession session) {
 
