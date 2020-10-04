@@ -9,7 +9,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <script src="https://codepen.io/shshaw/pen/QmZYMG.js"></script>
 <link href="https://cdn.materialdesignicons.com/5.5.55/css/materialdesignicons.min.css" rel="stylesheet">
-
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style>
 .prev, .next {
   cursor: pointer;
@@ -26,6 +26,8 @@
 
 .next {margin-right: 16px; right: 0; border-radius: 3px 0 0 3px;}
 .prev:hover, .next:hover {opacity: 0.3;}
+.popover-body img {width: 30px; margin-right:10px;}
+.popover-body img:hover {cursor:pointer;}
 .fa-share-square, .fa-heart {color:black; font-size:25px; margin-right:10px;}
 .fab {margin-right:5px;}
 a:hover {opacity: 0.3; color:black;}
@@ -88,6 +90,7 @@ $(function(){
     		$heart.html("<i class='far fa-heart'></i>");
     	}
     });
+
 });
 
 function urlcopy(){
@@ -102,7 +105,29 @@ function urlcopy(){
 	alert("url 복사완료!");
 }
 
+//트위터 공유
+function twitterShare() {
+	window.open("https://twitter.com/intent/tweet"
+			+"?via=SpaceUs"
+			+"&text="+encodeURIComponent( "SpaceUs :: ${ space.spaceName }\n" )
+			+"&url="+encodeURIComponent(window.location.href)
+			, "_blank"
+			, 'width=600,height=400,resizable=yes,scrollbars=yes'
+	);
+}
+
+
+//네이버 공유
+function naverShare() {
+	var url = encodeURI(encodeURIComponent(window.location.href));
+    var title = encodeURI("${ space.spaceName }");
+    var shareURL = "https://share.naver.com/web/shareView.nhn?url=" + url + "&title=" + title;
+
+    window.open(shareURL, "_blank", 'width=600,height=400,resizable=yes,scrollbars=yes');
+ }
+
 </script>
+
 <section class="ftco-section ftco-property-details">
       <div class="container">
       	<div class="row justify-content-center">
@@ -120,17 +145,19 @@ function urlcopy(){
       				<div style="text-align:right; padding-right:5px">
 					    <a href=javascript:; id="heart-a"><i class="far fa-heart"></i></a>
 					    &emsp;
+					    <a href="javascript:;" id="kakao-link-btn">
+							<img src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png" width="30px" />
+						   </a>
       				<!-- 공유하기 팝오버 시작-->
 					       <a href=javascript:; data-toggle="popover" data-trigger="focus" data-placement="bottom"
 					          tabindex="0" title="공유하기" data-html="true" data-popover-content="#a1" >
 					       <i class="far fa-share-square"></i>
 					       </a>
-					       
 					       <div class="d-none" id="a1">
 							  <div class="popover-body">
-							  <i class="fab fa-korvue fa-2x" style="color:#fae100"></i>
-							  <i class="fab fa-twitter-square fa-2x" style="color:#2aa9e0"></i>
-							  <i class="fab fa-facebook-square fa-2x" style="color:#3b5998"></i>
+							  <%-- <img src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png" onclick="kakaoShare();"/> --%>
+							  <img src="${pageContext.request.contextPath }/resources/images/icons/twitter-icon.png" onclick="twitterShare();"/>
+							  <img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg" onclick="naverShare();"/>
 							    <input class="input-group-text w-100 mt-2 mb-2" type="text" id="url-input">
 							    <button class="btn btn-primary w-100" id="url-btn" onclick="urlcopy();">URL 복사</button>
 							  </div>
@@ -603,6 +630,39 @@ function urlcopy(){
 	</div>
 
     <!-- 추천시스템 끝 -->
+<!-- 카카오톡 공유 -->
+<script type='text/javascript'>
+    Kakao.init('455b391796eaae1861145a078007af70');
+
+    	 Kakao.Link.createDefaultButton({
+    	      container: '#kakao-link-btn',
+    	      objectType: 'location',
+    	      address: '${ space.address }',
+    	      addressTitle: '${ space.spaceName }',
+    	      content: {
+    	        title: '${ space.spaceName }',
+    	        description: '${ space.content }',
+    	        imageUrl: 'http://mud-kage.kakao.co.kr/dn/bSbH9w/btqgegaEDfW/vD9KKV0hEintg6bZT4v4WK/kakaolink40_original.png',
+    	        link: {
+    	          mobileWebUrl: 'https://developers.kakao.com',
+    	          webUrl: 'https://developers.kakao.com'
+    	        }
+    	      },
+    	      social: {
+    	        likeCount: 286,
+    	        commentCount: 45,
+    	        sharedCount: 845
+    	      },
+    	      buttons: [
+    	        {
+    	          title: '웹으로 보기',
+    	          link: {
+    	            mobileWebUrl: 'https://developers.kakao.com',
+    	            webUrl: 'https://developers.kakao.com'
+    	          	}
+    	        }]
+    	    });
+</script>
 <script>
 function ask(){
 	$("#ask-question").attr("action", 

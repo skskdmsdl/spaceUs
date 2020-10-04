@@ -103,17 +103,17 @@ public class SocialLoginController {
     	//response 파싱
     	JSONObject response_obj = (JSONObject)jsonObj.get("response");
 //    	//response의 email값 파싱
-    	String memberEmail = (String)response_obj.get("email");
-    	log.info("memberEmail = {}", memberEmail);
+    	String email = (String)response_obj.get("email");
+    	log.info("email = {}", email);
     	
     	
     	//4.모델에 저장 
     	model.addAttribute("naverLoginMember", response_obj);
-    	session.setAttribute("memberEmail", memberEmail);
+    	session.setAttribute("memberEmail", email);
     	//log.info("naverLoginMember = {}", response_obj);
     	
     	//이메일이 이미 가입되어있을 경우 로그인으로 가게 함
-    	Member member = memberService.selectOneMember(memberEmail);
+    	Member member = memberService.selectOneMember(email);
     	//log.info("member = {}", member);
     	
     	if(member != null) {
@@ -132,7 +132,7 @@ public class SocialLoginController {
       JsonNode userInfo = kakaoController.getKakaoUserInfo(code);
 	  JsonNode accessToken = userInfo.get("access_token");
       
-	  log.info("userInfo = {}", userInfo);
+	  //log.info("userInfo = {}", userInfo);
 	  
       String email = userInfo.get("kakao_account").get("email").asText();
       String nickname = userInfo.get("properties").get("nickname").asText();
@@ -143,6 +143,7 @@ public class SocialLoginController {
       model.addAttribute("email", email);
       model.addAttribute("nickname", nickname);
       
+    //이메일이 이미 가입되어있을 경우 로그인으로 가게 함
       Member member = memberService.selectOneMember(email);
       //log.info("member = {}", member);
   	
@@ -198,6 +199,7 @@ public class SocialLoginController {
     	  log.info("Invalid ID token.");
     	}
     	
+    	//이메일이 이미 가입되어있을 경우 로그인으로 가게 함
     	 Member member = memberService.selectOneMember(email);
          //log.info("member = {}", member);
      	
