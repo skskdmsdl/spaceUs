@@ -32,10 +32,13 @@
 	<c:if test="${ not empty msg }">
 		alert('${ msg }');	
 	</c:if>
-	<c:if test="${ not empty naverLoginMember }">
+	<c:if test="${ not empty email }">
 		alert('이미 가입하신 이메일입니다. 로그인해주세요.');
 	</c:if>
 
+ 	<c:if test="${ not empty closeFunction }">
+	    self.close();
+	</c:if>
 	function onSignIn(googleUser) {
 
 		var id_token = googleUser.getAuthResponse().id_token;
@@ -73,7 +76,8 @@
 						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 					</span>
 					<div id="naver_id_login" style="text-align:center">
-						<a href="${naver_url}">
+						<%-- <a href="${naver_url}"> --%>
+						<a href="#" onClick="window.open('${naver_url}', 'popup','width=600,height=600')">
 							<div class="social-btn">
 								<img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg"/>
 									&nbsp;네이버로 시작하기
@@ -81,7 +85,8 @@
 						</a>
 					</div>
 					<div id="naver_id_login" style="text-align:center">
-						<a href="${kakao_url}">
+						<%-- <a href="${kakao_url}"> --%>
+						<a href="#" onClick="window.open('${kakao_url}', 'popup','width=600,height=600')">
 							<div class="social-btn">
 								<img src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png"/>
 									&nbsp;카카오로 시작하기
@@ -89,7 +94,6 @@
 						</a>
 					</div>
 					<div id="naver_id_login" style="text-align:center">
-						<a href="${facebook_url}">
 							<div class="g-signin2 social-btn" data-onsuccess="onSignIn">
 								<img src="${pageContext.request.contextPath }/resources/images/icons/facebook-icon.png"/>
 									&nbsp;구글로 시작하기

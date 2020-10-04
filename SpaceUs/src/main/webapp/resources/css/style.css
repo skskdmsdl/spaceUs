@@ -9083,12 +9083,6 @@ textarea.form-control {
   padding-top: 120px;
   padding-bottom: 120px; }
 
-#map {
-  height: 500px;
-  width: 100%; }
-  @media (max-width: 991.98px) {
-    #map {
-      height: 300px; } }
 
 .mouse {
   position: absolute;
@@ -12197,14 +12191,15 @@ ol {
 }
 
 .cs-map {
- height: 400px;
+  width: 50;
+  height: 400px;
   right: 0;
   top: 0;
-  width: 50%;
   padding: 80px 0 0;
   margin: auto;
+  position: relative;
 }
-.cs-map iframe {
+.cs-map div {
   width: 100%;
 }
 
@@ -12523,33 +12518,33 @@ ol {
   font-weight: 700;
   margin-bottom: 35px;
 }
-.pd-text .pd-widget .map {
+.pd-text .pd-widget {
   height: 350px;
 }
-.pd-text .pd-widget .map iframe {
+.pd-text .pd-widget {
   width: 100%;
 }
-.pd-text .pd-widget .map-location {
+.pd-text .pd-widget {
   background: #f5f5f5;
   padding: 35px 0 10px 40px;
 }
-.pd-text .pd-widget .map-location .ml-item .ml-single-item {
+.pd-text .pd-widget .ml-item .ml-single-item {
   margin-bottom: 25px;
 }
-.pd-text .pd-widget .map-location .ml-item .ml-single-item h6 {
+.pd-text .pd-widget .ml-item .ml-single-item h6 {
   color: #111111;
   text-transform: uppercase;
   font-weight: 700;
   margin-bottom: 6px;
 }
-.pd-text .pd-widget .map-location .ml-item .ml-single-item h6 span {
+.pd-text .pd-widget .ml-item .ml-single-item h6 span {
   color: #00C89E;
   text-transform: lowercase;
   margin-left: 6px;
   font-size: 14px;
   font-weight: 400;
 }
-.pd-text .pd-widget .map-location .ml-item .ml-single-item p {
+.pd-text .pd-widget .ml-item .ml-single-item p {
   color: #888888;
 }
 .pd-text .pd-widget .pd-agent {
@@ -14160,11 +14155,6 @@ li .richText-btn[data-command=toggleCode] {
     height: auto;
   }
 
-  .cs-map {
-    height: 450px;
-    position: relative;
-    width: 100%;
-  }
 
   .pd-text .pd-social {
     text-align: left;
@@ -14631,11 +14621,6 @@ li .richText-btn[data-command=toggleCode] {
     height: auto;
   }
 
-  .cs-map {
-    height: 450px;
-    position: relative;
-    width: 100%;
-  }
 
   .pd-text .pd-board .tab-board .tab-content .tab-details ul {
     width: 100%;
