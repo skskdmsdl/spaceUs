@@ -37,5 +37,7 @@ public interface RecruitService {
 
 	int deleteComment(String commentNo);
 
+	int selectCommentTotalContents(String no);
+
 
 }

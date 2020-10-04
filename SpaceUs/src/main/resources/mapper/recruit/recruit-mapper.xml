@@ -6,9 +6,10 @@
 	
 	<select id="selectRecruitList" resultMap="recruitMap">
 		select
-			*
+			R.*,
+			(select count(*) from recruit_comment where recruit_no = R.recruit_no) commentCnt
 		from
-			recruit
+			recruit R
 		order by
 			enroll_date desc
 	</select>
@@ -20,6 +21,7 @@
 		<result column="content" property="content"/>
 		<result column="enroll_date" property="enrollDate"/>
 		<result column="report_cnt" property="reportCnt"/>
+		<result column="commentCnt" property="commentCnt"/>
 	</resultMap>
 	
 	<select id="selectRecruitTotalContents" resultType="_int">
@@ -176,6 +178,15 @@
 			recruit_comment_no = #{commentNo}
 	</delete>
 
+	<select id="selectCommentTotalContents" resultType="_int">
+	    select 
+	    	count(*) 
+	    from 
+	    	recruit_comment
+	    where 
+	    	recruit_no = #{no} 	
+	</select>
+	
 
 </mapper>
 

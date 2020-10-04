@@ -30,6 +30,8 @@ public interface SpaceDAO {
 
 	Star selectStar();
 
+	Space selectOneSpaceNo(String email);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

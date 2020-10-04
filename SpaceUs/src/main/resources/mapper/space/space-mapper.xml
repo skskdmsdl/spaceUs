@@ -28,7 +28,7 @@
       
 
 <!-- space -->
-	<select id="selectOneSpaceNo" resultType="space">
+	<select id="selectOneSpaceNum" resultType="space">
 		select 
 			*
 		from 
@@ -164,6 +164,14 @@
 			review
 	</select>
 	
+	<select id="selectOneSpaceNo" resultType="space">
+		select 
+			space_no
+		from 
+			space
+		where 
+			member_email = #{ email }
+	</select>
 	
 </mapper>
 

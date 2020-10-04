@@ -38,5 +38,7 @@ public interface RecruitDAO {
 
 	int deleteComment(String commentNo);
 
+	int selectCommentTotalContents(String no);
+
 
 }

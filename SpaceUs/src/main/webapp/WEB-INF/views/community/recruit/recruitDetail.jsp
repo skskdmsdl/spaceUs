@@ -146,10 +146,10 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                          <div class="m-5">
                          <div class="mb-5">${recruit.reportCnt >=10 ? "게시글이 비공개 처리 되었습니다." : recruit.content}</div>
                          
-                         
+                         <!-- 댓글 -->
                          <div id="commentBox" style="background-color: #fafafa; border: 1px solid #edeceb; padding-bottom: 50px; ">
                          <div class="pl-5 pr-5 pt-4">
-                         	<p><i class="fa fa-comment mr-1"></i>댓글 0개</p>
+                         	<p><i class="fa fa-comment mr-1"></i>댓글 ${ commentTotal }개</p>
                          	<div class="form-check" style="display: block;">
 								 <input class="form-check-input mt-2" type="checkbox" name="secret" id="secret" value="secret">
 								 <label class="form-check-label" for="secret" style="font-size: 14px;">비밀글</label>
@@ -178,7 +178,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                     			 <ul class="pull-left commentMenu hide">
 	                                    			 <c:choose>
 		                                    			 <c:when test="${loginMember != list.email || loginMember == null}">
-														    <li><i class="fa fa-flag"></i> &nbsp;신고</li>
+														    <li class="commentReport"><i class="fa fa-flag"></i> &nbsp;신고</li>
 		                                    			 </c:when>
 		                                    			 <c:when test="${loginMember == list.email}">
 		                                    			 	<input type="hidden" name="commentNo" value="${list.no}" />
@@ -230,7 +230,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                     			 <ul class="pull-left commentMenu hide">
 	                                    			 <c:choose>
 		                                    			 <c:when test="${loginMember != list.email || loginMember == null}">
-														    <li><i class="fa fa-flag"></i> &nbsp;신고</li>
+														    <li class="commentReport"><i class="fa fa-flag"></i> &nbsp;신고</li>
 		                                    			 </c:when>
 		                                    			 <c:when test="${loginMember == list.email}">
 		                                    			 	<input type="hidden" name="commentNo" value="${list.no}" />
@@ -262,8 +262,8 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                         	</c:forEach>		                         	
                          		<!-- 댓글보기끝-->
                          		</div>
-                       <!-- 댓글 끝 -->
 	                           </div>
+                       <!-- 댓글 끝 -->
 	                         </div>
                          </div>
                          </div>

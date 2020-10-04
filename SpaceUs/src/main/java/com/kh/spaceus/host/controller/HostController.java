@@ -23,6 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spaceus.host.model.service.HostService;
 import com.kh.spaceus.qna.model.vo.Qna;
+import com.kh.spaceus.space.model.service.SpaceService;
+import com.kh.spaceus.space.model.vo.Review;
+import com.kh.spaceus.space.model.vo.Space;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,6 +37,8 @@ public class HostController {
 	@Autowired
 	private HostService hostService;
 	
+	@Autowired 
+	private SpaceService spaceService;
 	
 	//정산내역
 	@RequestMapping("/settlementDetails.do")
@@ -161,4 +166,23 @@ public class HostController {
 		
 		return objWorkBook;
 	}
+	
+	//리뷰 목록
+	@RequestMapping("/reviewList.do")
+	public String reviewList(Principal principal,
+							 Model model,
+							 @RequestParam(defaultValue = "1",
+						  	 value = "cPage") int cPage) {
+		final int limit = 10; 
+		int offset = (cPage - 1) * limit;
+		Space space = spaceService.selectOneSpaceNo(principal.getName());
+		String spaceNo = space.getSpaceNo();
+		List<Review> review = spaceService.selectListReview(spaceNo, limit, offset);
+		
+		model.addAttribute("review", review);
+		return "host/hostReviewList";
+	}
+	
+	
+	
 }

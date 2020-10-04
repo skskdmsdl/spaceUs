@@ -90,6 +90,11 @@ public class RecruitServiceImpl implements RecruitService{
 		return recruitDAO.deleteComment(commentNo);
 	}
 
+	@Override
+	public int selectCommentTotalContents(String no) {
+		return recruitDAO.selectCommentTotalContents(no);
+	}
+
 
 
 	

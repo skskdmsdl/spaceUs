@@ -56,6 +56,7 @@ public class RecruitController {
 		List<Recruit> list = recruitService.selectRecruitList(limit, offset);
 		log.debug("list = {}", list);
 		
+		
 		//전체컨텐츠수 구하기
 		int totalContents = recruitService.selectRecruitTotalContents(); 
 		String url = request.getRequestURI() + "?";
@@ -114,9 +115,11 @@ public class RecruitController {
 			
 			Recruit recruit = recruitService.selectOneRecruit(no);
 			List<RecruitComment> commentList = recruitService.selectCommentList(no);
+			int commentTotal = recruitService.selectCommentTotalContents(no);
 			log.debug("recruit = {}", recruit);
 			model.addAttribute("recruit", recruit);
 			model.addAttribute("commentList", commentList);
+			model.addAttribute("commentTotal", commentTotal);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
