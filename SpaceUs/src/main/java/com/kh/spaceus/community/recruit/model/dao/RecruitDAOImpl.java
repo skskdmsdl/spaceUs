@@ -84,6 +84,11 @@ public class RecruitDAOImpl implements RecruitDAO{
 		return sqlSession.selectList("recruit.selectCommentList", no);
 	}
 
+	@Override
+	public int updateComment(RecruitComment comment) {
+		return sqlSession.update("recruit.updateComment", comment);
+	}
+
 
 
 

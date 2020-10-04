@@ -181,7 +181,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 														    <li><i class="fa fa-flag"></i> &nbsp;신고</li>
 		                                    			 </c:when>
 		                                    			 <c:when test="${loginMember == list.email}">
-														    <li style="padding: 5px 25px">수정</li>
+														    <li style="padding: 5px 25px" class="commentModify">수정<input type="hidden" name="commentNo" value="${list.no}" /></li>
 														    <li style="padding: 5px 25px">삭제</li>
 		                                    			 </c:when>
 	                                    			 </c:choose>
@@ -191,7 +191,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                    	</sec:authorize>
                                	</tr>
                                 <c:if test="${list.secret == 0 || loginMember eq list.email || loginMember eq recruit.email}">
-                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${list.content}</div>
+                                	<div style="border-bottom : .5px solid #d0d0d0;" class="mb-3">${list.content}</div>
+                         			<div class="modify${list.no} mb-3 hide">
+                         				<input type="hidden" name="commentRef" value="${list.no}" />
+			             				<input class="modifyCon" type="text" style=" border: none;border-bottom: 1px solid #d0d0d0; background-color: #efefef; width:85%; color:#666;" value="${list.content}"/>
+			                       		<button type="button" class="btn btn-secondary ml-4 commentModifyBtn">수정</button>
+			                       		<button type="button" class="btn btn-light commentModifyClose">X</button>
+		             				</div>
                                 </c:if>
                                 <c:if test="${ list.secret == 1 && loginMember != list.email && loginMember != recruit.email}">
                          			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글입니다</div>
@@ -237,10 +243,10 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                    
                                 	</tr>
                                 	<c:if test="${list.secret == 0 || loginMember eq list.email || loginMember eq recruit.email}">
-	                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${list.content}</div>
+	                         			<div style="border-bottom : .5px solid #d0d0d0; ">${list.content}</div>
                                 	</c:if>
                                 	<c:if test="${list.secret == 1 && loginMember != list.email && loginMember != recruit.email }">
-	                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글 입니다</div>
+	                         			<div style="border-bottom : .5px solid #d0d0d0; color: #9e9e9e;">비밀 댓글 입니다</div>
                                 	</c:if>
 	                         	</div>
 	                         	
@@ -383,7 +389,38 @@ $(".replyBtn").click(function(){
 		}
 	}); 
 });
-
+//댓글 수정
+$(".commentModify").click(function(){
+	let commentNo = ".modify" + $(this).children("input").val();
+	$(commentNo).siblings('div').addClass("hide");
+	$(commentNo).removeClass("hide");
+	
+});
+$(".commentModifyClose").click(function(){
+	$(this).parent('div').siblings('div').removeClass("hide");
+	$(this).parent('div').addClass("hide");
+});
+$(".commentModifyBtn").click(function(){
+	let content = $(this).siblings('.modifyCon').val();
+	let commentNo = $(this).siblings("input").val();
+	alert(commentNo);
+	alert(content);
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/community/recruit/updateComment.do",
+		data : {
+			content : content,
+			commentNo : commentNo
+		},
+		dataType : "json",
+		success : function(data){
+			alert("댓글이 수정되었습니다!");
+			location.reload();
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	}); 
+});
 
 
 </script>

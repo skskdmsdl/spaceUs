@@ -160,6 +160,17 @@
 		<result column="recruit_comment_date" property="date"/>
 	</resultMap>
 
+	<update id="updateComment">
+		update 
+			recruit_comment
+		set
+			recruit_comment_content = #{content}
+		where
+			recruit_comment_no = #{no}
+	</update>
+
+
+
 </mapper>
 
 

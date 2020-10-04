@@ -80,6 +80,11 @@ public class RecruitServiceImpl implements RecruitService{
 		return recruitDAO.selectCommentList(no);
 	}
 
+	@Override
+	public int updateComment(RecruitComment comment) {
+		return recruitDAO.updateComment(comment);
+	}
+
 
 
 	
