@@ -28,72 +28,39 @@
 	transition: 0.6s ease;
 	border-radius: 0 3px 3px 0;
 }
-
 .next {
 	margin-right: 16px;
 	right: 0;
 	border-radius: 3px 0 0 3px;
 }
-
-.prev:hover, .next:hover {
-	opacity: 0.3;
-}
-
-.popover-body img {
-	width: 30px;
-	margin-right: 10px;
-}
-
-.popover-body img:hover {
-	cursor: pointer;
-}
-
+.prev:hover, .next:hover {opacity: 0.3;}
+.popover-body img {width: 30px;	margin-right: 10px;}
+.popover-body img:hover {cursor: pointer;}
 .fa-share-square, .fa-heart {
 	color: black;
 	font-size: 25px;
 	margin-right: 10px;
 }
-
-.fab {
-	margin-right: 5px;
-}
-
-a:hover {
-	opacity: 0.3;
-	color: black;
-}
-
+.fab {margin-right: 5px;}
+a:hover {opacity: 0.3; color: black;}
 .fade1 {
 	-webkit-animation-name: fade;
 	-webkit-animation-duration: 1.5s;
 	animation-name: fade;
 	animation-duration: 1.5s;
 }
-
 @
 -webkit-keyframes fade1 {
-	from {opacity: .4
-}
-
-to {
-	opacity: 1
-}
-
+	from {opacity: .4}
+to {opacity: 1}
 }
 @
 keyframes fade1 {
-	from {opacity: .4
-}
-
-to {
-	opacity: 1
-}
-
+	from {opacity: .4}
+to {opacity: 1}
 }
 @media only screen and (max-width: 300px) {
-	.prev, .next, .text {
-		font-size: 11px
-	}
+	.prev, .next, .text {font-size: 11px}
 }
 /* 리뷰 */
 .btn-group-toggle {
@@ -101,10 +68,7 @@ to {
 	position: absolute;
 	right: 85px;
 }
-
-.reviewLabel {
-	font-size: 11px;
-}
+.reviewLabel {font-size: 11px;}
 </style>
 <script>
 var url = $(location).attr('href');
@@ -205,15 +169,10 @@ function naverShare() {
 							<div class="d-none" id="a1">
 								<div class="popover-body">
 									<%-- <img src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png" onclick="kakaoShare();"/> --%>
-									<img
-										src="${pageContext.request.contextPath }/resources/images/icons/twitter-icon.png"
-										onclick="twitterShare();" /> <img
-										src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg"
-										onclick="naverShare();" /> <input
-										class="input-group-text w-100 mt-2 mb-2" type="text"
-										id="url-input">
-									<button class="btn btn-primary w-100" id="url-btn"
-										onclick="urlcopy();">URL 복사</button>
+									<img src="${pageContext.request.contextPath }/resources/images/icons/twitter-icon.png" onclick="twitterShare();" />
+									<img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg" onclick="naverShare();" />
+									<input class="input-group-text w-100 mt-2 mb-2" type="text" id="url-input">
+									<button class="btn btn-primary w-100" id="url-btn" onclick="urlcopy();">URL 복사</button>
 								</div>
 							</div>
 							<!-- 공유하기 팝오버 끝-->

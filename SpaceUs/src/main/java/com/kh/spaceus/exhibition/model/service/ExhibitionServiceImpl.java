@@ -30,5 +30,13 @@ public class ExhibitionServiceImpl implements ExhibitionService{
 	public Exhibition selectOne(String exNo) {
 		return exhibitionDAO.selectOne(exNo);
 	}
+	@Override
+	public List<Exhibition> selectByTag(String tag) {
+		return exhibitionDAO.selectByTag(tag);
+	}
+	@Override
+	public Exhibition selectOneByTag(String tag) {
+		return exhibitionDAO.selectOneByTag(tag);
+	}
 
 }
