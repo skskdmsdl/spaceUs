@@ -51,4 +51,6 @@ public interface GroupDAO {
 
 	List<CmtReport> selectReport();
 
+	int updateReportCnt(String groupBoardCommentNo);
+
 }

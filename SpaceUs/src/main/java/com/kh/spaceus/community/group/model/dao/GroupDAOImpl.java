@@ -121,6 +121,11 @@ public class GroupDAOImpl implements GroupDAO {
 		return session.selectList("board.selectReport");
 	}
 
+	@Override
+	public int updateReportCnt(String groupBoardCommentNo) {
+		return session.update("board.updateReportCnt", groupBoardCommentNo);
+	}
+
 	
 	
 	

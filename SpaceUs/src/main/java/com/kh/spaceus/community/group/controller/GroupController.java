@@ -142,11 +142,7 @@ public class GroupController {
 			List<CmtReport> report = groupService.selectReport();
 			
 			log.info("report={}", report);
-//			
-//			log.info("commentCnt={}",commentCnt);
-//	
-//			log.info("commentList={}",commentList);
-//			
+
 			model.addAttribute("list", list);
 			model.addAttribute("boardList", boardList);
 			model.addAttribute("commentList", commentList);

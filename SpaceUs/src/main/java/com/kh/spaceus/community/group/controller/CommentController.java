@@ -82,8 +82,10 @@ public class CommentController {
 		map.put("memberEmail", memberEmail);
 		
 		try {
-			int result = groupService.alertComment(map);
-			if(result>0) {
+			int result1 = groupService.alertComment(map);
+			int result2 = groupService.updateReportCnt(groupBoardCommentNo);
+			
+			if(result1>0 && result2>0) {
 				log.info("댓글 신고 성공");
 			}
 		}catch(Exception e) {

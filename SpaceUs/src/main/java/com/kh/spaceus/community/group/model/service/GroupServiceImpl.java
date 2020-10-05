@@ -119,6 +119,11 @@ public class GroupServiceImpl implements GroupService {
 		return groupDAO.selectReport();
 	}
 
+	@Override
+	public int updateReportCnt(String groupBoardCommentNo) {
+		return groupDAO.updateReportCnt(groupBoardCommentNo);
+	}
+
 	
 	
 	

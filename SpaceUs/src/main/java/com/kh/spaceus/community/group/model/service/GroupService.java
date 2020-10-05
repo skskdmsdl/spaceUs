@@ -51,4 +51,6 @@ public interface GroupService {
 
 	List<CmtReport> selectReport();
 
+	int updateReportCnt(String groupBoardCommentNo);
+
 }

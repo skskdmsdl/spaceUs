@@ -243,6 +243,15 @@
 			#{memberEmail},
 			#{groupBoardCommentNo}
 		)
-	</insert>		
+	</insert>
+	<!-- 댓글/대댓글 신고시 reportcnt +1 -->
+	<update id="updateReportCnt">
+		update 
+			group_board_comment
+		set
+			report_cnt = report_cnt+1
+		where
+			group_board_comment_no = #{groupBoardCommentNo}
+	</update>		
 	
 </mapper>

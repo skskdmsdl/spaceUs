@@ -143,6 +143,7 @@ body{
 		                         <div class="m-5">
 			                         <div class="mb-5">
 			                   			${list.groupBoardContent}
+			                   			${report}
 			                         </div>	                         
 		                         </div>
 	                         </div>
@@ -193,6 +194,7 @@ body{
 	                           		<!-- 댓글보기시작 -->
 	                           		<c:forEach items="${commentList}" var="cm" varStatus="vs">
 	                           			<c:if test="${cm.groupBoardCommentLevel eq '1' }">
+	                           				<%-- <c:if test="${report}"> --%>
 			                           		<div class="level1_${cm.groupBoardCommentNo}" style="margin-top: 10px;">
 			                           			<div class="level1__${cm.groupBoardCommentNo}">
 					                           		<tr class="col-md-1">                           		
@@ -273,6 +275,7 @@ body{
 					                             
 				                               </div>
 				                         	</div>
+				                         	<!-- report -->
 				                         	
 				                 
 				                         	
@@ -492,7 +495,7 @@ body{
 	                           			<!-- 대댓글 폼 끝 -->
 	                           			</c:if>
 	                           			
-	                           			
+	                           			<!-- 대댓글  보기 시작 -->
 										<c:if test="${cm.groupBoardCommentLevel eq '2' }">
 										<div  class="level2_${cm.groupBoardCommentNo}">
 				                         	<div class="level2__${cm.groupBoardCommentNo}" style="margin: 10px 0 0 3%;">
