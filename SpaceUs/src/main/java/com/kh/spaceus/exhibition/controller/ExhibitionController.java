@@ -44,7 +44,7 @@ public class ExhibitionController {
 		
 		List<Exhibition> list = exhibitionService.selectExList();
 		
-		log.info("list = {}", list);
+		//log.info("list = {}", list);
 		
 		mav.addObject("list", list);
 		
@@ -54,8 +54,20 @@ public class ExhibitionController {
 	
 	//기획전리스트
 	@RequestMapping("/exhibitionList.do")
-	public String exhibitionList() {
-		return "exhibition/exhibitionList";
+	public ModelAndView exhibitionList(@RequestParam("tag") String tag, ModelAndView mav) {
+		
+		List<Exhibition> exList = exhibitionService.selectByTag(tag);
+		Exhibition exhibition = exhibitionService.selectOneByTag(tag);
+		
+		//log.info("exList = {}", exList);
+		//log.info("exhibition = {}",exhibition);
+		
+		mav.addObject("exList", exList);
+		mav.addObject("exhibition", exhibition);
+		
+		mav.setViewName("exhibition/exhibitionList");
+		
+		return mav;
 	}
 
 	//기획전추가폼
@@ -106,7 +118,7 @@ public class ExhibitionController {
 //		log.info("image = {}", exhibition.getRenamedFileName());
 		int result = exhibitionService.insertExhibition(exhibition);
 		
-		log.info("result = {}", result);
+		//log.info("result = {}", result);
 		
 		return "redirect:exhibition.do";
 	}
@@ -118,12 +130,12 @@ public class ExhibitionController {
 		
 		
 		Exhibition exhibition = exhibitionService.selectOne(exNo);
-		log.info("exhibition = {}", exhibition);
+		//log.info("exhibition = {}", exhibition);
 		
 		//삭제할 파일의 경로
 		String imagePath = servletContext.getRealPath("resources/upload/exhibition/" + exhibition.getRenamedFileName());
 		
-		log.info("imagePath = {}", imagePath);
+		//log.info("imagePath = {}", imagePath);
 		
 		File file = new File(imagePath);
 		if(file.exists() == true)

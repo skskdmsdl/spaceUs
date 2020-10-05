@@ -61,16 +61,12 @@ public class SocialLoginController {
         //카카오 인증url 생성
         String kakaoUrl = kakaoController.getAuthorizationUrl(session);
         
-        //구글 인증url 생성
-        
         //네이버 
         model.addAttribute("naver_url", naverAuthUrl);
         
         //카카오
         model.addAttribute("kakao_url", kakaoUrl);
         
-        //구글
- 
         /* 생성한 인증 URL을 View로 전달 */
         return "/member/memberLoginForm";
     	
@@ -103,6 +99,7 @@ public class SocialLoginController {
     	
     	//4.모델에 저장 
     	model.addAttribute("email", email);
+    	model.addAttribute("site", "네이버");
     	model.addAttribute("closeFunction", "closeFunction");
     	
     	//이메일이 이미 가입되어있을 경우 로그인으로 가게 함
@@ -113,7 +110,7 @@ public class SocialLoginController {
     		return "/member/memberLoginForm";
     	}
     	else {
-    		String returnPath = "/member/naverMemberEnrollForm";
+    		String returnPath = "/member/socialMemberEnrollForm";
     		model.addAttribute("returnPath", "returnPath");
     		log.info("returnPath = {}", returnPath);
     		
@@ -141,6 +138,7 @@ public class SocialLoginController {
       //log.info("nickname = {}", nickname);
 
       model.addAttribute("email", email);
+      model.addAttribute("site", "카카오");
       model.addAttribute("closeFunction", "closeFunction");
       
     //이메일이 이미 가입되어있을 경우 로그인으로 가게 함
@@ -151,7 +149,7 @@ public class SocialLoginController {
 	  		return "/member/memberLoginForm";
 	  	}
 
-      return "/member/kakaoMemberEnrollForm";
+      return "/member/socialMemberEnrollForm";
     }
     
     /**
@@ -219,6 +217,7 @@ public class SocialLoginController {
 //	   	  		return "/member/memberLoginForm";
 //	   	  	}
    	  		model.addAttribute("email", email);
-	   	  	return "/member/googleMemberEnrollForm";
+   	  		model.addAttribute("site", "구글");
+	   	  	return "/member/socialMemberEnrollForm";
     }
 }

@@ -5,15 +5,46 @@
 <mapper namespace="qna">
 	<insert id="insertQna">
 		insert into qna values(
-			seq_qna_no.nextval,
-			space_no = #{spaceNo},
-			qna_no = #{qnaNo},
-			qna_date = #{date},
-			nickname = #{name},
-			member_email = #{memberEmail},
-			qna_status = #{status}
-			
+			'Q'||seq_qna_no.nextval,
+			#{spaceNo},
+			#{email},
+			#{name},
+			#{password},
+			#{content},
+			null,
+			default,
+			default			
 		)
 		
 	</insert>
+	
+	<select id="selectQuestionList" resultMap="qnaMap">
+		select
+			*
+		from 
+			qna
+		where
+			space_no=#{spaceNo}
+		order by
+			qna_date desc
+	</select>
+	
+	<select id="selectQuestionTotalContents" resultType="_int">
+		select
+			count(*)
+		from qna
+	</select>
+	
+		
+	<resultMap type="qna" id="qnaMap">
+		<id column="qna_no" property="qnaNo" />
+		<result column="space_no" property="spaceNo" />
+		<result column="member_email" property="email" />
+		<result column="nickname" property="name" />
+		<result column="qna_pw" property="password" />
+		<result column="qna_content" property="content" />
+		<result column="qna_date" property="date" />
+		<result column="qna_status" property="status" />
+	</resultMap>
+	
 </mapper>

@@ -9632,8 +9632,10 @@ textarea.form-control {
   color: #000000;
   border: 1px solid #ccc;
   font-size: 11px; }
-  .tagcloud a:hover {
-    border: 1px solid #000; }
+ .tagcloud a:hover {
+    cursor: default;
+    text-decoration: none;
+    opacity: 1; }
 
 .comment-form-wrap {
   clear: both; }
