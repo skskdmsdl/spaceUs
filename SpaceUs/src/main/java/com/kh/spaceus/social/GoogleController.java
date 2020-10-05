@@ -32,8 +32,8 @@ public class GoogleController {
   public String getAuthorizationUrl(HttpSession session) {
 
     String kakaoUrl = "https://kauth.kakao.com/oauth/authorize?"
-        + "client_id=" + K_CLIENT_ID + "&redirect_uri="
-        + K_REDIRECT_URI + "&response_type=code";
+        + "client_id=" + CLIENT_ID + "&redirect_uri="
+        + REDIRECT_URI + "&response_type=code";
     return kakaoUrl;
   }
 
@@ -42,8 +42,8 @@ public class GoogleController {
     final String RequestUrl = "https://kauth.kakao.com/oauth/token";
     final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
     postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
-    postParams.add(new BasicNameValuePair("client_id", K_CLIENT_ID)); // REST API KEY
-    postParams.add(new BasicNameValuePair("redirect_uri", K_REDIRECT_URI)); // 리다이렉트 URI
+    postParams.add(new BasicNameValuePair("client_id", CLIENT_ID)); // REST API KEY
+    postParams.add(new BasicNameValuePair("redirect_uri", REDIRECT_URI)); // 리다이렉트 URI
     postParams.add(new BasicNameValuePair("code", autorize_code)); // 로그인 과정 중 얻은 code 값
 
     final HttpClient client = HttpClientBuilder.create().build();
