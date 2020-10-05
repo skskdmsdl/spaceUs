@@ -442,6 +442,9 @@ create sequence seq_group_board_comment_no;
 
 delete from group_board_comment where group_board_comment_no = 30;
 
+alter table group_board_comment add(report_cnt number default 0);
+ALTER TABLE group_board_comment DROP column report_cnt;
+
 select * from group_board_comment;
 select * from member;
 
@@ -521,6 +524,8 @@ create table com_report(
 ALTER TABLE com_report DROP constraints fk_com_report_board_comment_no;
 
 select * from com_report;
+
+delete from com_report where board_comment_no='81';
 
 commit;
 -----------------------------

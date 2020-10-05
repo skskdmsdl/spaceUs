@@ -143,7 +143,6 @@ body{
 		                         <div class="m-5">
 			                         <div class="mb-5">
 			                   			${list.groupBoardContent}
-			                   			${report}
 			                         </div>	                         
 		                         </div>
 	                         </div>
@@ -194,7 +193,6 @@ body{
 	                           		<!-- 댓글보기시작 -->
 	                           		<c:forEach items="${commentList}" var="cm" varStatus="vs">
 	                           			<c:if test="${cm.groupBoardCommentLevel eq '1' }">
-	                           				<%-- <c:if test="${report}"> --%>
 			                           		<div class="level1_${cm.groupBoardCommentNo}" style="margin-top: 10px;">
 			                           			<div class="level1__${cm.groupBoardCommentNo}">
 					                           		<tr class="col-md-1">                           		
@@ -218,7 +216,7 @@ body{
 								                                    				<c:if test="${loginMember != cm.writer}">
 								                                    					<li><button name="alertComment${cm.groupBoardCommentNo}" 
 								                                    								value="${cm.groupBoardCommentNo}" style="border:0; background: #fafafa;"
-								                                    								>신고하기</button></li>
+								                                    								onclick="alertCommentBtn${cm.groupBoardCommentNo}">신고하기</button></li>
 								                                    				</c:if>
 								                                    				<c:if test="${loginMember == cm.writer}">
 								                                    					<li><button name="updateComment${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}"  style="border:0; background: #fafafa;">수정</button></li>
@@ -230,27 +228,9 @@ body{
 							                                    	</ul>
 						                                    	</th>
 					                                    	<script type="text/javascript">
-					                                    	/*댓글 대댓글 신고*/
-					                                    
-					                                    $('[name=alertComment${cm.groupBoardCommentNo}]').click(function(){	                                    	
-						                                    	var groupBoardCommentNo = ${cm.groupBoardCommentNo};
-						                                    	alert(groupBoardCommentNo);
-		
-						                                   $.ajax({
-							                                    	method:"post",
-							                                    	url:"${pageContext.request.contextPath}/community/comment/alertComment.do?groupBoardCommentNo="+groupBoardCommentNo,
-							                                    	success:function(){
-																		alert("댓글이 정상적으로 신고되었습니다.");
-																		
-																		window.location.reload();
-																	},
-																	error: function(x,h,r){
-																		alert("댓글이 정상적으로 신고되지 않았습니다.");
-																		console.log(x,h,r);
-																	}
-							                                    });
-							                   
-					                                    	});
+																function alertCommentBtn${cm.groupBoardCommentNo}(){
+																	alert("sss");
+																}
 					                                    	
 						                                    	function menu${cm.groupBoardCommentNo}(){
 						                                    		var element = document.getElementById("main-menu${cm.groupBoardCommentNo}");
@@ -275,14 +255,12 @@ body{
 					                             
 				                               </div>
 				                         	</div>
-				                         	<!-- report -->
 				                         	
 				                 
 				                         	
 	                 					<!-- 대댓글 폼 시작 -->
 		                           		<script type="text/javascript">
 											$("#replyComment${cm.groupBoardCommentNo}").click(function(){
-
 												/* alert($(this).val()); */
 												
 												if('${loginMember}' == 'anonymousUser'){
@@ -320,17 +298,13 @@ body{
 													let $BoardCommentDiv = $(this).parent();
 													
 													$div1.insertAfter($BoardCommentDiv);
-
 													$('.textarea2').focus();
 																		
 											
 												}
-
 											});
-
 											/*대댓글 등록*/
 											function replyComment(){
-
 												var groupBoardContent = $('[name=textarea2]').val();
 												
 												if(groupBoardContent == null || groupBoardContent == ''){
@@ -375,12 +349,10 @@ body{
 												$('[name=replyComment${cm.groupBoardCommentNo}]').show();
 											}
 											
-
 											/*댓글 수정 폼 생성*/
 											$('[name=updateComment${cm.groupBoardCommentNo}]').click(function(){
 												
 												$(".level1__${cm.groupBoardCommentNo}").hide(); //댓글보기 안보이게 하기
-
 												let $div4 = $("<div class='form-check' style='display: inline;margin-left: 20px;'>");
 												$div4.append("<input class='form-check-input' type='checkbox' name='secret_${cm.groupBoardCommentNo}' id='secret' value='secret' ${cm.secret eq '1' ? 'checked':''}>");
 												$div4.append("<label class='form-check-label' for='secret'>비밀글</label>");
@@ -397,7 +369,6 @@ body{
 												$div2.append("<input type='hidden' name='groupBoardCommentLevel_' value='1' />");
 												$div2.append("<input type='hidden' name='groupBoardCommentRef_' value='"+$(this).val()+"' />");
 												
-
 												$div2.append($div3);
 												$div2.append($div4);
 												
@@ -410,9 +381,7 @@ body{
 										
 												let $div1 = $("<div name='replyFrm${cm.groupBoardCommentNo}'></div>");
 												$div1.append($frm);
-
 												$div1.insertAfter('.level1_${cm.groupBoardCommentNo}');
-
 												
 												$('.cancel${cm.groupBoardCommentNo}').click(function(){
 													$(".level1__${cm.groupBoardCommentNo}").show();
@@ -420,10 +389,8 @@ body{
 												});
 													
 											});
-
 											/*댓글 수정*/
 											function updateCommentBtn_${cm.groupBoardCommentNo} (){
-
 												var groupBoardContent = $('[name=comment_${cm.groupBoardCommentNo}]').val();
 												/* alert(groupBoardContent); */
 												
@@ -431,15 +398,12 @@ body{
 													alert("댓글을 입력해주세요");
 													return;
 												}
-
 												var groupBoardRef = $("[name=groupBoardRef]").val();
 												var writer = $("[name=memberEmail]").val();
 												var groupBoardCommentLevel = $("[name=groupBoardCommentLevel]").val();
 												var groupBoardCommentRef = $("[name=groupBoardCommentRef]").val();
 												var groupBoardCommentNo = $('[name=groupBoardCommentNo${cm.groupBoardCommentNo}]').val();
-
 												var secret = "0";
-
 												if($("[name=secret_${cm.groupBoardCommentNo}]").is(":checked")){
 													secret = "1";
 												}
@@ -448,7 +412,6 @@ body{
 															"&groupBoardCommentLevel="+groupBoardCommentLevel+
 															"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret+
 															"&groupBoardCommentNo="+groupBoardCommentNo;
-
 												alert(param1);
 												
 											$.ajax({
@@ -466,13 +429,10 @@ body{
 													}
 												});
 											} 
-
 											/*댓글 삭제*/
 											$('[name=deleteComment${cm.groupBoardCommentNo}]').click(function(){
 												if(confirm("댓글을 삭제하시겠습니까?")==false) return;
-
 												var groupBoardCommentNo = $('[name=groupBoardCommentNo${cm.groupBoardCommentNo}]').val();
-
 												var param1 = "groupBoardCommentNo="+groupBoardCommentNo;
 												
 												 $.ajax({
@@ -495,7 +455,7 @@ body{
 	                           			<!-- 대댓글 폼 끝 -->
 	                           			</c:if>
 	                           			
-	                           			<!-- 대댓글  보기 시작 -->
+	                           			
 										<c:if test="${cm.groupBoardCommentLevel eq '2' }">
 										<div  class="level2_${cm.groupBoardCommentNo}">
 				                         	<div class="level2__${cm.groupBoardCommentNo}" style="margin: 10px 0 0 3%;">
@@ -547,35 +507,11 @@ body{
 				                         	</div>
 				                         </div>
 				                         	<script type="text/javascript">
-
-				                         	/*대댓글 신고*/
-				                         	  $('[name=alertComment${cm.groupBoardCommentNo}]').click(function(){	                                    	
-			                                    	var groupBoardCommentNo = ${cm.groupBoardCommentNo};
-			                                    	alert(groupBoardCommentNo);
-
-			                                   $.ajax({
-				                                    	method:"post",
-				                                    	url:"${pageContext.request.contextPath}/community/comment/alertComment.do?groupBoardCommentNo="+groupBoardCommentNo,
-				                                    	success:function(){
-															alert("댓글이 정상적으로 신고되었습니다.");
-															
-															window.location.reload();
-														},
-														error: function(x,h,r){
-															alert("댓글이 정상적으로 신고되지 않았습니다.");
-															console.log(x,h,r);
-														}
-				                                    });
-				                   
-		                                    	});
-		                                    	
 												/*대댓글 수정 폼*/
 												$('[name=updatereply_${cm.groupBoardCommentNo}]').click(function(){
-
 													/* alert($(this).val()); */ 
 													
 													$(".level2__${cm.groupBoardCommentNo}").hide(); //댓글보기 안보이게 하기
-
 													let $div4 = $("<div class='form-check' style='display: inline;margin-left: 20px;'>");
 													$div4.append("<input class='form-check-input' type='checkbox' name='secret_${cm.groupBoardCommentNo}' id='secret' value='secret' ${cm.secret eq '1' ? 'checked':''}>");
 													$div4.append("<label class='form-check-label' for='secret'>비밀글</label>");
@@ -592,7 +528,6 @@ body{
 													$div2.append("<input type='hidden' name='groupBoardCommentLevel__' value='2' />");
 													$div2.append("<input type='hidden' name='groupBoardCommentRef__' value='"+$(this).val()+"' />");
 													
-
 													$div2.append($div3);
 													
 													let $tr = $("<tr></tr>");
@@ -604,19 +539,15 @@ body{
 											
 													let $div1 = $("<div name='replyFrm${cm.groupBoardCommentNo}'></div>");
 													$div1.append($frm);
-
 													$div1.insertAfter('.level2_${cm.groupBoardCommentNo}');
-
 													
 													$('.cancel${cm.groupBoardCommentNo}').click(function(){
 														$(".level2__${cm.groupBoardCommentNo}").show();
 														$div1.remove();
 													});
 												});
-
 												/*대댓글 수정*/
 												function updateReplyBtn_${cm.groupBoardCommentNo}(){
-
 													var groupBoardContent = $('[name=comment_${cm.groupBoardCommentNo}]').val();
 													/* alert(groupBoardContent); */
 													
@@ -624,13 +555,11 @@ body{
 														alert("댓글을 입력해주세요");
 														return;
 													}
-
 													var groupBoardRef = $("[name=groupBoardRef__]").val();
 													var writer = $("[name=memberEmail__]").val();
 													var groupBoardCommentLevel = $("[name=groupBoardCommentLevel__]").val();
 													var groupBoardCommentRef = $("[name=groupBoardCommentRef__]").val();
 													var groupBoardCommentNo = $('[name=groupBoardCommentNo${cm.groupBoardCommentNo}]').val();
-
 													var secret = "0";
 													
 													var param1 = "groupBoardContent="+groupBoardContent+
@@ -638,7 +567,6 @@ body{
 																"&groupBoardCommentLevel="+groupBoardCommentLevel+
 																"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret+
 																"&groupBoardCommentNo="+groupBoardCommentNo;
-
 													/* alert(param1); */
 													
 												 $.ajax({
@@ -657,13 +585,10 @@ body{
 														}
 													}); 
 												}
-
 												/*대댓글 삭제*/
 												$('[name=deleteComment${cm.groupBoardCommentNo}]').click(function(){
 												if(confirm("댓글을 삭제하시겠습니까?")==false) return;
-
 												var groupBoardCommentNo = $('[name=groupBoardCommentNo${cm.groupBoardCommentNo}]').val();
-
 												var param1 = "groupBoardCommentNo="+groupBoardCommentNo;
 												
 												 $.ajax({
@@ -683,7 +608,7 @@ body{
 											});
 				                         	</script>
 										</c:if>	                         	
-		                         	</c:forEach> <!-- cm -->		                         	
+		                         	</c:forEach>		                         	
 	                           		<!-- 댓글보기끝-->
 	                           		
 	                           </div>
@@ -723,7 +648,33 @@ body{
                        </div>
                        <!-- Modal end -->
                        
-                  
+                  <%--      <!-- 댓글 신고 Modal -->
+                       <c:forEach items="${commentList}" var="comment">
+	                       <div class="modal fade" id="commentReport" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
+	                           <div class="modal-dialog">
+	                               <div class="modal-content">
+	                                   <div class="modal-header">
+	                                       <h4 class="modal-title">신고하기</h4>
+	                                   </div>
+	                                   <div class="modal-body">
+	                                      <p style=" padding-top: 20px; font-size: 16px; margin-bottom:0;">신고 게시물 : <input style="border: none; color:#666; font-size: 16px;" type="text" value="${comment.groupBoardContent }" /></p>
+	                                       <p style="border-bottom: 1px solid #efefef; font-size: 16px; padding-bottom: 30px;">작&nbsp;&nbsp;&nbsp;  성&nbsp;&nbsp;&nbsp;  자 &nbsp;: <input id="reportNick" style="border: none; color:#666; font-size: 16px;" type="text" value="${comment.nickname }" /></p>
+	                                       <p style=" font-size: 16px;">사 유&nbsp; 선 택 &nbsp;: <span style="font-size: 12px; color:#888;">여러 사유에 해당되는 경우, 대표적인 사유 1개를 선택해 주세요.</span></p>
+	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="부적절한 홍보 게시글"/> 부적절한 홍보 게시글<br/>
+	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="음란성 또는 청소년에게 부적합한 내용"/> 음란성 또는 청소년에게 부적합한 내용<br/>
+	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="명예훼손/사생활 침해 및 저작권침해등"/> 명예훼손/사생활 침해 및 저작권침해등<br/>
+	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="기타"/> 기타
+	                                       <input type="hidden" name="groupCommentNo_${comment.groupBoardCommentNo}" value="${comment.groupBoardCommentNo}" />
+	                                   </div>
+	                                   <div class="modal-footer">
+	                                       <button type="submit" class="btn btn-primary" data-dismiss="modal" id="alertCommentBtn" value="${comment.groupBoardCommentNo}">신고</button>
+	                                       <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+	                                   </div>
+	                               </div>
+	                           </div>
+	                       </div>
+	                       <!-- Modal end --> --%>
+                       <%-- </c:forEach> --%>
                        
                    </c:forEach>
           
@@ -733,24 +684,20 @@ body{
     <!-- 소모임 리스트 끝-->
 <!-- 컨텐츠 끝 -->
 <script type="text/javascript">
-
 $("#deleteBtn").click(function(){
 	let groupBoardNo = $("[name=groupBoardNo]").val();
 	if(!confirm('정말 삭제하시겠습니까?')) return;
 	location.href="${pageContext.request.contextPath }/community/group/deleteBoard.do?groupBoardNo="+groupBoardNo;
 });
-
 $("#alertBtn").click(function(){
 	let groupBoardNo = $("[name=groupBoardNo]").val();
 	let reportReason = $("[name=reportReason]:checked").val();
 	
 	location.href="${pageContext.request.contextPath }/community/group/alertBoard.do?groupBoardNo="+groupBoardNo+"&reportReason="+reportReason;
 });
-
 //댓글 삼지창
 $(function(){
 	$('.sub-menu').hide();	
-
 $(".textarea1").click(function(){
 	/* alert('${loginMember}'); */
  	if('${loginMember}' == 'anonymousUser'){
@@ -761,7 +708,6 @@ $(".textarea1").click(function(){
 		return;
 	}
 });
-
 /*댓글 등록 버튼 이벤트 ajax*/
 $("#inserCommentFrm #insertCmt").click(function(){
 	var groupBoardContent = $("[name=textarea1]").val();
@@ -769,14 +715,11 @@ $("#inserCommentFrm #insertCmt").click(function(){
 		alert("댓글을 입력해주세요");
 		return;
 	}
-
 	var groupBoardRef = $("[name=groupBoardRef]").val();
 	var writer = $("[name=memberEmail]").val();
 	var groupBoardCommentLevel = $("[name=groupBoardCommentLevel]").val();
 	var groupBoardCommentRef = $("[name=groupBoardCommentRef]").val();
-
 	var secret = "0";
-
 	if($("[name=secret]").is(":checked")){
 		secret = "1";
 	}
@@ -802,11 +745,8 @@ $("#inserCommentFrm #insertCmt").click(function(){
 		}
 	});
 });
-
 });
-
 var url = $(location).attr('href');
-
 $(function(){
 	$("#url-input").attr('value', url);
 	
@@ -821,9 +761,7 @@ $(function(){
           return $(title).children(".popover-heading").html();
         }
     });
-
     $("#heart-a").click(function(){
-
 		var $heart = $("#heart-a");
     	if($heart.html().indexOf("far fa-heart") != -1) {
     		$heart.html("<i class='fas fa-heart'></i>");
@@ -833,19 +771,14 @@ $(function(){
     	}
     });
 });
-
 function urlcopy(){
 	var tempElem = document.createElement('textarea');
-
 	tempElem.value = url;  
 	document.body.appendChild(tempElem);
 	tempElem.select();
 	document.execCommand("copy");
 	document.body.removeChild(tempElem);
-
 	alert("url 복사완료!");
 }
-
-
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
