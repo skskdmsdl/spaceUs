@@ -193,6 +193,7 @@ body{
 					                                   	</th>
 				                                         
 				                                        <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
+				                                        <c:if test="${cm.reportCnt eq '0' }">
 						                                         <th>			                                    	
 							                                    	<ul class="main-menu" id="main-menu${cm.groupBoardCommentNo}" onclick="menu${cm.groupBoardCommentNo}();">
 							                                    		<li>
@@ -212,6 +213,7 @@ body{
 							                                    		</li>
 							                                    	</ul>
 						                                    	</th>
+						                                    </c:if>
 					                                    	<script type="text/javascript">
 																function alertCommentBtn${cm.groupBoardCommentNo}(){
 																	alert("sss");
@@ -231,13 +233,15 @@ body{
 				                                    	</sec:authorize>
 				                                	</tr>
 				                                	
-					                                <c:if test="${cm.secret eq '0' || cm.writer eq loginMember}">
+					                                <c:if test="${ (cm.secret eq '0' && cm.reportCnt eq '0' )|| cm.writer eq loginMember}">
 					                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
 					                                </c:if>
-					                                <c:if test="${cm.secret eq '1' && cm.writer != loginMember}">
+					                                <c:if test="${cm.secret eq '1' && cm.writer != loginMember  && cm.reportCnt eq '0'}">
 					                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글입니다</div>
 					                                </c:if>
-					                             
+					                             	<c:if test="${cm.reportCnt eq '1' }">
+					                             		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">신고된 댓글입니다</div>
+					                             	</c:if>
 				                               </div>
 				                         	</div>
 				                         	
@@ -451,6 +455,7 @@ body{
 				                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
 				                                     
 				                                     <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
+				                                      <c:if test="${cm.reportCnt eq '0' }">
 					                                     <th>
 					                                    	<ul class="main-menu" id="main-menu${cm.groupBoardCommentNo}" onclick="menu${cm.groupBoardCommentNo}();">
 					                                    		<li>
@@ -468,6 +473,7 @@ body{
 					                                    		</li>
 					                                    	</ul>
 					                                    </th>
+					                                    </c:if>
 					                                    <script type="text/javascript">
 					                                    	function menu${cm.groupBoardCommentNo}(){
 					                                    		var element = document.getElementById("main-menu${cm.groupBoardCommentNo}");
@@ -483,11 +489,14 @@ body{
 				                                    </sec:authorize>
 				                                    
 			                                	</tr>
-			                                	<c:if test="${cm.secret eq '0'}">
+			                                	<c:if test="${cm.secret eq '0' && cm.reportCnt eq '0'}">
 				                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
 			                                	</c:if>
-			                                	<c:if test="${cm.secret eq '1'}">
+			                                	<c:if test="${cm.secret eq '1' && cm.reportCnt eq '0'}">
 				                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글 입니다</div>
+			                                	</c:if>
+			                                	<c:if test="${cm.reportCnt eq '1'}">
+			                                		<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">신고된 댓글 입니다</div>
 			                                	</c:if>
 				                         	</div>
 				                         </div>
