@@ -12,9 +12,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class cmtReport {
+public class CmtReport {
 
 	private String memberEmail;
-	private String boardCommentNo;
-	private String commentReportReason;
+	private String groupBoardCommentNo;
 }

@@ -5,9 +5,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.spaceus.community.group.model.service.GroupService;
+import com.kh.spaceus.community.group.model.vo.CmtReport;
 import com.kh.spaceus.community.group.model.vo.GBComment;
 
 import lombok.extern.slf4j.Slf4j;
@@ -64,5 +66,10 @@ public class CommentController {
 		}catch(Exception e) {
 			log.error("댓글 삭제 오류",e);
 		}
+	}
+	
+	@PostMapping("/alertComment.do")
+	public  void alertComment(@ModelAttribute CmtReport param1) {
+		log.info("param1 = {}", param1);
 	}
 }

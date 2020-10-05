@@ -229,28 +229,29 @@ body{
 						                                    	</th>
 					                                    	<script type="text/javascript">
 					                                    	/*댓글 대댓글 신고*/
-					                                    	/*
-					                                    	88
-					                                    	8
-					                                    	8
-					                                    	8
-					                                    	8
 					                                    	
-					                                    	*/
 					                                    
 					                                    	$('[name=alertComment${cm.groupBoardCommentNo}]').click(function(){
-						                                    	//alert(${cm.groupBoardCommentNo});
+
+						                                    	
 						                                    	var groupBoardCommentNo = ${cm.groupBoardCommentNo};
 						                                    	alert(groupBoardCommentNo);
 						                                    	var groupBoardNo = $("[name=groupBoardNo]").val();
 						                                    	alert(groupBoardNo);
-
+						                                    	var memberEmail = '${loginMember}';
+						                                    	alert(memberEmail);
+																var param1="memberEmail="+memberEmail+
+																			"&groupBoardCommentNo="+groupBoardCommentNo;
+						                                    	alert(param1);
+						                                    	
 						                                    	$.ajax({
 							                                    	method:"post",
-							                                    	url:"${pageContext.request.contextPath}/community/group/alertComment.do?groupBoardCommentNo="+groupBoardCommentNo,
+							                                    	url:"${pageContext.request.contextPath}/community/comment/alertComment.do",
+								                                    data: param1,
+								                                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 							                                    	success:function(){
 																		alert("댓글이 정상적으로 신고되었습니다.");
-																		/* location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do"; */
+																		
 																		window.location.reload();
 																	},
 																	error: function(x,h,r){
@@ -258,6 +259,9 @@ body{
 																		console.log(x,h,r);
 																	}
 							                                    });
+							                                    
+							                                    
+							                                    
 					                                    	});
 					                                    	
 						                                    	function menu${cm.groupBoardCommentNo}(){
