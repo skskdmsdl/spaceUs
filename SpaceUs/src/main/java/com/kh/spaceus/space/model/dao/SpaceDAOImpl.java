@@ -82,6 +82,12 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.update("space.updateReviewComment", review);
 	}
 
+	@Override
+	public List<Review> selectReviewComment(String spaceNo, int limit, int offset) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("space.selectReviewComment", spaceNo, rowBounds);
+	}
+
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {
 		return sqlSession.selectList("space.selectListSpaceCollection", email);

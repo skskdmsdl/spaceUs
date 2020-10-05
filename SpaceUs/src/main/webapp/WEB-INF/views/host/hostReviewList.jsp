@@ -60,6 +60,9 @@ a:hover {opacity: 0.3; color:black;}
 .reviewLabel{
 	font-size: 11px;
 }
+.modifyDiv{
+	display: none;
+}
 </style>
 
         <div class="page-wrapper">
@@ -92,14 +95,26 @@ a:hover {opacity: 0.3; color:black;}
                            <h6 class="card-subtitle">이용자들의 리뷰입니다</h6>
                        </div>
                           <div class="col-md-2">
-                              <select class="custom-select b-0 ">
-                                  <option value="1" >전체 리뷰</option>
-                                  <option value="2">작성 가능한 리뷰</option>
-                                  <option value="3">내가 작성한 리뷰</option>
+                          <c:choose>
+							<c:when test="${ comment == 'no' }">
+                              <select class="custom-select b-0" id="selectId">
+                                  <option value="1">전체 리뷰</option>
+                                  <option value="2" selected>작성 안한 댓글</option>
                               </select>
+                             </c:when>
+                             <c:otherwise>
+                              <select class="custom-select b-0" id="selectId">
+                                  <option value="1">전체 리뷰</option>
+                                  <option value="2">작성 안한 댓글</option>
+                              </select>
+                             </c:otherwise>
+                           </c:choose>
+		                      <form action="${pageContext.request.contextPath}/host/selectReviewComment.do" id="selectCommentFrm">
+		                          <input type="hidden" name="spaceNo" value="${ spaceNo }" />
+		                      </form>
+		                      <form action="${pageContext.request.contextPath}/host/reviewList.do" id="totalCommentFrm"></form>
                            </div> 
                       </div>
-                      
                        <div >
 				   		<div class="row">
 				   			<p class="head ml-4">${ reviewTotal }개의 리뷰</p>
@@ -138,16 +153,29 @@ a:hover {opacity: 0.3; color:black;}
 									   			<div style="background-image: url(${pageContext.request.contextPath}/resources/upload/review/${review.image});  width: 500px;height: 350px;background-size: cover; margin-bottom:30px;"></div>
 							   				</div>
 							   				<!-- 댓글 -->
-							   				
-							   				<c:if test="${ review.reviewComment != null }"></c:if>
-							   				<div class="commentBox" style="background-color: #fafafa; border: 1px solid #edeceb; padding-bottom: 30px; ">
+							   				<div class="commentBox" style="background-color: #fafafa;  cursor:default; border: 1px solid #edeceb; padding-bottom: 30px; ">
 					                         <div class="pl-5 pr-5 pt-4 commentBox">
 					                         	<p class="commentBox"><i class="fa fa-comment mr-1 commentBox"></i>댓글</p>
-												<div class="row commentBox" style="height: 110px;">
-													<input type="hidden" name="reviewNo" value="${ review.reviewNo }" />
-						                         	<textarea class="col ml-2 mr-1 mt-1 commentBox content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-						                           	<button type="button" class="btn mt-1 commentBox insertComment" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
-					                         	</div>
+												<c:choose>
+													<c:when test="${ review.reviewComment != null }">
+														<div class="modifyFrm">
+															<p class="commentBox">${ review.reviewComment }</p>
+															<button type="button" class="btn btn-secondary commentBox modifyBtn" style="margin-left: 95%;">수정</button>
+														</div>
+														<div class="row commentBox modifyDiv" style="height: 110px;">
+															<input type="hidden" name="reviewNo" value="${ review.reviewNo }" />
+								                         	<textarea class="ml-2 mr-1 mt-1 commentBox content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px; width:90%">${ review.reviewComment }</textarea>
+								                           	<button type="button" class="btn mt-1 commentBox insertComment" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">수정</button>
+							                         	</div>
+													</c:when>
+													<c:otherwise>
+														<div class="row commentBox" style="height: 110px; ">
+															<input type="hidden" name="reviewNo" value="${ review.reviewNo }" />
+								                         	<textarea class="col ml-2 mr-1 mt-1 commentBox content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+								                           	<button type="button" class="btn mt-1 commentBox insertComment" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+							                         	</div>
+													</c:otherwise>
+												</c:choose>
 				                         		</div>
 					                           </div>
 							   				<!-- 댓글 끝 -->
@@ -187,14 +215,29 @@ a:hover {opacity: 0.3; color:black;}
 											<p style="font-weight: 600;" class="simpleBtn">접기</p>
 										</div>
 										<!-- 댓글 -->
-						   				<div class="commentBox" style="background-color: #fafafa; border: 1px solid #edeceb; padding-bottom: 30px; ">
+						   				<div class="commentBox" style="background-color: #fafafa;  cursor:default; border: 1px solid #edeceb; padding-bottom: 30px; ">
 				                         <div class="pl-5 pr-5 pt-4 commentBox">
 				                         	<p class="commentBox"><i class="fa fa-comment mr-1 commentBox"></i>댓글</p>
-											<div class="row commentBox" style="height: 110px;">
-												<input type="hidden" name="reviewNo" value="${ review.reviewNo }" />
-					                         	<textarea class="col ml-2 mr-1 mt-1 commentBox content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-					                           	<button type="button" class="btn mt-1 commentBox insertComment" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
-				                         	</div>
+											<c:choose>
+												<c:when test="${ review.reviewComment != null }">
+													<div class="modifyFrm">
+														<p class="commentBox">${ review.reviewComment }</p>
+														<button type="button" class="btn btn-secondary commentBox modifyBtn" style="margin-left: 95%;">수정</button>
+													</div>
+													<div class="row commentBox modifyDiv" style="height: 110px; ">
+														<input type="hidden" name="reviewNo" value="${ review.reviewNo }" />
+							                         	<textarea class="ml-2 mr-1 mt-1 commentBox content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px; width:90%">${ review.reviewComment }</textarea>
+							                           	<button type="button" class="btn mt-1 commentBox insertComment" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">수정</button>
+						                         	</div>
+												</c:when>
+												<c:otherwise>
+													<div class="row commentBox" style="height: 110px; ">
+														<input type="hidden" name="reviewNo" value="${ review.reviewNo }" />
+							                         	<textarea class="col ml-2 mr-1 mt-1 commentBox content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+							                           	<button type="button" class="btn mt-1 commentBox insertComment" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+						                         	</div>
+												</c:otherwise>
+											</c:choose>
 			                         		</div>
 				                           </div>
 						   				<!-- 댓글 끝 -->
@@ -278,7 +321,15 @@ $(".insertComment").click(function(){
 	}); 
 	
 });
-
-
-
+//리뷰 수정
+$(".modifyBtn").click(function(){
+	$(this).parent(".modifyFrm").hide();
+	$(this).parent("div").siblings(".modifyDiv").show();
+});
+//리뷰 모아보기
+$("#selectId").change(function(){
+	let option = $("#selectId").val();
+	if(option == 1) $("#totalCommentFrm").submit();
+	else $("#selectCommentFrm").submit();
+}); 
 </script>
