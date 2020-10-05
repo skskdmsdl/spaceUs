@@ -39,11 +39,11 @@
 	    self.close();
 	</c:if>
 	
-	<c:if test="${ not empty returnPath }">
+/* 	<c:if test="${ not empty returnPath }">
 		alert("not empty returnPath"); //뷰단에 오기전에 컨트롤러에서 다 리턴되어버리는듯..
 	    self.close();
 		opener.parent.location="${returnPath}"
-	</c:if>
+	</c:if> */
 	
 	/* window.onload = function(){
 		signOut();

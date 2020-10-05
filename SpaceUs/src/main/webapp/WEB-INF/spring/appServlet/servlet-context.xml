@@ -27,6 +27,16 @@
 			<beans:bean class="com.kh.spaceus.common.interceptor.LoggerInterceptor"
 						id="loggerInterceptor"/>
 		</interceptor>
+		
+		<!-- referer 인터셉터 설정 -->
+		<!-- <interceptor>
+			<mapping path="/member/memberLogin.do"/>
+			<mapping path="/callback"/>
+			<mapping path="/member/kakaoLogin.do"/>
+			<mapping path="/member/googleLogin.do"/>
+			<beans:bean class="com.kh.spaceus.common.interceptor.RefererInterceptor"
+						id="RefererInterceptor"/>
+		</interceptor> -->
 		<!-- <interceptor>
 			<mapping path="/space/insertSpace.do"/>
 			<mapping path="/community/recruit/recruitEnrollForm.do"/>

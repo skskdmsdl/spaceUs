@@ -113,8 +113,10 @@ commit;
 --    space_no = 'space2';
 --DELETE FROM space WHERE space_no = 'space2';
 
+
+
 -----------------------------
--------- 공간첨부파일 --------
+-------- 첨부파일 --------
 -----------------------------
 create table space_image (
     file_no varchar2(256),
@@ -257,6 +259,18 @@ CREATE TABLE Space_tag (
 create sequence seq_space_tag_no;
 
 select * from space_tag;
+
+select 
+    space_no, space_name, tag_name
+    from (select
+    *
+from
+    space
+    join
+        space_tag
+    using(space_no))
+    join tag using(tag_no);
+
 
 
 
