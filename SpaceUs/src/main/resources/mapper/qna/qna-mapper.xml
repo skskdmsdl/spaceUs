@@ -5,14 +5,15 @@
 <mapper namespace="qna">
 	<insert id="insertQna">
 		insert into qna values(
-			seq_qna_no.nextval,
-			space_no = #{spaceNo},
-			qna_no = #{qnaNo},
-			qna_date = #{date},
-			nickname = #{name},
-			member_email = #{memberEmail},
-			qna_status = #{status}
-			
+			'Q'||seq_qna_no.nextval,
+			#{spaceNo},
+			#{email},
+			#{name},
+			#{password},
+			#{content},
+			null,
+			default,
+			default			
 		)
 		
 	</insert>

@@ -23,7 +23,7 @@ public class QnaController {
 	
 	  @RequestMapping(value = "/insertQna.do", method=RequestMethod.POST) 
 	  public String insertQna(@RequestParam("spaceNo") String spaceNo, 
-			  				@ModelAttribute("memo") Qna qna,
+			  				@ModelAttribute("qna") Qna qna,
 								  RedirectAttributes redirectAttr) { 
 	     log.debug("질문 등록 요청");
 	     	
@@ -33,7 +33,7 @@ public class QnaController {
 		 String msg = result > 0 ? "등록 성공!" : "등록실패";
 		 redirectAttr.addFlashAttribute("msg", msg); 
 	  
-	  return "redirect:/space/SpaceDetail.do?spaceNo="+spaceNo; 
+	  return "redirect:/space/spaceDetail.do?spaceNo="+spaceNo; 
 	  
 	  }
 }
