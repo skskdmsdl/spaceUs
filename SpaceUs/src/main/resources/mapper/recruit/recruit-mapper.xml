@@ -140,10 +140,15 @@
 	
 	<select id="selectCommentList" resultMap="CommentMap">
 		select 
-			RC.*,
-			(select member_email from member where nickname= RC.writer) email
+		    RC.*,
+		    (select member_email from member where nickname= RC.writer) email,
+		    cr.board_comment_no,
+		    cr.member_email
 		from 
-			recruit_comment RC
+		    recruit_comment RC 
+		    left join 
+		    (select * from com_report where member_email=#{ reporter }) CR 
+		    on RC.recruit_comment_no = CR.board_comment_no
 		where 
 			recruit_no = #{ no } 
 			start with recruit_comment_level = 1 
@@ -160,6 +165,8 @@
 		<result column="recruit_comment_content" property="content"/>
 		<result column="recruit_comment_level" property="level"/>
 		<result column="recruit_comment_date" property="date"/>
+		<result column="member_email" property="reporter"/>
+		<result column="board_comment_no" property="boardCommentNo"/>
 	</resultMap>
 
 	<update id="updateComment">
@@ -186,6 +193,16 @@
 	    where 
 	    	recruit_no = #{no} 	
 	</select>
+	
+	<insert id="insertReportComment">
+		insert into
+			com_report
+		values (
+			#{email},
+			#{boardCommentNo}
+		)
+	</insert>
+	
 	
 
 </mapper>

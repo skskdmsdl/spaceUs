@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
 import com.kh.spaceus.community.recruit.model.vo.RecruitComment;
+import com.kh.spaceus.community.recruit.model.vo.ReportComment;
 import com.kh.spaceus.community.recruit.model.vo.ReportRecruit;
 import com.kh.spaceus.space.model.vo.Tag;
 
@@ -80,8 +81,8 @@ public class RecruitDAOImpl implements RecruitDAO{
 	}
 
 	@Override
-	public List<RecruitComment> selectCommentList(String no) {
-		return sqlSession.selectList("recruit.selectCommentList", no);
+	public List<RecruitComment> selectCommentList(RecruitComment comment) {
+		return sqlSession.selectList("recruit.selectCommentList", comment);
 	}
 
 	@Override
@@ -98,6 +99,12 @@ public class RecruitDAOImpl implements RecruitDAO{
 	public int selectCommentTotalContents(String no) {
 		return sqlSession.selectOne("recruit.selectCommentTotalContents", no);
 	}
+
+	@Override
+	public int insertReportComment(ReportComment reportComment) {
+		return sqlSession.insert("recruit.insertReportComment", reportComment);
+	}
+
 
 
 

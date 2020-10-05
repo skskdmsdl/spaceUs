@@ -159,6 +159,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                           	<button type="button" class="btn mt-1" id="insertComment" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
                          	</div>
                          <!-- 댓글 보기 -->
+                         <%-- <c:forEach items="${commentList}" var="list" varStatus="vs"> --%>
                          <c:forEach items="${commentList}" var="list" varStatus="vs">
                        			<c:if test="${list.level == 1 }">
                          		<div style="margin-top: 20px;">
@@ -178,6 +179,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                     			 <ul class="pull-left commentMenu hide">
 	                                    			 <c:choose>
 		                                    			 <c:when test="${loginMember != list.email || loginMember == null}">
+		                                    			 	<input type="hidden" name="commentNo" value="${list.no}" />
 														    <li class="commentReport"><i class="fa fa-flag"></i> &nbsp;신고</li>
 		                                    			 </c:when>
 		                                    			 <c:when test="${loginMember == list.email}">
@@ -191,7 +193,10 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                    	</th>
                                    	</sec:authorize>
                                	</tr>
-                                <c:if test="${list.secret == 0 || loginMember eq list.email || loginMember eq recruit.email}">
+                               	<c:if test="${ not empty list.boardCommentNo }">
+                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">신고에 의해 비공개 처리되었습니다</div>
+                               	</c:if>
+                                <c:if test="${(list.secret == 0 || loginMember eq list.email || loginMember eq recruit.email) && empty list.boardCommentNo }">
                                 	<div style="border-bottom : .5px solid #d0d0d0;" class="mb-3">${list.content}</div>
                          			<div class="modify${list.no} mb-3 hide">
                          				<input type="hidden" name="commentRef" value="${list.no}" />
@@ -200,9 +205,10 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                       		<button type="button" class="btn btn-light commentModifyClose">X</button>
 		             				</div>
                                 </c:if>
-                                <c:if test="${ list.secret == 1 && loginMember != list.email && loginMember != recruit.email}">
+                                <c:if test="${ (list.secret == 1 && loginMember != list.email && loginMember != recruit.email) && empty list.boardCommentNo  }">
                          			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글입니다</div>
                                 </c:if>
+                               	
                         	</div>
              				<!-- 대댓글 폼 시작 -->
              				<div class="${list.no} hide">
@@ -230,6 +236,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                     			 <ul class="pull-left commentMenu hide">
 	                                    			 <c:choose>
 		                                    			 <c:when test="${loginMember != list.email || loginMember == null}">
+		                                    			 	<input type="hidden" name="commentNo" value="${list.no}" />
 														    <li class="commentReport"><i class="fa fa-flag"></i> &nbsp;신고</li>
 		                                    			 </c:when>
 		                                    			 <c:when test="${loginMember == list.email}">
@@ -244,7 +251,10 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                    	</sec:authorize>
 	                                    
                                 	</tr>
-                                	<c:if test="${list.secret == 0 || loginMember eq list.email || loginMember eq recruit.email}">
+                                	<c:if test="${ not empty list.boardCommentNo }">
+                                		<div style="border-bottom : .5px solid #d0d0d0; color: #9e9e9e;">신고에 의해 비공개 처리되었습니다</div>
+                                	</c:if>
+                                	<c:if test="${(list.secret == 0 || loginMember eq list.email || loginMember eq recruit.email )&& empty list.boardCommentNo}">
 	                         			<div style="border-bottom : .5px solid #d0d0d0; ">${list.content}</div>
 	                         			<div class="modify${list.no} hide">
 	                         				<input type="hidden" name="commentRef" value="${list.no}" />
@@ -253,7 +263,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 				                       		<button type="button" class="btn btn-light commentModifyClose">X</button>
 			             				</div>
                                 	</c:if>
-                                	<c:if test="${list.secret == 1 && loginMember != list.email && loginMember != recruit.email }">
+                                	<c:if test="${(list.secret == 1 && loginMember != list.email && loginMember != recruit.email )&& empty list.boardCommentNo}">
 	                         			<div style="border-bottom : .5px solid #d0d0d0; color: #9e9e9e;">비밀 댓글 입니다</div>
                                 	</c:if>
 	                         	</div>
@@ -446,6 +456,24 @@ $(".commentDelete").click(function(){
 		}
 	}); 
 });
-
+//댓글 신고
+$(".commentReport").click(function(){
+	if(!confirm("댓글을 신고하시겠습니까?")) return;
+	let commentNo = $(this).siblings("input").val();
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/community/recruit/insertReportComment.do",
+		data : {
+			commentNo : commentNo
+		},
+		dataType : "json",
+		success : function(data){
+			alert("댓글이 신고되었습니다!");
+			location.reload();
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	});
+});
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

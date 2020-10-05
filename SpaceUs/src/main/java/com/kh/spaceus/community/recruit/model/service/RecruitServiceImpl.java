@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.spaceus.community.recruit.model.dao.RecruitDAO;
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
 import com.kh.spaceus.community.recruit.model.vo.RecruitComment;
+import com.kh.spaceus.community.recruit.model.vo.ReportComment;
 import com.kh.spaceus.community.recruit.model.vo.ReportRecruit;
 import com.kh.spaceus.space.model.dao.SpaceDAO;
 import com.kh.spaceus.space.model.vo.Tag;
@@ -76,8 +77,8 @@ public class RecruitServiceImpl implements RecruitService{
 	}
 
 	@Override
-	public List<RecruitComment> selectCommentList(String no) {
-		return recruitDAO.selectCommentList(no);
+	public List<RecruitComment> selectCommentList(RecruitComment comment) {
+		return recruitDAO.selectCommentList(comment);
 	}
 
 	@Override
@@ -93,6 +94,11 @@ public class RecruitServiceImpl implements RecruitService{
 	@Override
 	public int selectCommentTotalContents(String no) {
 		return recruitDAO.selectCommentTotalContents(no);
+	}
+
+	@Override
+	public int insertReportComment(ReportComment reportComment) {
+		return recruitDAO.insertReportComment(reportComment);
 	}
 
 
