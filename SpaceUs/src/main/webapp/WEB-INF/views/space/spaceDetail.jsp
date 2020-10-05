@@ -94,7 +94,22 @@ $(function(){
 
 		var $heart = $("#heart-a");
     	if($heart.html().indexOf("far fa-heart") != -1) {
-    		$heart.html("<i class='fas fa-heart'></i>");
+    		$heart.html("<i class='fas fa-heart' style='color:#ffc107'></i>");
+	   		 $.ajax({
+			        type: "POST",
+					url : "${pageContext.request.contextPath}/space/heart.do",
+					data :  {
+						spaceNo : "${space.spaceNo}",
+						email : "${loginMember.principal.memberEmail}"
+					},
+					dataType: "json",
+					success: function(data){
+					},
+					error: function(xhr, status, err){
+						console.log("처리실패", xhr, status, err);
+						}
+					
+			});
     	}
     	else {
     		$heart.html("<i class='far fa-heart'></i>");
@@ -155,11 +170,18 @@ function naverShare() {
 					<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i>
 					<div class="text text-center">
 						<div style="text-align: right; padding-right: 5px">
-							<a href=javascript:; id="heart-a"><i class="far fa-heart"></i></a>
+<%-- 							<form id="addLikeCnt" action="${pageContext.request.contextPath }/space/heart.do" method="POST">
+								<input name= "spaceNo" type="hidden" value="${space.spaceNo }"/>
+								<input name= "email" type="hidden" value="${loginMember.principal.memberEmail}"/>
+								
+							</form> --%>
+							<sec:authorize access="hasAnyRole('USER','HOST')"> 
+							<a href=javascript:; id="heart-a"><i id="addLike" class="far fa-heart"></i></a>
 							&emsp; <a href="javascript:;" id="kakao-link-btn"> <img
 								src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png"
 								width="30px" />
 							</a>
+							</sec:authorize>
 							<!-- 공유하기 팝오버 시작-->
 							<a href=javascript:; data-toggle="popover" data-trigger="focus"
 								data-placement="bottom" tabindex="0" title="공유하기"
@@ -382,37 +404,75 @@ function naverShare() {
 		   				<span class="text-left badge">${ qna.name}</span>
 		   				<span class="text-right"><fmt:formatDate value="${ qna.date}" pattern="yyyy-MM-dd"/></span>
 		   			</h4>
-		   			 <p style="padding-left:20px; text-align:justify;">${qna.content }</p>
-		   			<sec:authorize access="hasRole('HOST')">
+		   			<c:choose>
+		   				<c:when test="${qna.status eq false}">
+			   			    <p style="padding-left:20px; text-align:justify;">${qna.content }</p>
+		   			 	</c:when>
+		   			 	<c:otherwise>
+		   			 		<p style="padding-left:20px; text-align:justify;"><i class="fa fa-lock">비공개</i></p>
+		   			 		
+		   			 		<!-- 비공개 질문은 호스트와 질문 작성자, 관리자가 조회 가능 -->
+		   			 		<sec:authorize access="hasAnyRole('HOST', 'USER')">
+   							<sec:authentication property="principal.username" var="loginMember"/>
+	   							<c:if test="${loginMember != null && loginMember eq space.memberEmail || loginMember eq qna.email }">
+			   			 			<p style="padding-left:20px; text-align:justify;">${qna.content }</p>
+			   			 			
+			   			 		</c:if>
+		   			 		</sec:authorize>
+		   			 		<sec:authorize access="hasRole('ADMIN')">
+		   			 			<p style="padding-left:20px; text-align:justify;">${qna.content }</p>
+		   			 		</sec:authorize>
+		   			 	</c:otherwise>
+		   			</c:choose>
+		   			
+		   			<!-- 호스트 권한을 갖고 있고 해당 공간의 호스트의 메일과 로그인 유저의 메일이 동일하면 답변하기 버튼 생성 -->
+	   				<sec:authorize access="hasRole('HOST')">
    					<sec:authentication property="principal.username" var="loginMember"/>
    					<c:if test="${loginMember != null && loginMember eq space.memberEmail }">
-   					<h4 style="text-align: right;">
-		   				<span style="background: #F0F0F0; padding: 4px 10px; width: 100px; height: 24.8px; margin: 3px;">
-		   					<button class="fa fa-mail-reply" style="color:#20c997; border: none;" onclick="answer();">답변하기</button>
-   						</span>   						
-	   				</h4>
-	   				<form action="${pageContext.request.contextPath }/qna/answer.do?qnaNo=${qnaNo}">
-	   				<textarea class="answer-question" name="" rows="4" cols="100"></textarea>
-	   				</form>
-	   				</c:if>
-	   				</sec:authorize>
+	 					<h4 style="text-align: center;">
+		   					<span style="background: #F0F0F0; padding: 4px 10px; width: 100px; height: 24.8px; margin: 3px;">
+		   						<button class="fa fa-mail-reply" style="color:#20c997; border: none;" onclick="answer();">답변하기</button>
+	  						</span>   						
+	   					</h4>
+   					</c:if>
+   					</sec:authorize>
+   					
 		   		</div>
 		   		
 		   	</div> 
 		   	
 		   	<c:choose>
-				<c:when test="${ item.answer != null }">
+				<c:when test="${ qna.answer != null && qna.status eq false }">
+				
 	   			<div class="review d-flex" style="padding: 10px;">
-			   		<div class="desc" style="background-color:#f7f7f7; padding:5px">
+			   		<div class="desc" style="background-color:#dfe8e6; padding:5px">
 			   			<h4>
 			   				<span class="text-left"><i class="mdi mdi-subdirectory-arrow-right"></i>A. 호스트님의 답글</span>
 			   			</h4>
-			   			<p style="padding-left:15px">${ item.answer}</p>
+			   			<p style="padding-left:15px">${ qna.answer}</p>
 			   		</div>
 			   	</div>
-			   	<hr />
+			   	
 			   	</c:when>
 			   	<c:otherwise>
+				   	<sec:authorize access="hasRole('HOST')">
+	   					<sec:authentication property="principal.username" var="loginMember"/>
+	   					<c:if test="${loginMember != null && loginMember eq space.memberEmail }">
+	   					<div class="review d-flex" style="padding: 10px 10px;">
+					   		<div class="desc" style="background-color:#dfe8e6; padding:5px">
+			   					<h4 style="text-align: right;">
+					   				<span style="background: #F0F0F0; padding: 4px 10px; width: 80px; height: 24.8px; margin: 3px;">
+					   					<button type="button" class="fa fa-send" style="color:#20c997; border: none;" onclick="sendAnswer();">전송</button>
+			   						</span>   						
+				   				</h4>
+				   				<form id="answerFrm" action="${pageContext.request.contextPath }/qna/insertAnswer.do">
+				   					<input type="hidden" name="qnaNo" value="${qna.qnaNo}"/>
+				   					<textarea id="answer-content" name="answer" rows="4" cols="70"></textarea>
+				   				</form>
+				   			</div>
+				   		</div>
+		   				</c:if>
+		   			</sec:authorize>
 			   	</c:otherwise>
 			</c:choose>   	
 			</c:forEach>
@@ -751,9 +811,19 @@ function naverShare() {
 
 <script>
 function answer(){
-	alert();
-	$(answer-input).show();
+	alert(${qna.qnaNo});
 	
+}
+
+function sendAnswer(){
+	if($("#answer-content").val !=null){
+		$("#answerFrm").attr("action",
+				"${ pageContext.request.contextPath}/qna/updateAnswer.do")
+		.attr("method", "POST")
+		.submit();
+	} else{
+		alert("답변 내용을 입력하세요.");
+		}
 }
 
 function ask(){

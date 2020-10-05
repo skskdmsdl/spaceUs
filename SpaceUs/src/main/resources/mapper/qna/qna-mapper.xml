@@ -35,12 +35,21 @@
 		from qna
 	</select>
 	
+	<update id="updateAnswer">
+		update
+			qna
+		set 
+			qna_answer = #{qna.answer}
+		where
+			qna_no = #{qna.qnaNo}
+	</update>
 		
 	<resultMap type="qna" id="qnaMap">
 		<id column="qna_no" property="qnaNo" />
 		<result column="space_no" property="spaceNo" />
 		<result column="member_email" property="email" />
 		<result column="nickname" property="name" />
+		<result column="qna_answer" property="answer" />
 		<result column="qna_pw" property="password" />
 		<result column="qna_content" property="content" />
 		<result column="qna_date" property="date" />
