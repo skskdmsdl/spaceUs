@@ -1,4 +1,4 @@
-package com.kh.spaceus.host.model.vo;
+package com.kh.spaceus.qna.model.vo;
 
 import java.io.Serializable;
 import java.util.Date;

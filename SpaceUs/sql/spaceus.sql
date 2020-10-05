@@ -514,6 +514,7 @@ create sequence seq_ex;
 select * from exhibition;
 commit;
 
+
 -----------------------------
 ---- 좋아요(위시리스트) ------
 -----------------------------

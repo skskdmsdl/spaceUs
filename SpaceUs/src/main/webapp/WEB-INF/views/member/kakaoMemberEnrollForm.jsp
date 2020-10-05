@@ -80,8 +80,7 @@
 					</div>
 					
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="nickName" id="nickName"
-								value="${ nickname }" placeholder="nickName *" required>
+						<input class="input100" type="text" name="nickName" id="nickName" placeholder="nickName *" required>
 						<input type="hidden" id="nickNameValid" value="0"/>
 						<span class="focus-input100">nickName</span>
 					</div>
@@ -261,6 +260,43 @@ $("#passwordChk").blur(function(){
 	else {
 		$("#pw-alert").css('display', 'none');
 	}
+});
+
+//닉네임 검사
+$("#nickName").blur(function(){
+
+	//닉네임 유효성검사 : 공백 입력불가
+	if($(this).val().search(/\s/) != -1) {
+		$(".nickNameRegex").show();
+		$("#nickNameValid").val(0);
+		$("#nickName").val('').focus();
+		return;
+	}else {
+		$(".nickNameRegex").hide();
+	}
+
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/member/checkNickNameDuplicate.do",
+		data : {
+			nickName : $(this).val()
+		},
+		dataType : "json",
+		success : function(data){
+
+			if(data.isUsable == true) {
+				$(".nickNameDuplicate").hide();
+				$("#nickNameValid").val(1);
+			}
+			else {
+				$(".nickNameDuplicate").show();
+				$("#nickName").val('').focus();
+				$("#nickNameValid").val(0);
+			}
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	});
 });
 
 $(function(){
