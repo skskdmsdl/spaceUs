@@ -31,6 +31,8 @@ public interface SpaceService {
 
 	int updateReviewComment(Review review);
 
+	List<Review> selectReviewComment(String spaceNo, int limit, int offset);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

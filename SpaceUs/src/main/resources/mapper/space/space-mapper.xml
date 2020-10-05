@@ -182,6 +182,20 @@
 			review_no = #{reviewNo}
 	</update>
 	
+	<select resultMap="reviewMap" id="selectReviewComment">
+		select
+			R.*,
+			(select re_renamed_filename  from review_image where review_no=R.review_no) image
+		from
+			review R
+		where 
+			space_no = #{ spaceNo }
+			and
+		 	review_comment is null
+		order by R.review_date desc
+	</select>
+	
+	
 </mapper>
 
 

@@ -173,8 +173,8 @@ public class HostController {
 	@RequestMapping("/reviewList.do")
 	public String reviewList(Principal principal,
 							 Model model,
-							 @RequestParam(defaultValue = "1",
-						  	 value = "cPage") int cPage) {
+							 @RequestParam(defaultValue = "1", value = "cPage")
+							 int cPage) {
 		final int limit = 10; 
 		int offset = (cPage - 1) * limit;
 		Space space = spaceService.selectOneSpaceNo(principal.getName());
@@ -182,6 +182,8 @@ public class HostController {
 		List<Review> review = spaceService.selectListReview(spaceNo, limit, offset);
 		
 		model.addAttribute("review", review);
+		model.addAttribute("spaceNo", spaceNo);
+		
 		return "host/hostReviewList";
 	}
 	
@@ -199,6 +201,25 @@ public class HostController {
 		
 		mav.setViewName("jsonView");
 		
+		return mav;
+	}
+	
+	//리뷰 조회
+	@GetMapping("/selectReviewComment.do")
+	public ModelAndView selectReviewComment(ModelAndView mav,
+											@RequestParam("spaceNo") String spaceNo,
+											@RequestParam(defaultValue = "1", value = "cPage")
+											int cPage) {
+		final int limit = 10; 
+		int offset = (cPage - 1) * limit;
+		
+		List<Review> review = spaceService.selectReviewComment(spaceNo, limit, offset);
+		
+		mav.addObject("review", review);
+		mav.addObject("spaceNo", spaceNo);
+		mav.addObject("comment", "no");
+		mav.setViewName("host/hostReviewList");
+		System.out.println(review);
 		return mav;
 	}
 	
