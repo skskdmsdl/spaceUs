@@ -28,8 +28,8 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
-import com.kh.spaceus.member.model.vo.UserInfo;
 
+import antlr.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -48,13 +48,6 @@ public class SocialLoginController {
     //카카오 로그인관련
     @Autowired
     private KakaoController kakaoController;
-    
-    //페이스북 로그인 관련
-    @Autowired
-    private FacebookConnectionFactory connectionFactory;
-    @Autowired
-    private OAuth2Parameters oAuth2Parameters;
- 
     
     @Autowired
 	private MemberService memberService;
@@ -94,6 +87,7 @@ public class SocialLoginController {
     	
     	//1. 로그인 사용자 정보를 읽어옴.
     	apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
+    	
     	//2. String형식인 apiResult를 json형태로 바꿈
     	JSONParser parser = new JSONParser();
     	Object obj = parser.parse(apiResult);
@@ -102,37 +96,43 @@ public class SocialLoginController {
     	//3. 데이터 파싱
     	//response 파싱
     	JSONObject response_obj = (JSONObject)jsonObj.get("response");
-//    	//response의 email값 파싱
-    	String memberEmail = (String)response_obj.get("email");
-    	log.info("memberEmail = {}", memberEmail);
     	
+//    	//response의 email값 파싱
+    	String email = (String)response_obj.get("email");
+    	log.info("email = {}", email);
     	
     	//4.모델에 저장 
-    	model.addAttribute("naverLoginMember", response_obj);
-    	session.setAttribute("memberEmail", memberEmail);
-    	//log.info("naverLoginMember = {}", response_obj);
+    	model.addAttribute("email", email);
+    	model.addAttribute("closeFunction", "closeFunction");
     	
     	//이메일이 이미 가입되어있을 경우 로그인으로 가게 함
-    	Member member = memberService.selectOneMember(memberEmail);
+    	Member member = memberService.selectOneMember(email);
     	//log.info("member = {}", member);
     	
     	if(member != null) {
     		return "/member/memberLoginForm";
     	}
-        return "/member/naverMemberEnrollForm";
+    	else {
+    		String returnPath = "/member/naverMemberEnrollForm";
+    		model.addAttribute("returnPath", "returnPath");
+    		log.info("returnPath = {}", returnPath);
+    		
+    		return returnPath;
+    	}
     }
     
     
     //카카오 콜백
     @RequestMapping("/member/kakaoLogin.do")
-    public String getKakaoSignIn(Model model,@RequestParam("code") String code, HttpSession session) throws Exception {
+    public String getKakaoSignIn(RedirectAttributes redirectAttr, Model model,
+    							@RequestParam("code") String code, HttpSession session) throws Exception {
 
       log.info("code = {}", code);
 		
       JsonNode userInfo = kakaoController.getKakaoUserInfo(code);
 	  JsonNode accessToken = userInfo.get("access_token");
       
-	  log.info("userInfo = {}", userInfo);
+	  //log.info("userInfo = {}", userInfo);
 	  
       String email = userInfo.get("kakao_account").get("email").asText();
       String nickname = userInfo.get("properties").get("nickname").asText();
@@ -141,8 +141,9 @@ public class SocialLoginController {
       //log.info("nickname = {}", nickname);
 
       model.addAttribute("email", email);
-      model.addAttribute("nickname", nickname);
+      model.addAttribute("closeFunction", "closeFunction");
       
+    //이메일이 이미 가입되어있을 경우 로그인으로 가게 함
       Member member = memberService.selectOneMember(email);
       //log.info("member = {}", member);
   	
@@ -164,7 +165,13 @@ public class SocialLoginController {
      * @throws Exception
      */
     @RequestMapping("/member/googleLogin.do")
-    public String getGoogleSignIn(Model model, @RequestParam("idtoken") String idtoken, HttpSession session) throws Exception {
+    public String getGoogleSignIn(Model model
+    		, @RequestParam("idtoken") String idtoken
+    		, @RequestParam(required = false) String email
+    		, @RequestParam(required = false) String tokenEmail
+    		, HttpSession session) throws Exception {
+    	
+    	
     	HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
     	JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     	GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(httpTransport, JSON_FACTORY)
@@ -178,33 +185,40 @@ public class SocialLoginController {
 
     	GoogleIdToken idToken = verifier.verify(idtoken);
     	String userId = null;
-    	String email = null;
     	String name = null;
     	
     	
     	if (idToken != null) {
     	  Payload payload = idToken.getPayload();
     	  userId = payload.getSubject();
-    	  email = payload.getEmail();
     	  name = (String) payload.get("name");
     	  //log.info("name = {}", name);
     	  //log.info("email = {}", email);
-
-    	  //session.setAttribute("userInfo", new UserInfo(name, email));
-    	  
-    	  model.addAttribute("email", email);
-    	  model.addAttribute("nickname", name);
     	} else {
     	  log.info("Invalid ID token.");
     	}
     	
-    	 Member member = memberService.selectOneMember(email);
-         //log.info("member = {}", member);
+    	
+    	//이메일이 이미 가입되어있을 경우 로그인으로 가게 함
+    	Member member = memberService.selectOneMember(email);
+        log.info("member = {}", member);
      	
-   	  	if(member != null) {
+   	  	if(member != null) { //이미 가입
+   	  		model.addAttribute("email", email);
    	  		return "/member/memberLoginForm";
    	  	}
-   	  	
-    	return "/member/googleMemberEnrollForm";
+//   	  	else {
+//   	  		//이미 구글로그인
+//	   	  	if(!(null == tokenEmail || "".equals(tokenEmail))) { //회원가입
+//	   	  		log.info("이미 구글로그인 googleMemberEnrollForm...tokenEmail="+tokenEmail);
+//		   	  	model.addAttribute("email", tokenEmail);
+//	   	  		return "/member/googleMemberEnrollForm";
+//	   	  	}else {
+//	   	  		//로그인뷰에 머문다
+//	   	  		log.info("이미 구글로그인 memberLoginForm...");
+//	   	  		return "/member/memberLoginForm";
+//	   	  	}
+   	  		model.addAttribute("email", email);
+	   	  	return "/member/googleMemberEnrollForm";
     }
 }

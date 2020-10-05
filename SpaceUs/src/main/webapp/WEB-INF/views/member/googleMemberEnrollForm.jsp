@@ -81,8 +81,7 @@
 					</div>
 					
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="nickName" id="nickName"
-								value="${ nickname }" placeholder="nickName *" required>
+						<input class="input100" type="text" name="nickName" id="nickName" placeholder="nickName *" required>
 						<input type="hidden" id="nickNameValid" value="0"/>
 						<span class="focus-input100">nickName</span>
 					</div>

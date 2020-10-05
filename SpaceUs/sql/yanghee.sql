@@ -488,7 +488,7 @@ ALTER TABLE report DROP constraints fk_group_board_no;
 commit;
 select * from report;
 
-
+select * from member;
 -----------------------------
 --------- 블랙리스트 --------
 -----------------------------
@@ -507,10 +507,22 @@ create sequence seq_blacklist_no;
 select * from blacklist;
 
 -----------------------------
--- 댓글 신고 (소모임, 구인구직) --
+------- 댓글 신고 -------------
 -----------------------------
+create table com_report(
+	member_email varchar2(256),
+	board_comment_no varchar2(256),
+	comment_report_reason varchar2(256) not null,
 
+	constraints pk_com_report primary key(member_email, board_comment_no),
+	constraints fk_com_report_member_email foreign key(member_email) references member(member_email) on delete cascade,
+	constraints fk_com_report_board_comment_no foreign key(board_comment_no) references group_board_comment(group_board_comment_no) on delete cascade
+);
+ALTER TABLE com_report DROP constraints fk_com_report_board_comment_no;
 
+select * from com_report;
+
+commit;
 -----------------------------
 ---------- 기획전 -----------
 -----------------------------
