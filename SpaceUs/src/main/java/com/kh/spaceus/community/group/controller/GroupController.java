@@ -263,11 +263,6 @@ public class GroupController {
 		return "redirect:/community/group/groupList.do";
 	}
 	
-//	@PostMapping("/insertComment.do")
-//	@ResponseBody
-//	public String insertComment() {
-//		log.info("222222222222222222222222222222222222222222");
-//		return "";
-//	}
+	@PostMapping("")
 	
 }

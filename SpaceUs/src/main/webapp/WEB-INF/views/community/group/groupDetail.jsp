@@ -216,7 +216,7 @@ body{
 								                                    				<c:if test="${loginMember != cm.writer}">
 								                                    					<li><button name="alertComment${cm.groupBoardCommentNo}" 
 								                                    								value="${cm.groupBoardCommentNo}" style="border:0; background: #fafafa;"
-								                                    								onclick="alertCommentBtn${cm.groupBoardCommentNo}">신고하기</button></li>
+								                                    								>신고하기</button></li>
 								                                    				</c:if>
 								                                    				<c:if test="${loginMember == cm.writer}">
 								                                    					<li><button name="updateComment${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}"  style="border:0; background: #fafafa;">수정</button></li>
@@ -228,9 +228,37 @@ body{
 							                                    	</ul>
 						                                    	</th>
 					                                    	<script type="text/javascript">
-																function alertCommentBtn${cm.groupBoardCommentNo}(){
-																	alert("sss");
-																}
+					                                    	/*댓글 대댓글 신고*/
+					                                    	/*
+					                                    	88
+					                                    	8
+					                                    	8
+					                                    	8
+					                                    	8
+					                                    	
+					                                    	*/
+					                                    
+					                                    	$('[name=alertComment${cm.groupBoardCommentNo}]').click(function(){
+						                                    	//alert(${cm.groupBoardCommentNo});
+						                                    	var groupBoardCommentNo = ${cm.groupBoardCommentNo};
+						                                    	alert(groupBoardCommentNo);
+						                                    	var groupBoardNo = $("[name=groupBoardNo]").val();
+						                                    	alert(groupBoardNo);
+
+						                                    	$.ajax({
+							                                    	method:"post",
+							                                    	url:"${pageContext.request.contextPath}/community/group/alertComment.do?groupBoardCommentNo="+groupBoardCommentNo,
+							                                    	success:function(){
+																		alert("댓글이 정상적으로 신고되었습니다.");
+																		/* location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do"; */
+																		window.location.reload();
+																	},
+																	error: function(x,h,r){
+																		alert("댓글이 정상적으로 신고되지 않았습니다.");
+																		console.log(x,h,r);
+																	}
+							                                    });
+					                                    	});
 					                                    	
 						                                    	function menu${cm.groupBoardCommentNo}(){
 						                                    		var element = document.getElementById("main-menu${cm.groupBoardCommentNo}");
@@ -526,6 +554,22 @@ body{
 				                         	</div>
 				                         </div>
 				                         	<script type="text/javascript">
+				                         	/*
+				                         	
+				                         	7
+				                         	7
+				                         	7
+				                         	7
+				                         	
+				                         	*/
+					                         	$('[name=alertComment${cm.groupBoardCommentNo}]').click(function(){
+					                         		var groupBoardCommentNo = ${cm.groupBoardCommentNo};
+			                                    	alert(groupBoardCommentNo);
+			                                    	var groupBoardNo = $("[name=groupBoardNo]").val();
+			                                    	alert(groupBoardNo);
+			                                    	
+		                                    	});
+		                                    	
 												/*대댓글 수정 폼*/
 												$('[name=updatereply_${cm.groupBoardCommentNo}]').click(function(){
 
@@ -680,33 +724,7 @@ body{
                        </div>
                        <!-- Modal end -->
                        
-                  <%--      <!-- 댓글 신고 Modal -->
-                       <c:forEach items="${commentList}" var="comment">
-	                       <div class="modal fade" id="commentReport" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
-	                           <div class="modal-dialog">
-	                               <div class="modal-content">
-	                                   <div class="modal-header">
-	                                       <h4 class="modal-title">신고하기</h4>
-	                                   </div>
-	                                   <div class="modal-body">
-	                                      <p style=" padding-top: 20px; font-size: 16px; margin-bottom:0;">신고 게시물 : <input style="border: none; color:#666; font-size: 16px;" type="text" value="${comment.groupBoardContent }" /></p>
-	                                       <p style="border-bottom: 1px solid #efefef; font-size: 16px; padding-bottom: 30px;">작&nbsp;&nbsp;&nbsp;  성&nbsp;&nbsp;&nbsp;  자 &nbsp;: <input id="reportNick" style="border: none; color:#666; font-size: 16px;" type="text" value="${comment.nickname }" /></p>
-	                                       <p style=" font-size: 16px;">사 유&nbsp; 선 택 &nbsp;: <span style="font-size: 12px; color:#888;">여러 사유에 해당되는 경우, 대표적인 사유 1개를 선택해 주세요.</span></p>
-	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="부적절한 홍보 게시글"/> 부적절한 홍보 게시글<br/>
-	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="음란성 또는 청소년에게 부적합한 내용"/> 음란성 또는 청소년에게 부적합한 내용<br/>
-	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="명예훼손/사생활 침해 및 저작권침해등"/> 명예훼손/사생활 침해 및 저작권침해등<br/>
-	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="기타"/> 기타
-	                                       <input type="hidden" name="groupCommentNo_${comment.groupBoardCommentNo}" value="${comment.groupBoardCommentNo}" />
-	                                   </div>
-	                                   <div class="modal-footer">
-	                                       <button type="submit" class="btn btn-primary" data-dismiss="modal" id="alertCommentBtn" value="${comment.groupBoardCommentNo}">신고</button>
-	                                       <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-	                                   </div>
-	                               </div>
-	                           </div>
-	                       </div>
-	                       <!-- Modal end --> --%>
-                       <%-- </c:forEach> --%>
+                  
                        
                    </c:forEach>
           
