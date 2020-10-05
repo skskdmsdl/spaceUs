@@ -173,6 +173,15 @@
 			member_email = #{ email }
 	</select>
 	
+	<update id="updateReviewComment">
+		update 
+			review
+		set
+			review_comment = #{content}
+		where
+			review_no = #{reviewNo}
+	</update>
+	
 </mapper>
 
 

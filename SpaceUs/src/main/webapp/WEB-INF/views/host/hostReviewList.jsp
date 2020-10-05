@@ -138,12 +138,15 @@ a:hover {opacity: 0.3; color:black;}
 									   			<div style="background-image: url(${pageContext.request.contextPath}/resources/upload/review/${review.image});  width: 500px;height: 350px;background-size: cover; margin-bottom:30px;"></div>
 							   				</div>
 							   				<!-- 댓글 -->
+							   				
+							   				<c:if test="${ review.reviewComment != null }"></c:if>
 							   				<div class="commentBox" style="background-color: #fafafa; border: 1px solid #edeceb; padding-bottom: 30px; ">
 					                         <div class="pl-5 pr-5 pt-4 commentBox">
 					                         	<p class="commentBox"><i class="fa fa-comment mr-1 commentBox"></i>댓글</p>
 												<div class="row commentBox" style="height: 110px;">
-						                         	<textarea class="col ml-2 mr-1 mt-1 commentBox" id=content style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-						                           	<button type="button" class="btn mt-1 commentBox" id="insertComment" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+													<input type="hidden" name="reviewNo" value="${ review.reviewNo }" />
+						                         	<textarea class="col ml-2 mr-1 mt-1 commentBox content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+						                           	<button type="button" class="btn mt-1 commentBox insertComment" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
 					                         	</div>
 				                         		</div>
 					                           </div>
@@ -188,8 +191,9 @@ a:hover {opacity: 0.3; color:black;}
 				                         <div class="pl-5 pr-5 pt-4 commentBox">
 				                         	<p class="commentBox"><i class="fa fa-comment mr-1 commentBox"></i>댓글</p>
 											<div class="row commentBox" style="height: 110px;">
-					                         	<textarea class="col ml-2 mr-1 mt-1 commentBox" id=content style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-					                           	<button type="button" class="btn mt-1 commentBox" id="insertComment" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+												<input type="hidden" name="reviewNo" value="${ review.reviewNo }" />
+					                         	<textarea class="col ml-2 mr-1 mt-1 commentBox content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+					                           	<button type="button" class="btn mt-1 commentBox insertComment" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
 				                         	</div>
 			                         		</div>
 				                           </div>
@@ -252,7 +256,29 @@ $(".reviewToggle").click(function(e){
 	if($(e.target).hasClass("commentBox")) return;
 	$(this).children(".reviewDetailBtn").toggle();
 	$(this).children(".reviewSimpleBtn").toggle();
+});
+/*리뷰 댓글 등록*/
+$(".insertComment").click(function(){
+	let reviewNo = $(this).siblings('input').val();
+	let content = $(this).siblings('.content').val();
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/host/updateReviewComment.do",
+		data : {
+			reviewNo : reviewNo,
+			content : content
+		},
+		dataType : "json",
+		success : function(data){
+			alert("댓글이 등록되었습니다!");
+			location.reload();
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	}); 
 	
 });
+
+
 
 </script>

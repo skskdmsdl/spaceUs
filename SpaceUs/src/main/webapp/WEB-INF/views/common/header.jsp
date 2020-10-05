@@ -178,6 +178,15 @@
 		         	 💚  위시리스트
 		        </a>
 	      	 </div>
+	      	  <!-- admin 권한 -->
+	      	  <sec:authorize access="hasRole('ADMIN')">
+	      	 	<div class="col-sm-10 mb-2">
+		        <a href="${pageContext.request.contextPath }/admin/memberManage.do">
+		         	 👨‍👨‍👧‍👧	 SpaceUs 관리       
+		        </a>
+	      	    </div>
+	      	   </sec:authorize>
+	      	  <!-- admin 권한 끝 -->
 	      </div>
 	      <div class="modal-footer">
 	      	 <form:form action="${ pageContext.request.contextPath }/member/memberLogout.do">
@@ -188,7 +197,7 @@
 	  </div>
 	</div>
      </sec:authorize>
-     <sec:authorize access="hasAnyRole('USER', 'HOST')">
+    <%--  <sec:authorize access="hasAnyRole('USER', 'HOST', 'ADMIN')">
 	<div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-auto" role="document">
 	    <div class="modal-content"  style="background:#625c55; border-radius: 1.3em; left:36rem; top:3rem; width:55%; ">
@@ -209,30 +218,28 @@
 	    	            👩🏻 회원정보
 	    	    </a>
 	      	</div>
-	      <%-- 	<div class="col-sm-10 mb-2">
+	      	<div class="col-sm-10 mb-2">
 	    	    <a href="${pageContext.request.contextPath }/space/insertSpace.do">
 	    	            💒 공간 등록 
 	    	    </a>
-	      	</div> --%>
+	      	</div>
 	      	<div class="col-sm-10 mb-2">
 		        <a href="${pageContext.request.contextPath }/member/usageHistory.do">
 		           🧭 나의 예약내역
 		        </a>
 	      	 </div>
-	      	 <div class="col-sm-10 mb-2">
-		        <a href="${pageContext.request.contextPath }/member/wishList.do">
-		         	 💚  위시리스트
-		        </a>
-	      	 </div>
 	      	 <!-- admin 권한 -->
-	      	 <sec:authorize access="hasRole('ROLE_ADMIN')">
 	      	 	<div class="col-sm-10 mb-2">
 		        <a href="${pageContext.request.contextPath }/admin/memberManage.do">
 		         	 👨‍👨‍👧‍👧	 SpaceUs 관리       
 		        </a>
 	      	    </div>
-	      	 </sec:authorize>
 	      	 <!-- admin 권한 끝 -->
+	      	 <div class="col-sm-10 mb-2">
+		        <a href="${pageContext.request.contextPath }/member/wishList.do">
+		         	 💚  위시리스트
+		        </a>
+	      	 </div>
 	      </div>
 	      <div class="modal-footer">
 	      	 <form:form action="${ pageContext.request.contextPath }/member/memberLogout.do">
@@ -243,9 +250,9 @@
 	  </div>
 	</div>
 	</sec:authorize>
-	<!-- /user 권한 -->
+	<!-- /user 권한 --> --%>
 	
-<!-- admin 권한 -->	
+<%-- <!-- admin 권한 -->	
 <sec:authorize access="hasRole('ADMIN')">
 	<div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-auto" role="document">
@@ -272,7 +279,7 @@
 	    	            💒 공간 등록 
 	    	    </a>
 	      	</div>
-	      <%-- 	<div class="col-sm-10 mb-2">
+	      	<div class="col-sm-10 mb-2">
 		        <a href="${pageContext.request.contextPath }/member/usageHistory.do">
 		           🧭 예약관리
 		        </a>
@@ -281,7 +288,7 @@
 		        <a href="${pageContext.request.contextPath }/member/wishList.do">
 		         	 ❤   위시리스트
 		        </a>
-	      	 </div> --%>
+	      	 </div>
       	 	<div class="col-sm-10 mb-2">
 		        <a href="${pageContext.request.contextPath }/admin/memberManage.do">
 		         	 👨‍👨‍👧‍👧	 SpaceUs 관리       
@@ -297,7 +304,7 @@
 	  </div>
 	</div>
 
-	</sec:authorize>
+	</sec:authorize> --%>
 	<!-- /admin 권한 끝 -->
 <!-- <div id="talkjs-container" style="right:30px;">
 	<i>Loading chat...</i>

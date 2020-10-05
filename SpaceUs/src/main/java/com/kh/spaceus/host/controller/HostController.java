@@ -15,12 +15,14 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.spaceus.community.recruit.model.vo.RecruitComment;
 import com.kh.spaceus.host.model.service.HostService;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.service.SpaceService;
@@ -183,6 +185,21 @@ public class HostController {
 		return "host/hostReviewList";
 	}
 	
-	
+	//댓글 등록
+	@GetMapping("/updateReviewComment.do")
+	public ModelAndView updateReviewComment(ModelAndView mav,
+										   @RequestParam("content") String content,
+										   @RequestParam("reviewNo") String reviewNo) {
+		
+		Review review = new Review();
+		review.setReviewNo(reviewNo);
+		review.setContent(content);
+		
+		int result = spaceService.updateReviewComment(review);
+		
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
 	
 }

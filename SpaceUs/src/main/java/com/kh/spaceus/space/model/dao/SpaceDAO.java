@@ -32,6 +32,8 @@ public interface SpaceDAO {
 
 	Space selectOneSpaceNo(String email);
 
+	int updateReviewComment(Review review);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 
