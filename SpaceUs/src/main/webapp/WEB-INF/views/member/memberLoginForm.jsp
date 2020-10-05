@@ -107,8 +107,7 @@
 <body>
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg-01.jpg');
-											 background-position: right">
+			<div class="wrap-login100" style="background-image: url('https://interiordesignideas2014.files.wordpress.com/2016/12/image-41434.jpg');">
 				<form:form action="${pageContext.request.contextPath }/member/memberLogin.do" method="POST"
 							class="login100-form validate-form">
 					<span class="login100-form-title p-b-43">

@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.kh.spaceus">
-		<level value="info"/> <!-- 인터셉터 확인하시고 싶으신 분은 이 부분을 trace 또는 debug로 바꾸세요 -->
+		<level value="debug"/> <!-- 인터셉터 확인하시고 싶으신 분은 이 부분을 trace 또는 debug로 바꾸세요 -->
 	</logger>
 	
 	<!-- log4jdbc logger -->
