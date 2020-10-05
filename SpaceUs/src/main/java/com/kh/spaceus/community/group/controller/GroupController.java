@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.community.group.model.service.GroupService;
 import com.kh.spaceus.community.group.model.vo.Board;
+import com.kh.spaceus.community.group.model.vo.CmtReport;
 import com.kh.spaceus.community.group.model.vo.GBComment;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
@@ -138,15 +139,19 @@ public class GroupController {
 			List<Board> boardList = groupService.selectBoardOne(groupBoardNo);
 			List<GBComment> commentList = groupService.selectAllComment(groupBoardNo);
 			int commentCnt = groupService.selectCommentCnt(groupBoardNo);
+			List<CmtReport> report = groupService.selectReport();
 			
-			log.info("commentCnt={}",commentCnt);
-	
-			log.info("commentList={}",commentList);
-			
+			log.info("report={}", report);
+//			
+//			log.info("commentCnt={}",commentCnt);
+//	
+//			log.info("commentList={}",commentList);
+//			
 			model.addAttribute("list", list);
 			model.addAttribute("boardList", boardList);
 			model.addAttribute("commentList", commentList);
 			model.addAttribute("commentCnt", commentCnt);
+			model.addAttribute("report", report);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

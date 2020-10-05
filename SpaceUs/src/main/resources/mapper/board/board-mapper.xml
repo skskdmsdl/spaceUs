@@ -112,6 +112,15 @@
 			group_board_ref = #{groupBoardNo}
 	</select>
 	
+	<!-- board Detail에서 report -->
+	<select id="selectReport" resultMap="cmtReportMap">
+		select
+			*
+		from
+			com_report
+	</select>
+	<resultMap type="cmtReport" id="cmtReportMap"></resultMap>
+	
 	<!-- insert board -->
 	<insert id="insertBoard">
 		insert into
@@ -225,4 +234,15 @@
 		where
 			group_board_comment_no = #{groupBoardCommentNo}
 	</delete>
+	
+	<!-- 댓글/대댓글 신고 -->
+	<insert id="alertComment">
+		insert into
+			com_report
+		values(
+			#{memberEmail},
+			#{groupBoardCommentNo}
+		)
+	</insert>		
+	
 </mapper>

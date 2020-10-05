@@ -229,26 +229,14 @@ body{
 						                                    	</th>
 					                                    	<script type="text/javascript">
 					                                    	/*댓글 대댓글 신고*/
-					                                    	
 					                                    
-					                                    	$('[name=alertComment${cm.groupBoardCommentNo}]').click(function(){
-
-						                                    	
+					                                    $('[name=alertComment${cm.groupBoardCommentNo}]').click(function(){	                                    	
 						                                    	var groupBoardCommentNo = ${cm.groupBoardCommentNo};
 						                                    	alert(groupBoardCommentNo);
-						                                    	var groupBoardNo = $("[name=groupBoardNo]").val();
-						                                    	alert(groupBoardNo);
-						                                    	var memberEmail = '${loginMember}';
-						                                    	alert(memberEmail);
-																var param1="memberEmail="+memberEmail+
-																			"&groupBoardCommentNo="+groupBoardCommentNo;
-						                                    	alert(param1);
-						                                    	
-						                                    	$.ajax({
+		
+						                                   $.ajax({
 							                                    	method:"post",
-							                                    	url:"${pageContext.request.contextPath}/community/comment/alertComment.do",
-								                                    data: param1,
-								                                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+							                                    	url:"${pageContext.request.contextPath}/community/comment/alertComment.do?groupBoardCommentNo="+groupBoardCommentNo,
 							                                    	success:function(){
 																		alert("댓글이 정상적으로 신고되었습니다.");
 																		
@@ -259,9 +247,7 @@ body{
 																		console.log(x,h,r);
 																	}
 							                                    });
-							                                    
-							                                    
-							                                    
+							                   
 					                                    	});
 					                                    	
 						                                    	function menu${cm.groupBoardCommentNo}(){
@@ -558,20 +544,26 @@ body{
 				                         	</div>
 				                         </div>
 				                         	<script type="text/javascript">
-				                         	/*
-				                         	
-				                         	7
-				                         	7
-				                         	7
-				                         	7
-				                         	
-				                         	*/
-					                         	$('[name=alertComment${cm.groupBoardCommentNo}]').click(function(){
-					                         		var groupBoardCommentNo = ${cm.groupBoardCommentNo};
+
+				                         	/*대댓글 신고*/
+				                         	  $('[name=alertComment${cm.groupBoardCommentNo}]').click(function(){	                                    	
+			                                    	var groupBoardCommentNo = ${cm.groupBoardCommentNo};
 			                                    	alert(groupBoardCommentNo);
-			                                    	var groupBoardNo = $("[name=groupBoardNo]").val();
-			                                    	alert(groupBoardNo);
-			                                    	
+
+			                                   $.ajax({
+				                                    	method:"post",
+				                                    	url:"${pageContext.request.contextPath}/community/comment/alertComment.do?groupBoardCommentNo="+groupBoardCommentNo,
+				                                    	success:function(){
+															alert("댓글이 정상적으로 신고되었습니다.");
+															
+															window.location.reload();
+														},
+														error: function(x,h,r){
+															alert("댓글이 정상적으로 신고되지 않았습니다.");
+															console.log(x,h,r);
+														}
+				                                    });
+				                   
 		                                    	});
 		                                    	
 												/*대댓글 수정 폼*/
@@ -688,7 +680,7 @@ body{
 											});
 				                         	</script>
 										</c:if>	                         	
-		                         	</c:forEach>		                         	
+		                         	</c:forEach> <!-- cm -->		                         	
 	                           		<!-- 댓글보기끝-->
 	                           		
 	                           </div>

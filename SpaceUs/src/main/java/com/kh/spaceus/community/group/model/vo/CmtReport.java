@@ -15,5 +15,5 @@ import lombok.ToString;
 public class CmtReport {
 
 	private String memberEmail;
-	private String groupBoardCommentNo;
+	private String boardCommentNo;
 }

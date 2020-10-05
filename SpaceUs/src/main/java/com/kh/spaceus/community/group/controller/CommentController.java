@@ -1,5 +1,9 @@
 package com.kh.spaceus.community.group.controller;
 
+import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.spaceus.community.group.model.service.GroupService;
-import com.kh.spaceus.community.group.model.vo.CmtReport;
 import com.kh.spaceus.community.group.model.vo.GBComment;
 
 import lombok.extern.slf4j.Slf4j;
@@ -69,7 +72,25 @@ public class CommentController {
 	}
 	
 	@PostMapping("/alertComment.do")
-	public  void alertComment(@ModelAttribute CmtReport param1) {
-		log.info("param1 = {}", param1);
+	public  void alertComment(@RequestParam String groupBoardCommentNo,Principal principal) {
+		log.info("groupBoardCommentNo= {}",groupBoardCommentNo);
+		String memberEmail = principal.getName();
+		log.info("memberEmail={}",memberEmail);
+		
+		Map<String,String> map = new HashMap<>();
+		map.put("groupBoardCommentNo", groupBoardCommentNo);
+		map.put("memberEmail", memberEmail);
+		
+		try {
+			int result = groupService.alertComment(map);
+			if(result>0) {
+				log.info("댓글 신고 성공");
+			}
+		}catch(Exception e) {
+			log.error("댓글 신고 오류",e);
+		}
+		
+		log.info("map={}",map);
+		
 	}
 }
