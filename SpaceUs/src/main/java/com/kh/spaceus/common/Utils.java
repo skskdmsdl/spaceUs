@@ -48,7 +48,7 @@ public class Utils {
 		while(pageNo <= pageEnd && pageNo <= totalPage ) {
 			//현재페이지인 경우
 			if(pageNo == cPage) {
-				pageBar += "<span class='cPage'>"+pageNo+"</span>";
+				pageBar += "<span class='cPage align-self-center'>"+pageNo+"</span>";
 			}else {
 				pageBar += "<a class='page-link' href='"+url+"cPage="+pageNo+"'>"+pageNo+"</a>";
 			}

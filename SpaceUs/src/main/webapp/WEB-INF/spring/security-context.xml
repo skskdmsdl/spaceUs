@@ -27,11 +27,11 @@
 	
 		<intercept-url pattern="/**" access="permitAll"/>		
 		
-		<!-- 시큐리티 로그인 -->
+		<!-- 시큐리티 로그인 
+		default-target-url="/member/memberLogin.do -->
 		 <form-login
 			login-page="/member/memberLoginForm.do"
 			login-processing-url="/member/memberLogin.do"
-			default-target-url="/member/memberLogin.do"
 			username-parameter="memberEmail"
 			password-parameter="password"
 			authentication-failure-forward-url="/member/memberLoginFailure.do"

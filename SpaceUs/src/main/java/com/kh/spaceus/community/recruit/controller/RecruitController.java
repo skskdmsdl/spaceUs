@@ -56,6 +56,7 @@ public class RecruitController {
 		List<Recruit> list = recruitService.selectRecruitList(limit, offset);
 		log.debug("list = {}", list);
 		
+		
 		//전체컨텐츠수 구하기
 		int totalContents = recruitService.selectRecruitTotalContents(); 
 		String url = request.getRequestURI() + "?";
@@ -114,9 +115,11 @@ public class RecruitController {
 			
 			Recruit recruit = recruitService.selectOneRecruit(no);
 			List<RecruitComment> commentList = recruitService.selectCommentList(no);
+			int commentTotal = recruitService.selectCommentTotalContents(no);
 			log.debug("recruit = {}", recruit);
 			model.addAttribute("recruit", recruit);
 			model.addAttribute("commentList", commentList);
+			model.addAttribute("commentTotal", commentTotal);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -254,11 +257,11 @@ public class RecruitController {
 	//대댓글 등록
 	@GetMapping("/insertReply.do")
 	public ModelAndView insertReply(ModelAndView mav,
-			@RequestParam("recruitNo") String recruitNo,
-			@RequestParam("email") String email,
-			@RequestParam("secret") int secret,
-			@RequestParam("content") String content,
-			@RequestParam("commentRef") String commentRef) {
+									@RequestParam("recruitNo") String recruitNo,
+									@RequestParam("email") String email,
+									@RequestParam("secret") int secret,
+									@RequestParam("content") String content,
+									@RequestParam("commentRef") String commentRef) {
 		
 		Member member = memberService.selectOneMember(email);
 		
@@ -272,12 +275,39 @@ public class RecruitController {
 		
 		int result = recruitService.insertComment(comment);
 		
-		mav.addObject("comment", comment);
 		mav.setViewName("jsonView"); // /WEB-INF/views/jsonView.jsp
 		
 		return mav;
 	}
 	
+	//댓글 수정
+	@GetMapping("/updateComment.do")
+	public ModelAndView updateComment(ModelAndView mav,
+									  @RequestParam("content") String content,
+									  @RequestParam("commentNo") String commentNo) {
+		
+		RecruitComment comment = new RecruitComment();
+		comment.setContent(content);
+		comment.setNo(commentNo);
+		
+		int result = recruitService.updateComment(comment);
+		
+		mav.setViewName("jsonView"); // /WEB-INF/views/jsonView.jsp
+		
+		return mav;
+	}
+	
+	//댓글 삭제
+	@GetMapping("/deleteComment.do")
+	public ModelAndView deleteComment(ModelAndView mav,
+									  @RequestParam("commentNo") String commentNo) {
+		
+		int result = recruitService.deleteComment(commentNo);
+		
+		mav.setViewName("jsonView"); // /WEB-INF/views/jsonView.jsp
+		
+		return mav;
+	}
 	
 	
 	

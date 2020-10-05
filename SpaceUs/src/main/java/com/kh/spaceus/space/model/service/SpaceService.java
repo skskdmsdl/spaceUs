@@ -14,7 +14,6 @@ public interface SpaceService {
 
 	int insertHashTag(String hashTag);
 
-
 	Space selectOneSpace(String spaceNo);
 
 	Space selectOneSpace(int businessNo);
@@ -32,6 +31,12 @@ public interface SpaceService {
 	List<Qna> selectQuestionList(String spaceNo, int limit, int offset);
 
 	int selectQuestionTotalContents(String spaceNo);
+
+	Space selectOneSpaceNo(String email);
+
+	int updateReviewComment(Review review);
+
+	List<Review> selectReviewComment(String spaceNo, int limit, int offset);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

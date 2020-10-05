@@ -34,4 +34,14 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 		return sqlSession.selectOne("exhibition.selectOne", exNo);
 	}
 
+	@Override
+	public List<Exhibition> selectByTag(String tag) {
+		return sqlSession.selectList("exhibition.selectByTag", tag);
+	}
+
+	@Override
+	public Exhibition selectOneByTag(String tag) {
+		return sqlSession.selectOne("exhibition.selectOneByTag", tag);
+	}
+
 }

@@ -75,20 +75,18 @@ public class SpaceController {
 						  	  value = "cPage") int cPage,
 							  HttpServletRequest request) {
 
-		//log.debug("spaceNo= {}",spaceNo);
 		Space space = spaceService.selectOneSpace(spaceNo);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
 		
 		
 		
 		//리뷰 한 페이지당 개수 제한
-		final int limit = 5; //사용용도는 numPerPage와 똑같음
+		final int limit = 10; //사용용도는 numPerPage와 똑같음
 		int offset = (cPage - 1) * limit;
 		List<Review> review = spaceService.selectListReview(spaceNo, limit, offset);
 		
 		//전체리뷰수 구하기
 		int reviewTotal = spaceService.selectReviewTotalContents(spaceNo);
-		
 		//별점조회
 		Star star = spaceService.selectStar();
 		star.setSumStar(star.getStar1()+star.getStar2()+star.getStar3()+star.getStar4()+star.getStar5());

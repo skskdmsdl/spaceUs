@@ -80,6 +80,21 @@ public class RecruitServiceImpl implements RecruitService{
 		return recruitDAO.selectCommentList(no);
 	}
 
+	@Override
+	public int updateComment(RecruitComment comment) {
+		return recruitDAO.updateComment(comment);
+	}
+
+	@Override
+	public int deleteComment(String commentNo) {
+		return recruitDAO.deleteComment(commentNo);
+	}
+
+	@Override
+	public int selectCommentTotalContents(String no) {
+		return recruitDAO.selectCommentTotalContents(no);
+	}
+
 
 
 	

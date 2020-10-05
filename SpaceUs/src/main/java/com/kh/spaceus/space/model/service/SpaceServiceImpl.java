@@ -88,6 +88,22 @@ public class SpaceServiceImpl implements SpaceService{
 		return spaceDAO.selectStar();
 	}
 
+
+	@Override
+	public Space selectOneSpaceNo(String email) {
+		return spaceDAO.selectOneSpaceNo(email);
+	}
+
+	@Override
+	public int updateReviewComment(Review review) {
+		return spaceDAO.updateReviewComment(review);
+	}
+
+	@Override
+	public List<Review> selectReviewComment(String spaceNo, int limit, int offset) {
+		return spaceDAO.selectReviewComment(spaceNo, limit, offset);
+	}
+	
 	@Override
 	public List<Qna> selectQuestionList(String spaceNo, int limit, int offset) {
 		return spaceDAO.selectQuestionList(spaceNo, limit, offset);

@@ -34,7 +34,7 @@ public class SpaceDAOImpl implements SpaceDAO{
 
 	@Override
 	public Space selectOneSpace(String spaceNo) {
-		return sqlSession.selectOne("space.selectOneSpaceNo", spaceNo);
+		return sqlSession.selectOne("space.selectOneSpaceNum", spaceNo);
 	}
 	
 	@Override
@@ -82,6 +82,22 @@ public class SpaceDAOImpl implements SpaceDAO{
 	@Override
 	public int selectQuestionTotalContents(String spaceNo) {
 		return sqlSession.selectOne("qna.selectQuestionTotalContents", spaceNo);
+	}
+
+	@Override
+	public Space selectOneSpaceNo(String email) {
+		return sqlSession.selectOne("space.selectOneSpaceNo", email);
+	}
+
+	@Override
+	public int updateReviewComment(Review review) {
+		return sqlSession.update("space.updateReviewComment", review);
+	}
+
+	@Override
+	public List<Review> selectReviewComment(String spaceNo, int limit, int offset) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("space.selectReviewComment", spaceNo, rowBounds);
 	}
 
 	/*@Override

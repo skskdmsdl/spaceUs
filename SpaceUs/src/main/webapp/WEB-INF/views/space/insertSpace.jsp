@@ -409,8 +409,8 @@ $("#tags").on("click", function(){
 </script>
 <script>
 //사업자 등록정보 조회(중복조회)
-$("#businessNo").keyup(function(){
-	if(!/[0-9]{10}$/.test($(this).val())){
+$("#businessNo").blur(function(){
+	if(!/^[0-9]{10}$/.test($(this).val())){
 		$("#duplicate").hide();
 		$("#ok").hide();
 		$("#error").show();
