@@ -86,6 +86,16 @@ public class SpaceServiceImpl implements SpaceService{
 	public Star selectStar() {
 		return spaceDAO.selectStar();
 	}
+
+	@Override
+	public Space selectOneSpaceNo(String email) {
+		return spaceDAO.selectOneSpaceNo(email);
+	}
+
+	@Override
+	public int updateReviewComment(Review review) {
+		return spaceDAO.updateReviewComment(review);
+	}
 	
 	
 	

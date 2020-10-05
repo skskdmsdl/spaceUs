@@ -13,7 +13,6 @@ public interface SpaceService {
 
 	int insertHashTag(String hashTag);
 
-
 	Space selectOneSpace(String spaceNo);
 
 	Space selectOneSpace(int businessNo);
@@ -27,6 +26,10 @@ public interface SpaceService {
 	int selectReviewTotalContents(String spaceNo);
 
 	Star selectStar();
+
+	Space selectOneSpaceNo(String email);
+
+	int updateReviewComment(Review review);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

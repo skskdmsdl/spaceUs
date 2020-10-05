@@ -34,5 +34,11 @@ public interface RecruitDAO {
 
 	List<RecruitComment> selectCommentList(String no);
 
+	int updateComment(RecruitComment comment);
+
+	int deleteComment(String commentNo);
+
+	int selectCommentTotalContents(String no);
+
 
 }

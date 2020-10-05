@@ -84,6 +84,21 @@ public class RecruitDAOImpl implements RecruitDAO{
 		return sqlSession.selectList("recruit.selectCommentList", no);
 	}
 
+	@Override
+	public int updateComment(RecruitComment comment) {
+		return sqlSession.update("recruit.updateComment", comment);
+	}
+
+	@Override
+	public int deleteComment(String commentNo) {
+		return sqlSession.update("recruit.deleteComment", commentNo);
+	}
+
+	@Override
+	public int selectCommentTotalContents(String no) {
+		return sqlSession.selectOne("recruit.selectCommentTotalContents", no);
+	}
+
 
 
 

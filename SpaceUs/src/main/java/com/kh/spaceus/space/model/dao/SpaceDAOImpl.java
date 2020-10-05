@@ -33,7 +33,7 @@ public class SpaceDAOImpl implements SpaceDAO{
 
 	@Override
 	public Space selectOneSpace(String spaceNo) {
-		return sqlSession.selectOne("space.selectOneSpaceNo", spaceNo);
+		return sqlSession.selectOne("space.selectOneSpaceNum", spaceNo);
 	}
 	
 	@Override
@@ -70,6 +70,16 @@ public class SpaceDAOImpl implements SpaceDAO{
 	@Override
 	public Star selectStar() {
 		return sqlSession.selectOne("space.selectStar");
+	}
+
+	@Override
+	public Space selectOneSpaceNo(String email) {
+		return sqlSession.selectOne("space.selectOneSpaceNo", email);
+	}
+
+	@Override
+	public int updateReviewComment(Review review) {
+		return sqlSession.update("space.updateReviewComment", review);
 	}
 
 	/*@Override

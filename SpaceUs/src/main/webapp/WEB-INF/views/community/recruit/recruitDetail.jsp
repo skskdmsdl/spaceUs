@@ -146,10 +146,10 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                          <div class="m-5">
                          <div class="mb-5">${recruit.reportCnt >=10 ? "게시글이 비공개 처리 되었습니다." : recruit.content}</div>
                          
-                         
+                         <!-- 댓글 -->
                          <div id="commentBox" style="background-color: #fafafa; border: 1px solid #edeceb; padding-bottom: 50px; ">
                          <div class="pl-5 pr-5 pt-4">
-                         	<p><i class="fa fa-comment mr-1"></i>댓글 0개</p>
+                         	<p><i class="fa fa-comment mr-1"></i>댓글 ${ commentTotal }개</p>
                          	<div class="form-check" style="display: block;">
 								 <input class="form-check-input mt-2" type="checkbox" name="secret" id="secret" value="secret">
 								 <label class="form-check-label" for="secret" style="font-size: 14px;">비밀글</label>
@@ -178,11 +178,12 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                     			 <ul class="pull-left commentMenu hide">
 	                                    			 <c:choose>
 		                                    			 <c:when test="${loginMember != list.email || loginMember == null}">
-														    <li><i class="fa fa-flag"></i> &nbsp;신고</li>
+														    <li class="commentReport"><i class="fa fa-flag"></i> &nbsp;신고</li>
 		                                    			 </c:when>
 		                                    			 <c:when test="${loginMember == list.email}">
-														    <li style="padding: 5px 25px">수정</li>
-														    <li style="padding: 5px 25px">삭제</li>
+		                                    			 	<input type="hidden" name="commentNo" value="${list.no}" />
+														    <li style="padding: 5px 25px" class="commentModify">수정</li>
+														    <li style="padding: 5px 25px" class="commentDelete">삭제</li>
 		                                    			 </c:when>
 	                                    			 </c:choose>
 												  </ul>
@@ -191,7 +192,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                    	</sec:authorize>
                                	</tr>
                                 <c:if test="${list.secret == 0 || loginMember eq list.email || loginMember eq recruit.email}">
-                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${list.content}</div>
+                                	<div style="border-bottom : .5px solid #d0d0d0;" class="mb-3">${list.content}</div>
+                         			<div class="modify${list.no} mb-3 hide">
+                         				<input type="hidden" name="commentRef" value="${list.no}" />
+			             				<input class="modifyCon" type="text" style=" border: none;border-bottom: 1px solid #d0d0d0; background-color: #efefef; width:85%; color:#666;" value="${list.content}"/>
+			                       		<button type="button" class="btn btn-secondary ml-4 commentModifyBtn">수정</button>
+			                       		<button type="button" class="btn btn-light commentModifyClose">X</button>
+		             				</div>
                                 </c:if>
                                 <c:if test="${ list.secret == 1 && loginMember != list.email && loginMember != recruit.email}">
                          			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글입니다</div>
@@ -223,11 +230,12 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                     			 <ul class="pull-left commentMenu hide">
 	                                    			 <c:choose>
 		                                    			 <c:when test="${loginMember != list.email || loginMember == null}">
-														    <li><i class="fa fa-flag"></i> &nbsp;신고</li>
+														    <li class="commentReport"><i class="fa fa-flag"></i> &nbsp;신고</li>
 		                                    			 </c:when>
 		                                    			 <c:when test="${loginMember == list.email}">
-														    <li style="padding: 5px 25px">수정</li>
-														    <li style="padding: 5px 25px">삭제</li>
+		                                    			 	<input type="hidden" name="commentNo" value="${list.no}" />
+														    <li style="padding: 5px 25px" class="commentModify">수정</li>
+														    <li style="padding: 5px 25px" class="commentDelete">삭제</li>
 		                                    			 </c:when>
 	                                    			 </c:choose>
 												  </ul>
@@ -237,10 +245,16 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                    
                                 	</tr>
                                 	<c:if test="${list.secret == 0 || loginMember eq list.email || loginMember eq recruit.email}">
-	                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${list.content}</div>
+	                         			<div style="border-bottom : .5px solid #d0d0d0; ">${list.content}</div>
+	                         			<div class="modify${list.no} hide">
+	                         				<input type="hidden" name="commentRef" value="${list.no}" />
+				             				<input class="modifyCon" type="text" style=" border: none;border-bottom: 1px solid #d0d0d0; background-color: #efefef; width:85%; color:#666;" value="${list.content}"/>
+				                       		<button type="button" class="btn btn-secondary ml-4 commentModifyBtn">수정</button>
+				                       		<button type="button" class="btn btn-light commentModifyClose">X</button>
+			             				</div>
                                 	</c:if>
                                 	<c:if test="${list.secret == 1 && loginMember != list.email && loginMember != recruit.email }">
-	                         			<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px; color: #9e9e9e;">비밀 댓글 입니다</div>
+	                         			<div style="border-bottom : .5px solid #d0d0d0; color: #9e9e9e;">비밀 댓글 입니다</div>
                                 	</c:if>
 	                         	</div>
 	                         	
@@ -248,8 +262,8 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                         	</c:forEach>		                         	
                          		<!-- 댓글보기끝-->
                          		</div>
-                       <!-- 댓글 끝 -->
 	                           </div>
+                       <!-- 댓글 끝 -->
 	                         </div>
                          </div>
                          </div>
@@ -383,8 +397,55 @@ $(".replyBtn").click(function(){
 		}
 	}); 
 });
-
-
+//댓글 수정
+$(".commentModify").click(function(){
+	let commentNo = ".modify" + $(this).siblings("input").val();
+	$(commentNo).siblings('div').addClass("hide");
+	$(commentNo).removeClass("hide");
+	
+});
+$(".commentModifyClose").click(function(){
+	$(this).parent('div').siblings('div').removeClass("hide");
+	$(this).parent('div').addClass("hide");
+});
+$(".commentModifyBtn").click(function(){
+	let content = $(this).siblings('.modifyCon').val();
+	let commentNo = $(this).siblings("input").val();
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/community/recruit/updateComment.do",
+		data : {
+			content : content,
+			commentNo : commentNo
+		},
+		dataType : "json",
+		success : function(data){
+			alert("댓글이 수정되었습니다!");
+			location.reload();
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	}); 
+});
+//댓글 삭제
+$(".commentDelete").click(function(){
+	if(!confirm("댓글을 삭제하시겠습니까?")) return;
+	let commentNo = $(this).siblings("input").val();
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/community/recruit/deleteComment.do",
+		data : {
+			commentNo : commentNo
+		},
+		dataType : "json",
+		success : function(data){
+			alert("댓글이 삭제되었습니다!");
+			location.reload();
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	}); 
+});
 
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
