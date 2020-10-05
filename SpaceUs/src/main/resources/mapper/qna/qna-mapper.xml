@@ -17,4 +17,34 @@
 		)
 		
 	</insert>
+	
+	<select id="selectQuestionList" resultMap="qnaMap">
+		select
+			*
+		from 
+			qna
+		where
+			space_no=#{spaceNo}
+		order by
+			qna_date desc
+	</select>
+	
+	<select id="selectQuestionTotalContents" resultType="_int">
+		select
+			count(*)
+		from qna
+	</select>
+	
+		
+	<resultMap type="qna" id="qnaMap">
+		<id column="qna_no" property="qnaNo" />
+		<result column="space_no" property="spaceNo" />
+		<result column="member_email" property="email" />
+		<result column="nickname" property="name" />
+		<result column="qna_pw" property="password" />
+		<result column="qna_content" property="content" />
+		<result column="qna_date" property="date" />
+		<result column="qna_status" property="status" />
+	</resultMap>
+	
 </mapper>

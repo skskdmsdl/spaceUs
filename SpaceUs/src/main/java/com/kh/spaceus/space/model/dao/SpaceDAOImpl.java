@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
@@ -70,6 +71,17 @@ public class SpaceDAOImpl implements SpaceDAO{
 	@Override
 	public Star selectStar() {
 		return sqlSession.selectOne("space.selectStar");
+	}
+
+	@Override
+	public List<Qna> selectQuestionList(String spaceNo, int limit, int offset) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("qna.selectQuestionList", spaceNo, rowBounds);
+	}
+
+	@Override
+	public int selectQuestionTotalContents(String spaceNo) {
+		return sqlSession.selectOne("qna.selectQuestionTotalContents", spaceNo);
 	}
 
 	/*@Override

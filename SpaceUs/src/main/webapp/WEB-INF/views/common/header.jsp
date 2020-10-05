@@ -224,7 +224,7 @@
 		         	 💚  위시리스트
 		        </a>
 	      	 </div>
-	      	 <!-- admin 권한 -->
+<%-- 	      	 <!-- admin 권한 -->
 	      	 <sec:authorize access="hasRole('ROLE_ADMIN')">
 	      	 	<div class="col-sm-10 mb-2">
 		        <a href="${pageContext.request.contextPath }/admin/memberManage.do">
@@ -232,7 +232,7 @@
 		        </a>
 	      	    </div>
 	      	 </sec:authorize>
-	      	 <!-- admin 권한 끝 -->
+	      	 <!-- admin 권한 끝 --> --%>
 	      </div>
 	      <div class="modal-footer">
 	      	 <form:form action="${ pageContext.request.contextPath }/member/memberLogout.do">

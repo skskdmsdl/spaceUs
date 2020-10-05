@@ -2,6 +2,7 @@ package com.kh.spaceus.space.model.service;
 
 import java.util.List;
 
+import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Star;
@@ -27,6 +28,10 @@ public interface SpaceService {
 	int selectReviewTotalContents(String spaceNo);
 
 	Star selectStar();
+
+	List<Qna> selectQuestionList(String spaceNo, int limit, int offset);
+
+	int selectQuestionTotalContents(String spaceNo);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

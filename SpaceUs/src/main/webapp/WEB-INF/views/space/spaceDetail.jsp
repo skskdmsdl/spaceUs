@@ -284,23 +284,24 @@ function urlcopy(){
 <div class="tab-pane fade" id="detail-qna" role="tabpanel" aria-labelledby="detail-qna-tab">
      <div class="row">
    		<div class="col-md-10">
-   			<h3 class="head">5개의 Q&A</h3>
-					   			
+   			<h3 class="head fa fa-pencil">${qnaTotal }개의 질문글</h3>
+   				
+			 	<!-- 질문글 등록 모달창 -->
 				<sec:authorize access="hasAnyRole('USER','HOST','ADMIN')"> 
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#qnaModal" data-whatever="@fat">문의하기</button>
-				 
-				
+				<!-- 질문글쓰기 버튼 -->
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#qnaModal" data-whatever="@fat" style="float: right; margin: 10px; letter-spacing:1px; font-weight:bold; font-size:1em;">질문글 작성</button>
+								
 				<div class="modal fade" id="qnaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  <div class="modal-dialog" role="document">
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalLabel" style="letter-spacing:2px;">문의하기</h5>
+				        <h5 class="modal-title  fa fa-pencil" id="exampleModalLabel" style="letter-spacing:1px; font-weight:bold;">질문글 작성</h5>
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				          <span aria-hidden="true">&times;</span>
 				        </button>
 				      </div>
 				      <div class="modal-body">
-						<form id="ask-question">
+				      	<form id="ask-question">
 				      
 				          <div class="form-group">
 				            <label for="recipient-name" class="col-form-label">글쓴이</label>
@@ -333,44 +334,60 @@ function urlcopy(){
 				  </div>
 				</div>
 				</sec:authorize>
-				<div class="review d-flex">
-   				
-		   		<div class="desc">
+				<!-- 질문글 등록 모달창 끝-->
+				
+		 	<!-- 질문글 시작 -->
+		 	<c:if test="${ not empty qlist }">
+			<c:forEach items="${ qlist }" var="qna" varStatus="vs">
+			<div class="review d-flex">
+		   		<div class="desc" style="background-color:#f8f9fa; padding:5px;">
 		   			<h4>
-		   				<span class="text-left">질문자 닉네임</span>
-		   				<span class="text-right">14 March 2018</span>
+		   			<span class="text-left badge">Q.</span>
 		   			</h4>
-		   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-		   		</div>
-		   
-		   	</div>
-   			<div class="review d-flex" style="padding: 15px;">
-		   		<div class="desc" style="background-color:#f7f7f7; padding:5px">
 		   			<h4>
-		   				<span class="text-left"><i class="mdi mdi-subdirectory-arrow-right"></i>&nbsp;방 이름</span>
-		   				<span class="text-right">14 March 2018</span>
+		   				<span class="text-left badge">${ qna.name}</span>
+		   				<span class="text-right"><fmt:formatDate value="${ qna.date}" pattern="yyyy-MM-dd"/></span>
 		   			</h4>
-		   			<p style="padding-left:15px">답변내용답변내용답변내용답변내용답변내용답변내용</p>
+		   			 <p style="padding-left:20px; text-align:justify;">${qna.content }</p>
+		   			<sec:authorize access="hasRole('HOST')">
+   					<sec:authentication property="principal.username" var="loginMember"/>
+   					<c:if test="${loginMember != null && loginMember eq space.memberEmail }">
+   					<h4 style="text-align: right;">
+		   				<span style="background: #F0F0F0; padding: 4px 10px; width: 100px; height: 24.8px; margin: 3px;">
+		   					<button class="fa fa-mail-reply" style="color:#20c997; border: none;" onclick="answer();">답변하기</button>
+   						</span>   						
+	   				</h4>
+	   				<form action="${pageContext.request.contextPath }/qna/answer.do?qnaNo=${qnaNo}">
+	   				<textarea class="answer-question" name="" rows="4" cols="100"></textarea>
+	   				</form>
+	   				</c:if>
+	   				</sec:authorize>
 		   		</div>
-		   	</div>
-		   	<div class="review d-flex">
-		   		<div class="desc">
-		   			<h4>
-		   				<span class="text-left">Jacob Webb</span>
-		   				<span class="text-right">14 March 2018</span>
-		   			</h4>
-		   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-		   		</div>
-		   	</div>
-		   	<div class="review d-flex">
-		   		<div class="desc">
-		   			<h4>
-		   				<span class="text-left">Jacob Webb</span>
-		   				<span class="text-right">14 March 2018</span>
-		   			</h4>
-		   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-		   		</div>
-		   	</div>
+		   		
+		   	</div> 
+		   	
+		   	<c:choose>
+				<c:when test="${ item.answer != null }">
+	   			<div class="review d-flex" style="padding: 10px;">
+			   		<div class="desc" style="background-color:#f7f7f7; padding:5px">
+			   			<h4>
+			   				<span class="text-left"><i class="mdi mdi-subdirectory-arrow-right"></i>A. 호스트님의 답글</span>
+			   			</h4>
+			   			<p style="padding-left:15px">${ item.answer}</p>
+			   		</div>
+			   	</div>
+			   	<hr />
+			   	</c:when>
+			   	<c:otherwise>
+			   	</c:otherwise>
+			</c:choose>   	
+			</c:forEach>
+		   	</c:if>
+   		</div>
+		   	
+<%-- 			<nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 45%; margin-top:50px;">
+			<ul class="pagination" style="border:0; margin-right:10px;"> ${qPageBar}</ul>
+			</nav> --%>
    		</div>
    		</div>
    		</div>
@@ -381,7 +398,7 @@ function urlcopy(){
      <div class="row">
    		<div class="col-md-7">
    		<div class="row">
-   			<h3 class="head ml-4">${ reviewTotal }개의 리뷰</h3>
+   			<h3 class="head ml-4 icon-comments">${ reviewTotal }개의 리뷰</h3>
    			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 			  <label class="btn btn-secondary active reviewLabel" >
 			    <a id="option1"><input type="radio" name="options" autocomplete="off" checked>포토리뷰 OFF</a>
@@ -444,7 +461,7 @@ function urlcopy(){
 	   					<sec:authorize access="hasAnyRole('USER','HOST','ADMIN')">
 	   					<sec:authentication property="principal.username" var="loginMember"/>
 	   					<c:if test="${loginMember != null && loginMember eq space.memberEmail }">
-	   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+	   					<span class="text-right"><a href="#" class="reply"><i class="fa fa-reply"></i></a></span>
 	   					</c:if>
 	   					</sec:authorize>
 		   			</p>
@@ -603,6 +620,12 @@ function urlcopy(){
 
     <!-- 추천시스템 끝 -->
 <script>
+function answer(){
+	alert();
+	$(answer-input).show();
+	
+}
+
 function ask(){
 	$("#ask-question").attr("action", 
 	"${ pageContext.request.contextPath}/qna/insertQna.do")

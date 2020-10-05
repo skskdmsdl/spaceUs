@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spaceus.common.Utils;
+import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.service.SpaceService;
@@ -78,6 +79,8 @@ public class SpaceController {
 		Space space = spaceService.selectOneSpace(spaceNo);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
 		
+		
+		
 		//리뷰 한 페이지당 개수 제한
 		final int limit = 5; //사용용도는 numPerPage와 똑같음
 		int offset = (cPage - 1) * limit;
@@ -89,8 +92,20 @@ public class SpaceController {
 		//별점조회
 		Star star = spaceService.selectStar();
 		star.setSumStar(star.getStar1()+star.getStar2()+star.getStar3()+star.getStar4()+star.getStar5());
-		String url = request.getRequestURI() + "?";
+		String url = request.getRequestURI() + "?spaceNo=" + spaceNo;
 		String pageBar = Utils.getPageBarHtml(cPage, limit, reviewTotal, url);
+		
+		int qnaTotal = spaceService.selectQuestionTotalContents(spaceNo);
+		
+		//qna 조회
+		List<Qna> qlist = spaceService.selectQuestionList(spaceNo, limit, offset);
+		String qPageBar = Utils.getPageBarHtml(cPage, limit, qnaTotal, url);
+		
+		
+		model.addAttribute("qlist", qlist);
+		model.addAttribute("qPageBar", qPageBar);
+		model.addAttribute("qnaTotal", qnaTotal);
+		
 		
 		model.addAttribute("space", space);
 		model.addAttribute("tag", tag);
@@ -100,7 +115,7 @@ public class SpaceController {
 		model.addAttribute("reviewTotal", reviewTotal);
 		model.addAttribute("star", star);
 		model.addAttribute("pageBar", pageBar);
-
+		
 		return "space/spaceDetail";
 	}
 	
@@ -133,6 +148,7 @@ public class SpaceController {
 		
 		return mav;
 	}
+	
 	//사업자등록증 조회
 	@GetMapping("/checkIdDuplicate.do")
     public ModelAndView checkIdDuplicate1(ModelAndView mav,
