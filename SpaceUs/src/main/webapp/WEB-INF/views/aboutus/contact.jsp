@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 	  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 	  crossorigin="anonymous">
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=455b391796eaae1861145a078007af70&libraries=services"></script>
 
 <!-- test -->
 <!-- 사용자작성 css -->
@@ -112,10 +115,47 @@ input[type="text"] {
     </div>
   </section>
   <!-- 지도 -->
-      <div class="row justify-content-center" style="margin-top: -100px; margin-bottom:100px">
+      <div class="row justify-content-center" style="margin-top: -130px; margin-bottom:100px">
       	<div class="col-md-7">
-      		<div id="map" class="bg-white"></div>
+      		<div id="kakaomap" style="width:600px;height:500px; margin: 0 auto;"></div>
       	</div>
       </div>
 <!-- 컨텐츠 끝 -->
+<script>
+	var mapContainer = document.getElementById('kakaomap'), // 지도를 표시할 div 
+	    mapOption = {
+	        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };  
+	
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+	var geocoder = new kakao.maps.services.Geocoder();
+
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch('서울시 강남구 테헤란로 10길 9', function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="padding:5px;">&emsp;&emsp;SpaceUs</div>'
+	        });
+	        infowindow.open(map, marker);
+
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    }});    
+
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/> 

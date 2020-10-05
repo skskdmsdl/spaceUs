@@ -260,16 +260,18 @@ create sequence seq_space_tag_no;
 
 select * from space_tag;
 
-select 
-    space_no, space_name, tag_name
-    from (select
-    *
+select
+  *
 from
-    space
-    join
-        space_tag
-    using(space_no))
-    join tag using(tag_no);
+  (
+    select
+      *
+    from
+      space
+      join space_tag using(space_no)
+  )
+  join tag using(tag_no)
+  where tag_name = '힐링';
 
 
 
@@ -527,6 +529,21 @@ create sequence seq_ex;
 
 select * from exhibition;
 commit;
+
+select
+	  *
+	from
+	  (
+	    select
+	      *
+	    from
+	      space
+	      join space_tag using(space_no)
+	  )
+	  join tag using(tag_no)
+	where
+	  tag_name = '힐링';
+
 
 
 -----------------------------
