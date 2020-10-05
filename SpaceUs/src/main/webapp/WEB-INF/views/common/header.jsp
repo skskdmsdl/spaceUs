@@ -188,7 +188,7 @@
 	  </div>
 	</div>
      </sec:authorize>
-     <sec:authorize access="hasAnyRole('USER', 'HOST')">
+     <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_HOST')">
 	<div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-auto" role="document">
 	    <div class="modal-content"  style="background:#625c55; border-radius: 1.3em; left:36rem; top:3rem; width:55%; ">

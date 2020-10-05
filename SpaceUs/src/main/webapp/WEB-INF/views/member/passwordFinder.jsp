@@ -51,8 +51,7 @@
 				
 			<div class="text-left p-b-20" style="width:99%">
 				<p class="txt1">
-					가입 시 사용한 이메일 주소를 입력해주시면 임시비밀번호를 메일로 보내드립니다. <br />
-					네이버, 구글, 페이스북으로 가입하신 경우 비밀번호 찾기가 불가합니다.
+					가입 시 사용한 이메일 주소를 입력해주시면 임시비밀번호를 메일로 보내드립니다.
 				</p><br />
 			</div>
 			<div class="container-login100-form-btn">
