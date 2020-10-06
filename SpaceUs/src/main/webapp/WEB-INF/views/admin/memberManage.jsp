@@ -100,13 +100,11 @@ div#search-userName {
             </div>
             <!-- End Sidebar scroll-->
         </aside>
-        <!-- 목록 끝 -->
+        <!-- 왼쪽 목록 끝 -->
 
         <div class="page-wrapper">
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Bread crumb and right sidebar toggle -->
-                <!-- ============================================================== -->
+               
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
                         <h4 class="text-themecolor ml-5">SpaceUs 관리</h4>
@@ -128,26 +126,27 @@ div#search-userName {
 		                    <!-- 입력창  시작-->
 		                    <div class="search-container" style="display: inline-block;">
 								<select id="searchType">
-									<option value="userId">ID</option>
-									<option value="userName">NAME</option>
+									<option value="userId">EMAIL</option>
+									<option value="userName">NICKNAME</option>
 								</select>
 								<div id="search-userId">
-									<form <%-- action="<%=request.getContextPath()%>/admin/userFinder" --%>>
+									<form  action="${pageContext.request.contextPath}/admin/findUserList.do">
 										<input type="hidden" class="textbox" name="searchType"
 											value="userId"> 
 										<input type="text" class="textbox"
-											name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요"
-					                	   		<%-- value="<%="userId".equals(searchType) ? searchKeyword : ""%>" --%> />
+											   name="searchKeyword" size="25" placeholder="검색할 이메일을 입력하세요"
+											   
+					                	/>
 										<button type="submit" class="search-btn button">검색</button>
 									</form>
 								</div>
 								<div id="search-userName">
-									<form <%-- action="<%=request.getContextPath()%>/admin/userFinder" --%>>
+									<form action="${pageContext.request.contextPath}/admin/findUserList.do">
 										<input type="hidden" class="textbox" name="searchType"
 											value="userName"> 
 										<input type="search" class="textbox"
-											name="searchKeyword" size="25" placeholder="검색할 이름을 입력하세요."
-											<%-- value="<%="userName".equals(searchType) ? searchKeyword : ""%>" --%> />
+											name="searchKeyword" size="25" placeholder="검색할 닉네임을 입력하세요."
+											 />
 										<button type="submit" class="search-btn">검색</button>
 									</form>
 								</div>
@@ -156,11 +155,11 @@ div#search-userName {
 		             
 		                    
 		                    <div class="btn-div" style="display: inline-block; float: right;">
-								<form action="<%=request.getContextPath()%>/admin/userFinder">
+								<form action="<%=request.getContextPath()%>/admin/findUserList.do">
 									<input type="hidden" name="searchType" value="userRole" />
-									<button type="submit" class="btn btn-primary" name="searchKeyword" value="T">전체 보기</button>
-									<button type="submit" class="btn btn-primary" name="searchKeyword" value="U">일반 맴버</button>
-									<button type="submit" class="btn btn-primary" name="searchKeyword" value="P">호스트</button>
+									<button type="submit" class="btn btn-primary" name="searchKeyword" value="total">전체 보기</button>
+									<button type="submit" class="btn btn-primary" name="searchKeyword" value="ROLE_USER">일반 맴버</button>
+									<button type="submit" class="btn btn-primary" name="searchKeyword" value="ROLE_HOST">호스트</button>
 								</form>
 							</div>
 		                    <br />

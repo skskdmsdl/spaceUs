@@ -67,7 +67,7 @@ select * from category;
 -----------------------------
 
 CREATE TABLE space (
-    space_no	varchar2(256)	,
+    space_no	varchar2(256),
     category_no	varchar2(256)	NOT NULL,
     member_email	varchar2(256)	NOT NULL,
     business_license	number	NOT NULL,
@@ -427,6 +427,16 @@ select * from member;
 update group_board set report_cnt = report_cnt +9 where group_board_no = 'G6';
 update group_board set report_cnt = report_cnt +9 where group_board_no = 'G64';
 update group_board set report_cnt = report_cnt +9 where group_board_no = 'G62';
+
+select
+			G.*,
+			(select nickname from member where member_email= G.member_email) nickname,
+			(select count(*) from group_board_comment where group_board_ref = G.group_board_no  ) comment_cnt
+		from
+			group_board G
+		where
+			G.report_cnt < 10
+		order by group_board_date desc, group_board_no desc ;
 
 commit;
 
