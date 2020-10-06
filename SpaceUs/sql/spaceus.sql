@@ -310,7 +310,6 @@ create table qna(
   space_no varchar2(256) not null,
   member_email varchar2(256) not null,
   nickname varchar2(256) not null,
-  qna_pw varchar2(300) not null,
   qna_content varchar2(2000) not null,
   qna_answer varchar2(2000),
   qna_date date default sysdate,
