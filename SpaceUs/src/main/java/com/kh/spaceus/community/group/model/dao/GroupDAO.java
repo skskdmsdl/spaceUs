@@ -49,7 +49,7 @@ public interface GroupDAO {
 
 	int alertComment(Map<String, String> map);
 
-	List<CmtReport> selectReport();
+	List<CmtReport> selectReport(); 
 
 	int updateReportCnt(String groupBoardCommentNo);
 
