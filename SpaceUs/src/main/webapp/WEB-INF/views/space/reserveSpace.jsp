@@ -75,52 +75,51 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 								<th><input type="date" name="revDay" onchange="selectDay(this.value)"></th>
 							</tr>
 						    <tr>
-						      <td>예약 시작시간</td>
+						  <!--     <td>예약 시작시간</td>
 						      <td><select name="" id=""></select></td>
 							</tr>
 							<tr>
 						       <td>예약 종료시간</td>
-						       <td><select name="" id=""></select></td>
+						       <td><select name="" id=""></select></td> -->
 							</tr>
 							<tr>
-								<table class="table table-bordered" style="cursor: pointer;" id="availableTime">
-                                	<tr>
-										<th style="width:16.6%;">00:00 - 01:00</th>	                                
-										<th style="width:16.6%;">01:00 - 02:00</th>	                                
-										<th style="width:16.6%;">02:00 - 03:00</th>	                                
-										<th style="width:16.6%;">03:00 - 04:00</th>	                                
-										<th style="width:16.6%;">04:00 - 05:00</th>	                                
-										<th style="width:16.6%;">05:00 - 06:00</th>	                                
-                                	</tr>
-                                	<tr>
-										<th>06:00 - 07:00</th>	                                
-										<th>07:00 - 08:00</th>	                                
-										<th>08:00 - 09:00</th>	                                
-										<th>09:00 - 10:00</th>	                                
-										<th>10:00 - 11:00</th>	                                
-										<th>11:00 - 12:00</th>	                                
-                                	</tr>
-                                	<tr>
-										<th>12:00 - 13:00</th>	                                
-										<th>13:00 - 14:00</th>	                                
-										<th>14:00 - 15:00</th>	                                
-										<th>15:00 - 16:00</th>	                                
-										<th>16:00 - 17:00</th>	                                
-										<th>17:00 - 18:00</th>	                                
-                                	</tr>
-                                	<tr>
-										<th>18:00 - 19:00</th>	                                
-										<th>19:00 - 20:00</th>	                                
-										<th>20:00 - 21:00</th>	                                
-										<th>21:00 - 22:00</th>	                                
-										<th>22:00 - 23:00</th>	                                
-										<th>23:00 - 24:00</th>	                                
-                                	</tr>
-                                </table>
-							</tr>
-						    <tr>
-						      <td>예약 인원</td>
-						      <td><input type="number" name="" id="" /></td>
+								<th>예약 시간</th>
+								<th>
+									<table class="table table-bordered" style="cursor: pointer;" id="availableTime">
+	                                	<tr>
+											<th id=0 style="width:16.6%;">00:00 - 01:00</th>	                                
+											<th id=1 style="width:16.6%;">01:00 - 02:00</th>	                                
+											<th id=2 style="width:16.6%;">02:00 - 03:00</th>	                                
+											<th id=3 style="width:16.6%;">03:00 - 04:00</th>	                                
+											<th id=4 style="width:16.6%;">04:00 - 05:00</th>	                                
+											<th id=5 style="width:16.6%;">05:00 - 06:00</th>	                                
+	                                	</tr>
+	                                	<tr>
+											<th id=6>06:00 - 07:00</th>	                                
+											<th id=7>07:00 - 08:00</th>	                                
+											<th id=8>08:00 - 09:00</th>	                                
+											<th id=9>09:00 - 10:00</th>	                                
+											<th id=10>10:00 - 11:00</th>	                                
+											<th id=11>11:00 - 12:00</th>	                                
+	                                	</tr>
+	                                	<tr>
+											<th id=12>12:00 - 13:00</th>	                                
+											<th id=13>13:00 - 14:00</th>	                                
+											<th id=14>14:00 - 15:00</th>	                                
+											<th id=15>15:00 - 16:00</th>	                                
+											<th id=16>16:00 - 17:00</th>	                                
+											<th id=17>17:00 - 18:00</th>	                                
+	                                	</tr>
+	                                	<tr>
+											<th id=18>18:00 - 19:00</th>	                                
+											<th id=19>19:00 - 20:00</th>	                                
+											<th id=20>20:00 - 21:00</th>	                                
+											<th id=21>21:00 - 22:00</th>	                                
+											<th id=22>22:00 - 23:00</th>	                                
+											<th id=23>23:00 - 24:00</th>	                                
+	                                	</tr>
+	                                </table>
+                                </th>
 							</tr>
 						</table>
 						<table id="tbl-reserve" class="table table-striped table-hover">
@@ -203,36 +202,65 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 
 <script>
 //예약 날짜 클릭이벤트
+var day=-1;
 function selectDay(val){
-	//alert(val);
 	var week = ['일', '월', '화', '수', '목', '금', '토'];
 
-	var day = week[new Date(val).getDay()];
-	console.log(day);
-	
-	$.ajax({
-		url : "${ pageContext.request.contextPath }/reservation/getRevAvail.do",
-		method: "POST",
-		dataType : "json",
-		data : {
-			"day" : day
-		},
-		success : function(data){
-			//console.log(data);
-			console.log("ajax연결 성공!");
-		},
-		error : function(xhr, status, err){
-			console.log("처리실패", xhr, status, err);
-		}
-	});
-}
+	//날짜 선택
+	day = week[new Date(val).getDay()];
+	console.log($("[name=revDay]").val() + " : " + day);
 
+	//선택한 날짜에 맞춰 가능 날짜 확인
+
+	
+}
+var flag=0;
+var start=-1;
+var end=-1;
 //가능시간 클릭이벤트
 $("#availableTime th").on("click", function(){
-	if($(this).hasClass("bg-primary"))
-    	$(this).removeClass("bg-primary");
-	else
-    	$(this).addClass("bg-primary");
+	//날짜,요일 선택여부
+	if(day==-1){
+		alert("예약 날짜를 먼저 선택해주세요");
+		return;
+	}
+	
+	flag++;
+	//초기화하기
+	if(flag==3){
+		flag=0;
+		//셀 색 지우기
+		start=-1;
+		end=-1;
+		for(var i=0; i<33; i++)
+    		$("#"+i).removeClass("bg-primary");
+		return;
+	};
+	//연속선택
+	if(flag==2){
+		//선택한 셀의 아이디 찾기
+		var end = Number($(this).attr("id"));
+
+		//셀 색 바꾸기
+		if(end == start){
+			$(this).removeClass("bg-primary");
+			return;
+		}
+		if(end<start){
+			var temp = start;
+			start = end;
+			end = temp;
+		}	
+		for(var i=start; i<=end; i++)
+			$("#"+i).addClass("bg-primary");
+		return;
+	};
+
+	//선택한 셀의 아이디 찾기
+	start = Number($(this).attr("id"));
+
+	//셀 색 바꾸기
+    $(this).addClass("bg-primary");
 });
 </script>
 
