@@ -19,6 +19,17 @@ public class AdminDAOImpl implements AdminDAO {
 	public List<ManageMember> selectList() {
 		return session.selectList("admin.selectList");
 	}
+
+	@Override
+	public List<ManageMember> findUserIdList(String searchKeyword) {
+		return session.selectList("admin.findUserIdList", searchKeyword);
+	}
+
+	@Override
+	public List<ManageMember> findUserNameList(String searchKeyword) {
+		return session.selectList("admin.findUserNameList", searchKeyword);
+	}
+	
 	
 	
 }

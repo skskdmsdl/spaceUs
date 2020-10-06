@@ -9,4 +9,8 @@ public interface AdminService {
 
 	List<ManageMember> selectList();
 
+	List<ManageMember> findUserIdList(String searchKeyword);
+
+	List<ManageMember> findUserNameList(String searchKeyword);
+
 }

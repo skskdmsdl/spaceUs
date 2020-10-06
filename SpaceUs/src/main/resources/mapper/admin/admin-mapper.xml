@@ -18,5 +18,33 @@
 	</select>
 	<resultMap type="manageMember" id="memberMap"></resultMap>
 	
+	<!-- user Id로  memberList 출력-->
+	<select id="findUserIdList" resultMap="memberMap">
+		select
+		    M.member_email,
+		    M.nickname,
+		    M.member_phone,
+		    M.member_regdate,
+		    A.authority
+		from 
+		    member M join auth A
+		            on M.member_email = A.member_email
+		where
+			M.member_email = '%' || #{searchKeyword} || '%'
+	</select>
 	
+	<!-- user Name로 memberList 출력 -->
+	<select id="findUserNameList" resultMap="memberMap">
+		select
+		    M.member_email,
+		    M.nickname,
+		    M.member_phone,
+		    M.member_regdate,
+		    A.authority
+		from 
+		    member M join auth A
+		            on M.member_email = A.member_email
+		where
+			M.nickname = '%' || #{searchKeyword} || '%'
+	</select>
 </mapper>

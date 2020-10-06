@@ -33,21 +33,18 @@ public class AdminController {
 	
 	//Id로 입력시 회원목록 조회
 	@RequestMapping("/findUserList.do")
-	public String findIdUserList(Model model, @RequestParam String searchType, @RequestParam String searchKeyword) {
+	public String findUserList(Model model, @RequestParam String searchType, @RequestParam String searchKeyword) {
 		log.info("searchType={}", searchType);
 		log.info("searchKeyword={}",searchKeyword);
 		
 		if(searchType.equals("userId")) {
-			System.out.println("------------userId-----------");
+			List<ManageMember> memberList = adminService.findUserIdList(searchKeyword);
+			log.info("memberList = {}", memberList);
 		}
 		if(searchType.equals("userName")) {
-			System.out.println("------------userName-----------");			
+			List<ManageMember> memberList = adminService.findUserNameList(searchKeyword);						
+			log.info("memberList = {}", memberList);
 		}
-		
-		
-		
-		
-		
 		return "redirect:/admin/memberManage.do";
 	}
 	
