@@ -177,7 +177,7 @@ public class SpaceController {
 	
 	//예약하기버튼
 	@RequestMapping("/reserveSpace.do")
-	public String reserveSpace(Model model,
+	public ModelAndView reserveSpace(Model model,
 							   ModelAndView mav,
 							   @RequestParam("spaceNo") String spaceNo,
 							   @RequestParam("spaceName") String spaceName) {
@@ -188,12 +188,12 @@ public class SpaceController {
 		
 		//spaceNo로 예약가능한 날짜 가져오기
 		List<ReservationAvail> availList = reservationService.selectListAvail(spaceNo);
-		//log.debug("rev={}",rev);
-		
+		System.out.println(availList);
 		model.addAttribute("spaceName", spaceName);
 		mav.addObject("availList",availList);
 		
-		return "space/reserveSpace";
+		mav.setViewName("space/reserveSpace");
+		return mav;
 	}
 	
 	@RequestMapping(value="/searchSpace.do",

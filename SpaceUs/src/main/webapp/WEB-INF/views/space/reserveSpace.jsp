@@ -201,6 +201,18 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
     <!-- 공간 예약 폼 끝-->
 
 <script>
+var avail = new Array();
+$(function(){
+	<c:forEach items="${availList}" var="info">
+		var hour = new Object();
+		hour.day="${info.day}";
+		hour.start="${info.startHour}";
+		hour.end="${info.endHour}";
+		avail.push(hour);
+	</c:forEach>
+
+	//alert("avail="+JSON.stringify(avail));
+});
 //예약 날짜 클릭이벤트
 var day=-1;
 function selectDay(val){
