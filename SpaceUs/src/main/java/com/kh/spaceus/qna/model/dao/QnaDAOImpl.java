@@ -1,5 +1,7 @@
 package com.kh.spaceus.qna.model.dao;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,6 +20,12 @@ public class QnaDAOImpl implements QnaDAO {
 	@Override
 	public int insertQna(Qna qna) {
 		return session.insert("qna.insertQna", qna);
+	}
+
+	@Override
+	public int updateAnswer(String answer, String qnaNo) {
+		HashMap<String, String> qna = new HashMap<String, String>();
+		return session.update("qna.updateAnswer", qna);
 	}
 
 }
