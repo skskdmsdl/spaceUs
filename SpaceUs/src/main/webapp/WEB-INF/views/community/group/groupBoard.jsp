@@ -158,7 +158,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                            			"식당공간 나눔":gb.boardNo=="9"?
 			                            			"소모임 자랑":"기타"}]
 			                            	</span>
-			                            		${gb.groupBoardTitle} &nbsp;&nbsp;[${gb.commentCnt}]ㅇ
+			                            		${gb.groupBoardTitle} &nbsp;&nbsp;[${gb.commentCnt}]
 			                            </td>
 			                            <td class="txt-oflo">${gb.groupBoardDate }</td>
 			                            <td class="txt-oflo">${gb.viewCnt}</td>
