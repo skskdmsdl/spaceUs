@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+
+	<!-- member List 관리  -->
+	<select id="selectList" resultMap="memberMap">
+		select
+		    M.member_email,
+		    M.nickname,
+		    M.member_phone,
+		    M.member_regdate,
+		    A.authority
+		from 
+		    member M join auth A
+		            on M.member_email = A.member_email
+	</select>
+	<resultMap type="manageMember" id="memberMap"></resultMap>
+	
+	
+</mapper>

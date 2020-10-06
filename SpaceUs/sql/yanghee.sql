@@ -21,6 +21,16 @@ commit;
 
 insert into member values('yang@naver.com','김양희','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','90/09/09','20/10/10',0);
 
+select
+    M.member_email,
+    M.nickname,
+    M.member_phone,
+    M.member_regdate,
+    A.authority
+from 
+    member M join auth A
+            on M.member_email = A.member_email;
+
 --권한 컬럼 삭제
 ALTER TABLE member DROP COLUMN authority;
 
@@ -304,10 +314,13 @@ create table recruit (
     constraints ck_header check(header in ('구인', '구직'))
 );
 
+update recruit set report_cnt = report_cnt +7 where recruit_no = 'R21';
+
 create sequence seq_recruit_no;
 
 select * from recruit;
 
+COMMIT;
 -----------------------------
 --------- 구인구직댓글 ----------
 -----------------------------
@@ -409,10 +422,11 @@ insert into group_board values('G'||seq_group_board_no.nextval,'9','honggd@naver
 select * from group_board;
 select * from member;
 
-delete from group_board where member_email = 'honggd@naver.com' ;
-drop sequence seq_group_board_no;
+
 
 update group_board set report_cnt = report_cnt +9 where group_board_no = 'G6';
+update group_board set report_cnt = report_cnt +9 where group_board_no = 'G64';
+update group_board set report_cnt = report_cnt +9 where group_board_no = 'G62';
 
 commit;
 
@@ -444,6 +458,7 @@ delete from group_board_comment where group_board_comment_no = 30;
 
 alter table group_board_comment add(report_cnt number default 0);
 ALTER TABLE group_board_comment DROP column report_cnt;
+update group_board_comment set report_cnt = '0';
 
 select * from group_board_comment;
 select * from member;
@@ -508,6 +523,25 @@ create table blackList (
 
 create sequence seq_blacklist_no;
 select * from blacklist;
+select * from recruit;
+select * from group_board;
+
+delete from blacklist where blackList_no = 'BLACK41';
+
+COMMIT;
+
+select
+    B.blackList_no,
+    G.group_board_title,
+    G.member_email,
+    R.title,
+    R.member_email
+    
+from
+    blacklist B left join group_board G
+            on G.group_board_no = B.report_board_no
+                left join recruit R
+            on R.recruit_no = B.report_board_no;
 
 -----------------------------
 ------- 댓글 신고 -------------
@@ -525,7 +559,7 @@ ALTER TABLE com_report DROP constraints fk_com_report_board_comment_no;
 
 select * from com_report;
 
-delete from com_report where board_comment_no='81';
+delete from com_report where board_comment_no='41';
 
 commit;
 -----------------------------
