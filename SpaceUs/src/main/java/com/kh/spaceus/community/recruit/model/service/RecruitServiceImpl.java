@@ -106,6 +106,12 @@ public class RecruitServiceImpl implements RecruitService{
 		return recruitDAO.searchRecruit(keyWord, limit, offset);
 	}
 
+	@Override
+	public int selectRecruitTotalSearch(String keyWord) {
+		return recruitDAO.selectRecruitTotalSearch(keyWord);
+	}
+
+
 
 
 	
