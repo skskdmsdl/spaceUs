@@ -126,15 +126,15 @@ div#search-userName {
 		                    <!-- 입력창  시작-->
 		                    <div class="search-container" style="display: inline-block;">
 								<select id="searchType">
-									<option value="userId">ID</option>
-									<option value="userName">NAME</option>
+									<option value="userId">EMAIL</option>
+									<option value="userName">NICKNAME</option>
 								</select>
 								<div id="search-userId">
 									<form  action="${pageContext.request.contextPath}/admin/findUserList.do">
 										<input type="hidden" class="textbox" name="searchType"
 											value="userId"> 
 										<input type="text" class="textbox"
-											   name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요"
+											   name="searchKeyword" size="25" placeholder="검색할 이메일을 입력하세요"
 											   
 					                	/>
 										<button type="submit" class="search-btn button">검색</button>
@@ -145,7 +145,7 @@ div#search-userName {
 										<input type="hidden" class="textbox" name="searchType"
 											value="userName"> 
 										<input type="search" class="textbox"
-											name="searchKeyword" size="25" placeholder="검색할 이름을 입력하세요."
+											name="searchKeyword" size="25" placeholder="검색할 닉네임을 입력하세요."
 											 />
 										<button type="submit" class="search-btn">검색</button>
 									</form>

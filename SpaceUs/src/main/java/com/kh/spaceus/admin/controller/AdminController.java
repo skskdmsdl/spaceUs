@@ -37,15 +37,18 @@ public class AdminController {
 		log.info("searchType={}", searchType);
 		log.info("searchKeyword={}",searchKeyword);
 		
+		List<ManageMember> memberList = null;
 		if(searchType.equals("userId")) {
-			List<ManageMember> memberList = adminService.findUserIdList(searchKeyword);
+			memberList = adminService.findUserIdList(searchKeyword);
 			log.info("memberList = {}", memberList);
 		}
 		if(searchType.equals("userName")) {
-			List<ManageMember> memberList = adminService.findUserNameList(searchKeyword);						
+			memberList = adminService.findUserNameList(searchKeyword);						
 			log.info("memberList = {}", memberList);
 		}
-		return "redirect:/admin/memberManage.do";
+		
+		model.addAttribute("memberList", memberList);
+		return "admin/memberManage";
 	}
 	
 	//공간관리 폼

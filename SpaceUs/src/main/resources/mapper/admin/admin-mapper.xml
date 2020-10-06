@@ -30,7 +30,7 @@
 		    member M join auth A
 		            on M.member_email = A.member_email
 		where
-			M.member_email = '%' || #{searchKeyword} || '%'
+			M.member_email like '%' || #{searchKeyword} || '%'
 	</select>
 	
 	<!-- user Name로 memberList 출력 -->
@@ -45,6 +45,6 @@
 		    member M join auth A
 		            on M.member_email = A.member_email
 		where
-			M.nickname = '%' || #{searchKeyword} || '%'
+			M.nickname like '%' || #{searchKeyword} || '%'
 	</select>
 </mapper>
