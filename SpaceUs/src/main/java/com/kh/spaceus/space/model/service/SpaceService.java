@@ -38,6 +38,8 @@ public interface SpaceService {
 
 	List<Review> selectReviewComment(String spaceNo, int limit, int offset);
 
+	int insertWishList(String spaceNo, String email);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

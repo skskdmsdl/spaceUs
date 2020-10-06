@@ -19,7 +19,6 @@ public class Qna implements Serializable {
 	private String spaceNo;
 	private String email;
 	private String name;
-	private String password;
 	private String content;
 	private String answer;
 	private Date date;
