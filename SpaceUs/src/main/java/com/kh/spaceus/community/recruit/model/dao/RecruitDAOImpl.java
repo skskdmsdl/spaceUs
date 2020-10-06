@@ -105,6 +105,12 @@ public class RecruitDAOImpl implements RecruitDAO{
 		return sqlSession.insert("recruit.insertReportComment", reportComment);
 	}
 
+	@Override
+	public List<Recruit> searchRecruit(String keyWord, int limit, int offset) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("recruit.searchRecruit", keyWord, rowBounds);
+	}
+
 
 
 

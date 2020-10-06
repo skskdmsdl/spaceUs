@@ -203,6 +203,18 @@
 		)
 	</insert>
 	
+	<select id="searchRecruit" resultMap="recruitMap">
+		select
+			R.*,
+			(select count(*) from recruit_comment where recruit_no = R.recruit_no) commentCnt
+		from
+			recruit R
+		where
+			title like '%'||#{keyWord}||'%'
+		order by
+			enroll_date desc
+	</select>
+	
 	
 
 </mapper>

@@ -101,6 +101,11 @@ public class RecruitServiceImpl implements RecruitService{
 		return recruitDAO.insertReportComment(reportComment);
 	}
 
+	@Override
+	public List<Recruit> searchRecruit(String keyWord, int limit, int offset) {
+		return recruitDAO.searchRecruit(keyWord, limit, offset);
+	}
+
 
 
 	

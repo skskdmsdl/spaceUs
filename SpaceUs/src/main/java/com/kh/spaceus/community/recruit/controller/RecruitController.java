@@ -31,6 +31,7 @@ import com.kh.spaceus.community.recruit.model.vo.ReportComment;
 import com.kh.spaceus.community.recruit.model.vo.ReportRecruit;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.space.model.vo.Review;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,9 +49,8 @@ public class RecruitController {
 	// 구인/구직 목록
 	@RequestMapping("/recruitList.do")
 	public ModelAndView recruitList (ModelAndView mav,
-							  @RequestParam(defaultValue = "1",
-						  	  value = "cPage") int cPage,
-							  HttpServletRequest request) {
+								     @RequestParam(defaultValue = "1", value = "cPage") int cPage,
+								     HttpServletRequest request) {
 		//1.사용자 입력값 
 		final int limit = 10; //사용용도는 numPerPage와 똑같음
 		int offset = (cPage - 1) * limit;
@@ -330,6 +330,34 @@ public class RecruitController {
 		int result = recruitService.insertReportComment(reportComment);
 		mav.setViewName("jsonView"); 
 		
+		return mav;
+	}
+	
+	//키워드 검색
+	@GetMapping("/searchRecruit.do")
+	public ModelAndView searchRecruit(ModelAndView mav,
+									  @RequestParam("keyWord") String keyWord,
+									  @RequestParam(defaultValue = "1", value = "cPage") int cPage,
+									  HttpServletRequest request) {
+		//1.사용자 입력값 
+		final int limit = 10; 
+		int offset = (cPage - 1) * limit;
+		
+		//2. 업무로직
+		List<Recruit> list = recruitService.searchRecruit(keyWord, limit, offset);
+		log.debug("list = {}", list);
+		
+		
+		//전체컨텐츠수 구하기
+		int totalContents = recruitService.selectRecruitTotalContents(); 
+		String url = request.getRequestURI() + "?";
+		String pageBar = Utils.getPageBarHtml(cPage, limit, totalContents, url);
+		
+		//3. view단 처리
+		mav.addObject("totalContents", totalContents);
+		mav.addObject("list", list);
+		mav.addObject("pageBar", pageBar);
+		mav.setViewName("community/recruit/recruitList");
 		return mav;
 	}
 	

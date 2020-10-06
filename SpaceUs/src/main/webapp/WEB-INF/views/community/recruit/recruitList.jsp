@@ -66,15 +66,19 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                          <div class="m-5">
                              <div class="d-flex">
 								</div>
+								<form action="${pageContext.request.contextPath }/community/recruit/selectRecruit.do">
                                   <input type="radio" name="radio" class="m-r-10 ml-3" >전체
                                   <input type="radio" name="radio" class="m-r-10 ml-3">구인
                                   <input type="radio" name="radio" class="m-r-10 ml-3">구직
-                                 <div class="input-group mb-4 col-4 pull-right">
-								  <input type="text" class="input-group-text" style="background-color: white;">
-								  <div class="input-group-append">
-								    <button type="submit" class="btn btn-outline-secondary"><span><i class="fa fa-search fa-search mr-2"></i> </span>검색</button>
-								  </div>
-                             </div>
+                                </form>
+                                <form action="${pageContext.request.contextPath }/community/recruit/searchRecruit.do">
+	                                <div class="input-group mb-4 col-4 pull-right">
+									  <input type="text" class="input-group-text" name="keyWord" style="background-color: white;">
+									  <div class="input-group-append">
+									    <button type="submit" class="btn btn-outline-secondary"><span><i class="fa fa-search fa-search mr-2"></i> </span>검색</button>
+									  </div>
+	                             	</div>
+                                </form>
                          
                          <div class="table-responsive">
                              <table class="table table-hover">

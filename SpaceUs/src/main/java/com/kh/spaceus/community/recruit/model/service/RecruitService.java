@@ -42,6 +42,8 @@ public interface RecruitService {
 
 	int insertReportComment(ReportComment reportComment);
 
+	List<Recruit> searchRecruit(String keyWord, int limit, int offset);
+
 
 
 
