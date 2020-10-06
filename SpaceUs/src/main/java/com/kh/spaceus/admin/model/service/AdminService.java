@@ -13,4 +13,6 @@ public interface AdminService {
 
 	List<ManageMember> findUserNameList(String searchKeyword);
 
+	List<ManageMember> findUserRoleList(String searchKeyword);
+
 }

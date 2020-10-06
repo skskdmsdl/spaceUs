@@ -12,5 +12,7 @@ public interface AdminDAO {
 	List<ManageMember> findUserIdList(String searchKeyword);
 
 	List<ManageMember> findUserNameList(String searchKeyword);
+
+	List<ManageMember> findUserRoleList(String searchKeyword);
 	
 }

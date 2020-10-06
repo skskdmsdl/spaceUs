@@ -42,9 +42,16 @@ public class AdminController {
 			memberList = adminService.findUserIdList(searchKeyword);
 			log.info("memberList = {}", memberList);
 		}
-		if(searchType.equals("userName")) {
+		else if(searchType.equals("userName")) {
 			memberList = adminService.findUserNameList(searchKeyword);						
 			log.info("memberList = {}", memberList);
+		}
+		else if(searchType.equals("userRole")) {
+			if(searchKeyword.equals("total")) {
+				memberList = adminService.selectList();
+			}else{
+				memberList = adminService.findUserRoleList(searchKeyword);
+			}
 		}
 		
 		model.addAttribute("memberList", memberList);

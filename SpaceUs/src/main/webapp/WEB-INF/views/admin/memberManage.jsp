@@ -155,11 +155,11 @@ div#search-userName {
 		             
 		                    
 		                    <div class="btn-div" style="display: inline-block; float: right;">
-								<form action="<%=request.getContextPath()%>/admin/userFinder">
+								<form action="<%=request.getContextPath()%>/admin/findUserList.do">
 									<input type="hidden" name="searchType" value="userRole" />
-									<button type="submit" class="btn btn-primary" name="searchKeyword" value="T">전체 보기</button>
-									<button type="submit" class="btn btn-primary" name="searchKeyword" value="U">일반 맴버</button>
-									<button type="submit" class="btn btn-primary" name="searchKeyword" value="P">호스트</button>
+									<button type="submit" class="btn btn-primary" name="searchKeyword" value="total">전체 보기</button>
+									<button type="submit" class="btn btn-primary" name="searchKeyword" value="ROLE_USER">일반 맴버</button>
+									<button type="submit" class="btn btn-primary" name="searchKeyword" value="ROLE_HOST">호스트</button>
 								</form>
 							</div>
 		                    <br />

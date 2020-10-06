@@ -29,6 +29,11 @@ public class AdminServiceImpl implements AdminService{
 	public List<ManageMember> findUserNameList(String searchKeyword) {
 		return adminDAO.findUserNameList(searchKeyword);
 	}
+
+	@Override
+	public List<ManageMember> findUserRoleList(String searchKeyword) {
+		return adminDAO.findUserRoleList(searchKeyword);
+	}
 	
 	
 }
