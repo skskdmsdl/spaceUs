@@ -38,7 +38,7 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 	
 	@Override
-	public Space selectOneSpace(int businessNo) {
+	public Space selectOneSpace(long businessNo) {
 		return sqlSession.selectOne("space.selectOneSpace", businessNo);
 	}
 

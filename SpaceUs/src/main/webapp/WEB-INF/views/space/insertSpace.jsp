@@ -52,11 +52,11 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             <div class="pf-title">
                                 <h4>공간이름<span class="text-danger">*</span></h4>
                                 <!-- <h6>(공간이름은 수정이 불가능합니다 정확히 입력해주세요)</h6> -->
-                                <input type="text" name="spaceName">
+                                <input type="text" name="spaceName" id="spaceName">
                             </div>
                             <div class="pf-summernote">
                                 <h4>공간설명<span class="text-danger">*</span></h4>
-                                <textarea name="content" style="width:100%; height:350px; border: 1px solid #ebebeb; resize: none;"></textarea>
+                                <textarea id="content" name="content" style="width:100%; height:350px; border: 1px solid #ebebeb; resize: none;"></textarea>
                             </div>
                            
                             <div class="pf-location">
@@ -109,14 +109,15 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 <input type="hidden" name="categoryNo" value="" />
                             </div>
                             
-                            <div class="pf-status">
+                            <div class="pf-status" id="time">
                                 <h4>가능시간<span class="text-danger">*</span></h4>
                                 
-                                <div class="jumbotron pb-1 pt-1 status-item">
-	                                    <label for="mon" class="mr-5" style="font-size: 15px;">월요일
-	                                    <input type="radio" name="radio" id="mon">
+
+                                <div class="jumbotron pb-1 pt-1 status-item" id="day">
+	                                <label for="mon" class="mr-5" style="font-size: 15px;">월요일
+	                                	<input type="radio" name="radio" id="mon">
                                         <span class="checkbox mt-1"></span>
-	                                    </label>
+	                                </label>
                                     <label for="tue" class="mr-5" style="font-size: 15px;">화요일
 	                                    <input type="radio" name="radio" id="tue">
 	                                    <span class="checkbox mt-1"></span>
@@ -144,39 +145,58 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 </div>
                                 <table class="table table-bordered" style="cursor: pointer;" id="availableTime">
                                 	<tr>
-										<th style="width:16.6%;">00:00 - 01:00</th>	                                
-										<th style="width:16.6%;">01:00 - 02:00</th>	                                
-										<th style="width:16.6%;">02:00 - 03:00</th>	                                
-										<th style="width:16.6%;">03:00 - 04:00</th>	                                
-										<th style="width:16.6%;">04:00 - 05:00</th>	                                
-										<th style="width:16.6%;">05:00 - 06:00</th>	                                
+										<th id=0 style="width:16.6%;">00:00 - 01:00</th>	                                
+										<th id=1 style="width:16.6%;">01:00 - 02:00</th>	                                
+										<th id=2 style="width:16.6%;">02:00 - 03:00</th>	                                
+										<th id=3 style="width:16.6%;">03:00 - 04:00</th>	                                
+										<th id=4 style="width:16.6%;">04:00 - 05:00</th>	                                
+										<th id=5 style="width:16.6%;">05:00 - 06:00</th>	                                
                                 	</tr>
                                 	<tr>
-										<th>06:00 - 07:00</th>	                                
-										<th>07:00 - 08:00</th>	                                
-										<th>08:00 - 09:00</th>	                                
-										<th>09:00 - 10:00</th>	                                
-										<th>10:00 - 11:00</th>	                                
-										<th>11:00 - 12:00</th>	                                
+										<th id=6>06:00 - 07:00</th>	                                
+										<th id=7>07:00 - 08:00</th>	                                
+										<th id=8>08:00 - 09:00</th>	                                
+										<th id=9>09:00 - 10:00</th>	                                
+										<th id=10>10:00 - 11:00</th>	                                
+										<th id=11>11:00 - 12:00</th>	                                
                                 	</tr>
                                 	<tr>
-										<th>12:00 - 13:00</th>	                                
-										<th>13:00 - 14:00</th>	                                
-										<th>14:00 - 15:00</th>	                                
-										<th>15:00 - 16:00</th>	                                
-										<th>16:00 - 17:00</th>	                                
-										<th>17:00 - 18:00</th>	                                
+										<th id=12>12:00 - 13:00</th>	                                
+										<th id=13>13:00 - 14:00</th>	                                
+										<th id=14>14:00 - 15:00</th>	                                
+										<th id=15>15:00 - 16:00</th>	                                
+										<th id=16>16:00 - 17:00</th>	                                
+										<th id=17>17:00 - 18:00</th>	                                
                                 	</tr>
                                 	<tr>
-										<th>18:00 - 19:00</th>	                                
-										<th>19:00 - 20:00</th>	                                
-										<th>20:00 - 21:00</th>	                                
-										<th>21:00 - 22:00</th>	                                
-										<th>22:00 - 23:00</th>	                                
-										<th>23:00 - 24:00</th>	                                
+										<th id=18>18:00 - 19:00</th>	                                
+										<th id=19>19:00 - 20:00</th>	                                
+										<th id=20>20:00 - 21:00</th>	                                
+										<th id=21>21:00 - 22:00</th>	                                
+										<th id=22>22:00 - 23:00</th>	                                
+										<th id=23>23:00 - 24:00</th>	                                
                                 	</tr>
                                 </table>
-                                
+                                <!-- <hr>
+                                <h6>익일</h6>
+                                <hr>
+                                <table class="table table-bordered" style="cursor: pointer;" id="availableTime2">
+                                	<tr>
+										<th id=24 style="width:16.6%;">00:00 - 01:00</th>	                                
+										<th id=25 style="width:16.6%;">01:00 - 02:00</th>	                                
+										<th id=26 style="width:16.6%;">02:00 - 03:00</th>	                                
+										<th id=27 style="width:16.6%;">03:00 - 04:00</th>	                                
+										<th id=28 style="width:16.6%;">04:00 - 05:00</th>	                                
+										<th id=29 style="width:16.6%;">05:00 - 06:00</th>	                                
+                                	</tr>
+                                	<tr>
+										<th id=30>06:00 - 07:00</th>	                                
+										<th id=31>07:00 - 08:00</th>	                                
+										<th id=32>08:00 - 09:00</th>
+									</tr>
+                                </table> -->
+                                <input type="hidden" name="day" value="" />
+                               
                             </div>
                             
                             <div class="pf-feature-price">
@@ -195,7 +215,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             <div class="pf-feature-price">
                                 <h4>가격 (시간당)<span class="text-danger">*</span></h4>
                                 <div class="fp-inputs">
-                                    <input type="number" placeholder="가격을 입력해주세요">원
+                                    <input id="hourlyPrice" name="hourlyPrice" type="number" placeholder="가격을 입력해주세요">원
                                 </div>
                             </div>
                             <div class="pf-feature">
@@ -204,35 +224,36 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 <table class="table table-bordered" id="optionTb">
                                 	<tr>
 										<th id='option1' style="width:25%;">TV/프로젝터</th>	                                
-										<th style="width:25%;">인터넷/와이파이</th>	                                
-										<th style="width:25%;">복사/인쇄기</th>	                                
-										<th style="width:25%;">화이트보드</th>	                                
+										<th id='option2' style="width:25%;">인터넷/와이파이</th>	                                
+										<th id='option3' style="width:25%;">복사/인쇄기</th>	                                
+										<th id='option4' style="width:25%;">화이트보드</th>	                                
                                 	</tr>
                                 	<tr>
-										<th>음향/마이크</th>	                                
-										<th>취사시설</th>	                                
-										<th>음식물반입가능</th>	                                
-										<th>주류반입가능</th>	                                
+										<th id='option5'>음향/마이크</th>	                                
+										<th id='option6'>취사시설</th>	                                
+										<th id='option7'>음식물반입가능</th>	                                
+										<th id='option8'>주류반입가능</th>	                                
                                 	</tr>
                                 	<tr>
-										<th>샤워시설</th>	                                
-										<th>주차</th>	                                
-										<th>금연</th>	                                
-										<th>반려동물 동반가능</th>	                                
-                                	</tr>
-                                	<tr>
-										<th>PC/노트북</th>	                                
-										<th>의자/테이블</th>	                                
-										<th>내부화장실</th>	                                
-										<th>탈의실</th>	                                
-                                	</tr>
-                                	<tr>
-										<th>테라스/루프탑</th>	                                
-										<th>공용라운지</th>	                                
-										<th>전신거울</th>	                                
-										<th>바베큐시설</th>	                                
+										<th id='option9'>샤워시설</th>	                                
+										<th id='option10'>주차</th>	                                
+										<th id='option11'>금연</th>	                                
+										<th id='option12'>반려동물 동반가능</th>	                                
+                                	</tr> 
+                                	<tr>    
+										<th id='option13'>PC/노트북</th>	                                
+										<th id='option14'>의자/테이블</th>	                                
+										<th id='option15'>내부화장실</th>	                                
+										<th id='option16'>탈의실</th>	                                
+                                	</tr>  
+                                	<tr>   
+										<th id='option17'>테라스/루프탑</th>	                                
+										<th id='option18'>공용라운지</th>	                                
+										<th id='option19'>전신거울</th>	                                
+										<th id='option20'>바베큐시설</th>	                                
                                 	</tr>
                                 </table>
+                                <input type="hidden" name="optionNo" value="" />
                             </div>
                             <div class="pf-feature-image">
                                 <h4>공간이미지<span class="text-danger">*</span></h4>
@@ -259,7 +280,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 <h4>사업자등록번호<span class="text-danger">*</span></h4>
                                 <div class="row">
 	                                <div class="ml-3 mb-3" style="width:31%">
-	                                    <input id="businessNo" type="text" placeholder="사업자 번호를 입력해주세요">
+	                                    <input name="businessNo" id="businessNo" type="text" placeholder="사업자 번호를 입력해주세요">
 	                                </div>
 	                                <div class="pt-2">
 	                                 	<span id="error" class="ml-4 text-danger">유효하지 않은 번호입니다.</span>
@@ -274,14 +295,14 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             <div class="pf-feature-price">
                                 <h4>계좌정보<span class="text-danger">*</span></h4>
                                 <div class="row ml-1">
-									  <select  name="bank" style="height: 46px; width:100px; border-color:  #eaeaea;">
-									    <option value="">국민</option>
-									    <option value="">우리</option>
-									    <option value="">신한</option>
-									    <option value="">기업</option>
+									  <select name="bank" id="bank" style="height: 46px; width:100px; border-color:  #eaeaea;">
+									    <option value="국민">국민</option>
+									    <option value="우리">우리</option>
+									    <option value="신한">신한</option>
+									    <option value="기업">기업</option>
 									  </select>
 	                                <div class="ml-3 mb-3" style="width:31%">
-	                                    <input id="accountNo" type="text" placeholder="계좌번호를 입력해주세요">
+	                                    <input name="account" id="account" type="text" placeholder="계좌번호를 입력해주세요">
 	                                </div>
 	                            </div>
 		                        <span ></span>
@@ -301,7 +322,9 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- 주소 script -->
 <script>
+	//주소검색
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -349,7 +372,36 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
             }
         }).open();
     }
+
+    $("#sample6_detailAddress").focus(function(){
+    	if($("#sample6_postcode").val()==""){
+        	alert("우편번호 주소검색을 먼저 해주세요.");
+    		document.getElementById("sample6_postcode").focus();
+        }
+    });
+
+  //주소 합치기
+    $("#sample6_detailAddress").blur(function(){
+    	$("[name=address]").val("우("+$("#sample6_postcode").val()+") "+$("#sample6_address").val()+" "+$("#sample6_extraAddress").val()+" "+$("#sample6_detailAddress").val());
+    });
 </script>
+
+<!-- 전화번호script -->
+<script>
+$("#phone3").focus(function(){
+   	if($("#phone1").val()==""){
+   		document.getElementById("phone1").focus();
+       }
+});
+//전화번호 합치기
+$("#phone2").blur(function(){
+	document.getElementById("phone3").focus();
+});
+$("#phone3").blur(function(){
+	$("[name=spacePhone]").val($("#phone1").val()+$("#phone2").val()+$("#phone3").val());
+});
+</script>
+<!-- 카테고리, 옵션 script -->
 <script>
 //카테고리테이블 클릭이벤트
 $("#categoryTb th").on("click", function(){
@@ -359,22 +411,124 @@ $("#categoryTb th").on("click", function(){
    	$(this).addClass("bg-primary");
    	//console.log($(this).attr("id"));
    	$("[name=categoryNo]").val($(this).attr("id"));
-	
+   	console.log($("[name=categoryNo]").val());
 });
 //옵션테이블 클릭이벤트
+var optionArr = new Array();
 $("#optionTb th").on("click", function(){
-	if($(this).hasClass("bg-primary"))
+	var $option = $(this).attr("id");
+	if($(this).hasClass("bg-primary")){
     	$(this).removeClass("bg-primary");
-	else
+    	optionArr.splice(optionArr.indexOf($option),1);
+	}
+	else{
     	$(this).addClass("bg-primary");
+    	optionArr.push($option);
+	}
+   	//console.log(optionArr);
+   	var oStr='';
+   	for(var i=0; i<optionArr.length; i++)
+   	   	oStr += optionArr[i]+",";
+   	   	
+   	$("[name=optionNo]").val(oStr);
+   	//console.log($("[name=optionNo]").val());
+});
+</script>
+
+<!-- 시간선택 script -->
+<script>
+var dayTime = [
+	{ day: 'mon', startHour: -1, endHour: -1},
+	{ day: 'tue', startHour: -1, endHour: -1},
+	{ day: 'wed', startHour: -1, endHour: -1},
+	{ day: 'thu', startHour: -1, endHour: -1},
+	{ day: 'fri', startHour: -1, endHour: -1},
+	{ day: 'sat', startHour: -1, endHour: -1},	
+	{ day: 'sun', startHour: -1, endHour: -1}	
+];
+var day;
+var first;
+var flag=0;
+//요일 선택클릭 이벤트
+$("#day input").on("click", function(){
+	//배열 인덱스 찾기
+	day = dayTime.findIndex(obj => obj.day == $(this).attr("id"));
+	//console.log(day);
+	//셀 색 지우기
+	for(var i=0; i<33; i++)
+		$("#"+i).removeClass("bg-primary");
+
+	var s=dayTime[day].startHour;
+	//요일에 맞춰 색채우기
+	if(s == dayTime[day].endHour){
+		flag=0;
+		return;
+	}
+	if(s != 0 && dayTime[day].endHour==0){
+		flag=1;
+		$("#"+s).addClass("bg-primary");
+		return;
+	}
+	flag=2;
+	for(var i=s; i<=dayTime[day].endHour; i++)
+		$("#"+i).addClass("bg-primary");
 });
 //가능시간 클릭이벤트
 $("#availableTime th").on("click", function(){
-	if($(this).hasClass("bg-primary"))
-    	$(this).removeClass("bg-primary");
-	else
-    	$(this).addClass("bg-primary");
+	//요일선택
+	if(day==null){
+		alert("요일을 먼저 선택해주세요");
+		return;
+	}
+	
+	flag++;
+	//초기화하기
+	if(flag==3){
+		flag=0;
+		//배열값 초기화
+		dayTime[day].startHour=0;
+		dayTime[day].endHour=0;
+		console.log(dayTime);
+		//셀 색 지우기
+		for(var i=0; i<33; i++)
+    		$("#"+i).removeClass("bg-primary");
+		return;
+	};
+	//연속선택
+	if(flag==2){
+		//선택한 셀의 아이디 찾기
+		var last = Number($(this).attr("id"));
+		//셀 값 배열에 넣기
+		dayTime[day].endHour=last;
+		console.log(dayTime);
+
+		//셀 색 바꾸기
+		if(last == dayTime[day].startHour){
+			$(this).removeClass("bg-primary");
+			return;
+		}
+		if(last<first){
+			var temp = first;
+			first = last;
+			last = temp;
+		}	
+		for(var i=first; i<=last; i++)
+			$("#"+i).addClass("bg-primary");
+		return;
+	};
+
+	//선택한 셀의 아이디 찾기
+	first = Number($(this).attr("id"));
+	//셀 값 배열에 넣기
+	dayTime[day].startHour=first;
+	console.log(dayTime);
+	//셀 색 바꾸기
+    $(this).addClass("bg-primary");
 });
+</script>
+
+<!-- 태그 script -->
+<script>
 //태그 추가 클릭이벤트
 $("#addTags").on('click', function(){
 	if($("#tagName").val()==""){alert("내용을 입력해주세요");};
@@ -407,9 +561,11 @@ $("#tags").on("click", function(){
    //내용작성하기 
 });
 </script>
+
+<!-- 사업자등록 script -->
 <script>
 //사업자 등록정보 조회(중복조회)
-$("#businessNo").blur(function(){
+$("#businessNo").keyup(function(){
 	if(!/^[0-9]{10}$/.test($(this).val())){
 		$("#duplicate").hide();
 		$("#ok").hide();
@@ -445,34 +601,80 @@ $("#businessNo").blur(function(){
 	}); 
 	
 });
-//주소 합치기
-$("#sample6_detailAddress").blur(function(){
-	$("[name=address]").val("우("+$("#sample6_postcode").val()+") "+$("#sample6_address").val()+" "+$("#sample6_extraAddress").val()+" "+$("#sample6_detailAddress").val());
-});
-//전화번호 합치기
-$("#phone1").blur(function(){
-	$("[name=spacePhone]").val($("#phone1").val()+$("#phone2").val()+$("#phone3").val());
-});
-//제출전 확인
-/* $("#spaceFrm").submit(function(){
+</script>
+<script>
 
-	var $memberId = $("#memberId");
-	if(/^\w{4,}$/.test($memberId.val()) == false){
-		alert("아이디는 최소 4자리이상이어야 합니다.");
-		$memberId.focus();
+//제출전처리
+$("#spaceFrm").submit(function(){
+	
+	//빈칸이면 입력 요구
+	if($("[name=spaceName]").val() == ""){
+		alert("공간이름을 입력해주세요.");
+		document.getElementById("spaceName").focus();
 		return false;
 	}
-
-	//중복검사여부
-	var $idValid = $("#idValid");
-	if($idValid.val() == 0){
-		alert("아이디 중복검사 해주세요.");
+	if($("[name=content]").val() == ""){
+		alert("공간설명을 입력해주세요.");
+		document.getElementById("content").focus();
 		return false;
 	} 
+	if($("#sample6_detailAddress").val() == ""){
+		alert("주소를 입력해주세요.");
+		document.getElementById("sample6_postcode").focus();
+		return false;
+	}
+	if($("[name=spacePhone]").val() == ""){
+		alert("전화번호를 입력해주세요.");
+		document.getElementById("phone3").focus();
+		return false;
+	}
+	if($("[name=spacePhone]").val().length > 11){
+		alert("11자리까지 가능합니다. 전화번호를 확인해주세요");
+		document.getElementById("phone3").focus();
+		return false;
+	}
+	if($("[name=categoryNo]").val() == ""){
+		alert("카테고리를 선택해주세요.");
+		$('html, body').animate({scrollTop : $("#phone1").offset().top}, 100);
+		return false;
+	} 
+	if($("[name=hourlyPrice]").val() == 0){
+		alert("시간당 가격을 입력해주세요.");
+		document.getElementById("hourlyPrice").focus();
+		return false;
+	} 
+	if($("#idValid").val()!=1){
+		alert("올바른 사업자번호를 입력하세요.");
+		document.getElementById("businessNo").focus();
+		return false;
+	}
+	if($("[name=account]").val() == ""){
+		alert("계좌번호를 입력하세요.");
+		document.getElementById("account").focus();
+		return false;
+	} 
+
+	//시간배열 넣기
+	var arr = ['월','화','수','목','금','토','일'];
+	var str = "";
+	for(var i=0; i<7; i++){
+		str += arr[i]+ " : ";
+		if(dayTime[i].startHour==dayTime[i].endHour)
+			str += "없음";
+		else
+			str += dayTime[i].startHour + "시 ~ " +(dayTime[i].endHour+1) +"시 "; 
+	}
 	
-	
+	var result = confirm("요일별 선택된 시간이 맞으면 확인을 눌러주세요"+str);
+	if(result){	
+		$("[name=day]").val(JSON.stringify(dayTime));
+	}else{
+		$('html, body').animate({scrollTop : $("#time").offset().top}, 100);
+	    return false;
+	}
+
 	return true;
-}); */
+});
 </script>
 
 <!-- 컨텐츠 끝 -->

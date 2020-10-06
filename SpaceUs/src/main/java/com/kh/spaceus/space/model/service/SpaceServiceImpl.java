@@ -39,7 +39,7 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 	
 	@Override
-	public Space selectOneSpace(int businessNo) {
+	public Space selectOneSpace(long businessNo) {
 		return spaceDAO.selectOneSpace(businessNo);
 	}
 
@@ -112,6 +112,12 @@ public class SpaceServiceImpl implements SpaceService{
 	@Override
 	public int selectQuestionTotalContents(String spaceNo) {
 		return  spaceDAO.selectQuestionTotalContents(spaceNo);
+	}
+
+	@Override
+	public int insertWishList(String spaceNo, String email) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

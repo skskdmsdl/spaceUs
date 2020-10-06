@@ -16,7 +16,7 @@ public interface SpaceService {
 
 	Space selectOneSpace(String spaceNo);
 
-	Space selectOneSpace(int businessNo);
+	Space selectOneSpace(long businessNo);
 
 	List<Tag> selectListSpaceTag(String spaceNo);
 
@@ -37,6 +37,8 @@ public interface SpaceService {
 	int updateReviewComment(Review review);
 
 	List<Review> selectReviewComment(String spaceNo, int limit, int offset);
+
+	int insertWishList(String spaceNo, String email);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 
