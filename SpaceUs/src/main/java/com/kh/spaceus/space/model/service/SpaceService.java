@@ -39,9 +39,13 @@ public interface SpaceService {
 
 	List<Review> selectReviewComment(String spaceNo, int limit, int offset);
 
-	int insertWishList(Wish wish);
+	void insertWish(Wish wish);
 
 	List<Space> selectSameCategory(String category);
+
+	int selectLikeCnt(String spaceNo);
+
+	void deleteWish(Wish wish);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

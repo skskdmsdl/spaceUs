@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spaceus.common.Utils;
@@ -211,12 +212,28 @@ public class SpaceController {
 	//위시리스트 추가
 	@RequestMapping(value="/heart.do",
 					method=RequestMethod.POST)
-	public void insertWishList(Wish wish) {
-		System.out.println("좋아요클릭"+wish);
-	
-		spaceService.insertWishList(wish);
+	public void insertWish(Wish wish) {
+		spaceService.insertWish(wish);
+
 	}
 	
+	//좋아요수 읽어오기
+	@RequestMapping(value="/readLikeCnt.do",
+			method=RequestMethod.GET)
+	@ResponseBody
+	public int selectLikeCount(@RequestParam("no") String spaceNo) {
+		int cnt = spaceService.selectLikeCnt(spaceNo);
+		
+		return cnt;
+	}
+	
+	//위시리스트 삭제
+	@RequestMapping(value="/cancelHeart.do",
+			method=RequestMethod.POST)
+	public void deleteWishList(Wish wish){
+		spaceService.deleteWish(wish);
+		
+	}
 	
 	//사업자등록증 조회
 	@GetMapping("/checkIdDuplicate.do")
@@ -235,6 +252,8 @@ public class SpaceController {
     	
     	return mav;
     }
+	
+	
 	
 }
 

@@ -101,13 +101,23 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public int insertWishList(Wish wish) {
-		return sqlSession.insert("space.insertWishList", wish);
+	public void insertWish(Wish wish) {
+		sqlSession.insert("space.insertWish", wish);
 	}
 
 	@Override
 	public List<Space> selectSameCategory(String category) {
 		return sqlSession.selectList("space.selectSameCategory", category);
+	}
+
+	@Override
+	public int selectLikeCnt(String spaceNo) {
+		return sqlSession.selectOne("space.selectLikeCnt", spaceNo);
+	}
+
+	@Override
+	public void deleteWish(Wish wish) {
+		sqlSession.delete("space.deleteWish", wish);
 	}
 
 	/*@Override

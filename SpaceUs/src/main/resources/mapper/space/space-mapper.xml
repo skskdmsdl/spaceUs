@@ -107,7 +107,16 @@
 		<result column="like_date" property="date"/>
 	</resultMap>
 	
-	<insert id="insertWishList">
+	<select id="selectLikeCnt" resultType="_int">
+		select 
+			count(*)
+		from
+		 	wish
+		where 
+			space_no=#{spaceNo}
+	</select>
+	
+	<insert id="insertWish">
 		insert into wish values(
 			#{spaceNo},
 			#{email},
@@ -115,6 +124,15 @@
 		)
 		
 	</insert>
+	
+	<delete id="deleteWish">
+		delete
+		from
+			wish
+		where
+			space_no=#{spaceNo} and
+			member_email=#{email}
+	</delete>
 
 	<insert id="insertReviewAttahment">
 		insert into

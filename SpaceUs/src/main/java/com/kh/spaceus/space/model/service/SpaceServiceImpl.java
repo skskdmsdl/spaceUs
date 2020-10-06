@@ -116,13 +116,23 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public int insertWishList(Wish wish) {
-		return spaceDAO.insertWishList(wish);
+	public void insertWish(Wish wish) {
+		spaceDAO.insertWish(wish);
 	}
 
 	@Override
 	public List<Space> selectSameCategory(String category) {
 		return spaceDAO.selectSameCategory(category);
+	}
+
+	@Override
+	public int selectLikeCnt(String spaceNo) {
+		return spaceDAO.selectLikeCnt(spaceNo);
+	}
+
+	@Override
+	public void deleteWish(Wish wish) {
+		spaceDAO.deleteWish(wish);
 	}
 	
 	

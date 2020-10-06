@@ -73,6 +73,7 @@ to {opacity: 1}
 <script>
 var url = $(location).attr('href');
 
+
 $(function(){
 
 	$(".cs-map").removeAttr("style");
@@ -93,31 +94,66 @@ $(function(){
     $("#heart-a").click(function(){
 
 		var $heart = $("#heart-a");
-    	if($heart.html().indexOf("far fa-heart") != -1) {
-    		$heart.html("<i class='fas fa-heart' style='color:#ffc107'></i>");
+    	if($heart.html().indexOf("far fa-heart") != -1 ) {
+    		$heart.html("<i class='fas fa-heart' style='color:#ffc107; margin:2px;'></i>");
 	   		 $.ajax({
 			        type: "POST",
 					url : "${pageContext.request.contextPath}/space/heart.do",
+					
 					data :  {
 						spaceNo : "${space.spaceNo}",
 						email : "${loginMember.principal.memberEmail}"
 					},
-					dataType: "json",
-					success: function(data){
+					success: function(){
+						readLikeCnt();
 					},
 					error: function(xhr, status, err){
-						console.log("처리실패", xhr, status, err);
+						console.log("위시 추가 실패", xhr, status, err);
 						}
 					
 			});
     	}
     	else {
     		$heart.html("<i class='far fa-heart'></i>");
-    	}
-    });
-
+    		 $.ajax({
+			        type: "POST",
+					url : "${pageContext.request.contextPath}/space/cancelHeart.do",
+					data :  {
+						spaceNo : "${space.spaceNo}",
+						email : "${loginMember.principal.memberEmail}"
+					},
+					success: function(){
+						readLikeCnt();
+					},
+					error: function(xhr, status, err){
+						console.log("위시 삭제 실패", xhr, status, err);
+						}
+    	   			});	
+    		}
+	});
+	// 게시글 추천수
+    function readLikeCnt() {
+		$.ajax({
+			url: "${pageContext.request.contextPath}/space/readLikeCnt.do",
+            type: "GET",
+            data: {
+                no: "${space.spaceNo}"
+            },
+            dataType: "json",
+            success: function (count) {
+            	$(".like-count").html(count);
+            },
+			error: function(xhr, status, err){
+				console.log("좋아요수 읽어오기 실패", xhr, status, err);
+				}
+		});
+    };
+    
+    readLikeCnt(); // 처음 시작했을 때 실행되도록 해당 함수 호출
 });
 
+
+    
 function urlcopy(){
 	var tempElem = document.createElement('textarea');
 
@@ -170,18 +206,21 @@ function naverShare() {
 					<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i>
 					<div class="text text-center">
 						<div style="text-align: right; padding-right: 5px">
-<%-- 							<form id="addLikeCnt" action="${pageContext.request.contextPath }/space/heart.do" method="POST">
-								<input name= "spaceNo" type="hidden" value="${space.spaceNo }"/>
-								<input name= "email" type="hidden" value="${loginMember.principal.memberEmail}"/>
-								
-							</form> --%>
-							<sec:authorize access="hasAnyRole('USER','HOST')"> 
-							<a href=javascript:; id="heart-a"><i id="addLike" class="far fa-heart"></i></a>
+							
+							<c:choose>
+							<c:when test="${ loginMember.principal.memberEmail != null }">
+							<a href=javascript:; id="heart-a"><i id="addLike" class="far fa-heart" style="margin:2px;"></i></a>
+							<span class="like-count"></span>
+							</c:when>
+							<c:otherwise>
+							<i id="addLike" class="far fa-heart" style="margin:2px;"></i>
+							<span class="like-count"></span>
+							</c:otherwise>
+							</c:choose>
 							&emsp; <a href="javascript:;" id="kakao-link-btn"> <img
 								src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png"
 								width="30px" />
 							</a>
-							</sec:authorize>
 							<!-- 공유하기 팝오버 시작-->
 							<a href=javascript:; data-toggle="popover" data-trigger="focus"
 								data-placement="bottom" tabindex="0" title="공유하기"
