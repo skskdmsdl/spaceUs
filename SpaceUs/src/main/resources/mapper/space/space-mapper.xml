@@ -258,6 +258,15 @@
 		)
 	</insert>
 	
+	<insert id="insertSpaceTag">
+		insert into
+			space_tag 
+		values (
+			#{ spaceNo },
+			#{ tagNo }
+		)
+	</insert>
+	
 </mapper>
 
 

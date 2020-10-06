@@ -8,6 +8,7 @@ import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
 
@@ -48,6 +49,8 @@ public interface SpaceDAO {
 	int insertAttachment(Attachment attach);
 
 	int insertOption(Option option);
+
+	int insertSpaceTag(SpaceTag spaceTag);
 
 
 	/* List<Space> selectListSpaceCollection(String email); */

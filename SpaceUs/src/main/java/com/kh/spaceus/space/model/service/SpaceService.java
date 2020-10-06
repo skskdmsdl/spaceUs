@@ -6,6 +6,7 @@ import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
 
@@ -42,6 +43,8 @@ public interface SpaceService {
 	int insertSpace(Space space);
 
 	int insertOption(Option option);
+
+	int insertSpaceTag(SpaceTag spaceTag);
 
 
 	/* List<Space> selectListSpaceCollection(String email); */

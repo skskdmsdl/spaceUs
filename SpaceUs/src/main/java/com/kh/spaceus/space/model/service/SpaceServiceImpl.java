@@ -13,6 +13,7 @@ import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
 
@@ -142,6 +143,11 @@ public class SpaceServiceImpl implements SpaceService{
 	@Override
 	public int insertOption(Option option) {
 		return spaceDAO.insertOption(option);
+	}
+
+	@Override
+	public int insertSpaceTag(SpaceTag spaceTag) {
+		return spaceDAO.insertSpaceTag(spaceTag);
 	}
 
 	

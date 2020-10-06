@@ -14,6 +14,7 @@ import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
 
@@ -115,6 +116,11 @@ public class SpaceDAOImpl implements SpaceDAO{
 	@Override
 	public int insertOption(Option option) {
 		return sqlSession.insert("space.insertOption", option);
+	}
+
+	@Override
+	public int insertSpaceTag(SpaceTag spaceTag) {
+		return sqlSession.insert("space.insertSpaceTag", spaceTag);
 	}
 
 

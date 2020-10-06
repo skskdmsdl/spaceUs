@@ -45,7 +45,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                 <div class="col-lg-12">
                     <div class="property-submit-form">
                         <form:form name="spaceFrm" id="spaceFrm" 
-							  action="${pageContext.request.contextPath}/space/enrollSpace.do" 
+							  action="${pageContext.request.contextPath}/space/insertSpace.do" 
 							  method="post"
 							  enctype="multipart/form-data">
 							  <!-- enctype="multipart/form-data"> -->
@@ -211,7 +211,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                            <button id="addTags" type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">추가 ⅴ</button>
 		                            </div>
 	                            </div>
-		                        <span id="tags" style="cursor: pointer;"></span>
+		                        <span id="tags" class="btn col-sm-2 p-0" style="cursor: pointer;"></span>
                             </div>
                             <div class="pf-feature-price">
                                 <h4>가격 (시간당)<span class="text-danger">*</span></h4>
@@ -548,7 +548,8 @@ $("#addTags").on('click', function(){
 		dataType : "json",
 		success : function(data){
 			
-			$("#tags").append("<span class='label label-success m-2 p-2 small'>#"+$('#tagName').val() +" X</span>"); 
+			$("#tags").append("<input type='checkbox' name='tag' style='display:none' value="+$('#tagName').val() +" checked/><span class='label label-success m-2 p-2 small'>#"+$('#tagName').val() +" X</span>"); 
+			/* $("#tags").append("<span class='label label-success m-2 p-2 small'>#"+$('#tagName').val() +" X</span>");  */
 	    	$("#tagName").val("");	
 		},
 		error : function(xhr, status, err){

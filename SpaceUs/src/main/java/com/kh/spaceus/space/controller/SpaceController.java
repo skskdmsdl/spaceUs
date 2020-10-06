@@ -54,22 +54,19 @@ public class SpaceController {
 		return "space/insertSpace";
 	}
 	//공간등록 제출
-	@RequestMapping(value="/enrollSpace.do",method = RequestMethod.POST)
+	@RequestMapping(value="/insertSpace.do",method = RequestMethod.POST)
 	public String enrollSpace(Space space,
 							  @RequestParam String optionNo,
 							  @RequestParam String day,
+							  @RequestParam String[] tag,
 							  @RequestParam(value="upFile",required=true) MultipartFile[] upFiles,
 							  HttpServletRequest request,
 							  RedirectAttributes redirectAttr,
 							  Principal principal
 							 ) {
-		System.out.println(space);
-		System.out.println(optionNo);
 		space.setMemberEmail(principal.getName());
 		
-		
-
-//	   //1. 파일을 서버컴퓨터에 저장
+	   //1. 파일을 서버컴퓨터에 저장
 		List<Attachment> attachList  = new ArrayList<>();
 		String saveDirectory = request.getServletContext()
 									  .getRealPath("/resources/upload/space");
@@ -93,9 +90,7 @@ public class SpaceController {
 				attach.setRName(renamedFileName);
 				attachList.add(attach);
 			}
-			
 		}
-    
 		space.setAttachList(attachList);
 		
 		//2. 게시글, 첨부파일정보를 DB에 저장
@@ -120,8 +115,6 @@ public class SpaceController {
 		    } 
 		    String[] array = optionNo.split(",");
 		    List<Option> optionList = new ArrayList<>();
-		    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		    System.out.println(array.length);
 		    Option option = new Option();
 		    for(String str : array) {
 		    	System.out.println(str);
@@ -131,20 +124,18 @@ public class SpaceController {
 		    	int result3 = spaceService.insertOption(option);
 		    }
 		    
+		    int result4 = 0;
 		    SpaceTag spaceTag = new SpaceTag();
-		    for(String str : array) {
-		    	System.out.println(str);
-		    	option.setOptionNo(str);
-		    	option.setSpaceNo(spaceNo);
-		    	System.out.println(option);
-		    	int result3 = spaceService.insertOption(option);
+		    for(String s : tag) {
+		    	Tag tagOne = spaceService.selectOneTag(s);
+		    	spaceTag.setSpaceNo(spaceNo);
+		    	spaceTag.setTagNo(tagOne.getNo());
+		    	result4 = spaceService.insertSpaceTag(spaceTag);
 		    }
-		    
-			/* redirectAttr.addFlashAttribute("msg", "게시글 등록 성공!"); */
-			
+		    String msg = result4 > 0 ? "공간이 등록되었습니다! 심사 후 공개로 전환됩니다." : "등록실패";
+		    redirectAttr.addFlashAttribute("msg", msg);
 		} catch(Exception e) {
 			log.error("게시물 등록 오류", e);
-			/* redirectAttr.addFlashAttribute("msg", "게시글 등록 실패!"); */
 			
 			//예외발생을 spring container에게 전달 : 지정한  예외페이지로 응답처리
 			throw e;
