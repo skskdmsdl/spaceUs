@@ -565,11 +565,7 @@ $("#tags").on("click", function(){
 <!-- 사업자등록 script -->
 <script>
 //사업자 등록정보 조회(중복조회)
-<<<<<<< HEAD
 $("#businessNo").keyup(function(){
-=======
-$("#businessNo").blur(function(){
->>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
 	if(!/^[0-9]{10}$/.test($(this).val())){
 		$("#duplicate").hide();
 		$("#ok").hide();

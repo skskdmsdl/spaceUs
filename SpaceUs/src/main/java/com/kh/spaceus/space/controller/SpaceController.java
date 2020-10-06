@@ -1,5 +1,7 @@
 package com.kh.spaceus.space.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spaceus.common.Utils;
@@ -22,6 +25,7 @@ import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Review;
+import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
@@ -49,7 +53,8 @@ public class SpaceController {
 	@RequestMapping(value="/insertSpace.do",method = RequestMethod.POST)
 	public String insertSpace(Space space,
 							  @RequestParam String optionNo,
-							  @RequestParam String day) {
+							  @RequestParam String day
+							 ) {
 		System.out.println("post메핑");
 		System.out.println(space);
 		System.out.println(optionNo);
@@ -60,6 +65,45 @@ public class SpaceController {
 	        System.out.println(memberInfo.get("day") + " : " + memberInfo.get("startHour"));
 	    } 
 
+	    //System.out.println(files);
+//	    //1. 파일을 서버컴퓨터에 저장
+//  		List<ReviewAttachment> attachList  = new ArrayList<>();
+//  		String saveDirectory = request.getServletContext()
+//  									  .getRealPath("/resources/upload/space");
+//  		
+//  		for(MultipartFile f : files) {
+//  			
+//  			if(!f.isEmpty() && f.getSize() != 0) {
+//  				//1. 파일명 생성
+//  				String renamedFileName = Utils.getRenamedFileName(f.getOriginalFilename());
+//  				
+//  				//2. 메모리의 파일 -> 서버경로상의 파일 
+//  				File newFile = new File(saveDirectory, renamedFileName); //임의의 자바파일객체를 만들고 이동시킴
+//  				try {
+//  					f.transferTo(newFile);
+//  				} catch (IllegalStateException | IOException e) {
+//  					e.printStackTrace();
+//  				}
+//  				//3. attachment객체 생성(db 저장을 위한 준비)
+//  				ReviewAttachment attach = new ReviewAttachment();
+//  				attach.setOName(f.getOriginalFilename());
+//  				attach.setRName(renamedFileName);
+//  				attachList.add(attach);
+//  			}
+//  			
+//  		}
+//    
+//  		//2. 게시글, 첨부파일정보를 DB에 저장
+//		try {
+//			int result = spaceService.insertReview(review);
+//			redirectAttr.addFlashAttribute("msg", "리뷰 등록 성공!");
+//		} catch(Exception e) {
+//			log.error("게시물 등록 오류", e);
+//			redirectAttr.addFlashAttribute("msg", "리뷰 등록 실패!");
+//			
+//			//예외발생을 spring container에게 전달 : 지정한  예외페이지로 응답처리
+//			throw e;
+//		}
 	
 		return "space/insertSpace";
 	}
