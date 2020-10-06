@@ -215,6 +215,15 @@
 			enroll_date desc
 	</select>
 	
+	<select id="selectRecruitTotalSearch" resultType="_int">
+	    select 
+	    	count(*) 
+	    from 
+	    	recruit	
+	    where
+	    	title like '%'||#{keyWord}||'%'
+	</select>
+	
 	
 
 </mapper>

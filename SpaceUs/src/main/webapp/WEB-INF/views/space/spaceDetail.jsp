@@ -368,10 +368,6 @@ function naverShare() {
 				            <label for="message-text" class="col-form-label">내용</label>
 				            <textarea class="form-control" id="message-text" name="content" style="height: 400px;" ></textarea>
 				          </div>
-				          <div class="form-group">
-				            <label for="qna-password" class="col-form-label">비밀번호</label>
-				            <input type="password" class="form-control" id="qna-password" name="password">
-				          </div>
 				            <div class="form-group">
 				            <label for="qna-status" >비밀글</label>
 				            <input type="checkbox" name = "status" class="form-control" style="width: 27px; height: 24px;" id="qna-status" value="false">
