@@ -1,6 +1,8 @@
 package com.kh.spaceus.space.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spaceus.common.Utils;
@@ -25,6 +25,7 @@ import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
 
 import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSONArray;
 
 @Controller
 @Slf4j
@@ -46,12 +47,18 @@ public class SpaceController {
 	@RequestMapping(value="/insertSpace.do",method = RequestMethod.POST)
 	public String insertSpace(Space space,
 							  @RequestParam String optionNo,
-							  ReservationAvail reservationAvail) {
+							  @RequestParam String day) {
 		System.out.println("post메핑");
 		System.out.println(space);
 		System.out.println(optionNo);
-		//for(int i=0; i<reservationAvail.length; i++)
-		System.out.println(reservationAvail);
+		
+		List<Map<String,Object>> info = new ArrayList<Map<String,Object>>();
+	    info = JSONArray.fromObject(day);
+	    for (Map<String, Object> memberInfo : info) {
+	        System.out.println(memberInfo.get("day") + " : " + memberInfo.get("startHour"));
+	    } 
+
+	
 		return "space/insertSpace";
 	}
 	
@@ -145,7 +152,7 @@ public class SpaceController {
 	//사업자등록증 조회
 	@GetMapping("/checkIdDuplicate.do")
     public ModelAndView checkIdDuplicate1(ModelAndView mav,
-    									  @RequestParam("businessNo") int businessNo) {
+    									  @RequestParam("businessNo") long businessNo) {
     	
     	//1.업무로직 : 중복체크
     	Space space = spaceService.selectOneSpace(businessNo);
