@@ -113,6 +113,12 @@ public class SpaceServiceImpl implements SpaceService{
 	public int selectQuestionTotalContents(String spaceNo) {
 		return  spaceDAO.selectQuestionTotalContents(spaceNo);
 	}
+
+	@Override
+	public int insertWishList(String spaceNo, String email) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 	

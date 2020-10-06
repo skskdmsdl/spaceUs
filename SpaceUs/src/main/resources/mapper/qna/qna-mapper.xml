@@ -9,7 +9,6 @@
 			#{spaceNo},
 			#{email},
 			#{name},
-			#{password},
 			#{content},
 			null,
 			default,
@@ -50,7 +49,6 @@
 		<result column="member_email" property="email" />
 		<result column="nickname" property="name" />
 		<result column="qna_answer" property="answer" />
-		<result column="qna_pw" property="password" />
 		<result column="qna_content" property="content" />
 		<result column="qna_date" property="date" />
 		<result column="qna_status" property="status" />

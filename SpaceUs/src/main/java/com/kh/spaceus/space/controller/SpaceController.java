@@ -153,7 +153,10 @@ public class SpaceController {
 	public void insertWishList(@RequestParam("spaceNo") String spaceNo, @RequestParam("email") String email) {
 		System.out.println("좋아요클릭"+spaceNo+email);
 		
-		/* int result = spaceService.insertWishList(); */
+		
+		int result = spaceService.insertWishList(spaceNo, email);
+		
+		
 		
 	}
 	
