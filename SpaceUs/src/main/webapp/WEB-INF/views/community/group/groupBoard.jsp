@@ -75,7 +75,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	            <h1 class="mb-4">소모임</h1>
 	            <p class="h6">소모임 게시판은 사람과 사람을 연결하고 space와 us를 연결하기 위한 자유 게시판으로,<br>
 	            			  SpaceUs에서는 정보교환의 온라인 공간을 제공할 뿐 중개에 관여하지 않으며,<br>
-							    그에 따른 과실 또는 손해발생에 대해 일체 책임을 지지 않음을 알려드립니다.</p>
+							    그에 따른 과실 또는 손해발생에 대해 일체 책임을 지지 않음을 알려드립니다.!!!!!!!!</p>
             </div>
           </div>
         </div>
