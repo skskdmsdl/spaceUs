@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
 import com.kh.spaceus.community.recruit.model.vo.RecruitComment;
+import com.kh.spaceus.community.recruit.model.vo.ReportComment;
 import com.kh.spaceus.community.recruit.model.vo.ReportRecruit;
 import com.kh.spaceus.space.model.vo.Tag;
 
@@ -32,13 +33,19 @@ public interface RecruitDAO {
 
 	int insertComment(RecruitComment comment);
 
-	List<RecruitComment> selectCommentList(String no);
+	List<RecruitComment> selectCommentList(RecruitComment comment);
 
 	int updateComment(RecruitComment comment);
 
 	int deleteComment(String commentNo);
 
 	int selectCommentTotalContents(String no);
+
+	int insertReportComment(ReportComment reportComment);
+
+	List<Recruit> searchRecruit(String keyWord, int limit, int offset);
+
+
 
 
 }

@@ -20,14 +20,18 @@ import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.community.recruit.model.service.RecruitService;
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
 import com.kh.spaceus.community.recruit.model.vo.RecruitComment;
+import com.kh.spaceus.community.recruit.model.vo.ReportComment;
 import com.kh.spaceus.community.recruit.model.vo.ReportRecruit;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.space.model.vo.Review;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,9 +49,8 @@ public class RecruitController {
 	// 구인/구직 목록
 	@RequestMapping("/recruitList.do")
 	public ModelAndView recruitList (ModelAndView mav,
-							  @RequestParam(defaultValue = "1",
-						  	  value = "cPage") int cPage,
-							  HttpServletRequest request) {
+								     @RequestParam(defaultValue = "1", value = "cPage") int cPage,
+								     HttpServletRequest request) {
 		//1.사용자 입력값 
 		final int limit = 10; //사용용도는 numPerPage와 똑같음
 		int offset = (cPage - 1) * limit;
@@ -80,10 +83,10 @@ public class RecruitController {
 	// 구인/구직 상세페이지
 	@GetMapping("/recruitDetail.do")
 	public String recruitDetail (@RequestParam("no") String no,
-			  					Model model,
-			  					HttpServletRequest request,
-			  					HttpServletResponse response
-			  					) {
+			  					 Model model,
+			  					 HttpServletRequest request,
+			  				 	 HttpServletResponse response
+			  					 ) {
 		try {
 			//쿠키검사 : recruitCookie
 			Cookie[] cookies = request.getCookies();
@@ -113,10 +116,16 @@ public class RecruitController {
 				log.info("result = {}",result);			
 			}
 			
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			authentication.getName();
+			RecruitComment comment = new RecruitComment();
+			comment.setNo(no);
+			comment.setReporter(authentication.getName());
+			
 			Recruit recruit = recruitService.selectOneRecruit(no);
-			List<RecruitComment> commentList = recruitService.selectCommentList(no);
+			List<RecruitComment> commentList = recruitService.selectCommentList(comment);
 			int commentTotal = recruitService.selectCommentTotalContents(no);
-			log.debug("recruit = {}", recruit);
+			
 			model.addAttribute("recruit", recruit);
 			model.addAttribute("commentList", commentList);
 			model.addAttribute("commentTotal", commentTotal);
@@ -303,9 +312,52 @@ public class RecruitController {
 									  @RequestParam("commentNo") String commentNo) {
 		
 		int result = recruitService.deleteComment(commentNo);
+		mav.setViewName("jsonView"); 
 		
-		mav.setViewName("jsonView"); // /WEB-INF/views/jsonView.jsp
+		return mav;
+	}
+	
+	//댓글 신고
+	@GetMapping("/insertReportComment.do")
+	public ModelAndView insertReportComment(ModelAndView mav,
+										    @RequestParam("commentNo") String commentNo,
+										    Principal principal) {
 		
+		ReportComment reportComment = new ReportComment();
+		reportComment.setBoardCommentNo(commentNo);
+		reportComment.setEmail(principal.getName());
+		
+		int result = recruitService.insertReportComment(reportComment);
+		mav.setViewName("jsonView"); 
+		
+		return mav;
+	}
+	
+	//키워드 검색
+	@GetMapping("/searchRecruit.do")
+	public ModelAndView searchRecruit(ModelAndView mav,
+									  @RequestParam("keyWord") String keyWord,
+									  @RequestParam(defaultValue = "1", value = "cPage") int cPage,
+									  HttpServletRequest request) {
+		//1.사용자 입력값 
+		final int limit = 10; 
+		int offset = (cPage - 1) * limit;
+		
+		//2. 업무로직
+		List<Recruit> list = recruitService.searchRecruit(keyWord, limit, offset);
+		log.debug("list = {}", list);
+		
+		
+		//전체컨텐츠수 구하기
+		int totalContents = recruitService.selectRecruitTotalContents(); 
+		String url = request.getRequestURI() + "?";
+		String pageBar = Utils.getPageBarHtml(cPage, limit, totalContents, url);
+		
+		//3. view단 처리
+		mav.addObject("totalContents", totalContents);
+		mav.addObject("list", list);
+		mav.addObject("pageBar", pageBar);
+		mav.setViewName("community/recruit/recruitList");
 		return mav;
 	}
 	
