@@ -17,7 +17,7 @@ public interface SpaceDAO {
 
 	Space selectOneSpace(String spaceNo);
 
-	Space selectOneSpace(int businessNo);
+	Space selectOneSpace(long businessNo);
 
 	List<Tag> selectListSpaceTag(String spaceNo);
 

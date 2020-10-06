@@ -349,7 +349,7 @@ public class RecruitController {
 		
 		
 		//전체컨텐츠수 구하기
-		int totalContents = recruitService.selectRecruitTotalContents(); 
+		int totalContents = recruitService.selectRecruitTotalSearch(keyWord); 
 		String url = request.getRequestURI() + "?";
 		String pageBar = Utils.getPageBarHtml(cPage, limit, totalContents, url);
 		
