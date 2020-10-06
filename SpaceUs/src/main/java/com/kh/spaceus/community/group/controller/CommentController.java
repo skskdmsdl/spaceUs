@@ -1,10 +1,15 @@
 package com.kh.spaceus.community.group.controller;
 
+import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.spaceus.community.group.model.service.GroupService;
@@ -64,5 +69,30 @@ public class CommentController {
 		}catch(Exception e) {
 			log.error("댓글 삭제 오류",e);
 		}
+	}
+	
+	@PostMapping("/alertComment.do")
+	public  void alertComment(@RequestParam String groupBoardCommentNo,Principal principal) {
+		log.info("groupBoardCommentNo= {}",groupBoardCommentNo);
+		String memberEmail = principal.getName();
+		log.info("memberEmail={}",memberEmail);
+		
+		Map<String,String> map = new HashMap<>();
+		map.put("groupBoardCommentNo", groupBoardCommentNo);
+		map.put("memberEmail", memberEmail);
+		
+		try {
+			int result1 = groupService.alertComment(map);
+			int result2 = groupService.updateReportCnt(groupBoardCommentNo);
+			
+			if(result1>0 && result2>0) {
+				log.info("댓글 신고 성공");
+			}
+		}catch(Exception e) {
+			log.error("댓글 신고 오류",e);
+		}
+		
+		log.info("map={}",map);
+		
 	}
 }

@@ -111,12 +111,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 										<!-- <span class="badge badge-primary badge-pill">14</span> -->
 									</div>
 		                 		</c:if>
-		                 		<script>
-								/*  function upperList(){
-									var element = document.getElementById("upper");
-									element.classList.toggle("click");			
-								} */
-								</script>
+		                 		
                 			</form>
 			            </c:forEach>
 						</div>							
@@ -163,7 +158,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                            			"식당공간 나눔":gb.boardNo=="9"?
 			                            			"소모임 자랑":"기타"}]
 			                            	</span>
-			                            		${gb.groupBoardTitle}
+			                            		${gb.groupBoardTitle} &nbsp;&nbsp;[${gb.commentCnt}]
 			                            </td>
 			                            <td class="txt-oflo">${gb.groupBoardDate }</td>
 			                            <td class="txt-oflo">${gb.viewCnt}</td>

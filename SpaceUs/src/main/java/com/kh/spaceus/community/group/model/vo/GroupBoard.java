@@ -25,4 +25,5 @@ public class GroupBoard implements Serializable {
 	private int reportCnt;
 	private Date groupBoardDate;
 	private String nickname;
+	private String commentCnt;
 }
