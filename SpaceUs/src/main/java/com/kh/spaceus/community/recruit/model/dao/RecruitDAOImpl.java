@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
+import com.kh.spaceus.community.recruit.model.vo.RecruitComment;
 import com.kh.spaceus.community.recruit.model.vo.ReportRecruit;
 import com.kh.spaceus.space.model.vo.Tag;
 
@@ -72,6 +73,33 @@ public class RecruitDAOImpl implements RecruitDAO{
 	public int increaseRecruitReadCnt(String no) {
 		return sqlSession.update("recruit.increaseRecruitReadCnt", no);
 	}
+
+	@Override
+	public int insertComment(RecruitComment comment) {
+		return sqlSession.insert("recruit.insertComment", comment);
+	}
+
+	@Override
+	public List<RecruitComment> selectCommentList(String no) {
+		return sqlSession.selectList("recruit.selectCommentList", no);
+	}
+
+	@Override
+	public int updateComment(RecruitComment comment) {
+		return sqlSession.update("recruit.updateComment", comment);
+	}
+
+	@Override
+	public int deleteComment(String commentNo) {
+		return sqlSession.update("recruit.deleteComment", commentNo);
+	}
+
+	@Override
+	public int selectCommentTotalContents(String no) {
+		return sqlSession.selectOne("recruit.selectCommentTotalContents", no);
+	}
+
+
 
 
 

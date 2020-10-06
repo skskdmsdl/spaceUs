@@ -16,7 +16,6 @@
 	<!-- bootstrap js: jquery load 이후에 작성할것.-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-	
 	<!-- bootstrap css -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     
@@ -179,61 +178,15 @@
 		         	 💚  위시리스트
 		        </a>
 	      	 </div>
-	      </div>
-	      <div class="modal-footer">
-	      	 <form:form action="${ pageContext.request.contextPath }/member/memberLogout.do">
-	      	 	 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">로그아웃</button>
-	      	 </form:form>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-     </sec:authorize>
-     <sec:authorize access="hasAnyRole('USER', 'HOST')">
-	<div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-auto" role="document">
-	    <div class="modal-content"  style="background:#625c55; border-radius: 1.3em; left:36rem; top:3rem; width:55%; ">
-	      <div class="modal-header" style="background: #30D795; border-radius: 1.3em;">
-	        <h5 class="modal-title" id="exampleModalLabel">
-	        	<div data-toggle="modal" data-target="#exampleModal">
-		        	<img src="https://resource.miricanvas.com/image/common/profile_argo.svg" style="background: #22B47B; border-right: 0; border-radius: 90%; width: 40px;  height: 40px;">
-	        	<sec:authentication property="principal.nickName"/> 님
-	        	</div>
-	        </h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	      	<div class="col-sm-10 mb-2">
-	    	    <a href="${pageContext.request.contextPath }/member/memberProfile.do">
-	    	            👩🏻 회원정보
-	    	    </a>
-	      	</div>
-	      <%-- 	<div class="col-sm-10 mb-2">
-	    	    <a href="${pageContext.request.contextPath }/space/insertSpace.do">
-	    	            💒 공간 등록 
-	    	    </a>
-	      	</div> --%>
-	      	<div class="col-sm-10 mb-2">
-		        <a href="${pageContext.request.contextPath }/member/usageHistory.do">
-		           🧭 나의 예약내역
-		        </a>
-	      	 </div>
-	      	 <div class="col-sm-10 mb-2">
-		        <a href="${pageContext.request.contextPath }/member/wishList.do">
-		         	 💚  위시리스트
-		        </a>
-	      	 </div>
-	      	 <!-- admin 권한 -->
-	      	 <sec:authorize access="hasRole('ROLE_ADMIN')">
+	      	  <!-- admin 권한 -->
+	      	  <sec:authorize access="hasRole('ADMIN')">
 	      	 	<div class="col-sm-10 mb-2">
 		        <a href="${pageContext.request.contextPath }/admin/memberManage.do">
 		         	 👨‍👨‍👧‍👧	 SpaceUs 관리       
 		        </a>
 	      	    </div>
-	      	 </sec:authorize>
-	      	 <!-- admin 권한 끝 -->
+	      	   </sec:authorize>
+	      	  <!-- admin 권한 끝 -->
 	      </div>
 	      <div class="modal-footer">
 	      	 <form:form action="${ pageContext.request.contextPath }/member/memberLogout.do">
@@ -244,62 +197,4 @@
 	  </div>
 	</div>
 	</sec:authorize>
-	<!-- /user 권한 -->
-	
-<!-- admin 권한 -->	
-<sec:authorize access="hasRole('ADMIN')">
-	<div class="fade modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-auto" role="document">
-	    <div class="modal-content"  style="background:#625c55; border-radius: 1.3em; left:36rem; top:3rem; width:55%; ">
-	      <div class="modal-header" style="background: #30D795; border-radius: 1.3em;">
-	        <h5 class="modal-title" id="exampleModalLabel">
-	        	<div>
-		        	<img src="https://resource.miricanvas.com/image/common/profile_argo.svg" style="background: #22B47B; border-right: 0; border-radius: 90%; width: 40px;  height: 40px;">
-	        		<sec:authentication property="principal.nickName"/> 님
-	        	</div>
-	        </h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	      	<div class="col-sm-10 mb-2">
-	    	    <a href="${pageContext.request.contextPath }/member/memberProfile.do">
-	    	            👩🏻 마이 프로필
-	    	    </a>
-	      	</div>
-	      	<div class="col-sm-10 mb-2">
-	    	    <a href="${pageContext.request.contextPath }/space/insertSpace.do">
-	    	            💒 공간 등록 
-	    	    </a>
-	      	</div>
-	      <%-- 	<div class="col-sm-10 mb-2">
-		        <a href="${pageContext.request.contextPath }/member/usageHistory.do">
-		           🧭 예약관리
-		        </a>
-	      	 </div>
-	      	 <div class="col-sm-10 mb-2">
-		        <a href="${pageContext.request.contextPath }/member/wishList.do">
-		         	 ❤   위시리스트
-		        </a>
-	      	 </div> --%>
-      	 	<div class="col-sm-10 mb-2">
-		        <a href="${pageContext.request.contextPath }/admin/memberManage.do">
-		         	 👨‍👨‍👧‍👧	 SpaceUs 관리       
-		        </a>
-	      	 </div>
-	      </div>
-	      <div class="modal-footer">
-	      	 <form:form action="${ pageContext.request.contextPath }/member/memberLogout.do">
-	      	 	 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">로그아웃</button>
-	      	 </form:form>
-	      </div>
-	    </div>
-	  </div>
-	</div>
 
-	</sec:authorize>
-	<!-- /admin 권한 끝 -->
-<!-- <div id="talkjs-container" style="right:30px;">
-	<i>Loading chat...</i>
-</div>	 -->

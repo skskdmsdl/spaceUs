@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.dao.SpaceDAO;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
@@ -85,6 +86,32 @@ public class SpaceServiceImpl implements SpaceService{
 	@Override
 	public Star selectStar() {
 		return spaceDAO.selectStar();
+	}
+
+
+	@Override
+	public Space selectOneSpaceNo(String email) {
+		return spaceDAO.selectOneSpaceNo(email);
+	}
+
+	@Override
+	public int updateReviewComment(Review review) {
+		return spaceDAO.updateReviewComment(review);
+	}
+
+	@Override
+	public List<Review> selectReviewComment(String spaceNo, int limit, int offset) {
+		return spaceDAO.selectReviewComment(spaceNo, limit, offset);
+	}
+	
+	@Override
+	public List<Qna> selectQuestionList(String spaceNo, int limit, int offset) {
+		return spaceDAO.selectQuestionList(spaceNo, limit, offset);
+	}
+
+	@Override
+	public int selectQuestionTotalContents(String spaceNo) {
+		return  spaceDAO.selectQuestionTotalContents(spaceNo);
 	}
 	
 	

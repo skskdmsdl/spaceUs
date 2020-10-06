@@ -28,7 +28,7 @@
       
 
 <!-- space -->
-	<select id="selectOneSpaceNo" resultType="space">
+	<select id="selectOneSpaceNum" resultType="space">
 		select 
 			*
 		from 
@@ -117,7 +117,7 @@
 			#{ rName }
 		)
 	</insert>
-	
+
 	<select resultMap="reviewMap" id="selectListReview">
 		select
 			R.*,
@@ -127,6 +127,7 @@
 		where space_no = #{ spaceNo } 
 		order by R.review_date desc
 	</select>
+	
 	<resultMap type="review" id="reviewMap">
 		<id column="review_no" property="reviewNo"/>
 		<result column="space_no" property="spaceNo"/>
@@ -162,6 +163,37 @@
 			count(case when star_rating=5 then 1 end) star5
 		from 
 			review
+	</select>
+	
+	<select id="selectOneSpaceNo" resultType="space">
+		select 
+			space_no
+		from 
+			space
+		where 
+			member_email = #{ email }
+	</select>
+	
+	<update id="updateReviewComment">
+		update 
+			review
+		set
+			review_comment = #{content}
+		where
+			review_no = #{reviewNo}
+	</update>
+	
+	<select resultMap="reviewMap" id="selectReviewComment">
+		select
+			R.*,
+			(select re_renamed_filename  from review_image where review_no=R.review_no) image
+		from
+			review R
+		where 
+			space_no = #{ spaceNo }
+			and
+		 	review_comment is null
+		order by R.review_date desc
 	</select>
 	
 	

@@ -24,49 +24,132 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/main.css">
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+	<!-- 구글 로긴 -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="778421516975-r2f80c2f91aalftfppl2kq4sqn1om06i.apps.googleusercontent.com">
 <script>
 	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
 	<c:if test="${ not empty msg }">
 		alert('${ msg }');	
 	</c:if>
-	<c:if test="${ not empty naverLoginMember }">
+	<c:if test="${ not empty email }">
 		alert('이미 가입하신 이메일입니다. 로그인해주세요.');
 	</c:if>
+	<c:if test="${ not empty closeFunction }">
+	    self.close();
+	</c:if>
+	
+/* 	<c:if test="${ not empty returnPath }">
+		alert("not empty returnPath"); //뷰단에 오기전에 컨트롤러에서 다 리턴되어버리는듯..
+	    self.close();
+		opener.parent.location="${returnPath}"
+	</c:if> */
+	
+	/* window.onload = function(){
+		signOut();
+		alert('onload signOut.');
+	} */
+	
+	function onSignIn(googleUser) {
+		var id_token = googleUser.getAuthResponse().id_token;
+		var profile = googleUser.getBasicProfile();
+		var email = profile.getEmail();
+
+		console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+		console.log('Name: ' + profile.getName());
+		console.log('Image URL: ' + profile.getImageUrl());
+		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+		console.log('id_token: ' + id_token); // id_token
+		console.log('tokenEmail ${tokenEmail}');
+		<c:if test="${ empty tokenEmail }">
+			signOut();
+			location.href='${pageContext.request.contextPath }/member/googleLogin.do?idtoken='+id_token+'&email='+email;
+		</c:if>
+		<c:if test="${ not empty tokenEmail }">
+			signOut();
+			location.href='${pageContext.request.contextPath }/member/googleLogin.do?idtoken='+id_token+'&tokenEmail='+tokenEmail;
+			<c:remove var = "tokenEmail"/>
+		</c:if>
+		/*
+		<c:if test="${ empty tokenEmail }">
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', '${pageContext.request.contextPath }/member/googleLogin.do');
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			xhr.onload = function() {
+			  console.log('Signed in as: ' + xhr.responseText);
+			  document.open();
+			  document.write(xhr.responseText);
+			  document.close();
+			  
+			};
+			xhr.send('idtoken=' + id_token+'&email='+email);
+		</c:if>
+		*/
+	}
+
+	function newWindow(url) {
+		if('${returnPath}' == "") {
+			window.open(url, 'popup','width=600,height=600')
+		}
+
+		else {
+			self.close();
+			//window.opener.parent.location.reload();
+		}
+		//if(!window.opener) window.opener = window.open('${returnPath}', 'popup','width=600,height=600');
+		//opener.parent.location="${returnPath}"; //parent가 null이 나옴.
+	}
+
+	
 </script>
+
 </head>
 <body>
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100" style="background-image: url('${pageContext.request.contextPath }/resources/images/bg-01.jpg');
-											 background-position: right">
+			<div class="wrap-login100" style="background-image: url('https://interiordesignideas2014.files.wordpress.com/2016/12/image-41434.jpg');">
 				<form:form action="${pageContext.request.contextPath }/member/memberLogin.do" method="POST"
 							class="login100-form validate-form">
 					<span class="login100-form-title p-b-43">
 						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 					</span>
 					<div id="naver_id_login" style="text-align:center">
-						<a href="${naver_url}">
+						<%-- <a href="${naver_url}"> --%>
+						<a href="#" onClick="window.open('${naver_url}', 'popup','width=600,height=600')">
+						<%-- <a href="#" onClick="newWindow('${naver_url}')"> --%>
 							<div class="social-btn">
 								<img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg"/>
 									&nbsp;네이버로 시작하기
 							</div>
 						</a>
 					</div>
-					<div id="naver_id_login" style="text-align:center">
-						<a href="${kakao_url}">
+					<div id="kakao_id_login" style="text-align:center">
+						<%-- <a href="${kakao_url}"> --%>
+						<a href="#" onClick="window.open('${kakao_url}', 'popup','width=600,height=600')">
 							<div class="social-btn">
 								<img src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png"/>
 									&nbsp;카카오로 시작하기
 							</div>
 						</a>
 					</div>
-					<div id="naver_id_login" style="text-align:center">
-						<a href="${facebook_url}">
-							<div class="social-btn">
+					<div id="google_id_login" style="text-align:center">
+						<!--c:if test="${ empty tokenEmail }"-->				
+							<div class="g-signin2 social-btn" data-onsuccess="onSignIn" data-longtitle="true" data-width="645" data-height="50px" style="opacity: 100">
 								<img src="${pageContext.request.contextPath }/resources/images/icons/google-icon.png"/>
-									&nbsp;페이스북으로 시작하기
+									&nbsp;구글로 시작하기
 							</div>
-						</a>
+						<!--/c:if-->
+						<!--c:if test="${ not empty tokenEmail }"-->
+							<!-- <a href="#" onclick="signOut();">Sign out</a> -->
+							<script>
+							  function signOut() {
+							    var auth2 = gapi.auth2.getAuthInstance();
+							    auth2.signOut().then(function () {
+							      console.log('User signed out.');
+							    });
+							  }
+							</script>
+						<!--/c:if-->
 					</div>
 						<div class="text-center p-t-46 p-b-20">
 						<p class="txt1">

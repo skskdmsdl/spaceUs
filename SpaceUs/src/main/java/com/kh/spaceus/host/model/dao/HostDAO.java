@@ -3,7 +3,8 @@ package com.kh.spaceus.host.model.dao;
 import java.util.HashMap;
 import java.util.List;
 
-import com.kh.spaceus.host.model.vo.Qna;
+import com.kh.spaceus.qna.model.vo.Qna;
+
 
 public interface HostDAO {
 	

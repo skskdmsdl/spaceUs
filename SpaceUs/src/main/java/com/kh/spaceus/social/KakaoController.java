@@ -81,7 +81,7 @@ public class KakaoController {
 
   public JsonNode getKakaoUserInfo(String autorize_code) {
 
-    final String RequestUrl = "https://kapi.kakao.com/v1/user/me";
+    final String RequestUrl = "https://kapi.kakao.com/v2/user/me";
 //    String CLIENT_ID = K_CLIENT_ID; // REST API KEY
 //    String REDIRECT_URI = K_REDIRECT_URI; // 리다이렉트 URI
 //    String code = autorize_code; // 로그인 과정중 얻은 토큰 값
@@ -90,8 +90,11 @@ public class KakaoController {
     final HttpClient client = HttpClientBuilder.create().build();
     final HttpPost post = new HttpPost(RequestUrl);
     String accessToken = getAccessToken(autorize_code);
+    log.info("accessToken = {}", accessToken);
+    
     // add header
     post.addHeader("Authorization", "Bearer " + accessToken);
+    //post.addHeader("Content-Type" , "x-www-form-urlencoded");	
 
     JsonNode returnNode = null;
 

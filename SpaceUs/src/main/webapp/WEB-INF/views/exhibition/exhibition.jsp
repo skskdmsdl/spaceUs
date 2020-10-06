@@ -13,6 +13,7 @@
 .space1 {cursor: pointer;}
 .more-list {visibility:hidden;}
 .btn-outline-danger {margin-bottom:5px;}
+.text-right a:hover {color:#666666;}
 </style>
 <section class="ftco-section ftco-agent">
   	<div class="container">
@@ -32,7 +33,7 @@
 	      	<br />
 	      	</sec:authorize>
 	      	<input type="hidden" id="exNo" value="${ list.exNo }"/>
-	      		<div class="agent space1" onclick="exhibitionList();">
+	      		<div class="agent space1" onclick="exhibitionList('${list.tag}');">
   					<div class="img">
 	  					<c:if test="${ not empty list.imageUrl }">
 	    					<img src="${ list.imageUrl  }">
@@ -75,8 +76,9 @@ function deleteEx(exNo){
 	});
 }
 
-function exhibitionList () {
-	location.href = "${pageContext.request.contextPath}/exhibition/exhibitionList.do";
+function exhibitionList (tag) {
+	console.log("tag = " + tag);
+	location.href = "${pageContext.request.contextPath}/exhibition/exhibitionList.do?tag=" + tag;
 };
 
 </script>

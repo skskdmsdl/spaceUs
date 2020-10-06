@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
+import com.kh.spaceus.community.recruit.model.vo.RecruitComment;
 import com.kh.spaceus.community.recruit.model.vo.ReportRecruit;
 
 public interface RecruitService {
@@ -27,6 +28,16 @@ public interface RecruitService {
 	int updateReport(String no);
 
 	int increaseRecruitReadCnt(String no);
+
+	int insertComment(RecruitComment recruitComment);
+
+	List<RecruitComment> selectCommentList(String no);
+
+	int updateComment(RecruitComment comment);
+
+	int deleteComment(String commentNo);
+
+	int selectCommentTotalContents(String no);
 
 
 }

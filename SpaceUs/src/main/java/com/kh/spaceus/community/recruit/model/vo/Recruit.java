@@ -25,5 +25,6 @@ public class Recruit implements Serializable{
 	private int viewCnt;
 	private int reportCnt;
 	private Date enrollDate;
+	private int commentCnt;
 }
 

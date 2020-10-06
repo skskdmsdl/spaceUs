@@ -150,23 +150,24 @@ body{
 	                         
 	                         
 	                         <!-- 댓글 시작 -->
-	                         
+	                       
 		                         <p style="margin-left:5%; display: inline;"><i class="fa fa-comment"></i> 댓글수 &nbsp; ${commentCnt}</p>
 	                         
 	                         <p style="display: inline; margin: 0 5px;">|</p>
 	                         <!-- 공유하기 팝오버 시작-->
 						       <a href=javascript:; data-toggle="popover" data-trigger="focus" data-placement="bottom"
-						          tabindex="0" title="공유하기" data-html="true" data-popover-content="#a1" >
+						          tabindex="0" title="공유하기" data-html="true" data-popover-content="#url" >
 						       <i class="far fa-share-square" style="color:#d0d0d0 !important;"></i>
 						       <p style="display: inline;">공유하기</p>
 						       </a>
 						       
-						       <div class="d-none" id="a1" style="position: relative;">
+						       <div class="d-none" id="url" style="position: absolute; top:-100px;">
 								  <div class="popover-body">
 								    <input class="input-group-text w-100" type="text" id="url-input">
 								    <button class="btn btn-primary w-100" id="url-btn" onclick="urlcopy();">URL 복사</button>
 								  </div>
 							  	</div>
+							  	
       						<!-- 공유하기 팝오버 끝-->
                          	
 	                         <div style="background-color: #fafafa; width:90%; margin: auto;">
@@ -195,7 +196,7 @@ body{
 			                           		<div class="level1_${cm.groupBoardCommentNo}" style="margin-top: 10px;">
 			                           			<div class="level1__${cm.groupBoardCommentNo}">
 					                           		<tr class="col-md-1">                           		
-					                           			<input type="hidden" name="groupBoardCommentNo${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}" />
+					                           			<input type="hidden" name="groupBoardCommentNo${cm.groupBoardCommentNo}" id="gbcNo" value="${cm.groupBoardCommentNo}" />
 					                           			
 					                                    <th><b>${cm.nickname}</b></th>
 					                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;">${cm.groupBoardDate}</p></th>
@@ -215,7 +216,7 @@ body{
 								                                    				<c:if test="${loginMember != cm.writer}">
 								                                    					<li><button name="alertComment${cm.groupBoardCommentNo}" 
 								                                    								value="${cm.groupBoardCommentNo}" style="border:0; background: #fafafa;"
-								                                    								data-toggle="modal" data-target="#commentReport">신고하기</button></li>
+								                                    								onclick="alertCommentBtn${cm.groupBoardCommentNo}">신고하기</button></li>
 								                                    				</c:if>
 								                                    				<c:if test="${loginMember == cm.writer}">
 								                                    					<li><button name="updateComment${cm.groupBoardCommentNo}" value="${cm.groupBoardCommentNo}"  style="border:0; background: #fafafa;">수정</button></li>
@@ -227,6 +228,10 @@ body{
 							                                    	</ul>
 						                                    	</th>
 					                                    	<script type="text/javascript">
+																function alertCommentBtn${cm.groupBoardCommentNo}(){
+																	alert("sss");
+																}
+					                                    	
 						                                    	function menu${cm.groupBoardCommentNo}(){
 						                                    		var element = document.getElementById("main-menu${cm.groupBoardCommentNo}");
 						                                    		element.classList.toggle("click");
@@ -675,7 +680,7 @@ body{
                        </div>
                        <!-- Modal end -->
                        
-                       <!-- 댓글 신고 Modal -->
+                  <%--      <!-- 댓글 신고 Modal -->
                        <c:forEach items="${commentList}" var="comment">
 	                       <div class="modal fade" id="commentReport" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
 	                           <div class="modal-dialog">
@@ -691,16 +696,17 @@ body{
 	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="음란성 또는 청소년에게 부적합한 내용"/> 음란성 또는 청소년에게 부적합한 내용<br/>
 	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="명예훼손/사생활 침해 및 저작권침해등"/> 명예훼손/사생활 침해 및 저작권침해등<br/>
 	                                       <input type="radio" name="reportReason" style="margin-left:85px;" value="기타"/> 기타
+	                                       <input type="hidden" name="groupCommentNo_${comment.groupBoardCommentNo}" value="${comment.groupBoardCommentNo}" />
 	                                   </div>
 	                                   <div class="modal-footer">
-	                                       <button type="submit" class="btn btn-primary" data-dismiss="modal" id="alertBtn">신고</button>
+	                                       <button type="submit" class="btn btn-primary" data-dismiss="modal" id="alertCommentBtn" value="${comment.groupBoardCommentNo}">신고</button>
 	                                       <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 	                                   </div>
 	                               </div>
 	                           </div>
 	                       </div>
-	                       <!-- Modal end -->
-                       </c:forEach>
+	                       <!-- Modal end --> --%>
+                       <%-- </c:forEach> --%>
                        
                    </c:forEach>
           
@@ -723,6 +729,7 @@ $("#alertBtn").click(function(){
 	
 	location.href="${pageContext.request.contextPath }/community/group/alertBoard.do?groupBoardNo="+groupBoardNo+"&reportReason="+reportReason;
 });
+
 //댓글 삼지창
 $(function(){
 	$('.sub-menu').hide();	

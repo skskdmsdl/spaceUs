@@ -6,9 +6,7 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
@@ -17,17 +15,19 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.spaceus.community.recruit.model.vo.RecruitComment;
 import com.kh.spaceus.host.model.service.HostService;
-import com.kh.spaceus.host.model.vo.Qna;
-import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.qna.model.vo.Qna;
+import com.kh.spaceus.space.model.service.SpaceService;
+import com.kh.spaceus.space.model.vo.Review;
+import com.kh.spaceus.space.model.vo.Space;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,6 +39,8 @@ public class HostController {
 	@Autowired
 	private HostService hostService;
 	
+	@Autowired 
+	private SpaceService spaceService;
 	
 	//정산내역
 	@RequestMapping("/settlementDetails.do")
@@ -166,4 +168,59 @@ public class HostController {
 		
 		return objWorkBook;
 	}
+	
+	//리뷰 목록
+	@RequestMapping("/reviewList.do")
+	public String reviewList(Principal principal,
+							 Model model,
+							 @RequestParam(defaultValue = "1", value = "cPage")
+							 int cPage) {
+		final int limit = 10; 
+		int offset = (cPage - 1) * limit;
+		Space space = spaceService.selectOneSpaceNo(principal.getName());
+		String spaceNo = space.getSpaceNo();
+		List<Review> review = spaceService.selectListReview(spaceNo, limit, offset);
+		
+		model.addAttribute("review", review);
+		model.addAttribute("spaceNo", spaceNo);
+		
+		return "host/hostReviewList";
+	}
+	
+	//댓글 등록
+	@GetMapping("/updateReviewComment.do")
+	public ModelAndView updateReviewComment(ModelAndView mav,
+										   @RequestParam("content") String content,
+										   @RequestParam("reviewNo") String reviewNo) {
+		
+		Review review = new Review();
+		review.setReviewNo(reviewNo);
+		review.setContent(content);
+		
+		int result = spaceService.updateReviewComment(review);
+		
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+	
+	//리뷰 조회
+	@GetMapping("/selectReviewComment.do")
+	public ModelAndView selectReviewComment(ModelAndView mav,
+											@RequestParam("spaceNo") String spaceNo,
+											@RequestParam(defaultValue = "1", value = "cPage")
+											int cPage) {
+		final int limit = 10; 
+		int offset = (cPage - 1) * limit;
+		
+		List<Review> review = spaceService.selectReviewComment(spaceNo, limit, offset);
+		
+		mav.addObject("review", review);
+		mav.addObject("spaceNo", spaceNo);
+		mav.addObject("comment", "no");
+		mav.setViewName("host/hostReviewList");
+		System.out.println(review);
+		return mav;
+	}
+	
 }

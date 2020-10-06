@@ -1,0 +1,11 @@
+package com.kh.spaceus.qna.model.dao;
+
+import com.kh.spaceus.qna.model.vo.Qna;
+
+public interface QnaDAO {
+
+	int insertQna(Qna qna);
+
+	int updateAnswer(String answer, String qnaNo);
+
+}

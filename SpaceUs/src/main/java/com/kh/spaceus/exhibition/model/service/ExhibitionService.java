@@ -11,4 +11,10 @@ public interface ExhibitionService {
 	int deleteExhibition(String exNo);
 
 	int insertExhibition(Exhibition exhibition);
+
+	Exhibition selectOne(String exNo);
+
+	List<Exhibition> selectByTag(String tag);
+
+	Exhibition selectOneByTag(String tag);
 }

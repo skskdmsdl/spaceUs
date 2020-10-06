@@ -32,6 +32,52 @@
 	)
 </insert>
 
+<select id="selectOne" resultMap="exhibitionMap">
+	select 
+		*
+	from
+		exhibition
+	where
+		ex_no = #{exNo}
+</select>
+
+<select id="selectByTag" resultMap="spaceMap">
+	select
+	  *
+	from
+	  (
+	    select
+	      *
+	    from
+	      space
+      	join space_tag using(space_no)
+	  )
+	  join tag using(tag_no)
+	where
+	  tag_name = #{tag}
+</select>
+
+<select id="selectOneByTag" resultMap="exhibitionMap">
+	select
+		*
+	from 
+		exhibition
+	where 
+		tag = #{tag}
+</select>
+
+
+
+<!-- resultMap -->
+<resultMap type="space" id="spaceMap">
+</resultMap>
+
+<resultMap type="tag" id="tagMap">
+</resultMap>
+
+<resultMap type="spaceTag" id="spaceTagMap">
+</resultMap>
+
 <resultMap type="exhibition" id="exhibitionMap">
 </resultMap>
 </mapper>
