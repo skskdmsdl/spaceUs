@@ -19,4 +19,9 @@ public class ReservationServiceImpl implements ReservationService{
 		return reservationDAO.selectListAvail(spaceNo);
 	}
 
+	@Override
+	public int insertReservationVail(ReservationAvail reservationAvail) {
+		return reservationDAO.insertReservationVail(reservationAvail);
+	}
+
 }

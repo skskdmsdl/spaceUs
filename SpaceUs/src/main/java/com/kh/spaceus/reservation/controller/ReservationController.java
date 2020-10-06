@@ -19,7 +19,7 @@ public class ReservationController {
 	@Autowired 
 	private ReservationService reservationService;
 	 
-	@RequestMapping(value="/getRevAvail.do")
+	/*@RequestMapping(value="/getRevAvail.do")
 	public ModelAndView insertSpace(ModelAndView mav,
 									@RequestParam String day) {
 		//log.debug("해쉬태그 등록 요청");
@@ -27,7 +27,7 @@ public class ReservationController {
 		System.out.println("day="+day);
 		
 		return mav;
-	}
+	}*/
 	
 	
 }

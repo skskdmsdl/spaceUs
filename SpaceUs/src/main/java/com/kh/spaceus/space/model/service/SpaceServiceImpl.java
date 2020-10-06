@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.dao.SpaceDAO;
+import com.kh.spaceus.space.model.vo.Attachment;
+import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
@@ -113,7 +115,35 @@ public class SpaceServiceImpl implements SpaceService{
 	public int selectQuestionTotalContents(String spaceNo) {
 		return  spaceDAO.selectQuestionTotalContents(spaceNo);
 	}
-	
+
+	@Transactional(rollbackFor = {Exception.class})
+	@Override
+	public int insertSpace(Space space) {
+		int result = 0;
+		
+		result = spaceDAO.insertSpace(space);
+		
+		List<Attachment> attachList = space.getAttachList();
+		
+		//첨부파일이 있는 경우
+		if(attachList != null) {
+			for(Attachment attach : attachList) {
+				attach.setSpaceNo(space.getSpaceNo());
+				
+				log.debug("attach = {}", attach);
+				result = spaceDAO.insertAttachment(attach);
+				
+			}
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int insertOption(Option option) {
+		return spaceDAO.insertOption(option);
+	}
+
 	
 	
 	/*@Override

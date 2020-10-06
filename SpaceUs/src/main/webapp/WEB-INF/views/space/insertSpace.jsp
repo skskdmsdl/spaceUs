@@ -45,8 +45,9 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                 <div class="col-lg-12">
                     <div class="property-submit-form">
                         <form:form name="spaceFrm" id="spaceFrm" 
-							  action="${pageContext.request.contextPath}/space/insertSpace.do" 
-							  method="post">
+							  action="${pageContext.request.contextPath}/space/enrollSpace.do" 
+							  method="post"
+							  enctype="multipart/form-data">
 							  <!-- enctype="multipart/form-data"> -->
 <!-- 							  onsubmit="return spaceValidate();" -->
                             <div class="pf-title">
@@ -223,34 +224,34 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 <input type="hidden" name="" />
                                 <table class="table table-bordered" id="optionTb">
                                 	<tr>
-										<th id='option1' style="width:25%;">TV/프로젝터</th>	                                
-										<th id='option2' style="width:25%;">인터넷/와이파이</th>	                                
-										<th id='option3' style="width:25%;">복사/인쇄기</th>	                                
-										<th id='option4' style="width:25%;">화이트보드</th>	                                
-                                	</tr>
-                                	<tr>
-										<th id='option5'>음향/마이크</th>	                                
-										<th id='option6'>취사시설</th>	                                
-										<th id='option7'>음식물반입가능</th>	                                
-										<th id='option8'>주류반입가능</th>	                                
-                                	</tr>
-                                	<tr>
-										<th id='option9'>샤워시설</th>	                                
-										<th id='option10'>주차</th>	                                
-										<th id='option11'>금연</th>	                                
-										<th id='option12'>반려동물 동반가능</th>	                                
-                                	</tr> 
-                                	<tr>    
-										<th id='option13'>PC/노트북</th>	                                
-										<th id='option14'>의자/테이블</th>	                                
-										<th id='option15'>내부화장실</th>	                                
-										<th id='option16'>탈의실</th>	                                
-                                	</tr>  
-                                	<tr>   
-										<th id='option17'>테라스/루프탑</th>	                                
-										<th id='option18'>공용라운지</th>	                                
-										<th id='option19'>전신거울</th>	                                
-										<th id='option20'>바베큐시설</th>	                                
+										<th id='OPTION1' style="width:25%;">TV/프로젝터</th>	                                
+										<th id='OPTION2' style="width:25%;">인터넷/와이파이</th>	                                
+										<th id='OPTION3' style="width:25%;">복사/인쇄기</th>	                                
+										<th id='OPTION4' style="width:25%;">화이트보드</th>	                                
+                                	</tr>       
+                                	<tr>        
+										<th id='OPTION5'>음향/마이크</th>	                                
+										<th id='OPTION6'>취사시설</th>	                                
+										<th id='OPTION7'>음식물반입가능</th>	                                
+										<th id='OPTION8'>주류반입가능</th>	                                
+                                	</tr>       
+                                	<tr>        
+										<th id='OPTION9'>샤워시설</th>	                                
+										<th id='OPTION10'>주차</th>	                                
+										<th id='OPTION11'>금연</th>	                                
+										<th id='OPTION12'>반려동물 동반가능</th>	                                
+                                	</tr>       
+                                	<tr>        
+										<th id='OPTION13'>PC/노트북</th>	                                
+										<th id='OPTION14'>의자/테이블</th>	                                
+										<th id='OPTION15'>내부화장실</th>	                                
+										<th id='OPTION16'>탈의실</th>	                                
+                                	</tr>       
+                                	<tr>        
+										<th id='OPTION17'>테라스/루프탑</th>	                                
+										<th id='OPTION18'>공용라운지</th>	                                
+										<th id='OPTION19'>전신거울</th>	                                
+										<th id='OPTION20'>바베큐시설</th>	                                
                                 	</tr>
                                 </table>
                                 <input type="hidden" name="optionNo" value="" />
@@ -272,9 +273,9 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                	<i class="fas fa-plus"></i>
 	                                </div>
 	                            </div>
-	                            <input type="file" name="" id="" />
-	                            <input type="file" name="" id="" />
-	                            <input type="file" name="" id="" />
+	                            <input type="file" name="upFile" />
+	                            <input type="file" name="upFile" />
+	                            <input type="file" name="upFile" />
                             </div>
                             <div class="pf-feature-price">
                                 <h4>사업자등록번호<span class="text-danger">*</span></h4>

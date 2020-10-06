@@ -3,6 +3,8 @@ package com.kh.spaceus.space.model.dao;
 import java.util.List;
 
 import com.kh.spaceus.qna.model.vo.Qna;
+import com.kh.spaceus.space.model.vo.Attachment;
+import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
@@ -40,6 +42,13 @@ public interface SpaceDAO {
 	int updateReviewComment(Review review);
 
 	List<Review> selectReviewComment(String spaceNo, int limit, int offset);
+
+	int insertSpace(Space space);
+
+	int insertAttachment(Attachment attach);
+
+	int insertOption(Option option);
+
 
 	/* List<Space> selectListSpaceCollection(String email); */
 
