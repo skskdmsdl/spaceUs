@@ -62,7 +62,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	</section>
 
     <div class="hero-wrap ftco-degree-bg"
-    	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_1.jpg');
+    	 style="background-image: url('${pageContext.request.contextPath }/resources/images/group_board.jpg');
     	 		height: 400px"
     	 data-stellar-background-ratio="0.5">
 	
@@ -158,7 +158,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                            			"식당공간 나눔":gb.boardNo=="9"?
 			                            			"소모임 자랑":"기타"}]
 			                            	</span>
-			                            		${gb.groupBoardTitle} &nbsp;&nbsp;[${gb.commentCnt}]oooo
+			                            		${gb.groupBoardTitle} &nbsp;&nbsp;[${gb.commentCnt}]
 			                            </td>
 			                            <td class="txt-oflo">${gb.groupBoardDate }</td>
 			                            <td class="txt-oflo">${gb.viewCnt}</td>
