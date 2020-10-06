@@ -7,6 +7,7 @@ import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
+import com.kh.spaceus.space.model.vo.Wish;
 
 public interface SpaceService {
 
@@ -38,7 +39,7 @@ public interface SpaceService {
 
 	List<Review> selectReviewComment(String spaceNo, int limit, int offset);
 
-	int insertWishList(String spaceNo, String email);
+	int insertWishList(Wish wish);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

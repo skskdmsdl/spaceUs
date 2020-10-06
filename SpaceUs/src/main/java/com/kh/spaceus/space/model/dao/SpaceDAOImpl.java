@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.qna.model.vo.Qna;
-import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
+import com.kh.spaceus.space.model.vo.Wish;
 
 
 @Repository
@@ -98,6 +98,11 @@ public class SpaceDAOImpl implements SpaceDAO{
 	public List<Review> selectReviewComment(String spaceNo, int limit, int offset) {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return sqlSession.selectList("space.selectReviewComment", spaceNo, rowBounds);
+	}
+
+	@Override
+	public int insertWishList(Wish wish) {
+		return sqlSession.insert("space.insertWishList", wish);
 	}
 
 	/*@Override
