@@ -211,7 +211,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 			                            <button id="addTags" type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">추가 ⅴ</button>
 		                            </div>
 	                            </div>
-		                        <span id="tags" class="btn col-sm-2 p-0" style="cursor: pointer;"></span>
+		                        <span id="tags" class="btn p-0" style="cursor: pointer;"></span>
                             </div>
                             <div class="pf-feature-price">
                                 <h4>가격 (시간당)<span class="text-danger">*</span></h4>

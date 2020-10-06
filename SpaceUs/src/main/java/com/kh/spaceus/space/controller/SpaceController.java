@@ -55,7 +55,7 @@ public class SpaceController {
 	}
 	//공간등록 제출
 	@RequestMapping(value="/insertSpace.do",method = RequestMethod.POST)
-	public String enrollSpace(Space space,
+	public String insertSpace(Space space,
 							  @RequestParam String optionNo,
 							  @RequestParam String day,
 							  @RequestParam String[] tag,

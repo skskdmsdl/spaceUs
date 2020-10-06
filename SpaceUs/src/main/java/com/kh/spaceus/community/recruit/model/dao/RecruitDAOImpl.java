@@ -116,6 +116,18 @@ public class RecruitDAOImpl implements RecruitDAO{
 		return sqlSession.selectOne("recruit.selectRecruitTotalSearch", keyWord);
 	}
 
+	@Override
+	public List<Recruit> recruitHeaderSearch(String header, int limit, int offset) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("recruit.recruitHeaderSearch", header, rowBounds);
+	}
+
+	@Override
+	public int selectRecruitTotalHeader(String header) {
+		return sqlSession.selectOne("recruit.selectRecruitTotalHeader", header);
+	}
+
+
 
 
 
