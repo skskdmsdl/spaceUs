@@ -202,7 +202,9 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 
 <script>
 var avail = new Array();
+var today;
 $(function(){
+	//객체배열에 넣기
 	<c:forEach items="${availList}" var="info">
 		var hour = new Object();
 		hour.day="${info.day}";
@@ -210,29 +212,42 @@ $(function(){
 		hour.end="${info.endHour}";
 		avail.push(hour);
 	</c:forEach>
-
 	//alert("avail="+JSON.stringify(avail));
+
+	//오늘 날짜 구하기
+    var now = new Date();
+    today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+    console.log(today);
+
 });
+
 //예약 날짜 클릭이벤트
-var day=-1;
+var day='';
+var index=-1;
 function selectDay(val){
 	var week = ['일', '월', '화', '수', '목', '금', '토'];
-
-	//날짜 선택
-	day = week[new Date(val).getDay()];
-	console.log($("[name=revDay]").val() + " : " + day);
-
-	//선택한 날짜에 맞춰 가능 날짜 확인
-
 	
+	var date = new Date(val);
+	if(date.getTime() <= today.getTime()){
+		alert("오늘과 지난 날짜는 예약이 불가능합니다.");
+		return;
+	}
+	
+	//날짜 선택
+	day = week[date.getDay()];
+	console.log($("[name=revDay]").val() + " : " + day);
+	
+	index = avail.findIndex(obj => obj.day == day);
+	console.log("index="+index);
 }
+
 var flag=0;
 var start=-1;
 var end=-1;
 //가능시간 클릭이벤트
 $("#availableTime th").on("click", function(){
 	//날짜,요일 선택여부
-	if(day==-1){
+	if(day==''){
 		alert("예약 날짜를 먼저 선택해주세요");
 		return;
 	}
