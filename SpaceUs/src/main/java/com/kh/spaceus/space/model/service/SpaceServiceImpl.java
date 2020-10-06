@@ -39,7 +39,7 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 	
 	@Override
-	public Space selectOneSpace(int businessNo) {
+	public Space selectOneSpace(long businessNo) {
 		return spaceDAO.selectOneSpace(businessNo);
 	}
 

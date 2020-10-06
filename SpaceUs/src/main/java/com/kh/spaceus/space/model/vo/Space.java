@@ -20,7 +20,7 @@ public class Space implements Serializable{
 	private String spaceNo;
 	private String categoryNo;
 	private String memberEmail;
-	private int businessNo;
+	private long businessNo;
 	private String spaceName;
 	private String address;
 	private String spacePhone;
