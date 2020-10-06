@@ -41,6 +41,8 @@ public interface SpaceService {
 
 	int insertWishList(Wish wish);
 
+	List<Space> selectSameCategory(String category);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

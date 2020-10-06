@@ -258,11 +258,7 @@ function naverShare() {
 						<div class="tab-pane fade" id="detail-manufacturer"
 							role="tabpanel" aria-labelledby="detail-manufacturer-tab">
 							<p style="font-size: 18px">
-								${ space.content } 1,2층으로 나뉘어져 있으며 <br /> 대관시 2층의 엔틱, 빈티지 분위기의
-								유니크한 인테리어를 이용하여 각종 행사/ 전시/ 스튜디어 대관/ 쇼핑몰 대관등을 진행하고 있습니다.
-							</p>
-							<p style="font-size: 18px">2층 단독 화장실도 있기 때문에 장소를 이용하기에 방해 없이
-								장소를 즐기 실 수 있습니다🎁</p>
+								${ space.content } <br /> 
 						</div>
 						<!-- 공간설명 끝-->
 
@@ -652,83 +648,35 @@ function naverShare() {
 <!-- 추천시스템 시작 -->
 <div class="container" style="border-top: 1px solid rgba(0, 0, 0, 0.1)">
 	<div class="row justify-content-center">
-		<div
-			class="col-md-12 mt-5 heading-section text-center ftco-animate mb-5">
+		<div class="col-md-12 mt-5 heading-section text-center ftco-animate mb-5">
 			<span class="subheading">카테고리 추천</span>
 			<h2 class="mb-2">다른 카페(은/는) 어떠신가요?</h2>
 		</div>
 	</div>
+	
 	<div class="row">
-		<div class="col-md-4">
-			<div class="property-wrap ftco-animate">
-				<a href="" class="img"
-					style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
-				<div class="text">
-					<p class="price">
-						<span class="old-price">800,000</span><span class="orig-price">$3,050<small>/mo</small></span>
-					</p>
-					<ul class="property_list">
-						<li><span class="flaticon-bed"></span>3</li>
-						<li><span class="flaticon-bathtub"></span>2</li>
-						<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
-					</ul>
-					<h3>
-						<a href="${pageContext.request.contextPath }/space/spaceDetail.do">The
-							Blue Sky Home</a>
-					</h3>
-					<span class="location">Oakland</span> <a href="#"
-						class="d-flex align-items-center justify-content-center btn-custom">
-						<span class="ion-ios-link"></span>
-					</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="property-wrap ftco-animate">
-				<a href="#" class="img"
-					style="background-image: url(${pageContext.request.contextPath }/resources/images/work-2.jpg);"></a>
-				<div class="text">
-					<p class="price">
-						<span class="old-price">800,000</span><span class="orig-price">$3,050<small>/mo</small></span>
-					</p>
-					<ul class="property_list">
-						<li><span class="flaticon-bed"></span>3</li>
-						<li><span class="flaticon-bathtub"></span>2</li>
-						<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
-					</ul>
-					<h3>
-						<a href="#">The Blue Sky Home</a>
-					</h3>
-					<span class="location">Oakland</span> <a href="#"
-						class="d-flex align-items-center justify-content-center btn-custom">
-						<span class="ion-ios-link"></span>
-					</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="property-wrap ftco-animate">
-				<a href="#" class="img"
-					style="background-image: url(${pageContext.request.contextPath }/resources/images/work-3.jpg);"></a>
-				<div class="text">
-					<p class="price">
-						<span class="old-price">800,000</span><span class="orig-price">$3,050<small>/mo</small></span>
-					</p>
-					<ul class="property_list">
-						<li><span class="flaticon-bed"></span>3</li>
-						<li><span class="flaticon-bathtub"></span>2</li>
-						<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
-					</ul>
-					<h3>
-						<a href="#">The Blue Sky Home</a>
-					</h3>
-					<span class="location">Oakland</span> <a href="#"
-						class="d-flex align-items-center justify-content-center btn-custom">
-						<span class="ion-ios-link"></span>
-					</a>
-				</div>
-			</div>
-		</div>
+	<c:if test="${ not empty spcList }">
+	<c:forEach items="${ spcList }" var="space" varStatus="vs">
+    	  <div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price" style="color: #007bff;"><fmt:formatNumber value="${space.hourlyPrice }" type="number"/><small>원/시간</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="icon-star"></span>${space.starAvg }</li>
+    					<li><span class="icon-heart"></span>${space.likeCnt }</li>
+    					<li><span class="icon-eye"></span>${space.views }</li>
+    				</ul>
+    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${space.spaceNo}">${space.spaceName }</a></h3>
+    				<small><span class="icon-my_location">${space.address }</span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+	</c:forEach>
+	</c:if>
 	</div>
 </div>
 

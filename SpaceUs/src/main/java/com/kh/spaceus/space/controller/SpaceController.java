@@ -133,6 +133,11 @@ public class SpaceController {
 		Space space = spaceService.selectOneSpace(spaceNo);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
 		
+		//같은 카테고리 공간 리스트(최대 3개)
+		String category = space.getCategoryNo();
+		List<Space> spcList = spaceService.selectSameCategory(category); 
+		
+		//추천 공간 사진 리스트
 		
 		
 		//리뷰 한 페이지당 개수 제한
@@ -154,6 +159,7 @@ public class SpaceController {
 		List<Qna> qlist = spaceService.selectQuestionList(spaceNo, limit, offset);
 		String qPageBar = Utils.getPageBarHtml(cPage, limit, qnaTotal, url);
 		
+		model.addAttribute("spcList", spcList);
 		
 		model.addAttribute("qlist", qlist);
 		model.addAttribute("qPageBar", qPageBar);

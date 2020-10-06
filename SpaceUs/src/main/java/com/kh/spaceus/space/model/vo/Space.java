@@ -31,7 +31,7 @@ public class Space implements Serializable{
 	private int views;
 	private int likeCnt;
 	private String status;
-	private int account;
+	private long account;
 	private String content;
 	private String bank;
 	

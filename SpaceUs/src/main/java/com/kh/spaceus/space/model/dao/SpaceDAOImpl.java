@@ -105,6 +105,11 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.insert("space.insertWishList", wish);
 	}
 
+	@Override
+	public List<Space> selectSameCategory(String category) {
+		return sqlSession.selectList("space.selectSameCategory", category);
+	}
+
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {
 		return sqlSession.selectList("space.selectListSpaceCollection", email);

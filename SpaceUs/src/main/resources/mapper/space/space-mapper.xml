@@ -26,7 +26,6 @@
 		)
 	</insert>
       
-
 <!-- space -->
 	<select id="selectOneSpaceNum" resultType="space">
 		select 
@@ -211,6 +210,21 @@
 		order by R.review_date desc
 	</select>
 	
+	<select id="selectSameCategory" resultMap="spaceMap">
+		select 
+            rownum, D.*
+		from(
+			select
+				*
+			from
+				space
+			where 
+				category_no='cate8'
+			order by
+				like_cnt asc
+			) D
+		where rownum between 1 and 3
+	</select>
 	
 </mapper>
 

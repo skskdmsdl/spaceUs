@@ -119,6 +119,11 @@ public class SpaceServiceImpl implements SpaceService{
 	public int insertWishList(Wish wish) {
 		return spaceDAO.insertWishList(wish);
 	}
+
+	@Override
+	public List<Space> selectSameCategory(String category) {
+		return spaceDAO.selectSameCategory(category);
+	}
 	
 	
 	
