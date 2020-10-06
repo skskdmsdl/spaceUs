@@ -20,7 +20,8 @@
 	<select id="selectListGroupBoard" resultMap="groupBoardMap">
 		select
 			G.*,
-			(select nickname from member where member_email= G.member_email) nickname
+			(select nickname from member where member_email= G.member_email) nickname,
+			(select count(*) from group_board_comment where group_board_ref = G.group_board_no  ) comment_cnt
 		from
 			group_board G
 		where
@@ -111,6 +112,15 @@
 		where
 			group_board_ref = #{groupBoardNo}
 	</select>
+	
+	<!-- board Detail에서 report -->
+	<select id="selectReport" resultMap="cmtReportMap">
+		select
+			*
+		from
+			com_report
+	</select>
+	<resultMap type="cmtReport" id="cmtReportMap"></resultMap>
 	
 	<!-- insert board -->
 	<insert id="insertBoard">
@@ -203,6 +213,7 @@
 			#{groupBoardCommentRef},
 			#{groupBoardContent},
 			#{groupBoardCommentLevel},
+			default,
 			default
 		)
 	</insert>
@@ -225,4 +236,24 @@
 		where
 			group_board_comment_no = #{groupBoardCommentNo}
 	</delete>
+	
+	<!-- 댓글/대댓글 신고 -->
+	<insert id="alertComment">
+		insert into
+			com_report
+		values(
+			#{memberEmail},
+			#{groupBoardCommentNo}
+		)
+	</insert>
+	<!-- 댓글/대댓글 신고시 reportcnt +1 -->
+	<update id="updateReportCnt">
+		update 
+			group_board_comment
+		set
+			report_cnt = report_cnt+1
+		where
+			group_board_comment_no = #{groupBoardCommentNo}
+	</update>		
+	
 </mapper>

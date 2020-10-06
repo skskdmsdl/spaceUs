@@ -171,35 +171,25 @@ div#search-userName {
 							<table class="table table-stripped table-bordered ">
 							  <thead>
 							    <tr>
+							      <th scope="col">NO</th>
 							      <th scope="col">이메일</th>
 							      <th scope="col">닉네임</th>
 							      <th scope="col">전화번호</th>
-							      <th scope="col">생일</th>							      
-							      <th scope="col">가입일자</th>
+							      <th scope="col">가입일자</th>							      
+							      <th scope="col">권한</th>
 							    </tr>
 							  </thead>
 							  <tbody>
-							    <tr>
-							      <td>rhkim10@naver.com</td>
-							      <td>Mark</td>
-							      <td>Otto</td>
-							      <td>@mdo</td>
-							      <td>@mdo</td>
-							    </tr>
-							    <tr>
-							      <td>rhkim10@naver.com</td>
-							      <td>Mark</td>
-							      <td>Otto</td>
-							      <td>@mdo</td>
-							      <td>@mdo</td>
-							    </tr>
-							    <tr>
-							      <td>rhkim10@naver.com</td>
-							      <td>Mark</td>
-							      <td>Otto</td>
-							      <td>@mdo</td>
-							      <td>@mdo</td>
-							    </tr>							
+							  	<c:forEach items="${memberList}" var="member" varStatus="vs">
+								    <tr>
+								      <td>${vs.count}</td>
+								      <td>${member.memberEmail}</td>
+								      <td>${member.nickname}</td>
+								      <td>${member.memberPhone}</td>
+								      <td>${member.memberRegDate}</td>
+								      <td>${member.authority}</td>
+								    </tr>			
+							  	</c:forEach>
 							  </tbody>
 							</table>
 	                   </div>
