@@ -161,9 +161,11 @@ CREATE TABLE Reservation (
 	constraints ck_R_comple check(rev_comple in (0, 1))
 );
 
-
 create sequence seq_rev_no;
 select * from reservation;
+ALTER TABLE Reservation RENAME COLUMN dday TO d_day;
+ALTER TABLE Reservation RENAME COLUMN start_hours TO start_hour;
+ALTER TABLE Reservation RENAME COLUMN end_hours TO end_hour;
 
 -----------------------------
 ---- 공간별 예약가능 시간 ----
