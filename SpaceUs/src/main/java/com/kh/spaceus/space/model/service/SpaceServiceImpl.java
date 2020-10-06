@@ -13,6 +13,7 @@ import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
+import com.kh.spaceus.space.model.vo.Wish;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -115,9 +116,8 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public int insertWishList(String spaceNo, String email) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertWishList(Wish wish) {
+		return spaceDAO.insertWishList(wish);
 	}
 	
 	

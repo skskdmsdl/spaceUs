@@ -1,7 +1,5 @@
 package com.kh.spaceus.space.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spaceus.common.Utils;
@@ -25,10 +22,10 @@ import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Review;
-import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
+import com.kh.spaceus.space.model.vo.Wish;
 
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONArray;
@@ -208,14 +205,10 @@ public class SpaceController {
 	//위시리스트 추가
 	@RequestMapping(value="/heart.do",
 					method=RequestMethod.POST)
-	public void insertWishList(@RequestParam("spaceNo") String spaceNo, @RequestParam("email") String email) {
-		System.out.println("좋아요클릭"+spaceNo+email);
-		
-		
-		int result = spaceService.insertWishList(spaceNo, email);
-		
-		
-		
+	public void insertWishList(Wish wish) {
+		System.out.println("좋아요클릭"+wish);
+	
+		spaceService.insertWishList(wish);
 	}
 	
 	

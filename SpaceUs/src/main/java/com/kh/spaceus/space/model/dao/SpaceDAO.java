@@ -8,6 +8,7 @@ import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
+import com.kh.spaceus.space.model.vo.Wish;
 
 public interface SpaceDAO {
 
@@ -40,6 +41,8 @@ public interface SpaceDAO {
 	int updateReviewComment(Review review);
 
 	List<Review> selectReviewComment(String spaceNo, int limit, int offset);
+
+	int insertWishList(Wish wish);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 
