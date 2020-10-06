@@ -147,6 +147,17 @@ public class SpaceController {
 		return mav;
 	}
 	
+	//위시리스트 추가
+	@RequestMapping(value="/heart.do",
+					method=RequestMethod.POST)
+	public void insertWishList(@RequestParam("spaceNo") String spaceNo, @RequestParam("email") String email) {
+		System.out.println("좋아요클릭"+spaceNo+email);
+		
+		/* int result = spaceService.insertWishList(); */
+		
+	}
+	
+	
 	//사업자등록증 조회
 	@GetMapping("/checkIdDuplicate.do")
     public ModelAndView checkIdDuplicate1(ModelAndView mav,

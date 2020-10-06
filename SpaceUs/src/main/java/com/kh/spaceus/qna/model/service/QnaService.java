@@ -6,4 +6,6 @@ public interface QnaService {
 
 	int insertQna(Qna qna);
 
+	int updateAnswer(String answer, String qnaNo);
+
 }

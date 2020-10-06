@@ -20,5 +20,10 @@ public class QnaServiceImpl implements QnaService {
 		return QnaDAO.insertQna(qna);
 	}
 
+	@Override
+	public int updateAnswer(String answer, String qnaNo) {
+		return QnaDAO.updateAnswer(answer, qnaNo);
+	}
+
 
 }

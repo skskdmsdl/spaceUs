@@ -6,4 +6,6 @@ public interface QnaDAO {
 
 	int insertQna(Qna qna);
 
+	int updateAnswer(String answer, String qnaNo);
+
 }

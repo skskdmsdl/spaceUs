@@ -34,11 +34,25 @@ public class QnaController {
 	     log.debug("qna= {}", qna);
 		 int result = qnaService.insertQna(qna); 
 		
-		 String msg = result > 0 ? "등록 성공!" : "등록실패";
+		 String msg = result > 0 ? "질문 등록 성공!" : "답변 등록 실패";
 		 redirectAttr.addFlashAttribute("msg", msg); 
 	  
 	  return "redirect:/space/spaceDetail.do?spaceNo="+spaceNo; 
 	  
+	  }
+	  
+	  @RequestMapping(value="/updateAnswer.do", method=RequestMethod.POST)
+	  public String insertAnswer(@RequestParam("qnaNo") String qnaNo, 
+				@ModelAttribute("answer") String answer,
+				  RedirectAttributes redirectAttr) {
+		 log.debug("답변 등록 요청");
+	     	
+		 int result = qnaService.updateAnswer(answer, qnaNo); 
+
+		 String msg = result > 0 ? "답변 등록 성공!" : "답변 등록 실패";
+		 redirectAttr.addFlashAttribute("msg", msg); 
+	    
+		 return "redirect:/space/spaceDetail.do?spaceNo=";
 	  }
 	  
 		/*
