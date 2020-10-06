@@ -102,6 +102,31 @@ $(function(){
 		   	});
 	 	}
    	});
+	//태그 추가 클릭이벤트
+	$("#addTags").on('click', function(){
+	
+		var $tagName = $("#tagName");
+		
+		if($tagName.val() == "")
+			alert("내용을 입력해주세요");
+		
+		if($("#tags span").length >= 1){
+			alert("1개만 입력 가능합니다");
+			$tagName.val("");
+		}
+		else if($tagName.val() != ""){
+			$("#tags").append("<span class='label label-success m-2 p-2 small'>#" + $tagName.val() + " X</span>");
+			$("#tag").val($tagName.val());
+			$tagName.val("");
+			
+	    }
+	});
+	//태그 삭제 클릭이벤트
+	$("#tags").on("click", function(){
+		$("#tags *").remove();
+		$("#tag").val("");
+		$("#tagName").val("");
+	});
 });
 </script>
 <section class="ftco-section ftco-agent">
@@ -125,10 +150,25 @@ $(function(){
                             <h4>기획전 소제목</h4>
                             <input type="text" name="exSubtitle" id="exSubtitle">
                         </div>
-                        <div class="pf-title">
+                        <!-- <div class="pf-title">
                             <h4>태그<span class="text-danger">*</span></h4>
                             <input type="text" name="tag" id="tag" required>
-                        </div>
+                        </div> -->
+                        <div class="pf-feature-price">
+                               <h4>공간 태그<span class="text-danger">*</span></h4>
+                               
+                               <div class="row">
+                                <div class="ml-3 mb-3" style="width:31%">
+                                    <input id="tagName" type="text" placeholder="태그를 입력해주세요">
+                                    <input type="hidden" id="tag" name="tag"/>
+                                </div>
+                                <div>
+		                            <button id="addTags" type="button" class="btn btn-primary ml-4 pr-4 pl-4 p-10">추가</button>
+	                            </div>
+                            </div>
+	                        <span id="tags" style="cursor: pointer;"></span>
+                           </div>
+                        
                         <div class="pf-title">
                             <h4 data-toggle="modal" data-target="#imageModal">이미지 등록</h4>
                         </div>
@@ -200,9 +240,6 @@ $(function(){
     </div>
 </section>
 <!-- 기획전 등록폼 끝-->
-      
-      
-      
      </div>
      </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
