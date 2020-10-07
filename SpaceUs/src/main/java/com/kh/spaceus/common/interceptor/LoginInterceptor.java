@@ -50,6 +50,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			
 			return false;
 		}
+		
+		
 		return super.preHandle(request, response, handler);
 	}
 }

@@ -39,17 +39,6 @@
 	    self.close();
 	</c:if>
 	
-/* 	<c:if test="${ not empty returnPath }">
-		alert("not empty returnPath"); //뷰단에 오기전에 컨트롤러에서 다 리턴되어버리는듯..
-	    self.close();
-		opener.parent.location="${returnPath}"
-	</c:if> */
-	
-	/* window.onload = function(){
-		signOut();
-		alert('onload signOut.');
-	} */
-	
 	function onSignIn(googleUser) {
 		var id_token = googleUser.getAuthResponse().id_token;
 		var profile = googleUser.getBasicProfile();
@@ -87,19 +76,6 @@
 		*/
 	}
 
-	function newWindow(url) {
-		if('${returnPath}' == "") {
-			window.open(url, 'popup','width=600,height=600')
-		}
-
-		else {
-			self.close();
-			//window.opener.parent.location.reload();
-		}
-		//if(!window.opener) window.opener = window.open('${returnPath}', 'popup','width=600,height=600');
-		//opener.parent.location="${returnPath}"; //parent가 null이 나옴.
-	}
-
 	
 </script>
 
@@ -114,9 +90,8 @@
 						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 					</span>
 					<div id="naver_id_login" style="text-align:center">
-						<%-- <a href="${naver_url}"> --%>
-						<a href="#" onClick="window.open('${naver_url}', 'popup','width=600,height=600')">
-						<%-- <a href="#" onClick="newWindow('${naver_url}')"> --%>
+						<a href="${naver_url}">
+						<%-- <a href="#" onClick="window.open('${naver_url}', 'popup','width=600,height=600')"> --%>
 							<div class="social-btn">
 								<img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg"/>
 									&nbsp;네이버로 시작하기
@@ -124,8 +99,8 @@
 						</a>
 					</div>
 					<div id="kakao_id_login" style="text-align:center">
-						<%-- <a href="${kakao_url}"> --%>
-						<a href="#" onClick="window.open('${kakao_url}', 'popup','width=600,height=600')">
+						<a href="${kakao_url}">
+						<%-- <a href="#" onClick="window.open('${kakao_url}', 'popup','width=600,height=600')"> --%>
 							<div class="social-btn">
 								<img src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png"/>
 									&nbsp;카카오로 시작하기

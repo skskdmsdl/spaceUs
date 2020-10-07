@@ -22,6 +22,11 @@ public class ReservationDAOImpl implements ReservationDAO{
 		return sqlSession.selectList("reservation.selectListAvail", spaceNo);
 	}
 
+	@Override
+	public int insertReservationVail(ReservationAvail reservationAvail) {
+		return sqlSession.insert("reservation.insertReservationVail", reservationAvail);
+	}
+
 	
 
 }

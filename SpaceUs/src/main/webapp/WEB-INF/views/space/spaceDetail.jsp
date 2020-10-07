@@ -770,7 +770,7 @@ function naverShare() {
 	        map.setCenter(coords);
 	    }});    
 
-			</script>
+</script>
 <!-- 카카오톡 공유 -->
 <script type='text/javascript'>
     Kakao.init('455b391796eaae1861145a078007af70');

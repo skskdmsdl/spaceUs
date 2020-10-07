@@ -265,6 +265,76 @@
 			category_no=#{cateNo}
 	</select>
 	
+	<insert id="insertSpace">
+		insert into
+			space (
+				space_no,
+				category_no,
+				member_email,
+				business_license,
+				space_name,
+				address,
+				space_phone,
+				hourly_price,
+				account,
+				bank,
+				content
+			)
+		values (
+			'space'||seq_space_no.nextval,
+			#{ categoryNo },
+			#{ memberEmail },
+			#{ businessNo },
+			#{ spaceName },
+			#{ address },
+			#{ spacePhone },
+			#{ hourlyPrice },
+			#{ account },
+			#{ bank },
+			#{ content }
+		)
+		
+		<selectKey keyProperty="spaceNo" resultType="string" order="AFTER">
+			select
+				'space'||seq_space_no.currval
+			from 
+				dual
+		</selectKey>
+	</insert>
+	
+	<insert id="insertAttachment">
+		insert into
+			space_image (
+				file_no,
+				space_no,
+				original_filename,
+				renamed_filename
+			)
+		values (
+			'SPIMG'||seq_space_image_no.nextval,
+			#{ spaceNo },
+			#{ oName },
+			#{ rName }
+		)
+	</insert>
+	
+	<insert id="insertOption">
+		insert into
+			space_option 
+		values (
+			#{ spaceNo },
+			#{ optionNo }
+		)
+	</insert>
+	
+	<insert id="insertSpaceTag">
+		insert into
+			space_tag 
+		values (
+			#{ spaceNo },
+			#{ tagNo }
+		)
+	</insert>
 </mapper>
 
 

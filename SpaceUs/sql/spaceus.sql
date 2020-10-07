@@ -24,6 +24,7 @@ commit;
 --권한 컬럼 삭제
 ALTER TABLE member DROP COLUMN authority;
 
+
 -----------------------------
 ----------- 권한 ------------
 -----------------------------
@@ -96,6 +97,8 @@ alter table space add(bank varchar2(256));
 create sequence seq_space_no;
 select * from space;
 select * from space where space_no = 'space2';
+
+
 
 --제약조건명 변경
 alter table space rename constraint pk_review_no to pk_space_no;
@@ -218,30 +221,30 @@ select * from option_list;
 --    option_name = 'TV/프로젝터'
 --where 
 --    option_no = 'option1';
-insert into option_list values('option'||seq_option_no.nextval,'TV/프로젝터');
-insert into option_list values('option'||seq_option_no.nextval,'인터넷/와이파이');
-insert into option_list values('option'||seq_option_no.nextval,'복사/인쇄기');
-insert into option_list values('option'||seq_option_no.nextval,'화이트보드');
+insert into option_list values('OPTION'||seq_option_no.nextval,'TV/프로젝터');
+insert into option_list values('OPTION'||seq_option_no.nextval,'인터넷/와이파이');
+insert into option_list values('OPTION'||seq_option_no.nextval,'복사/인쇄기');
+insert into option_list values('OPTION'||seq_option_no.nextval,'화이트보드');
 
-insert into option_list values('option'||seq_option_no.nextval,'음향/마이크');
-insert into option_list values('option'||seq_option_no.nextval,'취사시설');
-insert into option_list values('option'||seq_option_no.nextval,'음식물반입가능');
-insert into option_list values('option'||seq_option_no.nextval,'주류반입가능');
+insert into option_list values('OPTION'||seq_option_no.nextval,'음향/마이크');
+insert into option_list values('OPTION'||seq_option_no.nextval,'취사시설');
+insert into option_list values('OPTION'||seq_option_no.nextval,'음식물반입가능');
+insert into option_list values('OPTION'||seq_option_no.nextval,'주류반입가능');
 
-insert into option_list values('option'||seq_option_no.nextval,'샤워시설');
-insert into option_list values('option'||seq_option_no.nextval,'주차');
-insert into option_list values('option'||seq_option_no.nextval,'금연');
-insert into option_list values('option'||seq_option_no.nextval,'반려동물 동반가능');
+insert into option_list values('OPTION'||seq_option_no.nextval,'샤워시설');
+insert into option_list values('OPTION'||seq_option_no.nextval,'주차');
+insert into option_list values('OPTION'||seq_option_no.nextval,'금연');
+insert into option_list values('OPTION'||seq_option_no.nextval,'반려동물 동반가능');
 
-insert into option_list values('option'||seq_option_no.nextval,'PC/노트북');
-insert into option_list values('option'||seq_option_no.nextval,'의자/테이블');
-insert into option_list values('option'||seq_option_no.nextval,'내부화장실');
-insert into option_list values('option'||seq_option_no.nextval,'탈의실');
+insert into option_list values('OPTION'||seq_option_no.nextval,'PC/노트북');
+insert into option_list values('OPTION'||seq_option_no.nextval,'의자/테이블');
+insert into option_list values('OPTION'||seq_option_no.nextval,'내부화장실');
+insert into option_list values('OPTION'||seq_option_no.nextval,'탈의실');
 
-insert into option_list values('option'||seq_option_no.nextval,'테라스/루프탑');
-insert into option_list values('option'||seq_option_no.nextval,'공용라운지');
-insert into option_list values('option'||seq_option_no.nextval,'전신거울');
-insert into option_list values('option'||seq_option_no.nextval,'바베큐시설');
+insert into option_list values('OPTION'||seq_option_no.nextval,'테라스/루프탑');
+insert into option_list values('OPTION'||seq_option_no.nextval,'공용라운지');
+insert into option_list values('OPTION'||seq_option_no.nextval,'전신거울');
+insert into option_list values('OPTION'||seq_option_no.nextval,'바베큐시설');
 
 -----------------------------
 --------- 공간 옵션 ----------
@@ -288,16 +291,18 @@ create sequence seq_space_tag_no;
 
 select * from space_tag;
 
-select 
-    space_no, space_name, tag_name
-    from (select
-    *
+select
+  *
 from
-    space
-    join
-        space_tag
-    using(space_no))
-    join tag using(tag_no);
+  (
+    select
+      *
+    from
+      space
+      join space_tag using(space_no)
+  )
+  join tag using(tag_no)
+  where tag_name = '힐링';
 
 
 
@@ -554,6 +559,21 @@ create sequence seq_ex;
 
 select * from exhibition;
 commit;
+
+select
+	  *
+	from
+	  (
+	    select
+	      *
+	    from
+	      space
+	      join space_tag using(space_no)
+	  )
+	  join tag using(tag_no)
+	where
+	  tag_name = '힐링';
+
 
 
 -----------------------------
