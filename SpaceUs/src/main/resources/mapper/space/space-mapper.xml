@@ -62,6 +62,16 @@
 		<result column="account" property="account"/>
 		<result column="content" property="content"/>
 		<result column="bank" property="bank"/>
+		<collection property="attachList" ofType="space_image">
+			<id column="file_no" property="no"/>
+			<result column="space_no" property="boardNo"/>
+			<result column="original_filename" property="originalFileName"/>
+			<result column="renamed_filename" property="renamedFileName"/>
+			<result column="upload_date" property="uploadDate"/>
+			<result column="status" property="status" 
+							javaType="boolean"
+							jdbcType="NUMBER"/>
+		</collection>
 	</resultMap>
 	
 	<select resultMap="tagMap" id="selectListSpaceTag">

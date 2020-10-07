@@ -131,7 +131,7 @@ $(function(){
     	   			});	
     		}
 	});
-	// 게시글 추천수
+	// 공간 좋아요 갯수
     function readLikeCnt() {
 		$.ajax({
 			url: "${pageContext.request.contextPath}/space/readLikeCnt.do",

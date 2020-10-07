@@ -103,7 +103,7 @@ public class SpaceController {
 //			throw e;
 //		}
 	
-		return "space/insertSpace";
+		return "redirect:/";
 	}
 	
 	
