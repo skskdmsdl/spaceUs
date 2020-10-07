@@ -31,6 +31,10 @@ insert into member values('user8@naver.com','유저8','$2a$10$Qc91X8k0YEUfCTwsX4
 insert into member values('user9@naver.com','유저9','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','99/09/09',default,0);
 insert into member values('user10@naver.com','유저10','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','90/09/09',default,0);
 
+delete from member where member_email='rhkim10@naver.com';
+delete from auth where member_email='rhkim10@naver.com';
+
+commit;
 
 select
     M.member_email,
