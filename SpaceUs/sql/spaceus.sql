@@ -200,7 +200,12 @@ select * from reservation_avail;
 --values('목','space2',20,0);
 --insert into reservation_avail 
 --values('금','space2',20,0);
-commit;
+--update Reservation_avail
+--set 
+--    day = 'fri'
+--where 
+--    day = '금';
+--commit;
 
 -----------------------------
 ----------- 옵션 ------------
@@ -258,7 +263,9 @@ create table space_option (
 );
 
 select * from space_option;
-
+insert into space_option values('space2','OPTION2');
+insert into space_option values('space2','OPTION12');
+insert into space_option values('space2','OPTION14');
 -----------------------------
 ----------- 태그 ------------
 -----------------------------
