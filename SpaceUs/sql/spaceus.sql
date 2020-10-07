@@ -221,30 +221,30 @@ select * from option_list;
 --    option_name = 'TV/프로젝터'
 --where 
 --    option_no = 'option1';
-insert into option_list values('option'||seq_option_no.nextval,'TV/프로젝터');
-insert into option_list values('option'||seq_option_no.nextval,'인터넷/와이파이');
-insert into option_list values('option'||seq_option_no.nextval,'복사/인쇄기');
-insert into option_list values('option'||seq_option_no.nextval,'화이트보드');
+insert into option_list values('OPTION'||seq_option_no.nextval,'TV/프로젝터');
+insert into option_list values('OPTION'||seq_option_no.nextval,'인터넷/와이파이');
+insert into option_list values('OPTION'||seq_option_no.nextval,'복사/인쇄기');
+insert into option_list values('OPTION'||seq_option_no.nextval,'화이트보드');
 
-insert into option_list values('option'||seq_option_no.nextval,'음향/마이크');
-insert into option_list values('option'||seq_option_no.nextval,'취사시설');
-insert into option_list values('option'||seq_option_no.nextval,'음식물반입가능');
-insert into option_list values('option'||seq_option_no.nextval,'주류반입가능');
+insert into option_list values('OPTION'||seq_option_no.nextval,'음향/마이크');
+insert into option_list values('OPTION'||seq_option_no.nextval,'취사시설');
+insert into option_list values('OPTION'||seq_option_no.nextval,'음식물반입가능');
+insert into option_list values('OPTION'||seq_option_no.nextval,'주류반입가능');
 
-insert into option_list values('option'||seq_option_no.nextval,'샤워시설');
-insert into option_list values('option'||seq_option_no.nextval,'주차');
-insert into option_list values('option'||seq_option_no.nextval,'금연');
-insert into option_list values('option'||seq_option_no.nextval,'반려동물 동반가능');
+insert into option_list values('OPTION'||seq_option_no.nextval,'샤워시설');
+insert into option_list values('OPTION'||seq_option_no.nextval,'주차');
+insert into option_list values('OPTION'||seq_option_no.nextval,'금연');
+insert into option_list values('OPTION'||seq_option_no.nextval,'반려동물 동반가능');
 
-insert into option_list values('option'||seq_option_no.nextval,'PC/노트북');
-insert into option_list values('option'||seq_option_no.nextval,'의자/테이블');
-insert into option_list values('option'||seq_option_no.nextval,'내부화장실');
-insert into option_list values('option'||seq_option_no.nextval,'탈의실');
+insert into option_list values('OPTION'||seq_option_no.nextval,'PC/노트북');
+insert into option_list values('OPTION'||seq_option_no.nextval,'의자/테이블');
+insert into option_list values('OPTION'||seq_option_no.nextval,'내부화장실');
+insert into option_list values('OPTION'||seq_option_no.nextval,'탈의실');
 
-insert into option_list values('option'||seq_option_no.nextval,'테라스/루프탑');
-insert into option_list values('option'||seq_option_no.nextval,'공용라운지');
-insert into option_list values('option'||seq_option_no.nextval,'전신거울');
-insert into option_list values('option'||seq_option_no.nextval,'바베큐시설');
+insert into option_list values('OPTION'||seq_option_no.nextval,'테라스/루프탑');
+insert into option_list values('OPTION'||seq_option_no.nextval,'공용라운지');
+insert into option_list values('OPTION'||seq_option_no.nextval,'전신거울');
+insert into option_list values('OPTION'||seq_option_no.nextval,'바베큐시설');
 
 -----------------------------
 --------- 공간 옵션 ----------

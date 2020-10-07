@@ -167,14 +167,17 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                            			
                                     <th><b>${list.nickName}</b></th>
                                     <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"><fmt:formatDate value="${list.date}" pattern="yyyy.MM.dd HH:mm"/></p></th>
+                                    	<c:if test="${  list.reporter != loginMember  }">
                                     <th> |</th>
                                     <th>
-                                    	<p class="ml-2 replyComment" style="font-size: 13px; color: #6d6d6d; display: inline; cursor: pointer;">
-	                           			<input type="hidden" name="recruitCommentNo" value="${list.no}" />
-                                    	답글쓰기</p> 
+	                                    	<p class="ml-2 replyComment" style="font-size: 13px; color: #6d6d6d; display: inline; cursor: pointer;">
+		                           			<input type="hidden" name="recruitCommentNo" value="${list.no}" />
+	                                    	답글쓰기</p> 
                                     </th>
+                                    	</c:if>
                                        <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
 	                                         <th>	
+	                                         <c:if test="${  list.reporter != loginMember }">
                                     			<i class="fa fa-ellipsis-v pull-right">
                                     			 <ul class="pull-left commentMenu hide">
 	                                    			 <c:choose>
@@ -190,6 +193,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                    			 </c:choose>
 												  </ul>
                                     			</i>
+                                    			</c:if>
 	                                    	</th>
                                    	</sec:authorize>
                                	</tr>
@@ -212,7 +216,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                         	</div>
              				<!-- 대댓글 폼 시작 -->
              				<div class="${list.no} hide">
-	             				<input type="text" placeholder="답글을 입력해주세요" style="margin:20px 0 20px 30px;background-color: #efefef; border: none;border-bottom: 1px solid #666; width:78%;"/>
+	             				<input type="text" placeholder="답글을 입력해주세요" class="replyCon" style="margin:20px 0 20px 30px;background-color: #efefef; border: none;border-bottom: 1px solid #666; width:78%;"/>
 	                       		<c:if test="${ list.secret == 1 && loginMember != null &&( loginMember eq recruit.email || loginMember == list.email )}">
 		                       		<span class="hide" style="cursor: pointer;"><i class="fa fa-lock"><input type="hidden" value="1" /></i></span>
 		                       		<span style="cursor: pointer;"><i class="fa fa-unlock"><input type="hidden" value="0" /></i></span>
@@ -318,27 +322,33 @@ function reportBtn(){
 };
 //댓글 등록
 $("#insertComment").click(function(){
-	var secret = "0";
-	if($("#secret").is(":checked")){
-		secret = "1";
+	if('${loginMember}' == 'anonymousUser'){
+		alert("로그인 후 이용할 수 있습니다.");
+		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
 	}
-	 $.ajax({
-		url : "${ pageContext.request.contextPath }/community/recruit/insertComment.do",
-		data : {
-			recruitNo : $("#no").val(),
-			email : $("#memberEmail").val(),
-			content : $("#content").val(),
-			secret : secret
-		},
-		dataType : "json",
-		success : function(data){
-			alert("댓글이 등록되었습니다!");
-			location.reload();
-		},
-		error : function(xhr, status, err){
-			console.log("처리실패", xhr, status, err);
+	else {
+		var secret = "0";
+		if($("#secret").is(":checked")){
+			secret = "1";
 		}
-	}); 
+		 $.ajax({
+			url : "${ pageContext.request.contextPath }/community/recruit/insertComment.do",
+			data : {
+				recruitNo : $("#no").val(),
+				email : $("#memberEmail").val(),
+				content : $("#content").val(),
+				secret : secret
+			},
+			dataType : "json",
+			success : function(data){
+				alert("댓글이 등록되었습니다!");
+				location.reload();
+			},
+			error : function(xhr, status, err){
+				console.log("처리실패", xhr, status, err);
+			}
+		}); 
+	};
 });
 //댓글 신고/수정/삭제 버튼 이벤트
 function clear(){
@@ -474,6 +484,21 @@ $(".commentReport").click(function(){
 			console.log("처리실패", xhr, status, err);
 		}
 	});
+});
+//로그인요청
+$("#content").keyup(function(){
+	if('${loginMember}' == 'anonymousUser'){
+		$("#content").val("");
+		alert("로그인 후 이용할 수 있습니다.");
+		return;
+	}
+});
+$(".replyCon").keyup(function(){
+	if('${loginMember}' == 'anonymousUser'){
+		$(".replyCon").val("");
+		alert("로그인 후 이용할 수 있습니다.");
+		return;
+	}
 });
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

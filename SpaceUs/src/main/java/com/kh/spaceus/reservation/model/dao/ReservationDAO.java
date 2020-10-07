@@ -10,6 +10,8 @@ public interface ReservationDAO {
 
 	List<ReservationAvail> selectListAvail(String spaceNo);
 
+	int insertReservationVail(ReservationAvail reservationAvail);
+
 	
 	
 }

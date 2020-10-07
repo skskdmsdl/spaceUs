@@ -3,8 +3,10 @@ package com.kh.spaceus.space.model.service;
 import java.util.List;
 
 import com.kh.spaceus.qna.model.vo.Qna;
+import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
 import com.kh.spaceus.space.model.vo.Wish;
@@ -38,6 +40,12 @@ public interface SpaceService {
 	int updateReviewComment(Review review);
 
 	List<Review> selectReviewComment(String spaceNo, int limit, int offset);
+
+	int insertSpace(Space space);
+
+	int insertOption(Option option);
+
+	int insertSpaceTag(SpaceTag spaceTag);
 
 	int insertWishList(Wish wish);
 

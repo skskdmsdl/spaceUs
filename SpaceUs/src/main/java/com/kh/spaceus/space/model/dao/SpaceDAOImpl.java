@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.qna.model.vo.Qna;
+import com.kh.spaceus.reservation.model.vo.ReservationAvail;
+import com.kh.spaceus.space.model.vo.Attachment;
+import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
 import com.kh.spaceus.space.model.vo.Wish;
@@ -101,6 +105,25 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
+	public int insertSpace(Space space) {
+		return sqlSession.insert("space.insertSpace", space);
+	}
+
+	@Override
+	public int insertAttachment(Attachment attach) {
+		return sqlSession.insert("space.insertAttachment", attach);
+	}
+	
+	@Override
+	public int insertOption(Option option) {
+		return sqlSession.insert("space.insertOption", option);
+	}
+
+	@Override
+	public int insertSpaceTag(SpaceTag spaceTag) {
+		return sqlSession.insert("space.insertSpaceTag", spaceTag);
+	}
+
 	public int insertWishList(Wish wish) {
 		return sqlSession.insert("space.insertWishList", wish);
 	}
