@@ -41,11 +41,13 @@ public interface SpaceService {
 
 	void insertWish(Wish wish);
 
-	List<Space> selectSameCategory(String category);
+	List<Space> selectSameCategory(Space space);
 
 	int selectLikeCnt(String spaceNo);
 
 	void deleteWish(Wish wish);
+
+	String selectCateName(String cateNo);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

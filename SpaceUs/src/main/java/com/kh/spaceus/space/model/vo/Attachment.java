@@ -21,6 +21,6 @@ public class Attachment implements Serializable{
 	private String oName;
 	private String rName;
 	private Date uploadDate;
-	private int status;
+	private boolean status;
 }
 

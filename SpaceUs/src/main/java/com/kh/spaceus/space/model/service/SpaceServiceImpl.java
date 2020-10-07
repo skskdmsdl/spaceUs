@@ -121,8 +121,8 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public List<Space> selectSameCategory(String category) {
-		return spaceDAO.selectSameCategory(category);
+	public List<Space> selectSameCategory(Space space) {
+		return spaceDAO.selectSameCategory(space);
 	}
 
 	@Override
@@ -133,6 +133,11 @@ public class SpaceServiceImpl implements SpaceService{
 	@Override
 	public void deleteWish(Wish wish) {
 		spaceDAO.deleteWish(wish);
+	}
+
+	@Override
+	public String selectCateName(String cateNo) {
+		return spaceDAO.selectCateName(cateNo);
 	}
 	
 	

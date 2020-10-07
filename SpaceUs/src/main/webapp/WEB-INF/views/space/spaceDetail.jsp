@@ -71,8 +71,8 @@ to {opacity: 1}
 .reviewLabel {font-size: 11px;}
 </style>
 <script>
-var url = $(location).attr('href');
 
+var url = $(location).attr('href');
 
 $(function(){
 
@@ -99,12 +99,12 @@ $(function(){
 	   		 $.ajax({
 			        type: "POST",
 					url : "${pageContext.request.contextPath}/space/heart.do",
-					
-					data :  {
+					dataType: "JSON",
+					data :   {
 						spaceNo : "${space.spaceNo}",
-						email : "${loginMember.principal.memberEmail}"
-					},
-					success: function(){
+						email : "${loginMember.principal.memberEmail}"},
+					success: function(data){
+						console.log(data);
 						readLikeCnt();
 					},
 					error: function(xhr, status, err){
@@ -120,9 +120,8 @@ $(function(){
 					url : "${pageContext.request.contextPath}/space/cancelHeart.do",
 					data :  {
 						spaceNo : "${space.spaceNo}",
-						email : "${loginMember.principal.memberEmail}"
-					},
-					success: function(){
+						email : "${loginMember.principal.memberEmail}"},
+					success: function(data){
 						readLikeCnt();
 					},
 					error: function(xhr, status, err){
@@ -689,7 +688,7 @@ function naverShare() {
 	<div class="row justify-content-center">
 		<div class="col-md-12 mt-5 heading-section text-center ftco-animate mb-5">
 			<span class="subheading">카테고리 추천</span>
-			<h2 class="mb-2">다른 카페(은/는) 어떠신가요?</h2>
+			<h2 class="mb-2">다른 ${ cateName }(은/는) 어떠신가요?</h2>
 		</div>
 	</div>
 	
@@ -698,9 +697,22 @@ function naverShare() {
 	<c:forEach items="${ spcList }" var="space" varStatus="vs">
     	  <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
-    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+		   				<div class="owl-carousel ref">
+			    			<c:if test="${not empty space.attachList}">
+				    			<c:forEach items="${space.attachList}" var="attach" varStatus="vs">
+				    				
+				    				<div class="img"
+										style="background-image: url(${pageContext.request.contextPath }
+										/resources/upload/space/20201006_384759267_348.jpg);"></div>
+									
+								</c:forEach>
+			    			</c:if>
+						</div>  
+					<!-- 	<i class="prev fas fa-chevron-left fa-2x" onclick="plusSlides(-1)"></i>
+						<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i> -->
     			<div class="text">
-    				<p class="price"><span class="space-price" style="color: #007bff;"><fmt:formatNumber value="${space.hourlyPrice }" type="number"/><small>원/시간</small></span></p>
+    				<p class="price"><span class="space-price" style="color: #007bff;">
+    				<fmt:formatNumber value="${space.hourlyPrice }" type="number"/><small>원/시간</small></span></p>
     				<ul class="property_list">
     					<li><span class="icon-star"></span>${space.starAvg }</li>
     					<li><span class="icon-heart"></span>${space.likeCnt }</li>
@@ -720,8 +732,9 @@ function naverShare() {
 </div>
 
 <!-- 추천시스템 끝 -->
-<!-- 지도 -->
 <script>
+
+<!-- 지도 -->
 	var mapContainer = document.getElementById('kakaomap'), // 지도를 표시할 div 
 	    mapOption = {
 	        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
@@ -793,6 +806,13 @@ function naverShare() {
 </script>
 
 <script>
+/* 추천공간 이미지 슬라이드 */
+/* $(".owl-carousel ref").owlCarousel({ 
+		items:1, 
+		loop:false,
+		center:true
+})
+ */
 function answer(){
 	alert(${qna.qnaNo});
 	

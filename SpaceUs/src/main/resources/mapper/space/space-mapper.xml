@@ -62,17 +62,19 @@
 		<result column="account" property="account"/>
 		<result column="content" property="content"/>
 		<result column="bank" property="bank"/>
-		<collection property="attachList" ofType="space_image">
-			<id column="file_no" property="no"/>
-			<result column="space_no" property="boardNo"/>
-			<result column="original_filename" property="originalFileName"/>
-			<result column="renamed_filename" property="renamedFileName"/>
+		<collection property="attachList" ofType="Attachment">
+			<id column="file_no" property="fileNo"/>
+			<result column="space_no" property="spaceNo"/>
+			<result column="original_filename" property="oName" jdbcType="VARCHAR" javaType="string"/>
+			<result column="renamed_filename" property="rName" jdbcType="VARCHAR" javaType="string"/>
 			<result column="upload_date" property="uploadDate"/>
-			<result column="status" property="status" 
-							javaType="boolean"
-							jdbcType="NUMBER"/>
+<!-- 			<result column="status" property="status" 
+								javaType="_int"
+								jdbcType="BOOLEAN"/> -->
 		</collection>
 	</resultMap>
+	
+	
 	
 	<select resultMap="tagMap" id="selectListSpaceTag">
 		select
@@ -245,13 +247,22 @@
 			select
 				*
 			from
-				space
+				space join space_image using (space_no) 
 			where 
-				category_no='cate8'
+				category_no=#{categoryNo} and space_no!=#{spaceNo}
 			order by
 				like_cnt asc
 			) D
 		where rownum between 1 and 3
+	</select>
+	
+	<select id="selectCateName" resultType="string">
+		select 
+			category_name
+		from
+			category
+		where 
+			category_no=#{cateNo}
 	</select>
 	
 </mapper>
