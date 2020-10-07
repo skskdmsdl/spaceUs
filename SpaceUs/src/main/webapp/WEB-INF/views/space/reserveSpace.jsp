@@ -175,19 +175,19 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                          <form action="#" class="calculator-form">
 	                         <div class="filter-input">
 	                             <p>예약 날짜</p>
-	                             <input type="text">
+	                             <input type="text" readonly>
 	                         </div>
 	                         <div class="filter-input">
 	                             <p>예약 시간</p>
-	                             <input type="text">
+	                             <input type="text" readonly>
 	                         </div>
 	                         <div class="filter-input">
-	                             <p>예약 인원</p>
-	                             <input type="text">
+	                             <p>결제 방법</p>
+	                             <input type="text" readonly>
 	                         </div>
 	                         <div class="filter-input">
 	                             <p>총 금액</p>
-	                             <input type="text">
+	                             <input type="text" readonly>
 	                         </div>
 	                         <button type="submit" class="site-btn">결제하기</button>
 						</form>
@@ -225,7 +225,7 @@ $(function(){
 var day='';
 var index=-1;
 function selectDay(val){
-	var week = ['일', '월', '화', '수', '목', '금', '토'];
+	var week = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 	
 	var date = new Date(val);
 	if(date.getTime() <= today.getTime()){
