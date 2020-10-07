@@ -39,11 +39,6 @@
 	    self.close();
 	</c:if>
 	
-	/* window.onload = function(){
-		signOut();
-		alert('onload signOut.');
-	} */
-	
 	function onSignIn(googleUser) {
 		var id_token = googleUser.getAuthResponse().id_token;
 		var profile = googleUser.getBasicProfile();
