@@ -8335,7 +8335,7 @@ h1, h2, h3, h4, h5,
     content: '';
     position: absolute;
     right: 0;
-    bottom: -30px;
+    bottom: -33px;
     overflow: visible;
     width: 50%;
     height: 70px;
@@ -8350,7 +8350,7 @@ h1, h2, h3, h4, h5,
     content: '';
     position: absolute;
     left: 0;
-    bottom: -30px;
+    bottom: -33px;
     overflow: visible;
     width: 50%;
     height: 70px;
