@@ -28,11 +28,11 @@ import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.Review;
-import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
+import com.kh.spaceus.space.model.vo.Wish;
 
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONArray;
@@ -79,11 +79,11 @@ public class SpaceController {
 				
 				//2. 메모리의 파일 -> 서버경로상의 파일 
 				File newFile = new File(saveDirectory, renamedFileName); //임의의 자바파일객체를 만들고 이동시킴
-				try {
-					f.transferTo(newFile);
-				} catch (IllegalStateException | IOException e) {
-					e.printStackTrace();
-				}
+					try {
+						f.transferTo(newFile);
+					} catch (IllegalStateException | IOException e) {
+						e.printStackTrace();
+					}
 				//3. attachment객체 생성(db 저장을 위한 준비)
 				Attachment attach = new Attachment();
 				attach.setOName(f.getOriginalFilename());
@@ -244,11 +244,10 @@ public class SpaceController {
 	//위시리스트 추가
 	@RequestMapping(value="/heart.do",
 					method=RequestMethod.POST)
-	public void insertWishList(@RequestParam("spaceNo") String spaceNo, @RequestParam("email") String email) {
-		System.out.println("좋아요클릭"+spaceNo+email);
-		
-		/* int result = spaceService.insertWishList(); */
-		
+	public void insertWishList(Wish wish) {
+		System.out.println("좋아요클릭"+wish);
+	
+		spaceService.insertWishList(wish);
 	}
 	
 	

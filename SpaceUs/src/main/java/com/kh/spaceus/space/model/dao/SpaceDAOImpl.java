@@ -17,6 +17,7 @@ import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
+import com.kh.spaceus.space.model.vo.Wish;
 
 
 @Repository
@@ -123,6 +124,9 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.insert("space.insertSpaceTag", spaceTag);
 	}
 
+	public int insertWishList(Wish wish) {
+		return sqlSession.insert("space.insertWishList", wish);
+	}
 
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {

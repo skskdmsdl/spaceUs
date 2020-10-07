@@ -101,6 +101,21 @@
 		</selectKey> 
 	
 	</insert>
+	
+	<resultMap type="wish" id="wishMap">
+		<id column="space_no" property="spaceNo"/>
+		<id column="member_email" property="email"/>
+		<result column="like_date" property="date"/>
+	</resultMap>
+	
+	<insert id="insertWishList">
+		insert into wish values(
+			#{spaceNo},
+			#{email},
+			sysdate
+		)
+		
+	</insert>
 
 	<insert id="insertReviewAttahment">
 		insert into

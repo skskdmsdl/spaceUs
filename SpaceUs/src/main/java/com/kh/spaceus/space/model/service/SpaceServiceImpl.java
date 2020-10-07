@@ -16,6 +16,7 @@ import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
+import com.kh.spaceus.space.model.vo.Wish;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -150,6 +151,11 @@ public class SpaceServiceImpl implements SpaceService{
 		return spaceDAO.insertSpaceTag(spaceTag);
 	}
 
+	@Override
+	public int insertWishList(Wish wish) {
+		return spaceDAO.insertWishList(wish);
+	}
+	
 	
 	
 	/*@Override

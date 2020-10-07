@@ -11,6 +11,7 @@ import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
+import com.kh.spaceus.space.model.vo.Wish;
 
 public interface SpaceDAO {
 
@@ -52,6 +53,7 @@ public interface SpaceDAO {
 
 	int insertSpaceTag(SpaceTag spaceTag);
 
+	int insertWishList(Wish wish);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 
