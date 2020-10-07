@@ -24,6 +24,7 @@ commit;
 --권한 컬럼 삭제
 ALTER TABLE member DROP COLUMN authority;
 
+
 -----------------------------
 ----------- 권한 ------------
 -----------------------------
@@ -96,6 +97,8 @@ alter table space add(bank varchar2(256));
 create sequence seq_space_no;
 select * from space;
 select * from space where space_no = 'space2';
+
+
 
 --제약조건명 변경
 alter table space rename constraint pk_review_no to pk_space_no;
@@ -288,16 +291,18 @@ create sequence seq_space_tag_no;
 
 select * from space_tag;
 
-select 
-    space_no, space_name, tag_name
-    from (select
-    *
+select
+  *
 from
-    space
-    join
-        space_tag
-    using(space_no))
-    join tag using(tag_no);
+  (
+    select
+      *
+    from
+      space
+      join space_tag using(space_no)
+  )
+  join tag using(tag_no)
+  where tag_name = '힐링';
 
 
 
@@ -554,6 +559,21 @@ create sequence seq_ex;
 
 select * from exhibition;
 commit;
+
+select
+	  *
+	from
+	  (
+	    select
+	      *
+	    from
+	      space
+	      join space_tag using(space_no)
+	  )
+	  join tag using(tag_no)
+	where
+	  tag_name = '힐링';
+
 
 
 -----------------------------

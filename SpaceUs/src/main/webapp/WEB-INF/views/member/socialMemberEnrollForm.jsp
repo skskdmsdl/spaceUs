@@ -39,6 +39,12 @@
 	border: 1px solid #d1001c;
 }
 </style>
+<script>
+<c:if test="${ site eq '네이버' and not empty returnPath }">
+	opener.parent.location = '${pageContext.request.contextPath}/callback?code=${code}&state=${state}';
+    self.close();
+</c:if>
+</script>
 <body style="background-color: #666666;">
 	<div class="limiter">
 		<div class="container-login100">
@@ -263,6 +269,43 @@ $("#passwordChk").blur(function(){
 		$("#pw-alert").css('display', 'none');
 	}
 });
+//닉네임 검사
+$("#nickName").blur(function(){
+
+	//닉네임 유효성검사 : 공백 입력불가
+	if($(this).val().search(/\s/) != -1) {
+		$(".nickNameRegex").show();
+		$("#nickNameValid").val(0);
+		$("#nickName").val('').focus();
+		return;
+	}else {
+		$(".nickNameRegex").hide();
+	}
+
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/member/checkNickNameDuplicate.do",
+		data : {
+			nickName : $(this).val()
+		},
+		dataType : "json",
+		success : function(data){
+
+			if(data.isUsable == true) {
+				$(".nickNameDuplicate").hide();
+				$("#nickNameValid").val(1);
+			}
+			else {
+				$(".nickNameDuplicate").show();
+				$("#nickName").val('').focus();
+				$("#nickNameValid").val(0);
+			}
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	});
+});
+
 
 $(function(){
 	
