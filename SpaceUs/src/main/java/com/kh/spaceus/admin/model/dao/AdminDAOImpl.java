@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.admin.model.vo.ManageMember;
-import com.kh.spaceus.member.model.vo.Member;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {

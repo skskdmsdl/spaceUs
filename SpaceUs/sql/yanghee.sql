@@ -20,6 +20,17 @@ select * from member;
 commit;
 
 insert into member values('yang@naver.com','김양희','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','90/09/09','20/10/10',0);
+insert into member values('user1@naver.com','유저1','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','91/09/09',default,0);
+insert into member values('user2@naver.com','유저2','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','92/09/09',default,0);
+insert into member values('user3@naver.com','유저3','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','93/09/09',default,0);
+insert into member values('user4@naver.com','유저4','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','94/09/09',default,0);
+insert into member values('user5@naver.com','유저5','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','95/09/09',default,0);
+insert into member values('user6@naver.com','유저6','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','96/09/09',default,0);
+insert into member values('user7@naver.com','유저7','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','97/09/09',default,0);
+insert into member values('user8@naver.com','유저8','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','98/09/09',default,0);
+insert into member values('user9@naver.com','유저9','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','99/09/09',default,0);
+insert into member values('user10@naver.com','유저10','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','90/09/09',default,0);
+
 
 select
     M.member_email,
@@ -47,6 +58,20 @@ create table auth (
 );
 
 select * from auth;
+
+commit;
+
+insert into auth values('yang@naver.com',default);
+insert into auth values('user1@naver.com',default);
+insert into auth values('user2@naver.com',default);
+insert into auth values('user3@naver.com',default);
+insert into auth values('user4@naver.com',default);
+insert into auth values('user5@naver.com',default);
+insert into auth values('user6@naver.com',default);
+insert into auth values('user7@naver.com',default);
+insert into auth values('user8@naver.com',default);
+insert into auth values('user9@naver.com',default);
+insert into auth values('user10@naver.com',default);
 
 -----------------------------
 ---------- 카테고리 ----------
@@ -85,7 +110,7 @@ CREATE TABLE space (
     constraints pk_review_no primary key(space_no),
     constraints fk_category_no foreign key(category_no) references category(category_no) on delete set null,
     constraints fk_member_email foreign key(member_email) references member(member_email) on delete set null,
-    constraints ck_status check(status in ('O','C','S'))
+    constraints ck_status check(status in ('O','C','S')) 
 );
 
 create sequence seq_space_no;
@@ -514,9 +539,25 @@ create table report (
 ALTER TABLE report DROP constraints fk_group_board_no;
 
 commit;
-select * from report;
+
+
+
+select
+    *
+from(
+    select *
+    from report R join blacklist B
+                    on R.board_no = B.report_board_no 
+    order by B.blacklist_no desc
+    );
+
+
 
 select * from member;
+select * from report;
+
+insert into report values('sinsa@naver.com','G64','기타');
+COMMIT;
 -----------------------------
 --------- 블랙리스트 --------
 -----------------------------
@@ -535,23 +576,23 @@ create sequence seq_blacklist_no;
 select * from blacklist;
 select * from recruit;
 select * from group_board;
+select * from report;
 
 delete from blacklist where blackList_no = 'BLACK41';
 
 COMMIT;
 
 select
-    B.blackList_no,
+    B.blacklist_no,
+    B.report_board_no,
     G.group_board_title,
     G.member_email,
-    R.title,
-    R.member_email
-    
+    (select report_reason from (select * from report join blacklist B on board_no = B.report_board_no group by board_no order by B.blacklist_no desc ) where rownum = 1) reason
 from
     blacklist B left join group_board G
-            on G.group_board_no = B.report_board_no
-                left join recruit R
-            on R.recruit_no = B.report_board_no;
+            on G.group_board_no = B.report_board_no;
+            
+select * from report;
 
 -----------------------------
 ------- 댓글 신고 -------------
