@@ -18,6 +18,7 @@
 		<result column="member_email" property="email"/>
 		<result column="nickname" property="nickName"/>
 		<result column="view_cnt" property="viewCnt"/>
+		<result column="header" property="header"/>
 		<result column="content" property="content"/>
 		<result column="enroll_date" property="enrollDate"/>
 		<result column="report_cnt" property="reportCnt"/>
@@ -224,6 +225,26 @@
 	    	title like '%'||#{keyWord}||'%'
 	</select>
 	
+	<select id="recruitHeaderSearch" resultMap="recruitMap">
+		select
+			R.*,
+			(select count(*) from recruit_comment where recruit_no = R.recruit_no) commentCnt
+		from
+			recruit R
+		where
+			header = #{header}
+		order by
+			enroll_date desc
+	</select>
+	
+	<select id="selectRecruitTotalHeader" resultType="_int">
+	    select 
+	    	count(*) 
+	    from 
+	    	recruit	
+	    where
+	    	header = #{header}
+	</select>
 	
 
 </mapper>

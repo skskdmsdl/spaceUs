@@ -8,11 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.dao.SpaceDAO;
+import com.kh.spaceus.space.model.vo.Attachment;
+import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
+import com.kh.spaceus.space.model.vo.Wish;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -114,10 +118,42 @@ public class SpaceServiceImpl implements SpaceService{
 		return  spaceDAO.selectQuestionTotalContents(spaceNo);
 	}
 
+	@Transactional(rollbackFor = {Exception.class})
 	@Override
-	public int insertWishList(String spaceNo, String email) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertSpace(Space space) {
+		int result = 0;
+		
+		result = spaceDAO.insertSpace(space);
+		
+		List<Attachment> attachList = space.getAttachList();
+		
+		//첨부파일이 있는 경우
+		if(attachList != null) {
+			for(Attachment attach : attachList) {
+				attach.setSpaceNo(space.getSpaceNo());
+				
+				log.debug("attach = {}", attach);
+				result = spaceDAO.insertAttachment(attach);
+				
+			}
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int insertOption(Option option) {
+		return spaceDAO.insertOption(option);
+	}
+
+	@Override
+	public int insertSpaceTag(SpaceTag spaceTag) {
+		return spaceDAO.insertSpaceTag(spaceTag);
+	}
+
+	@Override
+	public int insertWishList(Wish wish) {
+		return spaceDAO.insertWishList(wish);
 	}
 	
 	

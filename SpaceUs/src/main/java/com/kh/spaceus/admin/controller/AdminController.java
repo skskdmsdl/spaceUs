@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.spaceus.admin.model.service.AdminService;
 import com.kh.spaceus.admin.model.vo.ManageMember;
@@ -25,6 +26,33 @@ public class AdminController {
 	public String memberManage(Model model) {
 		List<ManageMember> memberList = adminService.selectList();
 		log.info("memberList={}",memberList);
+		
+		model.addAttribute("memberList", memberList);
+		return "admin/memberManage";
+	}
+	
+	//Id로 입력시 회원목록 조회
+	@RequestMapping("/findUserList.do")
+	public String findUserList(Model model, @RequestParam String searchType, @RequestParam String searchKeyword) {
+		log.info("searchType={}", searchType);
+		log.info("searchKeyword={}",searchKeyword);
+		
+		List<ManageMember> memberList = null;
+		if(searchType.equals("userId")) {
+			memberList = adminService.findUserIdList(searchKeyword);
+			log.info("memberList = {}", memberList);
+		}
+		else if(searchType.equals("userName")) {
+			memberList = adminService.findUserNameList(searchKeyword);						
+			log.info("memberList = {}", memberList);
+		}
+		else if(searchType.equals("userRole")) {
+			if(searchKeyword.equals("total")) {
+				memberList = adminService.selectList();
+			}else{
+				memberList = adminService.findUserRoleList(searchKeyword);
+			}
+		}
 		
 		model.addAttribute("memberList", memberList);
 		return "admin/memberManage";

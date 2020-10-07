@@ -14,6 +14,17 @@
 	</select>
 
 <!-- reservation -->
+	<insert id="insertReservationVail">
+		insert into
+			reservation_avail 
+		values (
+			#{ day },
+			#{ spaceNo },
+			#{ startHour },
+			#{ endHour }
+		)
+	</insert>
+
 
 </mapper>
 
