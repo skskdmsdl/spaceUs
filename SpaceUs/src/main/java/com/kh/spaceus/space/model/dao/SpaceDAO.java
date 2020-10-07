@@ -44,7 +44,7 @@ public interface SpaceDAO {
 	int updateReviewComment(Review review);
 
 	List<Review> selectReviewComment(String spaceNo, int limit, int offset);
-
+	
 	int insertSpace(Space space);
 
 	int insertAttachment(Attachment attach);
@@ -53,7 +53,15 @@ public interface SpaceDAO {
 
 	int insertSpaceTag(SpaceTag spaceTag);
 
-	int insertWishList(Wish wish);
+	void insertWish(Wish wish);
+
+	List<Space> selectSameCategory(Space space);
+
+	int selectLikeCnt(String spaceNo);
+
+	void deleteWish(Wish wish);
+
+	String selectCateName(String cateNo);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

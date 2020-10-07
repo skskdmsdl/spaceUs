@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -41,15 +43,15 @@ import net.sf.json.JSONArray;
 @Slf4j
 @RequestMapping("/space")
 public class SpaceController {
-	
-	@Autowired 
+
+	@Autowired
 	private SpaceService spaceService;
-	 
-	@Autowired 
+
+	@Autowired
 	private ReservationService reservationService;
-	
-	//공간등록하기 화면
-	@RequestMapping(value="/insertSpace.do",method = RequestMethod.GET)
+
+	// 공간등록하기 화면
+	@RequestMapping(value = "/insertSpace.do", method = RequestMethod.GET)
 	public String insertSpace() {
 		return "space/insertSpace";
 	}
@@ -143,62 +145,65 @@ public class SpaceController {
 	
 		return "/community/recruit/recruitList";
 	}
-	
-	
+
 	@GetMapping("/insertHashTag.do")
 	public ModelAndView insertHashTag(ModelAndView mav, @RequestParam("hashTag") String hashTag) {
 		log.debug("해쉬태그 등록 요청");
-		//1.업무로직 : 중복체크
-    	Tag tag = spaceService.selectOneTag(hashTag);
-    	if(tag!=null) {
-	    	mav.addObject("hashTag", hashTag);
-	    	mav.setViewName("jsonView");
-    	}
-    	else {
-    		spaceService.insertHashTag(hashTag);
-	    	mav.addObject("hashTag", hashTag);
-	    	mav.setViewName("jsonView");
-    	}
+		// 1.업무로직 : 중복체크
+		Tag tag = spaceService.selectOneTag(hashTag);
+		if (tag != null) {
+			mav.addObject("hashTag", hashTag);
+			mav.setViewName("jsonView");
+		} else {
+			spaceService.insertHashTag(hashTag);
+			mav.addObject("hashTag", hashTag);
+			mav.setViewName("jsonView");
+		}
 		return mav;
 	}
-	
+
 	@RequestMapping("/spaceDetail.do")
-	public String spaceDetail(Model model,
-							  @RequestParam("spaceNo") String spaceNo, Principal principal,
-							  @RequestParam(defaultValue = "1",
-						  	  value = "cPage") int cPage,
-							  HttpServletRequest request) {
+	public String spaceDetail(Model model, @RequestParam("spaceNo") String spaceNo, Principal principal,
+			@RequestParam(defaultValue = "1", value = "cPage") int cPage, HttpServletRequest request) {
 
 		Space space = spaceService.selectOneSpace(spaceNo);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
-		
-		
-		
-		//리뷰 한 페이지당 개수 제한
-		final int limit = 10; //사용용도는 numPerPage와 똑같음
+
+		// 같은 카테고리 공간 리스트(최대 3개)
+		List<Space> spcList = spaceService.selectSameCategory(space);
+		for (int i = 0; i < spcList.size(); i++) {
+			System.out.println(spcList);
+		}
+
+		// 추천 공간 사진 리스트
+		String cateName = spaceService.selectCateName(space.getCategoryNo());
+
+		// 리뷰 한 페이지당 개수 제한
+		final int limit = 10; // 사용용도는 numPerPage와 똑같음
 		int offset = (cPage - 1) * limit;
 		List<Review> review = spaceService.selectListReview(spaceNo, limit, offset);
-		
-		//전체리뷰수 구하기
+
+		// 전체리뷰수 구하기
 		int reviewTotal = spaceService.selectReviewTotalContents(spaceNo);
-		//별점조회
+		// 별점조회
 		Star star = spaceService.selectStar();
-		star.setSumStar(star.getStar1()+star.getStar2()+star.getStar3()+star.getStar4()+star.getStar5());
+		star.setSumStar(star.getStar1() + star.getStar2() + star.getStar3() + star.getStar4() + star.getStar5());
 		String url = request.getRequestURI() + "?spaceNo=" + spaceNo;
 		String pageBar = Utils.getPageBarHtml(cPage, limit, reviewTotal, url);
-		
+
 		int qnaTotal = spaceService.selectQuestionTotalContents(spaceNo);
-		
-		//qna 조회
+
+		// qna 조회
 		List<Qna> qlist = spaceService.selectQuestionList(spaceNo, limit, offset);
 		String qPageBar = Utils.getPageBarHtml(cPage, limit, qnaTotal, url);
-		
-		
+
+		model.addAttribute("spcList", spcList);
+		model.addAttribute("cateName", cateName);
+
 		model.addAttribute("qlist", qlist);
 		model.addAttribute("qPageBar", qPageBar);
 		model.addAttribute("qnaTotal", qnaTotal);
-		
-		
+
 		model.addAttribute("space", space);
 		model.addAttribute("tag", tag);
 		model.addAttribute("loginMember", principal);
@@ -207,67 +212,78 @@ public class SpaceController {
 		model.addAttribute("reviewTotal", reviewTotal);
 		model.addAttribute("star", star);
 		model.addAttribute("pageBar", pageBar);
-		
+
 		return "space/spaceDetail";
 	}
-	
-	//예약하기버튼
+
+	// 예약하기버튼
 	@RequestMapping("/reserveSpace.do")
-	public String reserveSpace(Model model,
-							   ModelAndView mav,
-							   @RequestParam("spaceNo") String spaceNo,
-							   @RequestParam("spaceName") String spaceName) {
-		//log.debug("spaceNo= {}",spaceNo);
-		//log.debug("spaceName= {}",spaceName);
-		
-		//spaceNo로 옵션정보가져와서 전달하기
-		
-		//spaceNo로 예약가능한 날짜 가져오기
+	public String reserveSpace(Model model, ModelAndView mav, @RequestParam("spaceNo") String spaceNo,
+			@RequestParam("spaceName") String spaceName) {
+		// log.debug("spaceNo= {}",spaceNo);
+		// log.debug("spaceName= {}",spaceName);
+
+		// spaceNo로 옵션정보가져와서 전달하기
+
+		// spaceNo로 예약가능한 날짜 가져오기
 		List<ReservationAvail> availList = reservationService.selectListAvail(spaceNo);
-		//log.debug("rev={}",rev);
-		
+		// log.debug("rev={}",rev);
+
 		model.addAttribute("spaceName", spaceName);
-		mav.addObject("availList",availList);
-		
+		mav.addObject("availList", availList);
+
 		return "space/reserveSpace";
 	}
-	
-	@RequestMapping(value="/searchSpace.do",
-					method=RequestMethod.GET)
+
+	@RequestMapping(value = "/searchSpace.do", method = RequestMethod.GET)
 	public ModelAndView searchSpace(ModelAndView mav, @RequestParam("search_keyword") String keyword) {
 		mav.addObject("keyword", keyword);
-		
-		
+
 		return mav;
 	}
-	
-	//위시리스트 추가
-	@RequestMapping(value="/heart.do",
-					method=RequestMethod.POST)
-	public void insertWishList(Wish wish) {
-		System.out.println("좋아요클릭"+wish);
-	
-		spaceService.insertWishList(wish);
-	}
-	
-	
-	//사업자등록증 조회
-	@GetMapping("/checkIdDuplicate.do")
-    public ModelAndView checkIdDuplicate1(ModelAndView mav,
-    									  @RequestParam("businessNo") long businessNo) {
-    	
-    	//1.업무로직 : 중복체크
-    	Space space = spaceService.selectOneSpace(businessNo);
-    	boolean isUsable = space == null;
-    	
-    	//2. model에 속성 등록
-    	mav.addObject("isUsable", isUsable);
-    	
-    	//3. viewName : jsonView빈 지정
-    	mav.setViewName("jsonView"); // /WEB-INF/views/jsonView.jsp
-    	
-    	return mav;
-    }
-	
-}
 
+	// 위시리스트 추가
+	@RequestMapping(value = "/heart.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String insertWish(Wish wish, HttpServletResponse response) {
+		spaceService.insertWish(wish);
+		
+		return "";
+	}
+
+	// 좋아요수 읽어오기
+	@RequestMapping(value = "/readLikeCnt.do", method = RequestMethod.GET)
+	@ResponseBody
+	public int selectLikeCount(@RequestParam("no") String spaceNo) {
+		int cnt = spaceService.selectLikeCnt(spaceNo);
+
+		return cnt;
+	}
+
+	// 위시리스트 삭제
+	@RequestMapping(value = "/cancelHeart.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteWishList(Wish wish, HttpServletResponse response) {
+		spaceService.deleteWish(wish);
+		
+		return "";
+	}
+
+	// 사업자등록증 조회
+	@GetMapping("/checkIdDuplicate.do")
+	public ModelAndView checkIdDuplicate1(ModelAndView mav, @RequestParam("businessNo") long businessNo) {
+
+		// 1.업무로직 : 중복체크
+		Space space = spaceService.selectOneSpace(businessNo);
+		boolean isUsable = space == null;
+
+		// 2. model에 속성 등록
+		mav.addObject("isUsable", isUsable);
+
+		// 3. viewName : jsonView빈 지정
+		mav.setViewName("jsonView"); // /WEB-INF/views/jsonView.jsp
+
+		return mav;
+	}
+
+}

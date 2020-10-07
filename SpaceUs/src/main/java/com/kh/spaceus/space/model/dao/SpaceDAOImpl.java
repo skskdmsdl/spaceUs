@@ -7,10 +7,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Option;
+import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
@@ -124,8 +126,29 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.insert("space.insertSpaceTag", spaceTag);
 	}
 
-	public int insertWishList(Wish wish) {
-		return sqlSession.insert("space.insertWishList", wish);
+	@Override
+	public void insertWish(Wish wish) {
+		sqlSession.insert("space.insertWish", wish);
+	}
+
+	@Override
+	public List<Space> selectSameCategory(Space space) {
+		return sqlSession.selectList("space.selectSameCategory", space);
+	}
+
+	@Override
+	public int selectLikeCnt(String spaceNo) {
+		return sqlSession.selectOne("space.selectLikeCnt", spaceNo);
+	}
+
+	@Override
+	public void deleteWish(Wish wish) {
+		sqlSession.delete("space.deleteWish", wish);
+	}
+
+	@Override
+	public String selectCateName(String cateNo) {
+		return sqlSession.selectOne("space.selectCateName", cateNo);
 	}
 
 	/*@Override
