@@ -1,3 +1,5 @@
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="org.springframework.security.core.Authentication"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,6 +8,11 @@
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<%
+Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+String loginMember = auth.getName();
+pageContext.setAttribute("loginMember",loginMember);
+%>
 <style>
 .image-div {
 	background-color:#f7f7f7;
@@ -66,12 +73,31 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                          <div class="m-5">
                              <div class="d-flex">
 								</div>
-								<form action="${pageContext.request.contextPath }/community/recruit/selectRecruit.do">
-                                  <input type="radio" name="radio" class="m-r-10 ml-3" >전체
-                                  <input type="radio" name="radio" class="m-r-10 ml-3">구인
-                                  <input type="radio" name="radio" class="m-r-10 ml-3">구직
-                                </form>
-                                <form action="${pageContext.request.contextPath }/community/recruit/searchRecruit.do">
+									<c:if test="${ category eq 'all' }">
+		                                  <input type="radio" class="m-r-10 ml-3 all" checked >전체
+		                                  <input type="radio" class="m-r-10 ml-3 hire">구인
+		                                  <input type="radio" class="m-r-10 ml-3 jobSearch">구직
+	                                </c:if>
+									<c:if test="${ category eq 'hire' }">
+		                                  <input type="radio" class="m-r-10 ml-3 all" >전체
+		                                  <input type="radio" class="m-r-10 ml-3 hire" checked>구인
+		                                  <input type="radio" class="m-r-10 ml-3 jobSearch">구직
+	                                </c:if>
+									<c:if test="${ category eq 'jobSearch' }">
+		                                  <input type="radio" class="m-r-10 ml-3 all" >전체
+		                                  <input type="radio" class="m-r-10 ml-3 hire">구인
+		                                  <input type="radio" class="m-r-10 ml-3 jobSearch" checked>구직
+	                                </c:if>
+									<c:if test="${ category eq null }">
+		                                  <input type="radio" class="m-r-10 ml-3 all" >전체
+		                                  <input type="radio" class="m-r-10 ml-3 hire">구인
+		                                  <input type="radio" class="m-r-10 ml-3 jobSearch">구직
+	                                </c:if>
+								<%-- <form action="${pageContext.request.contextPath }/community/recruit/recruitList.do"></form>
+								<form action="${pageContext.request.contextPath }/community/recruit/recruitAll.do" id="all"></form>--%>
+								<form action="${pageContext.request.contextPath }/community/recruit/recruitHire.do" id="hire"></form>
+                                <form action="${pageContext.request.contextPath }/community/recruit/recruitJobSearch.do" id="jobSearch"></form> 
+	                            <form action="${pageContext.request.contextPath }/community/recruit/searchRecruit.do">    
 	                                <div class="input-group mb-4 col-4 pull-right">
 									  <input type="text" class="input-group-text" name="keyWord" style="background-color: white;">
 									  <div class="input-group-append">
@@ -105,7 +131,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                              </table>
                              <div class="container">
 			                 <nav class="mt-5" >
-			                 	<a href="${pageContext.request.contextPath }/community/recruit/recruitEnrollForm.do" class="btn waves-effect waves-light hidden-md-down m-1 pull-right" style="font-size:18px;background-color: #00c89e;  color:white;"> 글 등록</a>
+			                 	<a class="btn waves-effect waves-light hidden-md-down m-1 pull-right" id="recruitEnroll" style="font-size:18px;background-color: #00c89e;  color:white;"> 글 등록</a>
 								  <ul class="justify-content-center pagination">${ pageBar }</ul>
 								</nav>
 							 </div>
@@ -120,9 +146,23 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 function recruitDetailFrm(recruit_no){
 	let no = recruit_no;
 	location.href='${pageContext.request.contextPath }/community/recruit/recruitDetail.do?no='+no;
-
-/* $("tbody tr").click(function(){
-}); */
-}; 
+};
+$("#recruitEnroll").click(function(){
+	if('${loginMember}' == 'anonymousUser'){
+		alert("로그인 후 이용할 수 있습니다.");
+		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+	}
+	else location.href="${pageContext.request.contextPath }/community/recruit/recruitEnrollForm.do";
+}); 
+//페이지 모아보기
+$(".all").click(function(){
+	location.href="${pageContext.request.contextPath }/community/recruit/recruitAll.do";
+});
+$(".hire").click(function(){
+	location.href="${pageContext.request.contextPath }/community/recruit/recruitHire.do";
+});
+$(".jobSearch").click(function(){
+	location.href="${pageContext.request.contextPath }/community/recruit/recruitJobSearch.do"; 
+});
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

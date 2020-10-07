@@ -21,8 +21,8 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public int updateAnswer(String answer, String qnaNo) {
-		return QnaDAO.updateAnswer(answer, qnaNo);
+	public int updateAnswer(Qna qna) {
+		return QnaDAO.updateAnswer(qna);
 	}
 
 

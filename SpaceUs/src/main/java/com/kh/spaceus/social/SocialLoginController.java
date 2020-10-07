@@ -81,6 +81,7 @@ public class SocialLoginController {
     	OAuth2AccessToken oauthToken;	
     	oauthToken = naverLoginBO.getAccessToken(session, code, state);
     	
+    	
     	//1. 로그인 사용자 정보를 읽어옴.
     	apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
     	
@@ -95,7 +96,7 @@ public class SocialLoginController {
     	
 //    	//response의 email값 파싱
     	String email = (String)response_obj.get("email");
-    	log.info("email = {}", email);
+    	//log.info("email = {}", email);
     	
     	//4.모델에 저장 
     	model.addAttribute("email", email);
@@ -112,7 +113,9 @@ public class SocialLoginController {
     	else {
     		String returnPath = "/member/socialMemberEnrollForm";
     		model.addAttribute("returnPath", "returnPath");
-    		log.info("returnPath = {}", returnPath);
+    		model.addAttribute("code", code);
+        	model.addAttribute("state", state);
+    		//log.info("returnPath = {}", returnPath);
     		
     		return returnPath;
     	}
@@ -139,6 +142,7 @@ public class SocialLoginController {
 
       model.addAttribute("email", email);
       model.addAttribute("site", "카카오");
+      model.addAttribute("code", code);
       model.addAttribute("closeFunction", "closeFunction");
       
     //이메일이 이미 가입되어있을 경우 로그인으로 가게 함
@@ -205,17 +209,6 @@ public class SocialLoginController {
    	  		model.addAttribute("email", email);
    	  		return "/member/memberLoginForm";
    	  	}
-//   	  	else {
-//   	  		//이미 구글로그인
-//	   	  	if(!(null == tokenEmail || "".equals(tokenEmail))) { //회원가입
-//	   	  		log.info("이미 구글로그인 googleMemberEnrollForm...tokenEmail="+tokenEmail);
-//		   	  	model.addAttribute("email", tokenEmail);
-//	   	  		return "/member/googleMemberEnrollForm";
-//	   	  	}else {
-//	   	  		//로그인뷰에 머문다
-//	   	  		log.info("이미 구글로그인 memberLoginForm...");
-//	   	  		return "/member/memberLoginForm";
-//	   	  	}
    	  		model.addAttribute("email", email);
    	  		model.addAttribute("site", "구글");
 	   	  	return "/member/socialMemberEnrollForm";

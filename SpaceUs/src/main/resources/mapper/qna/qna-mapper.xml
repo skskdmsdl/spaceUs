@@ -38,9 +38,9 @@
 		update
 			qna
 		set 
-			qna_answer = #{qna.answer}
+			qna_answer = #{answer}
 		where
-			qna_no = #{qna.qnaNo}
+			qna_no = #{qnaNo}
 	</update>
 		
 	<resultMap type="qna" id="qnaMap">
