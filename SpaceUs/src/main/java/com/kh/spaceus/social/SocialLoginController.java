@@ -132,13 +132,14 @@ public class SocialLoginController {
       JsonNode userInfo = kakaoController.getKakaoUserInfo(code);
 	  JsonNode accessToken = userInfo.get("access_token");
       
-	  //log.info("userInfo = {}", userInfo);
+	  log.info("userInfo = {}", userInfo);
 	  
+	  //여기서부터 오류
       String email = userInfo.get("kakao_account").get("email").asText();
       String nickname = userInfo.get("properties").get("nickname").asText();
       
-      //log.info("email = {}", email);
-      //log.info("nickname = {}", nickname);
+      log.info("email = {}", email);
+      log.info("nickname = {}", nickname);
 
       model.addAttribute("email", email);
       model.addAttribute("site", "카카오");

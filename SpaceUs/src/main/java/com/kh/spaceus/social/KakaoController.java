@@ -108,7 +108,12 @@ public class KakaoController {
 
       // JSON 형태 반환값 처리
       ObjectMapper mapper = new ObjectMapper();
+      log.info("mapper : {}", mapper);
+
       returnNode = mapper.readTree(response.getEntity().getContent());
+      
+      log.info("returnNode : {}", returnNode);
+      
     } catch (UnsupportedEncodingException e) {
 
       e.printStackTrace();
