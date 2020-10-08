@@ -119,10 +119,8 @@ public class SpaceController {
 		    List<Option> optionList = new ArrayList<>();
 		    Option option = new Option();
 		    for(String str : array) {
-		    	System.out.println(str);
 		    	option.setOptionNo(str);
 		    	option.setSpaceNo(spaceNo);
-		    	System.out.println(option);
 		    	int result3 = spaceService.insertOption(option);
 		    }
 		    

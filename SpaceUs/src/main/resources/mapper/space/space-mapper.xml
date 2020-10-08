@@ -373,6 +373,23 @@
 			rev_no = #{revNo}
 	</update>
 	
+	<select resultMap="reviewMap" id="selectStarAvg">
+		select
+			*
+		from
+			review
+		where space_no = #{ spaceNo } 
+	</select>
+	
+	<update id="updateStarAvg">
+		update 
+			space
+		set
+			star_avg = #{starAvg}
+		where
+			space_no = #{spaceNo}
+	</update>
+	
 	
 </mapper>
 

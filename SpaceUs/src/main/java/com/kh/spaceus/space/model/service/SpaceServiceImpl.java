@@ -184,6 +184,16 @@ public class SpaceServiceImpl implements SpaceService{
 	public int updateReview(Review review) {
 		return spaceDAO.updateReview(review);
 	}
+
+	@Override
+	public List<Review> selectStarAvg(String spaceNo) {
+		return spaceDAO.selectStarAvg(spaceNo);
+	}
+
+	@Override
+	public void updateStarAvg(Space space) {
+		spaceDAO.updateStarAvg(space);
+	}
 	
 	
 	

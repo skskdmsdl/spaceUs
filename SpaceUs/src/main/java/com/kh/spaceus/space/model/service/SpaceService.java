@@ -62,6 +62,10 @@ public interface SpaceService {
 
 	int updateReview(Review review);
 
+	List<Review> selectStarAvg(String spaceNo);
+
+	void updateStarAvg(Space space);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 
