@@ -67,8 +67,12 @@
                                    	<div class="row"> 
                                         <div class="col-md-9 m-b-30">${ fn:substring(list.content,0,30) }</div>
                                         <div class="col-md-9">
-                                            <a class="btn m-r-5 btn-rounded btn-outline-success reviewBtn">리뷰등록</a> 
-                                            <a class="btn btn-rounded btn-outline-secondary modifyBtn">리뷰수정</a> 
+                                         <c:if test="${ list.reviewNo == null }">
+                                            	<a class="btn m-r-5 btn-rounded btn-outline-success reviewBtn">리뷰등록</a> 
+                                            </c:if>
+                                            <c:if test="${ list.reviewNo != null }">
+                                            	<a class="btn btn-rounded btn-outline-secondary modifyBtn">리뷰수정</a> 
+                                            </c:if> 
                                         </div>
                                        </div>
                                    </div>
@@ -94,6 +98,8 @@
 													  enctype="multipart/form-data"
 													  style="position: absolute;right: 5%;">
 													  <input type="hidden" name="starRating" required/>
+													  <input type="hidden" name="spaceNo" value="${list.spaceNo }"/>
+													  <input type="hidden" name="revNo" value="${list.revNo }"/>
 													  <input type="hidden" name="nickName" value="${member.nickName}" />
 													  <div class="input-group mb-3" style="padding:0px;">
 													  <div class="custom-file">
@@ -109,11 +115,11 @@
 												</form>
 												
 											<!-- 리뷰수정 -->	
-											<div class="pl-5 pr-5" style="height: 150px; display: none;" id="reviewUpdateFrm" >
+											<div class="pl-5 pr-5 reviewUpdateFrm" style="height: 150px; display: none;" >
 				                         	<div class="row pl-3 align-items-xl-center">
 				                         		<p class="m-1" style="font-size: 15px;">별점 &nbsp;&nbsp;:</p>
 				                         		<div class="star-box">
-												  <span class="star mt-2 star1" ></span>
+												  <span class="star mt-2 star1"></span>
 												  <span class="star star2"></span>
 												  <span class="star star3"></span>
 												 <span class="star star4"></span>
@@ -139,7 +145,7 @@
 													</div>
 												<!-- <div class="m-1" style="position: absolute;right: 60px;">+ 사진</div> -->
 					                         	</div>
-				                         		<textarea class="col-lg-11" id="reviewCon" name="content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+				                         		<textarea class="col-lg-11" id="reviewCon" name="content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;">${list.reviewContent }</textarea>
 				                           		<input type="submit" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #ddd;width: 70px;" value="수정">
 				                           </div>
 										</form>
@@ -244,12 +250,11 @@ function reviewValidate(){
 //리뷰수정 버튼
 $(".modifyBtn").on("click", function(){
 	if($(this).hasClass("btn-primary")){
-		$(".reviewFrm").hide();
-		/* $("#reviewFrm").css("position","block"); */
+		$(this).parents("div").siblings(".reviewUpdateFrm").hide();
 		$(this).removeClass("btn-primary");
 	}
 	else{
-		$(".reviewFrm").show();
+		$(this).parents("div").siblings(".reviewUpdateFrm").show();
 		$(this).addClass("btn-primary");
 	}	
 });

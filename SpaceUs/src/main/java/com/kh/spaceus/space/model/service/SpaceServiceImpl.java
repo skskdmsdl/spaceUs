@@ -174,6 +174,11 @@ public class SpaceServiceImpl implements SpaceService{
 	public String selectCateName(String cateNo) {
 		return spaceDAO.selectCateName(cateNo);
 	}
+
+	@Override
+	public List<Space> selectReviewList(String email) {
+		return spaceDAO.selectReviewList(email);
+	}
 	
 	
 	

@@ -58,6 +58,8 @@ public interface SpaceService {
 
 	String selectCateName(String cateNo);
 
+	List<Space> selectReviewList(String email);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

@@ -151,6 +151,11 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.selectOne("space.selectCateName", cateNo);
 	}
 
+	@Override
+	public List<Space> selectReviewList(String email) {
+		return sqlSession.selectList("space.selectReviewList", email);
+	}
+
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {
 		return sqlSession.selectList("space.selectListSpaceCollection", email);

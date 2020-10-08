@@ -100,13 +100,11 @@ public class MemberController {
 		Member member = memberService.selectOneMember(principal.getName());
 		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
 		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
-		List<Space> spaceList = new ArrayList<>();
+		System.out.println("@1"+revList);
+		List<Space> spaceList = spaceService.selectReviewList(principal.getName());
 		
-		for(Reservation r : revList) {
-			Space space = spaceService.selectOneSpace(r.getSpaceNo());
-			spaceList.add(space);
-		}
-		System.out.println("@@@@"+spaceList); 
+		
+		System.out.println("@2"+spaceList); 
 		
 		model.addAttribute("spaceList", spaceList);
 		model.addAttribute("member", member);
@@ -324,7 +322,7 @@ public class MemberController {
 		
 		System.out.println(review);
 		System.out.println(spaceNo);
-		System.out.println(revNo);
+		System.out.println("@@"+revNo);
 		//1. 파일을 서버컴퓨터에 저장
 		List<ReviewAttachment> attachList  = new ArrayList<>();
 		String saveDirectory = request.getServletContext()
