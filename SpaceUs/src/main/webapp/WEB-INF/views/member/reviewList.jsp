@@ -63,21 +63,23 @@
                            </div> 
                       </div>
                        <div class="steamline m-t-40">
+                       <c:forEach items="${spaceList}" var="list" varStatus="vs">
                            <div class="sl-item">
                             <div class="row">
                              <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
-		    			<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_6.jpg" alt="..."> 
+		    					<img class="img-circle" src="${ pageContext.request.contextPath }/resources/upload/space/${list.rname}" alt="..."> 
                                  </div>
                                    <div class="mt-2 col-md p-20">
-                                       <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
+                                       <div><a href="#">${ list.spaceName }</a> <span class="sl-date">${ list.enrollDate }</span></div>
                                    	<div class="row"> 
-                                        <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+                                        <div class="col-md-9 m-b-30">${ fn:substring(list.content,0,30) }</div>
                                         <div class="col-md-9">
                                             <a id="reviewBtn" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
                                             <a id="modifyBtn" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
                                         </div>
                                        </div>
                                    </div>
+                                       
                                    </div>
                                    		<!-- 리뷰등록 -->
 				                         <div class="pl-5 pr-5" style="height: 150px; display: none;" id="reviewFrm" >
@@ -147,6 +149,10 @@
 				                           </div>
 												</form>
                                   </div>
+                                   </c:forEach>
+                                  
+                                  
+                                  
                                   <div class="sl-item">
                                 <div class="row">
                                 <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >

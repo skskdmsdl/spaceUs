@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Tag;
@@ -25,6 +26,11 @@ public class ReservationDAOImpl implements ReservationDAO{
 	@Override
 	public int insertReservationVail(ReservationAvail reservationAvail) {
 		return sqlSession.insert("reservation.insertReservationVail", reservationAvail);
+	}
+
+	@Override
+	public List<Reservation> selectListReservation(String email) {
+		return sqlSession.selectList("reservation.selectListReservation", email);
 	}
 
 	
