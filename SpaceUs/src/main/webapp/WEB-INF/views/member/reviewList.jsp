@@ -15,14 +15,7 @@
 <style>	
 *{margin:0; padding:0;}
 .star{
-  display:inline-block;
-  width: 30px;height: 30px;
-  cursor: pointer;
-  background: url(http://gahyun.wooga.kr/main/img/testImg/star.png) no-repeat 0 0; 
-  background-size: 100%; 
-}
-.star.on{
-  background-image: url(http://gahyun.wooga.kr/main/img/testImg/star_on.png);
+	cursor: pointer;
 }
 </style>
 
@@ -74,23 +67,23 @@
                                    	<div class="row"> 
                                         <div class="col-md-9 m-b-30">${ fn:substring(list.content,0,30) }</div>
                                         <div class="col-md-9">
-                                            <a id="reviewBtn" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
-                                            <a id="modifyBtn" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
+                                            <a class="btn m-r-5 btn-rounded btn-outline-success reviewBtn">리뷰등록</a> 
+                                            <a class="btn btn-rounded btn-outline-secondary modifyBtn">리뷰수정</a> 
                                         </div>
                                        </div>
                                    </div>
                                        
                                    </div>
                                    		<!-- 리뷰등록 -->
-				                         <div class="pl-5 pr-5" style="height: 150px; display: none;" id="reviewFrm" >
+				                         <div class="pl-5 pr-5 reviewFrm" style="height: 150px; display: none;" >
 				                         	<div class="row pl-3 align-items-xl-center">
 				                         		<p class="m-1" style="font-size: 15px;">별점 &nbsp;&nbsp;:</p>
 				                         		<div class="star-box">
-												  <span class="star mt-2 star1" ></span>
-												  <span class="star star2"></span>
-												  <span class="star star3"></span>
-												 <span class="star star4"></span>
-												 <span class="star star5"></span>
+												  <i class="fa fa-star-o star mt-2 star1" aria-hidden="true"></i>
+												  <i class="fa fa-star-o star star2" aria-hidden="true"></i>
+												  <i class="fa fa-star-o star star3" aria-hidden="true"></i>
+												 <i class="fa fa-star-o star star4" aria-hidden="true"></i>
+												 <i class="fa fa-star-o star star5" aria-hidden="true"></i>
 												</div>
 												<div>
 												</div>
@@ -109,10 +102,10 @@
 													  </div>
 													</div>
 												<!-- <div class="m-1" style="position: absolute;right: 60px;">+ 사진</div> -->
-				                         	</div>
-				                         		 <textarea class="col-lg-11" id="reviewCon" name="content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-				                           		<input type="submit" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #ddd;width: 70px;" value="등록">
-				                           </div>
+					                         	</div>
+					                         		 <textarea class="col-lg-11 reviewCon" name="content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+					                           		<input type="submit" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #ddd;width: 70px;" value="등록">
+					                           </div>
 												</form>
 												
 											<!-- 리뷰수정 -->	
@@ -134,6 +127,8 @@
 													  onsubmit="return reviewValidate();"
 													  enctype="multipart/form-data"
 													  style="position: absolute;right: 5%;">
+													  <input type="hidden" name="spaceNo" value="${list.spaceNo }"/>
+													  <input type="hidden" name="revNo" value="${list.revNo }"/>
 													  <input type="hidden" name="starRating" required/>
 													  <input type="hidden" name="nickName" value="${member.nickName}" />
 													  <div class="input-group mb-3" style="padding:0px;">
@@ -143,84 +138,13 @@
 													  </div>
 													</div>
 												<!-- <div class="m-1" style="position: absolute;right: 60px;">+ 사진</div> -->
-				                         	</div>
-				                         		 <textarea class="col-lg-11" id="reviewCon" name="content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+					                         	</div>
+				                         		<textarea class="col-lg-11" id="reviewCon" name="content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
 				                           		<input type="submit" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #ddd;width: 70px;" value="수정">
 				                           </div>
-												</form>
-                                  </div>
-                                   </c:forEach>
-                                  
-                                  
-                                  
-                                  <div class="sl-item">
-                                <div class="row">
-                                <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
-		    						<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_7.jpg" alt="..."> 
-                                 </div>
-                                   <div class="mt-2 col-md p-20">
-                                       <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-                                   	<div class="row"> 
-                                        <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-                                        <div class="col-md-9">
-                                            <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
-                                            <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
-                                        </div>
-                                       </div>
-                                   </div>
-                                   </div>
-                                  </div>
-                                  <div class="sl-item">
-                                <div class="row">
-                                 <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
-			    					<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_8.jpg" alt="..."> 
-                                  </div>
-                                    <div class="mt-2 col-md p-20">
-                                        <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-                                    	<div class="row"> 
-                                         <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-                                         <div class="col-md-9">
-                                             <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
-                                             <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
-                                         </div>
-                                        </div>
-                                    </div>
-                                  </div>
-                                  </div>
-                                  <div class="sl-item">
-                               <div class="row">
-                                <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
-		    						<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
-                                 </div>
-                                   <div class="mt-2 col-md p-20">
-                                       <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-                                   	<div class="row"> 
-                                        <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-                                        <div class="col-md-9">
-                                            <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
-                                            <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
-                                        </div>
-                                       </div>
-                                   </div>
-                                 </div>
-                                  </div>
-                                  <div class="sl-item">
-                               <div class="row">
-                                 <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
-			    					<img class="img-circle" src="${ pageContext.request.contextPath }/resources/images/image_2.jpg" alt="..."> 
-                                  </div>
-                                  <div class="mt-2 col-md p-20">
-                                      <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-                                  	<div class="row"> 
-                                       <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-                                       <div class="col-md-9">
-                                           <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">리뷰등록</a> 
-                                           <a href="javascript:void(0)" class="btn btn-rounded btn-outline-secondary">리뷰수정</a> 
-                                       </div>
-                                      </div>
-                                  </div>
-                               </div>
-                            </div>
+										</form>
+                                 	</div>
+                                 </c:forEach>
                         </div>
                     </div>
                 </div>
@@ -250,12 +174,22 @@
 <!--morris JavaScript -->
 <script>
 $(".star").on('click',function(){
-	   var idx = $(this).index();
-	   $(".star").removeClass("on");
-	     for(var i=0; i<=idx; i++){
-	        $(".star").eq(i).addClass("on");
+   var idx = $(this).index();
+    if($(".star").hasClass("fa-star")){
+	   for(var i=0; i<=10; i++){
+		   $(this).siblings(".star").eq(i).removeClass("fa-star");
+		   $(this).siblings(".star").eq(i).addClass("fa-star-o");
 	   }
-	 });
+	}  
+   if($(".star").hasClass("fa-star-o")){ 
+	    for(var i=0; i<idx; i++){
+	    	$(this).siblings(".star").eq(i).removeClass("fa-star-o");
+	    	$(this).siblings(".star").eq(i).addClass("fa-star");
+		}
+	    	$(this).removeClass("fa-star-o");
+	    	$(this).addClass("fa-star");
+   }
+}); 
 //사진 첨부
 $(function(){
 	$("[name=upFile]").on("change", function(){
@@ -268,23 +202,22 @@ $(function(){
 			$label.html("파일을 선택하세요.");
 		else 
 			$label.html(file.name);
-		
 	});
 });
 //리뷰등록 버튼
-$("#reviewBtn").on("click", function(){
+$(".reviewBtn").on("click", function(){
+	
 	if($(this).hasClass("btn-primary")){
-		$("#reviewFrm").hide();
-		/* $("#reviewFrm").css("position","block"); */
+		$(this).parents("div").siblings(".reviewFrm").hide();
 		$(this).removeClass("btn-primary");
 	}
 	else{
-		$("#reviewFrm").show();
+		$(this).parents("div").siblings(".reviewFrm").show();
 		$(this).addClass("btn-primary");
-	}	
+	} 	
 });
 //별 받기
- $(".star-box span").on("click", function(){
+ $(".star-box i").on("click", function(){
 	/* alert($(this).hasClass("star1")?"1":$(this).hasClass("star2")?"2":$(this).hasClass("star3")?"3":$(this).hasClass("star4")?"4":"5"); */
 	$("[name=starRating]").val($(this).hasClass("star1")?"1":$(this).hasClass("star2")?"2":$(this).hasClass("star3")?"3":$(this).hasClass("star4")?"4":"5");
 }); 
@@ -295,28 +228,28 @@ function reviewValidate(){
 		alert("별점을 선택해주세요");
 		return false;
 	}
-	if($("#reviewCon").val().length<10){
+	if($(".reviewCon").val().length<10){
 		alert("내용을 최소 10자 이상 입력해주세요");
 		return false;
 	}
 	/* 금칙어 */
-	var reContent = $("#reviewCon").val();
+	var reContent = $(".reviewCon").val();
 	var j=0;
 	var str = ["바보","멍청이"];
 	var keyRegExp = new RegExp('(' + str.join('|') + ')', 'g');
-	$("#reviewCon").val(reContent.replace(keyRegExp, "❤❤"));
+	$(".reviewCon").val(reContent.replace(keyRegExp, "❤❤"));
 
 	return true;
 } 
 //리뷰수정 버튼
-$("#modifyBtn").on("click", function(){
+$(".modifyBtn").on("click", function(){
 	if($(this).hasClass("btn-primary")){
-		$("#reviewFrm").hide();
+		$(".reviewFrm").hide();
 		/* $("#reviewFrm").css("position","block"); */
 		$(this).removeClass("btn-primary");
 	}
 	else{
-		$("#reviewFrm").show();
+		$(".reviewFrm").show();
 		$(this).addClass("btn-primary");
 	}	
 });

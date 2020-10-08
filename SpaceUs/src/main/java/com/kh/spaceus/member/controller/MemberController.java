@@ -316,11 +316,15 @@ public class MemberController {
 	
 	@PostMapping("/insertReview.do")
 	public String insertReview(Review review,
+							  @RequestParam("spaceNo") String spaceNo,
+							  @RequestParam("revNo") String revNo,
 							  @RequestParam(value="upFile",required=false) MultipartFile[] upFiles,
 							  HttpServletRequest request,
 							  RedirectAttributes redirectAttr) {
 		
 		System.out.println(review);
+		System.out.println(spaceNo);
+		System.out.println(revNo);
 		//1. 파일을 서버컴퓨터에 저장
 		List<ReviewAttachment> attachList  = new ArrayList<>();
 		String saveDirectory = request.getServletContext()
@@ -348,9 +352,8 @@ public class MemberController {
 			
 		}
 		
-		//***********예약 부분 완료 이후 수정 필요함!!!!!
-		review.setSpaceNo("space2");
-		review.setRevNo("REV1");
+		review.setSpaceNo(spaceNo);
+		review.setRevNo(revNo);
 		
 		review.setReviewAtt(attachList);
 		log.debug("reveiw = {}", review);
