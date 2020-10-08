@@ -257,6 +257,7 @@
 				space join space_image using (space_no) 
 			where 
 				category_no=#{categoryNo} and space_no!=#{spaceNo}
+                and rownum=1
 			order by
 				like_cnt asc
 			) D
