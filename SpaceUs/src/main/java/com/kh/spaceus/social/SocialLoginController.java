@@ -132,13 +132,14 @@ public class SocialLoginController {
       JsonNode userInfo = kakaoController.getKakaoUserInfo(code);
 	  JsonNode accessToken = userInfo.get("access_token");
       
-	  //log.info("userInfo = {}", userInfo);
+	  log.info("userInfo = {}", userInfo);
 	  
+	  //여기서부터 오류
       String email = userInfo.get("kakao_account").get("email").asText();
       String nickname = userInfo.get("properties").get("nickname").asText();
       
-      //log.info("email = {}", email);
-      //log.info("nickname = {}", nickname);
+      log.info("email = {}", email);
+      log.info("nickname = {}", nickname);
 
       model.addAttribute("email", email);
       model.addAttribute("site", "카카오");
@@ -158,8 +159,8 @@ public class SocialLoginController {
     
     /**
      * Google 토큰인증
-     * 클라이언트 ID  778421516975-r2f80c2f91aalftfppl2kq4sqn1om06i.apps.googleusercontent.com
-     * 클라이언트 보안 비밀 lOWRdU4bq4fc8XZmxu-ASV96
+     * 클라이언트 ID  398489879454-c5aqb8i12qv1gku3dgtt31fd8iogm2hd.apps.googleusercontent.com
+     * 클라이언트 보안 비밀 E5imBrQzrkyvHBqapPMFjS45
      * @param model
      * @param idtoken
      * @param session
@@ -178,7 +179,7 @@ public class SocialLoginController {
     	JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     	GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(httpTransport, JSON_FACTORY)
     	    // Specify the CLIENT_ID of the app that accesses the backend:
-    	    .setAudience(Collections.singletonList("778421516975-r2f80c2f91aalftfppl2kq4sqn1om06i.apps.googleusercontent.com"))
+    	    .setAudience(Collections.singletonList("398489879454-c5aqb8i12qv1gku3dgtt31fd8iogm2hd.apps.googleusercontent.com"))
     	    // Or, if multiple clients access the backend:
     	    //.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
     	    .build();

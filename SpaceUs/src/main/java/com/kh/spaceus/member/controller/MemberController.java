@@ -256,8 +256,8 @@ public class MemberController {
 	public HashMap<String, String> sendSms(HttpServletRequest request, RedirectAttributes redirectAttr,
 			@RequestParam("phone") String phone) throws Exception {
 
-		String api_key = "NCS6NKC9PWO2KDJA";
-		String api_secret = "4NQ8EPL3E7ASKRNC54XECT5NTXMB0EPB";
+		String api_key = "NCSCE6UYF5ENLSNF";
+		String api_secret = "WBPW8N0BWEWOGVYGYMNKNGQEB6QFPZZH";
 		String phoneChk = RandomStringUtils.randomNumeric(4);
 
 		Message coolsms = new Message(api_key, api_secret);
@@ -270,7 +270,7 @@ public class MemberController {
 
 		if (member == null) {
 			params.put("to", phone);
-			params.put("from", "01045049209"); // 무조건 자기번호 (인증)
+			params.put("from", "01048179843"); // 무조건 자기번호 (인증)
 			params.put("type", "SMS");
 			params.put("text", phoneChk);
 			params.put("app_version", "spaceUs"); // application name and version

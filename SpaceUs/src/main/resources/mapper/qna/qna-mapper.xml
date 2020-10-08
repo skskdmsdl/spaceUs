@@ -31,7 +31,10 @@
 	<select id="selectQuestionTotalContents" resultType="_int">
 		select
 			count(*)
-		from qna
+		from 
+			qna
+		where 
+			space_no=#{spaceNo}
 	</select>
 	
 	<update id="updateAnswer">
