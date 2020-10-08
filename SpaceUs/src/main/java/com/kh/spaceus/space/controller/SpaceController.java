@@ -141,7 +141,7 @@ public class SpaceController {
 			throw e;
 		}
 	
-		return "/community/recruit/recruitList";
+		return "redirect:/";
 	}
 	
 	
