@@ -363,6 +363,16 @@
 	     where RNUM =1
 	</select>
 	
+	<update id="updateReview">
+		update 
+			review
+		set
+			star_rating = #{starRating},
+			review_content = #{content}
+		where
+			rev_no = #{revNo}
+	</update>
+	
 	
 </mapper>
 

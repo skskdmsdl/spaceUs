@@ -65,6 +65,8 @@ public interface SpaceDAO {
 
 	List<Space> selectReviewList(String email);
 
+	int updateReview(Review review);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

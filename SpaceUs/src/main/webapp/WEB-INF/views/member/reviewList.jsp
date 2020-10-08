@@ -72,6 +72,7 @@
                                             </c:if>
                                             <c:if test="${ list.reviewNo != null }">
                                             <input type="hidden" name="starInfo" value="${ list.starRating }" />
+                                            <input type="hidden" name="className" value="${ list.reviewNo }" />
                                             	<a class="btn btn-rounded btn-outline-secondary modifyBtn">리뷰수정</a> 
                                             </c:if> 
                                         </div>
@@ -90,15 +91,12 @@
 												 <i class="fa fa-star-o star star4" aria-hidden="true"></i>
 												 <i class="fa fa-star-o star star5" aria-hidden="true"></i>
 												</div>
-												<div>
-												</div>
 												<form name="ReviewFrm" 
 													  action="${pageContext.request.contextPath}/member/insertReview.do" 
 													  method="post" 
 													  onsubmit="return reviewValidate();"
 													  enctype="multipart/form-data"
 													  style="position: absolute;right: 5%;">
-													  <input type="hidden" name="starRating" required/>
 													  <input type="hidden" name="spaceNo" value="${list.spaceNo }"/>
 													  <input type="hidden" name="revNo" value="${list.revNo }"/>
 													  <input type="hidden" name="nickName" value="${member.nickName}" />
@@ -111,6 +109,7 @@
 													</div>
 													
 													</div>
+													  <input type="hidden" name="starRating" required/>
 					                         		 <textarea class="col-lg-11 reviewCon" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
 					                           		<input type="submit" class="btn submit" style="margin-bottom: 70px;height: 80px; border: 1px solid #ddd;width: 70px;" value="등록">
 					                           </div>
@@ -123,15 +122,12 @@
 											<div class="pl-5 pr-5 reviewUpdateFrm" style="height: 150px; display: none;" >
 				                         	<div class="row pl-3 align-items-xl-center">
 				                         		<p class="m-1" style="font-size: 15px;">별점 &nbsp;&nbsp;:</p>
-				                         		
 				                         		<div class="star-box">
-												  <i class="fa fa-star-o star mt-2 star1 starInfo${ list.starRating }" aria-hidden="true"></i>
-												  <i class="fa fa-star-o star star2 starInfo${ list.starRating }" aria-hidden="true"></i>
-												  <i class="fa fa-star-o star star3 starInfo${ list.starRating }" aria-hidden="true"></i>
-												 <i class="fa fa-star-o star star4 starInfo${ list.starRating }" aria-hidden="true"></i>
-												 <i class="fa fa-star-o star star5 starInfo${ list.starRating }" aria-hidden="true"></i>
-												</div>
-												<div>
+												  <i class="fa fa-star-o star mt-2 star1 starInfo${ list.reviewNo }" aria-hidden="true"></i>
+												  <i class="fa fa-star-o star star2 starInfo${ list.reviewNo }" aria-hidden="true"></i>
+												  <i class="fa fa-star-o star star3 starInfo${ list.reviewNo }" aria-hidden="true"></i>
+												 <i class="fa fa-star-o star star4 starInfo${ list.reviewNo }" aria-hidden="true"></i>
+												 <i class="fa fa-star-o star star5 starInfo${ list.reviewNo }" aria-hidden="true"></i>
 												</div>
 												<form name="ReviewUpdateFrm" 
 													  action="${pageContext.request.contextPath}/member/updateReview.do" 
@@ -141,17 +137,16 @@
 													  style="position: absolute;right: 5%;">
 													  <input type="hidden" name="spaceNo" value="${list.spaceNo }"/>
 													  <input type="hidden" name="revNo" value="${list.revNo }"/>
-													  <input type="hidden" name="starRating" required/>
 													  <input type="hidden" name="nickName" value="${member.nickName}" />
 													  <input type="hidden" name="content"  />
 													  <div class="input-group mb-3" style="padding:0px;">
 													  <div class="custom-file">
-													    <input type="file" class="custom-file-input" name="upFile" id="upFile1" >
-													    <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
+													    <%-- <input type="file" class="custom-file-input" name="upFile" id="upFile1" >
+													    <label class="custom-file-label" for="upFile1">${list.rname }</label> --%>
 													  </div>
 													</div>
-												<!-- <div class="m-1" style="position: absolute;right: 60px;">+ 사진</div> -->
 					                         	</div>
+													  <input type="hidden" name="starRating" value="${list.starRating }" required/>
 				                         		<textarea class="col-lg-11 reviewCon"  style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;">${list.reviewContent }</textarea>
 				                           		<input type="submit" class="btn submit" style="margin-bottom: 70px;height: 80px; border: 1px solid #ddd;width: 70px;" value="수정">
 				                           </div>
@@ -231,32 +226,30 @@ $(".reviewBtn").on("click", function(){
 });
 //별 받기
  $(".star-box i").on("click", function(){
-	/* alert($(this).hasClass("star1")?"1":$(this).hasClass("star2")?"2":$(this).hasClass("star3")?"3":$(this).hasClass("star4")?"4":"5"); */
+	 /* alert($(this).hasClass("star1")?"1":$(this).hasClass("star2")?"2":$(this).hasClass("star3")?"3":$(this).hasClass("star4")?"4":"5");  */
 	$("[name=starRating]").val($(this).hasClass("star1")?"1":$(this).hasClass("star2")?"2":$(this).hasClass("star3")?"3":$(this).hasClass("star4")?"4":"5");
 }); 
-/*  $(".reviewCon").click(function (){
-		alert($(this).val());
-			})  */
  //리뷰 유효성 검사
 $(".submit").click(function(){
-	if($("[name=starRating]").val()==""){
+	if($(this).siblings("[name=starRating]").val()==""){
 		alert("별점을 선택해주세요");
 		return false;
 	}
-	$("[name=content]").val($(this).siblings("textarea").val());
-	alert($(this).siblings("textarea").val());
-		
 	
-	/* if($(".reviewCon").val().length<10){
+	 if($(this).siblings(".reviewCon").val().length<10){
 		alert("내용을 최소 10자 이상 입력해주세요");
 		return false;
-	} */
+	} 
+		
 	/* 금칙어 */
-	var reContent = $(".reviewCon").val();
+	var reContent = $(this).siblings("textarea").val();
 	var j=0;
 	var str = ["바보","멍청이"];
 	var keyRegExp = new RegExp('(' + str.join('|') + ')', 'g');
-	$(".reviewCon").val(reContent.replace(keyRegExp, "❤❤"));
+	$(this).siblings("textarea").val(reContent.replace(keyRegExp, "❤❤"));
+	
+	$("[name=content]").val($(this).siblings("textarea").val());
+	/* alert($(this).siblings("textarea").val()); */
 
 	return true;
 });
@@ -271,9 +264,10 @@ $(".modifyBtn").on("click", function(){
 		$(this).addClass("btn-primary");
 	}	
 	var idx = $(this).siblings("[name=starInfo]").val();
+	var className = $(this).siblings("[name=className]").val();
 	for(var i=0; i<idx; i++){
-		$(".starInfo"+idx).eq(i).removeClass("fa-star-o");
-		$(".starInfo"+idx).eq(i).addClass("fa-star");
+		$(".starInfo"+className).eq(i).removeClass("fa-star-o");
+		$(".starInfo"+className).eq(i).addClass("fa-star");
 	} 
 });
 

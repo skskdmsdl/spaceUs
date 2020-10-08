@@ -179,6 +179,11 @@ public class SpaceServiceImpl implements SpaceService{
 	public List<Space> selectReviewList(String email) {
 		return spaceDAO.selectReviewList(email);
 	}
+
+	@Override
+	public int updateReview(Review review) {
+		return spaceDAO.updateReview(review);
+	}
 	
 	
 	

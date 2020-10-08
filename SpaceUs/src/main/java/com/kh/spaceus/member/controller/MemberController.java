@@ -319,10 +319,7 @@ public class MemberController {
 							  @RequestParam(value="upFile",required=false) MultipartFile[] upFiles,
 							  HttpServletRequest request,
 							  RedirectAttributes redirectAttr) {
-		
-		System.out.println(review);
-		System.out.println(spaceNo);
-		System.out.println("@@"+revNo);
+		System.out.println(review.getStarRating());
 		//1. 파일을 서버컴퓨터에 저장
 		List<ReviewAttachment> attachList  = new ArrayList<>();
 		String saveDirectory = request.getServletContext()
@@ -364,6 +361,60 @@ public class MemberController {
 		} catch(Exception e) {
 			log.error("게시물 등록 오류", e);
 			redirectAttr.addFlashAttribute("msg", "리뷰 등록 실패!");
+			
+			//예외발생을 spring container에게 전달 : 지정한  예외페이지로 응답처리
+			throw e;
+		}
+		
+		return "redirect:/member/reviewList.do";
+	}
+	
+	@PostMapping("/updateReview.do")
+	public String updateReview(Review review,
+								@RequestParam("spaceNo") String spaceNo,
+								@RequestParam("revNo") String revNo,
+			/* @RequestParam(value="upFile",required=false) MultipartFile[] upFiles, */
+								HttpServletRequest request,
+								RedirectAttributes redirectAttr) {
+		
+		System.out.println(review);
+		System.out.println(spaceNo);
+		System.out.println("@@"+revNo);
+		
+		/*
+		 * //1. 파일을 서버컴퓨터에 저장 List<ReviewAttachment> attachList = new ArrayList<>();
+		 * String saveDirectory = request.getServletContext()
+		 * .getRealPath("/resources/upload/review");
+		 * 
+		 * for(MultipartFile f : upFiles) {
+		 * 
+		 * if(!f.isEmpty() && f.getSize() != 0) { //1. 파일명 생성 String renamedFileName =
+		 * Utils.getRenamedFileName(f.getOriginalFilename());
+		 * 
+		 * //2. 메모리의 파일 -> 서버경로상의 파일 File newFile = new File(saveDirectory,
+		 * renamedFileName); //임의의 자바파일객체를 만들고 이동시킴 try { f.transferTo(newFile); } catch
+		 * (IllegalStateException | IOException e) { e.printStackTrace(); } //3.
+		 * attachment객체 생성(db 저장을 위한 준비) ReviewAttachment attach = new
+		 * ReviewAttachment(); attach.setOName(f.getOriginalFilename());
+		 * attach.setRName(renamedFileName); attachList.add(attach); }
+		 * 
+		 * }
+		 */
+		
+		review.setSpaceNo(spaceNo);
+		review.setRevNo(revNo);
+		
+		/* review.setReviewAtt(attachList); */
+		log.debug("reveiw = {}", review);
+		System.out.println(review);
+		
+		//2. 게시글, 첨부파일정보를 DB에 저장
+		try {
+			int result = spaceService.updateReview(review);
+			redirectAttr.addFlashAttribute("msg", "리뷰 수정 성공!");
+		} catch(Exception e) {
+			log.error("게시물 등록 오류", e);
+			redirectAttr.addFlashAttribute("msg", "리뷰 수정 실패!");
 			
 			//예외발생을 spring container에게 전달 : 지정한  예외페이지로 응답처리
 			throw e;
