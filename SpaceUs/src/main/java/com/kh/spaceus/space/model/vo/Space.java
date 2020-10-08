@@ -35,6 +35,7 @@ public class Space implements Serializable{
 	private String content;
 	private String bank;
 	private String[] tag;
+	private String rname;
 	
 	private List<Attachment> attachList;
 }
