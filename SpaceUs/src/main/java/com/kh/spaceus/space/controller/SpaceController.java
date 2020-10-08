@@ -171,9 +171,7 @@ public class SpaceController {
 
 		// 같은 카테고리 공간 리스트(최대 3개)
 		List<Space> spcList = spaceService.selectSameCategory(space);
-		for (int i = 0; i < spcList.size(); i++) {
-			System.out.println(spcList);
-		}
+		log.debug("같은 카테고리 공간 리스트={}",spcList);
 
 		// 추천 공간 사진 리스트
 		String cateName = spaceService.selectCateName(space.getCategoryNo());
