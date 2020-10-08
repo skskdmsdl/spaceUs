@@ -58,7 +58,7 @@
                        <div class="steamline m-t-40">
                        <c:forEach items="${spaceList}" var="list" varStatus="vs">
                            <div class="sl-item">
-                            <div class="row">
+                            <div class="row parent">
                              <div class="usageReviewImg mb-5 ml-5 mr-5 mt-3" >
 		    					<img class="img-circle" src="${ pageContext.request.contextPath }/resources/upload/space/${list.rname}" alt="..."> 
                                  </div>
@@ -71,6 +71,7 @@
                                             	<a class="btn m-r-5 btn-rounded btn-outline-success reviewBtn">리뷰등록</a> 
                                             </c:if>
                                             <c:if test="${ list.reviewNo != null }">
+                                            <input type="hidden" name="starInfo" value="${ list.starRating }" />
                                             	<a class="btn btn-rounded btn-outline-secondary modifyBtn">리뷰수정</a> 
                                             </c:if> 
                                         </div>
@@ -101,29 +102,34 @@
 													  <input type="hidden" name="spaceNo" value="${list.spaceNo }"/>
 													  <input type="hidden" name="revNo" value="${list.revNo }"/>
 													  <input type="hidden" name="nickName" value="${member.nickName}" />
+													  <input type="hidden" name="content"  />
 													  <div class="input-group mb-3" style="padding:0px;">
 													  <div class="custom-file">
 													    <input type="file" class="custom-file-input" name="upFile" id="upFile1" >
 													    <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
 													  </div>
 													</div>
-												<!-- <div class="m-1" style="position: absolute;right: 60px;">+ 사진</div> -->
-					                         	</div>
-					                         		 <textarea class="col-lg-11 reviewCon" name="content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-					                           		<input type="submit" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #ddd;width: 70px;" value="등록">
+													
+													</div>
+					                         		 <textarea class="col-lg-11 reviewCon" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+					                           		<input type="submit" class="btn submit" style="margin-bottom: 70px;height: 80px; border: 1px solid #ddd;width: 70px;" value="등록">
 					                           </div>
 												</form>
+												<!-- <div class="m-1" style="position: absolute;right: 60px;">+ 사진</div> -->
+					                         	
+					                           
 												
 											<!-- 리뷰수정 -->	
 											<div class="pl-5 pr-5 reviewUpdateFrm" style="height: 150px; display: none;" >
 				                         	<div class="row pl-3 align-items-xl-center">
 				                         		<p class="m-1" style="font-size: 15px;">별점 &nbsp;&nbsp;:</p>
+				                         		
 				                         		<div class="star-box">
-												  <span class="star mt-2 star1"></span>
-												  <span class="star star2"></span>
-												  <span class="star star3"></span>
-												 <span class="star star4"></span>
-												 <span class="star star5"></span>
+												  <i class="fa fa-star-o star mt-2 star1 starInfo${ list.starRating }" aria-hidden="true"></i>
+												  <i class="fa fa-star-o star star2 starInfo${ list.starRating }" aria-hidden="true"></i>
+												  <i class="fa fa-star-o star star3 starInfo${ list.starRating }" aria-hidden="true"></i>
+												 <i class="fa fa-star-o star star4 starInfo${ list.starRating }" aria-hidden="true"></i>
+												 <i class="fa fa-star-o star star5 starInfo${ list.starRating }" aria-hidden="true"></i>
 												</div>
 												<div>
 												</div>
@@ -137,6 +143,7 @@
 													  <input type="hidden" name="revNo" value="${list.revNo }"/>
 													  <input type="hidden" name="starRating" required/>
 													  <input type="hidden" name="nickName" value="${member.nickName}" />
+													  <input type="hidden" name="content"  />
 													  <div class="input-group mb-3" style="padding:0px;">
 													  <div class="custom-file">
 													    <input type="file" class="custom-file-input" name="upFile" id="upFile1" >
@@ -145,8 +152,8 @@
 													</div>
 												<!-- <div class="m-1" style="position: absolute;right: 60px;">+ 사진</div> -->
 					                         	</div>
-				                         		<textarea class="col-lg-11" id="reviewCon" name="content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;">${list.reviewContent }</textarea>
-				                           		<input type="submit" class="btn" style="margin-bottom: 70px;height: 80px; border: 1px solid #ddd;width: 70px;" value="수정">
+				                         		<textarea class="col-lg-11 reviewCon"  style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;">${list.reviewContent }</textarea>
+				                           		<input type="submit" class="btn submit" style="margin-bottom: 70px;height: 80px; border: 1px solid #ddd;width: 70px;" value="수정">
 				                           </div>
 										</form>
                                  	</div>
@@ -227,17 +234,23 @@ $(".reviewBtn").on("click", function(){
 	/* alert($(this).hasClass("star1")?"1":$(this).hasClass("star2")?"2":$(this).hasClass("star3")?"3":$(this).hasClass("star4")?"4":"5"); */
 	$("[name=starRating]").val($(this).hasClass("star1")?"1":$(this).hasClass("star2")?"2":$(this).hasClass("star3")?"3":$(this).hasClass("star4")?"4":"5");
 }); 
-
+/*  $(".reviewCon").click(function (){
+		alert($(this).val());
+			})  */
  //리뷰 유효성 검사
-function reviewValidate(){
+$(".submit").click(function(){
 	if($("[name=starRating]").val()==""){
 		alert("별점을 선택해주세요");
 		return false;
 	}
-	if($(".reviewCon").val().length<10){
+	$("[name=content]").val($(this).siblings("textarea").val());
+	alert($(this).siblings("textarea").val());
+		
+	
+	/* if($(".reviewCon").val().length<10){
 		alert("내용을 최소 10자 이상 입력해주세요");
 		return false;
-	}
+	} */
 	/* 금칙어 */
 	var reContent = $(".reviewCon").val();
 	var j=0;
@@ -246,7 +259,7 @@ function reviewValidate(){
 	$(".reviewCon").val(reContent.replace(keyRegExp, "❤❤"));
 
 	return true;
-} 
+});
 //리뷰수정 버튼
 $(".modifyBtn").on("click", function(){
 	if($(this).hasClass("btn-primary")){
@@ -257,6 +270,11 @@ $(".modifyBtn").on("click", function(){
 		$(this).parents("div").siblings(".reviewUpdateFrm").show();
 		$(this).addClass("btn-primary");
 	}	
+	var idx = $(this).siblings("[name=starInfo]").val();
+	for(var i=0; i<idx; i++){
+		$(".starInfo"+idx).eq(i).removeClass("fa-star-o");
+		$(".starInfo"+idx).eq(i).addClass("fa-star");
+	} 
 });
 
 </script>
