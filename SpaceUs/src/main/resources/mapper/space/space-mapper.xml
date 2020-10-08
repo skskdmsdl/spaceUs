@@ -335,6 +335,18 @@
 			#{ tagNo }
 		)
 	</insert>
+	
+	<select id="selectRecentReviewList" resultMap="reviewMap">
+	    select 
+	        R.*
+		from(select 
+				*
+			from
+				review
+			order by 
+				review_date desc) R
+	        where rownum between 1 and 4;
+	</select>
 </mapper>
 
 

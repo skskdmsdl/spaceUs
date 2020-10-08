@@ -127,8 +127,8 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public void insertWish(Wish wish) {
-		sqlSession.insert("space.insertWish", wish);
+	public int insertWish(Wish wish) {
+		return sqlSession.insert("space.insertWish", wish);
 	}
 
 	@Override
@@ -142,13 +142,18 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public void deleteWish(Wish wish) {
-		sqlSession.delete("space.deleteWish", wish);
+	public int deleteWish(Wish wish) {
+		return sqlSession.delete("space.deleteWish", wish);
 	}
 
 	@Override
 	public String selectCateName(String cateNo) {
 		return sqlSession.selectOne("space.selectCateName", cateNo);
+	}
+
+	@Override
+	public List<Review> selectRecentReviewList() {
+		return sqlSession.selectList("space.selectRecentReviewList");
 	}
 
 	/*@Override

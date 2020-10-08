@@ -48,15 +48,17 @@ public interface SpaceService {
 	int insertSpaceTag(SpaceTag spaceTag);
 
 	
-	void insertWish(Wish wish);
+	int insertWish(Wish wish);
 
 	List<Space> selectSameCategory(Space space);
 
 	int selectLikeCnt(String spaceNo);
 
-	void deleteWish(Wish wish);
+	int deleteWish(Wish wish);
 
 	String selectCateName(String cateNo);
+
+	List<Review> selectRecentReviewList(); 
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

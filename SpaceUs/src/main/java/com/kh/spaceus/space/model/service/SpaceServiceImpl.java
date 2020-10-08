@@ -152,8 +152,8 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public void insertWish(Wish wish) {
-		spaceDAO.insertWish(wish);
+	public int insertWish(Wish wish) {
+		return spaceDAO.insertWish(wish);
 	}
 
 	@Override
@@ -167,13 +167,18 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public void deleteWish(Wish wish) {
-		spaceDAO.deleteWish(wish);
+	public int deleteWish(Wish wish) {
+		return spaceDAO.deleteWish(wish);
 	}
 
 	@Override
 	public String selectCateName(String cateNo) {
 		return spaceDAO.selectCateName(cateNo);
+	}
+
+	@Override
+	public List<Review> selectRecentReviewList() {
+		return spaceDAO.selectRecentReviewList();
 	}
 	
 	
