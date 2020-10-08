@@ -338,14 +338,14 @@
 	
 	<select id="selectRecentReviewList" resultMap="reviewMap">
 	    select 
-	        R.*
+	        rownum, R.review_no, R.space_no, nickname, review_content, star_rating, review_date, re_reg_date, re_renamed_filename image
 		from(select 
 				*
 			from
-				review
+				review join review_image using (review_no)
 			order by 
 				review_date desc) R
-	        where rownum between 1 and 4;
+	        where rownum between 1 and 4
 	</select>
 </mapper>
 

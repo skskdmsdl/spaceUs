@@ -12,53 +12,7 @@
 	  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 	  crossorigin="anonymous">
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-			  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-			  crossorigin="anonymous"></script>
-<script>
-//이용자 리뷰 ajax 요청
-//$(function () { 
-$(".review-ajax").on('click', function(){ 
-		function review(){
-			$.ajax({
-				url:"${pageContext.request.contextPath}/space/recentRev.do",
-				type:"GET",
-				dataType:"json",
-				success:function(data){
-					console.log("ajax 요청 성공!");
-					
-	/* 				if(data!=null){
-					 $.each(data, function(i, item){
-						
-						var html="";
-			
-						html+=  "<div class=/'col-md-3 d-flex ftco-animate/'>";
-			          	 	+= "<div class=/'blog-entry justify-content-end/'>";
-			              	+= "<div class=/'text'>";
-			                += "<h3 class=/'heading/'><a href=/'#/'>Why Lead Generation is Key for Business Growth</a></h3>";
-			                += "<div class=/'meta mb-3/'>";
-			                +=  "<div><a href=/'#/'>"+item.enrollDate+"</a></div>";
-			                +=  "<div><a href=/'#/'>"+item.nickName+"</a></div>";
-			                +=  "<div><a href=/'#/' class=/'meta-chat/'><span class=/'icon-chat/'></span> 3</a></div>"
-			                +=	"</div>";
-			                += 	"<a href=/'blog-single.html/' class=/'block-20 img/' style=/'background-image: url(${pageContext.request.contextPath }/resources/upload/review/"+item.image+");/'>"
-				            += "</a><p></p></div></div></div>";
-			
-						$(".review-wrapper").append(html);			 
-					 	}
-					} */
-				},error:function(){
-					console.log("ajax 요청 실패");
-					}
-				});
-			//AJAX요청 끝
-		};
-		//리뷰function끝
 
-		//페이지 실행시 이용자리뷰 불러오기
-		review();
-	}); 
-</script>
 <style>
 h1 {
 font-family: 'NEXON Lv1 Gothic OTF';
@@ -370,7 +324,6 @@ input[type="text"]:focus {
 <!-- 추천공간 끝 -->
 <!-- 이용자리뷰 시작 -->
     <section class="ftco-section ftco-no-pt">
-			<button type="button" class="review-ajax" value="review" onclick="review();">리뷰ajax</button>
       <div class="container">
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 heading-section text-center ftco-animate">
@@ -386,7 +339,48 @@ input[type="text"]:focus {
     </section>	
 <!-- 이용자리뷰 끝-->
 <script>
+//이용자 리뷰 ajax 요청
+$(function () { 
+		function review(){
+			console.log("리뷰function 실행");
+			/*$.ajax({
+				url:"${pageContext.request.contextPath}/space/recentRev.do",
+				type:"GET",
+				dataType:"json",
+				success:function(data){
+					console.log("ajax 요청 성공!");
+					
+					if(data!=null){
+					 $.each(data, function(i, item){
+						
+						var html="";
+			
+						html+=  "<div class=/'col-md-3 d-flex ftco-animate/'>";
+			          	 	+= "<div class=/'blog-entry justify-content-end/'>";
+			              	+= "<div class=/'text'>";
+			                += "<h3 class=/'heading/'><a href=/'#/'>Why Lead Generation is Key for Business Growth</a></h3>";
+			                += "<div class=/'meta mb-3/'>";
+			                +=  "<div><a href=/'#/'>"+item.enrollDate+"</a></div>";
+			                +=  "<div><a href=/'#/'>"+item.nickName+"</a></div>";
+			                +=  "<div><a href=/'#/' class=/'meta-chat/'><span class=/'icon-chat/'></span> 3</a></div>"
+			                +=	"</div>";
+			                += 	"<a href=/'blog-single.html/' class=/'block-20 img/' style=/'background-image: url(${pageContext.request.contextPath }/resources/upload/review/"+item.image+");/'>";
+				            += "</a><p></p></div></div></div>";
+			
+						$(".review-wrapper").append(html);			 
+					 	}
+					} 
+				},error:function(){
+					console.log("ajax 요청 실패");
+					}
+				});*/
+			//AJAX요청 끝
+		};
+		//리뷰function끝
 
+		//페이지 실행시 이용자리뷰 불러오기
+		review();
+	}); 
 
 function searchSpace(){
 	
