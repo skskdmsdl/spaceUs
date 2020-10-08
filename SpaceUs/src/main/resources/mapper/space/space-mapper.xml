@@ -39,7 +39,7 @@
 		         space_no= #{spaceNo} and rownum=1
 		    order by
 		        upload_date)
-		 order by 
+		 order by registration_date desc
 	</select>
 
 	<select id="selectOneSpace" resultMap="spaceMap">
