@@ -18,6 +18,7 @@
 .fas {position: absolute; padding: 90px;}
 input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 .site-btn {width: 100%; font-size: 17px;}
+.nochoose {background-color:#8f8d8d;}
 </style>
 
 <!-- 컨텐츠 시작 -->
@@ -63,7 +64,11 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 							</tr>
 						    <tr>
 						      <td>공간옵션</td>
-						      <td>와이파이, 테이블, 의자, 반려동물 동반가능</td>
+						      <td>
+						      	<c:forEach items="${optionList}" var="info" varStatus="vs">
+									${ info.optionName }${ vs.last ? '' : ', '}
+								</c:forEach>
+							  </td>
 							</tr>
 						</table>
                         <table id="tbl-reserve" class="table table-striped table-hover">
@@ -87,36 +92,36 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 								<th>
 									<table class="table table-bordered" style="cursor: pointer;" id="availableTime">
 	                                	<tr>
-											<th id=0 style="width:16.6%;">00:00 - 01:00</th>	                                
-											<th id=1 style="width:16.6%;">01:00 - 02:00</th>	                                
-											<th id=2 style="width:16.6%;">02:00 - 03:00</th>	                                
-											<th id=3 style="width:16.6%;">03:00 - 04:00</th>	                                
-											<th id=4 style="width:16.6%;">04:00 - 05:00</th>	                                
-											<th id=5 style="width:16.6%;">05:00 - 06:00</th>	                                
-	                                	</tr>
-	                                	<tr>
-											<th id=6>06:00 - 07:00</th>	                                
-											<th id=7>07:00 - 08:00</th>	                                
-											<th id=8>08:00 - 09:00</th>	                                
-											<th id=9>09:00 - 10:00</th>	                                
-											<th id=10>10:00 - 11:00</th>	                                
-											<th id=11>11:00 - 12:00</th>	                                
-	                                	</tr>
-	                                	<tr>
-											<th id=12>12:00 - 13:00</th>	                                
-											<th id=13>13:00 - 14:00</th>	                                
-											<th id=14>14:00 - 15:00</th>	                                
-											<th id=15>15:00 - 16:00</th>	                                
-											<th id=16>16:00 - 17:00</th>	                                
-											<th id=17>17:00 - 18:00</th>	                                
-	                                	</tr>
-	                                	<tr>
-											<th id=18>18:00 - 19:00</th>	                                
-											<th id=19>19:00 - 20:00</th>	                                
-											<th id=20>20:00 - 21:00</th>	                                
-											<th id=21>21:00 - 22:00</th>	                                
-											<th id=22>22:00 - 23:00</th>	                                
-											<th id=23>23:00 - 24:00</th>	                                
+											<th id="0" style="width:16.6%;">00:00 - 01:00</th>	                                
+											<th id="1" style="width:16.6%;">01:00 - 02:00</th>	                                
+											<th id="2" style="width:16.6%;">02:00 - 03:00</th>	                                
+											<th id="3" style="width:16.6%;">03:00 - 04:00</th>	                                
+											<th id="4" style="width:16.6%;">04:00 - 05:00</th>	                                
+											<th id="5" style="width:16.6%;">05:00 - 06:00</th>	                                
+	                                	</tr>      
+	                                	<tr>       
+											<th id="6">06:00 - 07:00</th>	                                
+											<th id="7">07:00 - 08:00</th>	                                
+											<th id="8">08:00 - 09:00</th>	                                
+											<th id="9">09:00 - 10:00</th>	                                
+											<th id="10">10:00 - 11:00</th>	                                
+											<th id="11">11:00 - 12:00</th>	                                
+	                                	</tr>      
+	                                	<tr>       
+											<th id="12" class="nochoose">12:00 - 13:00</th>	                                
+											<th id="13">13:00 - 14:00</th>	                                
+											<th id="14">14:00 - 15:00</th>	                                
+											<th id="15">15:00 - 16:00</th>	                                
+											<th id="16">16:00 - 17:00</th>	                                
+											<th id="17">17:00 - 18:00</th>	                                
+	                                	</tr>      
+	                                	<tr>       
+											<th id="18">18:00 - 19:00</th>	                                
+											<th id="19">19:00 - 20:00</th>	                                
+											<th id="20">20:00 - 21:00</th>	                                
+											<th id="21">21:00 - 22:00</th>	                                
+											<th id="22">22:00 - 23:00</th>	                                
+											<th id="23">23:00 - 24:00</th>	                                
 	                                	</tr>
 	                                </table>
                                 </th>
@@ -230,6 +235,9 @@ function selectDay(val){
 	var date = new Date(val);
 	if(date.getTime() <= today.getTime()){
 		alert("오늘과 지난 날짜는 예약이 불가능합니다.");
+		$("[name=revDay]").val('');
+		day='';
+		index=-1;
 		return;
 	}
 	
@@ -239,6 +247,7 @@ function selectDay(val){
 	
 	index = avail.findIndex(obj => obj.day == day);
 	console.log("index="+index);
+
 }
 
 var flag=0;
@@ -285,6 +294,7 @@ $("#availableTime th").on("click", function(){
 
 	//선택한 셀의 아이디 찾기
 	start = Number($(this).attr("id"));
+	console.log("start : "+ start);
 
 	//셀 색 바꾸기
     $(this).addClass("bg-primary");

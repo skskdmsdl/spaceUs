@@ -27,6 +27,7 @@ import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Option;
+import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.SpaceTag;
@@ -221,11 +222,13 @@ public class SpaceController {
 		//log.debug("spaceName= {}",spaceName);
 		
 		//spaceNo로 옵션정보가져와서 전달하기
+		List<OptionList> optionList = spaceService.selectOptionList(spaceNo);
 		
 		//spaceNo로 예약가능한 날짜 가져오기
 		List<ReservationAvail> availList = reservationService.selectListAvail(spaceNo);
-		System.out.println(availList);
+
 		model.addAttribute("spaceName", spaceName);
+		mav.addObject("optionList",optionList);
 		mav.addObject("availList",availList);
 		
 		mav.setViewName("space/reserveSpace");
