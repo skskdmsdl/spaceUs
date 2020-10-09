@@ -29,7 +29,7 @@ public interface SpaceService {
 
 	int selectReviewTotalContents(String spaceNo);
 
-	Star selectStar();
+	Star selectStar(String spaceNo);
 
 	List<Qna> selectQuestionList(String spaceNo, int limit, int offset);
 
@@ -69,6 +69,7 @@ public interface SpaceService {
 	List<Space> selectReviewPossible(String email);
 
 	List<Space> selectReviewComplete(String email);
+
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

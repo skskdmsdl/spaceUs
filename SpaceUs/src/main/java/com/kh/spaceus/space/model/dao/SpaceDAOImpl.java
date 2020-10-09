@@ -75,8 +75,8 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public Star selectStar() {
-		return sqlSession.selectOne("space.selectStar");
+	public Star selectStar(String spaceNo) {
+		return sqlSession.selectOne("space.selectStar", spaceNo);
 	}
 
 	@Override

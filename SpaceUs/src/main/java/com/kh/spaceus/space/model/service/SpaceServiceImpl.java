@@ -87,8 +87,8 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public Star selectStar() {
-		return spaceDAO.selectStar();
+	public Star selectStar(String spaceNo) {
+		return spaceDAO.selectStar(spaceNo);
 	}
 
 

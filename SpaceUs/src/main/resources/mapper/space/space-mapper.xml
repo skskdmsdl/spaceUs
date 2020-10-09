@@ -218,6 +218,7 @@
 			count(case when star_rating=5 then 1 end) star5
 		from 
 			review
+		where space_no = #{spaceNo}
 	</select>
 	
 	<select id="selectOneSpaceNo" resultType="space">
