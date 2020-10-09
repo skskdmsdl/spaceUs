@@ -304,7 +304,7 @@ function naverShare() {
 							aria-labelledby="detail-manufacturer-tab" style="padding-top: 100px;">
 							<div class="row" style="margin-left: 5em;">
 								<div id="kakaomap" style="width:500px;height:400px; "></div>
-								<div class="contact-info">
+								<div class="contact-info" style="padding-left: 100px;">
 									<div class="ci-item">
 										<div class="ci-icon">
 											<i class="fa fa-map-marker"></i>
