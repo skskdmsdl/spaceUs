@@ -349,18 +349,44 @@
 	
 	<select id="selectReviewList" resultMap="spaceMap">
 		select SS.* from(
-			select  row_number() over(PARTITION BY rev_no ORDER BY rev_date ) AS RNUM, S.*
+			select  row_number() over(partition by rev_no order by rev_date ) as RNUM, S.*
 			from(
 			    select
 			       *
 			    from
 			        space join space_image using (space_no) left outer join reservation using(space_no) left outer join review using(rev_no)
 			    where 
-			         reservation.member_email= #{email}
-	           
-			    order by
-			        upload_date ) S) SS
+			         reservation.member_email= #{email} ) S ) SS
 	     where RNUM =1
+	     order by SS.rev_date desc
+	</select>
+	
+	<select id="selectReviewPossible" resultMap="spaceMap">
+		select SS.* from(
+		    select  row_number() over(partition by rev_no order by rev_date ) as RNUM, S.*
+		    from(
+		        select
+		           *
+		        from
+		            space join space_image using (space_no) left outer join reservation using(space_no) left outer join review using(rev_no)
+		        where 
+		             reservation.member_email= #{email} and review_no is null  ) S ) SS
+		 where RNUM =1
+		 order by SS.rev_date desc
+	</select>
+	
+	<select id="selectReviewComplete" resultMap="spaceMap">
+		select SS.* from(
+		    select  row_number() over(partition by rev_no order by rev_date ) as RNUM, S.*
+		    from(
+		        select
+		           *
+		        from
+		            space join space_image using (space_no) left outer join reservation using(space_no) left outer join review using(rev_no)
+		        where 
+		             reservation.member_email= #{email} and review_no is not null  ) S ) SS
+		 where RNUM =1
+		 order by SS.rev_date desc
 	</select>
 	
 	<update id="updateReview">

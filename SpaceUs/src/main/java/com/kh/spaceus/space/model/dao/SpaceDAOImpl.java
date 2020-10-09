@@ -171,6 +171,16 @@ public class SpaceDAOImpl implements SpaceDAO{
 		sqlSession.update("space.updateStarAvg", space);
 	}
 
+	@Override
+	public List<Space> selectReviewPossible(String email) {
+		return sqlSession.selectList("space.selectReviewPossible", email);
+	}
+
+	@Override
+	public List<Space> selectReviewComplete(String email) {
+		return sqlSession.selectList("space.selectReviewComplete", email);
+	}
+
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {
 		return sqlSession.selectList("space.selectListSpaceCollection", email);

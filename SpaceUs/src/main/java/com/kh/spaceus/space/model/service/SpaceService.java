@@ -66,6 +66,10 @@ public interface SpaceService {
 
 	void updateStarAvg(Space space);
 
+	List<Space> selectReviewPossible(String email);
+
+	List<Space> selectReviewComplete(String email);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

@@ -100,13 +100,44 @@ public class MemberController {
 		Member member = memberService.selectOneMember(principal.getName());
 		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
 		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
-		System.out.println("@1"+revList);
 		List<Space> spaceList = spaceService.selectReviewList(principal.getName());
+		
+		
+		model.addAttribute("spaceList", spaceList);
+		model.addAttribute("member", member);
+		model.addAttribute("status", "all");
+		return "member/reviewList";
+	}
+	
+	@RequestMapping("/reviewPossible.do")
+	public String reviewPossible (Model model, Principal principal) {
+		Member member = memberService.selectOneMember(principal.getName());
+		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
+		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		System.out.println("@1"+revList);
+		List<Space> spaceList = spaceService.selectReviewPossible(principal.getName());
 		
 		System.out.println("@2"+spaceList); 
 		
 		model.addAttribute("spaceList", spaceList);
 		model.addAttribute("member", member);
+		model.addAttribute("status", "possible");
+		return "member/reviewList";
+	}
+	
+	@RequestMapping("/reviewComplete.do")
+	public String reviewComplete (Model model, Principal principal) {
+		Member member = memberService.selectOneMember(principal.getName());
+		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
+		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		System.out.println("@1"+revList);
+		List<Space> spaceList = spaceService.selectReviewComplete(principal.getName());
+		
+		System.out.println("@2"+spaceList); 
+		
+		model.addAttribute("spaceList", spaceList);
+		model.addAttribute("member", member);
+		model.addAttribute("status", "complete");
 		return "member/reviewList";
 	}
 

@@ -48,10 +48,31 @@
                            <h6 class="card-subtitle">이용한 공간의 리뷰를 작성해주세요</h6>
                        </div>
                           <div class="col-md-2">
-                              <select class="custom-select b-0 ">
-                                  <option value="1" >전체 리뷰</option>
-                                  <option value="2">작성 가능한 리뷰</option>
-                                  <option value="3">내가 작성한 리뷰</option>
+                              <select class="custom-select b-0" id="selectId">
+                              	<c:choose>
+	                              	<c:when test="${ status eq 'all' }">
+	                                  <option value="1" selected>전체 리뷰</option>
+	                              	</c:when>
+	                              	<c:otherwise>
+	                                  <option value="1" >전체 리뷰</option>
+	                              	</c:otherwise>
+                              	</c:choose>
+                              	<c:choose>
+	                              	<c:when test="${ status eq 'possible' }">
+	                                  <option value="2" selected>작성 가능한 리뷰</option>
+	                              	</c:when>
+	                              	<c:otherwise>
+	                                  <option value="2" >작성 가능한 리뷰</option>
+	                              	</c:otherwise>
+                              	</c:choose>
+                              	<c:choose>
+	                              	<c:when test="${ status eq 'complete' }">
+	                                  <option value="3" selected>내가 작성한 리뷰</option>
+	                              	</c:when>
+	                              	<c:otherwise>
+	                                  <option value="3" >내가 작성한 리뷰</option>
+	                              	</c:otherwise>
+                              	</c:choose>
                               </select>
                            </div> 
                       </div>
@@ -270,5 +291,11 @@ $(".modifyBtn").on("click", function(){
 		$(".starInfo"+className).eq(i).addClass("fa-star");
 	} 
 });
-
+//리뷰 모아보기
+$("#selectId").change(function(){
+	let option = $("#selectId").val();
+	if(option == 1) location.href="${pageContext.request.contextPath }/member/reviewList.do";
+	else if(option == 2) location.href="${pageContext.request.contextPath }/member/reviewPossible.do";
+	else location.href="${pageContext.request.contextPath }/member/reviewComplete.do";
+});
 </script>
