@@ -116,7 +116,7 @@ input[type="text"] {
   <!-- 지도 -->
       <div class="row justify-content-center" style="margin-top: -130px; margin-bottom:100px">
       	<div class="col-md-7">
-      		<div id="kakaomap" style="width:600px;height:500px; margin: 0 auto;"></div>
+      		<div id="kakaomap" style="width:700px;height:500px; margin: 0 auto;"></div>
       	</div>
       </div>
 <!-- 컨텐츠 끝 -->
