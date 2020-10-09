@@ -62,4 +62,43 @@
 		where
 			A.authority = #{searchKeyword}
 	</select>
+	
+	<!-- blackList group -->
+	<select id="selectGroupList" resultMap="manageBlackListMap">
+		select 
+		    B.report_board_no,
+		    G.member_email,
+		    G.group_board_title,
+		    G.group_board_date
+		from blacklist B join member M
+		                on B.member_email = M.member_email
+		                 join group_board G
+		                on B.report_board_no = G.group_board_no
+		where B.board_type='G'
+	</select>
+	<!-- blackList recruit -->
+	<select id="selectRecruitList" resultMap="manageBlackListMap">
+		select 
+		    B.report_board_no,
+		    G.member_email,
+		    G.group_board_title,
+		    G.group_board_date
+		from blacklist B join member M
+		                on B.member_email = M.member_email
+		                 join group_board G
+		                on B.report_board_no = G.group_board_no
+		where B.board_type='R'
+	</select>
+	<resultMap type="manageBlackList" id="manageBlackListMap"></resultMap>
+	
+	<!-- blackList reason -->
+	<select id="selectReasonList" resultMap="reportMap">
+		select
+			*
+		from
+			report
+		where 
+			board_no=#{reportBoardNo}
+	</select>
+	<resultMap type="report" id="reportMap"></resultMap>
 </mapper>

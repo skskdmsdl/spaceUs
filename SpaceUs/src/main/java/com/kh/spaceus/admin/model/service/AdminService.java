@@ -2,8 +2,9 @@ package com.kh.spaceus.admin.model.service;
 
 import java.util.List;
 
+import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
-import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.community.group.model.vo.Report;
 
 public interface AdminService {
 
@@ -14,5 +15,11 @@ public interface AdminService {
 	List<ManageMember> findUserNameList(String searchKeyword);
 
 	List<ManageMember> findUserRoleList(String searchKeyword);
+
+	List<ManageBlackList> selectGroupList();
+
+	List<ManageBlackList> selectRecruitList();
+
+	List<Report> selectReasonList(String reportBoardNo);
 
 }

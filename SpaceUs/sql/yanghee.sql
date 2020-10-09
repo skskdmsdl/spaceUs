@@ -545,7 +545,7 @@ ALTER TABLE report DROP constraints fk_group_board_no;
 commit;
 
 
-
+-------------10/9-----------------------------
 select
     *
 from(
@@ -555,10 +555,37 @@ from(
     order by B.blacklist_no desc
     );
 
+select 
+    B.report_board_no,
+    G.member_email,
+    G.group_board_title,
+    G.group_board_date,
+    
+from blacklist B join member M
+                on B.member_email = M.member_email
+                 join group_board G
+                on B.report_board_no = G.group_board_no
+                 join auth A
+                on B.member_m
+where B.board_type='G';
 
+delete from group_board where group_board_no = 'G64';
 
 select * from member;
 select * from report;
+select * from blacklist;
+select * from group_board;
+select * from space;
+select * from tag;
+
+select
+*
+from
+report
+where board_no='G64';
+---------------------------------10/9------------------------
+
+
 
 insert into report values('sinsa@naver.com','G64','기타');
 COMMIT;
@@ -575,6 +602,8 @@ create table blackList (
     constraints fk_blacklist_email foreign key(member_email) references member(member_email) on delete set null,
     constraints ck_board_type check(board_type in ('R', 'G'))
 );
+ALTER TABLE blackList DROP constraints fk_blacklist_email;
+ALTER TABLE blackList add constraints fk_blacklist_email foreign key(member_email) references member(member_email) on delete set null;
 
 create sequence seq_blacklist_no;
 select * from blacklist;

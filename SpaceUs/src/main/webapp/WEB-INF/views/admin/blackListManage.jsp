@@ -352,15 +352,29 @@ div#search-userName {
 		                    <thead>
 		                        <tr>
 		                            <th>NO</th>
-		                            <th>게시물 제목</th>
+		                            <th>게시물 번호</th>
 		                            <th>게시물 작성자</th>
-		                            <th>게시물 작성자 전화번호</th>
-		                            <th>이유</th>
-		                            <th>게시물 Status</th>
+		                            <th>게시물 타이틀</th>
+		                            <th>게시물 게시일자</th>
+		                            <th>사유</th>
 		                        </tr>
 		                    </thead>
 		                    <tbody>
-		                   
+		                    	<c:forEach items="${groupList}" var="group" varStatus="vs">
+		                    		<tr>
+				                   		<td>${vs.count}</td>
+				                   		<td>${group.reportBoardNo}</td>
+				                   		<td>${group.memberEmail}</td>
+				                   		<td><a href="#">${group.groupBoardTitle}</a></td>
+				                   		<td>${group.groupBoardDate}</td>
+				                   		<td>
+											<button type="button" name="reportBoardNo" value="${group.reportBoardNo}"
+													class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+											  사유
+											</button>   		
+				                   		</td>
+		                    		</tr>
+		                    	</c:forEach>
 		                    </tbody>
 		                </table>
 		                
@@ -421,11 +435,11 @@ div#search-userName {
 		                    <thead>
 		                        <tr>
 		                            <th>NO</th>
-		                            <th>게시물 제목</th>
+		                            <th>게시물 번호</th>
 		                            <th>게시물 작성자</th>
-		                            <th>게시물 작성자 전화번호</th>
-		                            <th>이유</th>
-		                            <th>게시물 Status</th>
+		                            <th>게시물 타이틀</th>
+		                            <th>게시물 게시일자</th>
+		                            <th>사유</th>
 		                        </tr>
 		                    </thead>
 		                    <tbody>
@@ -445,6 +459,47 @@ div#search-userName {
 	 </div>
  </div>
  
+ <!-- Modal -->
+<!-- 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">BlackList Reason</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+      	  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+ -->
+<script type="text/javascript">
+$("[name=reportBoardNo]").click(function(){
+	alert('응애~~~~~~~~~`');
+	var boardNo = $(this).val();
+	alert(boardNo);
+
+	$.ajax({
+		url: "${pageContext.request.contextPath}/admin/reasonList.do?boardNo="+boardNo,
+		dataType: "json",
+		method: "GET",
+		success: function(data){
+			alert('성공');
+			console.log(data)
+		},
+		error: function(x,s,e){
+			alert('실패');
+			console.log("처리실패",x,s,e);
+		} 
+	});
+});
+</script>
+
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap popper Core JavaScript -->

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spaceus.admin.model.dao.AdminDAO;
+import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
+import com.kh.spaceus.community.group.model.vo.Report;
 import com.kh.spaceus.member.model.vo.Member;
 
 @Service
@@ -34,6 +36,23 @@ public class AdminServiceImpl implements AdminService{
 	public List<ManageMember> findUserRoleList(String searchKeyword) {
 		return adminDAO.findUserRoleList(searchKeyword);
 	}
+
+	@Override
+	public List<ManageBlackList> selectGroupList() {
+		return adminDAO.selectGroupList();
+	}
+
+	@Override
+	public List<ManageBlackList> selectRecruitList() {
+		return adminDAO.selectRecruitList();
+	}
+
+	@Override
+	public List<Report> selectReasonList(String reportBoardNo) {
+		return adminDAO.selectReasonList(reportBoardNo);
+	}
+
+	
 	
 	
 }
