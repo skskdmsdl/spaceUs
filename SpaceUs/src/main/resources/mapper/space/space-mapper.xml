@@ -27,13 +27,19 @@
 	</insert>
       
 <!-- space -->
-	<select id="selectOneSpaceNum" resultType="space">
+	<select id="selectOneSpaceNum" resultMap="spaceMap">
 		select 
-			*
-		from 
-			space
-		where 
-			space_no = #{ spaceNo }
+            *
+		from(
+		    select
+		        *
+		    from
+		        space join space_image using (space_no) 
+		    where 
+		         space_no= #{spaceNo} and rownum=1
+		    order by
+		        upload_date)
+		 order by registration_date desc
 	</select>
 
 	<select id="selectOneSpace" resultMap="spaceMap">
@@ -62,6 +68,7 @@
 		<result column="account" property="account"/>
 		<result column="content" property="content"/>
 		<result column="bank" property="bank"/>
+		<result column="renamed_filename" property="rname"/>
 		<collection property="attachList" ofType="Attachment">
 			<id column="file_no" property="fileNo"/>
 			<result column="space_no" property="spaceNo"/>

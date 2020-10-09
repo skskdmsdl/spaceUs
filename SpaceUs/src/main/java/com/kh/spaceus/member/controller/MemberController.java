@@ -99,9 +99,16 @@ public class MemberController {
 	public String reviewList (Model model, Principal principal) {
 		Member member = memberService.selectOneMember(principal.getName());
 		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
-		//List<Reservation> revList = reservationService.selectListReservation(principal.getName());
-		//List<Review> reviewList = spaceService.selectListMyReview(member.getNickName());
+		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		List<Space> spaceList = new ArrayList<>();
 		
+		for(Reservation r : revList) {
+			Space space = spaceService.selectOneSpace(r.getSpaceNo());
+			spaceList.add(space);
+		}
+		System.out.println("@@@@"+spaceList); 
+		
+		model.addAttribute("spaceList", spaceList);
 		model.addAttribute("member", member);
 		return "member/reviewList";
 	}

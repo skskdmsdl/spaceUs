@@ -2,6 +2,7 @@ package com.kh.spaceus.reservation.model.service;
 
 import java.util.List;
 
+import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 
 public interface ReservationService {
@@ -10,6 +11,8 @@ public interface ReservationService {
 	List<ReservationAvail> selectListAvail(String spaceNo);
 
 	int insertReservationVail(ReservationAvail reservationAvail);
+
+	List<Reservation> selectListReservation(String email);
 
 	
 	//공간별 예약
