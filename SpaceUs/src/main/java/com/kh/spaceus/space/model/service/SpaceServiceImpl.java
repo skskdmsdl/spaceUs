@@ -87,8 +87,8 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public Star selectStar() {
-		return spaceDAO.selectStar();
+	public Star selectStar(String spaceNo) {
+		return spaceDAO.selectStar(spaceNo);
 	}
 
 
@@ -173,6 +173,36 @@ public class SpaceServiceImpl implements SpaceService{
 	@Override
 	public String selectCateName(String cateNo) {
 		return spaceDAO.selectCateName(cateNo);
+	}
+
+	@Override
+	public List<Space> selectReviewList(String email) {
+		return spaceDAO.selectReviewList(email);
+	}
+
+	@Override
+	public int updateReview(Review review) {
+		return spaceDAO.updateReview(review);
+	}
+
+	@Override
+	public List<Review> selectStarAvg(String spaceNo) {
+		return spaceDAO.selectStarAvg(spaceNo);
+	}
+
+	@Override
+	public void updateStarAvg(Space space) {
+		spaceDAO.updateStarAvg(space);
+	}
+
+	@Override
+	public List<Space> selectReviewPossible(String email) {
+		return spaceDAO.selectReviewPossible(email);
+	}
+
+	@Override
+	public List<Space> selectReviewComplete(String email) {
+		return spaceDAO.selectReviewComplete(email);
 	}
 	
 	

@@ -52,37 +52,48 @@
 	                    </div>
 						 <table class="col-11">
 							<tr>
-								<th class="align-baseline">닉네임</th>
-								<th><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.nickName"/>" required /></th>
+								<th class="align-baseline" >닉네임</th>
+								<th><input type="text" class="col-7 input-group-text mb-4 mr-5 pull-right" style="background-color: white;" value="<sec:authentication property="principal.nickName"/>" required /></th>
 							</tr>
 						    <tr>
 						      <td class="align-baseline">이메일 계정</td>
-						      <td><input type="email" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.username"/>" required /></td>
+						      <td><input type="email" class="col-7 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.username"/>" disabled /></td>
 							</tr>
 						    <tr>
 						      <td class="align-baseline">생일</td>
-						      <td><input type="date" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.birthDay"/>"/></td>
+						      <td><input type="date" class="col-7 input-group-text mb-4 mr-5 pull-right" style="background-color: white;" value="<sec:authentication property="principal.birthDay"/>"/></td>
 							</tr>
 						    <tr>
 						      <td class="align-baseline">핸드폰</td>
-						      <td><input type="tel" class="col-8 input-group-text mb-4 mr-5 pull-right" maxlength="11" value="<sec:authentication property="principal.memberPhone"/>" required /></td>
+						      <td>
+							      <div class="row" style="margin-right: 50px;">
+								      <input type="tel" class="col-5 input-group-text mb-4 ml-auto mr-5" style="background-color: white;" maxlength="11" value="<sec:authentication property="principal.memberPhone"/>" required />
+								      <div class="btn-wrap">
+										<button class="btn btn-primary font-bold">휴대폰 인증</button>				
+									  </div>
+							      </div>
+							  </td>
 							</tr>
 						</table >
+							<div class="mt-5 mr-5" style="text-align: right;padding-top: 20px;">
+						      <input type="submit" class="btn primary-btn p-3 pl-4 pr-4" value="회원정보 수정">&nbsp;
+						      <input type="reset" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4 font-weight-bolder" value="변경사항 없음">
+							</div>
 						  <div class="mt-5" style="border-top: 1px solid #bbbbbb" ></div>
 						  <h6 class="card-subtitle mt-3 mb-5">비밀번호를 입력해주세요.</h6>
 						  <table class="col-11">
 							<tr>
 						      <td class="align-baseline">새 비밀번호</td>
-						      <td><input type="password" class="col-8 input-group-text ml-auto mb-4 mr-5" value="" /></td>
+						      <td><input type="password" class="col-8 input-group-text ml-auto mb-4 mr-5" style="background-color: white;" value="" /></td>
 							</tr>
 						    <tr>
 						      <td class="align-baseline">새 비밀번호 확인</td>
-						      <td><input type="password" class="col-8 input-group-text ml-auto mb-5 mr-5"value="" required /></td>
+						      <td><input type="password" class="col-8 input-group-text ml-auto mb-5 mr-5" style="background-color: white;" value="" required /></td>
 							</tr>
 						</table>
 						<div class="mt-5 pull-right mr-5">
-					      <input type="submit" class="btn btn-outline-success btn-lg p-3 pl-4 pr-4" value="회원 수정">&nbsp;
-					      <input type="reset" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4" value="변경사항 없음">
+					      <input type="submit" class="btn primary-btn p-3 pl-4 pr-4" value="비밀번호 수정">&nbsp;
+					      <input type="reset" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4 font-weight-bolder" value="변경사항 없음">
 						</div>
 	                   </div>
 	               </div>
