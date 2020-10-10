@@ -62,4 +62,52 @@
 		where
 			A.authority = #{searchKeyword}
 	</select>
+	
+	<!-- blackList group -->
+	<select id="selectGroupList" resultMap="manageBlackListMap">
+		select
+			*
+		from
+			blacklist
+		where 
+			board_type='G'
+	</select>
+	<!-- blackList recruit -->
+	<select id="selectRecruitList" resultMap="manageBlackListMap">
+		select
+			*
+		from
+			blacklist
+		where 
+			board_type='R'
+	</select>
+	<resultMap type="manageBlackList" id="manageBlackListMap"></resultMap>
+	
+	<!-- blackList status -->
+	<select id="selectGBList" resultMap="manageGroupBoardMap">
+		select
+			group_board_no
+		from
+			group_board
+	</select>
+	<resultMap type="manageGroupBoard" id="manageGroupBoardMap"></resultMap>
+	
+	<select id="selectrList" resultMap="recruitMap">
+		select
+			recruit_no
+		from
+			recruit
+	</select>
+	<resultMap type="manageRecruit" id="recruitMap"></resultMap>
+	
+	<!-- blackList reason -->
+	<select id="selectReasonList" resultMap="reportMap">
+		select
+			*
+		from
+			report
+		where 
+			board_no=#{reportBoardNo}
+	</select>
+	<resultMap type="report" id="reportMap"></resultMap>
 </mapper>
