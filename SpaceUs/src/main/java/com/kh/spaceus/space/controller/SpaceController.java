@@ -119,10 +119,8 @@ public class SpaceController {
 		    List<Option> optionList = new ArrayList<>();
 		    Option option = new Option();
 		    for(String str : array) {
-		    	System.out.println(str);
 		    	option.setOptionNo(str);
 		    	option.setSpaceNo(spaceNo);
-		    	System.out.println(option);
 		    	int result3 = spaceService.insertOption(option);
 		    }
 		    
@@ -186,7 +184,7 @@ public class SpaceController {
 		// 전체리뷰수 구하기
 		int reviewTotal = spaceService.selectReviewTotalContents(spaceNo);
 		// 별점조회
-		Star star = spaceService.selectStar();
+		Star star = spaceService.selectStar(spaceNo);
 		star.setSumStar(star.getStar1() + star.getStar2() + star.getStar3() + star.getStar4() + star.getStar5());
 		String url = request.getRequestURI() + "?spaceNo=" + spaceNo;
 		String pageBar = Utils.getPageBarHtml(cPage, limit, reviewTotal, url);

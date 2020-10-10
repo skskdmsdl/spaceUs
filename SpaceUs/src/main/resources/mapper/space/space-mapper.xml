@@ -34,12 +34,12 @@
 		    select
 		        *
 		    from
-		        space join space_image using (space_no) 
+		        space join space_image using (space_no) join reservation using(space_no) 
 		    where 
 		         space_no= #{spaceNo} and rownum=1
 		    order by
-		        upload_date)
-		 order by registration_date desc
+		        upload_date )
+		 
 	</select>
 
 	<select id="selectOneSpace" resultMap="spaceMap">
@@ -69,6 +69,10 @@
 		<result column="content" property="content"/>
 		<result column="bank" property="bank"/>
 		<result column="renamed_filename" property="rname"/>
+		<result column="rev_no" property="revNo"/>
+		<result column="review_no" property="reviewNo"/>
+		<result column="star_rating" property="starRating"/>
+		<result column="review_content" property="reviewContent"/>
 		<collection property="attachList" ofType="Attachment">
 			<id column="file_no" property="fileNo"/>
 			<result column="space_no" property="spaceNo"/>
@@ -214,6 +218,7 @@
 			count(case when star_rating=5 then 1 end) star5
 		from 
 			review
+		where space_no = #{spaceNo}
 	</select>
 	
 	<select id="selectOneSpaceNo" resultType="space">
@@ -342,6 +347,77 @@
 			#{ tagNo }
 		)
 	</insert>
+	
+	<select id="selectReviewList" resultMap="spaceMap">
+		select SS.* from(
+			select  row_number() over(partition by rev_no order by rev_date ) as RNUM, S.*
+			from(
+			    select
+			       *
+			    from
+			        space join space_image using (space_no) left outer join reservation using(space_no) left outer join review using(rev_no)
+			    where 
+			         reservation.member_email= #{email} ) S ) SS
+	     where RNUM =1
+	     order by SS.rev_date desc
+	</select>
+	
+	<select id="selectReviewPossible" resultMap="spaceMap">
+		select SS.* from(
+		    select  row_number() over(partition by rev_no order by rev_date ) as RNUM, S.*
+		    from(
+		        select
+		           *
+		        from
+		            space join space_image using (space_no) left outer join reservation using(space_no) left outer join review using(rev_no)
+		        where 
+		             reservation.member_email= #{email} and review_no is null  ) S ) SS
+		 where RNUM =1
+		 order by SS.rev_date desc
+	</select>
+	
+	<select id="selectReviewComplete" resultMap="spaceMap">
+		select SS.* from(
+		    select  row_number() over(partition by rev_no order by rev_date ) as RNUM, S.*
+		    from(
+		        select
+		           *
+		        from
+		            space join space_image using (space_no) left outer join reservation using(space_no) left outer join review using(rev_no)
+		        where 
+		             reservation.member_email= #{email} and review_no is not null  ) S ) SS
+		 where RNUM =1
+		 order by SS.rev_date desc
+	</select>
+	
+	<update id="updateReview">
+		update 
+			review
+		set
+			star_rating = #{starRating},
+			review_content = #{content}
+		where
+			rev_no = #{revNo}
+	</update>
+	
+	<select resultMap="reviewMap" id="selectStarAvg">
+		select
+			*
+		from
+			review
+		where space_no = #{ spaceNo } 
+	</select>
+	
+	<update id="updateStarAvg">
+		update 
+			space
+		set
+			star_avg = #{starAvg}
+		where
+			space_no = #{spaceNo}
+	</update>
+	
+	
 </mapper>
 
 
