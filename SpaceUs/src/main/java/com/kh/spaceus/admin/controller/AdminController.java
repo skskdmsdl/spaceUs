@@ -104,4 +104,10 @@ public class AdminController {
 		return reasonList;
 	}
 	
+	@RequestMapping("confirmSpaceFrm.do")
+	public String confirmSpaceFrm(@RequestParam String spaceNo) {
+		log.info("spaceNo = {}", spaceNo);
+		return "admin/confirmSpaceFrm";
+	}
+	
 }

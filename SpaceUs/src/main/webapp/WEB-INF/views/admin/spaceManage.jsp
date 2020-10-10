@@ -11,12 +11,15 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <style>
 .spaceOne:hover{
 	background: #e9f2f1;
 	border-radius: 10px; 
 }
 </style>
+
 
 <div class="skin-default-dark fixed-layout">
     <div class="preloader">
@@ -89,7 +92,7 @@
 	                <div class="card p-4">
 		                <div class="card-body">
 			                <div class="col-md-10">
-	                            <h5 class="card-title">공간 승인</h5>
+	                            <h3 class="card-title">공간 승인</h3>
 	                        </div>
 	                        
 	                        <div class="row">
@@ -107,27 +110,34 @@
 									     	<div class="caption" style="text-align: center;">
 									        	<h4 style="margin: 10px 0;">${space.spaceName}</h4>
 									        	<h6 style="margin: 10px 0;"><strong>등록 요청일</strong>: ${space.registrationDate}</h6>
-									        	<h6 style="margin: 10px 0;"><strong>호스트</strong>: ${space.memberEmail}</h6>
-									        	<h6 style="margin: 10px 0;">
+									        	<h6 style="margin: 10px 0;"><strong>유저 이메일</strong>: ${space.memberEmail}</h6>
+									        	<!-- <h6 style="margin: 10px 0;">
 									        		<a href="#" class="btn btn-primary" role="button">승인</a> 
 									        		<a href="#" class="btn btn-default" role="button">승인거절</a>
-									        	</h6>
+									        	</h6> -->
 									     	</div>
-								     	</div>
-									 </div>
+								     	</div>	
+										<input type="hidden" name="spaceNo" value="${space.spaceNo}" />
+									</div>
 								</c:forEach>
 							</div>
 						</div>
 					</div>
 				</div>
                 <!-- 공간승인 끝-->
-
-
     </div>
 </div>
 </div>
 </div>
 
+<script type="text/javascript">
+	$(".spaceTwo").click(function(){
+		var spaceNo = $(this).siblings("[name=spaceNo]").val();
+		alert(spaceNo);
+		
+		location.href="${pageContext.request.contextPath}/admin/confirmSpaceFrm.do?spaceNo="+spaceNo;
+	});
+</script>
 
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
