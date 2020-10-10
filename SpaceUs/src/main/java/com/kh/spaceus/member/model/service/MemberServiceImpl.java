@@ -42,5 +42,15 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.updatePassword(param);
 	}
 
+	@Override
+	public int updateStamp(String email) {
+		return memberDAO.updateStamp(email);
+	}
+
+	@Override
+	public int updateMember(Member member) {
+		return memberDAO.updateMember(member);
+	}
+
 
 }

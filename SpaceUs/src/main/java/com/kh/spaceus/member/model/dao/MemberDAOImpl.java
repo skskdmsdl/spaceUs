@@ -41,4 +41,14 @@ public class MemberDAOImpl implements MemberDAO {
 	public int updatePassword(Map<String, Object> param) {
 		return sqlSession.update("member.updatePassword", param);
 	}
+
+	@Override
+	public int updateStamp(String email) {
+		return sqlSession.update("member.updateStamp", email);
+	}
+
+	@Override
+	public int updateMember(Member member) {
+		return sqlSession.update("member.updateMember", member);
+	}
 }

@@ -16,4 +16,8 @@ public interface MemberDAO {
 
 	int updatePassword(Map<String, Object> param);
 
+	int updateStamp(String email);
+
+	int updateMember(Member member);
+
 }
