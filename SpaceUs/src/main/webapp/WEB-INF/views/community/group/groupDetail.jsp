@@ -120,7 +120,7 @@ body{
 	                            </table>
 	                            
 		                        <!-- 수정삭제 버튼시작 -->
-		                        <sec:authorize access="hasAnyRole('USER','ADMIN')">
+		                        <sec:authorize access="hasAnyRole('USER','ADMIN','HOST')">
 		                        	<%-- <sec:authentication property="principal.username" var="loginMember"/> --%>
 		                        	<c:if test="${loginMember != list.memberEmail}">
 			                            <button class="btn btn-sm btn-danger"  

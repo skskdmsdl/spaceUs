@@ -301,77 +301,56 @@ div#search-userName {
             
             	<!-- 소모임 테이블  시작-->
 		        <div class="table-responsive card p-5" style="border-radius: 10px">
-		        	<div>
-		        		<h4>소모임 게시물</h4>
-		        	</div>
 		            <div class="table-wrapper card-body">
 		                <div class="table-title" style="border-radius: 10px;">
 		                    <div class="row" style="display: flex; justify-content: space-between;">
-			                    <div class="search-container" style="display: inline;">
-									<select id="searchType">
-										<option value="userId">EMAIL</option>
-										<option value="userName">NICKNAME</option>
-									</select>
-									<div id="search-userId">
-										<form  action="${pageContext.request.contextPath}/admin/findUserList.do">
-											<input type="hidden" class="textbox" name="searchType"
-												value="userId"> 
-											<input type="text" class="textbox"
-												   name="searchKeyword" size="25" placeholder="검색할 이메일을 입력하세요"
-												   style="border-radius: 5px; size: portrait;"
-												   
-						                	/>
-											<button type="submit" class="search-btn button btn btn-secondary">검색</button>
-										</form>
-									</div>
-									<div id="search-userName">
-										<form action="${pageContext.request.contextPath}/admin/findUserList.do">
-											<input type="hidden" class="textbox" name="searchType"
-												value="userName"> 
-											<input type="search" class="textbox"
-												name="searchKeyword" size="25" placeholder="검색할 닉네임을 입력하세요."
-												 style="border-radius: 5px;"
-												 />
-											<button type="submit" class="search-btn  btn btn-secondary">검색</button>
-										</form>
-									</div>
-								</div>
-								
-		                   		<div class="btn-div" style="display: inline-block; float: right;">
-									<form action="<%=request.getContextPath()%>/admin/findUserList.do">
-										<input type="hidden" name="searchType" value="userRole" />
-										<button type="submit" class="btn" name="searchKeyword" value="total" style="background:#019efb; color: #fff;">전체 보기</button>
-										<button type="submit" class="btn" name="searchKeyword" value="ROLE_USER" style="background:#37bea6; color: #fff;">일반 맴버</button>
-										<button type="submit" class="btn" name="searchKeyword" value="ROLE_HOST" style="background:#ffbc34; color: #fff;">호스트</button>
-									</form>
-								</div>
-		             
+		                    	<div>
+					        		<h4>소모임 게시물</h4>
+					        	</div>           
 		                    </div>
 		                </div>
 		                <table class="table table-striped table-hover">
 		                    <thead>
 		                        <tr>
 		                            <th>NO</th>
-		                            <th>게시물 번호</th>
 		                            <th>게시물 작성자</th>
 		                            <th>게시물 타이틀</th>
-		                            <th>게시물 게시일자</th>
 		                            <th>사유</th>
+		                            <th>게시물 상태</th>
 		                        </tr>
 		                    </thead>
 		                    <tbody>
 		                    	<c:forEach items="${groupList}" var="group" varStatus="vs">
 		                    		<tr>
 				                   		<td>${vs.count}</td>
-				                   		<td>${group.reportBoardNo}</td>
 				                   		<td>${group.memberEmail}</td>
-				                   		<td><a href="#">${group.groupBoardTitle}</a></td>
-				                   		<td>${group.groupBoardDate}</td>
 				                   		<td>
-											<button type="button" name="reportBoardNo" value="${group.reportBoardNo}"
+				                   			<c:choose>
+				                   				<c:when test="${fn:contains(gbList,group.reportBoardNo)}">
+						                   			<a href="${pageContext.request.contextPath}/community/group/groupDetail/${group.reportBoardNo}.do">
+						                   				${group.title}
+						                   			</a>
+				                   				</c:when>
+				                   				<c:otherwise>
+				                   					${group.title}
+				                   				</c:otherwise>
+				                   			</c:choose>
+				                   		</td>
+				                   		<td>
+											 <button type="button" name="reportBoardNo" value="${group.reportBoardNo}"
 													class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
 											  사유
-											</button>   		
+											</button> 	
+				                   		</td>
+				                   		<td>
+				                   			<c:choose>
+					                   			<c:when test="${fn:contains(gbList,group.reportBoardNo)}">
+						                   			<span class="status text-success">&bull;</span> 게시물이 존재합니다
+					                   			</c:when>
+					                   			<c:otherwise>
+						                   			<span class="status text-warning">&bull;</span> 게시물이 삭제되었습니다
+					                   			</c:otherwise>
+				                   			</c:choose>
 				                   		</td>
 		                    		</tr>
 		                    	</c:forEach>
@@ -382,54 +361,16 @@ div#search-userName {
 		            </div>
 		        </div>
 		        <!-- 소모임 테이블 끝 -->
-		        
+		         
 		        <!-- 구인구직 테이블 시작 -->
 		        <div class="table-responsive card p-5" style="border-radius: 10px">
-		         	<div>
-		        		<h4>구인/구직 게시물</h4>
-		        	</div>
 		            <div class="table-wrapper card-body">
 		                <div class="table-title" style="border-radius: 10px;">
-		                    <div class="row" style="display: flex; justify-content: space-between;">
-			                    <div class="search-container" style="display: inline;">
-									<select id="searchType">
-										<option value="userId">EMAIL</option>
-										<option value="userName">NICKNAME</option>
-									</select>
-									<div id="search-userId">
-										<form  action="${pageContext.request.contextPath}/admin/findUserList.do">
-											<input type="hidden" class="textbox" name="searchType"
-												value="userId"> 
-											<input type="text" class="textbox"
-												   name="searchKeyword" size="25" placeholder="검색할 이메일을 입력하세요"
-												   style="border-radius: 5px; size: portrait;"
-												   
-						                	/>
-											<button type="submit" class="search-btn button btn btn-secondary">검색</button>
-										</form>
-									</div>
-									<div id="search-userName">
-										<form action="${pageContext.request.contextPath}/admin/findUserList.do">
-											<input type="hidden" class="textbox" name="searchType"
-												value="userName"> 
-											<input type="search" class="textbox"
-												name="searchKeyword" size="25" placeholder="검색할 닉네임을 입력하세요."
-												 style="border-radius: 5px;"
-												 />
-											<button type="submit" class="search-btn  btn btn-secondary">검색</button>
-										</form>
-									</div>
-								</div>
-								
-		                   		<div class="btn-div" style="display: inline-block; float: right;">
-									<form action="<%=request.getContextPath()%>/admin/findUserList.do">
-										<input type="hidden" name="searchType" value="userRole" />
-										<button type="submit" class="btn" name="searchKeyword" value="total" style="background:#019efb; color: #fff;">전체 보기</button>
-										<button type="submit" class="btn" name="searchKeyword" value="ROLE_USER" style="background:#37bea6; color: #fff;">일반 맴버</button>
-										<button type="submit" class="btn" name="searchKeyword" value="ROLE_HOST" style="background:#ffbc34; color: #fff;">호스트</button>
-									</form>
-								</div>
-		                    </div>
+		                	 <div class="row" style="display: flex; justify-content: space-between;">
+		                    	<div>
+					        		<h4>구인구직 게시물</h4>
+					        	</div>           
+		                     </div>
 		                </div>
 		                <table class="table table-striped table-hover">
 		                    <thead>
@@ -443,7 +384,28 @@ div#search-userName {
 		                        </tr>
 		                    </thead>
 		                    <tbody>
-		                    	
+		                    	<c:forEach items="${recruitList}" var="recruit" varStatus="vs">
+		                    		<c:if test="${not empty recruit}">
+		                    		<tr>
+				                   		<td>${vs.count}</td>
+				                   		<td>${recruit.reportBoardNo}</td>
+				                   		<td>${recruit.memberEmail}</td>
+				                   		<td><a href="#">${recruit.groupBoardTitle}</a></td>
+				                   		<td>${recruit.groupBoardDate}</td>
+				                   		<td>
+											 <button type="button" name="reportBoardNo" value="${recruit.reportBoardNo}"
+													class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+											  사유
+											</button> 	
+				                   		</td>
+		                    		</tr>
+		                    		</c:if>
+		                    		<c:if test="${empty recruit}">
+		                    			<tr>
+		                    				<td>검색된 결과가 없습니다.</td>
+		                    			</tr>
+		                    		</c:if>
+		                    	</c:forEach>
 		                    </tbody>
 		                </table>        
 		            </div>
@@ -458,39 +420,23 @@ div#search-userName {
 	 <!-- 어드민 memberManage1 본문 끝-->
 	 </div>
  </div>
- 
- <!-- Modal -->
-<!-- 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">BlackList Reason</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
-      	  
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
- -->
+
 <script type="text/javascript">
 $("[name=reportBoardNo]").click(function(){
-	alert('응애~~~~~~~~~`');
 	var boardNo = $(this).val();
-	alert(boardNo);
 
 	$.ajax({
 		url: "${pageContext.request.contextPath}/admin/reasonList.do?boardNo="+boardNo,
 		dataType: "json",
 		method: "GET",
 		success: function(data){
-			alert('성공');
-			console.log(data)
+			console.log(data);
+			var str = "";
+			for(var i in data){
+				str=data[i].reportReason;
+			};
+				alert(str);
+			/* displayResultModal(data); */
 		},
 		error: function(x,s,e){
 			alert('실패');
@@ -499,6 +445,10 @@ $("[name=reportBoardNo]").click(function(){
 	});
 });
 </script>
+
+<!-- Modal -->
+ 
+</div>
 
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>

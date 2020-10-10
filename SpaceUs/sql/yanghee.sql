@@ -343,11 +343,22 @@ create table recruit (
     constraints ck_header check(header in ('구인', '구직'))
 );
 
-update recruit set report_cnt = report_cnt +7 where recruit_no = 'R21';
+update recruit set report_cnt = report_cnt +8 where recruit_no = 'R21';
 
 create sequence seq_recruit_no;
 
 select * from recruit;
+select * from blacklist;
+select 
+		    B.report_board_no,
+		    R.member_email,
+		    R.title as group_board_title,
+		    R.enroll_date as group_board_date
+		from blacklist B join member M
+		                on B.member_email = M.member_email
+		                 join recruit R
+		                on B.report_board_no = R.recruit_no
+		where B.board_type='R';
 
 COMMIT;
 -----------------------------
@@ -583,6 +594,9 @@ select
 from
 report
 where board_no='G64';
+
+insert into report values('admin@spaceus.com','G6','기타');
+COMMIT;
 ---------------------------------10/9------------------------
 
 
@@ -604,14 +618,44 @@ create table blackList (
 );
 ALTER TABLE blackList DROP constraints fk_blacklist_email;
 ALTER TABLE blackList add constraints fk_blacklist_email foreign key(member_email) references member(member_email) on delete set null;
+ALTER TABLE blackList add (title varchar2(256));
+alter table group_board_comment add(report_cnt number default 0);
 
 create sequence seq_blacklist_no;
 select * from blacklist;
 select * from recruit;
 select * from group_board;
+select * from member;
 select * from report;
 
-delete from blacklist where blackList_no = 'BLACK41';
+update group_board set report_cnt 
+delete from group_board where report_cnt = '10';
+
+COMMIT;
+
+select 
+		    B.report_board_no,
+		    R.member_email,
+		    R.title as group_board_title,
+		    R.enroll_date as group_board_date
+		from blacklist B left join member M
+		                on B.member_email = M.member_email
+		                 left join recruit R
+		                on B.report_board_no = R.recruit_no
+		where B.board_type='R';
+        
+select 
+		    B.report_board_no,
+		    G.member_email,
+		    G.group_board_title,
+		    G.group_board_date
+		from blacklist B left join member M
+		                on B.member_email = M.member_email
+		                 left join group_board G
+		                on B.report_board_no = G.group_board_no
+		where B.board_type='G';
+
+select * from blackList;
 
 COMMIT;
 
@@ -697,10 +741,6 @@ create table coupon(
 create sequence seq_coupon_no;
 
 select * from coupon;
-
-
-
-
 -----------------------------
 --------- 비속어필터 ---------
 -----------------------------

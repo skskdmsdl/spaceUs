@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.spaceus.admin.model.service.AdminService;
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
+import com.kh.spaceus.community.group.model.vo.Board;
+import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
 
 import lombok.extern.slf4j.Slf4j;
@@ -74,9 +76,11 @@ public class AdminController {
 	public String blackListManage(Model model) {
 		List<ManageBlackList> groupList = adminService.selectGroupList();
 		List<ManageBlackList> recruitList = adminService.selectRecruitList();
+		List<GroupBoard> gbList = adminService.selectGBList();
 		
 		model.addAttribute("groupList", groupList);
 		model.addAttribute("recruitList", recruitList);
+		model.addAttribute("gbList", gbList);
 		return "admin/blackListManage";
 	}
 	
@@ -84,12 +88,12 @@ public class AdminController {
 	@GetMapping(value="/reasonList.do",
 				produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public String reasonList(Model model, @RequestParam String reportBoardNo) {
-		log.info("reportBoardNo={}",reportBoardNo);
-		List<Report> reasonList = adminService.selectReasonList(reportBoardNo);
+	public List<Report> reasonList(Model model, @RequestParam String boardNo) {
+		log.info("boardNo={}",boardNo);
+		List<Report> reasonList = adminService.selectReasonList(boardNo);
+		log.info("reasonList={}",reasonList);
 		
-		model.addAttribute("reasonList", reasonList);
-		return "redirect:/admin/blackListManage.do";
+		return reasonList;
 	}
 	
 }

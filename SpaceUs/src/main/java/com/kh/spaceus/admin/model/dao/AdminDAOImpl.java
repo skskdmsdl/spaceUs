@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
+import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
 
 @Repository
@@ -49,6 +50,11 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<Report> selectReasonList(String reportBoardNo) {
 		return session.selectList("admin.selectReasonList",reportBoardNo);
+	}
+
+	@Override
+	public List<GroupBoard> selectGBList() {
+		return session.selectList("admin.selectGBList");
 	}
 	
 	

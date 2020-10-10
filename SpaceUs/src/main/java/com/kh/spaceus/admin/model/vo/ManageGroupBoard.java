@@ -1,7 +1,6 @@
 package com.kh.spaceus.admin.model.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,11 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ManageBlackList implements Serializable {
+public class ManageGroupBoard implements Serializable {
 	
-	private String reportBoardNo;
-	private String groupBoardTitle;
-	private String memberEmail;
-	private String title;
-	
+	private String groupBoardNo;
 }
