@@ -624,12 +624,12 @@ alter table group_board_comment add(report_cnt number default 0);
 create sequence seq_blacklist_no;
 select * from blacklist;
 select * from recruit;
+
 select * from group_board;
 select * from member;
 select * from report;
 
-update group_board set report_cnt 
-delete from group_board where report_cnt = '10';
+delete from group_board where group_board_no = 'G12';
 
 COMMIT;
 
