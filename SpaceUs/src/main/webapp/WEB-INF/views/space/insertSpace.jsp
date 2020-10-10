@@ -503,6 +503,7 @@ $("#availableTime th").on("click", function(){
 		//셀 색 바꾸기
 		if(last == dayTime[day].startHour){
 			$(this).removeClass("bg-primary");
+			dayTime[day].startHour=-1;
 			return;
 		}
 		if(last<first){

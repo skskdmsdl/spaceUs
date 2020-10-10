@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -18,7 +19,7 @@
 .fas {position: absolute; padding: 90px;}
 input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 .site-btn {width: 100%; font-size: 17px;}
-.nochoose {background-color:#8f8d8d;}
+.nochoose {color:#e6e6e6;}
 </style>
 
 <!-- 컨텐츠 시작 -->
@@ -77,7 +78,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                        </div>
 							<tr>
 								<th>예약 날짜</th>
-								<th><input type="date" name="revDay" onchange="selectDay(this.value)"></th>
+								<th><input type="date" id="D-day" onchange="selectDay(this.value)"></th>
 							</tr>
 						    <tr>
 						  <!--     <td>예약 시작시간</td>
@@ -108,7 +109,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 											<th id="11">11:00 - 12:00</th>	                                
 	                                	</tr>      
 	                                	<tr>       
-											<th id="12" class="nochoose">12:00 - 13:00</th>	                                
+											<th id="12">12:00 - 13:00</th>	                                
 											<th id="13">13:00 - 14:00</th>	                                
 											<th id="14">14:00 - 15:00</th>	                                
 											<th id="15">15:00 - 16:00</th>	                                
@@ -180,19 +181,20 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                          <form action="#" class="calculator-form">
 	                         <div class="filter-input">
 	                             <p>예약 날짜</p>
-	                             <input type="text" readonly>
+	                             <input type="text" name="dDay" readonly>
 	                         </div>
 	                         <div class="filter-input">
 	                             <p>예약 시간</p>
-	                             <input type="text" readonly>
+	                             <input type="text" name="startHour" style="width:45%;" readonly> ~ 
+	                             <input type="text" name="endHour" style="width:45%;" readonly>
 	                         </div>
 	                         <div class="filter-input">
 	                             <p>결제 방법</p>
-	                             <input type="text" readonly>
+	                             <input type="text" name="" readonly>
 	                         </div>
 	                         <div class="filter-input">
 	                             <p>총 금액</p>
-	                             <input type="text" readonly>
+	                             <input type="text" name="totalPrice" readonly>
 	                         </div>
 	                         <button type="submit" class="site-btn">결제하기</button>
 						</form>
@@ -229,35 +231,53 @@ $(function(){
 //예약 날짜 클릭이벤트
 var day='';
 var index=-1;
+var start=-1;
+var end=-1;
 function selectDay(val){
 	var week = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 	
 	var date = new Date(val);
 	if(date.getTime() <= today.getTime()){
 		alert("오늘과 지난 날짜는 예약이 불가능합니다.");
-		$("[name=revDay]").val('');
+		$("#D-day").val('');
 		day='';
 		index=-1;
+		start=-1;
+		end=-1;
+		for(var i=0; i<24; i++){
+			$("#"+i).removeClass("nochoose");
+			$("#"+i).removeClass("bg-primary");
+		}
+		revHour();
 		return;
 	}
 	
 	//날짜 선택
 	day = week[date.getDay()];
-	console.log($("[name=revDay]").val() + " : " + day);
+	console.log($("#D-day").val() + " : " + day);
 	
 	index = avail.findIndex(obj => obj.day == day);
 	console.log("index="+index);
 
+	for(var i=0; i<24; i++){
+		if(i >= avail[index].start && i <= avail[index].end)
+			$("#"+i).removeClass("nochoose");
+		else
+			$("#"+i).addClass("nochoose");
+	}
+	revHour();
 }
 
 var flag=0;
-var start=-1;
-var end=-1;
 //가능시간 클릭이벤트
 $("#availableTime th").on("click", function(){
 	//날짜,요일 선택여부
 	if(day==''){
 		alert("예약 날짜를 먼저 선택해주세요");
+		return;
+	}
+
+	if($(this).hasClass("nochoose")){
 		return;
 	}
 	
@@ -270,23 +290,30 @@ $("#availableTime th").on("click", function(){
 		end=-1;
 		for(var i=0; i<33; i++)
     		$("#"+i).removeClass("bg-primary");
+		revHour();
 		return;
 	};
 	//연속선택
 	if(flag==2){
 		//선택한 셀의 아이디 찾기
-		var end = Number($(this).attr("id"));
+		end = Number($(this).attr("id"));
+		console.log("end : "+ end);
 
 		//셀 색 바꾸기
 		if(end == start){
 			$(this).removeClass("bg-primary");
+			flag=0;
+			start=-1;
+			end=-1;
 			return;
 		}
+		
 		if(end<start){
 			var temp = start;
 			start = end;
 			end = temp;
 		}	
+		revHour();
 		for(var i=start; i<=end; i++)
 			$("#"+i).addClass("bg-primary");
 		return;
@@ -299,6 +326,18 @@ $("#availableTime th").on("click", function(){
 	//셀 색 바꾸기
     $(this).addClass("bg-primary");
 });
+
+function revHour(){
+	$("[name=dDay]").val($("#D-day").val());
+	if(start==-1 || end==-1){
+		$("[name=startHour]").val('');
+		$("[name=endHour]").val('');
+	}
+	else{
+		$("[name=startHour]").val(start);
+		$("[name=endHour]").val(end+1);
+	}
+};
 </script>
 
 <!-- 컨텐츠 끝 -->
