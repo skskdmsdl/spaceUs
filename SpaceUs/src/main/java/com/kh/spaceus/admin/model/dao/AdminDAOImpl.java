@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
+import com.kh.spaceus.admin.model.vo.ManageRecruit;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
+import com.kh.spaceus.community.recruit.model.vo.Recruit;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -56,6 +58,12 @@ public class AdminDAOImpl implements AdminDAO {
 	public List<GroupBoard> selectGBList() {
 		return session.selectList("admin.selectGBList");
 	}
+
+	@Override
+	public List<ManageRecruit> selectrList() {
+		return session.selectList("admin.selectrList");
+	}
+	
 	
 	
 	

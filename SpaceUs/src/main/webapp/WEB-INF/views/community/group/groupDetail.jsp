@@ -134,7 +134,10 @@ body{
 			                            		style="margin-top:50px; background-color: #00c89e; font-size:15px; color:white; float:right; margin-right: 10px; margin-top: 0;">글 수정 </button>
 			                           	<div style="display: inline-block;"></div>
 			                            <button id="deleteBtn" class="btn btn-sm" style="margin-top:42px;background-color: #00c89e;font-size:15px;color:white;float:right;margin-right: 10px;margin-top: 0;border-right-width: 0px;padding-right: 9px;">글 삭제 </button>
-		                          	</c:if>	                          	
+		                          	</c:if>	 
+		                          	<sec:authorize access="hasRole('ADMIN')">
+		                          		<button id="deleteBtn" class="btn btn-sm" style="margin-top:42px;background-color: #00c89e;font-size:15px;color:white;float:right;margin-right: 10px;margin-top: 0;border-right-width: 0px;padding-right: 9px;">글 삭제 </button>
+		                          	</sec:authorize>                         	
 		                        </sec:authorize>
 		                        <!-- 수정삭제 버튼끝-->
 	                         </div>

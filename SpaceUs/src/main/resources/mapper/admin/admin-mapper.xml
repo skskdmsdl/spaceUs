@@ -74,16 +74,12 @@
 	</select>
 	<!-- blackList recruit -->
 	<select id="selectRecruitList" resultMap="manageBlackListMap">
-		select 
-		    B.report_board_no,
-		    R.member_email,
-		    R.title as group_board_title,
-		    R.enroll_date as group_board_date
-		from blacklist B join member M
-		                on B.member_email = M.member_email
-		                 join recruit R
-		                on B.report_board_no = R.recruit_no
-		where B.board_type='R'
+		select
+			*
+		from
+			blacklist
+		where 
+			board_type='R'
 	</select>
 	<resultMap type="manageBlackList" id="manageBlackListMap"></resultMap>
 	
@@ -95,6 +91,14 @@
 			group_board
 	</select>
 	<resultMap type="manageGroupBoard" id="manageGroupBoardMap"></resultMap>
+	
+	<select id="selectrList" resultMap="recruitMap">
+		select
+			recruit_no
+		from
+			recruit
+	</select>
+	<resultMap type="manageRecruit" id="recruitMap"></resultMap>
 	
 	<!-- blackList reason -->
 	<select id="selectReasonList" resultMap="reportMap">

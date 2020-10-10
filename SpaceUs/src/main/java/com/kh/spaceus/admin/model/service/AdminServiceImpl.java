@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import com.kh.spaceus.admin.model.dao.AdminDAO;
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
+import com.kh.spaceus.admin.model.vo.ManageRecruit;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
+import com.kh.spaceus.community.recruit.model.vo.Recruit;
 import com.kh.spaceus.member.model.vo.Member;
 
 @Service
@@ -56,6 +58,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<GroupBoard> selectGBList() {
 		return adminDAO.selectGBList();
+	}
+
+	@Override
+	public List<ManageRecruit> selectrList() {
+		return adminDAO.selectrList();
 	}
 
 	

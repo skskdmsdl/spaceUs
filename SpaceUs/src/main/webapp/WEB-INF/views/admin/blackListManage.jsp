@@ -376,33 +376,51 @@ div#search-userName {
 		                    <thead>
 		                        <tr>
 		                            <th>NO</th>
-		                            <th>게시물 번호</th>
 		                            <th>게시물 작성자</th>
 		                            <th>게시물 타이틀</th>
-		                            <th>게시물 게시일자</th>
 		                            <th>사유</th>
+		                            <th>게시물 상태</th>
 		                        </tr>
 		                    </thead>
 		                    <tbody>
-		                    	<c:forEach items="${recruitList}" var="recruit" varStatus="vs">
-		                    		<c:if test="${not empty recruit}">
-		                    		<tr>
-				                   		<td>${vs.count}</td>
-				                   		<td>${recruit.reportBoardNo}</td>
-				                   		<td>${recruit.memberEmail}</td>
-				                   		<td><a href="#">${recruit.groupBoardTitle}</a></td>
-				                   		<td>${recruit.groupBoardDate}</td>
-				                   		<td>
-											 <button type="button" name="reportBoardNo" value="${recruit.reportBoardNo}"
-													class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-											  사유
-											</button> 	
-				                   		</td>
-		                    		</tr>
+								<c:forEach items="${recruitList}" var="recruit" varStatus="vs">
+									<c:if test="${not empty recruit}">
+			                    		<tr>
+					                   		<td>${vs.count}</td>
+					                   		<td>${recruit.memberEmail}</td>
+					                   		<td>
+					                   			<c:choose>
+					                   				<c:when test="${fn:contains(rList,recruit.reportBoardNo)}">
+							                   			<a href="${pageContext.request.contextPath}/community/recruit/recruitDetail.do?no=${recruit.reportBoardNo}">
+							                   				${recruit.title}
+							                   			</a>
+					                   				</c:when>
+					                   				<c:otherwise>
+					                   					${recruit.title}
+					                   				</c:otherwise>
+					                   			</c:choose>
+					                   		</td>
+					                   		<td>
+												 <button type="button" name="reportBoardNo" value="${recruit.reportBoardNo}"
+														class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+												  사유
+												</button> 	
+					                   		</td>
+					                   		<td>
+					                   			<c:choose>
+						                   			<c:when test="${fn:contains(rList,recruit.reportBoardNo)}">
+							                   			<span class="status text-success">&bull;</span> 게시물이 존재합니다
+						                   			</c:when>
+						                   			<c:otherwise>
+							                   			<span class="status text-warning">&bull;</span> 게시물이 삭제되었습니다
+						                   			</c:otherwise>
+					                   			</c:choose>
+					                   		</td>
+			                    		</tr>
 		                    		</c:if>
 		                    		<c:if test="${empty recruit}">
 		                    			<tr>
-		                    				<td>검색된 결과가 없습니다.</td>
+		                    				<td>입력된 행이 존재하지 않습니다</td>
 		                    			</tr>
 		                    		</c:if>
 		                    	</c:forEach>

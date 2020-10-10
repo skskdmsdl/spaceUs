@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.spaceus.admin.model.service.AdminService;
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
+import com.kh.spaceus.admin.model.vo.ManageRecruit;
 import com.kh.spaceus.community.group.model.vo.Board;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
+import com.kh.spaceus.community.recruit.model.vo.Recruit;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -77,10 +79,12 @@ public class AdminController {
 		List<ManageBlackList> groupList = adminService.selectGroupList();
 		List<ManageBlackList> recruitList = adminService.selectRecruitList();
 		List<GroupBoard> gbList = adminService.selectGBList();
+		List<ManageRecruit> rList = adminService.selectrList();
 		
 		model.addAttribute("groupList", groupList);
 		model.addAttribute("recruitList", recruitList);
 		model.addAttribute("gbList", gbList);
+		model.addAttribute("rList", rList);
 		return "admin/blackListManage";
 	}
 	
