@@ -9,6 +9,7 @@ import com.kh.spaceus.admin.model.dao.AdminDAO;
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
 import com.kh.spaceus.admin.model.vo.ManageRecruit;
+import com.kh.spaceus.admin.model.vo.ManageSpace;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
 import com.kh.spaceus.community.recruit.model.vo.Recruit;
@@ -63,6 +64,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<ManageRecruit> selectrList() {
 		return adminDAO.selectrList();
+	}
+
+	@Override
+	public List<ManageSpace> selectSpaceList() {
+		return adminDAO.selectSpaceList();
 	}
 
 	

@@ -624,7 +624,6 @@ alter table group_board_comment add(report_cnt number default 0);
 create sequence seq_blacklist_no;
 select * from blacklist;
 select * from recruit;
-
 select * from group_board;
 select * from member;
 select * from report;
@@ -846,3 +845,35 @@ select * from monthly_sale;
 select * from yearly_sale;
 
 commit;
+
+---------------------------------------
+-- 10/11
+---------------------------------------
+select * from space_image;
+
+-- 첫번째 사진이 대표사진 추출
+select
+    *
+from(
+    select 
+        S.space_no,
+        SI.renamed_filename,
+        rank()over(partition by S.space_no order by SI.renamed_filename) as rnum,
+        S.member_email
+    from 
+        space S join auth A
+                    on S.member_email = A.member_email
+                left join space_image SI
+                    on S.space_no = SI.space_no
+    where
+        A.authority = 'ROLE_USER'
+    )
+where rnum = 1;
+--------------------------------------------
+-- 그룹별로 ROWNUM
+select
+        space_no,
+        renamed_filename,
+        rank()over(partition by space_no order by renamed_filename) "rownum"
+from
+        space_image;

@@ -15,6 +15,7 @@ import com.kh.spaceus.admin.model.service.AdminService;
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
 import com.kh.spaceus.admin.model.vo.ManageRecruit;
+import com.kh.spaceus.admin.model.vo.ManageSpace;
 import com.kh.spaceus.community.group.model.vo.Board;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
@@ -69,7 +70,10 @@ public class AdminController {
 	
 	//공간관리 폼
 	@RequestMapping("/spaceManage.do")
-	public String spaceManage() {
+	public String spaceManage(Model model) {
+		List<ManageSpace> spaceList = adminService.selectSpaceList();
+		
+		model.addAttribute("spaceList", spaceList);
 		return "admin/spaceManage";
 	}
 	

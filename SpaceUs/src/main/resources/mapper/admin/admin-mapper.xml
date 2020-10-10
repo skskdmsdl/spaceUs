@@ -110,4 +110,28 @@
 			board_no=#{reportBoardNo}
 	</select>
 	<resultMap type="report" id="reportMap"></resultMap>
+	
+	<!-- space Manage -->
+	<select id="selectSpceList" resultMap="manageSpaceMap">
+		select
+		    *
+		from(
+		    select 
+		        S.space_no,
+		        SI.renamed_filename,
+		        S.space_name,
+		        S.registration_date,
+		        rank()over(partition by S.space_no order by SI.renamed_filename) as rnum,
+		        S.member_email
+		    from 
+		        space S join auth A
+		                    on S.member_email = A.member_email
+		                left join space_image SI
+		                    on S.space_no = SI.space_no
+		    where
+		        A.authority = 'ROLE_USER'
+		    )
+		where rnum = 1
+	</select>
+	<resultMap type="manageSpace" id="manageSpaceMap"></resultMap>
 </mapper>
