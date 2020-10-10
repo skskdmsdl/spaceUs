@@ -470,7 +470,7 @@ public class MemberController {
 	@ResponseBody
 	public ModelAndView insertStamp(ModelAndView mav,
 									@RequestParam("memberEmail") String email) {
-		int result = memberService.updateStamp(email);
+		/* int result = memberService.updateStamp(email); */
 
 		mav.setViewName("jsonView");
 

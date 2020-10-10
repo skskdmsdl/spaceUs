@@ -39,12 +39,12 @@
 			'R'||seq_recruit_no.nextval,
 			#{email},
 			#{nickName},
-			#{header},
 			default,
 			default,
 			#{title},
 			#{content},
-			default
+			default,
+			#{header}
 		)
 	</insert>
 	

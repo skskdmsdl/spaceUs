@@ -285,7 +285,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                          </div>
                          </div>
                          <div class="text-center mt-4">
-			                 	<a href='${pageContext.request.contextPath }/community/recruit/recruitList.do' class="btn m-1" style="background-color: #00c89e; font-size:20px; color:white;"><i class="fa fa-list"></i> 목록</a>
+			                 	<a href='${pageContext.request.contextPath }/community/recruit/recruitList.do' class="btn m-1 font-bold" style="background-color: #00c89e; font-size:16px; color:white;"><i class="fa fa-list"></i> 목록</a>
                              </div>
                          </div>
                      </div>
