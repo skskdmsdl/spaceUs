@@ -17,6 +17,8 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.common.Utils;
@@ -274,7 +277,7 @@ public class MemberController {
 	@GetMapping("/checkNickNameDuplicate.do")
 	@ResponseBody
 	public Map<String, Object> checkNickNameDuplicate(@RequestParam("nickName") String nickName) {
-
+		System.out.println(nickName);
 		Member member = memberService.selectOneNickName(nickName);
 		boolean isUsable = member == null;
 
@@ -462,6 +465,35 @@ public class MemberController {
 		return "redirect:/member/reviewList.do";
 	}
 	
+	// 닉네임중복검사
+	@GetMapping("/insertStamp.do")
+	@ResponseBody
+	public ModelAndView insertStamp(ModelAndView mav,
+									@RequestParam("memberEmail") String email) {
+		int result = memberService.updateStamp(email);
+
+		mav.setViewName("jsonView");
+
+		return mav;
+	}
 	
-	
+	// 닉네임중복검사
+	@GetMapping("/updateMember.do")
+	@ResponseBody
+	public Map<String, Object> updateMember(ModelAndView mav,
+											Member member) {
+		
+		int result = memberService.updateMember(member);
+		String memberEmail = member.getMemberEmail();
+		member = memberService.selectOneMember(memberEmail);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		authentication.getName();
+		authentication.getPrincipal();
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("nick", member.getNickName());
+
+		return map;
+	}
+
 }
