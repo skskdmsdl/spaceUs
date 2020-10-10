@@ -850,6 +850,7 @@ commit;
 -- 10/11
 ---------------------------------------
 select * from space_image;
+select * from space;
 
 -- 첫번째 사진이 대표사진 추출
 select
@@ -858,6 +859,8 @@ from(
     select 
         S.space_no,
         SI.renamed_filename,
+        S.space_name,
+        S.registration_date,
         rank()over(partition by S.space_no order by SI.renamed_filename) as rnum,
         S.member_email
     from 
