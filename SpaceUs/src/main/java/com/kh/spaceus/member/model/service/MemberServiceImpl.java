@@ -1,5 +1,7 @@
 package com.kh.spaceus.member.model.service;
 
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +52,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int updateMember(Member member) {
 		return memberDAO.updateMember(member);
+	}
+
+	@Override
+	public List<Member> selectBtdList(String format) {
+		return memberDAO.selectBtdList(format);
 	}
 
 

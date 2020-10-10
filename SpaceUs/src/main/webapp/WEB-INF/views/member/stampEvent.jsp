@@ -170,7 +170,7 @@ $(function(){
 		}
 	})
 });
-//클릭이벤트
+//클릭이벤트 --> ajax말고 reload해도 변경되지 않는걸로 데이터 전송해야함
 $("#calendar_content").css("cursor", "pointer");
 $("#calendar_content").click(function(){
 	$.ajax({

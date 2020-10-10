@@ -3,11 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
-		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
@@ -88,10 +86,17 @@
     </bean>
     
     <!-- 스케쥴러파일이 존재하는 패키지 설정 --> 
-    <context:component-scan base-package="com.kh.scheduler" /> 
+    <!-- <context:component-scan base-package="com.kh.spaceus.scheduler" />  -->
     <!-- 해당 태그들은 크론탭을 설정에 필요한 태그들 --> 
-    <task:scheduler id="jobScheduler" pool-size="10" /> 
-    <task:annotation-driven scheduler="jobScheduler" />
-
+   <!--  <task:scheduler id="jobScheduler" pool-size="10" /> 
+    <task:annotation-driven scheduler="jobScheduler" /> -->
+   <!--  <context:annotation-config/>
+    <task:annotation-driven/> -->
+    <!-- <bean id="checkController" class="com.kh.spaceus.scheduler.CheckController"/>
+	    <task:scheduler id="jobScheduler" pool-size="10" /> 
+	    <task:annotation-driven scheduler="jobScheduler" />
+	    <task:scheduled-tasks scheduler="scheduler">
+	    	<task:scheduled ref="checkController" method="everyScheduler" cron ="0 54 2 * * *"/>
+	    </task:scheduled-tasks> -->
 		
 </beans>
