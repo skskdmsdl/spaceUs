@@ -51,7 +51,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                         <div class="bi-pic">
                             <img src="${pageContext.request.contextPath }/resources/img/blog/blog-1.jpg" alt="">
                         </div>
-                        <table id="tbl-reserve" class="table table-striped table-hover">
+                        <table id="tbl-reserve1" class="table table-striped table-hover">
 	                        <div class="section-title sidebar-title-b mt-5">
 	                            <h6>공간 정보</h6>
 	                        </div>
@@ -72,21 +72,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 							  </td>
 							</tr>
 						</table>
-                        <table id="tbl-reserve" class="table table-striped table-hover">
+                        <table id="tbl-reserve2" class="table table-striped table-hover">
 	                        <div class="section-title sidebar-title-b mt-5">
 	                            <h6>예약 정보</h6>
 	                        </div>
 							<tr>
 								<th>예약 날짜</th>
 								<th><input type="date" id="D-day" onchange="selectDay(this.value)"></th>
-							</tr>
-						    <tr>
-						  <!--     <td>예약 시작시간</td>
-						      <td><select name="" id=""></select></td>
-							</tr>
-							<tr>
-						       <td>예약 종료시간</td>
-						       <td><select name="" id=""></select></td> -->
 							</tr>
 							<tr>
 								<th>예약 시간</th>
@@ -128,42 +120,42 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                 </th>
 							</tr>
 						</table>
-						<table id="tbl-reserve" class="table table-striped table-hover">
+						<table id="tbl-reserve3" class="table table-striped table-hover">
 	                        <div class="section-title sidebar-title-b mt-5">
 	                            <h6>결제 방법</h6>
 	                        </div>
 						    <tr>
 						      <td>
-						      	<input type="radio" name="" id="" />
+						      	<input type="radio" name="selectPay" id="pay" value="카드결제" />
 						      	<label>카드결제</label>
 						      </td>
 						      <td>
-						      	<input type="radio" name="" id="" />
+						      	<input type="radio" name="selectPay" value="네이버페이" />
 						      	<label>네이버페이</label>
 						      </td>
 							</tr>
 						</table>
 						
 						
-						<table id="tbl-reserve" class="table table-striped table-hover">
+						<table id="tbl-reserve4" class="table table-striped table-hover">
 	                        <div class="section-title sidebar-title-b mt-5">
 	                            <h6>서비스 동의</h6>
 	                        </div>
 						    <tr>
 						      <td>
-						      	<input type="checkbox" name="" id="" />
+						      	<input type="checkbox" name="agree" id="agree1" />
 						      	<label>위 공간의 예약조건 확인 및 결제진행 동의 (필수)</label>
 						      </td>
 							</tr>
 							<tr>
 						      <td>
-						      	<input type="checkbox" name="" id="" />
+						      	<input type="checkbox" name="agree" id="agree2" />
 						      	<label>개인정보 제3자 제공 동의 (필수)</label>
 						      </td>
 							</tr>
 							<tr>
 						      <td>
-						      	<input type="checkbox" name="" id="" />
+						      	<input type="checkbox" name="agree" id="agree3" />
 						      	<label>개인정보 수집 및 이용 동의 (필수)</label>
 						      </td>
 							</tr>
@@ -178,7 +170,11 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                         <div class="section-title sidebar-title-b">
                             <h6>결제 예정금액</h6>
                         </div>
-                         <form action="#" class="calculator-form">
+                         <form:form name="revFrm" id="revFrm" 
+							  action="#" 
+							  class="calculator-form">
+							  <!-- method="post"
+							  enctype="multipart/form-data" -->
 	                         <div class="filter-input">
 	                             <p>예약 날짜</p>
 	                             <input type="text" name="dDay" readonly>
@@ -190,14 +186,14 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                         </div>
 	                         <div class="filter-input">
 	                             <p>결제 방법</p>
-	                             <input type="text" name="" readonly>
+	                             <input type="text" name="pay" readonly>
 	                         </div>
 	                         <div class="filter-input">
 	                             <p>총 금액</p>
 	                             <input type="text" name="totalPrice" readonly>
 	                         </div>
 	                         <button type="submit" class="site-btn">결제하기</button>
-						</form>
+						</form:form>
                     </div>
                 </div>
             </div>
@@ -229,7 +225,6 @@ $(function(){
 });
 
 //예약 날짜 클릭이벤트
-var day='';
 var index=-1;
 var start=-1;
 var end=-1;
@@ -240,39 +235,35 @@ function selectDay(val){
 	if(date.getTime() <= today.getTime()){
 		alert("오늘과 지난 날짜는 예약이 불가능합니다.");
 		$("#D-day").val('');
-		day='';
-		index=-1;
-		start=-1;
-		end=-1;
+		$("[name=dDay]").val('');
+		
+		resetHour();
 		for(var i=0; i<24; i++){
 			$("#"+i).removeClass("nochoose");
-			$("#"+i).removeClass("bg-primary");
 		}
-		revHour();
 		return;
 	}
 	
 	//날짜 선택
-	day = week[date.getDay()];
-	console.log($("#D-day").val() + " : " + day);
-	
+	var day = week[date.getDay()];
 	index = avail.findIndex(obj => obj.day == day);
-	console.log("index="+index);
 
+	//가능시간 표시
 	for(var i=0; i<24; i++){
 		if(i >= avail[index].start && i <= avail[index].end)
 			$("#"+i).removeClass("nochoose");
 		else
 			$("#"+i).addClass("nochoose");
 	}
-	revHour();
+	resetHour();
+
+	$("[name=dDay]").val($("#D-day").val());
 }
 
-var flag=0;
 //가능시간 클릭이벤트
 $("#availableTime th").on("click", function(){
 	//날짜,요일 선택여부
-	if(day==''){
+	if($("#D-day").val()==''){
 		alert("예약 날짜를 먼저 선택해주세요");
 		return;
 	}
@@ -280,65 +271,100 @@ $("#availableTime th").on("click", function(){
 	if($(this).hasClass("nochoose")){
 		return;
 	}
+
+	if(start == -1){
+		start = Number($(this).attr("id"));
+		console.log("start : "+ start);
+		//셀 색 바꾸기
+	    $(this).addClass("bg-primary");
+	    return;
+	}
+
+	if(end != -1){
+		resetHour();
+		return;
+	}
 	
-	flag++;
-	//초기화하기
-	if(flag==3){
-		flag=0;
-		//셀 색 지우기
+	end = Number($(this).attr("id"));
+	if(end == start){
+		$(this).removeClass("bg-primary");
 		start=-1;
 		end=-1;
-		for(var i=0; i<33; i++)
-    		$("#"+i).removeClass("bg-primary");
-		revHour();
 		return;
-	};
-	//연속선택
-	if(flag==2){
-		//선택한 셀의 아이디 찾기
-		end = Number($(this).attr("id"));
-		console.log("end : "+ end);
-
-		//셀 색 바꾸기
-		if(end == start){
-			$(this).removeClass("bg-primary");
-			flag=0;
-			start=-1;
-			end=-1;
-			return;
-		}
-		
+	}
+	else{
 		if(end<start){
 			var temp = start;
 			start = end;
 			end = temp;
-		}	
-		revHour();
+		}
+		
+		$("[name=startHour]").val(start);
+		$("[name=endHour]").val(end+1);
+		
 		for(var i=start; i<=end; i++)
 			$("#"+i).addClass("bg-primary");
 		return;
-	};
-
-	//선택한 셀의 아이디 찾기
-	start = Number($(this).attr("id"));
-	console.log("start : "+ start);
-
-	//셀 색 바꾸기
-    $(this).addClass("bg-primary");
+	}
+    
 });
 
-function revHour(){
-	$("[name=dDay]").val($("#D-day").val());
-	if(start==-1 || end==-1){
-		$("[name=startHour]").val('');
-		$("[name=endHour]").val('');
-	}
-	else{
-		$("[name=startHour]").val(start);
-		$("[name=endHour]").val(end+1);
-	}
-};
+//초기화
+function resetHour(){
+	index=-1;
+	start=-1;
+	end=-1;
+
+	for(var i=0; i<24; i++)
+		$("#"+i).removeClass("bg-primary");
+
+	$("[name=startHour]").val('');
+	$("[name=endHour]").val('');
+}
+
 </script>
+<script>
+$("[name='selectPay']").change(function(){
+	$("[name=pay]").val($("[name='selectPay']:checked").val());
+});
+</script>
+<script>
+$("#revFrm").submit(function(){
+	
+	//빈칸이면 입력 요구
+	if($("[name=dDay]").val() == ""){
+		alert("예약날짜를 선택해주세요.");
+		document.getElementById("D-day").focus();
+		return false;
+	}
+
+	if($("[name=endHour]").val() == ""){
+		alert("시간을 설정해주세요");
+		$('html, body').animate({scrollTop : $("#D-day").offset().top}, 100);
+		return false;
+	}
+
+	if($("[name=pay]").val() == ""){
+		alert("결제 방법을 선택해주세요.");
+		document.getElementById("pay").focus();
+		return false;
+	}
+
+	if($("#agree1").is(":checked") == false){
+		document.getElementById("agree1").focus();
+		return false;
+	}
+	if($("#agree2").is(":checked") == false){
+		document.getElementById("agree2").focus();
+		return false;
+	}
+	if($("#agree3").is(":checked") == false){
+		document.getElementById("agree3").focus();
+		return false;
+	}
+});
+</script>
+
 
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -22,6 +22,7 @@ public class Reservation implements Serializable {
 	private Date dDay;
 	private int startHour;
 	private int endHour;
+	private String pay;
 	private int totalPrice;
 	private int revCancle;
 	private int revComplete;
