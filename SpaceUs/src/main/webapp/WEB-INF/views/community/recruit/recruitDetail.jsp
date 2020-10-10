@@ -114,7 +114,10 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                                    <th style="position: absolute;right: 110px; cursor: pointer;" class="mr-5" id="modifyBtn">수정하기</th>
 	                                    <th class="col-xl-auto mr-5" style="position: absolute;right: 70px;">|</th>
 	                                    <th style="position: absolute;right: 10px; cursor: pointer;" class="mr-5" onclick="deleteBtn('${ recruit.no }')">삭제하기</th>
-                               			</c:if>	
+                               			</c:if>
+                               			<sec:authorize access="hasRole('ADMIN')">
+                               				<th style="position: absolute;right: 10px; cursor: pointer;" class="mr-5" onclick="deleteBtn('${ recruit.no }')">삭제하기</th>
+                               			</sec:authorize>	
                                		</sec:authorize>
                                 </tr>
                             </table>
