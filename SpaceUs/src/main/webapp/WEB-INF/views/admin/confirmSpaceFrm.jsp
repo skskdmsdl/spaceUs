@@ -7,6 +7,7 @@
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style>
 .carousel {
@@ -175,7 +176,7 @@
                 
                 <!-- 사진 시작 -->
                  <div class="container-sm" style="margin-bottom: 20px;">
-                 		<h4>공간 사진<span class="text-danger">*</span></h4>
+                 		<h4>공간 사진</h4>
 				        <div class="row">
 				            <div class="col-md-8 mx-auto">
 				                <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -244,19 +245,20 @@
                      <div class="pf-feature-price" style="margin-bottom: 20px;">
                          <h4>공간 태그</h4>
                          <div class=" mx-lg-5">
-                         	<c:forEach items="${spaceOneTagList}" var="tag">
-                         		<c:if test="${!empty tag}">
-	                         		<span class="badge badge-success badge-pill" style="font-size: 15px;">${tag.tagName }</span>
-                         		</c:if>
-                         		<c:if test="${empty tag}">
-                         			<p>존재하지 않습니다.</p>
-                         		</c:if>
+                     
+                         <c:if test="${!empty spaceOneTagList}">
+                         	<c:forEach items="${spaceOneTagList}" var="tag">	                         		
+                         		<span class="badge badge-success badge-pill" style="font-size: 15px;"># ${tag.tagName }</span>
                      	 	</c:forEach>
+	                     </c:if>
+	                     <c:if test="${empty spaceOneTagList}">
+	                     	<h6>(공간 태그 값이 존재하지 않습니다.)</h6>
+	                     </c:if>
                      	 </div>
                      </div>
                      
                      <div class="pf-feature-price" style="margin-bottom: 20px;">
-                         <h4>가격 (시간당)<span class="text-danger">*</span></h4>
+                         <h4>가격 (시간당)</h4>
                        	 <div class="mx-lg-5">
                          	<h5>${space.hourlyPrice}원</h5>
                          </div>
@@ -265,9 +267,14 @@
                      <div class="pf-feature" style="margin-bottom: 20px;">
                          <h4>옵션선택</h4>
                          <div class=" mx-lg-5">
-                         	 <c:forEach items="${spaceOneTagList}" var="tag">	 	
-			                 	<span class="badge badge-primary badge-pill" style="font-size: 15px;">#${tag.tagName}</span>
-                         	 </c:forEach>
+                         	<c:if test="${!empty spaceOneOptionList}">
+	                         	 <c:forEach items="${spaceOneOptionList}" var="option">	 	
+				                 	<span class="badge badge-primary badge-pill" style="font-size: 15px;">${option.optionName}</span>
+	                         	 </c:forEach>
+	                        </c:if>
+	                        <c:if test="${empty spaceOneOptionList}">
+	                        		<h6>(공간 옵션 값이 존재하지 않습니다.)</h6>
+	                        </c:if>
                          </div>
                      </div>
                      
@@ -277,17 +284,41 @@
                      		<span class="status text-warning">&bull;</span> 승인 대기중
                      	</div>
                      </div> 
-                     
+                  
                      <div class="pf-property-details" style="text-align: center;" >
-                         <button type="submit" class="btn-info col-sm-3">공간 승인</button>
-                         <button type="button" class="btn-secondary col-sm-3">공간 승인 취소</button>
+                         <button type="button" class="confirm btn-info col-sm-3" value="${space.spaceNo}">공간 승인</button>
                      </div>
+                  
                    </div>
                </div>
            </div>
        </c:forEach>
        </div>
     </section>
+    
+<script type="text/javascript">
+$(".confirm").click(function(){
+	
+	var spaceNo = $(this).val();
+	
+	swal({
+		  text: "공간 승인을 하시겠습니까?",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  
+			location.href="${pageContext.request.contextPath}/admin/spaceConfirm.do?spaceNo="+spaceNo;
+
+		} else {
+
+		    location.href="${pageContext.request.contextPath}/admin/spaceManage.do";
+		}
+
+			});
+});
+</script>
     <!-- Property Submit Section End -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 

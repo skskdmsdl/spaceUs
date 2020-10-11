@@ -36,7 +36,8 @@
 	<select id="selectSortedListGroupBoard" resultMap="groupBoardMap">
   		select 
   			G.* ,
-  			(select nickname from member where member_email= G.member_email) nickname
+  			(select nickname from member where member_email= G.member_email) nickname,
+  			(select count(*) from group_board_comment where group_board_ref = G.group_board_no  ) comment_cnt
         from
             (
              select 

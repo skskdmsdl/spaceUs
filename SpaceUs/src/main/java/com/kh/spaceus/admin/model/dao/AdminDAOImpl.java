@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.admin.model.vo.ConfirmSpace;
+import com.kh.spaceus.admin.model.vo.ConfirmSpaceOption;
 import com.kh.spaceus.admin.model.vo.ConfirmSpaceTag;
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
@@ -92,7 +93,10 @@ public class AdminDAOImpl implements AdminDAO {
 	public List<ConfirmSpaceTag> selectSpaceOneTagList(String spaceNo) {
 		return session.selectList("admin.selectSpaceOneTagList", spaceNo);
 	}
-	
-	
+
+	@Override
+	public List<ConfirmSpaceOption> selectSpaceOptionList(String spaceNo) {
+		return session.selectList("admin.selectSpaceOptionList", spaceNo);
+	}
 	
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.spaceus.admin.model.service.AdminService;
 import com.kh.spaceus.admin.model.vo.ConfirmSpace;
+import com.kh.spaceus.admin.model.vo.ConfirmSpaceOption;
 import com.kh.spaceus.admin.model.vo.ConfirmSpaceTag;
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
@@ -21,6 +22,7 @@ import com.kh.spaceus.admin.model.vo.ManageSpace;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
 import com.kh.spaceus.space.model.vo.Category;
+import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.Space;
 
 import lombok.extern.slf4j.Slf4j;
@@ -117,13 +119,22 @@ public class AdminController {
 		List<Category> spaceOneCategory = adminService.selectSpaceOneCategory(spaceNo);
 		//tag
 		List<ConfirmSpaceTag> spaceOneTagList = adminService.selectSpaceOneTagList(spaceNo);
-		log.info("spaceOneTagList={}",spaceOneTagList);
+		//option
+		List<ConfirmSpaceOption> spaceOneOptionList = adminService.selectSpaceOptionList(spaceNo); 
 		
 		model.addAttribute("spaceOneList", spaceOneList);
 		model.addAttribute("sapceOneImageList", spaceOneImageList);
 		model.addAttribute("spaceOneCategory", spaceOneCategory);
 		model.addAttribute("spaceOneTagList", spaceOneTagList);
+		model.addAttribute("spaceOneOptionList", spaceOneOptionList);
 		return "admin/confirmSpaceFrm";
+	}
+	
+	@RequestMapping("spaceConfirm.do")
+	public String spaceConfirm(@RequestParam String spaceNo, Model model) {
+		log.info("spaceNo={}",spaceNo);
+		
+		return "admin/spaceManage.do";
 	}
 	
 }

@@ -120,6 +120,7 @@
 		        S.space_no,
 		        SI.renamed_filename,
 		        S.space_name,
+		        S.status,
 		        S.registration_date,
 		        rank()over(partition by S.space_no order by SI.renamed_filename) as rnum,
 		        S.member_email
@@ -129,7 +130,7 @@
 		                left join space_image SI
 		                    on S.space_no = SI.space_no
 		    where
-		        A.authority = 'ROLE_USER'
+		        A.authority = 'ROLE_USER' and S.status = 'S'
 		    )
 		where rnum = 1
 	</select>
@@ -180,4 +181,15 @@
 		    space_no = #{spaceNo}
 	</select>
 	<resultMap type="confirmSpaceTag" id="tagMap"></resultMap>
+	
+	<select id="selectSpaceOptionList" resultMap="optionMap">
+		select 
+		    * 
+		from 
+		    space_option join option_list
+		        using(option_no)
+		where
+		    space_no = #{spaceNo}
+	</select>
+	<resultMap type="confirmSpaceOption" id="optionMap"></resultMap>
 </mapper>

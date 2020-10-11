@@ -3,6 +3,7 @@ package com.kh.spaceus.admin.model.service;
 import java.util.List;
 
 import com.kh.spaceus.admin.model.vo.ConfirmSpace;
+import com.kh.spaceus.admin.model.vo.ConfirmSpaceOption;
 import com.kh.spaceus.admin.model.vo.ConfirmSpaceTag;
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
@@ -44,5 +45,7 @@ public interface AdminService {
 	List<Category> selectSpaceOneCategory(String spaceNo);
 
 	List<ConfirmSpaceTag> selectSpaceOneTagList(String spaceNo);
+
+	List<ConfirmSpaceOption> selectSpaceOptionList(String spaceNo);
 
 }
