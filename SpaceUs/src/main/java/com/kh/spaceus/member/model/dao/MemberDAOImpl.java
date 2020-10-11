@@ -1,5 +1,7 @@
 package com.kh.spaceus.member.model.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -50,5 +52,20 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int updateMember(Member member) {
 		return sqlSession.update("member.updateMember", member);
+	}
+
+	@Override
+	public List<Member> selectBtdList(String format) {
+		return sqlSession.selectList("member.selectBtdList", format);
+	}
+
+	@Override
+	public int deleteAttendance() {
+		return sqlSession.update("member.deleteAttendance");
+	}
+
+	@Override
+	public int deleteMember(String memberEmail) {
+		return sqlSession.delete("member.deleteMember", memberEmail);
 	}
 }

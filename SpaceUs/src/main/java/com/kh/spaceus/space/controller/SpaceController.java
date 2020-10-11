@@ -170,9 +170,7 @@ public class SpaceController {
 
 		// 같은 카테고리 공간 리스트(최대 3개)
 		List<Space> spcList = spaceService.selectSameCategory(space);
-		for (int i = 0; i < spcList.size(); i++) {
-			System.out.println(spcList);
-		}
+		log.debug("같은 카테고리 공간 리스트={}",spcList);
 
 		// 추천 공간 사진 리스트
 		String cateName = spaceService.selectCateName(space.getCategoryNo());
@@ -257,7 +255,7 @@ public class SpaceController {
 	@RequestMapping(value = "/heart.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String insertWish(Wish wish, HttpServletResponse response) {
-		spaceService.insertWish(wish);
+		int result = spaceService.insertWish(wish);
 		
 		return "";
 	}
@@ -275,11 +273,21 @@ public class SpaceController {
 	@RequestMapping(value = "/cancelHeart.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteWishList(Wish wish, HttpServletResponse response) {
-		spaceService.deleteWish(wish);
+		int result = spaceService.deleteWish(wish);
 		
 		return "";
 	}
 
+	//인덱스 페이지 이용자리뷰
+	@RequestMapping(value = "/recentRev.do", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Review> selectRecentReviewList(){
+		List<Review> revList = spaceService.selectRecentReviewList();
+		log.debug("리뷰목록={}"+revList);
+		return revList;
+	}
+
+	
 	// 사업자등록증 조회
 	@GetMapping("/checkIdDuplicate.do")
 	public ModelAndView checkIdDuplicate1(ModelAndView mav, @RequestParam("businessNo") long businessNo) {

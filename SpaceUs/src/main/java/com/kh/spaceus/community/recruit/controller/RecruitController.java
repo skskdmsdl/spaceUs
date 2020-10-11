@@ -147,7 +147,6 @@ public class RecruitController {
 		Member member = memberService.selectOneMember(principal.getName());
 		recruit.setEmail(principal.getName());
 		recruit.setNickName(member.getNickName());
-		
 		int result = recruitService.insertRecruit(recruit);
 		System.out.println(recruit);
 		String msg = result > 0 ? "등록 성공!" : "등록실패";

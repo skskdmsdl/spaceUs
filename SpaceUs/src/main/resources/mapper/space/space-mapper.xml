@@ -78,7 +78,7 @@
 		<result column="rev_no" property="revNo"/>
 		<result column="review_no" property="reviewNo"/>
 		<result column="star_rating" property="starRating"/>
-		<result column="review_content" property="reviewContent"/>
+		<result column="review_content" property="reviewContent"/>		
 		<collection property="attachList" ofType="Attachment">
 			<id column="file_no" property="fileNo"/>
 			<result column="space_no" property="spaceNo"/>
@@ -268,6 +268,7 @@
 				space join space_image using (space_no) 
 			where 
 				category_no=#{categoryNo} and space_no!=#{spaceNo}
+                and rownum=1
 			order by
 				like_cnt asc
 			) D
@@ -434,7 +435,18 @@
 			space_no = #{spaceNo}
 	</update>
 	
-	
+		
+	<select id="selectRecentReviewList" resultMap="reviewMap">
+	    select 
+	        rownum, R.review_no, R.space_no, nickname, review_content, star_rating, review_date, re_reg_date, re_renamed_filename image
+		from(select 
+				*
+			from
+				review join review_image using (review_no)
+			order by 
+				review_date desc) R
+	        where rownum between 1 and 4
+	</select>
 </mapper>
 
 

@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 	  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 	  crossorigin="anonymous">
+
+
 <style>
 h1 {
 font-family: 'NEXON Lv1 Gothic OTF';
@@ -320,7 +322,6 @@ input[type="text"]:focus {
 	</div>
 </section>
 <!-- 추천공간 끝 -->
-
 <!-- 이용자리뷰 시작 -->
     <section class="ftco-section ftco-no-pt">
       <div class="container">
@@ -330,53 +331,9 @@ input[type="text"]:focus {
             <h2>이용자 리뷰</h2>
           </div>
         </div>
-        <div class="row d-flex">
-          <div class="col-md-3 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <div class="text">
-                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-                <div class="meta mb-3">
-                  <div><a href="#">July. 24, 2019</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_1.jpg');">
-	              </a>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <div class="text">
-                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-                <div class="meta mb-3">
-                  <div><a href="#">July. 24, 2019</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_2.jpg');">
-	              </a>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <div class="text">
-                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-                <div class="meta mb-3">
-                  <div><a href="#">July. 24, 2019</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_3.jpg');">
-	              </a>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 d-flex ftco-animate">
+         <div class="row d-flex">
+         
+<%--           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
               <div class="text">
                 <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
@@ -390,12 +347,58 @@ input[type="text"]:focus {
                 <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
               </div>
             </div>
-          </div>
+          </div> --%>
+          <div class="col-md-3 d-flex ftco-animate"><div class="blog-entry justify-content-end"><div class="text"><h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3><div class="meta mb-3">
+          <div><a href="#">1601471972000</a></div><div><a href="#">홍길동</a></div><div><a href="#" class="meta-chat"><span class="icon-heart"></span>5</a></div></div><a href="blog-single.html" class="lock-20 img" 
+          							style="background-image:url('${pageContext.request.contextPath }
+										/resources/upload/review/20201001_071933031_653.jpg');"></a><p>❤❤같이 예약 시간을 잘못알았네요 잊고있다가 갑자기 생각나서 갔는데 시간도 미뤄주시고 정말 감사했습니다. 깔끔했구요 덕분에 좋은 추억 만들 수 있었습니다! </p></div></div></div>
         </div>
       </div>
     </section>	
 <!-- 이용자리뷰 끝-->
 <script>
+//이용자 리뷰 ajax 요청
+$(function () { 
+		function review(){
+			console.log("리뷰function 실행");
+			$.ajax({
+				type:"GET",
+				url:"${pageContext.request.contextPath}/space/recentRev.do",
+				dataType:"json",
+				success:function(data){
+					console.log("ajax 요청 성공!");
+					console.log(data);
+					 $.each(data, function(i, item){
+						var html="";
+						
+						html  +=  "<div class=\"col-md-3 d-flex ftco-animate\">";
+			          	html  += "<div class=\"blog-entry justify-content-end\">";
+		          	    html  += "<div class=\"text\">";
+			          	html  += "<h3 class=\"headig\"><a href=\"#\">Why Lead Generation is Key for Business Growth</a></h3>";
+			          	html  += "<div class=\"meta mb-3\">";
+			          	html  +=  "<div><a href=\"#\">"+item.enrollDate+"</a></div>";
+			          	html  +=  "<div><a href=\"#\">"+item.nickName+"</a></div>";
+			          	html  +=  "<div><a href=\"#\" class=\"meta-chat\"><span class=\"icon-heart\"></span>"+item.starRating+"</a></div>";
+		          		html  += "</div>";
+		          		html  += "<a href=\"blog-single.html\" class=\"lock-20 img\" style=\"background-image:" 
+			          			+"url(\'${pageContext.request.contextPath }/resources/upload/review/"+item.image+"\');\">";
+		          		html  += "</a><p>"+item.content+"</p></div></div></div>";
+
+						console.log(html);
+						$(".row d-flex").append(html);			 
+					}); 
+				},error:function(){
+					console.log("ajax 요청 실패");
+					}
+				});
+			//AJAX요청 끝
+		};
+		//리뷰function끝
+
+		//페이지 실행시 이용자리뷰 불러오기
+		review();
+	}); 
+
 function searchSpace(){
 	
 	$("#searchFrm").attr("action", 
@@ -405,7 +408,7 @@ function searchSpace(){
 
 document.querySelector('.stick').addEventListener('click',()=>{
 	  document.querySelector('.four').value = '';
-	});
+	}); 
 </script>
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -96,10 +96,27 @@
 					      <input type="reset" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4 font-weight-bolder" value="변경사항 없음">
 						</div>
 	                   </div>
+		               <!-- 회원정보 끝 -->
+		               <div class="container-fluid mt-4 pr-5" style="min-height: calc(10vh - 136px);">
+			                <div class="panel panel-default">
+								<div class="panel-heading" role="tab">
+									<a role="button" id="deleteTitle" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" style="color:#666;">
+									탈퇴하기
+									</a>
+								</div>
+								<div id="collapse1" class="panel-collapse collapse mr-5" role="tabpanel">
+									<br/>
+									<div class="panel-body">탈퇴하시면 모든 정보가 삭제됩니다.<br/>정말로 탈퇴하시겠습니까?</div>
+									<button onclick="$('#deleteTitle').trigger('click');" class="btn btn-outline-secondary font-bold mr-3 pull-right">취소</button>
+									<button id="deleteBtn" class="btn btn-danger font-bold mr-2 pull-right">확인</button>
+									<form action="${pageContext.request.contextPath }/member/deleteMember.do" id="deleteFrm">
+										<input type="hidden" name="memberEmail" value="${ member.memberEmail}"/>
+									</form>
+								</div>
+							</div>
+						</div>
 	               </div>
 	           </div>
-                <!-- 회원정보 끝 -->
-                
     </div>
 </div>
 </div>
@@ -128,7 +145,6 @@ $(function(){
 	$("#chatBtn").click(function(){
 		$("#talkjs-container").toggle('show');
 	});
-	
 });
 //닉네임 검사
 $("#nickName").on("blur", function(){
@@ -193,4 +209,10 @@ $("#passwordChk").blur(function(){
 		$(".passwordFalse").hide();
 	}
 });
+//탈퇴
+$("#deleteBtn").click(function(){
+	if(!confirm("정말로 탈퇴하시겠습니까?")) return;
+	$("#deleteFrm").submit();
+});
+
 </script>

@@ -127,7 +127,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                              </table>
                              <div class="container">
 			                 <nav class="mt-5" >
-			                 	<a class="btn waves-effect waves-light hidden-md-down m-1 pull-right" id="recruitEnroll" style="font-size:18px;background-color: #00c89e;  color:white;"> 글 등록</a>
+			                 	<a class="btn waves-effect waves-light hidden-md-down m-1 pull-right font-bold" id="recruitEnroll" style="font-size:16px;background-color: #00c89e;  color:white;"> 글 등록</a>
 								  <ul class="justify-content-center pagination">${ pageBar }</ul>
 								</nav>
 							 </div>
