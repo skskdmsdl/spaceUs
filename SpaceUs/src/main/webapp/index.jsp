@@ -331,7 +331,7 @@ input[type="text"]:focus {
             <h2>이용자 리뷰</h2>
           </div>
         </div>
-         <div class="row d-flex">
+         <div class="row d-flex" id="test">
          
 <%--           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
@@ -348,57 +348,53 @@ input[type="text"]:focus {
               </div>
             </div>
           </div> --%>
-          <div class="col-md-3 d-flex ftco-animate"><div class="blog-entry justify-content-end"><div class="text"><h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3><div class="meta mb-3">
+          <%-- <div class="col-md-3 d-flex ftco-animate"><div class="blog-entry justify-content-end"><div class="text"><h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3><div class="meta mb-3">
           <div><a href="#">1601471972000</a></div><div><a href="#">홍길동</a></div><div><a href="#" class="meta-chat"><span class="icon-heart"></span>5</a></div></div><a href="blog-single.html" class="lock-20 img" 
           							style="background-image:url('${pageContext.request.contextPath }
 										/resources/upload/review/20201001_071933031_653.jpg');"></a><p>❤❤같이 예약 시간을 잘못알았네요 잊고있다가 갑자기 생각나서 갔는데 시간도 미뤄주시고 정말 감사했습니다. 깔끔했구요 덕분에 좋은 추억 만들 수 있었습니다! </p></div></div></div>
-        </div>
+        </div> --%>
       </div>
     </section>	
 <!-- 이용자리뷰 끝-->
 <script>
 //이용자 리뷰 ajax 요청
 $(function () { 
-		function review(){
-			console.log("리뷰function 실행");
-			$.ajax({
-				type:"GET",
-				url:"${pageContext.request.contextPath}/space/recentRev.do",
-				dataType:"json",
-				success:function(data){
-					console.log("ajax 요청 성공!");
-					console.log(data);
-					 $.each(data, function(i, item){
-						var html="";
-						
-						html  +=  "<div class=\"col-md-3 d-flex ftco-animate\">";
-			          	html  += "<div class=\"blog-entry justify-content-end\">";
-		          	    html  += "<div class=\"text\">";
-			          	html  += "<h3 class=\"headig\"><a href=\"#\">Why Lead Generation is Key for Business Growth</a></h3>";
-			          	html  += "<div class=\"meta mb-3\">";
-			          	html  +=  "<div><a href=\"#\">"+item.enrollDate+"</a></div>";
-			          	html  +=  "<div><a href=\"#\">"+item.nickName+"</a></div>";
-			          	html  +=  "<div><a href=\"#\" class=\"meta-chat\"><span class=\"icon-heart\"></span>"+item.starRating+"</a></div>";
-		          		html  += "</div>";
-		          		html  += "<a href=\"blog-single.html\" class=\"lock-20 img\" style=\"background-image:" 
-			          			+"url(\'${pageContext.request.contextPath }/resources/upload/review/"+item.image+"\');\">";
-		          		html  += "</a><p>"+item.content+"</p></div></div></div>";
+	review();
+}); 
+function review(){
+	console.log("리뷰function 실행");
+	$.ajax({
+		type:"GET",
+		url:"${pageContext.request.contextPath}/space/recentRev.do",
+		dataType:"json",
+		success:function(data){
+			console.log("ajax 요청 성공!");
+			console.log(data);
+			 $.each(data, function(i, item){
+				var html="";
+				
+				html  +=  "<div class=\"col-md-3 d-flex\">";
+	          	html  += "<div class=\"blog-entry justify-content-end\">";
+          	    html  += "<div class=\"text\">";
+	          	html  += "<h3 class=\"headig\"><a href=\"#\">Why Lead Generation is Key for Business Growth</a></h3>";
+	          	html  += "<div class=\"meta mb-3\">";
+	          	html  +=  "<div><a href=\"#\">"+item.enrollDate+"</a></div>";
+	          	html  +=  "<div><a href=\"#\">"+item.nickName+"</a></div>";
+	          	html  +=  "<div><a href=\"#\" class=\"meta-chat\"><span class=\"icon-heart\"></span>"+item.starRating+"</a></div>";
+          		html  += "</div>";
+          		html  += "<a href=\"blog-single.html\" class=\"lock-20 img\" style=\"background-image:" 
+	          			+"url(\'${pageContext.request.contextPath }/resources/upload/review/"+item.image+"\');\">";
+          		html  += "</a><p>"+item.content+"</p></div></div></div>";
 
-						console.log(html);
-						$(".row d-flex").append(html);			 
-					}); 
-				},error:function(){
-					console.log("ajax 요청 실패");
-					}
-				});
-			//AJAX요청 끝
-		};
-		//리뷰function끝
-
-		//페이지 실행시 이용자리뷰 불러오기
-		review();
-	}); 
-
+				console.log(html);
+				$("#test").append(html);
+			}); 
+		},error:function(){
+			console.log("ajax 요청 실패");
+			}
+		});
+};
+		
 function searchSpace(){
 	
 	$("#searchFrm").attr("action", 
