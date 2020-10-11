@@ -196,6 +196,9 @@ public class SpaceController {
 		List<Qna> qlist = spaceService.selectQuestionList(spaceNo, limit, offset);
 		String qPageBar = Utils.getPageBarHtml(cPage, limit, qnaTotal, url);
 
+		// option 조회
+		List<OptionList> optionList = spaceService.selectOptionList(spaceNo);
+		
 		model.addAttribute("spcList", spcList);
 		model.addAttribute("cateName", cateName);
 
@@ -211,6 +214,8 @@ public class SpaceController {
 		model.addAttribute("reviewTotal", reviewTotal);
 		model.addAttribute("star", star);
 		model.addAttribute("pageBar", pageBar);
+		
+		model.addAttribute("optionList",optionList);
 
 		return "space/spaceDetail";
 	}

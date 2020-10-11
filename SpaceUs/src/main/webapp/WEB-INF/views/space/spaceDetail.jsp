@@ -343,7 +343,16 @@ function naverShare() {
 						<div class="tab-pane fade " id="detail-contact"
 							role="tabpanel" aria-labelledby="detail-description-tab">
 							<div class="row">
+								
+								<c:forEach items="${optionList}" var="info" varStatus="vs">
 								<div class="col-md-4">
+									<ul class="features">
+										<li class="check"><span class="ion-ios-checkmark"></span>${ info.optionName }</li>
+									</ul>
+								</div>
+								</c:forEach>
+									
+								<!-- <div class="col-md-4">
 									<ul class="features">
 										<li class="check"><span class="ion-ios-checkmark"></span>주류반입가능</li>
 										<li class="check"><span class="ion-ios-checkmark"></span>WIFI</li>
@@ -364,7 +373,7 @@ function naverShare() {
 										<li class="check"><span class="ion-ios-checkmark"></span>왕의자</li>
 										<li class="check"><span class="ion-ios-checkmark"></span>애완견동반가능</li>
 									</ul>
-								</div>
+								</div> -->
 							</div>
 						</div>
 						<!-- 공간옵션 끝-->
