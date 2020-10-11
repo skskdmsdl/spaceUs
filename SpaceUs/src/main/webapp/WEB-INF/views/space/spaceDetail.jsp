@@ -699,16 +699,16 @@ function naverShare() {
     	  <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
 		   				<div class="">
-	<%-- 		    			<c:if test="${not empty space.attachList}">
-				    			<c:forEach items="${space.attachList}" var="attach" varStatus="vs"> --%>
+			    			<c:if test="${not empty space.attachList}">
+				    			<c:forEach items="${space.attachList}" var="attach" varStatus="vs">
 				    			 <img src="${pageContext.request.contextPath }
 										/resources/upload/space/${space.rname }" alt="" /> 
-				    	 	<%-- 		<div class="img"
+				    	 			<div class="img"
 										style="background-image: url(${pageContext.request.contextPath }
-										/resources/upload/space/${space.rname };"></div>  --%>
+										/resources/upload/space/${space.rname };"></div> 
 									
-<%-- 								</c:forEach>
-			    			</c:if> --%>
+								</c:forEach>
+			    			</c:if>
 						</div>  
 					<!-- 	<i class="prev fas fa-chevron-left fa-2x" onclick="plusSlides(-1)"></i>
 						<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i> -->
