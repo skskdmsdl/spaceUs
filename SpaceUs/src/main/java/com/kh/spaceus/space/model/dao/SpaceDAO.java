@@ -75,6 +75,8 @@ public interface SpaceDAO {
 
 	List<Space> selectReviewComplete(String email);
 
+	List<Review> selectRecentReviewList();
+
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

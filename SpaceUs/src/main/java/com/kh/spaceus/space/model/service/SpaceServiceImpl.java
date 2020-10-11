@@ -205,6 +205,11 @@ public class SpaceServiceImpl implements SpaceService{
 	public List<Space> selectReviewComplete(String email) {
 		return spaceDAO.selectReviewComplete(email);
 	}
+
+	@Override
+	public List<Review> selectRecentReviewList() {
+		return spaceDAO.selectRecentReviewList();
+	}
 	
 	
 	
