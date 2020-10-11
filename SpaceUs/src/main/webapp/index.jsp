@@ -382,10 +382,8 @@ function review(){
 	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\">"+item.nickName+"</a></div>";
 	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\" class=\"meta-chat\"><span class=\"icon-heart\"></span>"+item.starRating+"</a></div>";
           		html  += "</div>";
-          		
-          		html  += "<a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\" class=\"lock-20 img\" style=\"background-image:" 
-	          			+"url(\'${pageContext.request.contextPath}/resources/upload/review/"+item.image+"\');\">";
-          		html  += "</a><p>"+item.content+"</p></div></div></div>";
+          		html  += "<img class=\"lock-20 img\" src=\'${pageContext.request.contextPath}/resources/upload/review/"+item.image+"\'>";
+          		html  += "<p>"+item.content+"</p></div></div></div>";
 				console.log(html);
 				$("#review-wrapper").append(html);
 			}); 
