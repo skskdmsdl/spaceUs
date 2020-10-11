@@ -6,14 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spaceus.admin.model.dao.AdminDAO;
+import com.kh.spaceus.admin.model.vo.ConfirmSpace;
+import com.kh.spaceus.admin.model.vo.ConfirmSpaceTag;
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
 import com.kh.spaceus.admin.model.vo.ManageRecruit;
 import com.kh.spaceus.admin.model.vo.ManageSpace;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
-import com.kh.spaceus.community.recruit.model.vo.Recruit;
-import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.space.model.vo.Category;
+import com.kh.spaceus.space.model.vo.Space;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -71,6 +73,26 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.selectSpaceList();
 	}
 
+	@Override
+	public List<Space> selectSpaceOneList(String spaceNo) {
+		return adminDAO.selectSpaceOneList(spaceNo);
+	}
+
+	@Override
+	public List<ConfirmSpace> selectSpaceOneImageList(String spaceNo) {
+		return adminDAO.selectSpaceOneImageList(spaceNo);
+	}
+
+	@Override
+	public List<Category> selectSpaceOneCategory(String spaceNo) {
+		return adminDAO.selectSpaceOneCategory(spaceNo);
+	}
+
+	@Override
+	public List<ConfirmSpaceTag> selectSpaceOneTagList(String spaceNo) {
+		return adminDAO.selectSpaceOneTagList(spaceNo);
+	}
+	
 	
 	
 	

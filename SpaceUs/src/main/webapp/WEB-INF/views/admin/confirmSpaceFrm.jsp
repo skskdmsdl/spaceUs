@@ -148,28 +148,29 @@
     <!-- 공간 등록 폼 -->
     <section class="property-submit-section spad m-5">
         <div class="container ">
+        <c:forEach items="${spaceOneList}" var="space">
             <div class="row m-5">
                 <div class="col-lg-12">
                 <div class="property-submit-form">
                 
                 <div class="pf-title" style="margin-bottom: 20px;">
                     <h4>공간이름</h4>
-                    <div class="mx-lg-5"><h5>공간이름입니다.</h5></div>
+                    <div class="mx-lg-5"><h5>${space.spaceName}</h5></div>
                 </div>
                 
                  <div class="pf-feature-price" style="margin-bottom: 20px;">
                      <h4>공간 호스트 이메일</h4>
-                     <div class="mx-lg-5"><h5>공간 호스트 이메일입니다.</h5></div>
+                     <div class="mx-lg-5"><h5>${space.memberEmail}</h5></div>
                  </div>
                  
                  <div class="pf-feature-price" style="margin-bottom: 20px;">
                      <h4>공간 호스트 사업자번호</h4>
-                     <div class="mx-lg-5"><h5>공간 호스트 사업자번호입니다.</h5></div>
+                     <div class="mx-lg-5"><h5>${space.businessLicense}</h5></div>
                  </div>
                  
                  <div class="pf-feature-price" style="margin-bottom: 20px;">
                      <h4>공간 등록일자</h4>
-                     <div class="mx-lg-5"><h5>공간 등록일자입니다.</h5></div>
+                     <div class="mx-lg-5"><h5>${space.registrationDate}</h5></div>
                  </div>
                 
                 <!-- 사진 시작 -->
@@ -181,20 +182,20 @@
 				                    <!-- Carousel indicators -->
 				                    <ol class="carousel-indicators" >
 				                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				                        <li data-target="#myCarousel" data-slide-to="1"></li>
-				                        <li data-target="#myCarousel" data-slide-to="2"></li>
+				                    	<c:forEach items="${sapceOneImageList}" var="image" varStatus="vs">
+					                        <li data-target="#myCarousel" data-slide-to="${vs.count}"></li>
+				                        </c:forEach>
 				                    </ol>
 				                    <!-- Wrapper for carousel items -->
 				                    <div class="carousel-inner" >
 				                        <div class="carousel-item active">
-				                            <img src="${pageContext.request.contextPath}/resources/images/about.jpg" class="img-fluid" alt="">
+				                            <img src="${pageContext.request.contextPath}/resources/images/image_1.jpg" class="img-fluid" alt="">
 				                        </div>
-				                        <div class="carousel-item">
-				                            <img src="${pageContext.request.contextPath}/resources/images/bg_1.jpg" class="img-fluid" alt="">
-				                        </div>
-				                        <div class="carousel-item">
-				                            <img src="${pageContext.request.contextPath}/resources/images/bg_2.jpg" class="img-fluid" alt="">
-				                        </div>
+							            <c:forEach items="${sapceOneImageList}" var="image" varStatus="vs">
+					                        <div class="carousel-item">
+					                            <img src="${pageContext.request.contextPath}/resources/upload/space/${image.renamedFilename}" class="img-fluid" alt="">
+					                        </div> 
+							            </c:forEach>
 				                    </div>
 				                    <!-- Carousel controls -->
 				                    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
@@ -212,50 +213,69 @@
                      <div class="pf-summernote" style="margin-bottom: 20px;">
                          <h4>공간설명</h4>
                          <div class="mx-lg-5">
-                         	대통령은 필요하다고 인정할 때에는 외교·국방·통일 기타 국가안위에 관한 중요정책을 국민투표에 붙일 수 있다. 의원을 제명하려면 국회재적의원 3분의 2 이상의 찬성이 있어야 한다.
+                         	${space.content}
                          </div>
                      </div>
                     
                      <div class="pf-location" style="margin-bottom: 20px;">
                          <h4>공간주소</h4>
                          <div class="mx-lg-5">
-                         	<h5>경기도 성남시 수정구 분당동 하나원스빌드 102-21</h5>
+                         	<h5>${space.address}</h5>
                          </div>
                      </div>
                      
                      <div class="pf-phone" style="margin-bottom: 20px;">
                          <h4>공간전화번호</h4>
                          <div class="mx-lg-5">
-                         	<h5>010-1234-1234</h5>
+                         	<h5>${space.spacePhone}</h5>
                          </div>
                      </div>
                      
                      <div class="pf-type" style="margin-bottom: 20px;">
                          <h4>카테고리 선택</h4>
-                         <span class="badge badge-warning badge-pill mx-lg-5" style="font-size: 15px;">다목적실</span>
+                         <div class=" mx-lg-5">
+                         	<c:forEach items="${spaceOneCategory}" var="category">
+	                         	<span class="badge badge-warning badge-pill" style="font-size: 15px;">${category.categoryName}</span>
+                         	</c:forEach>
+                     	 </div>
                      </div>
                      
                 
                      <div class="pf-feature-price" style="margin-bottom: 20px;">
                          <h4>공간 태그</h4>
-                         <span class="badge badge-success badge-pill mx-lg-5" style="font-size: 15px;">#감각적인</span>
+                         <div class=" mx-lg-5">
+                         	<c:forEach items="${spaceOneTagList}" var="tag">
+                         		<c:if test="${!empty tag}">
+	                         		<span class="badge badge-success badge-pill" style="font-size: 15px;">${tag.tagName }</span>
+                         		</c:if>
+                         		<c:if test="${empty tag}">
+                         			<p>존재하지 않습니다.</p>
+                         		</c:if>
+                     	 	</c:forEach>
+                     	 </div>
                      </div>
                      
                      <div class="pf-feature-price" style="margin-bottom: 20px;">
                          <h4>가격 (시간당)<span class="text-danger">*</span></h4>
                        	 <div class="mx-lg-5">
-                         	<h5>50000원</h5>
+                         	<h5>${space.hourlyPrice}원</h5>
                          </div>
                      </div>
                      
                      <div class="pf-feature" style="margin-bottom: 20px;">
                          <h4>옵션선택</h4>
                          <div class=" mx-lg-5">
-	                         <span class="badge badge-primary badge-pill" style="font-size: 15px;">금연</span>
-	                         <span class="badge badge-primary badge-pill" style="font-size: 15px;">인터넷/와이파이</span>
-	                         <span class="badge badge-primary badge-pill" style="font-size: 15px;">샤워시설</span>
-	                         <span class="badge badge-primary badge-pill" style="font-size: 15px;">주차</span>
+                         	 <c:forEach items="${spaceOneTagList}" var="tag">	 	
+			                 	<span class="badge badge-primary badge-pill" style="font-size: 15px;">#${tag.tagName}</span>
+                         	 </c:forEach>
                          </div>
+                     </div>
+                     
+                     <div class="pf-feature" style="margin-bottom: 20px;">
+                     	<h4>공간게시물 상태</h4>
+                     	<div class=" mx-lg-5">
+                     		<span class="status text-warning">&bull;</span> 승인 대기중
+                     	</div>
                      </div> 
                      
                      <div class="pf-property-details" style="text-align: center;" >
@@ -265,6 +285,7 @@
                    </div>
                </div>
            </div>
+       </c:forEach>
        </div>
     </section>
     <!-- Property Submit Section End -->

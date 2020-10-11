@@ -134,4 +134,50 @@
 		where rnum = 1
 	</select>
 	<resultMap type="manageSpace" id="manageSpaceMap"></resultMap>
+	
+	<!-- confirm Space -->
+	<select id="selectSpaceOneList" resultMap="confirmSpaceMap">
+		select
+		    *
+		from
+		    space
+		where 
+		    space_no = #{spaceNo}
+	</select>
+	<resultMap type="confirmSpace" id="confirmSpaceMap"></resultMap>
+	
+	<select id="selectSpaceOneImageList" resultMap="attachmentMap">
+		select 
+		    renamed_filename,
+		    space_no
+		from 
+		    space_image
+		where 
+		    space_no = #{spaceNo}		
+	</select>
+	<resultMap type="confirmSpaceImage" id="attachmentMap"></resultMap>
+	
+	<select id="selectSpaceOneCategory" resultMap="categoryMap">
+		select 
+		    space_no,
+		    category_no,
+		    category_name
+		from
+		    space join category
+		                using(category_no)
+		where 
+		    space_no = #{spaceNo}
+	</select>
+	<resultMap type="category" id="categoryMap"></resultMap>
+	
+	<select id="selectSpaceOneTagList" resultMap="tagMap">
+		select 
+		    * 
+		from 
+		    space_tag join tag
+		        using(tag_no)
+		where
+		    space_no = #{spaceNo}
+	</select>
+	<resultMap type="confirmSpaceTag" id="tagMap"></resultMap>
 </mapper>

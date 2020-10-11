@@ -12,14 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.spaceus.admin.model.service.AdminService;
+import com.kh.spaceus.admin.model.vo.ConfirmSpace;
+import com.kh.spaceus.admin.model.vo.ConfirmSpaceTag;
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
 import com.kh.spaceus.admin.model.vo.ManageRecruit;
 import com.kh.spaceus.admin.model.vo.ManageSpace;
-import com.kh.spaceus.community.group.model.vo.Board;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
-import com.kh.spaceus.community.recruit.model.vo.Recruit;
+import com.kh.spaceus.space.model.vo.Category;
+import com.kh.spaceus.space.model.vo.Space;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -105,8 +107,22 @@ public class AdminController {
 	}
 	
 	@RequestMapping("confirmSpaceFrm.do")
-	public String confirmSpaceFrm(@RequestParam String spaceNo) {
+	public String confirmSpaceFrm(@RequestParam String spaceNo, Model model) {
 		log.info("spaceNo = {}", spaceNo);
+		//space
+		List<Space> spaceOneList = adminService.selectSpaceOneList(spaceNo);
+		//image
+		List<ConfirmSpace> spaceOneImageList = adminService.selectSpaceOneImageList(spaceNo);
+		//category
+		List<Category> spaceOneCategory = adminService.selectSpaceOneCategory(spaceNo);
+		//tag
+		List<ConfirmSpaceTag> spaceOneTagList = adminService.selectSpaceOneTagList(spaceNo);
+		log.info("spaceOneTagList={}",spaceOneTagList);
+		
+		model.addAttribute("spaceOneList", spaceOneList);
+		model.addAttribute("sapceOneImageList", spaceOneImageList);
+		model.addAttribute("spaceOneCategory", spaceOneCategory);
+		model.addAttribute("spaceOneTagList", spaceOneTagList);
 		return "admin/confirmSpaceFrm";
 	}
 	

@@ -880,3 +880,55 @@ select
         rank()over(partition by space_no order by renamed_filename) "rownum"
 from
         space_image;
+-------------------------------------------------
+--10/11
+--------------------------------------------------
+select * from space;
+select * from category;
+select * from space_image;
+select * from space_option;
+select * from option_list;
+select * from space_tag;
+select * from tag;
+
+-- 스페이스
+select
+    *
+from
+    space
+where 
+    space_no = 'space2';
+-- 카테고리
+select 
+    space_no,
+    category_no,
+    category_name
+from
+    space join category
+                using(category_no)
+where 
+    space_no = 'space2';
+-- 사진
+select 
+    renamed_filename as rname,
+    space_no
+from 
+    space_image
+where 
+    space_no = 'space2';
+-- 옵션
+select 
+    * 
+from 
+    space_option join option_list
+        using(option_no)
+where
+    space_no = 'space2';
+-- 태그
+select 
+    * 
+from 
+    space_tag join tag
+        using(tag_no)
+where
+    space_no = 'space27';
