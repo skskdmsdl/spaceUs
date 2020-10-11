@@ -75,6 +75,22 @@ public class MemberController {
 		model.addAttribute("member", member);
 		return "member/memberProfile";
 	}
+	
+	//탈퇴
+	@RequestMapping("/deleteMember.do")
+	public String deleteMember (@RequestParam("memberEmail") String memberEmail,
+								RedirectAttributes redirectAttr) {
+		int result = memberService.deleteMember(memberEmail);
+		
+		if(result>0) {
+			redirectAttr.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다.");
+			return "redirect:/member/memberLogout";//로그아웃 처리함.
+		}
+		else 
+			redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");
+		
+		return "redirect:/";
+	}
 
 	// 이용내역
 	@RequestMapping("/usageHistory.do")
@@ -147,7 +163,11 @@ public class MemberController {
 	// 출석이벤트
 	@RequestMapping("/stampEvent.do")
 	public String stampEvent() {
-
+		//오늘클릭여부 조회
+		/*
+		 * if(today = 1) return;
+		 */
+		
 		return "member/stampEvent";
 	}
 
@@ -470,7 +490,7 @@ public class MemberController {
 	@ResponseBody
 	public ModelAndView insertStamp(ModelAndView mav,
 									@RequestParam("memberEmail") String email) {
-		int result = memberService.updateStamp(email);
+		/* int result = memberService.updateStamp(email); */
 
 		mav.setViewName("jsonView");
 

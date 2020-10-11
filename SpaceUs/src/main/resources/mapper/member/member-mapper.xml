@@ -78,8 +78,40 @@
 		member_email = #{ memberEmail }
 </update>
 
-
+<select id="selectBtdList" parameterType="string" resultMap="memberMap">
+	select
+		* 
+	from
+		member
+	where
+		birthday = to_date(#{ format }, 'MM/dd')
+</select>
 
 <resultMap type="member" id="memberMap">
+	<id column="member_email" property="memberEmail"/>
+	<result column="nickname" property="nickName"/>
+	<result column="password" property="password"/>
+	<result column="member_phone" property="memberPhone"/>
+	<result column="birthday" property="birthDay"/>
+	<result column="member_regdate" property="memberRegDate"/>
+	<result column="attendance_cnt" property="attendanceCnt"/>
 </resultMap>
+
+<update id="deleteAttendance">
+    update  
+    	member 
+    set 
+    	attendance_cnt = 0
+</update> 
+
+<delete id="deleteMember">
+    delete from 
+    	member 
+ 	where 
+ 		attendance_cnt = 0 
+</delete>
+
+
+
+
 </mapper>
