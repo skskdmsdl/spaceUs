@@ -10,6 +10,7 @@ import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.dao.SpaceDAO;
 import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Option;
+import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
@@ -207,6 +208,15 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
+	public List<Space> selectAll() {
+		return spaceDAO.selectAll();
+	}
+
+	@Override
+	public List<OptionList> selectOptionList(String spaceNo) {
+		return spaceDAO.selectOptionList(spaceNo);
+	}
+	
 	public List<Review> selectRecentReviewList() {
 		return spaceDAO.selectRecentReviewList();
 	}

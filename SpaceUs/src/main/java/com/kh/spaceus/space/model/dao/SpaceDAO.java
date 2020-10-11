@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Option;
+import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
@@ -77,6 +78,10 @@ public interface SpaceDAO {
 
 	List<Review> selectRecentReviewList();
 
+
+	List<Space> selectAll();
+
+	List<OptionList> selectOptionList(String spaceNo);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 
