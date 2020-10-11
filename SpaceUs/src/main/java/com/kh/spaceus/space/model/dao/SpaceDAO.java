@@ -83,6 +83,8 @@ public interface SpaceDAO {
 
 	List<OptionList> selectOptionList(String spaceNo);
 
+	List<Space> selectPopularSpaces();
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 
