@@ -624,7 +624,6 @@ alter table group_board_comment add(report_cnt number default 0);
 create sequence seq_blacklist_no;
 select * from blacklist;
 select * from recruit;
-
 select * from group_board;
 select * from member;
 select * from report;
@@ -846,3 +845,90 @@ select * from monthly_sale;
 select * from yearly_sale;
 
 commit;
+
+---------------------------------------
+-- 10/11
+---------------------------------------
+select * from space_image;
+select * from space;
+
+-- 첫번째 사진이 대표사진 추출
+select
+    *
+from(
+    select 
+        S.space_no,
+        SI.renamed_filename,
+        S.space_name,
+        S.registration_date,
+        rank()over(partition by S.space_no order by SI.renamed_filename) as rnum,
+        S.member_email
+    from 
+        space S join auth A
+                    on S.member_email = A.member_email
+                left join space_image SI
+                    on S.space_no = SI.space_no
+    where
+        A.authority = 'ROLE_USER'
+    )
+where rnum = 1;
+--------------------------------------------
+-- 그룹별로 ROWNUM
+select
+        space_no,
+        renamed_filename,
+        rank()over(partition by space_no order by renamed_filename) "rownum"
+from
+        space_image;
+-------------------------------------------------
+--10/11
+--------------------------------------------------
+select * from space;
+select * from category;
+select * from space_image;
+select * from space_option;
+select * from option_list;
+select * from space_tag;
+select * from tag;
+
+-- 스페이스
+select
+    *
+from
+    space
+where 
+    space_no = 'space2';
+-- 카테고리
+select 
+    space_no,
+    category_no,
+    category_name
+from
+    space join category
+                using(category_no)
+where 
+    space_no = 'space2';
+-- 사진
+select 
+    renamed_filename as rname,
+    space_no
+from 
+    space_image
+where 
+    space_no = 'space2';
+-- 옵션
+select 
+    * 
+from 
+    space_option join option_list
+        using(option_no)
+where
+    space_no = 'space2';
+-- 태그
+select 
+    * 
+from 
+    space_tag join tag
+        using(tag_no)
+where
+    space_no = 'space27';

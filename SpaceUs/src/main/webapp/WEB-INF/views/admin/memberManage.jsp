@@ -271,7 +271,7 @@ div#search-userName {
 	            <ul id="sidebarnav">
 	                <li> <a class="waves-effect" id="memberManageBtn" aria-expanded="false" href="${pageContext.request.contextPath }/admin/memberManage.do"><i class="fa fa-user"></i><span class="hide-menu">회원 관리</span></a></li>
 	                <li> <a class="waves-effect " id="spaceApprovalBtn" aria-expanded="false" href="${pageContext.request.contextPath }/admin/spaceManage.do"><i class="fa fa-home"></i><span class="hide-menu">공간승인</span></a></li>
-	                <li> <a class="waves-effect " id="blackListBtn" aria-expanded="false" href="${pageContext.request.contextPath }/admin/blackListManage.do"><i class="fa fa-home"></i><span class="hide-menu">블랙리스트 관리</span></a></li>
+	                <li> <a class="waves-effect " id="blackListBtn" aria-expanded="false" href="${pageContext.request.contextPath }/admin/blackListManage.do"><i class="fa fa-ban"></i><span class="hide-menu">블랙리스트 관리</span></a></li>
 	            </ul>
 	        </nav>
 	        <!-- End Sidebar navigation -->
