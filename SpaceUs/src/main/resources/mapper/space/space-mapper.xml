@@ -467,6 +467,16 @@
 			category_name like'%'|| #{value} ||'%'
 	</select>
 	<resultMap type="category" id="categoryMap"></resultMap>
+	
+	<select id="selecAutoOptionList" resultMap="optionMap1">
+		select
+			option_name
+		from
+			option_list
+		where 
+			option_name like'%'|| #{value} ||'%'
+	</select>
+	<resultMap type="confirmSpaceOption" id="optionMap1"></resultMap>
 </mapper>
 
 

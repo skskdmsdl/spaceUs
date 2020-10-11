@@ -124,6 +124,25 @@ $(function() {
                          })
                      );
                  }
+            });
+            //option
+        	 $.ajax({
+                 type: 'get',
+                 url: "${pageContext.request.contextPath}/space/autocomplete3.do",
+                 dataType: "json",
+                 data: {value : request.term},
+                 success: function(data) {
+                     //console.log(request.term);
+                     //서버에서 json 데이터 response 후 목록에 추가
+                     response(
+                         $.map(data, function(item) {  
+                             console.log(item);
+                             return {
+                             	label:item.optionName
+                             }
+                         })
+                     );
+                 }
             }); 
              
         },    // source 는 자동 완성 대상
@@ -439,7 +458,7 @@ function review(){
 		url:"${pageContext.request.contextPath}/space/recentRev.do",
 		dataType:"json",
 		success:function(data){
-			//console.log("ajax 요청 성공!");
+			console.log("ajax 요청 성공!");
 			//console.log(data);
 			 $.each(data, function(i, item){
 				var html="";
@@ -455,7 +474,7 @@ function review(){
           		html  += "</div>";
           		html  += "<img class=\"lock-20 img\" src=\'${pageContext.request.contextPath}/resources/upload/review/"+item.image+"\'>";
           		html  += "<p>"+item.content+"</p></div></div></div>";
-				console.log(html);
+				//console.log(html);
 				$("#review-wrapper").append(html);
 			}); 
 		},error:function(){

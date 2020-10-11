@@ -230,6 +230,12 @@ public class SpaceServiceImpl implements SpaceService{
 	public List<Object> selectAutoCategoryList(String value) {
 		return spaceDAO.selectAutoCategoryList(value);
 	}
+
+	@Override
+	public List<Object> selectAutoOptionList(String value) {
+		return spaceDAO.selectAutoOptionList(value);
+	}
+	
 	
 	
 	

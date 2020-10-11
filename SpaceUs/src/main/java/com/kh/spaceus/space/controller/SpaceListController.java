@@ -51,4 +51,20 @@ public class SpaceListController {
 	    
 	    return gson.toJson(array);
 	}
+	
+	@RequestMapping(value = "/autocomplete3.do", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String autocomplete3(@RequestParam String value) {
+		System.out.println(value);
+		
+	    List<Object> array = spaceSerivce.selectAutoOptionList(value);
+	    
+	    System.out.println(array);
+	    
+	    Gson gson = new Gson();
+	     
+	    System.out.println(gson.toJson(array));
+	    
+	    return gson.toJson(array);
+	}
 }
