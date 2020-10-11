@@ -166,6 +166,7 @@ public class SpaceController {
 			@RequestParam(defaultValue = "1", value = "cPage") int cPage, HttpServletRequest request) {
 
 		Space space = spaceService.selectOneSpace(spaceNo);
+		System.out.println("@@"+space);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
 
 		// 같은 카테고리 공간 리스트(최대 3개)
