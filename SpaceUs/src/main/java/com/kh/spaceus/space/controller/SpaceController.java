@@ -186,7 +186,10 @@ public class SpaceController {
 		int reviewTotal = spaceService.selectReviewTotalContents(spaceNo);
 		// 별점조회
 		Star star = spaceService.selectStar(spaceNo);
+		
 		star.setSumStar(star.getStar1() + star.getStar2() + star.getStar3() + star.getStar4() + star.getStar5());
+		
+		
 		String url = request.getRequestURI() + "?spaceNo=" + spaceNo;
 		String pageBar = Utils.getPageBarHtml(cPage, limit, reviewTotal, url);
 
@@ -212,7 +215,7 @@ public class SpaceController {
 
 		model.addAttribute("review", review);
 		model.addAttribute("reviewTotal", reviewTotal);
-		model.addAttribute("star", star);
+		model.addAttribute("star", star); 
 		model.addAttribute("pageBar", pageBar);
 		
 		model.addAttribute("optionList",optionList);

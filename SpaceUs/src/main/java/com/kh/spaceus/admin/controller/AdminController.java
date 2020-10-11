@@ -7,12 +7,16 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.spaceus.admin.model.service.AdminService;
 import com.kh.spaceus.admin.model.vo.ConfirmSpace;
+import com.kh.spaceus.admin.model.vo.ConfirmSpaceOption;
 import com.kh.spaceus.admin.model.vo.ConfirmSpaceTag;
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
@@ -117,13 +121,26 @@ public class AdminController {
 		List<Category> spaceOneCategory = adminService.selectSpaceOneCategory(spaceNo);
 		//tag
 		List<ConfirmSpaceTag> spaceOneTagList = adminService.selectSpaceOneTagList(spaceNo);
-		log.info("spaceOneTagList={}",spaceOneTagList);
+		//option
+		List<ConfirmSpaceOption> spaceOneOptionList = adminService.selectSpaceOptionList(spaceNo); 
 		
 		model.addAttribute("spaceOneList", spaceOneList);
 		model.addAttribute("sapceOneImageList", spaceOneImageList);
 		model.addAttribute("spaceOneCategory", spaceOneCategory);
 		model.addAttribute("spaceOneTagList", spaceOneTagList);
+		model.addAttribute("spaceOneOptionList", spaceOneOptionList);
 		return "admin/confirmSpaceFrm";
+	}
+	
+	@PostMapping("spaceConfirm.do")
+	@ResponseBody
+	public void spaceConfirm(@ModelAttribute Space param1) {
+		log.info("param1={}",param1);
+		//status update
+		int result1 = adminService.updatdStatus(param1);
+		//host
+		int result2 = adminService.updateHost(param1);
+		
 	}
 	
 }
