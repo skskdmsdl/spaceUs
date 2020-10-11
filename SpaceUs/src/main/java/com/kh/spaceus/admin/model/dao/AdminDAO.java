@@ -45,5 +45,9 @@ public interface AdminDAO {
 	List<ConfirmSpaceTag> selectSpaceOneTagList(String spaceNo);
 
 	List<ConfirmSpaceOption> selectSpaceOptionList(String spaceNo);
+
+	int updateStatus(Space param1);
+
+	int updateHost(Space param1);
 	
 }

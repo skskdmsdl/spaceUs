@@ -161,7 +161,7 @@
                 
                  <div class="pf-feature-price" style="margin-bottom: 20px;">
                      <h4>공간 호스트 이메일</h4>
-                     <div class="mx-lg-5"><h5>${space.memberEmail}</h5></div>
+                     <div class="mx-lg-5 member"><h5>${space.memberEmail}</h5></div>
                  </div>
                  
                  <div class="pf-feature-price" style="margin-bottom: 20px;">
@@ -285,9 +285,13 @@
                      	</div>
                      </div> 
                   
-                     <div class="pf-property-details" style="text-align: center;" >
-                         <button type="button" class="confirm btn-info col-sm-3" value="${space.spaceNo}">공간 승인</button>
-                     </div>
+                     <form>                     
+	                     <div class="pf-property-details" style="text-align: center;" >
+	                     	 <input type="hidden" value="${space.memberEmail}" class="member" />
+	                         <button type="button" class="confirm btn-info col-sm-3" value="${space.spaceNo}">공간 승인</button>
+	                     </div>
+                     </form>
+                     
                   
                    </div>
                </div>
@@ -300,6 +304,12 @@
 $(".confirm").click(function(){
 	
 	var spaceNo = $(this).val();
+	var memberEmail = $(this).siblings(".member").val();
+	alert(spaceNo);
+	alert(memberEmail);
+
+	var param1 = "spaceNo="+spaceNo+
+				"&memberEmail="+memberEmail;
 	
 	swal({
 		  text: "공간 승인을 하시겠습니까?",
@@ -309,14 +319,27 @@ $(".confirm").click(function(){
 		.then((willDelete) => {
 		  if (willDelete) {
 			  
-			location.href="${pageContext.request.contextPath}/admin/spaceConfirm.do?spaceNo="+spaceNo;
+			$.ajax({
+				method:"post",
+				url:"${pageContext.request.contextPath}/admin/spaceConfirm.do",
+				data:param1,
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+				success: function(){
+					alert("공간 승인이 정상적으로 등록되었습니다.");
+					location.href="${pageContext.request.contextPath}/admin/spaceManage.do";
+				},
+				error: function(){
+					alert("공간 승인이 정상적으로 등록이 되지 않았습니다.");
+					location.href="${pageContext.request.contextPath}/admin/spaceManage.do";
+				}
+			});
 
 		} else {
 
 		    location.href="${pageContext.request.contextPath}/admin/spaceManage.do";
 		}
 
-			});
+			}); 
 });
 </script>
     <!-- Property Submit Section End -->

@@ -192,4 +192,23 @@
 		    space_no = #{spaceNo}
 	</select>
 	<resultMap type="confirmSpaceOption" id="optionMap"></resultMap>
+	
+	<!-- confirm space -->
+	<update id="updateStatus">
+		update
+			space
+		set
+			status = 'O'
+		where
+			space_no = #{spaceNo}
+	</update>
+	
+	<update id="updateHost">
+		update
+			auth
+		set
+			authority = 'ROLE_HOST'
+		where
+			member_email = #{memberEmail}
+	</update>
 </mapper>

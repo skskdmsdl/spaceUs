@@ -7,6 +7,9 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,7 +25,6 @@ import com.kh.spaceus.admin.model.vo.ManageSpace;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
 import com.kh.spaceus.space.model.vo.Category;
-import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.Space;
 
 import lombok.extern.slf4j.Slf4j;
@@ -130,11 +132,15 @@ public class AdminController {
 		return "admin/confirmSpaceFrm";
 	}
 	
-	@RequestMapping("spaceConfirm.do")
-	public String spaceConfirm(@RequestParam String spaceNo, Model model) {
-		log.info("spaceNo={}",spaceNo);
+	@PostMapping("spaceConfirm.do")
+	@ResponseBody
+	public void spaceConfirm(@ModelAttribute Space param1) {
+		log.info("param1={}",param1);
+		//status update
+		int result1 = adminService.updatdStatus(param1);
+		//host
+		int result2 = adminService.updateHost(param1);
 		
-		return "admin/spaceManage.do";
 	}
 	
 }

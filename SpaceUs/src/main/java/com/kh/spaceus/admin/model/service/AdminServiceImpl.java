@@ -98,5 +98,16 @@ public class AdminServiceImpl implements AdminService{
 	public List<ConfirmSpaceOption> selectSpaceOptionList(String spaceNo) {
 		return adminDAO.selectSpaceOptionList(spaceNo);
 	}
+
+	@Override
+	public int updatdStatus(Space param1) {
+		return adminDAO.updateStatus(param1);
+	}
+
+	@Override
+	public int updateHost(Space param1) {
+		return adminDAO.updateHost(param1);
+	}
+	
 	
 }

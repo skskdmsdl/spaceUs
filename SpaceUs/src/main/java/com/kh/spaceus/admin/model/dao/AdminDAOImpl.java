@@ -98,5 +98,17 @@ public class AdminDAOImpl implements AdminDAO {
 	public List<ConfirmSpaceOption> selectSpaceOptionList(String spaceNo) {
 		return session.selectList("admin.selectSpaceOptionList", spaceNo);
 	}
+
+	@Override
+	public int updateStatus(Space param1) {
+		return session.update("admin.updateStatus", param1);
+	}
+
+	@Override
+	public int updateHost(Space param1) {
+		return session.update("admin.updateHost", param1);
+	}
+	
+	
 	
 }

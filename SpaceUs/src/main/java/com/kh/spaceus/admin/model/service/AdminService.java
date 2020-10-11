@@ -48,4 +48,8 @@ public interface AdminService {
 
 	List<ConfirmSpaceOption> selectSpaceOptionList(String spaceNo);
 
+	int updatdStatus(Space param1);
+
+	int updateHost(Space param1);
+
 }
