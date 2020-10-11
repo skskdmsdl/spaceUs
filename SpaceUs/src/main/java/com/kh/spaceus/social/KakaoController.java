@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class KakaoController {
 
-  private final static String K_CLIENT_ID = "c90a57f3e423118bdb575be6e3083e18";
+  private final static String K_CLIENT_ID = "017446cfc5cb51f558fc94c4b060e0df";
   private final static String K_REDIRECT_URI = "http://localhost:9090/spaceus/member/kakaoLogin.do";
 
   public String getAuthorizationUrl(HttpSession session) {
@@ -108,7 +108,12 @@ public class KakaoController {
 
       // JSON 형태 반환값 처리
       ObjectMapper mapper = new ObjectMapper();
+      log.info("mapper : {}", mapper);
+
       returnNode = mapper.readTree(response.getEntity().getContent());
+      
+      log.info("returnNode : {}", returnNode);
+      
     } catch (UnsupportedEncodingException e) {
 
       e.printStackTrace();

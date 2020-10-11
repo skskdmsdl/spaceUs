@@ -25,8 +25,8 @@
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 	<!-- 구글 로긴 -->
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
-	<meta name="google-signin-client_id" content="778421516975-r2f80c2f91aalftfppl2kq4sqn1om06i.apps.googleusercontent.com">
+	<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+	<meta name="google-signin-client_id" content="398489879454-c5aqb8i12qv1gku3dgtt31fd8iogm2hd.apps.googleusercontent.com">
 <script>
 	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
 	<c:if test="${ not empty msg }">
@@ -38,11 +38,6 @@
 	<c:if test="${ not empty closeFunction }">
 	    self.close();
 	</c:if>
-	
-	/* window.onload = function(){
-		signOut();
-		alert('onload signOut.');
-	} */
 	
 	function onSignIn(googleUser) {
 		var id_token = googleUser.getAuthResponse().id_token;
@@ -79,10 +74,54 @@
 			xhr.send('idtoken=' + id_token+'&email='+email);
 		</c:if>
 		*/
-	}
+
+		}
+	 function onSuccess(googleUser) {
+	      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+	      var id_token = googleUser.getAuthResponse().id_token;
+		  var profile = googleUser.getBasicProfile();
+		  var email = profile.getEmail();
+
+			console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+			console.log('Name: ' + profile.getName());
+			console.log('Image URL: ' + profile.getImageUrl());
+			console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+			console.log('id_token: ' + id_token); // id_token
+			console.log('tokenEmail ${tokenEmail}');
+			<c:if test="${ empty tokenEmail }">
+				signOut();
+				location.href='${pageContext.request.contextPath }/member/googleLogin.do?idtoken='+id_token+'&email='+email;
+			</c:if>
+			<c:if test="${ not empty tokenEmail }">
+				signOut();
+				location.href='${pageContext.request.contextPath }/member/googleLogin.do?idtoken='+id_token+'&tokenEmail='+tokenEmail;
+				<c:remove var = "tokenEmail"/>
+			</c:if>
+	      
+	    }
+	    function onFailure(error) {
+	      console.log(error);
+	    }
+	    function renderButton() {
+	      gapi.signin2.render('my-signin2', {
+	        /* 'scope': 'profile email', */
+	        'width': 645,
+	        'height': 50,
+	        'longtitle': true,
+	        'theme': 'white',
+	        'onsuccess': onSuccess,
+	        'onfailure': onFailure
+	      });
+	    }
 
 	
 </script>
+
+<style type="text/css">
+.abcRioButtonContentWrapper{
+	border: none !important;
+}
+</style>
 
 </head>
 <body>
@@ -94,30 +133,40 @@
 					<span class="login100-form-title p-b-43">
 						<a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
 					</span>
-					<div id="naver_id_login" style="text-align:center">
+					<div id="naver_id_login">
 						<a href="${naver_url}">
 						<%-- <a href="#" onClick="window.open('${naver_url}', 'popup','width=600,height=600')"> --%>
 							<div class="social-btn">
-								<img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg"/>
-									&nbsp;네이버로 시작하기
+								<div  class="btn" style="float: left;">
+									<img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg"/>
+								</div>
+								<p style="margin: 0 auto;">Sign in with Naver</p>	
 							</div>
 						</a>
 					</div>
-					<div id="kakao_id_login" style="text-align:center">
+					<div id="kakao_id_login">
 						<a href="${kakao_url}">
 						<%-- <a href="#" onClick="window.open('${kakao_url}', 'popup','width=600,height=600')"> --%>
 							<div class="social-btn">
-								<img src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png"/>
-									&nbsp;카카오로 시작하기
+								<div class="btn" style="float: left;">
+									<img src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png" style="left: 0;"/>
+								</div>
+								<p style="margin: 0 auto;">Sign in with Kakao</p>	
 							</div>
 						</a>
 					</div>
-					<div id="google_id_login" style="text-align:center">
-						<!--c:if test="${ empty tokenEmail }"-->				
-							<div class="g-signin2 social-btn" data-onsuccess="onSignIn" data-longtitle="true" data-width="645" data-height="50px" style="opacity: 100">
-								<img src="${pageContext.request.contextPath }/resources/images/icons/google-icon.png"/>
-									&nbsp;구글로 시작하기
-							</div>
+					<div id="google_id_login" >
+						<!--c:if test="${ empty tokenEmail }"-->
+							<!-- <div class="social-btn my-signin2"  data-longtitle="true" data-longtitle="true" data-width="645" data-height="50px"> -->
+							
+								<!-- <input type="hidden" id="my-signin2" /> -->
+								
+								<div id="my-signin2"></div>
+							
+							<!-- <div class="social-btn g-signin2" data-width="300" data-height="200" data-longtitle="true"> -->
+							<%-- 	 <img src="${pageContext.request.contextPath }/resources/images/icons/google-icon.png"/>
+									&nbsp;구글로 시작하기 
+							</div> --%>	
 						<!--/c:if-->
 						<!--c:if test="${ not empty tokenEmail }"-->
 							<!-- <a href="#" onclick="signOut();">Sign out</a> -->

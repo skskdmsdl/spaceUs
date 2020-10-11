@@ -13,8 +13,7 @@
 	href="https://cdn.materialdesignicons.com/5.5.55/css/materialdesignicons.min.css"
 	rel="stylesheet">
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=455b391796eaae1861145a078007af70&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f812560fa3200866e643713203eb962f&libraries=services"></script>
 <style>
 .prev, .next {
 	cursor: pointer;
@@ -71,11 +70,12 @@ to {opacity: 1}
 .reviewLabel {font-size: 11px;}
 </style>
 <script>
+
 var url = $(location).attr('href');
 
 $(function(){
 
-	$(".cs-map").removeAttr("style");
+	/* $(".cs-map").removeAttr("style"); */
 	$("#url-input").attr('value', url);
 	
     $("[data-toggle=popover]").popover({
@@ -93,31 +93,65 @@ $(function(){
     $("#heart-a").click(function(){
 
 		var $heart = $("#heart-a");
-    	if($heart.html().indexOf("far fa-heart") != -1) {
-    		$heart.html("<i class='fas fa-heart' style='color:#ffc107'></i>");
+    	if($heart.html().indexOf("far fa-heart") != -1 ) {
+    		$heart.html("<i class='fas fa-heart' style='color:#ffc107; margin:2px;'></i>");
 	   		 $.ajax({
 			        type: "POST",
 					url : "${pageContext.request.contextPath}/space/heart.do",
-					data :  {
+					dataType: "JSON",
+					data :   {
 						spaceNo : "${space.spaceNo}",
-						email : "${loginMember.principal.memberEmail}"
-					},
-					dataType: "json",
+						email : "${loginMember.principal.memberEmail}"},
 					success: function(data){
+						console.log(data);
+						readLikeCnt();
 					},
 					error: function(xhr, status, err){
-						console.log("처리실패", xhr, status, err);
+						console.log("위시 추가 실패", xhr, status, err);
 						}
 					
 			});
     	}
     	else {
     		$heart.html("<i class='far fa-heart'></i>");
-    	}
-    });
-
+    		 $.ajax({
+			        type: "POST",
+					url : "${pageContext.request.contextPath}/space/cancelHeart.do",
+					data :  {
+						spaceNo : "${space.spaceNo}",
+						email : "${loginMember.principal.memberEmail}"},
+					success: function(data){
+						readLikeCnt();
+					},
+					error: function(xhr, status, err){
+						console.log("위시 삭제 실패", xhr, status, err);
+						}
+    	   			});	
+    		}
+	});
+	// 공간 좋아요 갯수
+    function readLikeCnt() {
+		$.ajax({
+			url: "${pageContext.request.contextPath}/space/readLikeCnt.do",
+            type: "GET",
+            data: {
+                no: "${space.spaceNo}"
+            },
+            dataType: "json",
+            success: function (count) {
+            	$(".like-count").html(count);
+            },
+			error: function(xhr, status, err){
+				console.log("좋아요수 읽어오기 실패", xhr, status, err);
+				}
+		});
+    };
+    
+    readLikeCnt(); // 처음 시작했을 때 실행되도록 해당 함수 호출
 });
 
+
+    
 function urlcopy(){
 	var tempElem = document.createElement('textarea');
 
@@ -170,18 +204,21 @@ function naverShare() {
 					<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i>
 					<div class="text text-center">
 						<div style="text-align: right; padding-right: 5px">
-<%-- 							<form id="addLikeCnt" action="${pageContext.request.contextPath }/space/heart.do" method="POST">
-								<input name= "spaceNo" type="hidden" value="${space.spaceNo }"/>
-								<input name= "email" type="hidden" value="${loginMember.principal.memberEmail}"/>
-								
-							</form> --%>
-							<sec:authorize access="hasAnyRole('USER','HOST')"> 
-							<a href=javascript:; id="heart-a"><i id="addLike" class="far fa-heart"></i></a>
+							
+							<c:choose>
+							<c:when test="${ loginMember.principal.memberEmail != null }">
+							<a href=javascript:; id="heart-a"><i id="addLike" class="far fa-heart" style="margin:2px;"></i></a>
+							<span class="like-count"></span>
+							</c:when>
+							<c:otherwise>
+							<i id="addLike" class="far fa-heart" style="margin:2px;"></i>
+							<span class="like-count"></span>
+							</c:otherwise>
+							</c:choose>
 							&emsp; <a href="javascript:;" id="kakao-link-btn"> <img
 								src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png"
 								width="30px" />
 							</a>
-							</sec:authorize>
 							<!-- 공유하기 팝오버 시작-->
 							<a href=javascript:; data-toggle="popover" data-trigger="focus"
 								data-placement="bottom" tabindex="0" title="공유하기"
@@ -233,12 +270,12 @@ function naverShare() {
 							<li class="nav-item"><a class="nav-link active"
 								id="detail-description-tab" data-toggle="pill"
 								href="#detail-description" role="tab"
-								aria-controls="detail-description" aria-expanded="true">공간옵션</a>
+								aria-controls="detail-description" aria-expanded="true">공간위치</a>
 							</li>
 							<li class="nav-item"><a class="nav-link"
 								id="detail-contact-tab" data-toggle="pill"
 								href="#detail-contact" role="tab" aria-controls="detail-contact"
-								aria-expanded="true">Contact</a></li>
+								aria-expanded="true">공간옵션</a></li>
 							<li class="nav-item"><a class="nav-link" id="detail-qna-tab"
 								data-toggle="pill" href="#detail-qna" role="tab"
 								aria-controls="detail-qna" aria-expanded="true">Q&A</a></li>
@@ -256,48 +293,16 @@ function naverShare() {
 						<div class="tab-pane fade" id="detail-manufacturer"
 							role="tabpanel" aria-labelledby="detail-manufacturer-tab">
 							<p style="font-size: 18px">
-								${ space.content } 1,2층으로 나뉘어져 있으며 <br /> 대관시 2층의 엔틱, 빈티지 분위기의
-								유니크한 인테리어를 이용하여 각종 행사/ 전시/ 스튜디어 대관/ 쇼핑몰 대관등을 진행하고 있습니다.
-							</p>
-							<p style="font-size: 18px">2층 단독 화장실도 있기 때문에 장소를 이용하기에 방해 없이
-								장소를 즐기 실 수 있습니다🎁</p>
+								${ space.content } <br /> 
 						</div>
 						<!-- 공간설명 끝-->
-
-						<!-- 공간옵션시작 -->
-						<div class="tab-pane fade show active" id="detail-description"
-							role="tabpanel" aria-labelledby="detail-description-tab">
-							<div class="row">
-								<div class="col-md-4">
-									<ul class="features">
-										<li class="check"><span class="ion-ios-checkmark"></span>주류반입가능</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>WIFI</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>블루투스
-											스피커</li>
-									</ul>
-								</div>
-								<div class="col-md-4">
-									<ul class="features">
-										<li class="check"><span class="ion-ios-checkmark"></span>화장실</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>유료주차장</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>엔틱분위기</li>
-									</ul>
-								</div>
-								<div class="col-md-4">
-									<ul class="features">
-										<li class="check"><span class="ion-ios-checkmark"></span>빈티지분위기</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>왕의자</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>애완견동반가능</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<!-- 공간옵션 끝-->
+						
 						<!-- contact 시작 -->
-						<div class="tab-pane fade" id="detail-contact" role="tabpanel"
-							aria-labelledby="detail-manufacturer-tab">
+						<div class="tab-pane fade show active" id="detail-description" role="tabpanel"
+							aria-labelledby="detail-manufacturer-tab" style="padding-top: 100px;">
 							<div class="row" style="margin-left: 5em;">
-								<div class="contact-info">
+								<div id="kakaomap" style="width:500px;height:400px; "></div>
+								<div class="contact-info" style="padding-left: 100px;">
 									<div class="ci-item">
 										<div class="ci-icon">
 											<i class="fa fa-map-marker"></i>
@@ -327,13 +332,43 @@ function naverShare() {
 											<p>Support.aler@gmail.com</p>
 										</div>
 									</div>
-									<div class="cs-map">
-										<div id="kakaomap" style="width:500px;height:400px;"></div>
-									</div>
+									
+										
 								</div>
 							</div>
 						</div>
 						<!-- contact 끝 -->
+
+						<!-- 공간옵션시작 -->
+						<div class="tab-pane fade " id="detail-contact"
+							role="tabpanel" aria-labelledby="detail-description-tab">
+							<div class="row">
+								<div class="col-md-4">
+									<ul class="features">
+										<li class="check"><span class="ion-ios-checkmark"></span>주류반입가능</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>WIFI</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>블루투스
+											스피커</li>
+									</ul>
+								</div>
+								<div class="col-md-4">
+									<ul class="features">
+										<li class="check"><span class="ion-ios-checkmark"></span>화장실</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>유료주차장</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>엔틱분위기</li>
+									</ul>
+								</div>
+								<div class="col-md-4">
+									<ul class="features">
+										<li class="check"><span class="ion-ios-checkmark"></span>빈티지분위기</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>왕의자</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>애완견동반가능</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- 공간옵션 끝-->
+						
 
 <div class="tab-pane fade" id="detail-qna" role="tabpanel" aria-labelledby="detail-qna-tab">
      <div class="row">
@@ -650,123 +685,88 @@ function naverShare() {
 <!-- 추천시스템 시작 -->
 <div class="container" style="border-top: 1px solid rgba(0, 0, 0, 0.1)">
 	<div class="row justify-content-center">
-		<div
-			class="col-md-12 mt-5 heading-section text-center ftco-animate mb-5">
+		<div class="col-md-12 mt-5 heading-section text-center ftco-animate mb-5">
 			<span class="subheading">카테고리 추천</span>
-			<h2 class="mb-2">다른 카페(은/는) 어떠신가요?</h2>
+			<h2 class="mb-2">다른 ${ cateName }(은/는) 어떠신가요?</h2>
 		</div>
 	</div>
+	
 	<div class="row">
-		<div class="col-md-4">
-			<div class="property-wrap ftco-animate">
-				<a href="" class="img"
-					style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
-				<div class="text">
-					<p class="price">
-						<span class="old-price">800,000</span><span class="orig-price">$3,050<small>/mo</small></span>
-					</p>
-					<ul class="property_list">
-						<li><span class="flaticon-bed"></span>3</li>
-						<li><span class="flaticon-bathtub"></span>2</li>
-						<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
-					</ul>
-					<h3>
-						<a href="${pageContext.request.contextPath }/space/spaceDetail.do">The
-							Blue Sky Home</a>
-					</h3>
-					<span class="location">Oakland</span> <a href="#"
-						class="d-flex align-items-center justify-content-center btn-custom">
-						<span class="ion-ios-link"></span>
-					</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="property-wrap ftco-animate">
-				<a href="#" class="img"
-					style="background-image: url(${pageContext.request.contextPath }/resources/images/work-2.jpg);"></a>
-				<div class="text">
-					<p class="price">
-						<span class="old-price">800,000</span><span class="orig-price">$3,050<small>/mo</small></span>
-					</p>
-					<ul class="property_list">
-						<li><span class="flaticon-bed"></span>3</li>
-						<li><span class="flaticon-bathtub"></span>2</li>
-						<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
-					</ul>
-					<h3>
-						<a href="#">The Blue Sky Home</a>
-					</h3>
-					<span class="location">Oakland</span> <a href="#"
-						class="d-flex align-items-center justify-content-center btn-custom">
-						<span class="ion-ios-link"></span>
-					</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="property-wrap ftco-animate">
-				<a href="#" class="img"
-					style="background-image: url(${pageContext.request.contextPath }/resources/images/work-3.jpg);"></a>
-				<div class="text">
-					<p class="price">
-						<span class="old-price">800,000</span><span class="orig-price">$3,050<small>/mo</small></span>
-					</p>
-					<ul class="property_list">
-						<li><span class="flaticon-bed"></span>3</li>
-						<li><span class="flaticon-bathtub"></span>2</li>
-						<li><span class="flaticon-floor-plan"></span>1,878 sqft</li>
-					</ul>
-					<h3>
-						<a href="#">The Blue Sky Home</a>
-					</h3>
-					<span class="location">Oakland</span> <a href="#"
-						class="d-flex align-items-center justify-content-center btn-custom">
-						<span class="ion-ios-link"></span>
-					</a>
-				</div>
-			</div>
-		</div>
+	<c:if test="${ not empty spcList }">
+	<c:forEach items="${ spcList }" var="space" varStatus="vs">
+    	  <div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+		   				<div class="owl-carousel ref">
+			    			<c:if test="${not empty space.attachList}">
+				    			<c:forEach items="${space.attachList}" var="attach" varStatus="vs">
+				    				
+				    				<div class="img"
+										style="background-image: url(${pageContext.request.contextPath }
+										/resources/upload/space/20201006_384759267_348.jpg);"></div>
+									
+								</c:forEach>
+			    			</c:if>
+						</div>  
+					<!-- 	<i class="prev fas fa-chevron-left fa-2x" onclick="plusSlides(-1)"></i>
+						<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i> -->
+    			<div class="text">
+    				<p class="price"><span class="space-price" style="color: #007bff;">
+    				<fmt:formatNumber value="${space.hourlyPrice }" type="number"/><small>원/시간</small></span></p>
+    				<ul class="property_list">
+    					<li><span class="icon-star"></span>${space.starAvg }</li>
+    					<li><span class="icon-heart"></span>${space.likeCnt }</li>
+    					<li><span class="icon-eye"></span>${space.views }</li>
+    				</ul>
+    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${space.spaceNo}">${space.spaceName }</a></h3>
+    				<small><span class="icon-my_location">${space.address }</span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+	</c:forEach>
+	</c:if>
 	</div>
 </div>
 
 <!-- 추천시스템 끝 -->
-<!-- 지도 -->
+
 <script>
-	var mapContainer = document.getElementById('kakaomap'), // 지도를 표시할 div 
-	    mapOption = {
-	        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
-	    };  
-	
-	// 지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
+<!-- 지도 -->
+var mapContainer = document.getElementById('kakaomap'), // 지도를 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};  
 
-	var geocoder = new kakao.maps.services.Geocoder();
+//지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('${ space.address }', function(result, status) {
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
 
-	    // 정상적으로 검색이 완료됐으면 
-	     if (status === kakao.maps.services.Status.OK) {
+//주소로 좌표를 검색합니다
+geocoder.addressSearch('${ space.address }', function(result, status) {
 
-	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+// 정상적으로 검색이 완료됐으면 
+ if (status === kakao.maps.services.Status.OK) {
 
-	        // 결과값으로 받은 위치를 마커로 표시합니다
-	        var marker = new kakao.maps.Marker({
-	            map: map,
-	            position: coords
-	        });
+    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-	        // 인포윈도우로 장소에 대한 설명을 표시합니다
-	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;">' + "${ space.spaceName }" +'</div>'
-	        });
-	        infowindow.open(map, marker);
+    // 결과값으로 받은 위치를 마커로 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: coords
+    });
 
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-	    }});    
+
+    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    map.setCenter(coords);
+} 
+});  
+
+
 
 </script>
 <!-- 카카오톡 공유 -->
@@ -804,6 +804,13 @@ function naverShare() {
 </script>
 
 <script>
+/* 추천공간 이미지 슬라이드 */
+/* $(".owl-carousel ref").owlCarousel({ 
+		items:1, 
+		loop:false,
+		center:true
+})
+ */
 function answer(){
 	alert(${qna.qnaNo});
 	

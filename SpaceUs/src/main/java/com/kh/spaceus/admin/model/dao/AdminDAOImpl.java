@@ -6,8 +6,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
-import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.admin.model.vo.ManageRecruit;
+import com.kh.spaceus.community.group.model.vo.GroupBoard;
+import com.kh.spaceus.community.group.model.vo.Report;
+import com.kh.spaceus.community.recruit.model.vo.Recruit;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -34,6 +38,33 @@ public class AdminDAOImpl implements AdminDAO {
 	public List<ManageMember> findUserRoleList(String searchKeyword) {
 		return session.selectList("admin.findUserRoleList", searchKeyword);
 	}
+
+	@Override
+	public List<ManageBlackList> selectGroupList() {
+		return session.selectList("admin.selectGroupList");
+	}
+
+	@Override
+	public List<ManageBlackList> selectRecruitList() {
+		return session.selectList("admin.selectRecruitList");
+	}
+
+	@Override
+	public List<Report> selectReasonList(String reportBoardNo) {
+		return session.selectList("admin.selectReasonList",reportBoardNo);
+	}
+
+	@Override
+	public List<GroupBoard> selectGBList() {
+		return session.selectList("admin.selectGBList");
+	}
+
+	@Override
+	public List<ManageRecruit> selectrList() {
+		return session.selectList("admin.selectrList");
+	}
+	
+	
 	
 	
 	

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.qna.model.vo.Qna;
-import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.OptionList;
@@ -74,8 +73,8 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public Star selectStar() {
-		return sqlSession.selectOne("space.selectStar");
+	public Star selectStar(String spaceNo) {
+		return sqlSession.selectOne("space.selectStar", spaceNo);
 	}
 
 	@Override
@@ -125,8 +124,59 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.insert("space.insertSpaceTag", spaceTag);
 	}
 
-	public int insertWishList(Wish wish) {
-		return sqlSession.insert("space.insertWishList", wish);
+	@Override
+	public void insertWish(Wish wish) {
+		sqlSession.insert("space.insertWish", wish);
+	}
+
+	@Override
+	public List<Space> selectSameCategory(Space space) {
+		return sqlSession.selectList("space.selectSameCategory", space);
+	}
+
+	@Override
+	public int selectLikeCnt(String spaceNo) {
+		return sqlSession.selectOne("space.selectLikeCnt", spaceNo);
+	}
+
+	@Override
+	public void deleteWish(Wish wish) {
+		sqlSession.delete("space.deleteWish", wish);
+	}
+
+	@Override
+	public String selectCateName(String cateNo) {
+		return sqlSession.selectOne("space.selectCateName", cateNo);
+	}
+
+	@Override
+	public List<Space> selectReviewList(String email) {
+		return sqlSession.selectList("space.selectReviewList", email);
+	}
+
+	@Override
+	public int updateReview(Review review) {
+		return sqlSession.update("space.updateReview", review);
+	}
+
+	@Override
+	public List<Review> selectStarAvg(String spaceNo) {
+		return sqlSession.selectList("space.selectStarAvg", spaceNo);
+	}
+
+	@Override
+	public void updateStarAvg(Space space) {
+		sqlSession.update("space.updateStarAvg", space);
+	}
+
+	@Override
+	public List<Space> selectReviewPossible(String email) {
+		return sqlSession.selectList("space.selectReviewPossible", email);
+	}
+
+	@Override
+	public List<Space> selectReviewComplete(String email) {
+		return sqlSession.selectList("space.selectReviewComplete", email);
 	}
 
 	@Override

@@ -93,10 +93,6 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 		                                  <input type="radio" class="m-r-10 ml-3 hire">구인
 		                                  <input type="radio" class="m-r-10 ml-3 jobSearch">구직
 	                                </c:if>
-								<%-- <form action="${pageContext.request.contextPath }/community/recruit/recruitList.do"></form>
-								<form action="${pageContext.request.contextPath }/community/recruit/recruitAll.do" id="all"></form>--%>
-								<form action="${pageContext.request.contextPath }/community/recruit/recruitHire.do" id="hire"></form>
-                                <form action="${pageContext.request.contextPath }/community/recruit/recruitJobSearch.do" id="jobSearch"></form> 
 	                            <form action="${pageContext.request.contextPath }/community/recruit/searchRecruit.do">    
 	                                <div class="input-group mb-4 col-4 pull-right">
 									  <input type="text" class="input-group-text" name="keyWord" style="background-color: white;">
@@ -156,7 +152,7 @@ $("#recruitEnroll").click(function(){
 }); 
 //페이지 모아보기
 $(".all").click(function(){
-	location.href="${pageContext.request.contextPath }/community/recruit/recruitAll.do";
+	location.href="${pageContext.request.contextPath }/community/recruit/recruitList.do";
 });
 $(".hire").click(function(){
 	location.href="${pageContext.request.contextPath }/community/recruit/recruitHire.do";

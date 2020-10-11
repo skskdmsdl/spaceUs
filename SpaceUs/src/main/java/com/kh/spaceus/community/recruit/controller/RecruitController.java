@@ -69,6 +69,7 @@ public class RecruitController {
 		mav.addObject("totalContents", totalContents);
 		mav.addObject("list", list);
 		mav.addObject("pageBar", pageBar);
+		mav.addObject("category", "all");
 		mav.setViewName("community/recruit/recruitList");
 		return mav;
 	}
@@ -362,33 +363,6 @@ public class RecruitController {
 	}
 	
 	//구인구직 조회
-	@RequestMapping("/recruitAll.do")
-	public ModelAndView recruitAll(ModelAndView mav,
-								    @RequestParam(defaultValue = "1", value = "cPage") int cPage,
-								    HttpServletRequest request) {
-		//1.사용자 입력값 
-		final int limit = 10; //사용용도는 numPerPage와 똑같음
-		int offset = (cPage - 1) * limit;
-		
-		//2. 업무로직
-		List<Recruit> list = recruitService.selectRecruitList(limit, offset);
-		log.debug("list = {}", list);
-		
-		
-		//전체컨텐츠수 구하기
-		int totalContents = recruitService.selectRecruitTotalContents(); 
-		String url = request.getRequestURI() + "?";
-		String pageBar = Utils.getPageBarHtml(cPage, limit, totalContents, url);
-		
-		//3. view단 처리
-		mav.addObject("totalContents", totalContents);
-		mav.addObject("list", list);
-		mav.addObject("pageBar", pageBar);
-		mav.addObject("category", "all");
-		mav.setViewName("community/recruit/recruitList");
-		return mav;
-	}
-	
 	@RequestMapping("/recruitHire.do")
 	public ModelAndView recruitHire(ModelAndView mav,
 									@RequestParam(defaultValue = "1", value = "cPage") int cPage,

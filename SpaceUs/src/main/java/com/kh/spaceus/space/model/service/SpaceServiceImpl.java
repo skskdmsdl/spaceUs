@@ -69,7 +69,6 @@ public class SpaceServiceImpl implements SpaceService{
 		if(attachList != null) {
 			for(ReviewAttachment attach : attachList) {
 				attach.setReviewNo(review.getReviewNo());
-				System.out.println("@@@@@@@"+attach);
 				log.debug("attach = {}", attach);
 				result = spaceDAO.insertReviewAttahment(attach);
 			}
@@ -89,8 +88,8 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public Star selectStar() {
-		return spaceDAO.selectStar();
+	public Star selectStar(String spaceNo) {
+		return spaceDAO.selectStar(spaceNo);
 	}
 
 
@@ -153,8 +152,58 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public int insertWishList(Wish wish) {
-		return spaceDAO.insertWishList(wish);
+	public void insertWish(Wish wish) {
+		spaceDAO.insertWish(wish);
+	}
+
+	@Override
+	public List<Space> selectSameCategory(Space space) {
+		return spaceDAO.selectSameCategory(space);
+	}
+
+	@Override
+	public int selectLikeCnt(String spaceNo) {
+		return spaceDAO.selectLikeCnt(spaceNo);
+	}
+
+	@Override
+	public void deleteWish(Wish wish) {
+		spaceDAO.deleteWish(wish);
+	}
+
+	@Override
+	public String selectCateName(String cateNo) {
+		return spaceDAO.selectCateName(cateNo);
+	}
+
+	@Override
+	public List<Space> selectReviewList(String email) {
+		return spaceDAO.selectReviewList(email);
+	}
+
+	@Override
+	public int updateReview(Review review) {
+		return spaceDAO.updateReview(review);
+	}
+
+	@Override
+	public List<Review> selectStarAvg(String spaceNo) {
+		return spaceDAO.selectStarAvg(spaceNo);
+	}
+
+	@Override
+	public void updateStarAvg(Space space) {
+		spaceDAO.updateStarAvg(space);
+	}
+
+	@Override
+	public List<Space> selectReviewPossible(String email) {
+		return spaceDAO.selectReviewPossible(email);
+	}
+
+	@Override
+	public List<Space> selectReviewComplete(String email) {
+		return spaceDAO.selectReviewComplete(email);
 	}
 
 	@Override
