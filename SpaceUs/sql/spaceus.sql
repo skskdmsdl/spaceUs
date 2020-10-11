@@ -271,6 +271,7 @@ select * from space_option;
 insert into space_option values('space2','OPTION2');
 insert into space_option values('space2','OPTION12');
 insert into space_option values('space2','OPTION14');
+insert into space_option values('space2','OPTION13');
 commit;
 
 -----------------------------
