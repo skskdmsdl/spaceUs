@@ -447,6 +447,16 @@
 				review_date desc) R
 	        where rownum between 1 and 4
 	</select>
+	
+	<!-- autocomplete tag -->
+	<select id="selectAutoTagList" resultMap="tagMap">
+		select
+			tag_name
+		from
+			tag
+		where 
+			tag_name like'%'|| #{value} ||'%'
+	</select>
 </mapper>
 
 

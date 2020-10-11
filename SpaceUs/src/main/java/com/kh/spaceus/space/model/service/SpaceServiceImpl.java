@@ -220,6 +220,11 @@ public class SpaceServiceImpl implements SpaceService{
 	public List<Review> selectRecentReviewList() {
 		return spaceDAO.selectRecentReviewList();
 	}
+
+	@Override
+	public List<Object> selectAutoTagList(String value) {
+		return spaceDAO.selectAutoTagList(value);
+	}
 	
 	
 	

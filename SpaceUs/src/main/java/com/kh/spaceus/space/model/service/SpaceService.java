@@ -78,6 +78,8 @@ public interface SpaceService {
 
 	List<OptionList> selectOptionList(String spaceNo);
 
+	List<Object> selectAutoTagList(String value);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 
