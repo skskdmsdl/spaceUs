@@ -331,7 +331,7 @@ input[type="text"]:focus {
             <h2>이용자 리뷰</h2>
           </div>
         </div>
-         <div class="row d-flex" id="test">
+        <div class="row d-flex" id="test">
          
 <%--           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
@@ -385,7 +385,6 @@ function review(){
           		html  += "<a href=\"blog-single.html\" class=\"lock-20 img\" style=\"background-image:" 
 	          			+"url(\'${pageContext.request.contextPath }/resources/upload/review/"+item.image+"\');\">";
           		html  += "</a><p>"+item.content+"</p></div></div></div>";
-
 				console.log(html);
 				$("#test").append(html);
 			}); 
