@@ -114,7 +114,6 @@
 			#{ starRating },
 			#{ content }
 		)
-		
 		 <selectKey keyProperty="reviewNo" resultType="string" order="AFTER">
 			select
 				'REVIEW'||seq_review_no.currval
