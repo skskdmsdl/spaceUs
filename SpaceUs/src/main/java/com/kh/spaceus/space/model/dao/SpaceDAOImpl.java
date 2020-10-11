@@ -7,12 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 import com.kh.spaceus.qna.model.vo.Qna;
-import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Option;
-import com.kh.spaceus.qna.model.vo.Qna;
+import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
@@ -183,11 +181,20 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
+	public List<Space> selectAll() {
+		return sqlSession.selectList("space.selectAll");
+	}
+
+	@Override
+	public List<OptionList> selectOptionList(String spaceNo) {
+		return sqlSession.selectList("space.selectOptionList", spaceNo);
+	}
+
 	public List<Review> selectRecentReviewList() {
 		return sqlSession.selectList("space.selectRecentReviewList");
 	}
 
-	
+
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {
 		return sqlSession.selectList("space.selectListSpaceCollection", email);

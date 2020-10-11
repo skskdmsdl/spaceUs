@@ -29,6 +29,7 @@ import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Option;
+import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.SpaceTag;
@@ -194,6 +195,9 @@ public class SpaceController {
 		List<Qna> qlist = spaceService.selectQuestionList(spaceNo, limit, offset);
 		String qPageBar = Utils.getPageBarHtml(cPage, limit, qnaTotal, url);
 
+		// option 조회
+		List<OptionList> optionList = spaceService.selectOptionList(spaceNo);
+		
 		model.addAttribute("spcList", spcList);
 		model.addAttribute("cateName", cateName);
 
@@ -209,27 +213,36 @@ public class SpaceController {
 		model.addAttribute("reviewTotal", reviewTotal);
 		model.addAttribute("star", star);
 		model.addAttribute("pageBar", pageBar);
+		
+		model.addAttribute("optionList",optionList);
 
 		return "space/spaceDetail";
 	}
 
 	// 예약하기버튼
 	@RequestMapping("/reserveSpace.do")
-	public String reserveSpace(Model model, ModelAndView mav, @RequestParam("spaceNo") String spaceNo,
-			@RequestParam("spaceName") String spaceName) {
-		// log.debug("spaceNo= {}",spaceNo);
-		// log.debug("spaceName= {}",spaceName);
-
-		// spaceNo로 옵션정보가져와서 전달하기
-
-		// spaceNo로 예약가능한 날짜 가져오기
+	public ModelAndView reserveSpace(Model model,
+							   ModelAndView mav,
+							   @RequestParam("spaceNo") String spaceNo) {
+		//log.debug("spaceNo= {}",spaceNo);
+		//log.debug("spaceName= {}",spaceName);
+		
+		Space space = spaceService.selectOneSpace(spaceNo);
+		
+		//spaceNo로 옵션정보가져와서 전달하기
+		List<OptionList> optionList = spaceService.selectOptionList(spaceNo);
+		
+		//spaceNo로 예약가능한 날짜 가져오기
 		List<ReservationAvail> availList = reservationService.selectListAvail(spaceNo);
-		// log.debug("rev={}",rev);
 
-		model.addAttribute("spaceName", spaceName);
-		mav.addObject("availList", availList);
+		//model.addAttribute("spaceName", spaceName);
+		mav.addObject("space",space);
+		mav.addObject("optionList",optionList);
+		mav.addObject("availList",availList);
+		
+		mav.setViewName("space/reserveSpace");
+		return mav;
 
-		return "space/reserveSpace";
 	}
 
 	@RequestMapping(value = "/searchSpace.do", method = RequestMethod.GET)
