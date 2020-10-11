@@ -80,7 +80,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                      </tr>
                              </table>
                              <div class="text-center">
-			                 	<button  id="insertBtn" class="btn " style="margin-top:50px; background-color: #00c89e; font-size:18px; color:white;"> 글 등록</button>
+			                 	<button  id="insertBtn" class="btn font-bold" style="margin-top:50px; background-color: #00c89e; font-size:16px; color:white;"> 글 등록</button>
                              </div>
                              </form>
 							 </div>

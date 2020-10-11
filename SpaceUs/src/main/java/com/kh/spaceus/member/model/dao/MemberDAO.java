@@ -1,5 +1,7 @@
 package com.kh.spaceus.member.model.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 
 import com.kh.spaceus.member.model.vo.Member;
@@ -19,5 +21,11 @@ public interface MemberDAO {
 	int updateStamp(String email);
 
 	int updateMember(Member member);
+
+	List<Member> selectBtdList(String format);
+
+	int deleteAttendance();
+
+	int deleteMember(String memberEmail);
 
 }

@@ -71,13 +71,13 @@
 
 <script>
 
-let click = 0;
-
 <!-- 출석이벤트  -->
 $(function(){
 	function c(){
-		p();var e=h();
-		var r=0;var u=false;
+		p();
+		var e=h();
+		var r=0;
+		var u=false;
 		l.empty();
 		while(!u){
 			if(s[r]==e[0].weekday){u=true
@@ -91,16 +91,18 @@ $(function(){
 				l.append('<div class="blank"></div>')
 			}else{
 				var v=e[c].day;
-				if(click = 1){
+				/* if(check != null){
 					var m=g(new Date(t,n-1,v))?'<div class="today"><i class="fa fa-check"></i>':"<div>";
-				}else{
+				}else{ */
 					var m=g(new Date(t,n-1,v))?'<div class="today">':"<div>";
-				}
+				/* } */
 				l.append(m+""+v+"</div>")
 			}
 		}
-		var y=o[n-1];a.css("background-color",y).find("h1").text(i[n-1]+" "+t);
-		f.find("div").css("color",y);l.find(".today").css("background-color",y);
+		var y=o[n-1];
+		a.css("background-color",y).find("h1").text(i[n-1]+" "+t);
+		f.find("div").css("color",y);
+		l.find(".today").css("background-color",y);
 		d()
 	}
 	function h(){
@@ -165,8 +167,9 @@ $(function(){
 		}
 	})
 });
-//클릭이벤트
-$(".today").on("click", function(){
+//클릭이벤트 --> ajax말고 reload해도 변경되지 않는걸로 데이터 전송해야함
+$("#calendar_content").css("cursor", "pointer");
+$("#calendar_content").click(function(){
 	$.ajax({
 		url : "${ pageContext.request.contextPath }/member/insertStamp.do",
 		data : {
@@ -175,7 +178,6 @@ $(".today").on("click", function(){
 		dataType : "json",
 		success : function(data){
 			alert("출석확인 되었습니다!");
-			click = 1;
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
