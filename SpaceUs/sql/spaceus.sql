@@ -109,13 +109,13 @@ commit;
 --        1111111, '예약테스트 카페', '경기도 파주시 금바위로',
 --        '125-711-811', 70000, 0, sysdate, sysdate, 0, 0, 'O',
 --        1111111111, '공간 설명 블라블라 ~~~~', '신한');
---update space
---set 
---    category_no = 'cate8'
---where 
---    space_no = 'space2';
+update space
+set 
+    hourly_price= 500
+where 
+    space_no = 'space2';
 --DELETE FROM space WHERE space_no = 'space2';
-
+commit;
 
 
 -----------------------------
@@ -164,9 +164,13 @@ CREATE TABLE Reservation (
 	constraints ck_R_comple check(rev_comple in (0, 1))
 );
 
-
 create sequence seq_rev_no;
 select * from reservation;
+ALTER TABLE Reservation RENAME COLUMN dday TO d_day;
+ALTER TABLE Reservation RENAME COLUMN start_hours TO start_hour;
+ALTER TABLE Reservation RENAME COLUMN end_hours TO end_hour;
+alter table reservation add pay varchar2(50);
+commit;
 
 -----------------------------
 ---- 공간별 예약가능 시간 ----
@@ -201,7 +205,12 @@ select * from reservation_avail;
 --values('목','space2',20,0);
 --insert into reservation_avail 
 --values('금','space2',20,0);
-commit;
+--update Reservation_avail
+--set 
+--    end_hour = 23
+--where 
+--    day = 'fri' and space_no='space2';
+--commit;
 
 -----------------------------
 ----------- 옵션 ------------
@@ -259,6 +268,11 @@ create table space_option (
 );
 
 select * from space_option;
+insert into space_option values('space2','OPTION2');
+insert into space_option values('space2','OPTION12');
+insert into space_option values('space2','OPTION14');
+insert into space_option values('space2','OPTION13');
+commit;
 
 -----------------------------
 ----------- 태그 ------------

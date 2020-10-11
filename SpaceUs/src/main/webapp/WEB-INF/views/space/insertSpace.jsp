@@ -487,8 +487,8 @@ $("#availableTime th").on("click", function(){
 	if(flag==3){
 		flag=0;
 		//배열값 초기화
-		dayTime[day].startHour=0;
-		dayTime[day].endHour=0;
+		dayTime[day].startHour=-1;
+		dayTime[day].endHour=-1;
 		console.log(dayTime);
 		//셀 색 지우기
 		for(var i=0; i<33; i++)
@@ -499,20 +499,24 @@ $("#availableTime th").on("click", function(){
 	if(flag==2){
 		//선택한 셀의 아이디 찾기
 		var last = Number($(this).attr("id"));
-		//셀 값 배열에 넣기
-		dayTime[day].endHour=last;
-		console.log(dayTime);
 
 		//셀 색 바꾸기
 		if(last == dayTime[day].startHour){
 			$(this).removeClass("bg-primary");
+			dayTime[day].startHour=-1;
 			return;
 		}
 		if(last<first){
 			var temp = first;
 			first = last;
 			last = temp;
-		}	
+		}
+
+		//셀 값 배열에 넣기
+		dayTime[day].startHour=first;
+		dayTime[day].endHour=last;
+		console.log(dayTime);
+		
 		for(var i=first; i<=last; i++)
 			$("#"+i).addClass("bg-primary");
 		return;
