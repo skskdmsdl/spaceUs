@@ -457,6 +457,17 @@
 		where 
 			tag_name like'%'|| #{value} ||'%'
 	</select>
+	
+	<!-- autocomplete category -->
+	<select id="selectAutoCategoryList" resultMap="categoryMap">
+		select
+			category_name
+		from
+			category
+		where 
+			category_name like'%'|| #{value} ||'%'
+	</select>
+	<resultMap type="category" id="categoryMap"></resultMap>
 </mapper>
 
 

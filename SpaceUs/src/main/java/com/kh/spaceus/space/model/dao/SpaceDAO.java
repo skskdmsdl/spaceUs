@@ -85,6 +85,8 @@ public interface SpaceDAO {
 
 	List<Object> selectAutoTagList(String value);
 
+	List<Object> selectAutoCategoryList(String value);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

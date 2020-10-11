@@ -80,6 +80,8 @@ public interface SpaceService {
 
 	List<Object> selectAutoTagList(String value);
 
+	List<Object> selectAutoCategoryList(String value);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

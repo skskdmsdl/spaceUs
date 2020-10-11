@@ -199,6 +199,12 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.selectList("space.selectAutoTagList", value);
 	}
 
+	@Override
+	public List<Object> selectAutoCategoryList(String value) {
+		return sqlSession.selectList("space.selectAutoCategoryList", value);
+	}
+
+	
 	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {

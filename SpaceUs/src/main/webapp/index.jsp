@@ -83,28 +83,49 @@ input[type="text"]:focus {
 
 
 <script type="text/javascript">
-$(function() {    //화면 다 뜨면 시작
+$(function() { 
     
-    $("#searchInput").autocomplete({  //오토 컴플릿트 시작
+    $("#searchInput").autocomplete({
         source : function( request, response ) {
-        	 $.ajax({
+			//tag
+       	 	$.ajax({
                  type: 'get',
                  url: "${pageContext.request.contextPath}/space/autocomplete.do",
                  dataType: "json",
                  data: {value : request.term},
                  success: function(data) {
-                     console.log(request.term);
+                     //console.log(request.term);
                      //서버에서 json 데이터 response 후 목록에 추가
                      response(
-                         $.map(data, function(item) {    //json[i] 번째 에 있는게 item 임.
+                         $.map(data, function(item) {  
                              console.log(item);
                              return {
-                             	label:item.tag //input 밑에 리스트 ui에 들어갈 값
+                             	label:item.tag 
                              }
                          })
                      );
                  }
             });
+             //category
+        	 $.ajax({
+                 type: 'get',
+                 url: "${pageContext.request.contextPath}/space/autocomplete2.do",
+                 dataType: "json",
+                 data: {value : request.term},
+                 success: function(data) {
+                     //console.log(request.term);
+                     //서버에서 json 데이터 response 후 목록에 추가
+                     response(
+                         $.map(data, function(item) {  
+                             console.log(item);
+                             return {
+                             	label:item.categoryName
+                             }
+                         })
+                     );
+                 }
+            }); 
+             
         },    // source 는 자동 완성 대상
         select : function(event, ui) {    //아이템 선택시
             console.log(ui.item);
@@ -112,16 +133,14 @@ $(function() {    //화면 다 뜨면 시작
         focus : function(event, ui) {    //포커스 가면
             return false;//한글 에러 잡기용도로 사용됨
         },
-        minLength: 1,// 최소 글자수
+        minLength: 2,// 최소 글자수
         autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
-        classes: {    //잘 모르겠음
+        classes: {  
             "ui-autocomplete": "highlight"
         },
-        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
-//        disabled: true, //자동완성 기능 끄기
-        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
-        close : function(event){    //자동완성창 닫아질때 호출
-            console.log(event);
+        delay: 500,   
+        position: { my : "right top", at: "right bottom" }, 
+        close : function(event){ 
         }
     });
     
