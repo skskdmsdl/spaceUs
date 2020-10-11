@@ -188,7 +188,6 @@ function naverShare() {
 </script>
 
 <section class="ftco-section ftco-property-details">
-ㅑㄹ
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-12">
@@ -709,11 +708,11 @@ function naverShare() {
 		   				<div class="">
 			    			<c:if test="${not empty space.attachList}">
 				    			<c:forEach items="${space.attachList}" var="attach" varStatus="vs">
-				    			 <img src="${pageContext.request.contextPath }
+				    			 <img class="img" src="${pageContext.request.contextPath }
 										/resources/upload/space/${space.rname }" alt="" /> 
-				    	 			<div class="img"
+<%-- 				    	 			<div class="img"
 										style="background-image: url(${pageContext.request.contextPath }
-										/resources/upload/space/${space.rname };"></div> 
+										/resources/upload/space/${space.rname };"></div>  --%>
 									
 								</c:forEach>
 			    			</c:if>
