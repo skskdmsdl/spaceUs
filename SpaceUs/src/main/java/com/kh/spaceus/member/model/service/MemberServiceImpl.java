@@ -69,5 +69,35 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.deleteMember(memberEmail);
 	}
 
+	@Override
+	public int updatePwd(Member member) {
+		return memberDAO.updatePwd(member);
+	}
+
+	@Override
+	public int insertBtdCoupon(String memberEmail) {
+		return memberDAO.insertBtdCoupon(memberEmail);
+	}
+
+	@Override
+	public int deleteToday() {
+		return memberDAO.deleteToday();
+	}
+
+	@Override
+	public int insertAttend2Coupon() {
+		return memberDAO.insertAttend2Coupon();
+	}
+
+	@Override
+	public int insertAttend3Coupon() {
+		return memberDAO.insertAttend3Coupon();
+	}
+
+	@Override
+	public int insertBtdCoupon() {
+		return memberDAO.insertBtdCoupon();
+	}
+
 
 }

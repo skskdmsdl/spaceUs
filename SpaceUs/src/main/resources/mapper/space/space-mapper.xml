@@ -10,7 +10,7 @@
 		from 
 			tag
 		where 
-			tag_name = #{ hashTag }
+			tag_name = '#'||#{ hashTag }
 	</select>
 	<resultMap type="tag" id="tagMap">
 		<id column="tag_no" property="no"/>
@@ -22,7 +22,7 @@
 			tag 
 		values(
 			'TAG'||seq_tag_no.nextval, 
-			#{hashTag}
+			'#'||#{hashTag}
 		)
 	</insert>
       
