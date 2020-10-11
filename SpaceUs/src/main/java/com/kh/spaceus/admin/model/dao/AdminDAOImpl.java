@@ -6,12 +6,16 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spaceus.admin.model.vo.ConfirmSpace;
+import com.kh.spaceus.admin.model.vo.ConfirmSpaceTag;
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
 import com.kh.spaceus.admin.model.vo.ManageRecruit;
+import com.kh.spaceus.admin.model.vo.ManageSpace;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
-import com.kh.spaceus.community.recruit.model.vo.Recruit;
+import com.kh.spaceus.space.model.vo.Category;
+import com.kh.spaceus.space.model.vo.Space;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -63,8 +67,31 @@ public class AdminDAOImpl implements AdminDAO {
 	public List<ManageRecruit> selectrList() {
 		return session.selectList("admin.selectrList");
 	}
-	
-	
+
+	@Override
+	public List<ManageSpace> selectSpaceList() {
+		return session.selectList("admin.selectSpceList");
+	}
+
+	@Override
+	public List<Space> selectSpaceOneList(String spaceNo) {
+		return session.selectList("admin.selectSpaceOneList", spaceNo);
+	}
+
+	@Override
+	public List<ConfirmSpace> selectSpaceOneImageList(String spaceNo) {
+		return session.selectList("admin.selectSpaceOneImageList", spaceNo);
+	}
+
+	@Override
+	public List<Category> selectSpaceOneCategory(String spaceNo) {
+		return session.selectList("admin.selectSpaceOneCategory", spaceNo);
+	}
+
+	@Override
+	public List<ConfirmSpaceTag> selectSpaceOneTagList(String spaceNo) {
+		return session.selectList("admin.selectSpaceOneTagList", spaceNo);
+	}
 	
 	
 	
