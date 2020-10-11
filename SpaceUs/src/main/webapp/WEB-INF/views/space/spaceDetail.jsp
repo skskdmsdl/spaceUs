@@ -188,6 +188,7 @@ function naverShare() {
 </script>
 
 <section class="ftco-section ftco-property-details">
+ㅑㄹ
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-12">
@@ -239,9 +240,8 @@ function naverShare() {
 							<input type="submit" onclick="rvSubmit();" value="예약하기"
 								class="btn py-3 px-5 btn-primary" style="margin-left: 70px">
 							<form id="reserveFrm">
+								<input type="hidden" name="memberId" id="memberId" value="${loginMember.principal.memberEmail}" />
 								<input type="hidden" name="spaceNo" value="${ space.spaceNo }" />
-								<input type="hidden" name="spaceName"
-									value="${ space.spaceName }" />
 							</form>
 						</div>
 						<span class="subheading">카페</span>
@@ -345,28 +345,15 @@ function naverShare() {
 						<div class="tab-pane fade " id="detail-contact"
 							role="tabpanel" aria-labelledby="detail-description-tab">
 							<div class="row">
+								
+								<c:forEach items="${optionList}" var="info" varStatus="vs">
 								<div class="col-md-4">
 									<ul class="features">
-										<li class="check"><span class="ion-ios-checkmark"></span>주류반입가능</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>WIFI</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>블루투스
-											스피커</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>${ info.optionName }</li>
 									</ul>
 								</div>
-								<div class="col-md-4">
-									<ul class="features">
-										<li class="check"><span class="ion-ios-checkmark"></span>화장실</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>유료주차장</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>엔틱분위기</li>
-									</ul>
-								</div>
-								<div class="col-md-4">
-									<ul class="features">
-										<li class="check"><span class="ion-ios-checkmark"></span>빈티지분위기</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>왕의자</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>애완견동반가능</li>
-									</ul>
-								</div>
+								</c:forEach>
+									
 							</div>
 						</div>
 						<!-- 공간옵션 끝-->
@@ -837,11 +824,19 @@ function ask(){
 	.submit();
 }
 
-/* 예약버튼 */
-function rvSubmit() {
-	$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserveSpace.do")
-					.submit();
-}
+//예약하기
+function rvSubmit(){
+   	if($("#memberId").val()){
+   	   	alert($("#memberId").val());
+		$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserveSpace.do")
+		.submit();
+   	}
+   	else{
+      	alert("로그인 후 이용할 수 있습니다.");
+      	location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+	}
+	
+};
 
 
 /* 이미지 슬라이드 시작 */

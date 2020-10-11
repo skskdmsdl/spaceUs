@@ -14,7 +14,6 @@
 	</select>
 
 <!-- reservation -->
-
 	<insert id="insertReservationVail">
 		insert into
 			reservation_avail 
@@ -47,6 +46,7 @@
 		<result column="rev_cancle" property="cancle"/>
 		<result column="rev_comple" property="complete"/>
 	</resultMap>
+
 
 </mapper>
 

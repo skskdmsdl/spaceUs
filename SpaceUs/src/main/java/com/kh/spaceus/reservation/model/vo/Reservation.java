@@ -16,13 +16,14 @@ import lombok.ToString;
 @ToString
 public class Reservation implements Serializable {
 	private String revNo;
-	private String email;
+	private String memberEmail;
 	private String spaceNo;
-	private Date rev_date;
-	private Date day;
-	private int start;
-	private int end;
-	private int price;
-	private int cancle;
-	private int complete;
+	private Date revDate;
+	private Date dDay;
+	private int startHour;
+	private int endHour;
+	private String pay;
+	private int totalPrice;
+	private int revCancle;
+	private int revComplete;
 }
