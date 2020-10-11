@@ -161,4 +161,5 @@ $(".jobSearch").click(function(){
 	location.href="${pageContext.request.contextPath }/community/recruit/recruitJobSearch.do"; 
 });
 </script>
+<script>$(function () { memberId();});</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -168,12 +168,13 @@ public class SpaceController {
 		Space space = spaceService.selectOneSpace(spaceNo);
 		System.out.println("@@"+space);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
+		System.out.println("spaceNo="+ spaceNo);
 
 		// 같은 카테고리 공간 리스트(최대 3개)
 		List<Space> spcList = spaceService.selectSameCategory(space);
 		log.debug("같은 카테고리 공간 리스트={}",spcList);
 
-		// 추천 공간 사진 리스트
+		// 추천 공간 카테고리명
 		String cateName = spaceService.selectCateName(space.getCategoryNo());
 
 		// 리뷰 한 페이지당 개수 제한
@@ -185,7 +186,10 @@ public class SpaceController {
 		int reviewTotal = spaceService.selectReviewTotalContents(spaceNo);
 		// 별점조회
 		Star star = spaceService.selectStar(spaceNo);
+		
 		star.setSumStar(star.getStar1() + star.getStar2() + star.getStar3() + star.getStar4() + star.getStar5());
+		
+		
 		String url = request.getRequestURI() + "?spaceNo=" + spaceNo;
 		String pageBar = Utils.getPageBarHtml(cPage, limit, reviewTotal, url);
 
@@ -211,7 +215,7 @@ public class SpaceController {
 
 		model.addAttribute("review", review);
 		model.addAttribute("reviewTotal", reviewTotal);
-		model.addAttribute("star", star);
+		model.addAttribute("star", star); 
 		model.addAttribute("pageBar", pageBar);
 		
 		model.addAttribute("optionList",optionList);

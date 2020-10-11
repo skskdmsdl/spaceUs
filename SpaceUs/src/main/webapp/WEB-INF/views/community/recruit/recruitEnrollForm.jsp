@@ -130,6 +130,6 @@ nhn.husky.EZCreator.createInIFrame({
 	$("#recruitFrm").submit(); 
 	 
 }); 
-
 </script>
+<script>$(function () { memberId();});</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

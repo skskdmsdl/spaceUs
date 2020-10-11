@@ -399,7 +399,7 @@ $(function() {
             <h2>이용자 리뷰</h2>
           </div>
         </div>
-         <div class="row d-flex" id="test">
+        <div class="row d-flex" id="review-wrapper">
          
 <%--           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
@@ -425,6 +425,9 @@ $(function() {
     </section>	
 <!-- 이용자리뷰 끝-->
 <script>
+$(function () { 
+	memberId();
+});
 //이용자 리뷰 ajax 요청
 $(function () { 
 	review();
@@ -444,18 +447,16 @@ function review(){
 				html  +=  "<div class=\"col-md-3 d-flex\">";
 	          	html  += "<div class=\"blog-entry justify-content-end\">";
           	    html  += "<div class=\"text\">";
-	          	html  += "<h3 class=\"headig\"><a href=\"#\">Why Lead Generation is Key for Business Growth</a></h3>";
+	          	html  += "<h3 class=\"headig\"><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h3>";
 	          	html  += "<div class=\"meta mb-3\">";
-	          	html  +=  "<div><a href=\"#\">"+item.enrollDate+"</a></div>";
-	          	html  +=  "<div><a href=\"#\">"+item.nickName+"</a></div>";
-	          	html  +=  "<div><a href=\"#\" class=\"meta-chat\"><span class=\"icon-heart\"></span>"+item.starRating+"</a></div>";
+	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\">"+item.enrollDate+"</a></div>";
+	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\">"+item.nickName+"</a></div>";
+	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\" class=\"meta-chat\"><span class=\"icon-heart\"></span>"+item.starRating+"</a></div>";
           		html  += "</div>";
-          		html  += "<a href=\"blog-single.html\" class=\"lock-20 img\" style=\"background-image:" 
-	          			+"url(\'${pageContext.request.contextPath }/resources/upload/review/"+item.image+"\');\">";
-          		html  += "</a><p>"+item.content+"</p></div></div></div>";
-
-				//console.log(html);
-				$("#test").append(html);
+          		html  += "<img class=\"lock-20 img\" src=\'${pageContext.request.contextPath}/resources/upload/review/"+item.image+"\'>";
+          		html  += "<p>"+item.content+"</p></div></div></div>";
+				console.log(html);
+				$("#review-wrapper").append(html);
 			}); 
 		},error:function(){
 			console.log("ajax 요청 실패");

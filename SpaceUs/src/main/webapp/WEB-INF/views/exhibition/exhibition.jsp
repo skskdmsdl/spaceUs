@@ -82,4 +82,5 @@ function exhibitionList (tag) {
 };
 
 </script>
+<script>$(function () { memberId();});</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

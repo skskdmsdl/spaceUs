@@ -120,7 +120,6 @@
 			#{ starRating },
 			#{ content }
 		)
-		
 		 <selectKey keyProperty="reviewNo" resultType="string" order="AFTER">
 			select
 				'REVIEW'||seq_review_no.currval
@@ -438,13 +437,13 @@
 		
 	<select id="selectRecentReviewList" resultMap="reviewMap">
 	    select 
-	        rownum, R.review_no, R.space_no, nickname, review_content, star_rating, review_date, re_reg_date, re_renamed_filename image
+	        rownum, space_name,R.review_no, R.space_no, nickname, review_content, star_rating, review_date, re_reg_date, re_renamed_filename image
 		from(select 
 				*
 			from
 				review join review_image using (review_no)
 			order by 
-				review_date desc) R
+				review_date desc) R join space on R.space_no=space.space_no
 	        where rownum between 1 and 4
 	</select>
 	

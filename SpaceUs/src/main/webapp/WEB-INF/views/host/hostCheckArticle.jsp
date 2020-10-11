@@ -106,9 +106,9 @@ p#qna-content > a:hover{
 	                    
 	                  
                     	     <div class="qna-filter-container">
-								  <button id="show-unreplied" class="btn btn-secondary btn-sm" type="button" onclick="unreplied();" value="${loginMember.principal.memberEmail }">
+								  <button id="show-unreplied" class="btn btn-secondary btn-sm" type="button" onclick="unreplied();" value="${member.nickName}">
 								  <i id="check-unreplied"></i>
-								    ${loginMember.principal.nickName }님의 답변을 기다리는 질문
+								    ${member.nickName }님의 답변을 기다리는 질문
 								  </button>
                     		 </div>
                           <!-- 질문글 시작 -->

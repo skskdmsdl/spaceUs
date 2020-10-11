@@ -24,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spaceus.community.recruit.model.vo.RecruitComment;
 import com.kh.spaceus.host.model.service.HostService;
+import com.kh.spaceus.member.model.service.MemberService;
+import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Review;
@@ -41,6 +43,9 @@ public class HostController {
 	
 	@Autowired 
 	private SpaceService spaceService;
+	
+	@Autowired 
+	private MemberService memberService;
 	
 	//정산내역
 	@RequestMapping("/settlementDetails.do")
@@ -81,8 +86,8 @@ public class HostController {
 		String hostId = principal.getName();
 		
 		List<Qna> list = hostService.selectQuestionList(hostId);
-		
-		mav.addObject("loginMember", principal);
+		Member member = memberService.selectOneMember(principal.getName());
+		mav.addObject("member", member);
 		mav.addObject("list", list);
 		mav.setViewName("host/hostCheckArticle");
 		
