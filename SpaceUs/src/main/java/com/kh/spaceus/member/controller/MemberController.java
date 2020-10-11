@@ -2,6 +2,8 @@ package com.kh.spaceus.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,6 +70,18 @@ public class MemberController {
 	@Autowired
 	private JavaMailSender mailSender;
 
+	//헤더
+	@RequestMapping(value="/header.do", produces="application/json;charset=utf8" )
+	@ResponseBody
+	public ModelAndView header (ModelAndView mav, Principal principal) {
+		Member member = memberService.selectOneMember(principal.getName());
+		String nickName = member.getNickName();
+		System.out.println(nickName);
+		mav.addObject("nickName", nickName);
+		mav.setViewName("jsonView");		
+		return mav;
+	}
+	
 	// 프로필
 	@RequestMapping("/memberProfile.do")
 	public String memberProfile (Model model, Principal principal) {

@@ -357,6 +357,9 @@ input[type="text"]:focus {
     </section>	
 <!-- 이용자리뷰 끝-->
 <script>
+$(function () { 
+	memberId();
+});
 //이용자 리뷰 ajax 요청
 $(function () { 
 	review();

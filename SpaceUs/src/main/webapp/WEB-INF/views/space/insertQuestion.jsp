@@ -15,7 +15,7 @@
 <input type="text" />
 
 </form>
-
+<script>$(function () { memberId();});</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	

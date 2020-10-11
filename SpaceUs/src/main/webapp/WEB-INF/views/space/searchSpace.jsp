@@ -683,4 +683,5 @@ function searchSpace(){
 	location.href='${pageContext.request.contextPath}/space/searchSpace.do?search_keyword=${keyword}';	
 }
 </script>	
+<script>$(function () { memberId();});</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

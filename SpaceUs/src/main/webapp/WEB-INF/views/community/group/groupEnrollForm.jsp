@@ -151,4 +151,5 @@ nhn.husky.EZCreator.createInIFrame({
 }); 
 
 </script>
+<script>$(function () { memberId();});</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
