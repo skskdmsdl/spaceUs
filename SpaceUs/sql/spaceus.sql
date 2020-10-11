@@ -109,13 +109,13 @@ commit;
 --        1111111, '예약테스트 카페', '경기도 파주시 금바위로',
 --        '125-711-811', 70000, 0, sysdate, sysdate, 0, 0, 'O',
 --        1111111111, '공간 설명 블라블라 ~~~~', '신한');
---update space
---set 
---    category_no = 'cate8'
---where 
---    space_no = 'space2';
+update space
+set 
+    hourly_price= 500
+where 
+    space_no = 'space2';
 --DELETE FROM space WHERE space_no = 'space2';
-
+commit;
 
 
 -----------------------------
