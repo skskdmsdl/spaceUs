@@ -13,8 +13,7 @@
 	href="https://cdn.materialdesignicons.com/5.5.55/css/materialdesignicons.min.css"
 	rel="stylesheet">
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=455b391796eaae1861145a078007af70&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f812560fa3200866e643713203eb962f&libraries=services"></script>
 <style>
 .prev, .next {
 	cursor: pointer;
@@ -76,7 +75,7 @@ var url = $(location).attr('href');
 
 $(function(){
 
-	$(".cs-map").removeAttr("style");
+	/* $(".cs-map").removeAttr("style"); */
 	$("#url-input").attr('value', url);
 	
     $("[data-toggle=popover]").popover({
@@ -273,12 +272,12 @@ function naverShare() {
 							<li class="nav-item"><a class="nav-link active"
 								id="detail-description-tab" data-toggle="pill"
 								href="#detail-description" role="tab"
-								aria-controls="detail-description" aria-expanded="true">공간옵션</a>
+								aria-controls="detail-description" aria-expanded="true">공간위치</a>
 							</li>
 							<li class="nav-item"><a class="nav-link"
 								id="detail-contact-tab" data-toggle="pill"
 								href="#detail-contact" role="tab" aria-controls="detail-contact"
-								aria-expanded="true">Contact</a></li>
+								aria-expanded="true">공간옵션</a></li>
 							<li class="nav-item"><a class="nav-link" id="detail-qna-tab"
 								data-toggle="pill" href="#detail-qna" role="tab"
 								aria-controls="detail-qna" aria-expanded="true">Q&A</a></li>
@@ -299,41 +298,13 @@ function naverShare() {
 								${ space.content } <br /> 
 						</div>
 						<!-- 공간설명 끝-->
-
-						<!-- 공간옵션시작 -->
-						<div class="tab-pane fade show active" id="detail-description"
-							role="tabpanel" aria-labelledby="detail-description-tab">
-							<div class="row">
-								<div class="col-md-4">
-									<ul class="features">
-										<li class="check"><span class="ion-ios-checkmark"></span>주류반입가능</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>WIFI</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>블루투스
-											스피커</li>
-									</ul>
-								</div>
-								<div class="col-md-4">
-									<ul class="features">
-										<li class="check"><span class="ion-ios-checkmark"></span>화장실</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>유료주차장</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>엔틱분위기</li>
-									</ul>
-								</div>
-								<div class="col-md-4">
-									<ul class="features">
-										<li class="check"><span class="ion-ios-checkmark"></span>빈티지분위기</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>왕의자</li>
-										<li class="check"><span class="ion-ios-checkmark"></span>애완견동반가능</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<!-- 공간옵션 끝-->
+						
 						<!-- contact 시작 -->
-						<div class="tab-pane fade" id="detail-contact" role="tabpanel"
-							aria-labelledby="detail-manufacturer-tab">
+						<div class="tab-pane fade show active" id="detail-description" role="tabpanel"
+							aria-labelledby="detail-manufacturer-tab" style="padding-top: 100px;">
 							<div class="row" style="margin-left: 5em;">
-								<div class="contact-info">
+								<div id="kakaomap" style="width:500px;height:400px; "></div>
+								<div class="contact-info" style="padding-left: 100px;">
 									<div class="ci-item">
 										<div class="ci-icon">
 											<i class="fa fa-map-marker"></i>
@@ -363,13 +334,43 @@ function naverShare() {
 											<p>Support.aler@gmail.com</p>
 										</div>
 									</div>
-									<div class="cs-map">
-										<div id="kakaomap" style="width:500px;height:400px;"></div>
-									</div>
+									
+										
 								</div>
 							</div>
 						</div>
 						<!-- contact 끝 -->
+
+						<!-- 공간옵션시작 -->
+						<div class="tab-pane fade " id="detail-contact"
+							role="tabpanel" aria-labelledby="detail-description-tab">
+							<div class="row">
+								<div class="col-md-4">
+									<ul class="features">
+										<li class="check"><span class="ion-ios-checkmark"></span>주류반입가능</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>WIFI</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>블루투스
+											스피커</li>
+									</ul>
+								</div>
+								<div class="col-md-4">
+									<ul class="features">
+										<li class="check"><span class="ion-ios-checkmark"></span>화장실</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>유료주차장</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>엔틱분위기</li>
+									</ul>
+								</div>
+								<div class="col-md-4">
+									<ul class="features">
+										<li class="check"><span class="ion-ios-checkmark"></span>빈티지분위기</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>왕의자</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>애완견동반가능</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- 공간옵션 끝-->
+						
 
 <div class="tab-pane fade" id="detail-qna" role="tabpanel" aria-labelledby="detail-qna-tab">
      <div class="row">
@@ -733,43 +734,42 @@ function naverShare() {
 </div>
 
 <!-- 추천시스템 끝 -->
+
 <script>
-
 <!-- 지도 -->
-	var mapContainer = document.getElementById('kakaomap'), // 지도를 표시할 div 
-	    mapOption = {
-	        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
-	    };  
-	
-	// 지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
+var mapContainer = document.getElementById('kakaomap'), // 지도를 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};  
 
-	var geocoder = new kakao.maps.services.Geocoder();
+//지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('${ space.address }', function(result, status) {
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
 
-	    // 정상적으로 검색이 완료됐으면 
-	     if (status === kakao.maps.services.Status.OK) {
+//주소로 좌표를 검색합니다
+geocoder.addressSearch('${ space.address }', function(result, status) {
 
-	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+// 정상적으로 검색이 완료됐으면 
+ if (status === kakao.maps.services.Status.OK) {
 
-	        // 결과값으로 받은 위치를 마커로 표시합니다
-	        var marker = new kakao.maps.Marker({
-	            map: map,
-	            position: coords
-	        });
+    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-	        // 인포윈도우로 장소에 대한 설명을 표시합니다
-	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;">' + "${ space.spaceName }" +'</div>'
-	        });
-	        infowindow.open(map, marker);
+    // 결과값으로 받은 위치를 마커로 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: coords
+    });
 
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-	    }});    
+
+    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    map.setCenter(coords);
+} 
+});  
+
+
 
 </script>
 <!-- 카카오톡 공유 -->

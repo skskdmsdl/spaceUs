@@ -33,6 +33,7 @@
 			reservation
 		where
 			member_email = #{ email }
+		order by rev_no 
 	</select>
 	<resultMap type="reservation" id="reservationMap">
 		<id column="rev_no" property="revNo"/>

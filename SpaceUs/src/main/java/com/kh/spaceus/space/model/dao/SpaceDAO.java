@@ -33,7 +33,7 @@ public interface SpaceDAO {
 
 	int selectReviewTotalContents(String spaceNo);
 
-	Star selectStar();
+	Star selectStar(String spaceNo);
 
 	List<Qna> selectQuestionList(String spaceNo, int limit, int offset);
 
@@ -63,7 +63,18 @@ public interface SpaceDAO {
 
 	String selectCateName(String cateNo);
 
-	List<Review> selectRecentReviewList();
+	List<Space> selectReviewList(String email);
+
+	int updateReview(Review review);
+
+	List<Review> selectStarAvg(String spaceNo);
+
+	void updateStarAvg(Space space);
+
+	List<Space> selectReviewPossible(String email);
+
+	List<Space> selectReviewComplete(String email);
+
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

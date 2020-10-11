@@ -60,6 +60,25 @@
 		member_email = #{ tomail }
 </update>
 
+<update id="updateStamp">
+	update
+		member
+	set
+		attendance_cnt = attendance_cnt + 1
+	where
+		member_email = #{ email }
+</update>
+
+<update id="updateMember">
+	update
+		member
+	set
+		nickname = #{ nickName }
+	where
+		member_email = #{ memberEmail }
+</update>
+
+
 
 <resultMap type="member" id="memberMap">
 </resultMap>

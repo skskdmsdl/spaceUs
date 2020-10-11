@@ -374,7 +374,7 @@ $(function () {
 						html  +=  "<div class=\"col-md-3 d-flex ftco-animate\">";
 			          	html  += "<div class=\"blog-entry justify-content-end\">";
 		          	    html  += "<div class=\"text\">";
-			          	html  += "<h3 class=\"heading\"><a href=\"#\">Why Lead Generation is Key for Business Growth</a></h3>";
+			          	html  += "<h3 class=\"headig\"><a href=\"#\">Why Lead Generation is Key for Business Growth</a></h3>";
 			          	html  += "<div class=\"meta mb-3\">";
 			          	html  +=  "<div><a href=\"#\">"+item.enrollDate+"</a></div>";
 			          	html  +=  "<div><a href=\"#\">"+item.nickName+"</a></div>";

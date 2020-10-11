@@ -17,6 +17,8 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.common.Utils;
@@ -100,16 +103,44 @@ public class MemberController {
 		Member member = memberService.selectOneMember(principal.getName());
 		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
 		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
-		List<Space> spaceList = new ArrayList<>();
+		List<Space> spaceList = spaceService.selectReviewList(principal.getName());
 		
-		for(Reservation r : revList) {
-			Space space = spaceService.selectOneSpace(r.getSpaceNo());
-			spaceList.add(space);
-		}
-		System.out.println("@@@@"+spaceList); 
 		
 		model.addAttribute("spaceList", spaceList);
 		model.addAttribute("member", member);
+		model.addAttribute("status", "all");
+		return "member/reviewList";
+	}
+	
+	@RequestMapping("/reviewPossible.do")
+	public String reviewPossible (Model model, Principal principal) {
+		Member member = memberService.selectOneMember(principal.getName());
+		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
+		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		System.out.println("@1"+revList);
+		List<Space> spaceList = spaceService.selectReviewPossible(principal.getName());
+		
+		System.out.println("@2"+spaceList); 
+		
+		model.addAttribute("spaceList", spaceList);
+		model.addAttribute("member", member);
+		model.addAttribute("status", "possible");
+		return "member/reviewList";
+	}
+	
+	@RequestMapping("/reviewComplete.do")
+	public String reviewComplete (Model model, Principal principal) {
+		Member member = memberService.selectOneMember(principal.getName());
+		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
+		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		System.out.println("@1"+revList);
+		List<Space> spaceList = spaceService.selectReviewComplete(principal.getName());
+		
+		System.out.println("@2"+spaceList); 
+		
+		model.addAttribute("spaceList", spaceList);
+		model.addAttribute("member", member);
+		model.addAttribute("status", "complete");
 		return "member/reviewList";
 	}
 
@@ -246,7 +277,7 @@ public class MemberController {
 	@GetMapping("/checkNickNameDuplicate.do")
 	@ResponseBody
 	public Map<String, Object> checkNickNameDuplicate(@RequestParam("nickName") String nickName) {
-
+		System.out.println(nickName);
 		Member member = memberService.selectOneNickName(nickName);
 		boolean isUsable = member == null;
 
@@ -316,11 +347,12 @@ public class MemberController {
 	
 	@PostMapping("/insertReview.do")
 	public String insertReview(Review review,
+							  @RequestParam("spaceNo") String spaceNo,
+							  @RequestParam("revNo") String revNo,
 							  @RequestParam(value="upFile",required=false) MultipartFile[] upFiles,
 							  HttpServletRequest request,
 							  RedirectAttributes redirectAttr) {
 		
-		System.out.println(review);
 		//1. 파일을 서버컴퓨터에 저장
 		List<ReviewAttachment> attachList  = new ArrayList<>();
 		String saveDirectory = request.getServletContext()
@@ -345,12 +377,10 @@ public class MemberController {
 				attach.setRName(renamedFileName);
 				attachList.add(attach);
 			}
-			
 		}
 		
-		//***********예약 부분 완료 이후 수정 필요함!!!!!
-		review.setSpaceNo("space2");
-		review.setRevNo("REV1");
+		review.setSpaceNo(spaceNo);
+		review.setRevNo(revNo);
 		
 		review.setReviewAtt(attachList);
 		log.debug("reveiw = {}", review);
@@ -359,6 +389,23 @@ public class MemberController {
 		//2. 게시글, 첨부파일정보를 DB에 저장
 		try {
 			int result = spaceService.insertReview(review);
+			
+			//별점 평균 업데이트
+			List<Review> reviewList = spaceService.selectStarAvg(spaceNo);
+			/* Review r = new Review(); */
+			float starAvg = 0;
+			for(Review r  : reviewList) {
+				starAvg += r.getStarRating();
+			}
+			starAvg = starAvg/reviewList.size();
+			System.out.println("@@3"+starAvg);
+			
+			Space space = new Space();
+			space.setStarAvg(starAvg);
+			space.setSpaceNo(spaceNo);
+			
+			spaceService.updateStarAvg(space);
+			
 			redirectAttr.addFlashAttribute("msg", "리뷰 등록 성공!");
 		} catch(Exception e) {
 			log.error("게시물 등록 오류", e);
@@ -371,6 +418,82 @@ public class MemberController {
 		return "redirect:/member/reviewList.do";
 	}
 	
+	@PostMapping("/updateReview.do")
+	public String updateReview(Review review,
+								@RequestParam("spaceNo") String spaceNo,
+								@RequestParam("revNo") String revNo,
+			/* @RequestParam(value="upFile",required=false) MultipartFile[] upFiles, */
+								HttpServletRequest request,
+								RedirectAttributes redirectAttr) {
+		
+		
+		review.setSpaceNo(spaceNo);
+		review.setRevNo(revNo);
+		
+		/* review.setReviewAtt(attachList); */
+		log.debug("reveiw = {}", review);
+		
+		//2. 게시글, 첨부파일정보를 DB에 저장
+		try {
+			int result = spaceService.updateReview(review);
+			
+			//별점 평균 업데이트
+			List<Review> reviewList = spaceService.selectStarAvg(spaceNo);
+			/* Review r = new Review(); */
+			float starAvg = 0;
+			for(Review r  : reviewList) {
+				starAvg += r.getStarRating();
+			}
+			starAvg = starAvg/reviewList.size();
+			System.out.println("@@3"+starAvg);
+			
+			Space space = new Space();
+			space.setStarAvg(starAvg);
+			space.setSpaceNo(spaceNo);
+			
+			spaceService.updateStarAvg(space);
+			
+			redirectAttr.addFlashAttribute("msg", "리뷰 수정 성공!");
+		} catch(Exception e) {
+			log.error("게시물 등록 오류", e);
+			redirectAttr.addFlashAttribute("msg", "리뷰 수정 실패!");
+			
+			//예외발생을 spring container에게 전달 : 지정한  예외페이지로 응답처리
+			throw e;
+		}
+		
+		return "redirect:/member/reviewList.do";
+	}
 	
+	// 닉네임중복검사
+	@GetMapping("/insertStamp.do")
+	@ResponseBody
+	public ModelAndView insertStamp(ModelAndView mav,
+									@RequestParam("memberEmail") String email) {
+		int result = memberService.updateStamp(email);
+
+		mav.setViewName("jsonView");
+
+		return mav;
+	}
 	
+	// 닉네임중복검사
+	@GetMapping("/updateMember.do")
+	@ResponseBody
+	public Map<String, Object> updateMember(ModelAndView mav,
+											Member member) {
+		
+		int result = memberService.updateMember(member);
+		String memberEmail = member.getMemberEmail();
+		member = memberService.selectOneMember(memberEmail);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		authentication.getName();
+		authentication.getPrincipal();
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("nick", member.getNickName());
+
+		return map;
+	}
+
 }

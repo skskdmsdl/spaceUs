@@ -343,11 +343,22 @@ create table recruit (
     constraints ck_header check(header in ('구인', '구직'))
 );
 
-update recruit set report_cnt = report_cnt +7 where recruit_no = 'R21';
+update recruit set report_cnt = report_cnt +8 where recruit_no = 'R21';
 
 create sequence seq_recruit_no;
 
 select * from recruit;
+select * from blacklist;
+select 
+		    B.report_board_no,
+		    R.member_email,
+		    R.title as group_board_title,
+		    R.enroll_date as group_board_date
+		from blacklist B join member M
+		                on B.member_email = M.member_email
+		                 join recruit R
+		                on B.report_board_no = R.recruit_no
+		where B.board_type='R';
 
 COMMIT;
 -----------------------------
@@ -545,7 +556,7 @@ ALTER TABLE report DROP constraints fk_group_board_no;
 commit;
 
 
-
+-------------10/9-----------------------------
 select
     *
 from(
@@ -555,10 +566,40 @@ from(
     order by B.blacklist_no desc
     );
 
+select 
+    B.report_board_no,
+    G.member_email,
+    G.group_board_title,
+    G.group_board_date,
+    
+from blacklist B join member M
+                on B.member_email = M.member_email
+                 join group_board G
+                on B.report_board_no = G.group_board_no
+                 join auth A
+                on B.member_m
+where B.board_type='G';
 
+delete from group_board where group_board_no = 'G64';
 
 select * from member;
 select * from report;
+select * from blacklist;
+select * from group_board;
+select * from space;
+select * from tag;
+
+select
+*
+from
+report
+where board_no='G64';
+
+insert into report values('admin@spaceus.com','G6','기타');
+COMMIT;
+---------------------------------10/9------------------------
+
+
 
 insert into report values('sinsa@naver.com','G64','기타');
 COMMIT;
@@ -575,14 +616,46 @@ create table blackList (
     constraints fk_blacklist_email foreign key(member_email) references member(member_email) on delete set null,
     constraints ck_board_type check(board_type in ('R', 'G'))
 );
+ALTER TABLE blackList DROP constraints fk_blacklist_email;
+ALTER TABLE blackList add constraints fk_blacklist_email foreign key(member_email) references member(member_email) on delete set null;
+ALTER TABLE blackList add (title varchar2(256));
+alter table group_board_comment add(report_cnt number default 0);
 
 create sequence seq_blacklist_no;
 select * from blacklist;
 select * from recruit;
+
 select * from group_board;
+select * from member;
 select * from report;
 
-delete from blacklist where blackList_no = 'BLACK41';
+delete from group_board where group_board_no = 'G12';
+
+COMMIT;
+
+select 
+		    B.report_board_no,
+		    R.member_email,
+		    R.title as group_board_title,
+		    R.enroll_date as group_board_date
+		from blacklist B left join member M
+		                on B.member_email = M.member_email
+		                 left join recruit R
+		                on B.report_board_no = R.recruit_no
+		where B.board_type='R';
+        
+select 
+		    B.report_board_no,
+		    G.member_email,
+		    G.group_board_title,
+		    G.group_board_date
+		from blacklist B left join member M
+		                on B.member_email = M.member_email
+		                 left join group_board G
+		                on B.report_board_no = G.group_board_no
+		where B.board_type='G';
+
+select * from blackList;
 
 COMMIT;
 
@@ -668,10 +741,6 @@ create table coupon(
 create sequence seq_coupon_no;
 
 select * from coupon;
-
-
-
-
 -----------------------------
 --------- 비속어필터 ---------
 -----------------------------

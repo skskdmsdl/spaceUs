@@ -75,9 +75,10 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public Star selectStar() {
-		return sqlSession.selectOne("space.selectStar");
+	public Star selectStar(String spaceNo) {
+		return sqlSession.selectOne("space.selectStar", spaceNo);
 	}
+
 
 	@Override
 	public List<Qna> selectQuestionList(String spaceNo, int limit, int offset) {
@@ -152,8 +153,33 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public List<Review> selectRecentReviewList() {
-		return sqlSession.selectList("space.selectRecentReviewList");
+	public List<Space> selectReviewList(String email) {
+		return sqlSession.selectList("space.selectReviewList", email);
+	}
+
+	@Override
+	public int updateReview(Review review) {
+		return sqlSession.update("space.updateReview", review);
+	}
+
+	@Override
+	public List<Review> selectStarAvg(String spaceNo) {
+		return sqlSession.selectList("space.selectStarAvg", spaceNo);
+	}
+
+	@Override
+	public void updateStarAvg(Space space) {
+		sqlSession.update("space.updateStarAvg", space);
+	}
+
+	@Override
+	public List<Space> selectReviewPossible(String email) {
+		return sqlSession.selectList("space.selectReviewPossible", email);
+	}
+
+	@Override
+	public List<Space> selectReviewComplete(String email) {
+		return sqlSession.selectList("space.selectReviewComplete", email);
 	}
 
 	/*@Override
