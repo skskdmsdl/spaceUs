@@ -24,4 +24,8 @@ public interface MemberDAO {
 
 	List<Member> selectBtdList(String format);
 
+	int deleteAttendance();
+
+	int deleteMember(String memberEmail);
+
 }

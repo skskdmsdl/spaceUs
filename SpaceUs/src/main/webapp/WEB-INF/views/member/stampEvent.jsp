@@ -71,12 +71,9 @@
 
 <script>
 
-let click = null;
-
 <!-- 출석이벤트  -->
 $(function(){
-	function c(click){
-		alert(click);
+	function c(){
 		p();
 		var e=h();
 		var r=0;
@@ -94,11 +91,11 @@ $(function(){
 				l.append('<div class="blank"></div>')
 			}else{
 				var v=e[c].day;
-				if(click != null){
+				/* if(check != null){
 					var m=g(new Date(t,n-1,v))?'<div class="today"><i class="fa fa-check"></i>':"<div>";
-				}else{
+				}else{ */
 					var m=g(new Date(t,n-1,v))?'<div class="today">':"<div>";
-				}
+				/* } */
 				l.append(m+""+v+"</div>")
 			}
 		}
@@ -181,9 +178,6 @@ $("#calendar_content").click(function(){
 		dataType : "json",
 		success : function(data){
 			alert("출석확인 되었습니다!");
-			click = 'ok';
-			alert(click);
-			c('ok');
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);

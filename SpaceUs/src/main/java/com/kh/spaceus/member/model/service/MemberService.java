@@ -1,5 +1,6 @@
 package com.kh.spaceus.member.model.service;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
@@ -23,5 +24,9 @@ public interface MemberService {
 	int updateMember(Member member);
 
 	List<Member> selectBtdList(String format);
+
+	int deleteAttendance();
+
+	int deleteMember(String memberEmail);
 
 }

@@ -20,8 +20,8 @@ import com.kh.spaceus.space.model.service.SpaceService;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j; 
 
+@Controller
 @Slf4j 
-@Component
 public class Scheduler { 
 	
 	@Autowired 
@@ -34,17 +34,17 @@ public class Scheduler {
 	 * cron표현식 초 분 시 일 월 요일 년(생략가능)
 	 */
 	@Scheduled(cron = "0 0 0 1 * *") 
-	@Transactional
 	public void monthlyScheduler(){ 
-		System.out.println("출석데이터 삭제"); 
 		System.out.println("출석 쿠폰 발급"); 
+		
+		System.out.println("출석데이터 삭제"); 
+		int result = memberService.deleteAttendance();
 		
 		
 	}
 
-	@Scheduled(cron ="0 03 4 * * *") 
-	@Transactional
-	public void everyScheduler(){ 
+	@Scheduled(cron ="0 0 0 * * *") 
+	public void dailyScheduler(){ 
 		System.out.println("기념일 쿠폰 발급 "); 
 		//기념일 쿠폰 발급
 		Date today = new Date();
@@ -52,7 +52,10 @@ public class Scheduler {
 		System.out.println(data.format(today)); 
 		List<Member> btdList = memberService.selectBtdList(data.format(today));
 		System.out.println(btdList);
-		
+		for(Member m : btdList) {
+			System.out.println(m.getMemberEmail());
+			/* int result = memberService.insertBtdCoupon(m.getMemberEmail()); */
+		}
 		
 		System.out.println("당일 출첵 여부 초기화 "); 
 		

@@ -59,5 +59,15 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectBtdList(format);
 	}
 
+	@Override
+	public int deleteAttendance() {
+		return memberDAO.deleteAttendance();
+	}
+
+	@Override
+	public int deleteMember(String memberEmail) {
+		return memberDAO.deleteMember(memberEmail);
+	}
+
 
 }

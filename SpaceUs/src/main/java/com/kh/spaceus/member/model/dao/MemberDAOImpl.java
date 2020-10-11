@@ -58,4 +58,14 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<Member> selectBtdList(String format) {
 		return sqlSession.selectList("member.selectBtdList", format);
 	}
+
+	@Override
+	public int deleteAttendance() {
+		return sqlSession.update("member.deleteAttendance");
+	}
+
+	@Override
+	public int deleteMember(String memberEmail) {
+		return sqlSession.delete("member.deleteMember", memberEmail);
+	}
 }
