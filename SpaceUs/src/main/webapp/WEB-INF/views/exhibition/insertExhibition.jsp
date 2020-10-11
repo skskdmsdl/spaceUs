@@ -242,4 +242,5 @@ $(function(){
 <!-- 기획전 등록폼 끝-->
      </div>
      </section>
+<script>$(function () { memberId();});</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

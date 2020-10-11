@@ -183,4 +183,5 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
     <!-- 소모임 끝-->
 
 <!-- 컨텐츠 끝 -->
+<script>$(function () { memberId();});</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

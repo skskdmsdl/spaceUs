@@ -792,7 +792,7 @@ geocoder.addressSearch('${ space.address }', function(result, status) {
     	        }]
     	    });
 </script>
-
+<script>$(function () { memberId();});</script>
 <script>
 /* 추천공간 이미지 슬라이드 */
 /* $(".owl-carousel ref").owlCarousel({ 
