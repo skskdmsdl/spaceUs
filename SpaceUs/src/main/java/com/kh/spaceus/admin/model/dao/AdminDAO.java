@@ -3,6 +3,7 @@ package com.kh.spaceus.admin.model.dao;
 import java.util.List;
 
 import com.kh.spaceus.admin.model.vo.ConfirmSpace;
+import com.kh.spaceus.admin.model.vo.ConfirmSpaceOption;
 import com.kh.spaceus.admin.model.vo.ConfirmSpaceTag;
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
@@ -42,5 +43,11 @@ public interface AdminDAO {
 	List<Category> selectSpaceOneCategory(String spaceNo);
 
 	List<ConfirmSpaceTag> selectSpaceOneTagList(String spaceNo);
+
+	List<ConfirmSpaceOption> selectSpaceOptionList(String spaceNo);
+
+	int updateStatus(Space param1);
+
+	int updateHost(Space param1);
 	
 }

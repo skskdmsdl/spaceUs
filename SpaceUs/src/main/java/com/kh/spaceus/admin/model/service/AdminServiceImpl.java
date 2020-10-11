@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spaceus.admin.model.dao.AdminDAO;
 import com.kh.spaceus.admin.model.vo.ConfirmSpace;
+import com.kh.spaceus.admin.model.vo.ConfirmSpaceOption;
 import com.kh.spaceus.admin.model.vo.ConfirmSpaceTag;
 import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
@@ -92,8 +93,21 @@ public class AdminServiceImpl implements AdminService{
 	public List<ConfirmSpaceTag> selectSpaceOneTagList(String spaceNo) {
 		return adminDAO.selectSpaceOneTagList(spaceNo);
 	}
-	
-	
+
+	@Override
+	public List<ConfirmSpaceOption> selectSpaceOptionList(String spaceNo) {
+		return adminDAO.selectSpaceOptionList(spaceNo);
+	}
+
+	@Override
+	public int updatdStatus(Space param1) {
+		return adminDAO.updateStatus(param1);
+	}
+
+	@Override
+	public int updateHost(Space param1) {
+		return adminDAO.updateHost(param1);
+	}
 	
 	
 }
