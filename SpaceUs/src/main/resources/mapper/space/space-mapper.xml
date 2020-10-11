@@ -34,7 +34,7 @@
 		    select
 		        *
 		    from
-		        space join space_image using (space_no) join reservation using(space_no) 
+		        space join space_image using (space_no) 
 		    where 
 		         space_no= #{spaceNo} and rownum=1
 		    order by
