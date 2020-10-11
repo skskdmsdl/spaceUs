@@ -186,12 +186,9 @@ public class SpaceController {
 		// 별점조회
 		Star star = spaceService.selectStar(spaceNo);
 		
+		star.setSumStar(star.getStar1() + star.getStar2() + star.getStar3() + star.getStar4() + star.getStar5());
 		
-		star.setSumStar(star.getStar1() + star.getStar2() + star.getStar3() +
-		star.getStar4() + star.getStar5());
-		/*
-		 * star=null? star=0: star=1
-		 */		 
+		
 		String url = request.getRequestURI() + "?spaceNo=" + spaceNo;
 		String pageBar = Utils.getPageBarHtml(cPage, limit, reviewTotal, url);
 

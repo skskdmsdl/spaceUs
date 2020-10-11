@@ -624,39 +624,39 @@ function naverShare() {
 										<div class="wrap">
 											<p class="star">
 												<fmt:parseNumber var="star5"
-													value="${ star.star5/star.sumStar*100 }" integerOnly="true" />
+													value="${  star.sumStar == 0? 0 :star.star5/star.sumStar*100 }" integerOnly="true" />
 												<fmt:parseNumber var="star4"
-													value="${ star.star4/star.sumStar*100 }" integerOnly="true" />
+													value="${ star.sumStar == 0? 0 :star.star4/star.sumStar*100 }" integerOnly="true" />
 												<fmt:parseNumber var="star3"
-													value="${ star.star3/star.sumStar*100 }" integerOnly="true" />
+													value="${ star.sumStar == 0? 0 :star.star3/star.sumStar*100 }" integerOnly="true" />
 												<fmt:parseNumber var="star2"
-													value="${ star.star2/star.sumStar*100 }" integerOnly="true" />
+													value="${ star.sumStar == 0? 0 :star.star2/star.sumStar*100 }" integerOnly="true" />
 												<fmt:parseNumber var="star1"
-													value="${ star.star1/star.sumStar*100 }" integerOnly="true" />
+													value="${ star.sumStar == 0? 0 :star.star1/star.sumStar*100 }" integerOnly="true" />
 												<span> <i class="ion-ios-star"></i> <i
 													class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i
-													class="ion-ios-star"></i> <i class="ion-ios-star"></i> (${ star5 }%)
-												</span> <span>${ star.star5 } Reviews</span>
+													class="ion-ios-star"></i> <i class="ion-ios-star"></i> (${ star.sumStar == 0? 0 :star5 }%)
+												</span> <span>${ star.sumStar == 0? 0 :star.star5 } Reviews</span>
 											</p>
 											<p class="star">
 												<span> <i class="ion-ios-star"></i> <i
 													class="ion-ios-star"></i> <i class="ion-ios-star"></i> <i
-													class="ion-ios-star"></i> (${ star4 }%)
-												</span> <span>${ star.star4 } Reviews</span>
+													class="ion-ios-star"></i> (${ star.sumStar == 0? 0 :star4 }%)
+												</span> <span>${ star.sumStar == 0? 0 :star.star4 } Reviews</span>
 											</p>
 											<p class="star">
 												<span> <i class="ion-ios-star"></i> <i
-													class="ion-ios-star"></i> <i class="ion-ios-star"></i> (${ star3 }%)
-												</span> <span>${ star.star3 } Reviews</span>
+													class="ion-ios-star"></i> <i class="ion-ios-star"></i> (${ star.sumStar == 0? 0 :star3 }%)
+												</span> <span>${ star.sumStar == 0? 0 :star.star3 } Reviews</span>
 											</p>
 											<p class="star">
 												<span> <i class="ion-ios-star"></i> <i
-													class="ion-ios-star"></i> (${ star2 }%)
-												</span> <span>${ star.star2 } Reviews</span>
+													class="ion-ios-star"></i> (${ star.sumStar == 0? 0 :star2 }%)
+												</span> <span>${ star.sumStar == 0? 0 :star.star2 } Reviews</span>
 											</p>
 											<p class="star">
-												<span> <i class="ion-ios-star"></i> (${ star1 }%)
-												</span> <span>${ star.star1 } Reviews</span> 
+												<span> <i class="ion-ios-star"></i> (${ star.sumStar == 0? 0 :star1 }%)
+												</span> <span>${ star.sumStar == 0? 0 :star.star1 } Reviews</span> 
 											</p>
 										</div>
 									</div>
