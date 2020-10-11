@@ -845,8 +845,14 @@ function ask(){
 
 /* 예약버튼 */
 function rvSubmit() {
-	$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserveSpace.do")
-					.submit();
+
+	if('${loginMember}' == 'anonymousUser'){
+		alert("로그인 후 이용할 수 있습니다.");
+		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+	}
+	else 
+		$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserveSpace.do")
+		.submit();
 }
 
 
