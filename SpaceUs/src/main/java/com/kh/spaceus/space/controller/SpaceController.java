@@ -216,10 +216,11 @@ public class SpaceController {
 	@RequestMapping("/reserveSpace.do")
 	public ModelAndView reserveSpace(Model model,
 							   ModelAndView mav,
-							   @RequestParam("spaceNo") String spaceNo,
-							   @RequestParam("spaceName") String spaceName) {
+							   @RequestParam("spaceNo") String spaceNo) {
 		//log.debug("spaceNo= {}",spaceNo);
 		//log.debug("spaceName= {}",spaceName);
+		
+		Space space = spaceService.selectOneSpace(spaceNo);
 		
 		//spaceNo로 옵션정보가져와서 전달하기
 		List<OptionList> optionList = spaceService.selectOptionList(spaceNo);
@@ -227,7 +228,8 @@ public class SpaceController {
 		//spaceNo로 예약가능한 날짜 가져오기
 		List<ReservationAvail> availList = reservationService.selectListAvail(spaceNo);
 
-		model.addAttribute("spaceName", spaceName);
+		//model.addAttribute("spaceName", spaceName);
+		mav.addObject("space",space);
 		mav.addObject("optionList",optionList);
 		mav.addObject("availList",availList);
 		

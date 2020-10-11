@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -57,7 +59,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                        </div>
 	                        <tr>
 								<th>공간명</th>
-								<th>${ spaceName }</th>
+								<th>${ space.spaceName }</th>
 							</tr>
 							<tr>
 								<th>공간카테고리</th>
@@ -192,7 +194,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                             <p>총 금액</p>
 	                             <input type="text" name="totalPrice" readonly>
 	                         </div>
-	                         <button type="submit" class="site-btn">결제하기</button>
+	                         <button type="button" id="submit" class="site-btn">결제하기</button>
 						</form:form>
                     </div>
                 </div>
@@ -265,6 +267,7 @@ $("#availableTime th").on("click", function(){
 	//날짜,요일 선택여부
 	if($("#D-day").val()==''){
 		alert("예약 날짜를 먼저 선택해주세요");
+		document.getElementById("D-day").focus();
 		return;
 	}
 
@@ -285,8 +288,8 @@ $("#availableTime th").on("click", function(){
 		return;
 	}
 	
-	end = Number($(this).attr("id"));
-	if(end == start){
+	end = Number($(this).attr("id"))+1;
+	if((end-1) == start){
 		$(this).removeClass("bg-primary");
 		start=-1;
 		end=-1;
@@ -300,9 +303,9 @@ $("#availableTime th").on("click", function(){
 		}
 		
 		$("[name=startHour]").val(start);
-		$("[name=endHour]").val(end+1);
+		$("[name=endHour]").val(end);
 		
-		for(var i=start; i<=end; i++)
+		for(var i=start; i<end; i++)
 			$("#"+i).addClass("bg-primary");
 		return;
 	}
@@ -320,16 +323,33 @@ function resetHour(){
 
 	$("[name=startHour]").val('');
 	$("[name=endHour]").val('');
+	$("[name=pay]").val('');
+	$("[name=totalPrice]").val('');
 }
 
 </script>
 <script>
 $("[name='selectPay']").change(function(){
+	checkTime();
+	
 	$("[name=pay]").val($("[name='selectPay']:checked").val());
+
+	var totalHour = end - start;
+	var totalPrice = ${ space.hourlyPrice } * totalHour;
+
+	$("[name=totalPrice]").val(totalPrice);
 });
+
+function checkTime(){
+	if($("[name=endHour]").val() == ""){
+		alert("시간을 설정해주세요");
+		$('html, body').animate({scrollTop : $("#D-day").offset().top}, 100);
+		return false;
+	}
+}
 </script>
 <script>
-$("#revFrm").submit(function(){
+$("#submit").click(function(){
 	
 	//빈칸이면 입력 요구
 	if($("[name=dDay]").val() == ""){
@@ -338,11 +358,7 @@ $("#revFrm").submit(function(){
 		return false;
 	}
 
-	if($("[name=endHour]").val() == ""){
-		alert("시간을 설정해주세요");
-		$('html, body').animate({scrollTop : $("#D-day").offset().top}, 100);
-		return false;
-	}
+	checkTime();
 
 	if($("[name=pay]").val() == ""){
 		alert("결제 방법을 선택해주세요.");
@@ -362,6 +378,37 @@ $("#revFrm").submit(function(){
 		document.getElementById("agree3").focus();
 		return false;
 	}
+
+	//아임포트
+	var IMP = window.IMP; // 생략가능
+	IMP.init('imp84323249');
+
+	IMP.request_pay({
+	    pg : 'inicis', // version 1.1.0부터 지원.
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : '${ space.spaceName }',
+	    amount : $("[name=totalPrice]").val(),
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_postcode : '123-456',
+	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	    }
+	    alert(msg);
+	});
+	
 });
 </script>
 

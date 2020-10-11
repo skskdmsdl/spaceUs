@@ -203,8 +203,6 @@ function naverShare() {
 								class="btn py-3 px-5 btn-primary" style="margin-left: 70px">
 							<form id="reserveFrm">
 								<input type="hidden" name="spaceNo" value="${ space.spaceNo }" />
-								<input type="hidden" name="spaceName"
-									value="${ space.spaceName }" />
 							</form>
 						</div>
 						<span class="subheading">카페</span>
