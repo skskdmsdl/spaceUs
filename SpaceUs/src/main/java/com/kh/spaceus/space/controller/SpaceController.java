@@ -223,10 +223,11 @@ public class SpaceController {
 	@RequestMapping("/reserveSpace.do")
 	public ModelAndView reserveSpace(Model model,
 							   ModelAndView mav,
-							   @RequestParam("spaceNo") String spaceNo) {
+							   @RequestParam("spaceNo") String spaceNo,
+							   @RequestParam("memberId") String memberId) {
 		//log.debug("spaceNo= {}",spaceNo);
 		//log.debug("spaceName= {}",spaceName);
-		
+		System.out.println("memberId = "+memberId);
 		Space space = spaceService.selectOneSpace(spaceNo);
 		
 		//spaceNo로 옵션정보가져와서 전달하기
