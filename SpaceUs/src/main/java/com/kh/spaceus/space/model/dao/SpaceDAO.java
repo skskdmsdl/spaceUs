@@ -53,13 +53,13 @@ public interface SpaceDAO {
 
 	int insertSpaceTag(SpaceTag spaceTag);
 
-	void insertWish(Wish wish);
+	int insertWish(Wish wish);
 
 	List<Space> selectSameCategory(Space space);
 
 	int selectLikeCnt(String spaceNo);
 
-	void deleteWish(Wish wish);
+	int deleteWish(Wish wish);
 
 	String selectCateName(String cateNo);
 
@@ -74,6 +74,8 @@ public interface SpaceDAO {
 	List<Space> selectReviewPossible(String email);
 
 	List<Space> selectReviewComplete(String email);
+
+	List<Review> selectRecentReviewList();
 
 
 	/* List<Space> selectListSpaceCollection(String email); */

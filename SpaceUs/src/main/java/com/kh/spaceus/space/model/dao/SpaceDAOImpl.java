@@ -79,6 +79,7 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.selectOne("space.selectStar", spaceNo);
 	}
 
+
 	@Override
 	public List<Qna> selectQuestionList(String spaceNo, int limit, int offset) {
 		RowBounds rowBounds = new RowBounds(offset, limit);
@@ -127,8 +128,8 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public void insertWish(Wish wish) {
-		sqlSession.insert("space.insertWish", wish);
+	public int insertWish(Wish wish) {
+		return sqlSession.insert("space.insertWish", wish);
 	}
 
 	@Override
@@ -142,8 +143,8 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public void deleteWish(Wish wish) {
-		sqlSession.delete("space.deleteWish", wish);
+	public int deleteWish(Wish wish) {
+		return sqlSession.delete("space.deleteWish", wish);
 	}
 
 	@Override
@@ -181,6 +182,12 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.selectList("space.selectReviewComplete", email);
 	}
 
+	@Override
+	public List<Review> selectRecentReviewList() {
+		return sqlSession.selectList("space.selectRecentReviewList");
+	}
+
+	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {
 		return sqlSession.selectList("space.selectListSpaceCollection", email);

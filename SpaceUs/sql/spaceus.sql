@@ -686,6 +686,28 @@ create table yearly_sale(
 create sequence seq_year_sale;
 
 
+--------------------------------------------------
+-- 위시리스트 추가/삭제시 공간 좋아요수 컬럼 수정 트리거
+--------------------------------------------------
+create or replace trigger trig_addlike
+    after
+    insert on wish
+    for each row
+begin 
+    update space set like_cnt= like_cnt +1
+    where space_no = :new.space_no;
+end;
+/
+
+create or replace trigger trig_unlike
+    after
+    delete on wish
+    for each row
+begin 
+    update space set like_cnt= like_cnt-1
+    where space_no = :old.space_no;
+end;
+/
 
 
 
