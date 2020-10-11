@@ -168,12 +168,13 @@ public class SpaceController {
 		Space space = spaceService.selectOneSpace(spaceNo);
 		System.out.println("@@"+space);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
+		System.out.println("spaceNo="+ spaceNo);
 
 		// 같은 카테고리 공간 리스트(최대 3개)
 		List<Space> spcList = spaceService.selectSameCategory(space);
 		log.debug("같은 카테고리 공간 리스트={}",spcList);
 
-		// 추천 공간 사진 리스트
+		// 추천 공간 카테고리명
 		String cateName = spaceService.selectCateName(space.getCategoryNo());
 
 		// 리뷰 한 페이지당 개수 제한
