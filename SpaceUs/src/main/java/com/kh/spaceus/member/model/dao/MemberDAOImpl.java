@@ -68,4 +68,34 @@ public class MemberDAOImpl implements MemberDAO {
 	public int deleteMember(String memberEmail) {
 		return sqlSession.delete("member.deleteMember", memberEmail);
 	}
+
+	@Override
+	public int updatePwd(Member member) {
+		return sqlSession.update("member.updatePwd", member);
+	}
+
+	@Override
+	public int insertBtdCoupon(String memberEmail) {
+		return sqlSession.insert("member.insertBtdCoupon", memberEmail);
+	}
+
+	@Override
+	public int deleteToday() {
+		return sqlSession.update("member.deleteToday");
+	}
+
+	@Override
+	public int insertAttend2Coupon() {
+		return sqlSession.insert("member.insertAttend2Coupon");
+	}
+
+	@Override
+	public int insertAttend3Coupon() {
+		return sqlSession.insert("member.insertAttend3Coupon");
+	}
+
+	@Override
+	public int insertBtdCoupon() {
+		return sqlSession.insert("member.insertBtdCoupon");
+	}
 }

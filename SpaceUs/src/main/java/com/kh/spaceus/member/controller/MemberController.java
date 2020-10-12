@@ -176,13 +176,24 @@ public class MemberController {
 
 	// 출석이벤트
 	@RequestMapping("/stampEvent.do")
-	public String stampEvent() {
+	public String stampEvent(Principal principal, Model model) {
 		//오늘클릭여부 조회
-		/*
-		 * if(today = 1) return;
-		 */
+		Member member = memberService.selectOneMember(principal.getName()); 
 		
+		model.addAttribute("member", member);
 		return "member/stampEvent";
+	}
+	
+	//출석이벤트
+	@GetMapping("/insertStamp.do")
+	@ResponseBody
+	public ModelAndView insertStamp(ModelAndView mav,
+									@RequestParam("memberEmail") String email) {
+		int result = memberService.updateStamp(email);
+
+		mav.setViewName("jsonView");
+
+		return mav;
 	}
 
 //	// 로그인 폼
@@ -499,19 +510,7 @@ public class MemberController {
 		return "redirect:/member/reviewList.do";
 	}
 	
-	// 닉네임중복검사
-	@GetMapping("/insertStamp.do")
-	@ResponseBody
-	public ModelAndView insertStamp(ModelAndView mav,
-									@RequestParam("memberEmail") String email) {
-		/* int result = memberService.updateStamp(email); */
-
-		mav.setViewName("jsonView");
-
-		return mav;
-	}
-	
-	// 닉네임중복검사
+	//멤버 수정
 	@GetMapping("/updateMember.do")
 	@ResponseBody
 	public Map<String, Object> updateMember(ModelAndView mav,
@@ -528,6 +527,23 @@ public class MemberController {
 		map.put("nick", member.getNickName());
 
 		return map;
+	}
+	
+	//비밀번호 변경
+	@GetMapping("/updatePwd.do")
+	@ResponseBody
+	public ModelAndView updatePwd(ModelAndView mav,
+										 Principal principal, Member member) {
+		
+		String encryptPassword = bcryptPasswordEncoder.encode(member.getPassword());
+		member.setPassword(encryptPassword);
+		member.setMemberEmail(principal.getName());
+		
+		int result = memberService.updatePwd(member);
+		
+		mav.setViewName("jsonView");
+		
+		return mav;
 	}
 
 }

@@ -30,6 +30,7 @@ public class Member implements Serializable, UserDetails{
 	private Date birthDay; 
 	private Date memberRegDate; //가입일
 	private int attendanceCnt; //출석횟수
+	private int today; //오늘출석여부
 	private List<SimpleGrantedAuthority> authorities; //권한 ('U', 'H', 'A')
 	
 

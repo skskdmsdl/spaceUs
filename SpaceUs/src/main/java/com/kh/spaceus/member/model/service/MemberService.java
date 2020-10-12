@@ -29,4 +29,16 @@ public interface MemberService {
 
 	int deleteMember(String memberEmail);
 
+	int updatePwd(Member member);
+
+	int insertBtdCoupon(String memberEmail);
+
+	int deleteToday();
+
+	int insertAttend2Coupon();
+
+	int insertAttend3Coupon();
+
+	int insertBtdCoupon();
+
 }
