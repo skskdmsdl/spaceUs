@@ -293,6 +293,16 @@ public class SpaceController {
 		return revList;
 	}
 
+	//인덱스 페이지 인기공간리스트
+	@RequestMapping(value = "/popular.do", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Space> selectPopularSpaces(){
+		List<Space> popularList = spaceService.selectPopularSpaces();
+		log.debug("리뷰목록={}"+popularList);
+		return popularList;
+	}
+	
+	
 	
 	// 사업자등록증 조회
 	@GetMapping("/checkIdDuplicate.do")

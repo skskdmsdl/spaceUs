@@ -222,6 +222,12 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
+	public List<Space> selectPopularSpaces() {
+		return spaceDAO.selectPopularSpaces();
+	}
+	
+
+	@Override
 	public List<Object> selectAutoTagList(String value) {
 		return spaceDAO.selectAutoTagList(value);
 	}
@@ -235,8 +241,6 @@ public class SpaceServiceImpl implements SpaceService{
 	public List<Object> selectAutoOptionList(String value) {
 		return spaceDAO.selectAutoOptionList(value);
 	}
-	
-	
 	
 	
 	/*@Override
