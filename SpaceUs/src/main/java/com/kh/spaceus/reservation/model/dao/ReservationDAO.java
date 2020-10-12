@@ -15,6 +15,8 @@ public interface ReservationDAO {
 
 	List<Reservation> selectListReservation(String email);
 
+	List<Reservation> selectHostReservationList(String memberEmail);
+
 	
 	
 }

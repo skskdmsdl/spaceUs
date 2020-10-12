@@ -14,6 +14,8 @@ public interface ReservationService {
 
 	List<Reservation> selectListReservation(String email);
 
+	List<Reservation> selectHostReservationList(String memberEmail);
+
 	
 	//공간별 예약
 	

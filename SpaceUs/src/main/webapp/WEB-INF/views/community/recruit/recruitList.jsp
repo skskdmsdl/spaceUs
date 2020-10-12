@@ -107,20 +107,20 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                  <thead>
                                      <tr>
                                          <th class="text-center">#</th>
-                                         <th>제목</th>
+                                         <th >제목</th>
                                          <th class="text-center" style="padding-right: 0;">작성일</th>
                                          <th class="text-center">조회수</th>
-                                         <th>작성자</th>
+                                         <th class="text-center">작성자</th>
                                      </tr>
                                  </thead>
                                  <tbody>
                                  	<c:forEach items="${list}" var="recruit" varStatus="vs">
                                      <tr style="cursor: pointer;" onclick="recruitDetailFrm('${ recruit.no }')">
                                          <td class="text-center" >${ vs.count }</td>
-                                         <td class="txt-oflo"><span class="text-success mr-2" >[${ recruit.header }]</span>${ recruit.title }<span class="text-warning ml-2">[${ recruit.commentCnt }]</span></td>
+                                         <td><span class="text-success mr-2" >[${ recruit.header }]</span>${ recruit.title }<span class="text-warning ml-2">[${ recruit.commentCnt }]</span></td>
                                          <td class="text-center"  class="text-center" style="padding-right: 0;"><fmt:formatDate value="${recruit.enrollDate}" pattern="yyyy/MM/dd"/></td>
                                          <td class="text-center">${ recruit.viewCnt }</td>
-                                         <td class="txt-oflo">${ recruit.nickName }</td>
+                                         <td class="text-center">${ recruit.nickName }</td>
                                      </tr>
                                      </c:forEach>
                                  </tbody>

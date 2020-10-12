@@ -142,9 +142,13 @@ public class MemberController {
 	public String reviewList (Model model, Principal principal) {
 		Member member = memberService.selectOneMember(principal.getName());
 		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
-		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		/*List<Reservation> revList = reservationService.selectListReservation(principal.getName());*/
 		List<Space> spaceList = spaceService.selectReviewList(principal.getName());
 		
+		for(Space s : spaceList) {
+			System.out.println(s.getReviewComment());
+			System.out.println(s.getSpaceNo());
+		}
 		
 		model.addAttribute("spaceList", spaceList);
 		model.addAttribute("member", member);
@@ -156,8 +160,8 @@ public class MemberController {
 	public String reviewPossible (Model model, Principal principal) {
 		Member member = memberService.selectOneMember(principal.getName());
 		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
-		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
-		System.out.println("@1"+revList);
+		/*List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		System.out.println("@1"+revList);*/
 		List<Space> spaceList = spaceService.selectReviewPossible(principal.getName());
 		
 		System.out.println("@2"+spaceList); 
@@ -172,8 +176,8 @@ public class MemberController {
 	public String reviewComplete (Model model, Principal principal) {
 		Member member = memberService.selectOneMember(principal.getName());
 		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
-		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
-		System.out.println("@1"+revList);
+		/*List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		System.out.println("@1"+revList);*/
 		List<Space> spaceList = spaceService.selectReviewComplete(principal.getName());
 		
 		System.out.println("@2"+spaceList); 

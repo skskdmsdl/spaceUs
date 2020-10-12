@@ -36,17 +36,27 @@
 	</select>
 	<resultMap type="reservation" id="reservationMap">
 		<id column="rev_no" property="revNo"/>
-		<result column="member_email" property="email"/>
+		<result column="member_email" property="memberEmail"/>
 		<result column="space_no" property="spaceNo"/>
-		<result column="rev_date" property="rev_date"/>
-		<result column="d_day" property="day"/>
-		<result column="start_hour" property="start"/>
-		<result column="end_hour" property="end"/>
-		<result column="total_price" property="price"/>
-		<result column="rev_cancle" property="cancle"/>
-		<result column="rev_comple" property="complete"/>
+		<result column="d_day" property="dDay"/>
+		<result column="rev_date" property="revDate"/>
+		<result column="start_hour" property="startHour"/>
+		<result column="end_hour" property="endHour"/>
+		<result column="total_price" property="totalPrice"/>
+		<result column="rev_cancle" property="revCancle"/>
+		<result column="rev_comple" property="revComplete"/>
+		<result column="member_phone" property="phone"/>
+		<result column="pay" property="pay"/>
 	</resultMap>
 
+	<select id="selectHostReservationList" resultMap="reservationMap">
+        select 
+        	* 
+		from 
+			member join reservation using(member_email) 
+		where 
+			space_no=(select space_no from space where member_email = #{ member_email })
+	</select>
 
 </mapper>
 

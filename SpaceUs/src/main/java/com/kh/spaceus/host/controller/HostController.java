@@ -27,6 +27,8 @@ import com.kh.spaceus.host.model.service.HostService;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.qna.model.vo.Qna;
+import com.kh.spaceus.reservation.model.service.ReservationService;
+import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
@@ -47,6 +49,9 @@ public class HostController {
 	@Autowired 
 	private MemberService memberService;
 	
+	@Autowired 
+	private ReservationService reservationService;
+	
 	//정산내역
 	@RequestMapping("/settlementDetails.do")
 	public String settlementDetails () {
@@ -63,8 +68,11 @@ public class HostController {
 	
 	//예약 현황 
 	@RequestMapping("/hostReservation.do")
-	public String ManageHostReservation() {
+	public String ManageHostReservation(Principal principal, Model model) {
 		
+		String member_email = principal.getName();
+		List<Reservation> list = reservationService.selectHostReservationList(member_email);
+		model.addAttribute("list", list);
 		return "host/hostReservation";
 	}	
 	
