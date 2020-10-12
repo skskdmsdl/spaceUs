@@ -229,7 +229,7 @@
 	
 	<select id="selectOneSpaceNo" resultType="space">
 		select 
-			space_no
+			*
 		from 
 			space
 		where 

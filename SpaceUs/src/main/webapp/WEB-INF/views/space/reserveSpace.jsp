@@ -172,11 +172,13 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                         <div class="section-title sidebar-title-b">
                             <h6>결제 예정금액</h6>
                         </div>
-                         <form:form name="revFrm" id="revFrm" 
-							  action="#" 
+                         <form:form name="insertReservation" id="insertReservation"
+                         	  action="${pageContext.request.contextPath}/reservation/insertReservation.do"
+							  method="POST"
 							  class="calculator-form">
-							  <!-- method="post"
-							  enctype="multipart/form-data" -->
+							 <input type="hidden" name="memberEmail" value="${ member.memberEmail }">
+							 <input type="hidden" name="spaceNo" value="${ space.spaceNo }">
+		
 	                         <div class="filter-input">
 	                             <p>예약 날짜</p>
 	                             <input type="text" name="dDay" readonly>
@@ -194,7 +196,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                             <p>총 금액</p>
 	                             <input type="text" name="totalPrice" readonly>
 	                         </div>
-	                         <button type="button" id="submit" class="site-btn">결제하기</button>
+	                         <button type="button" id="sub" class="site-btn">결제하기</button>
 						</form:form>
                     </div>
                 </div>
@@ -288,8 +290,8 @@ $("#availableTime th").on("click", function(){
 		return;
 	}
 	
-	end = Number($(this).attr("id"))+1;
-	if((end-1) == start){
+	end = Number($(this).attr("id"));
+	if((end) == start){
 		$(this).removeClass("bg-primary");
 		start=-1;
 		end=-1;
@@ -303,9 +305,9 @@ $("#availableTime th").on("click", function(){
 		}
 		
 		$("[name=startHour]").val(start);
-		$("[name=endHour]").val(end);
+		$("[name=endHour]").val(end+1);
 		
-		for(var i=start; i<end; i++)
+		for(var i=start; i<=end; i++)
 			$("#"+i).addClass("bg-primary");
 		return;
 	}
@@ -334,7 +336,7 @@ $("[name='selectPay']").change(function(){
 	
 	$("[name=pay]").val($("[name='selectPay']:checked").val());
 
-	var totalHour = end - start;
+	var totalHour = (end+1) - start;
 	var totalPrice = ${ space.hourlyPrice } * totalHour;
 
 	$("[name=totalPrice]").val(totalPrice);
@@ -349,8 +351,7 @@ function checkTime(){
 }
 </script>
 <script>
-$("#submit").click(function(){
-	
+$("#sub").on("click", function(){
 	//빈칸이면 입력 요구
 	if($("[name=dDay]").val() == ""){
 		alert("예약날짜를 선택해주세요.");
@@ -379,6 +380,11 @@ $("#submit").click(function(){
 		return false;
 	}
 
+	iamport();
+	
+});
+
+function iamport(){
 	//아임포트
 	var IMP = window.IMP; // 생략가능
 	IMP.init('imp84323249');
@@ -389,12 +395,9 @@ $("#submit").click(function(){
 	    merchant_uid : 'merchant_' + new Date().getTime(),
 	    name : '${ space.spaceName }',
 	    amount : $("[name=totalPrice]").val(),
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456',
-	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+	    buyer_email : '${ member.memberEmail }',
+	    buyer_name : '${ member.nickName }',
+	    buyer_tel : '${ member.memberPhone }'
 	}, function(rsp) {
 	    if ( rsp.success ) {
 	        var msg = '결제가 완료되었습니다.';
@@ -402,14 +405,17 @@ $("#submit").click(function(){
 	        msg += '상점 거래ID : ' + rsp.merchant_uid;
 	        msg += '결제 금액 : ' + rsp.paid_amount;
 	        msg += '카드 승인번호 : ' + rsp.apply_num;
+
+	        document.insertReservation.submit();
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;
 	    }
 	    alert(msg);
+	    //나중에 지우기
+	    document.insertReservation.submit();
 	});
-	
-});
+}
 </script>
 <script>$(function () { memberId();});</script>
 
