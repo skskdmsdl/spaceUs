@@ -61,7 +61,7 @@
 							</tr>
 						    <tr>
 						      <td class="align-baseline">생일</td>
-						      <td><input type="date" class="col-7 input-group-text mb-4 mr-5 pull-right" value="<fmt:formatDate value="${member.birthDay}" pattern="yyyy-MM-dd" />" disabled/></td>
+						      <td><input type="text" class="col-7 input-group-text mb-4 mr-5 pull-right" value="${member.birthDay}" disabled/></td> 
 							</tr>
 						    <tr>
 						      <td class="align-baseline">핸드폰 <i class="fa fa-check phoneCheck ml-2" style="display:none; color:#3ab549;" aria-hidden="true"></i> <i class="fa fa-close phoneFalse ml-2" style="display:none; color:red;" aria-hidden="true"></i></td>
@@ -259,6 +259,8 @@ $("#infoUpdate").on("click", function(){
 		url : "${ pageContext.request.contextPath }/member/updateMember.do",
 		data : {
 			nickName : $("#nickName").val(),
+			birthDay : $("#btdCheck").val(),
+			
 			memberEmail : $("#memberEmail").val()
 		},
 		dataType : "json",
@@ -339,7 +341,7 @@ $("#updatePwd").on("click", function(){
 //탈퇴
 $("#deleteBtn").click(function(){
 	 if(!confirm("정말로 탈퇴하시겠습니까?")) return;
-	 /*$("#deleteFrm").submit(); */
+	 $("#deleteFrm").submit();
 });
 //핸드폰 인증
 $(function(){

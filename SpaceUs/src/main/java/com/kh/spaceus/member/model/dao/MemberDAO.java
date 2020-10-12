@@ -40,4 +40,6 @@ public interface MemberDAO {
 
 	int insertBtdCoupon();
 
+	int deleteCoupon();
+
 }

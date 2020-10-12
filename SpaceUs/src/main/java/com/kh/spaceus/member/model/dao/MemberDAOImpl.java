@@ -98,4 +98,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public int insertBtdCoupon() {
 		return sqlSession.insert("member.insertBtdCoupon");
 	}
+
+	@Override
+	public int deleteCoupon() {
+		return sqlSession.delete("member.deleteCoupon");
+	}
 }

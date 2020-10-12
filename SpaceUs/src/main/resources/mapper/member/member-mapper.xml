@@ -74,7 +74,8 @@
 	update
 		member
 	set
-		nickname = #{ nickName }
+		nickname = #{ nickName },
+		member_phone = #{ memberPhone }
 	where
 		member_email = #{ memberEmail }
 </update>
@@ -107,9 +108,9 @@
 
 <delete id="deleteMember">
     delete from 
-    	member 
- 	where 
- 		attendance_cnt = 0 
+    	member join 
+    where 
+    	member_email = #{ memberEmail}
 </delete>
 
 <update id="updatePwd">
@@ -138,7 +139,7 @@
 	from
 		member
 	where
-		birthday like '%%/'||(select to_char(sysdate+1, 'MM/dd') sys_month from dual)
+		birthday like '%%%%-'||(select to_char(sysdate, 'MM-dd') from dual)
 </insert>
 
 <update id="deleteToday">
@@ -147,7 +148,6 @@
 	set
 		today = 0
 </update>
-
 
 <insert id="insertAttend3Coupon">
 	insert all
@@ -179,6 +179,9 @@
 	select member_email from member <![CDATA[where attendance_cnt >=2 and attendance_cnt < 3]]> 
 </insert>
 
+<delete id="deleteCoupon">
+	select * from coupon where to_char(coupon_deadline) = to_date(sysdate, 'yy/MM/dd');
+</delete>
 
 
 

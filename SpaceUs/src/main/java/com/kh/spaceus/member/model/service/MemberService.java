@@ -41,4 +41,6 @@ public interface MemberService {
 
 	int insertBtdCoupon();
 
+	int deleteCoupon();
+
 }

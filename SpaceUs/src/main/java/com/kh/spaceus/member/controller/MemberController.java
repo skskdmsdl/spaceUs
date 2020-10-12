@@ -11,7 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
+import javax.management.relation.Role;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
@@ -19,6 +22,8 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -37,6 +42,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.member.model.service.MemberService;
+import com.kh.spaceus.member.model.vo.Coupon;
 import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.Reservation;
@@ -93,19 +99,18 @@ public class MemberController {
 	//탈퇴
 	@RequestMapping("/deleteMember.do")
 	public String deleteMember (@RequestParam("memberEmail") String memberEmail,
-								RedirectAttributes redirectAttr) {
+			RedirectAttributes redirectAttr) {
 		int result = memberService.deleteMember(memberEmail);
 		
 		if(result>0) {
-			redirectAttr.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다.");
-			return "redirect:/member/memberLogout";//로그아웃 처리함.
+		redirectAttr.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다.");
+		return "redirect:/member/memberLogout";//로그아웃 처리함.
 		}
 		else 
-			redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");
+		redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");
 		
 		return "redirect:/";
-	}
-
+		}
 	// 이용내역
 	@RequestMapping("/usageHistory.do")
 	public String usageHistory() {
@@ -122,7 +127,8 @@ public class MemberController {
 
 	// 쿠폰함
 	@RequestMapping("/couponList.do")
-	public String couponList() {
+	public String couponList(Principal principal) {
+		/* List<Coupon> coupon = memberService.selectCouponList(principal.getName()); */
 
 		return "member/couponList";
 	}
@@ -291,7 +297,14 @@ public class MemberController {
 
 	// 로그아웃
 	@RequestMapping("/memberLogout.do")
-	public String memberLogout() {
+	public String memberLogout(RedirectAttributes redirectAttr, HttpServletRequest request,
+			 HttpServletResponse response, HttpSession session, HttpSecurity http) {
+		
+		
+		Cookie cookie=new Cookie("JSESSIONID", session.getId());
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+		
 		return "redirect:/";
 	}
 
@@ -515,6 +528,10 @@ public class MemberController {
 	@ResponseBody
 	public Map<String, Object> updateMember(ModelAndView mav,
 											Member member) {
+		//생일 스트링으로 변환!!!!!!
+		String s = member.getBirthDay();
+		s= s.replace("-", "/").substring(2);
+		System.out.println(s);
 		
 		int result = memberService.updateMember(member);
 		String memberEmail = member.getMemberEmail();
@@ -523,9 +540,9 @@ public class MemberController {
 		authentication.getName();
 		authentication.getPrincipal();
 		
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("nick", member.getNickName());
-
 		return map;
 	}
 	

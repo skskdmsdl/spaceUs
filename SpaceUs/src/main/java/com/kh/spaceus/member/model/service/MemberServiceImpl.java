@@ -99,5 +99,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.insertBtdCoupon();
 	}
 
+	@Override
+	public int deleteCoupon() {
+		return memberDAO.deleteCoupon();
+	}
+
 
 }
