@@ -58,7 +58,7 @@ p#qna-content > a:hover{
 	                    
 	                  
                     	     <div class="qna-filter-container">
-								  <button id="show-unreplied" class="btn btn-secondary btn-sm" type="button" onclick="unreplied();" value="${member.nickName}">
+								  <button id="show-unreplied" class="btn btn-secondary btn-sm" type="button" onclick="unreplied();" value="${member.memberEmail}">
 								  <i id="check-unreplied"></i>
 								    ${member.nickName }님의 답변을 기다리는 질문
 								  </button>
