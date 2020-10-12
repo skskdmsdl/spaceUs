@@ -232,6 +232,11 @@ public class SpaceServiceImpl implements SpaceService{
 	public List<Object> selectAutoList(String value) {
 		return spaceDAO.selectAutoList(value);
 	}
+
+	@Override
+	public Wish selectOneWish(Wish wish) {
+		return spaceDAO.selectOneWish(wish);
+	}
 	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {

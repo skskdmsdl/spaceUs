@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.kh.spaceus.member.model.vo.Coupon;
 import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.space.model.vo.Wish;
 
 public interface MemberDAO {
 
@@ -44,5 +45,7 @@ public interface MemberDAO {
 	int deleteCoupon();
 
 	List<Coupon> selectCouponList(String email);
+
+	List<Wish> selectWishList(String email);
 
 }
