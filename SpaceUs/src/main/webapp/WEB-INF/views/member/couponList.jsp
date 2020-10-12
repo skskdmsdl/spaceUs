@@ -51,18 +51,20 @@
                                    </select>
                                 </div> 
                             </div>
+                            <c:forEach items="${coupon}" var="coupon" varStatus="vs">
 								<div class="col-md pull-left ml-5 mr-5" style="width:480px;">
-				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/coupon/come.png" alt="..."> 
-	                               	 <p id="couponEnd">2020.10.23 까지</p>
-	                               </div>
-								<div class="col-md pull-left" style="width:480px;">
+				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/coupon/${ coupon.type }.png" alt="..."> 
+	                               	<p id="couponEnd">2020.10.23 까지</p>
+	                            </div>
+	                        </c:forEach>
+								<%-- <div class="col-md pull-left" style="width:480px;">
 				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/coupon/btd.png" alt="..."> 
                                 	 <p id="couponEnd2">2020.10.23 까지</p>
                                 </div>
 								<div class="col-md pull-left ml-5 mr-5" style="width:480px;">
 				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/coupon/attend3.png" alt="..."> 
 	                               	 <p id="couponEnd">2020.10.23 까지</p>
-	                            </div>
+	                            </div> --%>
 								<%-- <div class="col-md pull-left" style="width:480px;">
 				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/attend2.png" alt="..."> 
                                 	 <p id="couponEnd2">2020.10.23 까지</p>

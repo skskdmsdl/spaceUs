@@ -46,28 +46,18 @@ public class Scheduler {
 		
 	}
 
-	@Scheduled(cron ="0 31 2 * * *") 
+	@Scheduled(cron ="0 0 0 * * *") 
 	public void dailyScheduler(){ 
 		System.out.println("생일 쿠폰 발급 "); 
 		//기념일 쿠폰 발급
 		int result = memberService.insertBtdCoupon();
-		/* Date today = new Date(); */
-		/*SimpleDateFormat data = new SimpleDateFormat ("MM/dd");
-		System.out.println(data.format(today)); 
-		List<Member> btdList = memberService.selectBtdList(data.format(today));*/
-		/*
-		List<Member> btdList = memberService.selectBtdList();
-		System.out.println(btdList);
-		for(Member m : btdList) {
-			System.out.println(m.getMemberEmail());
-			int result = memberService.insertBtdCoupon(m.getMemberEmail());
-		}
-		*/
 		
 		
 		System.out.println("당일 출첵 여부 초기화 "); 
 		int result2 = memberService.deleteToday();
 		
+		System.out.println("사용기간 만료 쿠폰 삭제 "); 
+		int result3 = memberService.deleteCoupon();
 		
 	} 
 }

@@ -120,7 +120,7 @@ $(function() {
         classes: {  
             "ui-autocomplete": "highlight"
         },
-        delay: 500,   
+        delay: 30,   
         position: { my : "right top", at: "right bottom" }, 
         close : function(event){ 
         }
@@ -129,7 +129,6 @@ $(function() {
     
 });
 </script>
-
 
 <!-- 컨텐츠 시작 -->
 <div class="hero-wrap ftco-degree-bg"
