@@ -82,14 +82,11 @@ public interface SpaceDAO {
 	List<Space> selectAll();
 
 	List<OptionList> selectOptionList(String spaceNo);
-
+	
 	List<Space> selectPopularSpaces();
 
-	List<Object> selectAutoTagList(String value);
+	List<Object> selectAutoList(String value);
 
-	List<Object> selectAutoCategoryList(String value);
-
-	List<Object> selectAutoOptionList(String value);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 
