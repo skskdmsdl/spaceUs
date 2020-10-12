@@ -189,7 +189,8 @@ public class SpaceDAOImpl implements SpaceDAO{
 	public List<OptionList> selectOptionList(String spaceNo) {
 		return sqlSession.selectList("space.selectOptionList", spaceNo);
 	}
-
+	
+	@Override	
 	public List<Review> selectRecentReviewList() {
 		return sqlSession.selectList("space.selectRecentReviewList");
 	}
@@ -198,9 +199,12 @@ public class SpaceDAOImpl implements SpaceDAO{
 	public List<Object> selectAutoList(String value) {
 		return sqlSession.selectList("space.selectAutoList", value);
 	}
+	
+	@Override	
+	public List<Space> selectPopularSpaces() {
+		return sqlSession.selectList("space.selectPopularSpaces");
+	}
 
-	
-	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {
 		return sqlSession.selectList("space.selectListSpaceCollection", email);
