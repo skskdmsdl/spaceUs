@@ -1,6 +1,7 @@
 package com.kh.spaceus.scheduler;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -36,28 +37,36 @@ public class Scheduler {
 	@Scheduled(cron = "0 0 0 1 * *") 
 	public void monthlyScheduler(){ 
 		System.out.println("출석 쿠폰 발급"); 
+		int result1 = memberService.insertAttend2Coupon();
+		int result2 = memberService.insertAttend3Coupon();
 		
 		System.out.println("출석데이터 삭제"); 
-		int result = memberService.deleteAttendance();
+		int result3 = memberService.deleteAttendance();
 		
 		
 	}
 
-	@Scheduled(cron ="0 0 0 * * *") 
+	@Scheduled(cron ="0 31 2 * * *") 
 	public void dailyScheduler(){ 
-		System.out.println("기념일 쿠폰 발급 "); 
+		System.out.println("생일 쿠폰 발급 "); 
 		//기념일 쿠폰 발급
-		Date today = new Date();
-		SimpleDateFormat data = new SimpleDateFormat ("MM/dd");
+		int result = memberService.insertBtdCoupon();
+		/* Date today = new Date(); */
+		/*SimpleDateFormat data = new SimpleDateFormat ("MM/dd");
 		System.out.println(data.format(today)); 
-		List<Member> btdList = memberService.selectBtdList(data.format(today));
+		List<Member> btdList = memberService.selectBtdList(data.format(today));*/
+		/*
+		List<Member> btdList = memberService.selectBtdList();
 		System.out.println(btdList);
 		for(Member m : btdList) {
 			System.out.println(m.getMemberEmail());
-			/* int result = memberService.insertBtdCoupon(m.getMemberEmail()); */
+			int result = memberService.insertBtdCoupon(m.getMemberEmail());
 		}
+		*/
+		
 		
 		System.out.println("당일 출첵 여부 초기화 "); 
+		int result2 = memberService.deleteToday();
 		
 		
 	} 

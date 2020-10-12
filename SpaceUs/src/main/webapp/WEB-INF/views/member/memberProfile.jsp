@@ -52,7 +52,7 @@
 						 <table class="col-11">
 							<tr>
 								<th class="align-baseline" >닉네임 <i class="fa fa-check nickNameCheck ml-2" style="display:none; color:#3ab549;" aria-hidden="true"></i> <i class="fa fa-close nickNameFalse ml-2" style="display:none; color:red;" aria-hidden="true"></i></th>
-								<th><input type="hidden" value="${ member.nickName }"/>
+								<th><input type="hidden" id="memberName" value="${ member.nickName }"/>
 								<input type="text" id="nickName" class="col-7 input-group-text mb-4 mr-5 pull-right" style="background-color: white;" value="${ member.nickName }" required /></th>
 							</tr>
 						    <tr>
@@ -60,24 +60,30 @@
 						      <td><input type="email" id="memberEmail" class="col-7 input-group-text mb-4 mr-5 pull-right" value="${ member.memberEmail}" disabled /></td>
 							</tr>
 						    <tr>
-						      <td class="align-baseline">기념일</td>
-						      <td><input type="date" class="col-7 input-group-text mb-4 mr-5 pull-right" style="background-color: white;" value="<fmt:formatDate value="${member.birthDay}" pattern="yyyy-MM-dd"/>"/></td>
+						      <td class="align-baseline">생일</td>
+						      <td><input type="date" class="col-7 input-group-text mb-4 mr-5 pull-right" value="<fmt:formatDate value="${member.birthDay}" pattern="yyyy-MM-dd" />" disabled/></td>
 							</tr>
 						    <tr>
-						      <td class="align-baseline">핸드폰</td>
+						      <td class="align-baseline">핸드폰 <i class="fa fa-check phoneCheck ml-2" style="display:none; color:#3ab549;" aria-hidden="true"></i> <i class="fa fa-close phoneFalse ml-2" style="display:none; color:red;" aria-hidden="true"></i></td>
 						      <td>
 							      <div class="row" style="margin-right: 50px;">
-								      <input type="tel" class="col-5 input-group-text mb-4 ml-auto mr-5" style="background-color: white;" maxlength="11" value="${ member.memberPhone}" required />
+								      <input type="tel" id="phone" class="col-5 input-group-text mb-4 ml-auto mr-5" style="background-color: white;" maxlength="11" value="${ member.memberPhone}" required />
 								      <div class="btn-wrap">
-										<button class="btn btn-primary font-bold">휴대폰 인증</button>				
+										<button class="btn btn-primary font-bold phone-btn">휴대폰 인증</button>				
 									  </div>
 							      </div>
+							      <div id="certification" class="row" style="margin-right: 52px;display:none;">
+									<input id="phoneChk"  class="col-5 input-group-text mb-4 ml-auto mr-5" style="background-color: white;" type="number" id="phoneChk" placeholder="인증번호 입력 *" required>
+									<div >
+										<span class="font-bold phone-btn">인증번호 입력</span>				
+									  </div>
+								  </div>
 							  </td>
 							</tr>
 						</table >
 							<div class="mt-5 mr-5" style="text-align: right;padding-top: 20px;">
 						      <input type="submit" class="btn primary-btn p-3 pl-4 pr-4" id="infoUpdate" value="회원정보 수정">&nbsp;
-						      <input type="reset" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4 font-weight-bolder" value="변경사항 없음">
+						      <input type="reset" id="resetBtn" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4 font-weight-bolder" style="width: 128.23px; cursor:default;" value="변경사항 없음">
 							</div>
 						  <div class="mt-5" style="border-top: 1px solid #bbbbbb" ></div>
 						  <h6 class="card-subtitle mt-3 mb-5">비밀번호를 입력해주세요.</h6>
@@ -92,8 +98,8 @@
 							</tr>
 						</table>
 						<div class="mt-5 pull-right mr-5">
-					      <input type="submit" class="btn primary-btn p-3 pl-4 pr-4" value="비밀번호 수정">&nbsp;
-					      <input type="reset" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4 font-weight-bolder" value="변경사항 없음">
+					      <input type="submit" id="updatePwd" class="btn primary-btn p-3 pl-4 pr-4" value="비밀번호 수정">&nbsp;
+					      <input type="reset" id="pwdReset" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4 font-weight-bolder" style="width: 128.23px; cursor:default;" value="변경사항 없음">
 						</div>
 	                   </div>
 		               <!-- 회원정보 끝 -->
@@ -146,6 +152,56 @@ $(function(){
 		$("#talkjs-container").toggle('show');
 	});
 });
+//초기화
+$("#nickName").keyup(function(){
+	if($("#nickName").val()==$("#memberName").val()&&!$("#certification").hasClass('show')) {
+		$("#resetBtn").val("변경사항 없음");
+		$("#resetBtn").css("cursor","default");
+		return;
+	}
+	$("#resetBtn").val("초기화");
+	$("#resetBtn").css("cursor","pointer");
+});
+$("#resetBtn").click(function(){
+	if($("#nickName").val()==$("#memberName").val()&&!$("#certification").hasClass('show')) {
+		return;
+	}
+	$("#nickName").val($("#memberName").val());
+	$(".nickNameCheck").removeClass('show');
+	$(".nickNameFalse").hide();
+	$(".nickNameCheck").hide();
+	$("#resetBtn").val("변경사항 없음");
+});
+
+$("#password").keyup(function(){
+	if(!$("#password").val() && !$("#passwordChk").val()) {
+		$("#pwdReset").val("변경사항 없음");
+		$("#pwdReset").css("cursor","default");
+		return;
+	}
+	$("#pwdReset").val("초기화");
+	$("#pwdReset").css("cursor","pointer");
+});
+$("#passwordChk").keyup(function(){
+	if(!$("#password").val() && !$("#passwordChk").val()) {
+		$("#pwdReset").val("변경사항 없음");
+		$("#pwdReset").css("cursor","default");
+		return;
+	}
+	$("#pwdReset").val("초기화");
+	$("#pwdReset").css("cursor","pointer");
+});
+$("#pwdReset").click(function(){
+	if(!$("#password").val() && !$("#passwordChk").val()) {
+		return;
+	}
+	$("#password").val("");
+	$("#passwordChk").val("");
+	$(".passwordChk").removeClass('show');
+	$(".passwordCheck").hide();
+	$(".passwordFalse").hide();
+	$("#pwdReset").val("변경사항 없음");
+});
 //닉네임 검사
 $("#nickName").on("blur", function(){
 
@@ -154,31 +210,51 @@ $("#nickName").on("blur", function(){
 	    $(this).val(a);
 		//$(".nickNameFalse").show();
 		//$("#nickName").val();
-	if($(this).val()==$(this).siblings('input').val()) return; 
-	 $.ajax({
-		url : "${ pageContext.request.contextPath }/member/checkNickNameDuplicate.do",
-		data : {
-			nickName : $("#nickName").val()
-		},
-		dataType : "json",
-		success : function(data){
-			if(data.isUsable == true) {
-				$(".nickNameCheck").show();
-				$(".nickNameFalse").hide();
+	if($(this).val()==$(this).siblings('input').val()){
+		$(".nickNameCheck").removeClass('show');
+		$(".nickNameFalse").hide();
+		$(".nickNameCheck").hide();
+		 return; 
+	}
+	else{
+		 $.ajax({
+			url : "${ pageContext.request.contextPath }/member/checkNickNameDuplicate.do",
+			data : {
+				nickName : $("#nickName").val()
+			},
+			dataType : "json",
+			success : function(data){
+				if(data.isUsable == true) {
+					$(".nickNameCheck").show();
+					$(".nickNameCheck").addClass('show');
+					$(".nickNameFalse").hide();
+				}
+				else {
+					$(".nickNameCheck").hide();
+					$(".nickNameCheck").removeClass('show');
+					$(".nickNameFalse").show();
+				}
+			},
+			error : function(xhr, status, err){
+				console.log("처리실패", xhr, status, err);
 			}
-			else {
-				$(".nickNameCheck").hide();
-				$(".nickNameFalse").show();
-			}
-		},
-		error : function(xhr, status, err){
-			console.log("처리실패", xhr, status, err);
-		}
-	}); 
+		}); 
+	}
 });
 //정보 업데이트
 $("#infoUpdate").on("click", function(){
 
+	if(!$(".nickNameCheck").hasClass('show')&&!$("#nickName").val()==$("#memberName").val()){
+		 alert("닉네임을 확인해주세요!");
+		 return;
+	}
+	if(!$(".phoneCheck").hasClass('show')&&$("#certification").hasClass('show')){
+		 alert("핸드폰을 확인해주세요!");
+		 return;
+	}
+	if($("#nickName").val()==$("#memberName").val()&&!$("#certification").hasClass('show')) {
+		return;
+	}
 	 $.ajax({
 		url : "${ pageContext.request.contextPath }/member/updateMember.do",
 		data : {
@@ -199,20 +275,119 @@ $("#infoUpdate").on("click", function(){
 //비밀번호 체크
 $("#passwordChk").blur(function(){
 	let $p1 = $("#password"), $p2 = $("#passwordChk");
-	
+	if(!$p1.val() && !$p2.val()){
+		$(".passwordCheck").hide();
+		$(".passwordFalse").hide();
+		$("#passwordChk").removeClass('show');
+		return;
+	}
 	if($p1.val() != $p2.val()){
+		$("#passwordChk").removeClass('show');
 		$(".passwordCheck").hide();
 		$(".passwordFalse").show();	
 	}
 	else {
+		$("#passwordChk").addClass('show');
 		$(".passwordCheck").show();
 		$(".passwordFalse").hide();
 	}
 });
+$("#password").blur(function(){
+	let $p1 = $("#password"), $p2 = $("#passwordChk");
+	if(!$p1.val() && !$p2.val()){
+		$(".passwordCheck").hide();
+		$(".passwordFalse").hide();
+		$("#passwordChk").removeClass('show');
+		return;
+	}
+	if($p1.val() != $p2.val()){
+		$("#passwordChk").removeClass('show');
+		$(".passwordCheck").hide();
+		$(".passwordFalse").show();	
+	}
+	else {
+		$("#passwordChk").addClass('show');
+		$(".passwordCheck").show();
+		$(".passwordFalse").hide();
+	}
+});
+//비밀번호 변경
+$("#updatePwd").on("click", function(){
+
+	if(!$("#password").val() && !$("#passwordChk").val()){
+		 return;
+	}
+	if(!$("#passwordChk").hasClass('show')){
+		 alert("비밀번호가 서로 다릅니다!");
+		 return;
+	}
+	 $.ajax({
+		url : "${ pageContext.request.contextPath }/member/updatePwd.do",
+		data : {
+			password : $("#passwordChk").val()
+		},
+		dataType : "json",
+		success : function(data){
+			alert("비밀번호가 변경되었습니다.");
+			location.reload();
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	}); 
+});
 //탈퇴
 $("#deleteBtn").click(function(){
-	if(!confirm("정말로 탈퇴하시겠습니까?")) return;
-	$("#deleteFrm").submit();
+	 if(!confirm("정말로 탈퇴하시겠습니까?")) return;
+	 /*$("#deleteFrm").submit(); */
+});
+//핸드폰 인증
+$(function(){
+	var text;
+
+	//문자인증
+	$(".phone-btn").click(function(){
+
+		$.ajax({
+			url : "${ pageContext.request.contextPath }/member/sendSms.do",
+			async : false,
+			data : {
+				phone : $("#phone").val()
+			},
+			dataType : "json",
+			success : function(data){
+				text = data.text;
+				//console.log(text);
+				
+				if(data.text != undefined) {
+					alert("인증번호를 전송했습니다.");
+					$("#certification").show();
+					$("#certification").addClass("show");
+				} else {
+					alert("이미 등록된 번호입니다.");
+					$("#phone").val('');
+				}
+			},
+			error : function(xhr, status, err){
+				console.log("처리실패", xhr, status, err);
+			}
+		});
+	});
+
+	$("#phoneChk").blur(function(){
+
+		if(text == $("#phoneChk").val()){
+			$(".phoneCheck").show();
+			$(".nickNameCheck").addClass('show');
+			$(".phoneFalse").hide();
+		}
+		else {
+			$(".phoneCheck").hide();
+			$(".nickNameCheck").removeClass('show');
+			$(".phoneFalse").show();
+			$("#phoneChk").val('');
+		}
+	});
 });
 
 </script>
