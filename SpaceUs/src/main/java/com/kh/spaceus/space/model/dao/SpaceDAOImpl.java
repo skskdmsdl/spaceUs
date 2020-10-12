@@ -209,4 +209,9 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.selectList("space.selectListSpaceCollection", email);
 	}*/
 
+	@Override
+	public Wish selectOneWish(Wish wish) {
+		return sqlSession.selectOne("space.selectOneWish", wish);
+	}
+
 }

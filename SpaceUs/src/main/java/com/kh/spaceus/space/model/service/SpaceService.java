@@ -81,6 +81,8 @@ public interface SpaceService {
 
 	List<Object> selectAutoList(String value);
 
+	Wish selectOneWish(Wish wish);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

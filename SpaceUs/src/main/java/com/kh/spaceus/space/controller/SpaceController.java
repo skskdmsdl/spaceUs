@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -336,16 +337,32 @@ public class SpaceController {
 	public String insertWish(Wish wish, HttpServletResponse response) {
 		int result = spaceService.insertWish(wish);
 		
-		return "";
+		String msg = (result>0) ? "위시 추가 성공!" : "위시 추가 실패";
+		return msg;
 	}
 
-	// 좋아요수 읽어오기
+	// 좋아요수 읽어오고 전달받은 멤버이메일이 있을경우 좋아요 여부 검색하기
 	@RequestMapping(value = "/readLikeCnt.do", method = RequestMethod.GET)
 	@ResponseBody
-	public int selectLikeCount(@RequestParam("no") String spaceNo) {
-		int cnt = spaceService.selectLikeCnt(spaceNo);
-
-		return cnt;
+	public HashMap<String, Object> selectLikeCount(Wish wish, HttpServletResponse response) {
+		int cnt = spaceService.selectLikeCnt(wish.getSpaceNo());
+		//좋아요 한 상태인지 아닌지
+		String status = null;
+		
+		if(wish.getEmail()!=null) {
+		  Wish selected = spaceService.selectOneWish(wish);
+		  if(selected!=null) {
+				status="liked";
+			}else {
+				status=null;
+			}
+		}
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("status", status);
+		map.put("cnt", cnt);
+		
+		return map;
 	}
 
 	// 위시리스트 삭제
@@ -354,7 +371,8 @@ public class SpaceController {
 	public String deleteWishList(Wish wish, HttpServletResponse response) {
 		int result = spaceService.deleteWish(wish);
 		
-		return "";
+		String msg = (result>0) ? "위시 삭제 성공!" : "위시 삭제 실패";
+		return msg;
 	}
 
 	//인덱스 페이지 이용자리뷰

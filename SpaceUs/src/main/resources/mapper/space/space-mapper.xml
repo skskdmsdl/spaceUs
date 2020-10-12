@@ -434,6 +434,17 @@
 			space_no = #{spaceNo}
 	</update>
 	
+	<select id="selectOneWish" resultMap="wishMap">
+		select 
+			*
+		from 
+			wish
+		where
+			space_no=#{spaceNo} and
+			member_email=#{email}
+	</select>
+	
+	
 	<select id="selectPopularSpaces" resultMap="spaceMap">
 		select
 			*
