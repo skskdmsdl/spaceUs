@@ -98,7 +98,7 @@ $(function() {
                      //서버에서 json 데이터 response 후 목록에 추가
                      response(
                          $.map(data, function(item) {  
-                             console.log(item);
+                             //console.log(item);
                              return {
                              	label:item.tag 
                              }
@@ -117,7 +117,7 @@ $(function() {
                      //서버에서 json 데이터 response 후 목록에 추가
                      response(
                          $.map(data, function(item) {  
-                             console.log(item);
+                             //console.log(item);
                              return {
                              	label:item.categoryName
                              }
@@ -136,7 +136,7 @@ $(function() {
                      //서버에서 json 데이터 response 후 목록에 추가
                      response(
                          $.map(data, function(item) {  
-                             console.log(item);
+                             //console.log(item);
                              return {
                              	label:item.optionName
                              }
@@ -157,7 +157,7 @@ $(function() {
         classes: {  
             "ui-autocomplete": "highlight"
         },
-        delay: 500,   
+        delay: 50,   
         position: { my : "right top", at: "right bottom" }, 
         close : function(event){ 
         }
