@@ -217,6 +217,7 @@ public class SpaceServiceImpl implements SpaceService{
 		return spaceDAO.selectOptionList(spaceNo);
 	}
 	
+	@Override
 	public List<Review> selectRecentReviewList() {
 		return spaceDAO.selectRecentReviewList();
 	}

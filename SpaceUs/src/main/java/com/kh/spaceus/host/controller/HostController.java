@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.spaceus.community.recruit.model.vo.RecruitComment;
 import com.kh.spaceus.host.model.service.HostService;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
@@ -56,9 +55,14 @@ public class HostController {
 	
 	//공간정보
 	@RequestMapping("/spaceInfo.do")
-	public String ManageSpace() {
+	public ModelAndView ManageSpace(Principal principal, ModelAndView mav) {
+		Space space = spaceService.selectOneSpaceNo(principal.getName());
+		System.out.println(space);
 		
-		return "host/spaceInfo";
+		mav.addObject("space", space);
+		mav.setViewName("host/spaceInfo");
+		
+		return mav;
 	}
 	
 	//예약 현황 

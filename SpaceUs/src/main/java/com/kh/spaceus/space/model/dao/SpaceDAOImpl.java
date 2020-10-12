@@ -190,6 +190,7 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.selectList("space.selectOptionList", spaceNo);
 	}
 
+	@Override
 	public List<Review> selectRecentReviewList() {
 		return sqlSession.selectList("space.selectRecentReviewList");
 	}

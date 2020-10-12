@@ -73,7 +73,6 @@ public interface SpaceService {
 
 	List<Review> selectRecentReviewList();
 
-
 	List<Space> selectAll();
 
 	List<OptionList> selectOptionList(String spaceNo);

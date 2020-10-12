@@ -87,29 +87,30 @@
                              <h6 class="card-subtitle mb-5">공간 정보를 확인하세요</h6>
                          </div>
 	                    </div>
+		    			<c:set var="space" value="${space}" scope="page"/> 
 						 <table class="col-11">
 							<tr>
-								<th class="align-baseline">닉네임</th>
-								<th><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="<sec:authentication property="principal.username"/>" required /></th>
+								<th class="align-baseline">공간명</th>
+								<th><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="${space.spaceName }" required /></th>
 							</tr>
 						    <tr>
-						      <td class="align-baseline">이메일 계정</td>
-						      <td><input type="email" class="col-8 input-group-text mb-4 mr-5 pull-right" value="honggd@naver.com" required /></td>
+						      <td class="align-baseline">공간 설명</td>
+						      <td><input type="email" class="col-8 input-group-text mb-4 mr-5 pull-right" value="${space.content }" required /></td>
 							</tr>
 						    <tr>
-						      <td class="align-baseline">생일</td>
-						      <td><input type="date" class="col-8 input-group-text mb-4 mr-5 pull-right" value="2020-08-08" /></td>
+						      <td class="align-baseline">옵션</td>
+						      <td><input type="date" class="col-8 input-group-text mb-4 mr-5 pull-right" value="${space.enrollDate }" /></td>
 							</tr>
 						    <tr>
-						      <td class="align-baseline">핸드폰</td>
-						      <td><input type="tel" class="col-8 input-group-text mb-4 mr-5 pull-right" maxlength="11" value="01012341234" required /></td>
+						      <td class="align-baseline">주소</td>
+						      <td><input type="tel" class="col-8 input-group-text mb-4 mr-5 pull-right" maxlength="11" value="${space.address }" required /></td>
 							</tr>
 						</table >
 						  <div class="mt-5" style="border-top: 1px solid #bbbbbb" ></div>
-						  <h6 class="card-subtitle mt-3 mb-5">비밀번호를 입력해주세요.</h6>
+						  <h6 class="card-subtitle mt-3 mb-5">태그</h6>
 						  <table class="col-11">
 							<tr>
-						      <td class="align-baseline">새 비밀번호</td>
+						      <td class="align-baseline">공간 사진</td>
 						      <td><input type="password" class="col-8 input-group-text ml-auto mb-4 mr-5" value="" /></td>
 							</tr>
 						    <tr>
@@ -118,12 +119,13 @@
 							</tr>
 						</table>
 						<div class="mt-5 pull-right mr-5">
-					      <input type="submit" class="btn btn-outline-success btn-lg p-3 pl-4 pr-4" value="회원 수정">&nbsp;
+					      <input type="submit" class="btn btn-outline-success btn-lg p-3 pl-4 pr-4" value="정보 수정">&nbsp;
 					      <input type="reset" class="btn btn-outline-secondary mr-5 btn-lg p-3 pl-4 pr-4" value="변경사항 없음">
 						</div>
 	                   </div>
 	               </div>
 	           </div>
+
                 <!-- 회원정보 끝 -->
     </div>
 </div>
