@@ -51,18 +51,22 @@
                                    </select>
                                 </div> 
                             </div>
-	                        <div class="row">
-								<div class="col-md">
-				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/welCoupon.png" alt="..."> 
-	                               	 <span id="couponDday" class="label label-danger">D-8</span>
+								<div class="col-md pull-left ml-5 mr-5" style="width:480px;">
+				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/coupon/come.png" alt="..."> 
 	                               	 <p id="couponEnd">2020.10.23 까지</p>
 	                               </div>
-								<div class="col-md">
-				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/hbdCoupon.png" alt="..."> 
-                                	 <span id="couponDday2" class="label label-warning">D-38</span>
+								<div class="col-md pull-left" style="width:480px;">
+				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/coupon/btd.png" alt="..."> 
                                 	 <p id="couponEnd2">2020.10.23 까지</p>
                                 </div>
-							</div>
+								<div class="col-md pull-left ml-5 mr-5" style="width:480px;">
+				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/coupon/attend3.png" alt="..."> 
+	                               	 <p id="couponEnd">2020.10.23 까지</p>
+	                            </div>
+								<%-- <div class="col-md pull-left" style="width:480px;">
+				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/attend2.png" alt="..."> 
+                                	 <p id="couponEnd2">2020.10.23 까지</p>
+                                </div> --%>
 						</div>
 					</div>
 				</div>

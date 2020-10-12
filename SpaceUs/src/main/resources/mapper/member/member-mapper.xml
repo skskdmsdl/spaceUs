@@ -64,7 +64,8 @@
 	update
 		member
 	set
-		attendance_cnt = attendance_cnt + 1
+		attendance_cnt = attendance_cnt + 1,
+		today = today +1
 	where
 		member_email = #{ email }
 </update>
@@ -110,6 +111,73 @@
  	where 
  		attendance_cnt = 0 
 </delete>
+
+<update id="updatePwd">
+	update
+		member
+	set
+		password = #{ password }
+	where
+		member_email = #{ memberEmail }
+</update>
+
+<insert id="insertBtdCoupon">
+	insert all
+    into coupon 
+    values(
+            'C'||seq_coupon_no.nextval,
+            'btd',
+            member_email,
+            0.3,
+            default,
+            sysdate+7,
+            default
+    )
+ 	select
+		member_email
+	from
+		member
+	where
+		birthday like '%%/'||(select to_char(sysdate+1, 'MM/dd') sys_month from dual)
+</insert>
+
+<update id="deleteToday">
+	update
+		member
+	set
+		today = 0
+</update>
+
+
+<insert id="insertAttend3Coupon">
+	insert all
+    into coupon
+    values(
+            'C'||seq_coupon_no.nextval,
+            'attend3',
+            member_email,
+            0.3,
+            default,
+            sysdate+7,
+            default
+    )
+	select member_email from member where attendance_cnt >=3
+</insert>
+
+<insert id="insertAttend2Coupon">
+	insert all
+    into coupon
+    values(
+            'C'||seq_coupon_no.nextval,
+            'attend2',
+            member_email,
+            0.2,
+            default,
+            sysdate+7,
+            default
+    )
+	select member_email from member <![CDATA[where attendance_cnt >=2 and attendance_cnt < 3]]> 
+</insert>
 
 
 
