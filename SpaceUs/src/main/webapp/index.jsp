@@ -378,7 +378,7 @@ $(function () {
 });
 
 function popular(){
-	console.log("리뷰function 실행");
+	console.log("인기공간function 실행");
 	$.ajax({
 		type:"GET",
 		url:"${pageContext.request.contextPath}/space/popular.do",
@@ -401,9 +401,9 @@ function popular(){
 		    	html+= "</ul>";
 		    	html+= "<h3><a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"'>"+item.spaceName+"</a></h3>"; 
 		    	html+= "<small><span class='icon-my_location'>"+item.address+"</span></small>";
-		    	html+= "<a href='#' class='d-flex align-items-center justify-content-center btn-custom'>"; 
-		    	html+= "<span class='icon-heart'></span>";
-		    	html+= "</a></div></div></div>";
+		    	//html+= "<a href='#' class='d-flex align-items-center justify-content-center btn-custom'>"; 
+		    	//html+= "<span class='icon-heart'></span></a>";
+		    	html+= "</div></div></div>";
 				
 				console.log(html);
 				$("#popular").append(html);

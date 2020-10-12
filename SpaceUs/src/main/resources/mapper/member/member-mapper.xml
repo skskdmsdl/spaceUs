@@ -202,4 +202,33 @@
 	<result column="coupon_status" property="status"/>
 </resultMap>
 
+<resultMap id="wishMap" type="wish">
+		<id column="space_no" property="spaceNo"/>
+		<id column="member_email" property="email"/>
+		<result column="like_date" property="date"/>
+		<result column="space_name" property="spaceName"/>
+		<result column="content" property="content"/>
+		<result column="star_avg" property="starAvg"/>
+		<result column="like_cnt" property="likeCnt"/>
+		<result column="address" property="address"/>
+		<result column="renamed_filename" property="image"/>
+		<result column="hourly_price" property="hourlyPrice"/>	
+</resultMap>
+
+<select id="selectWishList" resultMap="wishMap">
+	select 
+		wish.member_email, space.space_name, 
+		space.hourly_price, space.star_avg, 
+		space.like_cnt, space.status, space.content, 
+		space.space_no, wish.like_date 
+	from 
+		space join wish on space.space_no=wish.space_no 
+	where 
+		wish.member_email=#{email} and space.status='O'
+	order by 
+		like_date desc
+
+</select>
+
+
 </mapper>

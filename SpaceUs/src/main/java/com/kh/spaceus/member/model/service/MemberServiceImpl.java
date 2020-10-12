@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.spaceus.member.model.dao.MemberDAO;
 import com.kh.spaceus.member.model.vo.Coupon;
 import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.space.model.vo.Wish;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -108,6 +109,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<Coupon> selectCouponList(String email) {
 		return memberDAO.selectCouponList(email);
+	}
+
+	@Override
+	public List<Wish> selectWishList(String email) {
+		return memberDAO.selectWishList(email);
 	}
 
 

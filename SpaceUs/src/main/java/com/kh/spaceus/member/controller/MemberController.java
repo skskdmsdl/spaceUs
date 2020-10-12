@@ -2,8 +2,6 @@ package com.kh.spaceus.member.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,19 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
-import javax.management.relation.Role;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -48,10 +41,10 @@ import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.space.model.service.SpaceService;
-import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.Wish;
 
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.api.Message;
@@ -137,9 +130,23 @@ public class MemberController {
 
 	// 위시리스트
 	@RequestMapping("/wishList.do")
-	public String wishList() {
-
+	public String wishList(Principal principal, Model model) {
+		List<Wish> list = memberService.selectWishList(principal.getName());
+		
+		model.addAttribute("wlist", list);
 		return "member/wishList";
+	}
+	
+	//위시리스트 삭제
+	@RequestMapping("/deleteWish.do")
+	public String deleteWish(Wish wish, HttpServletResponse response, RedirectAttributes redirectAttr) {
+		
+		int result = spaceService.deleteWish(wish);
+		String msg = (result>0) ? "위시 삭제 성공!" : "위시 삭제 실패";
+		
+		redirectAttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/member/wishList.do";
 	}
 
 	// 쿠폰함

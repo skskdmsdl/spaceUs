@@ -702,9 +702,9 @@ function naverShare() {
     				</ul>
     				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${space.spaceNo}">${space.spaceName }</a></h3>
     				<small><span class="icon-my_location">${space.address }</span></small>
-    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    				<span class="icon-heart"></span>
-    				</a>
+    			<!-- 	<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				 <span class="icon-heart"></span> 
+    				</a> -->
     			</div>
     		</div>
     	</div>

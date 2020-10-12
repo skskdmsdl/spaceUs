@@ -258,20 +258,17 @@
 	</select>
 	
 	<select id="selectSameCategory" resultMap="spaceMap">
-		select 
-            rownum, D.*
-		from(
-			select
-				*
+			select *	
 			from
-				space join space_image using (space_no) 
+				space A join (SELECT * FROM space_image S
+                    WHERE S.ROWID IN (SELECT MAX(ROWID)
+                    FROM space_image
+                    GROUP BY space_no)) D on A.space_no=D.space_no
 			where 
-				category_no=#{categoryNo} and space_no!=#{spaceNo}
-                and rownum=1
-			order by
-				like_cnt asc
-			) D
-		where rownum between 1 and 3
+				A.category_no=#{categoryNo} and A.space_no!=#{spaceNo}
+                and A.status='O'
+            order by
+				A.like_cnt asc
 	</select>
 	
 	<select id="selectCateName" resultType="string">
@@ -463,6 +460,7 @@
 				order by cnt desc ) D
 				where rownum between 1 and 3
 				) R join space on space.space_no= R.space_no
+		 where space.status='O'
 		
 	</select>
 		
@@ -475,7 +473,7 @@
 				review join review_image using (review_no)
 			order by 
 				review_date desc) R join space on R.space_no=space.space_no
-	        where rownum between 1 and 4
+	        where rownum between 1 and 4 and space.status='O'
 	</select>
 	
 	<!-- autocomplete tag -->
