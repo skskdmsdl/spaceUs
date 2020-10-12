@@ -29,6 +29,7 @@ import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.Tag;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -58,6 +59,8 @@ public class HostController {
 	public ModelAndView ManageSpace(Principal principal, ModelAndView mav) {
 		Space space = spaceService.selectOneSpaceNo(principal.getName());
 		System.out.println(space);
+		
+		List<Tag> tags = spaceService.selectListSpaceTag(space.getSpaceNo());
 		
 		mav.addObject("space", space);
 		mav.setViewName("host/spaceInfo");
