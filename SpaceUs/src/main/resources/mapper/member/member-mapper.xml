@@ -183,6 +183,22 @@
 	select * from coupon where to_char(coupon_deadline) = to_date(sysdate, 'yy/MM/dd');
 </delete>
 
-
+<select id="selectCouponList" resultMap="couponMap">
+	select
+		* 
+	from
+		coupon
+	where
+		member_email = #{ email }
+</select>
+<resultMap type="coupon" id="couponMap">
+	<id column="coupon_no" property="no"/>
+	<result column="coupon_type" property="type"/>
+	<result column="member_email" property="email"/>
+	<result column="discount_rate" property="discount"/>
+	<result column="coupon_issued_date" property="issuedDate"/>
+	<result column="coupon_deadline" property="deadLine"/>
+	<result column="coupon_status" property="status"/>
+</resultMap>
 
 </mapper>

@@ -130,9 +130,10 @@ public class MemberController {
 
 	// 쿠폰함
 	@RequestMapping("/couponList.do")
-	public String couponList(Principal principal) {
-		/* List<Coupon> coupon = memberService.selectCouponList(principal.getName()); */
-
+	public String couponList(Principal principal, Model model) {
+		List<Coupon> coupon = memberService.selectCouponList(principal.getName());
+		
+		model.addAttribute("coupon", coupon);
 		return "member/couponList";
 	}
 

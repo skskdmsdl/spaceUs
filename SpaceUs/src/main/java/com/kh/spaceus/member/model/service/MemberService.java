@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.spaceus.member.model.vo.Coupon;
 import com.kh.spaceus.member.model.vo.Member;
 
 public interface MemberService {
@@ -42,5 +43,7 @@ public interface MemberService {
 	int insertBtdCoupon();
 
 	int deleteCoupon();
+
+	List<Coupon> selectCouponList(String email);
 
 }
