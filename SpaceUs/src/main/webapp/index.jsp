@@ -80,6 +80,93 @@ input[type="text"]:focus {
 }
 
 </style>
+
+
+<script type="text/javascript">
+$(function() { 
+    
+    $("#searchInput").autocomplete({
+        source : function( request, response ) {
+			//tag
+       	 	$.ajax({
+                 type: 'get',
+                 url: "${pageContext.request.contextPath}/space/autocomplete.do",
+                 dataType: "json",
+                 data: {value : request.term},
+                 success: function(data) {
+                     //console.log(request.term);
+                     //서버에서 json 데이터 response 후 목록에 추가
+                     response(
+                         $.map(data, function(item) {  
+                             console.log(item);
+                             return {
+                             	label:item.tag 
+                             }
+                         })
+                     );
+                 }
+            });
+             //category
+        	 $.ajax({
+                 type: 'get',
+                 url: "${pageContext.request.contextPath}/space/autocomplete2.do",
+                 dataType: "json",
+                 data: {value : request.term},
+                 success: function(data) {
+                     //console.log(request.term);
+                     //서버에서 json 데이터 response 후 목록에 추가
+                     response(
+                         $.map(data, function(item) {  
+                             console.log(item);
+                             return {
+                             	label:item.categoryName
+                             }
+                         })
+                     );
+                 }
+            });
+            //option
+        	 $.ajax({
+                 type: 'get',
+                 url: "${pageContext.request.contextPath}/space/autocomplete3.do",
+                 dataType: "json",
+                 data: {value : request.term},
+                 success: function(data) {
+                     //console.log(request.term);
+                     //서버에서 json 데이터 response 후 목록에 추가
+                     response(
+                         $.map(data, function(item) {  
+                             console.log(item);
+                             return {
+                             	label:item.optionName
+                             }
+                         })
+                     );
+                 }
+            }); 
+             
+        },    // source 는 자동 완성 대상
+        select : function(event, ui) {    //아이템 선택시
+            console.log(ui.item);
+        },
+        focus : function(event, ui) {    //포커스 가면
+            return false;//한글 에러 잡기용도로 사용됨
+        },
+        minLength: 2,// 최소 글자수
+        autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
+        classes: {  
+            "ui-autocomplete": "highlight"
+        },
+        delay: 500,   
+        position: { my : "right top", at: "right bottom" }, 
+        close : function(event){ 
+        }
+    });
+    
+});
+</script>
+
+
 <!-- 컨텐츠 시작 -->
 <div class="hero-wrap ftco-degree-bg"
 	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_1.jpg');
@@ -94,10 +181,10 @@ input[type="text"]:focus {
           			<p></p>
      					<div style="margin-top:-20px">
      						<div id="wrap">
-							  <form id="searchFrm" onsubmit="searchSpace();" action="" autocomplete="on">
-							  <input id="search_keyword" name="search_keyword" type="text" placeholder="키워드를 입력하세요">
+							  <%-- <form id="searchFrm" onsubmit="searchSpace();" action="" autocomplete="on"> --%>
+							  <input id="searchInput" name="search_keyword" type="text" placeholder="키워드를 입력하세요">
 							  <i class="fas fa-search fa-2x" id="search_submit" type="submit" style="color:#00C89E"></i>
-							  </form>
+							  <%-- </form> --%>
 							</div>
          				</div>
        			</div>
@@ -437,3 +524,9 @@ document.querySelector('.stick').addEventListener('click',()=>{
 </script>
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+<!-- autocomplete -->
+<!-- CSS , JS -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

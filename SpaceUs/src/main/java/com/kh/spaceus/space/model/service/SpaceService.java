@@ -79,6 +79,12 @@ public interface SpaceService {
 	List<OptionList> selectOptionList(String spaceNo);
 
 	List<Space> selectPopularSpaces();
+	
+	List<Object> selectAutoTagList(String value);
+
+	List<Object> selectAutoCategoryList(String value);
+
+	List<Object> selectAutoOptionList(String value);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 
