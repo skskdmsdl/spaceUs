@@ -248,7 +248,7 @@ $("#infoUpdate").on("click", function(){
 		 alert("닉네임을 확인해주세요!");
 		 return;
 	}
-	if(!$(".phoneCheck").hasClass('show')&&$("#certification").hasClass('show')){
+	if(!$(".phoneCheck").hasClass('show')){
 		 alert("핸드폰을 확인해주세요!");
 		 return;
 	}
@@ -260,7 +260,7 @@ $("#infoUpdate").on("click", function(){
 		data : {
 			nickName : $("#nickName").val(),
 			birthDay : $("#btdCheck").val(),
-			
+			memberPhone : $("#phone").val(),
 			memberEmail : $("#memberEmail").val()
 		},
 		dataType : "json",
@@ -380,12 +380,12 @@ $(function(){
 
 		if(text == $("#phoneChk").val()){
 			$(".phoneCheck").show();
-			$(".nickNameCheck").addClass('show');
+			$(".phoneCheck").addClass('show');
 			$(".phoneFalse").hide();
 		}
 		else {
 			$(".phoneCheck").hide();
-			$(".nickNameCheck").removeClass('show');
+			$(".phoneCheck").removeClass('show');
 			$(".phoneFalse").show();
 			$("#phoneChk").val('');
 		}

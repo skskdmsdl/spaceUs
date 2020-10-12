@@ -54,7 +54,6 @@ p#qna-content > a:hover{
                            
                              <ul class="nav nav-tabs">
                              	<li class="nav-item"><a class="nav-link active" href="#">최근 질문 게시글</a></li>
-                             	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/host/hostCheckReview.do">최근 리뷰 게시글</a></li>
                              </ul>
 	                    
 	                  

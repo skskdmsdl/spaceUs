@@ -527,18 +527,13 @@ public class MemberController {
 	@ResponseBody
 	public Map<String, Object> updateMember(ModelAndView mav,
 											Member member) {
-		//생일 스트링으로 변환!!!!!!
-		String s = member.getBirthDay();
-		s= s.replace("-", "/").substring(2);
-		System.out.println(s);
-		
 		int result = memberService.updateMember(member);
 		String memberEmail = member.getMemberEmail();
 		member = memberService.selectOneMember(memberEmail);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		authentication.getName();
 		authentication.getPrincipal();
-		
+		System.out.println("@@@2"+member.getMemberPhone());
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("nick", member.getNickName());
