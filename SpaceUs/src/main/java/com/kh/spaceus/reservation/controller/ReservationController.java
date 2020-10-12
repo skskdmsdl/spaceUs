@@ -24,7 +24,7 @@ public class ReservationController {
 		
 		int result = reservationService.insertReservation(reservation);
 		
-		return "member/usageHistory";
+		return "redirect:/member/usageHistory.do";
 	}
 	
 	

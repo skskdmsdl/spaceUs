@@ -826,7 +826,6 @@ function ask(){
 //예약하기
 function rvSubmit(){
    	if($("#memberId").val()){
-   	   	alert($("#memberId").val());
 		$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserveSpace.do")
 		.submit();
    	}

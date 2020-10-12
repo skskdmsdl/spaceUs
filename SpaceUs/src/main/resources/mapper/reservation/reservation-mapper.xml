@@ -50,19 +50,20 @@
 			reservation
 		where
 			member_email = #{ email }
-		order by rev_no 
+		order by rev_date desc
 	</select>
 	<resultMap type="reservation" id="reservationMap">
 		<id column="rev_no" property="revNo"/>
-		<result column="member_email" property="email"/>
+		<result column="member_email" property="memberEmail"/>
 		<result column="space_no" property="spaceNo"/>
-		<result column="rev_date" property="rev_date"/>
-		<result column="d_day" property="day"/>
-		<result column="start_hour" property="start"/>
-		<result column="end_hour" property="end"/>
-		<result column="total_price" property="price"/>
-		<result column="rev_cancle" property="cancle"/>
-		<result column="rev_comple" property="complete"/>
+		<result column="rev_date" property="revDate"/>
+		<result column="d_day" property="dDay"/>
+		<result column="start_hour" property="startHour"/>
+		<result column="end_hour" property="endHour"/>
+		<result column="pay" property="pay"/>
+		<result column="total_price" property="totalPrice"/>
+		<result column="rev_cancle" property="revCancle"/>
+		<result column="rev_comple" property="revComplete"/>
 	</resultMap>
 
 
