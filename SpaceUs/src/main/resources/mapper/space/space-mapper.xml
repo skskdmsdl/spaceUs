@@ -434,6 +434,26 @@
 			space_no = #{spaceNo}
 	</update>
 	
+	<select id="selectPopularSpaces" resultMap="spaceMap">
+		select
+			*
+		from(		
+			select rownum, D.* from
+				(select 
+				    space_no, count(reservation.rev_no) cnt
+				from
+				    reservation
+				where
+				<![CDATA[ 
+				   to_char(rev_date, 'yyyy/mm/dd') <= to_char(sysdate, 'yyyy/mm/dd') and
+				     to_char(rev_date, 'yyyy/mm/dd') > to_char(sysdate-14, 'yyyy/mm/dd') 
+				     ]]> 
+				group by space_no
+				order by cnt desc ) D
+				where rownum between 1 and 3
+				) R join space on space.space_no= R.space_no
+		
+	</select>
 		
 	<select id="selectRecentReviewList" resultMap="reviewMap">
 	    select 
@@ -448,35 +468,20 @@
 	</select>
 	
 	<!-- autocomplete tag -->
-	<select id="selectAutoTagList" resultMap="tagMap">
-		select
-			tag_name
-		from
-			tag
-		where 
-			tag_name like'%'|| #{value} ||'%'
+	<select id="selectAutoList" resultType="string">
+		select category_name
+		from category
+		where category_name like'%'|| #{value} ||'%'
+		union
+		select tag_name
+		from tag
+		where tag_name like'%'|| #{value} ||'%'
+		union
+		select option_name 
+		from option_list
+		where option_name like'%'|| #{value} ||'%'
 	</select>
 	
-	<!-- autocomplete category -->
-	<select id="selectAutoCategoryList" resultMap="categoryMap">
-		select
-			category_name
-		from
-			category
-		where 
-			category_name like'%'|| #{value} ||'%'
-	</select>
-	<resultMap type="category" id="categoryMap"></resultMap>
-	
-	<select id="selecAutoOptionList" resultMap="optionMap1">
-		select
-			option_name
-		from
-			option_list
-		where 
-			option_name like'%'|| #{value} ||'%'
-	</select>
-	<resultMap type="confirmSpaceOption" id="optionMap1"></resultMap>
 </mapper>
 
 
