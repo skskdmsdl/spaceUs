@@ -13,8 +13,8 @@ public interface ReservationService {
 	int insertReservationVail(ReservationAvail reservationAvail);
 
 	List<Reservation> selectListReservation(String email);
-
 	
 	//공간별 예약
+	int insertReservation(Reservation reservation);
 	
 }

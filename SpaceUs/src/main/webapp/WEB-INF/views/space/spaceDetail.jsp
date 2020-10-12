@@ -236,7 +236,6 @@ function naverShare() {
 							</div>
 							<!-- 공유하기 팝오버 끝-->
 							<!-- 예약버튼 -->
-							<input type="hidden" id="memberId" value="${loginMember.principal.memberEmail}" />
 							<input type="submit" onclick="rvSubmit();" value="예약하기"
 								class="btn py-3 px-5 btn-primary" style="margin-left: 70px"> 
 							<form id="reserveFrm">
@@ -897,15 +896,7 @@ $(".reviewToggle").on('click', function(){
 	$(this).children(".reviewSimpleBtn").toggle('show');
 	
 });
-//예약하기
-function rvSubmit(){
-	if($("#memberId").val()){
-		location.href="${pageContext.request.contextPath }/community/recruit/recruitEnrollForm.do";
-	}
-	else {	
-		alert("로그인 후 이용할 수 있습니다.");
-		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";}
-}; 
+
 </script>
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -157,7 +157,7 @@ $(function() {
         classes: {  
             "ui-autocomplete": "highlight"
         },
-        delay: 500,   
+        delay: 3,   
         position: { my : "right top", at: "right bottom" }, 
         close : function(event){ 
         }

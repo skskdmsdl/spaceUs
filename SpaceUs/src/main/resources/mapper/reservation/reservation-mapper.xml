@@ -13,7 +13,6 @@
 			space_no = #{ spaceNo }
 	</select>
 
-<!-- reservation -->
 	<insert id="insertReservationVail">
 		insert into
 			reservation_avail 
@@ -25,6 +24,25 @@
 		)
 	</insert>
 	
+<!-- reservation -->
+	<insert id="insertReservation">
+		insert into
+			reservation
+		values (
+			'REV'||seq_rev_no.nextval,
+			#{ memberEmail },
+			#{ spaceNo },
+			sysdate,
+			#{ dDay },
+			#{ startHour },
+			#{ endHour },
+			#{ totalPrice },
+			default,
+			default,
+			#{ pay }
+		)
+	</insert>
+
 	<select id="selectListReservation" resultMap="reservationMap">
         select 
 			* 
