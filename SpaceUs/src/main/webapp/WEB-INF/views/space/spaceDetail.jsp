@@ -888,6 +888,22 @@ function rvSubmit(){
 		alert("로그인 후 이용할 수 있습니다.");
 		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";}
 }; 
+
+$(function () { 
+
+	var bool = ${true};
+	//console.log(bool);
+	
+	if(${true}==1){
+	$("#detail-description-tab").removeClass('active');
+	$("#detail-review-tab").addClass('active');
+	$("#detail-description").removeClass('active');
+	$("#detail-description").removeClass('show');
+	$("#detail-review").addClass('active');
+	$("#detail-review").addClass('show');
+	}
+});
+
 </script>
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

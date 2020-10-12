@@ -456,11 +456,11 @@ function review(){
 				html  +=  "<div class=\"col-md-3 d-flex\">";
 	          	html  += "<div class=\"blog-entry justify-content-end\">";
           	    html  += "<div class=\"text\">";
-	          	html  += "<h3 class=\"headig\"><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h3>";
+	          	html  += "<h3 class=\"headig\"><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h3>";
 	          	html  += "<div class=\"meta mb-3\">";
-	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\">"+getFormatDate(date)+"</a></div>";
-	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\">"+item.nickName+"</a></div>";
-	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\" class=\"meta-chat\"><span class=\"icon-star\"></span>"+item.starRating+"</a></div>";
+	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+getFormatDate(date)+"</a></div>";
+	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.nickName+"</a></div>";
+	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\" class=\"meta-chat\"><span class=\"icon-star\"></span>"+item.starRating+"</a></div>";
           		html  += "</div>";
           		html += "<p>"+item.content+"</p>";
           		html  += "<img class=\"lock-20 img\" src=\'${pageContext.request.contextPath}/resources/upload/review/"+item.image+"\'>";
