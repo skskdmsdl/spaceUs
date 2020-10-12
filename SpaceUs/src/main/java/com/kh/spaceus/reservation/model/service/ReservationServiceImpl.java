@@ -30,4 +30,9 @@ public class ReservationServiceImpl implements ReservationService{
 		return reservationDAO.selectListReservation(email);
 	}
 
+	@Override
+	public int insertReservation(Reservation reservation) {
+		return reservationDAO.insertReservation(reservation);
+	}
+
 }

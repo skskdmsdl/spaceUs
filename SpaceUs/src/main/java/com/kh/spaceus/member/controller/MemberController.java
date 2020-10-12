@@ -48,6 +48,7 @@ import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.space.model.service.SpaceService;
+import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
@@ -116,9 +117,22 @@ public class MemberController {
 		}
 	// 이용내역
 	@RequestMapping("/usageHistory.do")
-	public String usageHistory() {
+	public ModelAndView usageHistory(Principal principal, ModelAndView mav) {
 
-		return "member/usageHistory";
+		//System.out.println("memberEmail: "+principal.getName());
+		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		List<Space> spaceList = new ArrayList<Space>();
+		
+		for(int i=0; i<revList.size(); i++) {
+			Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
+			System.out.println("space="+space);
+			spaceList.add(space);
+		}
+		
+		mav.addObject("revList",revList);
+		mav.addObject("spaceList",spaceList);
+		mav.setViewName("member/usageHistory");
+		return mav;
 	}
 
 	// 위시리스트

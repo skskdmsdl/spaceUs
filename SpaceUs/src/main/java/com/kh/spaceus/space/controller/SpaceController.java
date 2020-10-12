@@ -23,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.common.Utils;
+import com.kh.spaceus.member.model.service.MemberService;
+import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
@@ -50,6 +52,9 @@ public class SpaceController {
 
 	@Autowired
 	private ReservationService reservationService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	// 공간등록하기 화면
 	@RequestMapping(value = "/insertSpace.do", method = RequestMethod.GET)
@@ -297,8 +302,9 @@ public class SpaceController {
 							   @RequestParam("memberId") String memberId) {
 		//log.debug("spaceNo= {}",spaceNo);
 		//log.debug("spaceName= {}",spaceName);
-		System.out.println("memberId = "+memberId);
+		//System.out.println("memberId = "+memberId);
 		Space space = spaceService.selectOneSpace(spaceNo);
+		Member member = memberService.selectOneMember(memberId);
 		
 		//spaceNo로 옵션정보가져와서 전달하기
 		List<OptionList> optionList = spaceService.selectOptionList(spaceNo);
@@ -308,6 +314,7 @@ public class SpaceController {
 
 		//model.addAttribute("spaceName", spaceName);
 		mav.addObject("space",space);
+		mav.addObject("member",member);
 		mav.addObject("optionList",optionList);
 		mav.addObject("availList",availList);
 		

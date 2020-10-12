@@ -120,7 +120,7 @@ $(function() {
         classes: {  
             "ui-autocomplete": "highlight"
         },
-        delay: 30,   
+        delay: 30,
         position: { my : "right top", at: "right bottom" }, 
         close : function(event){ 
         }
