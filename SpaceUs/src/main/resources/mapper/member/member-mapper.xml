@@ -73,8 +73,10 @@
 <update id="updateMember">
 	update
 		member
-	set
-		nickname = #{ nickName }
+	<set>
+      <if test="nickName != null">nickname = #{ nickName },</if>
+      <if test="memberPhone != null">member_phone = #{ memberPhone }</if>
+   </set>
 	where
 		member_email = #{ memberEmail }
 </update>
@@ -107,9 +109,9 @@
 
 <delete id="deleteMember">
     delete from 
-    	member 
- 	where 
- 		attendance_cnt = 0 
+    	member
+    where 
+    	member_email = #{ memberEmail}
 </delete>
 
 <update id="updatePwd">
@@ -138,7 +140,7 @@
 	from
 		member
 	where
-		birthday like '%%/'||(select to_char(sysdate+1, 'MM/dd') sys_month from dual)
+		birthday like '%%%%-'||(select to_char(sysdate, 'MM-dd') from dual)
 </insert>
 
 <update id="deleteToday">
@@ -147,7 +149,6 @@
 	set
 		today = 0
 </update>
-
 
 <insert id="insertAttend3Coupon">
 	insert all
@@ -179,7 +180,26 @@
 	select member_email from member <![CDATA[where attendance_cnt >=2 and attendance_cnt < 3]]> 
 </insert>
 
+<delete id="deleteCoupon">
+	select * from coupon where to_char(coupon_deadline) = to_date(sysdate, 'yy/MM/dd');
+</delete>
 
-
+<select id="selectCouponList" resultMap="couponMap">
+	select
+		* 
+	from
+		coupon
+	where
+		member_email = #{ email }
+</select>
+<resultMap type="coupon" id="couponMap">
+	<id column="coupon_no" property="no"/>
+	<result column="coupon_type" property="type"/>
+	<result column="member_email" property="email"/>
+	<result column="discount_rate" property="discount"/>
+	<result column="coupon_issued_date" property="issuedDate"/>
+	<result column="coupon_deadline" property="deadLine"/>
+	<result column="coupon_status" property="status"/>
+</resultMap>
 
 </mapper>

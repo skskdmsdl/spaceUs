@@ -248,7 +248,7 @@ function naverShare() {
 						<br /> <span class="subheading">
 							<div class="tagcloud">
 								<c:forEach items="${ tag }" var="tag">
-									<a href="#" class="tag-cloud-link">#${ tag.tag }</a>
+									<a href="#" class="tag-cloud-link">${ tag.tag }</a>
 								</c:forEach>
 							</div>
 						</span>
@@ -262,21 +262,11 @@ function naverShare() {
 				<div class="bd-example bd-example-tabs">
 					<div class="d-flex justify-content-center">
 						<ul class="nav nav-pills mb-3" id="detail-tab" role="tablist">
-
-							<li class="nav-item"><a class="nav-link"
-								id="detail-manufacturer-tab" data-toggle="pill"
-								href="#detail-manufacturer" role="tab"
-								aria-controls="detail-manufacturer" aria-expanded="true">공간설명</a>
-							</li>
 							<li class="nav-item"><a class="nav-link active"
 								id="detail-description-tab" data-toggle="pill"
 								href="#detail-description" role="tab"
-								aria-controls="detail-description" aria-expanded="true">공간위치</a>
+								aria-controls="detail-description" aria-expanded="true">공간설명</a>
 							</li>
-							<li class="nav-item"><a class="nav-link"
-								id="detail-contact-tab" data-toggle="pill"
-								href="#detail-contact" role="tab" aria-controls="detail-contact"
-								aria-expanded="true">공간옵션</a></li>
 							<li class="nav-item"><a class="nav-link" id="detail-qna-tab"
 								data-toggle="pill" href="#detail-qna" role="tab"
 								aria-controls="detail-qna" aria-expanded="true">Q&A</a></li>
@@ -290,17 +280,24 @@ function naverShare() {
 					<!-- 세부카테고리 끝-->
 
 					<div class="tab-content" id="detail-tabContent">
-						<!-- 공간설명 시작-->
-						<div class="tab-pane fade" id="detail-manufacturer"
-							role="tabpanel" aria-labelledby="detail-manufacturer-tab">
-							<p style="font-size: 18px">
-								${ space.content } <br /> 
-						</div>
-						<!-- 공간설명 끝-->
-						
 						<!-- contact 시작 -->
 						<div class="tab-pane fade show active" id="detail-description" role="tabpanel"
-							aria-labelledby="detail-manufacturer-tab" style="padding-top: 100px;">
+							aria-labelledby="detail-manufacturer-tab" style="padding-top: 50px;">
+							<div class="row">
+								<c:forEach items="${optionList}" var="info" varStatus="vs">
+								<div class="col-md-4">
+									<ul class="features">
+										<li class="check"><span class="ion-ios-checkmark"></span>${ info.optionName }</li>
+									</ul>
+								</div>
+								</c:forEach>
+							</div>	
+							<!-- 공간설명 시작-->
+							<div>
+								<p style="font-size: 18px; min-height:300px; padding-top: 50px;">
+									${ space.content } <br /> </p>
+							</div>
+							<!-- 공간위치 -->	
 							<div class="row" style="margin-left: 5em;">
 								<div id="kakaomap" style="width:500px;height:400px; "></div>
 								<div class="contact-info" style="padding-left: 100px;">
@@ -340,22 +337,7 @@ function naverShare() {
 						</div>
 						<!-- contact 끝 -->
 
-						<!-- 공간옵션시작 -->
-						<div class="tab-pane fade " id="detail-contact"
-							role="tabpanel" aria-labelledby="detail-description-tab">
-							<div class="row">
-								
-								<c:forEach items="${optionList}" var="info" varStatus="vs">
-								<div class="col-md-4">
-									<ul class="features">
-										<li class="check"><span class="ion-ios-checkmark"></span>${ info.optionName }</li>
-									</ul>
-								</div>
-								</c:forEach>
-									
-							</div>
-						</div>
-						<!-- 공간옵션 끝-->
+						
 						
 
 <div class="tab-pane fade" id="detail-qna" role="tabpanel" aria-labelledby="detail-qna-tab">
@@ -895,6 +877,22 @@ $(".reviewToggle").on('click', function(){
 	$(this).children(".reviewSimpleBtn").toggle('show');
 	
 });
+
+$(function () { 
+
+	var bool = ${true};
+	//console.log(bool);
+	
+	if(${true}==1){
+	$("#detail-description-tab").removeClass('active');
+	$("#detail-review-tab").addClass('active');
+	$("#detail-description").removeClass('active');
+	$("#detail-description").removeClass('show');
+	$("#detail-review").addClass('active');
+	$("#detail-review").addClass('show');
+	}
+});
+
 
 </script>
 <!-- 컨텐츠 끝 -->

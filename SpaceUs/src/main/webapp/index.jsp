@@ -86,6 +86,7 @@ input[type="text"]:focus {
 $(function() { 
     
     $("#searchInput").autocomplete({
+        
         source : function( request, response ) {
 			//tag
        	 	$.ajax({
@@ -94,56 +95,18 @@ $(function() {
                  dataType: "json",
                  data: {value : request.term},
                  success: function(data) {
-                     //console.log(request.term);
+                     console.log(request.term);
                      //서버에서 json 데이터 response 후 목록에 추가
                      response(
                          $.map(data, function(item) {  
                              console.log(item);
                              return {
-                             	label:item.tag 
+                             	label:item
                              }
                          })
                      );
                  }
-            });
-             //category
-        	 $.ajax({
-                 type: 'get',
-                 url: "${pageContext.request.contextPath}/space/autocomplete2.do",
-                 dataType: "json",
-                 data: {value : request.term},
-                 success: function(data) {
-                     //console.log(request.term);
-                     //서버에서 json 데이터 response 후 목록에 추가
-                     response(
-                         $.map(data, function(item) {  
-                             console.log(item);
-                             return {
-                             	label:item.categoryName
-                             }
-                         })
-                     );
-                 }
-            });
-            //option
-        	 $.ajax({
-                 type: 'get',
-                 url: "${pageContext.request.contextPath}/space/autocomplete3.do",
-                 dataType: "json",
-                 data: {value : request.term},
-                 success: function(data) {
-                     //console.log(request.term);
-                     //서버에서 json 데이터 response 후 목록에 추가
-                     response(
-                         $.map(data, function(item) {  
-                             console.log(item);
-                             return {
-                             	label:item.optionName
-                             }
-                         })
-                     );
-                 }
-            }); 
+            });             
              
         },    // source 는 자동 완성 대상
         select : function(event, ui) {    //아이템 선택시
@@ -157,15 +120,15 @@ $(function() {
         classes: {  
             "ui-autocomplete": "highlight"
         },
-        delay: 3,   
+        delay: 30,
         position: { my : "right top", at: "right bottom" }, 
         close : function(event){ 
         }
+        
     });
     
 });
 </script>
-
 
 <!-- 컨텐츠 시작 -->
 <div class="hero-wrap ftco-degree-bg"
@@ -181,10 +144,10 @@ $(function() {
           			<p></p>
      					<div style="margin-top:-20px">
      						<div id="wrap">
-							  <%-- <form id="searchFrm" onsubmit="searchSpace();" action="" autocomplete="on"> --%>
-							  <input id="searchInput" name="search_keyword" type="text" placeholder="키워드를 입력하세요">
-							  <i class="fas fa-search fa-2x" id="search_submit" type="submit" style="color:#00C89E"></i>
-							  <%-- </form> --%>
+							  <form id="searchFrm" onsubmit="searchSpace();" action="" autocomplete="on"> 
+								  <input id="searchInput" name="search_keyword" type="text" placeholder="키워드를 입력하세요">
+								  <i class="fas fa-search fa-2x" id="search_submit" type="submit" style="color:#00C89E"></i>
+							  </form> 
 							</div>
          				</div>
        			</div>
@@ -369,42 +332,8 @@ $(function() {
     			</div>
     		</div>
     	</div>
-    	<div class="col-md-4">
-    		<div class="property-wrap ftco-animate">
-    			<a href="#" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-2.jpg);"></a>
-    			<div class="text">
-    				<p class="price"><span class="space-price">50,000<small>원/시간</small></span></p>
-    				<ul class="property_list">
-    					<li><span class="icon-people"></span>최대8인</li>
-    					<li><span class="icon-heart"></span>45</li>
-    					<li><span class="icon-comments"></span>340</li>
-    				</ul>
-    				<h3><a href="#">망원옥탑</a></h3>
-    				<small><span class="icon-my_location">망원동</span></small>
-    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    				<span class="icon-heart"></span>
-    				</a>
-    			</div>
-    		</div>
-    	</div>
-	    	<div class="col-md-4">
-	    		<div class="property-wrap ftco-animate">
-	    			<a href="#" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-3.jpg);"></a>
-	    			<div class="text">
-	    				<p class="price"><span class="space-price">60,000<small>원/시간</small></span></p>
-	    				<ul class="property_list">
-	    					<li><span class="icon-people"></span>최대4인</li>
-	    					<li><span class="icon-heart"></span>20</li>
-	    					<li><span class="icon-comments"></span>19</li>
-	    				</ul>
-	    				<h3><a href="#">노원 스튜디오 스페이셔스</a></h3>
-	    				<small><span class="icon-my_location">상계동</span></small>
-	    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-	    				<span class="icon-heart"></span>
-	    				</a>
-	    			</div>
-	    		</div>
-	    	</div>
+    	<div class='col-md-4'><div class='property-wrap ftco-animate'><a href='' class='img' style='background-image: url(/spaceus/resources/images/work-1.jpg);'></a><div class='text'><p class='price'><span class='space-price'>25000<small>원/시간</small></span></p><ul class='property_list'><li><span class='icon-eye'></span>0</li><li><span class='icon-heart'></span>0</li><li><span class='icon-star'></span>0</li></ul><h3><a href='/spaceus/space/spaceDetail.do?spaceNo=space26'>노르웨이숲</a></h3><small><span class='icon-my_location'>경기도 수원시 영통구</span></small><a href='#' class='d-flex align-items-center justify-content-center btn-custom'><span class='icon-heart'></span></a></div></div></div>
+			<!-- 인기공간 리스트 -->
     </div>
 	</div>
 </section>
@@ -445,6 +374,49 @@ $(function() {
 <!-- 이용자리뷰 끝-->
 <script>
 $(function () { 
+	popular();
+});
+
+function popular(){
+	console.log("리뷰function 실행");
+	$.ajax({
+		type:"GET",
+		url:"${pageContext.request.contextPath}/space/popular.do",
+		dataType:"json",
+		success:function(data){
+			console.log("ajax 요청 성공!");
+			console.log(data);
+			 $.each(data, function(i, item){
+				var html="";
+
+			    html+= "<div class='col-md-4'>";
+		    	html+= "<div class='property-wrap ftco-animate'>";
+ 		    	html+= "<a href='' class='img' style='background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);'></a>";
+		    	html+= "<div class='text'>";
+		    	html+= "<p class='price'><span class='space-price'>"+item.hourlyPrice+"<small>원/시간</small></span></p>";
+		    	html+= "<ul class='property_list'>";
+		    	html+= "<li><span class='icon-eye'></span>"+item.views+"</li>";
+		    	html+= "<li><span class='icon-heart'></span>"+item.likeCnt+"</li>";
+		    	html+= "<li><span class='icon-star'></span>"+item.starAvg+"</li>";
+		    	html+= "</ul>";
+		    	html+= "<h3><a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"'>"+item.spaceName+"</a></h3>"; 
+		    	html+= "<small><span class='icon-my_location'>"+item.address+"</span></small>";
+		    	html+= "<a href='#' class='d-flex align-items-center justify-content-center btn-custom'>"; 
+		    	html+= "<span class='icon-heart'></span>";
+		    	html+= "</a></div></div></div>";
+				
+				console.log(html);
+				$("#popular").append(html);
+			}); 
+		},error:function(){
+			console.log("ajax 요청 실패");
+			}
+		});
+	//AJAX요청끝
+};
+//인기공간리스트 끝
+
+$(function () { 
 	memberId();
 });
 //이용자 리뷰 ajax 요청
@@ -459,22 +431,41 @@ function review(){
 		dataType:"json",
 		success:function(data){
 			console.log("ajax 요청 성공!");
-			//console.log(data);
+			console.log(data);
 			 $.each(data, function(i, item){
 				var html="";
+				
+				 var date = new Date(item.enrollDate);
+				 /**
+				  *  yyyy년 MM 월 dd일 hh:mm 포맷으로 반환
+				  */
+				 function getFormatDate(date){
+				     var year = date.getFullYear();              //yyyy
+				     var month = (1 + date.getMonth());          //M
+				     month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+				     var day = date.getDate();                   //d
+				     day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+					 var hh = date.getHours();
+					 hh = hh>=10 ? hh : '0' + hh;
+					 var mm = date.getMinutes();	
+						
+				     return ' '+year + '년 ' + month + '월 ' + day + '일 ' + hh + ':' + mm;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+				 }
+				
 				
 				html  +=  "<div class=\"col-md-3 d-flex\">";
 	          	html  += "<div class=\"blog-entry justify-content-end\">";
           	    html  += "<div class=\"text\">";
-	          	html  += "<h3 class=\"headig\"><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h3>";
+	          	html  += "<h3 class=\"headig\"><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h3>";
 	          	html  += "<div class=\"meta mb-3\">";
-	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\">"+item.enrollDate+"</a></div>";
-	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\">"+item.nickName+"</a></div>";
-	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\" class=\"meta-chat\"><span class=\"icon-heart\"></span>"+item.starRating+"</a></div>";
+	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+getFormatDate(date)+"</a></div>";
+	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.nickName+"</a></div>";
+	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\" class=\"meta-chat\"><span class=\"icon-star\"></span>"+item.starRating+"</a></div>";
           		html  += "</div>";
+          		html += "<p>"+item.content+"</p>";
           		html  += "<img class=\"lock-20 img\" src=\'${pageContext.request.contextPath}/resources/upload/review/"+item.image+"\'>";
-          		html  += "<p>"+item.content+"</p></div></div></div>";
-				//console.log(html);
+          		html  += "</div></div></div>";
+				console.log(html);
 				$("#review-wrapper").append(html);
 			}); 
 		},error:function(){

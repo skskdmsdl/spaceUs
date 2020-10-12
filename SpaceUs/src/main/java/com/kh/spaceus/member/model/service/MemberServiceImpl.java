@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spaceus.member.model.dao.MemberDAO;
+import com.kh.spaceus.member.model.vo.Coupon;
 import com.kh.spaceus.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -97,6 +98,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int insertBtdCoupon() {
 		return memberDAO.insertBtdCoupon();
+	}
+
+	@Override
+	public int deleteCoupon() {
+		return memberDAO.deleteCoupon();
+	}
+
+	@Override
+	public List<Coupon> selectCouponList(String email) {
+		return memberDAO.selectCouponList(email);
 	}
 
 

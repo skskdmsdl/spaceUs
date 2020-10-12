@@ -217,27 +217,21 @@ public class SpaceServiceImpl implements SpaceService{
 		return spaceDAO.selectOptionList(spaceNo);
 	}
 	
+	@Override
 	public List<Review> selectRecentReviewList() {
 		return spaceDAO.selectRecentReviewList();
 	}
-
+	
 	@Override
-	public List<Object> selectAutoTagList(String value) {
-		return spaceDAO.selectAutoTagList(value);
-	}
-
-	@Override
-	public List<Object> selectAutoCategoryList(String value) {
-		return spaceDAO.selectAutoCategoryList(value);
-	}
-
-	@Override
-	public List<Object> selectAutoOptionList(String value) {
-		return spaceDAO.selectAutoOptionList(value);
+	public List<Space> selectPopularSpaces() {
+		return spaceDAO.selectPopularSpaces();
 	}
 	
-	
-	
+
+	@Override
+	public List<Object> selectAutoList(String value) {
+		return spaceDAO.selectAutoList(value);
+	}
 	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {

@@ -25,46 +25,12 @@ public class SpaceListController {
 	public String autocomplete(@RequestParam String value) {
 		System.out.println(value);
 		
-	    List<Object> array = spaceSerivce.selectAutoTagList(value);
-	    
-	    System.out.println(array);
-	    
+		List<Object> array = spaceSerivce.selectAutoList(value);
+	    	    	    
 	    Gson gson = new Gson();
-	     
-	    System.out.println(gson.toJson(array));
 	    
 	    return gson.toJson(array);
 	}
 	
-	@RequestMapping(value = "/autocomplete2.do", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	@ResponseBody
-	public String autocomplete2(@RequestParam String value) {
-		System.out.println(value);
-		
-	    List<Object> array = spaceSerivce.selectAutoCategoryList(value);
-	    
-	    System.out.println(array);
-	    
-	    Gson gson = new Gson();
-	     
-	    System.out.println(gson.toJson(array));
-	    
-	    return gson.toJson(array);
-	}
-	
-	@RequestMapping(value = "/autocomplete3.do", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	@ResponseBody
-	public String autocomplete3(@RequestParam String value) {
-		System.out.println(value);
-		
-	    List<Object> array = spaceSerivce.selectAutoOptionList(value);
-	    
-	    System.out.println(array);
-	    
-	    Gson gson = new Gson();
-	     
-	    System.out.println(gson.toJson(array));
-	    
-	    return gson.toJson(array);
-	}
+
 }
