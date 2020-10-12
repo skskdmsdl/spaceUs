@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -99,12 +100,14 @@ public class MemberController {
 	//탈퇴
 	@RequestMapping("/deleteMember.do")
 	public String deleteMember (@RequestParam("memberEmail") String memberEmail,
-			RedirectAttributes redirectAttr) {
+			RedirectAttributes redirectAttr, SessionStatus sessionStatus) {
 		int result = memberService.deleteMember(memberEmail);
 		
 		if(result>0) {
 		redirectAttr.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다.");
-		return "redirect:/member/memberLogout";//로그아웃 처리함.
+		
+		  SecurityContextHolder.clearContext();
+		
 		}
 		else 
 		redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");
@@ -297,13 +300,8 @@ public class MemberController {
 
 	// 로그아웃
 	@RequestMapping("/memberLogout.do")
-	public String memberLogout(RedirectAttributes redirectAttr, HttpServletRequest request,
-			 HttpServletResponse response, HttpSession session, HttpSecurity http) {
+	public String memberLogout() {
 		
-		
-		Cookie cookie=new Cookie("JSESSIONID", session.getId());
-		cookie.setMaxAge(0);
-		response.addCookie(cookie);
 		
 		return "redirect:/";
 	}

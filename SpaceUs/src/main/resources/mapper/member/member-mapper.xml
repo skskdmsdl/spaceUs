@@ -108,7 +108,7 @@
 
 <delete id="deleteMember">
     delete from 
-    	member join 
+    	member
     where 
     	member_email = #{ memberEmail}
 </delete>
