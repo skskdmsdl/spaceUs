@@ -468,35 +468,20 @@
 	</select>
 	
 	<!-- autocomplete tag -->
-	<select id="selectAutoTagList" resultMap="tagMap">
-		select
-			tag_name
-		from
-			tag
-		where 
-			tag_name like'%'|| #{value} ||'%'
+	<select id="selectAutoList" resultType="string">
+		select category_name
+		from category
+		where category_name like'%'|| #{value} ||'%'
+		union
+		select tag_name
+		from tag
+		where tag_name like'%'|| #{value} ||'%'
+		union
+		select option_name 
+		from option_list
+		where option_name like'%'|| #{value} ||'%'
 	</select>
 	
-	<!-- autocomplete category -->
-	<select id="selectAutoCategoryList" resultMap="categoryMap">
-		select
-			category_name
-		from
-			category
-		where 
-			category_name like'%'|| #{value} ||'%'
-	</select>
-	<resultMap type="category" id="categoryMap"></resultMap>
-	
-	<select id="selecAutoOptionList" resultMap="optionMap1">
-		select
-			option_name
-		from
-			option_list
-		where 
-			option_name like'%'|| #{value} ||'%'
-	</select>
-	<resultMap type="confirmSpaceOption" id="optionMap1"></resultMap>
 </mapper>
 
 

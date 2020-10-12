@@ -189,29 +189,20 @@ public class SpaceDAOImpl implements SpaceDAO{
 	public List<OptionList> selectOptionList(String spaceNo) {
 		return sqlSession.selectList("space.selectOptionList", spaceNo);
 	}
-
+	
+	@Override	
 	public List<Review> selectRecentReviewList() {
 		return sqlSession.selectList("space.selectRecentReviewList");
 	}
 
 	@Override
+	public List<Object> selectAutoList(String value) {
+		return sqlSession.selectList("space.selectAutoList", value);
+	}
+	
+	@Override	
 	public List<Space> selectPopularSpaces() {
 		return sqlSession.selectList("space.selectPopularSpaces");
-	}
-
-	@Override
-	public List<Object> selectAutoTagList(String value) {
-		return sqlSession.selectList("space.selectAutoTagList", value);
-	}
-
-	@Override
-	public List<Object> selectAutoCategoryList(String value) {
-		return sqlSession.selectList("space.selectAutoCategoryList", value);
-	}
-
-	@Override
-	public List<Object> selectAutoOptionList(String value) {
-		return sqlSession.selectList("space.selecAutoOptionList", value);
 	}
 
 	/*@Override

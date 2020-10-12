@@ -86,6 +86,7 @@ input[type="text"]:focus {
 $(function() { 
     
     $("#searchInput").autocomplete({
+        
         source : function( request, response ) {
 			//tag
        	 	$.ajax({
@@ -94,56 +95,18 @@ $(function() {
                  dataType: "json",
                  data: {value : request.term},
                  success: function(data) {
-                     //console.log(request.term);
+                     console.log(request.term);
                      //서버에서 json 데이터 response 후 목록에 추가
                      response(
                          $.map(data, function(item) {  
-                             //console.log(item);
+                             console.log(item);
                              return {
-                             	label:item.tag 
+                             	label:item
                              }
                          })
                      );
                  }
-            });
-             //category
-        	 $.ajax({
-                 type: 'get',
-                 url: "${pageContext.request.contextPath}/space/autocomplete2.do",
-                 dataType: "json",
-                 data: {value : request.term},
-                 success: function(data) {
-                     //console.log(request.term);
-                     //서버에서 json 데이터 response 후 목록에 추가
-                     response(
-                         $.map(data, function(item) {  
-                             //console.log(item);
-                             return {
-                             	label:item.categoryName
-                             }
-                         })
-                     );
-                 }
-            });
-            //option
-        	 $.ajax({
-                 type: 'get',
-                 url: "${pageContext.request.contextPath}/space/autocomplete3.do",
-                 dataType: "json",
-                 data: {value : request.term},
-                 success: function(data) {
-                     //console.log(request.term);
-                     //서버에서 json 데이터 response 후 목록에 추가
-                     response(
-                         $.map(data, function(item) {  
-                             //console.log(item);
-                             return {
-                             	label:item.optionName
-                             }
-                         })
-                     );
-                 }
-            }); 
+            });             
              
         },    // source 는 자동 완성 대상
         select : function(event, ui) {    //아이템 선택시
@@ -157,10 +120,11 @@ $(function() {
         classes: {  
             "ui-autocomplete": "highlight"
         },
-        delay: 50,   
+        delay: 500,   
         position: { my : "right top", at: "right bottom" }, 
         close : function(event){ 
         }
+        
     });
     
 });
@@ -181,10 +145,10 @@ $(function() {
           			<p></p>
      					<div style="margin-top:-20px">
      						<div id="wrap">
-							  <%-- <form id="searchFrm" onsubmit="searchSpace();" action="" autocomplete="on"> --%>
-							  <input id="searchInput" name="search_keyword" type="text" placeholder="키워드를 입력하세요">
-							  <i class="fas fa-search fa-2x" id="search_submit" type="submit" style="color:#00C89E"></i>
-							  <%-- </form> --%>
+							  <form id="searchFrm" onsubmit="searchSpace();" action="" autocomplete="on"> 
+								  <input id="searchInput" name="search_keyword" type="text" placeholder="키워드를 입력하세요">
+								  <i class="fas fa-search fa-2x" id="search_submit" type="submit" style="color:#00C89E"></i>
+							  </form> 
 							</div>
          				</div>
        			</div>
@@ -350,8 +314,8 @@ $(function() {
         <h2 class="mb-2">인기 공간</h2>
       </div>
     </div>
-    <div class="row" id="popular">
-    	    	  <div class="col-md-4">
+    <div class="row">
+    	  <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
     			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
     			<div class="text">
@@ -456,7 +420,7 @@ function popular(){
 $(function () { 
 	memberId();
 });
-//이용자 리뷰리스트 ajax 요청
+//이용자 리뷰 ajax 요청
 $(function () { 
 	review();
 }); 
