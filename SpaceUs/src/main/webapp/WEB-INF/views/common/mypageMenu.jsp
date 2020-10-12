@@ -94,12 +94,13 @@ conversation.setAttributes({
                     <a style="color:black" class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
                 </div>
                 <div class="navbar-collapse">
-                    
-                   <!-- <ul class="navbar-nav my-lg-0">
+                    <ul class="navbar-nav my-lg-0">
                        <li class="nav-item dropdown">
-                           <a id="logout" class="m-r-30">로그아웃</a>
+	                    <form:form action="${ pageContext.request.contextPath }/member/memberLogout.do">
+				      	 	 <button class="btn m-r-30" type="submit">로그아웃</button>
+				      	 </form:form>
                        </li>
-                   </ul> -->
+                   </ul> 
                </div>
             </nav>
         </header>
