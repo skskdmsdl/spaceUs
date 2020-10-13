@@ -28,4 +28,5 @@ public class Reservation implements Serializable {
 	private int revComplete;
 	private String nickName;
 	private String phone;
+	private String hostEmail;
 }

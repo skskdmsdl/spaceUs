@@ -31,6 +31,15 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
+	public List<Reservation> hostSearchReservation(Reservation reservation) {
+		return reservationDAO.hostSearchReservation(reservation);
+	}
+
+	@Override
+	public List<Reservation> selectUseReservation(String memberEmail) {
+		return reservationDAO.selectUseReservation(memberEmail);
+	}
+
 	public List<Reservation> selectListReservation(String email) {
 		return reservationDAO.selectListReservation(email);
 	}
