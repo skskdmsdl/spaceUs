@@ -18,5 +18,9 @@ public interface ReservationService {
 	int insertReservation(Reservation reservation);
 	
 	List<Reservation> selectListReservation(String email);
+
+	List<Reservation> hostSearchReservation(Reservation reservation);
+
+	List<Reservation> selectUseReservation(String memberEmail);
 	
 }

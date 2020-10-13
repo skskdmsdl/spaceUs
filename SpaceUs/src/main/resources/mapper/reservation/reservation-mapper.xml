@@ -73,8 +73,33 @@
 		from 
 			member join reservation using(member_email) 
 		where 
-			space_no=(select space_no from space where member_email = #{ member_email })
+			space_no=(select space_no from space where member_email = #{ memberEmail })
+		order by rev_date desc
 	</select>
+	
+	<select id="selectUseReservation" resultMap="reservationMap">
+        select 
+        	* 
+		from 
+			member join reservation using(member_email) 
+		where 
+			space_no=(select space_no from space where member_email = #{ memberEmail })
+		order by d_day desc
+	</select>
+	
+	<select id="hostSearchReservation" resultMap="reservationMap">
+        select 
+        	* 
+		from 
+			member join reservation using(member_email) 
+		where 
+			space_no=(select space_no from space where member_email = #{ hostEmail })
+			and member_email like '%'||#{ memberEmail }||'%'
+		order by rev_date desc
+	</select>
+
+
+
 
 </mapper>
 
