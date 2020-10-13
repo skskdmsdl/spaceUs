@@ -181,7 +181,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 		
 	                         <div class="filter-input">
 	                             <p>예약 날짜</p>
-	                             <input type="text" name="dDay" readonly>
+	                             <input type="text" name="Day" readonly>
 	                         </div>
 	                         <div class="filter-input">
 	                             <p>예약 시간</p>
@@ -239,7 +239,7 @@ function selectDay(val){
 	if(date.getTime() <= today.getTime()){
 		alert("오늘과 지난 날짜는 예약이 불가능합니다.");
 		$("#D-day").val('');
-		$("[name=dDay]").val('');
+		$("[name=Day]").val('');
 		
 		resetHour();
 		for(var i=0; i<24; i++){
@@ -261,7 +261,7 @@ function selectDay(val){
 	}
 	resetHour();
 
-	$("[name=dDay]").val($("#D-day").val());
+	$("[name=Day]").val($("#D-day").val());
 }
 
 //가능시간 클릭이벤트
@@ -353,7 +353,7 @@ function checkTime(){
 <script>
 $("#sub").on("click", function(){
 	//빈칸이면 입력 요구
-	if($("[name=dDay]").val() == ""){
+	if($("[name=Day]").val() == ""){
 		alert("예약날짜를 선택해주세요.");
 		document.getElementById("D-day").focus();
 		return false;

@@ -62,32 +62,47 @@
 		                                        	<div class="row"> 
 			                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
 			                                            <div class="col-md-9">
-			                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
-			                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
+			                                                <button type="button" class="btn m-r-5 btn-rounded btn-outline-success" data-toggle="modal" data-target="#confirmModal${ vs.index }">예약확인</button>
+			                                                <a href="#" onclick="return confirm('정말 예약을 취소하시겠습니까?');" class="btn btn-rounded btn-outline-danger">예약취소</a> 
 			                                            </div>
 		                                            </div>
 		                                        </div>
 		                                	</div>
 		                            	</div>
+		                            	
+		                            	<!-- Modal -->
+										<div class="modal fade" id="confirmModal${ vs.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <h5 class="modal-title" id="exampleModalLabel">예약확인</h5>
+										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										          <span aria-hidden="true">&times;</span>
+										        </button>
+										      </div>
+										      <div class="modal-body">
+							                        <div class="section-title sidebar-title-b">
+							                            <h6>공간 정보</h6>
+							                        </div>
+							                            <p>공간 이름 : ${ info.spaceName }</p>
+							                            <p>주소 : ${ info.address }</p>
+							                            <p>전화번호 : ${ info.spacePhone }</p>
+							                  		<div class="section-title sidebar-title-b">
+							                            <h6>예약 정보</h6>
+							                        </div>
+							                            <p>예약 날짜 : ${ revList[vs.index].day }</p>
+							                            <p>예약 시간 : ${ revList[vs.index].startHour }:00 ~ ${ revList[vs.index].endHour }:00</p>
+							                            <p>결제 금액 : ${ revList[vs.index].totalPrice }</p>
+							                            <p>결제 수단 : ${ revList[vs.index].pay }</p>
+								              		
+										      </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-secondary site-btn" data-dismiss="modal">Close</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
 									</c:forEach>
-                               		<%-- <div class="sl-item">
-                                     <div class="row">
-                                    	<div class="mb-5 ml-5 mr-5 mt-3" >
-					    					<img class="usageHistoryImg" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
-                                     	</div>
-                                        <div class="mt-2 col-md p-20">
-                                            <div><a href="#">모락(MORAK) 서울대입구점</a> <span class="sl-date">20.09.18</span></div>
-                                        	<div class="row"> 
-	                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
-	                                            <div class="col-md-9">
-	                                                <a href="javascript:void(0)" class="btn m-r-5 btn-rounded btn-outline-success">예약확인</a> 
-	                                                <a href="javascript:void(0)" class="btn btn-rounded btn-outline-danger">예약취소</a> 
-	                                            </div>
-                                            </div>
-                                        </div>
-                                      </div>
-                                   </div> --%>
-                               
                                 </div>
                             </div>
                         </div>
