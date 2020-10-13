@@ -491,6 +491,36 @@
 		where option_name like'%'|| #{value} ||'%'
 	</select>
 	
+	<!-- search Space -->
+	<select id="selectCategoryList" resultMap="categoryMap">
+		select 
+			* 
+		from 
+			category
+	</select>
+	<resultMap type="category" id="categoryMap"></resultMap>
+	
+	
+	<select id="selectOptionList1" resultMap="optionListMap">
+		select
+			*
+		from 
+			option_list
+	</select>
+	<resultMap type="optionList" id="optionListMap"></resultMap>
+	
+	<!-- 입력값에 따른 spaceNo 가져오기 -->
+	<select id="selectSpaceNoList" resultType="string">
+		WITH TEMP_TABLE AS (
+		   SELECT address as name, space_no FROM space union all
+		   select category_name as name, space_no from category join space using(category_no) union all
+		   select option_name as name, space_no from space_option join option_list using(option_no) union all
+		   select tag_name as name, space_no from space_tag join tag using(tag_no)
+		)
+		SELECT space_no
+		   FROM TEMP_TABLE
+		 WHERE name like '%' || #{keyword}  || '%'
+	</select>
 </mapper>
 
 

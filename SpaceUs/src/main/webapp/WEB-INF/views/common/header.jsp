@@ -10,8 +10,16 @@
   <head>
     <meta charset="utf-8">
     <title>SpaceUs</title>
+    <!-- autocomplete -->
+	<!-- CSS , JS -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+     <script src="http://code.jquery.com/jquery-latest.min.js"></script> 
+     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script> 
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 	<!-- bootstrap js: jquery load 이후에 작성할것.-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -57,22 +65,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/icomoon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/jquery-ui.min.css">
+	<script src="https://kit.fontawesome.com/b74a25ff1b.js" crossorigin="anonymous"></script>
+	
+	<script src="${pageContext.request.contextPath }/resources/js/aos.js"></script>  
+	
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	
 
-
-    <!-- icons -->
-    <script src="https://kit.fontawesome.com/b74a25ff1b.js" crossorigin="anonymous"></script>
-
-    <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
-   <script src="${pageContext.request.contextPath }/resources/js/aos.js"></script>  
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    
-  <!-- loader -->
-  <%-- <script src="${pageContext.request.contextPath }/resources/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="${pageContext.request.contextPath }/resources/js/google-map.js"></script> --%>
-
-<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
- <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
 <script>
 	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
 	<c:if test="${ not empty msg }">
@@ -206,8 +205,8 @@ function memberId(){
 		url:"${pageContext.request.contextPath}/member/header.do",
 		dataType:"json",
 		success:function(data){
-			console.log("ajax 요청 성공!");
-			console.log("dsfdsafadsfasfasdfasdfasdfasdfasf"+ data.nickName);
+			//console.log("ajax 요청 성공!");
+			//console.log("dsfdsafadsfasfasdfasdfasdfasdfasf"+ data.nickName);
 			$(".memberId").append(data.nickName+"님");
 			
 			 
