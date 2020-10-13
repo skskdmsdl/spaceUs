@@ -46,12 +46,11 @@ public class Scheduler {
 		
 	}
 
-	@Scheduled(cron ="0 0 0 * * *") 
+	@Scheduled(cron ="0 18 14 * * *") 
 	public void dailyScheduler(){ 
 		System.out.println("생일 쿠폰 발급 "); 
 		//기념일 쿠폰 발급
-		int result = memberService.insertBtdCoupon();
-		
+		int result1 = memberService.insertBtdCoupon();
 		
 		System.out.println("당일 출첵 여부 초기화 "); 
 		int result2 = memberService.deleteToday();

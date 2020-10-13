@@ -404,5 +404,7 @@ public class SpaceController {
 
 		return mav;
 	}
+	
+	//인덱스 페이지
 
 }

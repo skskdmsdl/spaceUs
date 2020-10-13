@@ -492,6 +492,18 @@ function searchSpace(){
 document.querySelector('.stick').addEventListener('click',()=>{
 	  document.querySelector('.four').value = '';
 	}); 
+
+$.ajax({
+	url : "${ pageContext.request.contextPath }/space/indexList.do",
+	dataType : "json",
+	success : function(data){
+		alert("index List!");
+	},
+	error : function(xhr, status, err){
+		console.log("처리실패", xhr, status, err);
+	}
+}); 
+
 </script>
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
