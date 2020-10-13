@@ -106,27 +106,69 @@ public class MemberController {
 			redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");
 		
 		return "redirect:/";
+
+		}
+	
+	// 이용내역
+	@RequestMapping("/usageHistory.do")
+	public ModelAndView usageHistory(Principal principal, ModelAndView mav, Model model) {
+
+		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		List<Space> spaceList = new ArrayList<Space>();
+		
+		for(int i=0; i<revList.size(); i++) {
+			Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
+			System.out.println("space="+space);
+			spaceList.add(space);
+		}
+		
+		model.addAttribute("status", "all");
+		mav.addObject("revList",revList);
+		mav.addObject("spaceList",spaceList);
+		mav.setViewName("member/usageHistory");
+		return mav;
+	}
+	
+	@RequestMapping("/usageIng.do")
+	public ModelAndView usageIng(Principal principal, ModelAndView mav, Model model) {
+
+		List<Reservation> revList = reservationService.ingReservation(principal.getName());
+		List<Space> spaceList = new ArrayList<Space>();
+		
+		for(int i=0; i<revList.size(); i++) {
+			Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
+			System.out.println("space="+space);
+			spaceList.add(space);
+		}
+		
+		model.addAttribute("status", "ing");
+		mav.addObject("revList",revList);
+		mav.addObject("spaceList",spaceList);
+		mav.setViewName("member/usageHistory");
+		return mav;
+
 	}
 
-	// 이용내역
-		@RequestMapping("/usageHistory.do")
-		public ModelAndView usageHistory(Principal principal, ModelAndView mav) {
 
-			//System.out.println("memberEmail: "+principal.getName());
-			List<Reservation> revList = reservationService.selectListReservation(principal.getName());
-			List<Space> spaceList = new ArrayList<Space>();
-			
-			for(int i=0; i<revList.size(); i++) {
-				Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
-				System.out.println("space="+space);
-				spaceList.add(space);
-			}
-			
-			mav.addObject("revList",revList);
-			mav.addObject("spaceList",spaceList);
-			mav.setViewName("member/usageHistory");
-			return mav;
+	@RequestMapping("/usageFinish.do")
+	public ModelAndView usageFinish(Principal principal, ModelAndView mav, Model model) {
+
+		List<Reservation> revList = reservationService.finishReservation(principal.getName());
+		List<Space> spaceList = new ArrayList<Space>();
+		
+		for(int i=0; i<revList.size(); i++) {
+			Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
+			System.out.println("space="+space);
+			spaceList.add(space);
 		}
+		
+		model.addAttribute("status", "finish");
+		mav.addObject("revList",revList);
+		mav.addObject("spaceList",spaceList);
+		mav.setViewName("member/usageHistory");
+		return mav;
+
+	}
 
 	// 위시리스트
 	@RequestMapping("/wishList.do")

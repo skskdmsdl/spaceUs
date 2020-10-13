@@ -12,11 +12,17 @@ public interface ReservationService {
 
 	int insertReservationVail(ReservationAvail reservationAvail);
 
-	List<Reservation> selectHostReservationList(String memberEmail);
 	
 	//공간별 예약
 	int insertReservation(Reservation reservation);
 	
 	List<Reservation> selectListReservation(String email);
+
+	List<Reservation> ingReservation(String email);
+
+	List<Reservation> finishReservation(String email);
+
+	int cancleReservation(String revNo);
 	
+	List<Reservation> selectHostReservationList(String memberEmail);
 }

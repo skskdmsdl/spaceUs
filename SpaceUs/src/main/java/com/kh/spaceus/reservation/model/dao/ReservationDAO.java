@@ -12,13 +12,16 @@ public interface ReservationDAO {
 	List<ReservationAvail> selectListAvail(String spaceNo);
 
 	int insertReservationVail(ReservationAvail reservationAvail);
-
-	List<Reservation> selectListReservation(String email);
-
-	List<Reservation> selectHostReservationList(String memberEmail);
 	
 	int insertReservation(Reservation reservation);
 
+	List<Reservation> selectListReservation(String email);
+
+	List<Reservation>ingReservation(String email);
+
+	List<Reservation> finishReservation(String email);
+
+	int cancleReservation(String revNo);
 	
-	
+	List<Reservation> selectHostReservationList(String memberEmail);
 }
