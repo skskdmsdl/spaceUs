@@ -41,6 +41,7 @@
 			invalidate-session="true"
 			logout-url="/member/memberLogout.do"
 			logout-success-url="/"
+			delete-cookies="JSESSIONID"
 		/> 
 		
 	

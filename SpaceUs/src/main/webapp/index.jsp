@@ -121,7 +121,7 @@ $(function() {
         classes: {  
             "ui-autocomplete": "highlight"
         },
-        delay: 500,   
+        delay: 30,
         position: { my : "right top", at: "right bottom" }, 
         close : function(event){ 
         }
@@ -130,7 +130,6 @@ $(function() {
     
 });
 </script>
-
 
 <!-- 컨텐츠 시작 -->
 <div class="hero-wrap ftco-degree-bg"
@@ -379,7 +378,7 @@ $(function () {
 });
 
 function popular(){
-	console.log("리뷰function 실행");
+	console.log("인기공간function 실행");
 	$.ajax({
 		type:"GET",
 		url:"${pageContext.request.contextPath}/space/popular.do",
@@ -402,9 +401,9 @@ function popular(){
 		    	html+= "</ul>";
 		    	html+= "<h3><a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"'>"+item.spaceName+"</a></h3>"; 
 		    	html+= "<small><span class='icon-my_location'>"+item.address+"</span></small>";
-		    	html+= "<a href='#' class='d-flex align-items-center justify-content-center btn-custom'>"; 
-		    	html+= "<span class='icon-heart'></span>";
-		    	html+= "</a></div></div></div>";
+		    	//html+= "<a href='#' class='d-flex align-items-center justify-content-center btn-custom'>"; 
+		    	//html+= "<span class='icon-heart'></span></a>";
+		    	html+= "</div></div></div>";
 				
 				console.log(html);
 				$("#popular").append(html);
@@ -457,11 +456,11 @@ function review(){
 				html  +=  "<div class=\"col-md-3 d-flex\">";
 	          	html  += "<div class=\"blog-entry justify-content-end\">";
           	    html  += "<div class=\"text\">";
-	          	html  += "<h3 class=\"headig\"><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h3>";
+	          	html  += "<h3 class=\"headig\"><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h3>";
 	          	html  += "<div class=\"meta mb-3\">";
-	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\">"+getFormatDate(date)+"</a></div>";
-	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\">"+item.nickName+"</a></div>";
-	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"\" class=\"meta-chat\"><span class=\"icon-star\"></span>"+item.starRating+"</a></div>";
+	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+getFormatDate(date)+"</a></div>";
+	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.nickName+"</a></div>";
+	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\" class=\"meta-chat\"><span class=\"icon-star\"></span>"+item.starRating+"</a></div>";
           		html  += "</div>";
           		html += "<p>"+item.content+"</p>";
           		html  += "<img class=\"lock-20 img\" src=\'${pageContext.request.contextPath}/resources/upload/review/"+item.image+"\'>";

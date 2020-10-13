@@ -33,6 +33,11 @@ public class ReservationDAOImpl implements ReservationDAO{
 		return sqlSession.selectList("reservation.selectListReservation", email);
 	}
 
+	@Override
+	public int insertReservation(Reservation reservation) {
+		return sqlSession.insert("reservation.insertReservation", reservation);
+	}
+
 	
 
 }

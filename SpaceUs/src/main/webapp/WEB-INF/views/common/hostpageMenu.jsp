@@ -23,7 +23,9 @@
                     
                     <ul class="navbar-nav my-lg-0">
                        <li class="nav-item dropdown">
-                           <a id="logout" class="m-r-30">로그아웃</a>
+                           <form action="${ pageContext.request.contextPath }/member/memberLogout.do">
+				      	 	 <button class="btn m-r-30" type="submit">로그아웃</button>
+				      	   </form>
                        </li>
                    </ul> 
                </div>

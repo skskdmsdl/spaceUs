@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.common.Utils;
+import com.kh.spaceus.member.model.service.MemberService;
+import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
@@ -50,6 +53,9 @@ public class SpaceController {
 
 	@Autowired
 	private ReservationService reservationService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	// 공간등록하기 화면
 	@RequestMapping(value = "/insertSpace.do", method = RequestMethod.GET)
@@ -222,6 +228,72 @@ public class SpaceController {
 
 		return "space/spaceDetail";
 	}
+	
+	
+	//리뷰링크 클릭시 이동하는 공간상세페이지
+	@RequestMapping("/spaceReviewDetail.do")
+	public String spaceReviewDetail(Model model, @RequestParam("spaceNo") String spaceNo, Principal principal,
+			@RequestParam(defaultValue = "1", value = "cPage") int cPage, HttpServletRequest request) {
+
+		Space space = spaceService.selectOneSpace(spaceNo);
+		System.out.println("@@"+space);
+		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
+		System.out.println("spaceNo="+ spaceNo);
+
+		// 같은 카테고리 공간 리스트(최대 3개)
+		List<Space> spcList = spaceService.selectSameCategory(space);
+		log.debug("같은 카테고리 공간 리스트={}",spcList);
+
+		// 추천 공간 카테고리명
+		String cateName = spaceService.selectCateName(space.getCategoryNo());
+
+		// 리뷰 한 페이지당 개수 제한
+		final int limit = 10; // 사용용도는 numPerPage와 똑같음
+		int offset = (cPage - 1) * limit;
+		List<Review> review = spaceService.selectListReview(spaceNo, limit, offset);
+
+		// 전체리뷰수 구하기
+		int reviewTotal = spaceService.selectReviewTotalContents(spaceNo);
+		// 별점조회
+		Star star = spaceService.selectStar(spaceNo);
+		
+		star.setSumStar(star.getStar1() + star.getStar2() + star.getStar3() + star.getStar4() + star.getStar5());
+		
+		
+		String url = request.getRequestURI() + "?spaceNo=" + spaceNo;
+		String pageBar = Utils.getPageBarHtml(cPage, limit, reviewTotal, url);
+
+		int qnaTotal = spaceService.selectQuestionTotalContents(spaceNo);
+
+		// qna 조회
+		List<Qna> qlist = spaceService.selectQuestionList(spaceNo, limit, offset);
+		String qPageBar = Utils.getPageBarHtml(cPage, limit, qnaTotal, url);
+
+		// option 조회
+		List<OptionList> optionList = spaceService.selectOptionList(spaceNo);
+		
+		model.addAttribute("spcList", spcList);
+		model.addAttribute("cateName", cateName);
+
+		model.addAttribute("qlist", qlist);
+		model.addAttribute("qPageBar", qPageBar);
+		model.addAttribute("qnaTotal", qnaTotal);
+
+		model.addAttribute("space", space);
+		model.addAttribute("tag", tag);
+		model.addAttribute("loginMember", principal);
+
+		model.addAttribute("review", review);
+		model.addAttribute("reviewTotal", reviewTotal);
+		model.addAttribute("star", star); 
+		model.addAttribute("pageBar", pageBar);
+		
+		model.addAttribute("optionList",optionList);
+		model.addAttribute("true", 1);
+		
+		
+		return "space/spaceDetail";
+	}
 
 	// 예약하기버튼
 	@RequestMapping("/reserveSpace.do")
@@ -231,8 +303,9 @@ public class SpaceController {
 							   @RequestParam("memberId") String memberId) {
 		//log.debug("spaceNo= {}",spaceNo);
 		//log.debug("spaceName= {}",spaceName);
-		System.out.println("memberId = "+memberId);
+		//System.out.println("memberId = "+memberId);
 		Space space = spaceService.selectOneSpace(spaceNo);
+		Member member = memberService.selectOneMember(memberId);
 		
 		//spaceNo로 옵션정보가져와서 전달하기
 		List<OptionList> optionList = spaceService.selectOptionList(spaceNo);
@@ -242,6 +315,7 @@ public class SpaceController {
 
 		//model.addAttribute("spaceName", spaceName);
 		mav.addObject("space",space);
+		mav.addObject("member",member);
 		mav.addObject("optionList",optionList);
 		mav.addObject("availList",availList);
 		
@@ -256,16 +330,32 @@ public class SpaceController {
 	public String insertWish(Wish wish, HttpServletResponse response) {
 		int result = spaceService.insertWish(wish);
 		
-		return "";
+		String msg = (result>0) ? "위시 추가 성공!" : "위시 추가 실패";
+		return msg;
 	}
 
-	// 좋아요수 읽어오기
+	// 좋아요수 읽어오고 전달받은 멤버이메일이 있을경우 좋아요 여부 검색하기
 	@RequestMapping(value = "/readLikeCnt.do", method = RequestMethod.GET)
 	@ResponseBody
-	public int selectLikeCount(@RequestParam("no") String spaceNo) {
-		int cnt = spaceService.selectLikeCnt(spaceNo);
-
-		return cnt;
+	public HashMap<String, Object> selectLikeCount(Wish wish, HttpServletResponse response) {
+		int cnt = spaceService.selectLikeCnt(wish.getSpaceNo());
+		//좋아요 한 상태인지 아닌지
+		String status = null;
+		
+		if(wish.getEmail()!=null) {
+		  Wish selected = spaceService.selectOneWish(wish);
+		  if(selected!=null) {
+				status="liked";
+			}else {
+				status=null;
+			}
+		}
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("status", status);
+		map.put("cnt", cnt);
+		
+		return map;
 	}
 
 	// 위시리스트 삭제
@@ -274,7 +364,8 @@ public class SpaceController {
 	public String deleteWishList(Wish wish, HttpServletResponse response) {
 		int result = spaceService.deleteWish(wish);
 		
-		return "";
+		String msg = (result>0) ? "위시 삭제 성공!" : "위시 삭제 실패";
+		return msg;
 	}
 
 	//인덱스 페이지 이용자리뷰

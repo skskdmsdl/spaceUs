@@ -87,6 +87,8 @@ public interface SpaceDAO {
 	List<Space> selectPopularSpaces();
 
 	List<Object> selectAutoList(String value);
+	
+	Wish selectOneWish(Wish wish);
 
 	List<Category> selectCategoryList();
 

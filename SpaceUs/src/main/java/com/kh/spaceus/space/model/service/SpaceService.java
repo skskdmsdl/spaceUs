@@ -74,7 +74,6 @@ public interface SpaceService {
 
 	List<Review> selectRecentReviewList();
 
-
 	List<Space> selectAll();
 
 	List<OptionList> selectOptionList(String spaceNo);
@@ -88,6 +87,8 @@ public interface SpaceService {
 	List<OptionList> selectOptionList1();
 
 	List<String> selectSpaceNoList(String keyword);
+
+	Wish selectOneWish(Wish wish);
 	
 	/* List<Space> selectListSpaceCollection(String email); */
 

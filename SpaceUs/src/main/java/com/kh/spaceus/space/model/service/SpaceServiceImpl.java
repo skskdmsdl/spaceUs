@@ -218,6 +218,7 @@ public class SpaceServiceImpl implements SpaceService{
 		return spaceDAO.selectOptionList(spaceNo);
 	}
 	
+	@Override
 	public List<Review> selectRecentReviewList() {
 		return spaceDAO.selectRecentReviewList();
 	}
@@ -248,6 +249,10 @@ public class SpaceServiceImpl implements SpaceService{
 		return spaceDAO.selectSpaceNoList(keyword);
 	}
 	
+	@Override
+	public Wish selectOneWish(Wish wish) {
+		return spaceDAO.selectOneWish(wish);
+	}
 	
 	
 	/*@Override

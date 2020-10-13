@@ -73,8 +73,10 @@
 <update id="updateMember">
 	update
 		member
-	set
-		nickname = #{ nickName }
+	<set>
+      <if test="nickName != null">nickname = #{ nickName },</if>
+      <if test="memberPhone != null">member_phone = #{ memberPhone }</if>
+   </set>
 	where
 		member_email = #{ memberEmail }
 </update>

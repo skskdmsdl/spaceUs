@@ -68,6 +68,8 @@ to {opacity: 1}
 	right: 85px;
 }
 .reviewLabel {font-size: 11px;}
+
+
 </style>
 <script>
 
@@ -98,10 +100,11 @@ $(function(){
 	   		 $.ajax({
 			        type: "POST",
 					url : "${pageContext.request.contextPath}/space/heart.do",
-					dataType: "JSON",
+					//dataType: "JSON",
 					data :   {
 						spaceNo : "${space.spaceNo}",
 						email : "${loginMember.principal.memberEmail}"},
+					//contentType:"application/json;charset=UTF-8"
 					success: function(data){
 						console.log(data);
 						readLikeCnt();
@@ -113,15 +116,17 @@ $(function(){
 			});
     	}
     	else {
-    		$heart.html("<i class='far fa-heart'></i>");
+    		//$heart.html("<i class='far fa-heart'></i>");
     		 $.ajax({
 			        type: "POST",
 					url : "${pageContext.request.contextPath}/space/cancelHeart.do",
 					data :  {
 						spaceNo : "${space.spaceNo}",
 						email : "${loginMember.principal.memberEmail}"},
+						//contentType:"application/json;charset=UTF-8"
 					success: function(data){
 						readLikeCnt();
+						$heart.html("<i class='far fa-heart'></i>");
 					},
 					error: function(xhr, status, err){
 						console.log("위시 삭제 실패", xhr, status, err);
@@ -129,27 +134,34 @@ $(function(){
     	   			});	
     		}
 	});
-	// 공간 좋아요 갯수
+    
+    readLikeCnt(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+});
+
+	// 공간 좋아요 갯수 읽어오고 이전에 위시리스트에 추가했는지 검사
     function readLikeCnt() {
 		$.ajax({
 			url: "${pageContext.request.contextPath}/space/readLikeCnt.do",
             type: "GET",
             data: {
-                no: "${space.spaceNo}"
+                spaceNo: "${space.spaceNo}",
+                email: "${loginMember.principal.memberEmail}"
             },
             dataType: "json",
-            success: function (count) {
-            	$(".like-count").html(count);
+            success: function (data) {
+                console.log(data);
+            	$(".like-count").html(data.cnt);
+            	if(data.status=='liked'){
+						//멤버 이메일로 좋아요 검색 후 이미 좋아요한 경우 
+						$("#heart-a").html("<i class='fas fa-heart' style='color:#ffc107; margin:2px;'></i>");		       			
+						console.log(data.status);
+                	}
             },
 			error: function(xhr, status, err){
 				console.log("좋아요수 읽어오기 실패", xhr, status, err);
 				}
 		});
     };
-    
-    readLikeCnt(); // 처음 시작했을 때 실행되도록 해당 함수 호출
-});
-
 
     
 function urlcopy(){
@@ -236,7 +248,6 @@ function naverShare() {
 							</div>
 							<!-- 공유하기 팝오버 끝-->
 							<!-- 예약버튼 -->
-							<input type="hidden" id="memberId" value="${loginMember.principal.memberEmail}" />
 							<input type="submit" onclick="rvSubmit();" value="예약하기"
 								class="btn py-3 px-5 btn-primary" style="margin-left: 70px"> 
 							<form id="reserveFrm">
@@ -249,7 +260,7 @@ function naverShare() {
 						<br /> <span class="subheading">
 							<div class="tagcloud">
 								<c:forEach items="${ tag }" var="tag">
-									<a href="#" class="tag-cloud-link">#${ tag.tag }</a>
+									<a href="#" class="tag-cloud-link">${ tag.tag }</a>
 								</c:forEach>
 							</div>
 						</span>
@@ -263,21 +274,11 @@ function naverShare() {
 				<div class="bd-example bd-example-tabs">
 					<div class="d-flex justify-content-center">
 						<ul class="nav nav-pills mb-3" id="detail-tab" role="tablist">
-
-							<li class="nav-item"><a class="nav-link"
-								id="detail-manufacturer-tab" data-toggle="pill"
-								href="#detail-manufacturer" role="tab"
-								aria-controls="detail-manufacturer" aria-expanded="true">공간설명</a>
-							</li>
 							<li class="nav-item"><a class="nav-link active"
 								id="detail-description-tab" data-toggle="pill"
 								href="#detail-description" role="tab"
-								aria-controls="detail-description" aria-expanded="true">공간위치</a>
+								aria-controls="detail-description" aria-expanded="true">공간설명</a>
 							</li>
-							<li class="nav-item"><a class="nav-link"
-								id="detail-contact-tab" data-toggle="pill"
-								href="#detail-contact" role="tab" aria-controls="detail-contact"
-								aria-expanded="true">공간옵션</a></li>
 							<li class="nav-item"><a class="nav-link" id="detail-qna-tab"
 								data-toggle="pill" href="#detail-qna" role="tab"
 								aria-controls="detail-qna" aria-expanded="true">Q&A</a></li>
@@ -291,17 +292,24 @@ function naverShare() {
 					<!-- 세부카테고리 끝-->
 
 					<div class="tab-content" id="detail-tabContent">
-						<!-- 공간설명 시작-->
-						<div class="tab-pane fade" id="detail-manufacturer"
-							role="tabpanel" aria-labelledby="detail-manufacturer-tab">
-							<p style="font-size: 18px">
-								${ space.content } <br /> 
-						</div>
-						<!-- 공간설명 끝-->
-						
 						<!-- contact 시작 -->
 						<div class="tab-pane fade show active" id="detail-description" role="tabpanel"
-							aria-labelledby="detail-manufacturer-tab" style="padding-top: 100px;">
+							aria-labelledby="detail-manufacturer-tab" style="padding-top: 50px;">
+							<div class="row">
+								<c:forEach items="${optionList}" var="info" varStatus="vs">
+								<div class="col-md-4">
+									<ul class="features">
+										<li class="check"><span class="ion-ios-checkmark"></span>${ info.optionName }</li>
+									</ul>
+								</div>
+								</c:forEach>
+							</div>	
+							<!-- 공간설명 시작-->
+							<div>
+								<p style="font-size: 18px; min-height:300px; padding-top: 50px;">
+									${ space.content } <br /> </p>
+							</div>
+							<!-- 공간위치 -->	
 							<div class="row" style="margin-left: 5em;">
 								<div id="kakaomap" style="width:500px;height:400px; "></div>
 								<div class="contact-info" style="padding-left: 100px;">
@@ -341,22 +349,7 @@ function naverShare() {
 						</div>
 						<!-- contact 끝 -->
 
-						<!-- 공간옵션시작 -->
-						<div class="tab-pane fade " id="detail-contact"
-							role="tabpanel" aria-labelledby="detail-description-tab">
-							<div class="row">
-								
-								<c:forEach items="${optionList}" var="info" varStatus="vs">
-								<div class="col-md-4">
-									<ul class="features">
-										<li class="check"><span class="ion-ios-checkmark"></span>${ info.optionName }</li>
-									</ul>
-								</div>
-								</c:forEach>
-									
-							</div>
-						</div>
-						<!-- 공간옵션 끝-->
+						
 						
 
 <div class="tab-pane fade" id="detail-qna" role="tabpanel" aria-labelledby="detail-qna-tab">
@@ -709,9 +702,9 @@ function naverShare() {
     				</ul>
     				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${space.spaceNo}">${space.spaceName }</a></h3>
     				<small><span class="icon-my_location">${space.address }</span></small>
-    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    				<span class="icon-heart"></span>
-    				</a>
+    			<!-- 	<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				 <span class="icon-heart"></span> 
+    				</a> -->
     			</div>
     		</div>
     	</div>
@@ -827,7 +820,6 @@ function ask(){
 //예약하기
 function rvSubmit(){
    	if($("#memberId").val()){
-   	   	alert($("#memberId").val());
 		$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserveSpace.do")
 		.submit();
    	}
@@ -897,15 +889,23 @@ $(".reviewToggle").on('click', function(){
 	$(this).children(".reviewSimpleBtn").toggle('show');
 	
 });
-//예약하기
-function rvSubmit(){
-	if($("#memberId").val()){
-		location.href="${pageContext.request.contextPath }/community/recruit/recruitEnrollForm.do";
+
+$(function () { 
+
+	var bool = ${true};
+	//console.log(bool);
+	
+	if(${true}==1){
+	$("#detail-description-tab").removeClass('active');
+	$("#detail-review-tab").addClass('active');
+	$("#detail-description").removeClass('active');
+	$("#detail-description").removeClass('show');
+	$("#detail-review").addClass('active');
+	$("#detail-review").addClass('show');
 	}
-	else {	
-		alert("로그인 후 이용할 수 있습니다.");
-		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";}
-}; 
+});
+
+
 </script>
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -27,7 +27,7 @@ public class Member implements Serializable, UserDetails{
 	private String password;
 	private String nickName;
 	private String memberPhone;
-	private Date birthDay; 
+	private String birthDay; 
 	private Date memberRegDate; //가입일
 	private int attendanceCnt; //출석횟수
 	private int today; //오늘출석여부

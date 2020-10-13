@@ -61,7 +61,7 @@
 							</tr>
 						    <tr>
 						      <td class="align-baseline">생일</td>
-						      <td><input type="date" class="col-7 input-group-text mb-4 mr-5 pull-right" value="<fmt:formatDate value="${member.birthDay}" pattern="yyyy-MM-dd" />" disabled/></td>
+						      <td><input type="text" class="col-7 input-group-text mb-4 mr-5 pull-right" value="${member.birthDay}" disabled/></td> 
 							</tr>
 						    <tr>
 						      <td class="align-baseline">핸드폰 <i class="fa fa-check phoneCheck ml-2" style="display:none; color:#3ab549;" aria-hidden="true"></i> <i class="fa fa-close phoneFalse ml-2" style="display:none; color:red;" aria-hidden="true"></i></td>
@@ -248,7 +248,7 @@ $("#infoUpdate").on("click", function(){
 		 alert("닉네임을 확인해주세요!");
 		 return;
 	}
-	if(!$(".phoneCheck").hasClass('show')&&$("#certification").hasClass('show')){
+	if(!$(".phoneCheck").hasClass('show')){
 		 alert("핸드폰을 확인해주세요!");
 		 return;
 	}
@@ -259,6 +259,8 @@ $("#infoUpdate").on("click", function(){
 		url : "${ pageContext.request.contextPath }/member/updateMember.do",
 		data : {
 			nickName : $("#nickName").val(),
+			birthDay : $("#btdCheck").val(),
+			memberPhone : $("#phone").val(),
 			memberEmail : $("#memberEmail").val()
 		},
 		dataType : "json",
@@ -378,12 +380,12 @@ $(function(){
 
 		if(text == $("#phoneChk").val()){
 			$(".phoneCheck").show();
-			$(".nickNameCheck").addClass('show');
+			$(".phoneCheck").addClass('show');
 			$(".phoneFalse").hide();
 		}
 		else {
 			$(".phoneCheck").hide();
-			$(".nickNameCheck").removeClass('show');
+			$(".phoneCheck").removeClass('show');
 			$(".phoneFalse").show();
 			$("#phoneChk").val('');
 		}

@@ -8,7 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spaceus.member.model.vo.Coupon;
 import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.space.model.vo.Wish;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -97,5 +99,20 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int insertBtdCoupon() {
 		return sqlSession.insert("member.insertBtdCoupon");
+	}
+
+	@Override
+	public int deleteCoupon() {
+		return sqlSession.delete("member.deleteCoupon");
+	}
+
+	@Override
+	public List<Coupon> selectCouponList(String email) {
+		return sqlSession.selectList("member.selectCouponList", email);
+	}
+
+	@Override
+	public List<Wish> selectWishList(String email) {
+		return sqlSession.selectList("member.selectWishList", email);
 	}
 }

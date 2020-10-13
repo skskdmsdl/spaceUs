@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.spaceus.member.model.vo.Coupon;
 import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.space.model.vo.Wish;
 
 public interface MemberService {
 
@@ -40,5 +42,11 @@ public interface MemberService {
 	int insertAttend3Coupon();
 
 	int insertBtdCoupon();
+
+	int deleteCoupon();
+
+	List<Coupon> selectCouponList(String email);
+
+	List<Wish> selectWishList(String email);
 
 }

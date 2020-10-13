@@ -170,6 +170,7 @@ ALTER TABLE Reservation RENAME COLUMN dday TO d_day;
 ALTER TABLE Reservation RENAME COLUMN start_hours TO start_hour;
 ALTER TABLE Reservation RENAME COLUMN end_hours TO end_hour;
 alter table reservation add pay varchar2(50);
+
 commit;
 
 -----------------------------
