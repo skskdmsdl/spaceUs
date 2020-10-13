@@ -110,9 +110,8 @@ public class MemberController {
 		}
 	// 이용내역
 	@RequestMapping("/usageHistory.do")
-	public ModelAndView usageHistory(Principal principal, ModelAndView mav) {
+	public ModelAndView usageHistory(Principal principal, ModelAndView mav, Model model) {
 
-		//System.out.println("memberEmail: "+principal.getName());
 		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
 		List<Space> spaceList = new ArrayList<Space>();
 		
@@ -122,12 +121,51 @@ public class MemberController {
 			spaceList.add(space);
 		}
 		
+		model.addAttribute("status", "all");
+		mav.addObject("revList",revList);
+		mav.addObject("spaceList",spaceList);
+		mav.setViewName("member/usageHistory");
+		return mav;
+	}
+	
+	@RequestMapping("/usageIng.do")
+	public ModelAndView usageIng(Principal principal, ModelAndView mav, Model model) {
+
+		List<Reservation> revList = reservationService.ingReservation(principal.getName());
+		List<Space> spaceList = new ArrayList<Space>();
+		
+		for(int i=0; i<revList.size(); i++) {
+			Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
+			System.out.println("space="+space);
+			spaceList.add(space);
+		}
+		
+		model.addAttribute("status", "ing");
 		mav.addObject("revList",revList);
 		mav.addObject("spaceList",spaceList);
 		mav.setViewName("member/usageHistory");
 		return mav;
 	}
 
+	@RequestMapping("/usageFinish.do")
+	public ModelAndView usageFinish(Principal principal, ModelAndView mav, Model model) {
+
+		List<Reservation> revList = reservationService.finishReservation(principal.getName());
+		List<Space> spaceList = new ArrayList<Space>();
+		
+		for(int i=0; i<revList.size(); i++) {
+			Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
+			System.out.println("space="+space);
+			spaceList.add(space);
+		}
+		
+		model.addAttribute("status", "finish");
+		mav.addObject("revList",revList);
+		mav.addObject("spaceList",spaceList);
+		mav.setViewName("member/usageHistory");
+		return mav;
+	}
+	
 	// 위시리스트
 	@RequestMapping("/wishList.do")
 	public String wishList(Principal principal, Model model) {

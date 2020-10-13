@@ -16,5 +16,11 @@ public interface ReservationService {
 	int insertReservation(Reservation reservation);
 	
 	List<Reservation> selectListReservation(String email);
+
+	List<Reservation> ingReservation(String email);
+
+	List<Reservation> finishReservation(String email);
+
+	int cancleReservation(String revNo);
 	
 }

@@ -13,10 +13,13 @@ public interface ReservationDAO {
 
 	int insertReservationVail(ReservationAvail reservationAvail);
 
-	List<Reservation> selectListReservation(String email);
-
 	int insertReservation(Reservation reservation);
 
-	
-	
+	List<Reservation> selectListReservation(String email);
+
+	List<Reservation>ingReservation(String email);
+
+	List<Reservation> finishReservation(String email);
+
+	int cancleReservation(String revNo);
 }

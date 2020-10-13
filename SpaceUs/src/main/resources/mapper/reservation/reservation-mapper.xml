@@ -52,6 +52,31 @@
 			member_email = #{ email }
 		order by rev_date desc
 	</select>
+	
+	<select id="ingReservation" resultMap="reservationMap">
+        select 
+			* 
+		from 
+			reservation
+		where
+			member_email = #{ email }
+			and
+			rev_cancle = rev_comple
+		order by rev_date desc
+	</select>
+	
+	<select id="finishReservation" resultMap="reservationMap">
+        select 
+			* 
+		from 
+			reservation
+		where
+			member_email = #{ email }
+			and
+			rev_cancle != rev_comple
+		order by rev_date desc
+	</select>
+	
 	<resultMap type="reservation" id="reservationMap">
 		<id column="rev_no" property="revNo"/>
 		<result column="member_email" property="memberEmail"/>
@@ -66,6 +91,14 @@
 		<result column="rev_comple" property="revComplete"/>
 	</resultMap>
 
+	<update id="cancleReservation">
+		update
+			reservation
+		set
+			rev_cancle = 1
+		where
+			rev_no = #{ revNo }
+	</update>
 
 </mapper>
 
