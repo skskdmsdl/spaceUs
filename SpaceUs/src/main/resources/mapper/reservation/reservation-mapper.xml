@@ -33,7 +33,7 @@
 			#{ memberEmail },
 			#{ spaceNo },
 			sysdate,
-			#{ dDay },
+			#{ day },
 			#{ startHour },
 			#{ endHour },
 			#{ totalPrice },
@@ -52,6 +52,31 @@
 			member_email = #{ email }
 		order by rev_date desc
 	</select>
+	
+	<select id="ingReservation" resultMap="reservationMap">
+        select 
+			* 
+		from 
+			reservation
+		where
+			member_email = #{ email }
+			and
+			rev_cancle = rev_comple
+		order by rev_date desc
+	</select>
+	
+	<select id="finishReservation" resultMap="reservationMap">
+        select 
+			* 
+		from 
+			reservation
+		where
+			member_email = #{ email }
+			and
+			rev_cancle != rev_comple
+		order by rev_date desc
+	</select>
+	
 	<resultMap type="reservation" id="reservationMap">
 		<id column="rev_no" property="revNo"/>
 		<result column="member_email" property="memberEmail"/>
@@ -67,14 +92,48 @@
 		<result column="pay" property="pay"/>
 	</resultMap>
 
+	<update id="cancleReservation">
+		update
+			reservation
+		set
+			rev_cancle = 1
+		where
+			rev_no = #{ revNo }
+	</update>
+
 	<select id="selectHostReservationList" resultMap="reservationMap">
         select 
         	* 
 		from 
 			member join reservation using(member_email) 
 		where 
-			space_no=(select space_no from space where member_email = #{ member_email })
+			space_no=(select space_no from space where member_email = #{ memberEmail })
+		order by rev_date desc
 	</select>
+	
+	<select id="selectUseReservation" resultMap="reservationMap">
+        select 
+        	* 
+		from 
+			member join reservation using(member_email) 
+		where 
+			space_no=(select space_no from space where member_email = #{ memberEmail })
+		order by d_day desc
+	</select>
+	
+	<select id="hostSearchReservation" resultMap="reservationMap">
+        select 
+        	* 
+		from 
+			member join reservation using(member_email) 
+		where 
+			space_no=(select space_no from space where member_email = #{ hostEmail })
+			and member_email like '%'||#{ memberEmail }||'%'
+		order by rev_date desc
+	</select>
+
+
+
 
 </mapper>
 

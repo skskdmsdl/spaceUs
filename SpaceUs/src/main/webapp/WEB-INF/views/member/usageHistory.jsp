@@ -12,6 +12,9 @@
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/mypageMenu.jsp" />
+<style>
+.nochoose {background-color:#e6e6e6;}
+</style>
 
         <div class="page-wrapper">
             <div class="container-fluid">
@@ -37,33 +40,82 @@
                        <div class="card p-5">
                            <div class="card-body">
 	                            <div class="row"> 
-		                           <div class="col-md-10">
+		                           <div class="col-md-9">
 		                                <h5 class="card-title">사용 내역</h5>
 		                                <h6 class="card-subtitle">사용 공간 내역을 확인하세요</h6>
 		                           </div>
-	                       		   <div class="col-md-2">
-	                                   <select class="custom-select b-0 ">
-	                                       <option value="1" >전체 공간</option>
-	                                       <option value="2">사용 전</option>
-	                                       <option value="3">사용 완료</option>
+	                       		   <div class="col-md-3">
+	                                   <select class="custom-select b-0" id="selectId" >
+	                                       <option value="1" <c:if test="${status == 'all'}">selected</c:if> >
+	                                       			전체 공간</option>
+	                                       <option value="2" <c:if test="${status == 'ing'}">selected</c:if> >
+	                                       			예약중</option>
+	                                       <option value="3" <c:if test="${status == 'finish'}">selected</c:if> >
+	                                       			예약취소/사용완료</option>
 	                                   </select>
 	                               </div> 
 	                           </div>
                            
                                <div class="steamline m-t-40">
-                               		<c:forEach items="${spaceList}" var="info" varStatus="vs">
-										<div class="sl-item">
-		                                     <div class="row">
-		                                    	<div class="mb-5 ml-5 mr-5 mt-3" >
-							    					<img class="usageHistoryImg" src="${pageContext.request.contextPath }/resources/upload/space/${info.rname}" alt="..."> 
-		                                     	</div>
-		                                        <div class="mt-2 col-md p-20">
-		                                            <div><a href="#">${ info.spaceName }</a> <span class="sl-date">${ revList[vs.index].revDate }</span></div>
+                               		<c:forEach items="${revList}" var="info" varStatus="vs">
+										<div>
+		                                     <c:choose>
+									   				<c:when test="${ info.revCancle eq info.revComplete}">
+										   			   <div class="row">
+										   			   <p>${ vs.index + 1 }</p>
+									   			 	</c:when>
+									   			 	<c:otherwise>
+									   			 		<div class="row nochoose">
+									   			 		<p>${ vs.index + 1 }</p>
+									   			 	</c:otherwise>
+									   		 </c:choose>
+									   		 <div class="mb-5 ml-5 mr-5 mt-3" >
+									   		 <c:choose>
+									   				<c:when test="${ info.spaceNo == null}">
+									    					<img class="usageHistoryImg" src="${pageContext.request.contextPath }/resources/images/delete.png" alt="..."> 
+				                                     	</div>
+				                                        <div class="mt-2 col-md p-20">
+				                                            <div><a href="">공간이 존재하지 않습니다</a> <span class="sl-date">${ info.revDate }</span></div>
+									   			 	</c:when>
+									   			 	<c:otherwise>
+				                                        	<img class="usageHistoryImg" src="${pageContext.request.contextPath }/resources/upload/space/${spaceList[vs.index].rname}" alt="..."> 
+				                                     	</div>
+				                                        <div class="mt-2 col-md p-20">
+				                                            <div><a href="${ pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${ spaceList[vs.index].spaceNo }">${ spaceList[vs.index].spaceName }</a> <span class="sl-date">${ info.revDate }</span></div>
+									   			 	</c:otherwise>
+									   		 </c:choose>
+		                                    	
 		                                        	<div class="row"> 
-			                                            <div class="col-md-9 m-b-30">모임이 즐거워지는 공간! 서울대입구역 단독룸!</div>
+			                                            <div class="col-md-9 m-b-30">
+			                                            	<c:choose>
+			                                            		<c:when test="${ info.revCancle eq 1 }">
+			                                            			<p>상태 : 예약취소</p>
+			                                            		</c:when>
+			                                            		<c:when test="${ info.revComplete eq 1 }">
+			                                            			<p>상태 : 사용완료</p>
+			                                            		</c:when>
+			                                            		<c:otherwise>
+			                                            			<p>상태 : 예약중</p>
+			                                            		</c:otherwise>
+			                                            	</c:choose>
+			                                            </div>
 			                                            <div class="col-md-9">
+			                                                <form:form name="revCancle" id="revCancle"
+										                         	   action="${pageContext.request.contextPath}/reservation/cancleReservation.do"
+																	   method="POST">
+															<input type="hidden" name="revNo" value="${ info.revNo }">
 			                                                <button type="button" class="btn m-r-5 btn-rounded btn-outline-success" data-toggle="modal" data-target="#confirmModal${ vs.index }">예약확인</button>
-			                                                <a href="#" onclick="return confirm('정말 예약을 취소하시겠습니까?');" class="btn btn-rounded btn-outline-danger">예약취소</a> 
+															
+															<c:choose>
+													   				<c:when test="${ info.revCancle eq info.revComplete}">
+														   			   <button type="submit" class="btn btn-rounded btn-outline-danger">예약취소</button>
+													   			 	</c:when>
+													   			 	<c:otherwise>
+													   			 		<button type="button" class="btn btn-rounded btn-outline-danger">예약취소</button>
+													   			 	</c:otherwise>
+													   		 </c:choose>
+															
+															</form:form>
 			                                            </div>
 		                                            </div>
 		                                        </div>
@@ -84,16 +136,16 @@
 							                        <div class="section-title sidebar-title-b">
 							                            <h6>공간 정보</h6>
 							                        </div>
-							                            <p>공간 이름 : ${ info.spaceName }</p>
-							                            <p>주소 : ${ info.address }</p>
-							                            <p>전화번호 : ${ info.spacePhone }</p>
+							                            <p>공간 이름 : ${ spaceList[vs.index].spaceName }</p>
+							                            <p>주소 : ${ spaceList[vs.index].address }</p>
+							                            <p>전화번호 : ${ spaceList[vs.index].spacePhone }</p>
 							                  		<div class="section-title sidebar-title-b">
 							                            <h6>예약 정보</h6>
 							                        </div>
-							                            <p>예약 날짜 : ${ revList[vs.index].day }</p>
-							                            <p>예약 시간 : ${ revList[vs.index].startHour }:00 ~ ${ revList[vs.index].endHour }:00</p>
-							                            <p>결제 금액 : ${ revList[vs.index].totalPrice }</p>
-							                            <p>결제 수단 : ${ revList[vs.index].pay }</p>
+							                            <p>예약 날짜 : ${ info.day }</p>
+							                            <p>예약 시간 : ${ info.startHour }:00 ~ ${ info.endHour }:00</p>
+							                            <p>결제 금액 : ${ info.totalPrice }</p>
+							                            <p>결제 수단 : ${ info.pay }</p>
 								              		
 										      </div>
 										      <div class="modal-footer">
@@ -113,6 +165,22 @@
 </div>
 </div>
 
+<script>
+
+//제출전처리
+$("#revCancle").submit(function(){
+	return confirm('정말 예약을 취소하시겠습니까?');
+});
+
+//사용내역 모아보기
+$("#selectId").change(function(){
+	let option = $("#selectId").val();
+	if(option == 1) location.href="${pageContext.request.contextPath}/member/usageHistory.do";
+	else if(option == 2) location.href="${pageContext.request.contextPath }/member/usageIng.do";
+	else location.href="${pageContext.request.contextPath }/member/usageFinish.do";
+});
+</script>
+
 
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
@@ -127,40 +195,3 @@
 <script src="${ pageContext.request.contextPath }/resources/js/sidebarmenu.js"></script>
 <!--Custom JavaScript -->
 <script src="${ pageContext.request.contextPath }/resources/js/custom.min.js"></script>
-<!-- ============================================================== -->
-<!-- This page plugins -->
-<!-- ============================================================== -->
-<!--morris JavaScript -->
-
-
-
-<!-- 호스트 정산내역 그래프 활용 ?
-<div class="col-lg-8">
-    <div class="card oh">
-        <div class="card-body">
-            <div class="d-flex m-b-30 align-items-center no-block">
-                <h5 class="card-title ">Yearly Sales</h5>
-                <div class="ml-auto">
-                    <ul class="list-inline font-12">
-                        <li><i class="fa fa-circle text-info"></i> Iphone</li>
-                        <li><i class="fa fa-circle text-primary"></i> Ipad</li>
-                    </ul>
-                </div>
-            </div>
-            <div id="morris-area-chart" style="height: 350px;"></div>
-        </div>
-        <div class="card-body bg-light">
-            <div class="row text-center m-b-20">
-                <div class="col-lg-4 col-md-4 m-t-20">
-                    <h2 class="m-b-0 font-light">6000</h2><span class="text-muted">Total sale</span>
-                </div>
-                <div class="col-lg-4 col-md-4 m-t-20">
-                    <h2 class="m-b-0 font-light">4000</h2><span class="text-muted">Iphone</span>
-                </div>
-                <div class="col-lg-4 col-md-4 m-t-20">
-                    <h2 class="m-b-0 font-light">2000</h2><span class="text-muted">Ipad</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
