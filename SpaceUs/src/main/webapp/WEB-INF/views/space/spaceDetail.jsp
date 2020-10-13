@@ -698,18 +698,7 @@ function naverShare() {
 	<c:forEach items="${ spcList }" var="space" varStatus="vs">
     	  <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
-		   				<div class="">
-			    			<c:if test="${not empty space.attachList}">
-				    			<c:forEach items="${space.attachList}" var="attach" varStatus="vs">
-				    			 <img class="img" src="${pageContext.request.contextPath }
-										/resources/upload/space/${space.rname }" alt="" /> 
-<%-- 				    	 			<div class="img"
-										style="background-image: url(${pageContext.request.contextPath }
-										/resources/upload/space/${space.rname };"></div>  --%>
-									
-								</c:forEach>
-			    			</c:if>
-						</div>  
+		   		<a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${space.spaceNo}" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/${space.renamedFilename});"></a> 
 					<!-- 	<i class="prev fas fa-chevron-left fa-2x" onclick="plusSlides(-1)"></i>
 						<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i> -->
     			<div class="text">
@@ -718,7 +707,7 @@ function naverShare() {
     				<ul class="property_list">
     					<li><span class="icon-star"></span>${space.starAvg }</li>
     					<li><span class="icon-heart"></span>${space.likeCnt }</li>
-    					<li><span class="icon-eye"></span>${space.views }</li>
+    					<li><span class="icon-comments"></span>${space.reviewCnt }</li>
     				</ul>
     				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${space.spaceNo}">${space.spaceName }</a></h3>
     				<small><span class="icon-my_location">${space.address }</span></small>

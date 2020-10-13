@@ -160,7 +160,7 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public List<Space> selectSameCategory(Space space) {
+	public List<SpaceList> selectSameCategory(Space space) {
 		return spaceDAO.selectSameCategory(space);
 	}
 
