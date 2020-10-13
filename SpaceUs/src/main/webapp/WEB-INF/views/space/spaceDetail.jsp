@@ -255,7 +255,7 @@ function naverShare() {
 								<input type="hidden" name="spaceNo" value="${ space.spaceNo }" />
 							</form>
 						</div>
-						<span class="subheading">카페</span>
+						<span class="subheading"> ${ cateName} </span>
 						<h2>${ space.spaceName }</h2>
 						<br /> <span class="subheading">
 							<div class="tagcloud">
@@ -698,9 +698,17 @@ function naverShare() {
 	<c:forEach items="${ spcList }" var="space" varStatus="vs">
     	  <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
-		   		<a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${space.spaceNo}" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/${space.renamedFilename});"></a> 
-					<!-- 	<i class="prev fas fa-chevron-left fa-2x" onclick="plusSlides(-1)"></i>
-						<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i> -->
+    			<c:choose>
+					<c:when test="${ space.renamedFilename !=null }">
+					<!-- 이미지파일이 있을때 -->
+				   		<a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${space.spaceNo}" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/${space.renamedFilename});"></a> 
+							<!-- 	<i class="prev fas fa-chevron-left fa-2x" onclick="plusSlides(-1)"></i>
+								<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i> -->
+					</c:when>
+					<c:otherwise>
+						<a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${space.spaceNo}" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/spcuslogo.png);"></a>
+					</c:otherwise>
+				</c:choose>
     			<div class="text">
     				<p class="price"><span class="space-price" style="color: #007bff;">
     				<fmt:formatNumber value="${space.hourlyPrice }" type="number"/><small>원/시간</small></span></p>

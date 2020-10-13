@@ -95,8 +95,9 @@
                             <h6 class="card-subtitle">위시리스트를 확인하세요</h6>
                         </div>
                         <div class="row">
-                        	 <c:if test="${ not empty wlist }">
-							<c:forEach items="${ wlist }" var="wish" varStatus="vs">
+                        	<c:choose>
+				         	 <c:when test="${ not empty wlist }">
+                        	<c:forEach items="${ wlist }" var="wish" varStatus="vs">
 							<div class="col-md-3">
 							    <div class="thumbnail block-20" >
 							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
@@ -128,7 +129,13 @@
 						     </div>
 							  </div>
 							</c:forEach>
-							</c:if>		
+							</c:when>
+							<c:otherwise>
+								<div style="text-align: center; width: 90%; padding:20px;">
+									<span class="icon-folder" style="letter-spacing:1px;">조회된 위시리스트가 없습니다.</span>
+								</div>
+							</c:otherwise>
+							</c:choose>	
 						  </div>
 						</div>
 						</div>

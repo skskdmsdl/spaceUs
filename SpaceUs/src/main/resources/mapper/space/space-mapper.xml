@@ -260,7 +260,8 @@
 	</select>
 	
 	<select id="selectSameCategory" resultMap="spaceListMap">
-	select
+select rownum, JJ.* from(
+select
           S.space_no,
           S.space_name, 
           REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
@@ -282,7 +283,9 @@
                       where rnum=1
             )SI
                 on S.space_no = SI.space_no
-      where S.status = 'O' and S.category_no= #{categoryNo} and S.space_no!=#{spaceNo}
+      where S.status = 'O' and S.category_no=#{categoryNo} and S.space_no!=#{spaceNo}
+      order by s.like_cnt desc) JJ
+      where rownum between 1 and 6
 	
 <!-- 			select *	
 			from
