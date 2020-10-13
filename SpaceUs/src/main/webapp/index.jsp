@@ -79,7 +79,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
 .space-price{
   color: #007bff;
 }
-
+#disapear {display: none;}
 </style>
 
 
@@ -129,6 +129,11 @@ $(function() {
     });
     
 });
+
+$(document).on("click",".fa-2x",function(){
+   $(this).siblings("#disapear").toggle('30000');
+});
+
 </script>
 
 <!-- 컨텐츠 시작 -->
@@ -143,11 +148,11 @@ $(function() {
       			<div class="text text-center mx-auto" style="margin-bottom:25%;">
           			<h1 class="mb-4">어떤 공간을<br>찾고 있나요?</h1>
           			<p></p>
-     					<div style="margin-top:-20px">
+		  				<i class="fas fa-search fa-2x" style="color:#00C89E"></i>	
+     					<div id="disapear" style="margin-top:-20px">
      						<div id="wrap">
 		  						<input id="searchInput" class="searchInput" name="search_keyword" placeholder="키워드를 입력하세요">
-		  						<input type="submit" class="btn-lg search-btn" value="입력" onclick="searchSpace();" />
-		  						<!-- <i class="fas fa-search fa-2x" style="color:#00C89E"></i> -->	
+		  						<input type="submit" class="btn-lg search-btn" value="입력" onclick="searchSpace();" style="background: #00c89e;"/>
 							</div>
          				</div>
        			</div>
