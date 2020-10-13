@@ -46,7 +46,7 @@ public class Scheduler {
 		
 	}
 
-	@Scheduled(cron ="0 18 14 * * *") 
+	@Scheduled(cron ="0 0 0 * * *") 
 	public void dailyScheduler(){ 
 		System.out.println("생일 쿠폰 발급 "); 
 		//기념일 쿠폰 발급
