@@ -510,6 +510,8 @@
 	</select>
 	<resultMap type="optionList" id="optionListMap"></resultMap>
 	
+	<!-- searchSpace 시작 -->
+	
 	<!-- 입력값에 따른 spaceNo 가져오기 -->
 	<select id="selectSpaceNoList" resultType="string">
 		WITH TEMP_TABLE AS (
@@ -522,6 +524,23 @@
 		   FROM TEMP_TABLE
 		 WHERE name like '%' || #{keyword}  || '%'
 	</select>
+	
+	<!-- spaceNo로 space 데이터 가져오기 -->
+	<select id="selectSearchSpaceList" resultMap="spaceMap">
+		select
+		    space_no,
+		    space_name, 
+		    REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
+		    hourly_price,
+		    views,
+		    like_cnt,
+		    nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as review
+		from 
+		    space S
+		where status = 'O' and space_no= #{searchSpace}
+	</select>
+	
+	<!-- searchSpace 끝-->
 </mapper>
 
 

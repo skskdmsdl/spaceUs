@@ -1032,3 +1032,41 @@ where rnum = 1;
 select * from(select rank()over(partition by space_no order by renamed_filename) as rnum, renamed_filename from space left join space_image using(space_no)) where rnum=1;
 ---
 select renamed_filename, space_no from( select space_no, renamed_filename, rank()over(partition by space_no order by renamed_filename) as rnum from space left join space_image using(space_no))where rnum = 1;
+
+-------------------------------
+--10/13
+-------------------------------
+-- 공간 대표사진 
+select 
+    renamed_filename, space_no
+from(
+    select 
+        space_no,
+        renamed_filename,
+        rank()over(partition by space_no order by renamed_filename) as rnum
+    from 
+        space left join space_image 
+                    using(space_no)
+    )
+where rnum = 1;
+
+-- 주소 구만 
+select REGEXP_SUBSTR(address,'[^ ]+',1,3) from space;
+
+-- 태그
+select
+    space_no
+    space_name, 
+    REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
+    hourly_price,
+    views,
+    like_cnt
+from 
+    space
+where status = 'O'; and space_no='space31';
+-- 리뷰수
+select
+    space_no,
+    count(*)over(partition by space_no)
+from 
+    review;

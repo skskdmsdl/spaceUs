@@ -96,6 +96,8 @@ public interface SpaceDAO {
 
 	List<String> selectSpaceNoList(String keyword);
 
+	List<Space> selectSearchSpaceList(String searchSpace);
+
 
 	/* List<Space> selectListSpaceCollection(String email); */
 
