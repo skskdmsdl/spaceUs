@@ -140,7 +140,7 @@
 	from
 		member
 	where
-		birthday like '%%/'||(select to_char(sysdate+1, 'MM/dd') sys_month from dual)
+		birthday like '%%%%-'||(select to_char(sysdate, 'MM-dd') from dual)
 </insert>
 
 <update id="deleteToday">
@@ -181,7 +181,7 @@
 </insert>
 
 <delete id="deleteCoupon">
-	select * from coupon where to_char(coupon_deadline) = to_date(sysdate, 'yy/MM/dd');
+	delete from coupon where to_char(coupon_deadline) = to_date(sysdate, 'yy/MM/dd')
 </delete>
 
 <select id="selectCouponList" resultMap="couponMap">
