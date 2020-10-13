@@ -33,7 +33,7 @@
 			#{ memberEmail },
 			#{ spaceNo },
 			sysdate,
-			#{ dDay },
+			#{ day },
 			#{ startHour },
 			#{ endHour },
 			#{ totalPrice },
@@ -81,14 +81,15 @@
 		<id column="rev_no" property="revNo"/>
 		<result column="member_email" property="memberEmail"/>
 		<result column="space_no" property="spaceNo"/>
-		<result column="rev_date" property="revDate"/>
 		<result column="d_day" property="day"/>
+		<result column="rev_date" property="revDate"/>
 		<result column="start_hour" property="startHour"/>
 		<result column="end_hour" property="endHour"/>
-		<result column="pay" property="pay"/>
 		<result column="total_price" property="totalPrice"/>
 		<result column="rev_cancle" property="revCancle"/>
 		<result column="rev_comple" property="revComplete"/>
+		<result column="member_phone" property="phone"/>
+		<result column="pay" property="pay"/>
 	</resultMap>
 
 	<update id="cancleReservation">
@@ -99,6 +100,15 @@
 		where
 			rev_no = #{ revNo }
 	</update>
+
+	<select id="selectHostReservationList" resultMap="reservationMap">
+        select 
+        	* 
+		from 
+			member join reservation using(member_email) 
+		where 
+			space_no=(select space_no from space where member_email = #{ member_email })
+	</select>
 
 </mapper>
 

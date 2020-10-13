@@ -181,7 +181,7 @@
 </insert>
 
 <delete id="deleteCoupon">
-	select * from coupon where to_char(coupon_deadline) = to_date(sysdate, 'yy/MM/dd');
+	delete from coupon where to_char(coupon_deadline) = to_date(sysdate, 'yy/MM/dd')
 </delete>
 
 <select id="selectCouponList" resultMap="couponMap">
@@ -213,6 +213,13 @@
 		<result column="address" property="address"/>
 		<result column="renamed_filename" property="image"/>
 		<result column="hourly_price" property="hourlyPrice"/>	
+<!-- 		<collection property="attachList" ofType="Attachment">
+				<id column="file_no" property="fileNo"/>
+				<result column="space_no" property="spaceNo"/>
+				<result column="original_filename" property="oName" jdbcType="VARCHAR" javaType="string"/>
+				<result column="renamed_filename" property="rName" jdbcType="VARCHAR" javaType="string"/>
+				<result column="upload_date" property="uploadDate"/>
+		</collection> -->
 </resultMap>
 
 <select id="selectWishList" resultMap="wishMap">

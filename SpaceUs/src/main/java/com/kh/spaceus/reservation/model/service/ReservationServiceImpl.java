@@ -50,4 +50,8 @@ public class ReservationServiceImpl implements ReservationService{
 		return reservationDAO.cancleReservation(revNo);
 	}
 
+	public List<Reservation> selectHostReservationList(String memberEmail) {
+		return reservationDAO.selectHostReservationList(memberEmail);
+	}
+	
 }

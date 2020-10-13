@@ -13,6 +13,8 @@ public interface ReservationDAO {
 
 	int insertReservationVail(ReservationAvail reservationAvail);
 
+	List<Reservation> selectHostReservationList(String memberEmail);
+	
 	int insertReservation(Reservation reservation);
 
 	List<Reservation> selectListReservation(String email);

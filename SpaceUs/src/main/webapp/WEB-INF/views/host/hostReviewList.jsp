@@ -117,7 +117,8 @@ a:hover {opacity: 0.3; color:black;}
                       </div>
                        <div >
 				   		<div class="row">
-				   			<p class="head ml-4">${ reviewTotal }개의 리뷰</p>
+				   		<p class="head"></p>
+				   			<%-- <p class="head ml-4">${ reviewTotal }개의 리뷰</p> --%>
 				   			
 				   		</div>
 						 <c:forEach items="${review}" var="review" varStatus="vs">
