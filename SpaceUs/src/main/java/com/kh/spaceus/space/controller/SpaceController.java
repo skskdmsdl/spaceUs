@@ -300,12 +300,12 @@ public class SpaceController {
 	public ModelAndView reserveSpace(Model model,
 							   ModelAndView mav,
 							   @RequestParam("spaceNo") String spaceNo,
-							   @RequestParam("memberId") String memberId) {
+							   Principal principal) {
 		//log.debug("spaceNo= {}",spaceNo);
 		//log.debug("spaceName= {}",spaceName);
 		//System.out.println("memberId = "+memberId);
 		Space space = spaceService.selectOneSpace(spaceNo);
-		Member member = memberService.selectOneMember(memberId);
+		Member member = memberService.selectOneMember(principal.getName());
 		
 		//spaceNo로 옵션정보가져와서 전달하기
 		List<OptionList> optionList = spaceService.selectOptionList(spaceNo);

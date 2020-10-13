@@ -248,10 +248,10 @@ function naverShare() {
 							</div>
 							<!-- 공유하기 팝오버 끝-->
 							<!-- 예약버튼 -->
+							<input type="hidden" name="memberId" id="memberId" value="${loginMember.principal.memberEmail}" />
 							<input type="submit" onclick="rvSubmit();" value="예약하기"
 								class="btn py-3 px-5 btn-primary" style="margin-left: 70px"> 
 							<form id="reserveFrm">
-								<input type="hidden" name="memberId" id="memberId" value="${loginMember.principal.memberEmail}" />
 								<input type="hidden" name="spaceNo" value="${ space.spaceNo }" />
 							</form>
 						</div>

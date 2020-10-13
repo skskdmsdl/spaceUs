@@ -67,6 +67,7 @@ insert into category values('cate'||seq_category_no.nextval,'엠티장소');
 insert into category values('cate'||seq_category_no.nextval,'독립 오피스');
 insert into category values('cate'||seq_category_no.nextval,'코워킹 스페이스');
 
+
 -----------------------------
 --------- 공간목록 ----------
 -----------------------------
@@ -171,7 +172,10 @@ ALTER TABLE Reservation RENAME COLUMN start_hours TO start_hour;
 ALTER TABLE Reservation RENAME COLUMN end_hours TO end_hour;
 alter table reservation add pay varchar2(50);
 
-commit;
+update reservation
+set rev_cancle = 0
+where rev_no = 'REV6';
+
 
 -----------------------------
 ---- 공간별 예약가능 시간 ----

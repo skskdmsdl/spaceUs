@@ -26,16 +26,6 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public List<Reservation> selectListReservation(String email) {
-		return reservationDAO.selectListReservation(email);
-	}
-
-	@Override
-	public List<Reservation> selectHostReservationList(String memberEmail) {
-		return reservationDAO.selectHostReservationList(memberEmail);
-	}
-	
-	@Override
 	public int insertReservation(Reservation reservation) {
 		return reservationDAO.insertReservation(reservation);
 	}
@@ -50,4 +40,27 @@ public class ReservationServiceImpl implements ReservationService{
 		return reservationDAO.selectUseReservation(memberEmail);
 	}
 
+	public List<Reservation> selectListReservation(String email) {
+		return reservationDAO.selectListReservation(email);
+	}
+	
+	@Override
+	public List<Reservation> ingReservation(String email) {
+		return reservationDAO.ingReservation(email);
+	}
+	
+	@Override
+	public List<Reservation> finishReservation(String email) {
+		return reservationDAO.finishReservation(email);
+	}
+
+	@Override
+	public int cancleReservation(String revNo) {
+		return reservationDAO.cancleReservation(revNo);
+	}
+
+	public List<Reservation> selectHostReservationList(String memberEmail) {
+		return reservationDAO.selectHostReservationList(memberEmail);
+	}
+	
 }
