@@ -3,6 +3,7 @@ package com.kh.spaceus.space.model.service;
 import java.util.List;
 
 import com.kh.spaceus.qna.model.vo.Qna;
+import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.OptionList;
@@ -91,7 +92,9 @@ public interface SpaceService {
 	Wish selectOneWish(Wish wish);
 
 	List<Space> selectSearchSpaceList(String searchSpace);
-	
+
+	Attachment selectPopularImage(String spaceNo);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

@@ -62,6 +62,7 @@ public class SpaceController {
 	public String insertSpace() {
 		return "space/insertSpace";
 	}
+	
 	//공간등록 제출
 	@RequestMapping(value="/insertSpace.do",method = RequestMethod.POST)
 	public String insertSpace(Space space,
@@ -377,16 +378,6 @@ public class SpaceController {
 		return revList;
 	}
 
-	//인덱스 페이지 인기공간리스트
-	@RequestMapping(value = "/popular.do", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Space> selectPopularSpaces(){
-		List<Space> popularList = spaceService.selectPopularSpaces();
-		log.debug("리뷰목록={}"+popularList);
-		return popularList;
-	}
-	
-	
 	
 	// 사업자등록증 조회
 	@GetMapping("/checkIdDuplicate.do")
@@ -405,6 +396,34 @@ public class SpaceController {
 		return mav;
 	}
 	
+	//인덱스 페이지 인기공간리스트
+	/*@RequestMapping(value = "/popular.do", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Space> selectPopularSpaces(){
+		List<Space> popularList = spaceService.selectPopularSpaces();
+		log.debug("리뷰목록={}"+popularList);
+		return popularList;
+	}*/
+		
+	
 	//인덱스 페이지
+	@GetMapping("/selectPopularSpaces.do")
+	public ModelAndView selectPopularSpaces(ModelAndView mav) {
 
+		List<Space> popularList = spaceService.selectPopularSpaces();
+		List<Attachment> imageList = new ArrayList<>();
+		for(Space s : popularList) {
+			System.out.println("@@@@@@@@@@@@"+s.getSpaceNo());
+			Attachment att = spaceService.selectPopularImage(s.getSpaceNo());
+			imageList.add(att);
+		}
+		
+		
+		mav.addObject("popularList", popularList);
+		mav.addObject("imageList", imageList);
+		mav.setViewName("jsonView");
+
+		return mav;
+	}
+	
 }

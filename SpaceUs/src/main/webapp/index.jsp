@@ -377,7 +377,7 @@ $(function () {
 	popular();
 });
 
-function popular(){
+/* function popular(){
 	console.log("인기공간function 실행");
 	$.ajax({
 		type:"GET",
@@ -411,13 +411,16 @@ function popular(){
 		},error:function(){
 			console.log("ajax 요청 실패");
 			}
-		});
+		}); */
 	//AJAX요청끝
 };
 //인기공간리스트 끝
 
 $(function () { 
 	memberId();
+});
+$(function () { 
+	popular();
 });
 //이용자 리뷰 ajax 요청
 $(function () { 
@@ -492,17 +495,18 @@ function searchSpace(){
 document.querySelector('.stick').addEventListener('click',()=>{
 	  document.querySelector('.four').value = '';
 	}); 
-
-$.ajax({
-	url : "${ pageContext.request.contextPath }/space/indexList.do",
-	dataType : "json",
-	success : function(data){
-		alert("index List!");
-	},
-	error : function(xhr, status, err){
-		console.log("처리실패", xhr, status, err);
-	}
-}); 
+function popular(){
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/space/selectPopularSpaces.do",
+		dataType : "json",
+		success : function(data){
+			console.log("@@@@성공!!@@@@");
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	}); 
+};
 
 </script>
 <!-- 컨텐츠 끝 -->

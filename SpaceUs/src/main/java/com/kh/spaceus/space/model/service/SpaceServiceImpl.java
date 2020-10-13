@@ -249,8 +249,6 @@ public class SpaceServiceImpl implements SpaceService{
 		return spaceDAO.selectSpaceNoList(keyword);
 	}
 	
-	
-
 	@Override
 	public Wish selectOneWish(Wish wish) {
 		return spaceDAO.selectOneWish(wish);
@@ -260,8 +258,12 @@ public class SpaceServiceImpl implements SpaceService{
 	public List<Space> selectSearchSpaceList(String searchSpace) {
 		return spaceDAO.selectSearchSpaceList(searchSpace);
 	}
-	
-	
+
+	@Override
+	public Attachment selectPopularImage(String spaceNo) {
+		return spaceDAO.selectPopularImage(spaceNo);
+	}
+
 	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {
