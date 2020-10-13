@@ -12,7 +12,52 @@
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/mypageMenu.jsp" />
+<style>
+.content{
+	background-color: #f8f9fa; 
+	color:#343a40;
+	padding: 2px;
+	width: 70%;
+	text-align: center;
+}
 
+.content:hover{
+	text-decoration: underline;
+}
+
+.space-detail>span{
+	font-size:20px;
+	color:#20c997;
+}
+
+.space_list > li{
+	list-style:none;
+	display: inline;
+	color:#ffc107;
+	letter-spacing: 1px;
+	padding: 1.5px;
+}
+
+
+.space_list > li:hover{
+	text-decoration: none;
+/* 	list-style:none;
+	display: inline;
+	
+	letter-spacing: 1px;
+	padding: 1.5px; */
+}
+
+.space_list > li>.icon-won{
+	color: #a6e4d2;
+	letter-spacing: 1.5px;
+	font-weight: bold;
+	font-size:13px;
+}
+
+
+
+</style>
 
         <div class="page-wrapper">
             <div class="container-fluid">
@@ -50,85 +95,40 @@
                             <h6 class="card-subtitle">위시리스트를 확인하세요</h6>
                         </div>
                         <div class="row">
-						<div class="col-md-3">
-						    <div class="thumbnail block-20" >
-						    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
-						</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p style="width:250px;">분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-					     </div>
-						  </div>
-						  <div class="col-md-3">
-						    <div class="thumbnail block-20" >
-						    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_2.jpg" alt="..."> 
-						</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-					     </div>
-						  </div>
-						  <div class="col-md-3">
-						    <div class="thumbnail block-20" >
-						    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_3.jpg" alt="..."> 
-						</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-					     </div>
-						  </div>
-						  <div class="col-md-3">
-						    <div class="thumbnail block-20" >
-						    	<img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_4.jpg" alt="..."> 
+                        	 <c:if test="${ not empty wlist }">
+							<c:forEach items="${ wlist }" var="wish" varStatus="vs">
+							<div class="col-md-3">
+							    <div class="thumbnail block-20" >
+							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
 							</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-					     </div>
-						  </div>
-						  <div class="col-md-3">
-						    <div class="thumbnail block-20" >
-							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_5.jpg" alt="..."> 
-							</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-					     </div>
-						  </div>
-						  <div class="col-md-3">
-						    <div class="thumbnail block-20" >
-							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_6.jpg" alt="..."> 
-							</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-					     </div>
-						  </div>
-						  <div class="col-md-3">
-						    <div class="thumbnail block-20" >
-							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_7.jpg" alt="..."> 
-							</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-					     </div>
-						  </div>
-						  <div class="col-md-3">
-						    <div class="thumbnail block-20" >
-							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_8.jpg" alt="..."> 
-							</div>
-					     <div class="caption">
-					        <h4>카페두드림 Do dream</h4>
-					        <p>분당 서현역 24시간 스터디카페 Do:Dream (1인 또는 소그룹 전용 스터디룸 1~3인실 / 2~5인실 보유)</p>
-					        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-					     </div>
+						     <div class="caption">
+						     	<a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${wish.spaceNo}">
+						     	<div class="space-detail">
+							        <span class="badge badge-light">${ wish.spaceName}</span>
+							        <ul class="space_list">
+							        <li><i class="icon-won badge badge-secondary"><fmt:formatNumber value="${wish.hourlyPrice }" type="number"/><small>원/시간</small></i><li>
+				    					<li><span class="icon-star"></span>${wish.starAvg }</li>
+				    					<li><span class="icon-heart"></span>${wish.likeCnt }</li>
+				    					<%-- <li><span class="icon-eye"></span>${space.views }</li> --%>
+	    							</ul>
+						        </div>
+						        <div class="content">
+						        	<p class="content" style="width:250px;">${ wish.content}</p>
+						        </div>
+						        </a>
+						        <form name="deleteFrm" 
+									  action="${pageContext.request.contextPath}/member/deleteWish.do" 
+									  method="post" >
+						       
+						        <input type="hidden" name="spaceNo" value="${wish.spaceNo }"/>
+						        <input type="hidden" name="email" value="${wish.email }"/>
+						        
+						        <p><button class="delete btn btn-secondary" type="submit">위시리스트 삭제</button></p>
+						        </form>
+						     </div>
+							  </div>
+							</c:forEach>
+							</c:if>		
 						  </div>
 						</div>
 						</div>
@@ -136,9 +136,7 @@
 				</div>
                 <!-- 위시리스트 끝 -->
     </div>
-</div>
-</div>
-</div>
+
 
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>

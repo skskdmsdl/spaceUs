@@ -68,6 +68,8 @@ to {opacity: 1}
 	right: 85px;
 }
 .reviewLabel {font-size: 11px;}
+
+
 </style>
 <script>
 
@@ -98,10 +100,11 @@ $(function(){
 	   		 $.ajax({
 			        type: "POST",
 					url : "${pageContext.request.contextPath}/space/heart.do",
-					dataType: "JSON",
+					//dataType: "JSON",
 					data :   {
 						spaceNo : "${space.spaceNo}",
 						email : "${loginMember.principal.memberEmail}"},
+					//contentType:"application/json;charset=UTF-8"
 					success: function(data){
 						console.log(data);
 						readLikeCnt();
@@ -113,15 +116,17 @@ $(function(){
 			});
     	}
     	else {
-    		$heart.html("<i class='far fa-heart'></i>");
+    		//$heart.html("<i class='far fa-heart'></i>");
     		 $.ajax({
 			        type: "POST",
 					url : "${pageContext.request.contextPath}/space/cancelHeart.do",
 					data :  {
 						spaceNo : "${space.spaceNo}",
 						email : "${loginMember.principal.memberEmail}"},
+						//contentType:"application/json;charset=UTF-8"
 					success: function(data){
 						readLikeCnt();
+						$heart.html("<i class='far fa-heart'></i>");
 					},
 					error: function(xhr, status, err){
 						console.log("위시 삭제 실패", xhr, status, err);
@@ -129,27 +134,34 @@ $(function(){
     	   			});	
     		}
 	});
-	// 공간 좋아요 갯수
+    
+    readLikeCnt(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+});
+
+	// 공간 좋아요 갯수 읽어오고 이전에 위시리스트에 추가했는지 검사
     function readLikeCnt() {
 		$.ajax({
 			url: "${pageContext.request.contextPath}/space/readLikeCnt.do",
             type: "GET",
             data: {
-                no: "${space.spaceNo}"
+                spaceNo: "${space.spaceNo}",
+                email: "${loginMember.principal.memberEmail}"
             },
             dataType: "json",
-            success: function (count) {
-            	$(".like-count").html(count);
+            success: function (data) {
+                console.log(data);
+            	$(".like-count").html(data.cnt);
+            	if(data.status=='liked'){
+						//멤버 이메일로 좋아요 검색 후 이미 좋아요한 경우 
+						$("#heart-a").html("<i class='fas fa-heart' style='color:#ffc107; margin:2px;'></i>");		       			
+						console.log(data.status);
+                	}
             },
 			error: function(xhr, status, err){
 				console.log("좋아요수 읽어오기 실패", xhr, status, err);
 				}
 		});
     };
-    
-    readLikeCnt(); // 처음 시작했을 때 실행되도록 해당 함수 호출
-});
-
 
     
 function urlcopy(){
@@ -710,9 +722,9 @@ function naverShare() {
     				</ul>
     				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${space.spaceNo}">${space.spaceName }</a></h3>
     				<small><span class="icon-my_location">${space.address }</span></small>
-    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    				<span class="icon-heart"></span>
-    				</a>
+    			<!-- 	<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				 <span class="icon-heart"></span> 
+    				</a> -->
     			</div>
     		</div>
     	</div>

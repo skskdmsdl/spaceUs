@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.member.model.vo.Coupon;
 import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.space.model.vo.Wish;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -108,5 +109,10 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public List<Coupon> selectCouponList(String email) {
 		return sqlSession.selectList("member.selectCouponList", email);
+	}
+
+	@Override
+	public List<Wish> selectWishList(String email) {
+		return sqlSession.selectList("member.selectWishList", email);
 	}
 }

@@ -17,5 +17,12 @@ import lombok.ToString;
 public class Wish implements Serializable{
 	String spaceNo;
 	String email;
+	String spaceName;
+	String content;
+	float starAvg;
+	int likeCnt;
+	String address;
+	int hourlyPrice;
+	String image;
 	Date date;
 }

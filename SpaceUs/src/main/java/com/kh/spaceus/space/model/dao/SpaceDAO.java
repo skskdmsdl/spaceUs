@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Attachment;
+import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
@@ -86,6 +87,14 @@ public interface SpaceDAO {
 	List<Space> selectPopularSpaces();
 
 	List<Object> selectAutoList(String value);
+	
+	Wish selectOneWish(Wish wish);
+
+	List<Category> selectCategoryList();
+
+	List<OptionList> selectOptionList1();
+
+	List<String> selectSpaceNoList(String keyword);
 
 
 	/* List<Space> selectListSpaceCollection(String email); */
