@@ -15,6 +15,7 @@ import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceList;
 import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
@@ -228,9 +229,10 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}*/
 	
 	@Override
-	public List<Space> selectSearchSpaceList(String searchSpace) {
+	public List<SpaceList> selectSearchSpaceList(String searchSpace) {
 		return sqlSession.selectList("space.selectSearchSpaceList", searchSpace);
 	}
+	
 
 	@Override
 	public Wish selectOneWish(Wish wish) {

@@ -37,6 +37,7 @@ public class Space implements Serializable{
 	private String[] tag;
 	private String rname;
 	private String revNo;
+	
 	private String reviewNo;
 	private String starRating;
 	private String reviewContent;

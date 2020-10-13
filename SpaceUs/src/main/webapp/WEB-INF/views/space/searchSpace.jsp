@@ -202,7 +202,7 @@ $(function() {
 
 function searchSpace(){
 	var keyword = $(".searchInput").val();
-	alert(keyword);
+	//alert(keyword);
 
 	keyword = keyword.replace('#','%23');
 	
@@ -346,26 +346,41 @@ function searchSpace(){
 
 <!-- 공간 리스트 시작 -->
 <div class="container search-result">
+    <c:if test="${!empty spaceList}">
     <div class="row">
-		<div class="col-md-4">
-			<div class="property-wrap ftco-animate">
-    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
-    			<div class="text">
-    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
-    				<ul class="property_list">
-    					<li><span class="icon-eye"></span>0</li>
-    					<li><span class="icon-heart"></span>55</li> <!-- 좋아요 수 -->
-    					<li><span class="icon-comments"></span>29</li><!-- 후기 수 -->
-    				</ul>
-    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
-    				<small><span class="icon-my_location">조원동</span></small>
-    				<!-- <a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    				<span class="icon-heart"></span>
-    				</a> -->
-    			</div>
-			</div>
-    	</div>
+		<c:forEach items="${spaceList}" var="space">
+			<div class="col-md-4">
+				<div class="property-wrap ftco-animate">
+	    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/${space.renamedFilename});"></a>
+	    			<div class="text">
+	    				<p class="price"><span class="space-price">${space.hourlyPrice}<small>원/시간</small></span></p>
+	    				<ul class="property_list">
+	    					<li><span class="icon-star"></span>${space.starAvg }</li><!-- 평균 별점 수 -->
+	    					<li><span class="icon-heart"></span>${space.likeCnt }</li> <!-- 좋아요 수 -->
+	    					<li><span class="icon-comments"></span>${space.reviewCnt}</li><!-- 리뷰 수 -->
+	    				</ul>
+	    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">${space.spaceName}</a></h3>
+	    				<small><span class="icon-my_location">${space.address}</span></small>
+	    				<!-- <a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+	    				<span class="icon-heart"></span>
+	    				</a> -->
+	    			</div>
+				</div>
+	    	</div>		
+		</c:forEach>
 	</div>
+	</c:if>
+	<c:if test="${empty spaceList}">
+	<div class="row" style="font-size: 20px; margin:auto;">
+		<div class="col-md-4" style="margin:auto;">
+			<div class="property-wrap ftco-animate" style="margin-top:10px; text-align: center;">
+				검색 결과가 없습니다. <br />
+				다른 검색조건으로 공간을 찾아보세요.
+			</div>
+		</div>
+	</div>
+	</c:if>
+	
 </div>
 <!-- 공간 리스트 끝-->
 </section>	

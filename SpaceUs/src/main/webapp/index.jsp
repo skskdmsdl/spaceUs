@@ -32,6 +32,65 @@ font-family: 'NEXON Lv1 Gothic OTF';
   position: relative;
 }
 
+.search-btn{
+  float: right;
+  right: 30px;
+  padding-right: 15px;
+  padding-left: 15px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: #20c997;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border-style: groove;
+  border-color: #20c997;
+}
+
+#btn-wrap{
+  display: block;
+  width: 100%;
+  color: #17a2b8;
+  text-align: center;
+  margin-left: 10px;
+  argin-right: 20px;
+  margin-top: 10px;
+  padding-left: 15px;
+}
+
+.sort-wrap{ 
+  display:block;
+  width: 100%;
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+#space-sort{
+  width: 240px;
+  height: 40px;
+}
+
+.flex-wrap{
+  display:block;
+  width: 100%;
+}
+
+.search-category{
+  display:inline-block;
+  width: 33%;
+  height: 50px;
+  text-align: left;
+  color:#343a40;
+  padding: 13px;
+}
+
+.search-result {
+  background-color: #f8f9fa;
+  padding-top: 20px;
+}
+
 .searchInput{
   height: 40px;
   width: 400px;
@@ -79,7 +138,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
 .space-price{
   color: #007bff;
 }
-
+#disapear {display: none;}
 </style>
 
 
@@ -129,6 +188,11 @@ $(function() {
     });
     
 });
+
+$(document).on("click",".fa-2x",function(){
+   $(this).siblings("#disapear").toggle('30000');
+});
+
 </script>
 
 <!-- 컨텐츠 시작 -->
@@ -143,11 +207,11 @@ $(function() {
       			<div class="text text-center mx-auto" style="margin-bottom:25%;">
           			<h1 class="mb-4">어떤 공간을<br>찾고 있나요?</h1>
           			<p></p>
-     					<div style="margin-top:-20px">
+		  				<i class="fas fa-search fa-2x" style="color:#00C89E"></i>	
+     					<div id="disapear" style="margin-top:-20px">
      						<div id="wrap">
 		  						<input id="searchInput" class="searchInput" name="search_keyword" placeholder="키워드를 입력하세요">
-		  						<input type="submit" class="btn-lg search-btn" value="입력" onclick="searchSpace();" />
-		  						<!-- <i class="fas fa-search fa-2x" style="color:#00C89E"></i> -->	
+		  						<input type="submit" class="btn-lg search-btn" value="입력" onclick="searchSpace();" style="background: #00c89e;"/>
 							</div>
          				</div>
        			</div>
@@ -161,147 +225,77 @@ $(function() {
  </div>
 </div>
 <!-- 검색창 시작 -->
-<section class="ftco-section goto-here">
-<section class="search-section spad">
-    <div class="container">
-           		<div class="row justify-content-center">
-      <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-      	<span class="subheading">원하는 옵션으로 검색해보세요</span>
-        <h2 class="mb-2">공간 검색</h2>
-      </div>
-    </div>
-        <div class="search-form-content">
-            <form id="filter-search" class="filter-form">
-                <select class="nice-select sm-width">
-                    <option value="">Chose The City</option>
-                </select>
-                <select class="nice-select sm-width">
-                    <option value="">Location</option>
-                </select>
-                <select class="nice-select sm-width">
-                    <option value="">Property Status</option>
-                </select>
-                <select class="nice-select sm-width">
-                    <option value="">Property Type</option>
-                </select>
-                <select class="nice-select sm-width">
-                    <option value="">No Of Bedrooms</option>
-                </select>
-                <select class="nice-select sm-width">
-                    <option value="">No Of Bathrooms</option>
-                </select>
-                <div class="room-size-range-wrap sm-width">
-                    <div class="price-text">
-                        <label for="roomsizeRange">Size:</label>
-                        <input type="text" id="roomsizeRange" readonly>
-                    </div>
-                    <div id="roomsize-range" class="slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
-                    <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 14.2857%; width: 42.8571%;"></div>
-                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 14.2857%;"></span>
-                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 57.1429%;"></span>
-                    </div>
-                </div>
-                <div class="price-range-wrap sm-width">
-                    <div class="price-text">
-                        <label for="priceRange">Price:</label>
-                        <input type="text" id="priceRange" readonly>
-                    </div>
-                    <div id="price-range" class="slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
-                    <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 6.66667%; width: 60%;"></div>
-                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 6.66667%;"></span>
-                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 66.6667%;"></span>
-                    </div>
-                </div>
-                <button type="button" onclick="location.href='${pageContext.request.contextPath}/space/searchSpace.do?search_keyword=';" class="search-btn sm-width">검색</button>
-            </form>
-        </div>
-        <div class="more-option">
-            <div class="accordion" id="accordionExample">
-                <div class="card">
-                    <div class="card-heading active">
-                        <a data-toggle="collapse" data-target="#collapseOne">
-                            더 많은 옵션
-                        </a>
-                    </div>
-                    <div id="collapseOne" class="collapse" data-parent="#accordionExample">
-                        <div class="card-body">
-                            <div class="mo-list">
-                                <div class="ml-column">
-                                    <label for="air">Air conditioning
-                                        <input type="checkbox" id="air">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="lundry">Laundry
-                                        <input type="checkbox" id="lundry">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="refrigerator">Refrigerator
-                                        <input type="checkbox" id="refrigerator">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="washer">Washer
-                                        <input type="checkbox" id="washer">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                </div>
-                                <div class="ml-column">
-                                    <label for="barbeque">Barbeque
-                                        <input type="checkbox" id="barbeque">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="lawn">Lawn
-                                        <input type="checkbox" id="lawn">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="sauna">Sauna
-                                        <input type="checkbox" id="sauna">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="wifi">Wifi
-                                        <input type="checkbox" id="wifi">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                </div>
-                                <div class="ml-column">
-                                    <label for="dryer">Dryer
-                                        <input type="checkbox" id="dryer">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="microwave">Microwave
-                                        <input type="checkbox" id="microwave">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="pool">Swimming Pool
-                                        <input type="checkbox" id="pool">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="window">Window Coverings
-                                        <input type="checkbox" id="window">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                </div>
-                                <div class="ml-column last-column">
-                                    <label for="gym">Gym
-                                        <input type="checkbox" id="gym">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="shower">OutdoorShower
-                                        <input type="checkbox" id="shower">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="tv">Tv Cable
-                                        <input type="checkbox" id="tv">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<section class="ftco-section goto-here search-section spad">
+<!-- 옵션/카테고리/지역 선택 시작-->
+<div class="container">
+	<div class="search-form-content" style="margin-top:100px;">
+		<div class="flex-wrap">
+			<div class="search-category">공간유형</div>
+			<div class="search-category">지역</div>
+			<div class="search-category">날짜</div>
+			<form id="filter-search" class="filter-form">
+				<!-- 카테고리 선택 시작 -->
+				<select name="space_type" id="space_type" class="nice-select sm-width">
+					<option value="all_category">모든유형</option>
+					<c:forEach items="${categoryList}" var="category">
+						<option value="${category.categoryNo}">${category.categoryName}</option>
+					</c:forEach>
+				</select>
+				<!-- 카테고리 선택 끝-->
+				
+				<!-- 지역 선택 시작 -->
+				<select name="space_location" id="space_location" class="nice-select sm-width">		
+					<option value="all_location">모든지역</option>
+					<option value="seoul">서울특별시</option>
+					<option value="seoul">인천광역시</option>
+					<option value="seoul">경기도</option>
+					<option value="seoul">강원도</option>
+				</select>
+				<!-- 지역 선택 끝-->
+				
+				<!-- 날짜 선택 시작 -->
+				<input type="date" name="space_date" id="space_date" class="nice-select sm-width"/>
+				<!-- 날짜 선택 끝 -->
+			</form>
+			
+			<div class="container">
+				<button type="button" class="search-btn" onclick="searchSpace();">검색</button>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 더많은 옵션 시작-->   
+	<div class="more-option">
+		<div class="accordion" id="accordionExample">
+			<div class="card">
+				<div class="card-heading-active" id="btn-wrap">
+					<a class="icon-arrow_drop_down_circle" data-toggle="collapse" data-target="#collapseOne">
+						<b>더 많은 옵션</b>
+					</a>
+					<br />
+				</div>  
+					
+				<div id="collapseOne" class="collapse">
+					<div class="card-body">
+						<span><b>편의시설</b>을 선택하세요.</span>
+						<hr />
+						<div class="mo-list">
+							<div class="ml-column">
+								<label for="${option.optionNO}">${option.optionName}
+									<input type="checkbox" id="${option.optionNO}" value="${option.optionNO}">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div> 
+				
+			</div>
+		</div>
+	</div>
+	<!-- 더많은 옵션 끝 -->    
+</div>
+<!-- 옵션/카테고리/지역 선택 끝 -->
 <!-- 검색창 끝 -->
 <br />
 <br />
@@ -479,7 +473,7 @@ function review(){
 		
 function searchSpace(){
 	var keyword = $(".searchInput").val();
-	alert(keyword);
+	//alert(keyword);
 
 	keyword = keyword.replace('#','%23');
 	

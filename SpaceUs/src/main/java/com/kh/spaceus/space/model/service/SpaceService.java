@@ -9,6 +9,7 @@ import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceList;
 import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
@@ -91,10 +92,13 @@ public interface SpaceService {
 
 	Wish selectOneWish(Wish wish);
 
-	List<Space> selectSearchSpaceList(String searchSpace);
+	//물어보기
+	/* List<Space> selectSearchSpaceList(String searchSpace); */
 
 	Attachment selectPopularImage(String spaceNo);
 
+	List<SpaceList> selectSearchSpaceList(String searchSpace);
+	
 	/* List<Space> selectListSpaceCollection(String email); */
 
 
