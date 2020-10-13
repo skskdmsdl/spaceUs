@@ -94,39 +94,39 @@ public class MemberController {
 	//탈퇴
 	@RequestMapping("/deleteMember.do")
 	public String deleteMember (@RequestParam("memberEmail") String memberEmail,
-			RedirectAttributes redirectAttr, SessionStatus sessionStatus) {
+								RedirectAttributes redirectAttr, SessionStatus sessionStatus) {
 		int result = memberService.deleteMember(memberEmail);
 		
 		if(result>0) {
-		redirectAttr.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다.");
-		
-		  SecurityContextHolder.clearContext();
-		
+			redirectAttr.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다.");
+			
+			SecurityContextHolder.clearContext();
 		}
 		else 
-		redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");
+			redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");
 		
 		return "redirect:/";
-		}
-	// 이용내역
-	@RequestMapping("/usageHistory.do")
-	public ModelAndView usageHistory(Principal principal, ModelAndView mav) {
-
-		//System.out.println("memberEmail: "+principal.getName());
-		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
-		List<Space> spaceList = new ArrayList<Space>();
-		
-		for(int i=0; i<revList.size(); i++) {
-			Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
-			System.out.println("space="+space);
-			spaceList.add(space);
-		}
-		
-		mav.addObject("revList",revList);
-		mav.addObject("spaceList",spaceList);
-		mav.setViewName("member/usageHistory");
-		return mav;
 	}
+
+	// 이용내역
+		@RequestMapping("/usageHistory.do")
+		public ModelAndView usageHistory(Principal principal, ModelAndView mav) {
+
+			//System.out.println("memberEmail: "+principal.getName());
+			List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+			List<Space> spaceList = new ArrayList<Space>();
+			
+			for(int i=0; i<revList.size(); i++) {
+				Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
+				System.out.println("space="+space);
+				spaceList.add(space);
+			}
+			
+			mav.addObject("revList",revList);
+			mav.addObject("spaceList",spaceList);
+			mav.setViewName("member/usageHistory");
+			return mav;
+		}
 
 	// 위시리스트
 	@RequestMapping("/wishList.do")
@@ -135,18 +135,6 @@ public class MemberController {
 		
 		model.addAttribute("wlist", list);
 		return "member/wishList";
-	}
-	
-	//위시리스트 삭제
-	@RequestMapping("/deleteWish.do")
-	public String deleteWish(Wish wish, HttpServletResponse response, RedirectAttributes redirectAttr) {
-		
-		int result = spaceService.deleteWish(wish);
-		String msg = (result>0) ? "위시 삭제 성공!" : "위시 삭제 실패";
-		
-		redirectAttr.addFlashAttribute("msg", msg);
-		
-		return "redirect:/member/wishList.do";
 	}
 
 	// 쿠폰함
@@ -163,9 +151,13 @@ public class MemberController {
 	public String reviewList (Model model, Principal principal) {
 		Member member = memberService.selectOneMember(principal.getName());
 		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
-		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		/*List<Reservation> revList = reservationService.selectListReservation(principal.getName());*/
 		List<Space> spaceList = spaceService.selectReviewList(principal.getName());
 		
+		for(Space s : spaceList) {
+			System.out.println(s.getReviewComment());
+			System.out.println(s.getSpaceNo());
+		}
 		
 		model.addAttribute("spaceList", spaceList);
 		model.addAttribute("member", member);
@@ -177,8 +169,8 @@ public class MemberController {
 	public String reviewPossible (Model model, Principal principal) {
 		Member member = memberService.selectOneMember(principal.getName());
 		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
-		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
-		System.out.println("@1"+revList);
+		/*List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		System.out.println("@1"+revList);*/
 		List<Space> spaceList = spaceService.selectReviewPossible(principal.getName());
 		
 		System.out.println("@2"+spaceList); 
@@ -193,8 +185,8 @@ public class MemberController {
 	public String reviewComplete (Model model, Principal principal) {
 		Member member = memberService.selectOneMember(principal.getName());
 		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
-		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
-		System.out.println("@1"+revList);
+		/*List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		System.out.println("@1"+revList);*/
 		List<Space> spaceList = spaceService.selectReviewComplete(principal.getName());
 		
 		System.out.println("@2"+spaceList); 
@@ -323,7 +315,6 @@ public class MemberController {
 	// 로그아웃
 	@RequestMapping("/memberLogout.do")
 	public String memberLogout() {
-		
 		
 		return "redirect:/";
 	}
@@ -548,16 +539,17 @@ public class MemberController {
 	@ResponseBody
 	public Map<String, Object> updateMember(ModelAndView mav,
 											Member member) {
+		
 		int result = memberService.updateMember(member);
 		String memberEmail = member.getMemberEmail();
 		member = memberService.selectOneMember(memberEmail);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		authentication.getName();
 		authentication.getPrincipal();
-		System.out.println("@@@2"+member.getMemberPhone());
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("nick", member.getNickName());
+
 		return map;
 	}
 	

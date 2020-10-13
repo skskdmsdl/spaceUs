@@ -279,6 +279,11 @@ function naverShare() {
 								href="#detail-description" role="tab"
 								aria-controls="detail-description" aria-expanded="true">공간설명</a>
 							</li>
+<!-- 							<li class="nav-item"><a class="nav-link active"
+								id="detail-description-tab" data-toggle="pill"
+								href="#detail-description" role="tab"
+								aria-controls="detail-description" aria-expanded="true">공간설명</a>
+							</li> -->
 							<li class="nav-item"><a class="nav-link" id="detail-qna-tab"
 								data-toggle="pill" href="#detail-qna" role="tab"
 								aria-controls="detail-qna" aria-expanded="true">Q&A</a></li>
@@ -553,8 +558,15 @@ function naverShare() {
 																style="cursor: pointer; display: none; height: 100%">
 																<p>${ review.content }</p>
 																<p style="font-weight: 600;" class="simpleBtn">접기</p>
-																<div
-																	style="background-image: url(${pageContext.request.contextPath}/resources/upload/review/${review.image});  width: 500px;height: 350px;background-size: cover;"></div>
+																<div style="background-image: url(${pageContext.request.contextPath}/resources/upload/review/${review.image});  width: 500px;height: 350px;background-size: cover;"></div>
+										                         <c:if test="${ not empty review.reviewComment }">
+										                         	<div class="mt-4" style="background-color: #fafafa; width: 500px; cursor:default; border: 1px solid #edeceb; padding-bottom: 30px; ">
+											                         <div class="pl-5 pr-5 pt-4 ">
+											                         	<p><i class="fa fa-comment mr-1"></i>호스트 답글</p>
+											                         	<p>${ review.reviewComment }</p>
+											                         </div>
+										                         	</div>
+										                         </c:if>
 															</div>
 														</div>
 													</div>
@@ -596,6 +608,14 @@ function naverShare() {
 																style="cursor: pointer; display: none; height: 100%">
 																<p>${ review.content }</p>
 																<p style="font-weight: 600;" class="simpleBtn">접기</p>
+																<c:if test="${ not empty review.reviewComment }">
+										                         	<div class="mt-4" style="background-color: #fafafa; width: 500px; cursor:default; border: 1px solid #edeceb; padding-bottom: 30px; ">
+											                         <div class="pl-5 pr-5 pt-4 ">
+											                         	<p><i class="fa fa-comment mr-1"></i>댓글</p>
+											                         	<p>${ review.reviewComment }</p>
+											                         </div>
+										                         	</div>
+										                         </c:if>
 															</div>
 														</div>
 													</div>
@@ -907,5 +927,6 @@ $(function () {
 
 
 </script>
+
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

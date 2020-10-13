@@ -41,10 +41,9 @@
 			invalidate-session="true"
 			logout-url="/member/memberLogout.do"
 			logout-success-url="/"
-			delete-cookies="JSESSIONID"
 		/> 
-
-		 
+		
+	
 		
 		<!-- 모든 post요청에 csrf토큰값 인증사용 -->
 		<!-- ajax post요청시 403에러 처리 -->
@@ -55,6 +54,7 @@
    		 </headers>  
 	</http>
 	
+
 	<!-- #8.4 사용자 인증 -->
 	<authentication-manager>
 		 <!-- <authentication-provider>

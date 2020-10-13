@@ -324,13 +324,6 @@ public class SpaceController {
 
 	}
 
-	@RequestMapping(value = "/searchSpace.do", method = RequestMethod.GET)
-	public ModelAndView searchSpace(ModelAndView mav, @RequestParam("search_keyword") String keyword) {
-		mav.addObject("keyword", keyword);
-
-		return mav;
-	}
-
 	// 위시리스트 추가
 	@RequestMapping(value = "/heart.do", method = RequestMethod.POST)
 	@ResponseBody

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.dao.SpaceDAO;
 import com.kh.spaceus.space.model.vo.Attachment;
+import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
@@ -234,9 +235,25 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
+	public List<Category> selectCategoryList() {
+		return spaceDAO.selectCategoryList();
+	}
+
+	@Override
+	public List<OptionList> selectOptionList1() {
+		return spaceDAO.selectOptionList1();
+	}
+
+	@Override
+	public List<String> selectSpaceNoList(String keyword) {
+		return spaceDAO.selectSpaceNoList(keyword);
+	}
+	
+	@Override
 	public Wish selectOneWish(Wish wish) {
 		return spaceDAO.selectOneWish(wish);
 	}
+	
 	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {

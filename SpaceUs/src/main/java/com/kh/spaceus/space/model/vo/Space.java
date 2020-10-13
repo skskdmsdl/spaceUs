@@ -40,6 +40,7 @@ public class Space implements Serializable{
 	private String reviewNo;
 	private String starRating;
 	private String reviewContent;
+	private String reviewComment;
 	
 	private List<Attachment> attachList;
 }

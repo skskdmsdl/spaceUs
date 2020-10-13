@@ -140,7 +140,7 @@
 	from
 		member
 	where
-		birthday like '%%%%-'||(select to_char(sysdate, 'MM-dd') from dual)
+		birthday like '%%/'||(select to_char(sysdate+1, 'MM/dd') sys_month from dual)
 </insert>
 
 <update id="deleteToday">
@@ -213,6 +213,13 @@
 		<result column="address" property="address"/>
 		<result column="renamed_filename" property="image"/>
 		<result column="hourly_price" property="hourlyPrice"/>	
+<!-- 		<collection property="attachList" ofType="Attachment">
+				<id column="file_no" property="fileNo"/>
+				<result column="space_no" property="spaceNo"/>
+				<result column="original_filename" property="oName" jdbcType="VARCHAR" javaType="string"/>
+				<result column="renamed_filename" property="rName" jdbcType="VARCHAR" javaType="string"/>
+				<result column="upload_date" property="uploadDate"/>
+		</collection> -->
 </resultMap>
 
 <select id="selectWishList" resultMap="wishMap">

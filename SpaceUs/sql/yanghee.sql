@@ -31,6 +31,8 @@ insert into member values('user8@naver.com','유저8','$2a$10$Qc91X8k0YEUfCTwsX4
 insert into member values('user9@naver.com','유저9','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','99/09/09',default,0);
 insert into member values('user10@naver.com','유저10','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','90/09/09',default,0);
 
+update member set password = '$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu' where member_email = 'admin@spaceus.com';
+
 delete from member where member_email='rhkim10@naver.com';
 delete from auth where member_email='rhkim10@naver.com';
 
@@ -932,3 +934,101 @@ from
         using(tag_no)
 where
     space_no = 'space27';
+-----------------------------------
+-- 10 /12
+-----------------------------------
+select * from category;
+select * from space;
+select * from space_option;
+select * from option_list;
+select * from space_tag;
+select * from tag;
+--------------------
+select
+   (category_name)
+from category;
+select
+    (option_name)
+from option_list;
+select
+    (tag_name)
+from tag;
+---------------------
+select category_name
+from category
+where category_name like '%감각%'
+union
+select tag_name
+from tag
+where tag_name like '%감각%'
+union
+select option_name 
+from option_list
+where option_name like '%감각%';
+
+select 
+    * 
+from 
+    space S join category C
+                using(category_no)
+            join space_option SO
+                using(space_no)
+            join option_list SL
+                on SO.option_no = SL.option_no
+;
+select REGEXP_SUBSTR('C-01-02','[^-]+',1,1) from dual;
+select REGEXP_SUBSTR(address,'[^ ]+',1,3) from space;
+
+select * from space;
+
+SELECT address as name, space_no FROM space;
+select category_name as name, space_no from category join space using(category_no);
+select option_name as name, 
+        space_no, 
+        space_name, 
+        REGEXP_SUBSTR(address,'[^ ]+',1,3) as address, 
+        views, 
+        like_cnt, 
+        hourly_price,
+        renamed_filename,
+        rnum
+from space join space_option 
+                using(space_no) 
+           join option_list 
+                using(option_no)
+           left join (  select space_no,renamed_filename,rank()over(partition by space_no order by renamed_filename) as rnum from space left join space_image using(space_no))
+                using(space_no)
+where rnum=1;
+
+------- 
+WITH TEMP_TABLE AS (
+   SELECT address as name, space_no FROM space union all
+   select category_name as name, space_no from category join space using(category_no) union all
+   select option_name as name, space_no from space_option join option_list using(option_no) union all
+   select tag_name as name, space_no from space_tag join tag using(tag_no)
+)
+SELECT space_no
+   FROM TEMP_TABLE;
+ WHERE name like '%#바다가 보이는%';
+ 
+ 
+ 
+ 
+-- 공간 대표사진 
+select 
+    renamed_filename, space_no
+from(
+    select 
+        space_no,
+        renamed_filename,
+        rank()over(partition by space_no order by renamed_filename) as rnum
+    from 
+        space left join space_image 
+                    using(space_no)
+    )
+where rnum = 1;
+
+---
+select * from(select rank()over(partition by space_no order by renamed_filename) as rnum, renamed_filename from space left join space_image using(space_no)) where rnum=1;
+---
+select renamed_filename, space_no from( select space_no, renamed_filename, rank()over(partition by space_no order by renamed_filename) as rnum from space left join space_image using(space_no))where rnum = 1;
