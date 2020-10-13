@@ -476,7 +476,7 @@ function review(){
 		
 function searchSpace(){
 	var keyword = $(".searchInput").val();
-	alert(keyword);
+	//alert(keyword);
 
 	keyword = keyword.replace('#','%23');
 	

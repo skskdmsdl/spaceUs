@@ -14,22 +14,34 @@ create table member(
 		attendance_cnt number default 0,
 		constraints pk_member_email primary key(member_email)
 );
-
-select * from member;
-
+-- 10/13 일 추가
 commit;
+select * from member order by member_regdate desc;
+delete from member where member_email='user17@naver.com';
+insert into member values('user11@naver.com','유저11','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-09',default,0,default);
+insert into member values('user12@naver.com','유저12','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-01',default,0,default);
+insert into member values('user13@naver.com','유저13','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-09',default,0,default);
+insert into member values('user14@naver.com','유저14','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-09',default,0,default);
+insert into member values('user15@naver.com','유저15','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-09',default,0,default);
+insert into member values('user16@naver.com','유저16','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-09',default,0,default);
+insert into member values('user17@naver.com','유저17','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','1990-10-09',default,0,default);
+insert into member values('user18@naver.com','유저18','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-11',default,0,default);
+insert into member values('user19@naver.com','유저19','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-23',default,0,default);
+insert into member values('user20@naver.com','유저20','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-19',default,0,default);
 
-insert into member values('yang@naver.com','김양희','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','90/09/09','20/10/10',0);
-insert into member values('user1@naver.com','유저1','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','91/09/09',default,0);
-insert into member values('user2@naver.com','유저2','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','92/09/09',default,0);
-insert into member values('user3@naver.com','유저3','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','93/09/09',default,0);
-insert into member values('user4@naver.com','유저4','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','94/09/09',default,0);
-insert into member values('user5@naver.com','유저5','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','95/09/09',default,0);
-insert into member values('user6@naver.com','유저6','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','96/09/09',default,0);
-insert into member values('user7@naver.com','유저7','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','97/09/09',default,0);
-insert into member values('user8@naver.com','유저8','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','98/09/09',default,0);
-insert into member values('user9@naver.com','유저9','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','99/09/09',default,0);
-insert into member values('user10@naver.com','유저10','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01012341234','90/09/09',default,0);
+insert into member values('user21@naver.com','유저21','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-19',default,0,default);
+insert into member values('user22@naver.com','유저22','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-18',default,0,default);
+insert into member values('user23@naver.com','유저23','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-17',default,0,default);
+insert into member values('user24@naver.com','유저24','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-30',default,0,default);
+insert into member values('user25@naver.com','유저25','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-12',default,0,default);
+insert into member values('user26@naver.com','유저26','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-13',default,0,default);
+insert into member values('user27@naver.com','유저27','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-14',default,0,default);
+insert into member values('user28@naver.com','유저28','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-15',default,0,default);
+insert into member values('user29@naver.com','유저29','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-16',default,0,default);
+insert into member values('user30@naver.com','유저30','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-17',default,0,default);
+
+
+
 
 update member set password = '$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu' where member_email = 'admin@spaceus.com';
 
@@ -1038,35 +1050,87 @@ select renamed_filename, space_no from( select space_no, renamed_filename, rank(
 -------------------------------
 -- 공간 대표사진 
 select 
-    renamed_filename, space_no
+    space_no,
+    renamed_filename
 from(
     select 
-        space_no,
-        renamed_filename,
-        rank()over(partition by space_no order by renamed_filename) as rnum
+        S.space_no,
+        SI.renamed_filename,
+        S.status,
+        rank()over(partition by S.space_no order by SI.renamed_filename) as rnum
     from 
-        space left join space_image 
-                    using(space_no)
+        space S left join space_image SI 
+                    on S.space_no = SI.space_no
     )
-where rnum = 1;
+where rnum = 1 and status = 'O';
 
 -- 주소 구만 
 select REGEXP_SUBSTR(address,'[^ ]+',1,3) from space;
 
--- 태그
+-- 리뷰수
+select count(*)over(partition by space_no) as review_cnt from review;
+
+select * from review;
+    
+-- 전체
 select
-    space_no
+    space_no,
     space_name, 
     REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
     hourly_price,
     views,
-    like_cnt
+    like_cnt,
+    nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as reviewNo
 from 
-    space
-where status = 'O'; and space_no='space31';
--- 리뷰수
+    space S
+where status = 'O'
+        and space_no='space61';
+----
+select * from category;
+select * from space where status = 'O';
+select * from member;
+select * from space where member_email='rhkim999@gmail.com';
+delete from space where space_no = 'space60';
+commit;
+update space set hourly_price='50000' where space_no = 'space2';
+
+select 
+        S.space_no,
+        SI.renamed_filename,
+        S.status,
+        rank()over(partition by S.space_no order by SI.renamed_filename) as rnum
+    from 
+        space S left join space_image SI 
+                    on S.space_no = SI.space_no;
+                    
+                    
+--
 select
-    space_no,
-    count(*)over(partition by space_no)
-from 
-    review;
+		    S.space_no,
+		    S.space_name, 
+		    REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
+		    S.hourly_price,
+		    S.views,
+		    S.like_cnt,
+		    S.star_avg,
+		    nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as review_cnt,
+            SI.renamed_filename
+		from 
+		    space S join(
+                select space_no,renamed_filename 
+                from( select 
+                        S.space_no,
+                        SI.renamed_filename,
+                        rank()over(partition by S.space_no order by SI.renamed_filename) as rnum 
+                      from space S left join space_image SI 
+                                    on S.space_no = SI.space_no)
+                      where rnum=1
+            )SI
+                on S.space_no = SI.space_no
+		where S.status = 'O' and S.space_no= 'space61';
+        
+--
+-- 공간 대표사진 
+select * from space_image ;
+select space_no,renamed_filename from( select S.space_no,SI.renamed_filename,rank()over(partition by S.space_no order by SI.renamed_filename) as rnum from space S left join space_image SI on S.space_no = SI.space_no)
+where rnum = 1 and status = 'O';
