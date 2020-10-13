@@ -316,7 +316,7 @@ div#search-userName {
 		                            <th>게시물 작성자</th>
 		                            <th>게시물 타이틀</th>
 		                            <th>사유</th>
-		                            <th>게시물 상태</th>
+		                            <th>게시물 삭제 여부</th>
 		                        </tr>
 		                    </thead>
 		                    <tbody>
@@ -325,16 +325,7 @@ div#search-userName {
 				                   		<td>${vs.count}</td>
 				                   		<td>${group.memberEmail}</td>
 				                   		<td>
-				                   			<c:choose>
-				                   				<c:when test="${fn:contains(gbList,group.reportBoardNo)}">
-						                   			<a href="${pageContext.request.contextPath}/community/group/groupDetail/${group.reportBoardNo}.do">
-						                   				${group.title}
-						                   			</a>
-				                   				</c:when>
-				                   				<c:otherwise>
-				                   					${group.title}
-				                   				</c:otherwise>
-				                   			</c:choose>
+		                   					${group.title}
 				                   		</td>
 				                   		<td>
 											 <button type="button" name="reportBoardNo" value="${group.reportBoardNo}"
@@ -389,16 +380,7 @@ div#search-userName {
 					                   		<td>${vs.count}</td>
 					                   		<td>${recruit.memberEmail}</td>
 					                   		<td>
-					                   			<c:choose>
-					                   				<c:when test="${fn:contains(rList,recruit.reportBoardNo)}">
-							                   			<a href="${pageContext.request.contextPath}/community/recruit/recruitDetail.do?no=${recruit.reportBoardNo}">
-							                   				${recruit.title}
-							                   			</a>
-					                   				</c:when>
-					                   				<c:otherwise>
-					                   					${recruit.title}
-					                   				</c:otherwise>
-					                   			</c:choose>
+				                   				${recruit.title}           	
 					                   		</td>
 					                   		<td>
 												 <button type="button" name="reportBoardNo" value="${recruit.reportBoardNo}"

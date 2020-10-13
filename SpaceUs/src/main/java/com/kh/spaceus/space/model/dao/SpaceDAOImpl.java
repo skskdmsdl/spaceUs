@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Attachment;
+import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
@@ -204,6 +205,24 @@ public class SpaceDAOImpl implements SpaceDAO{
 	public List<Space> selectPopularSpaces() {
 		return sqlSession.selectList("space.selectPopularSpaces");
 	}
+
+	@Override
+	public List<Category> selectCategoryList() {
+		return sqlSession.selectList("space.selectCategoryList");
+	}
+
+	@Override
+	public List<OptionList> selectOptionList1() {
+		return sqlSession.selectList("space.selectOptionList1");
+	}
+
+	@Override
+	public List<String> selectSpaceNoList(String keyword) {
+		return sqlSession.selectList("space.selectSpaceNoList", keyword);
+	}
+	
+	
+	
 
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {

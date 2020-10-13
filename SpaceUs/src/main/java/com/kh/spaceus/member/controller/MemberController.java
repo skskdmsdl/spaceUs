@@ -2,8 +2,6 @@ package com.kh.spaceus.member.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +10,6 @@ import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
@@ -31,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -98,7 +96,7 @@ public class MemberController {
 		
 		if(result>0) {
 			redirectAttr.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다.");
-			return "redirect:/member/memberLogout";//로그아웃 처리함.
+			SecurityContextHolder.clearContext();
 		}
 		else 
 			redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");

@@ -339,7 +339,7 @@ $("#updatePwd").on("click", function(){
 //탈퇴
 $("#deleteBtn").click(function(){
 	 if(!confirm("정말로 탈퇴하시겠습니까?")) return;
-	 /*$("#deleteFrm").submit(); */
+	 $("#deleteFrm").submit();
 });
 //핸드폰 인증
 $(function(){

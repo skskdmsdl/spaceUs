@@ -107,9 +107,9 @@
 
 <delete id="deleteMember">
     delete from 
-    	member 
- 	where 
- 		attendance_cnt = 0 
+       member 
+    where 
+       member_email = #{ memberEmail}
 </delete>
 
 <update id="updatePwd">
