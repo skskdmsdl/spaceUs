@@ -19,7 +19,7 @@ public class Reservation implements Serializable {
 	private String memberEmail;
 	private String spaceNo;
 	private Date revDate;
-	private Date dDay;
+	private Date day;
 	private int startHour;
 	private int endHour;
 	private String pay;

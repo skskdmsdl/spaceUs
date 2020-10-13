@@ -79,6 +79,7 @@ public class HostController {
 		
 		String member_email = principal.getName();
 		List<Reservation> list = reservationService.selectHostReservationList(member_email);
+	
 		model.addAttribute("list", list);
 		return "host/hostReservation";
 	}	

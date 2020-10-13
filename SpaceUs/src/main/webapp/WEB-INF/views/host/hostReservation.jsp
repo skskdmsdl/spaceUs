@@ -92,7 +92,7 @@
 			                            <td class="text-center">${reservation.memberEmail}</td>
 			                            <td class="text-center">${reservation.phone}</td>
 			                            <td class="text-center"><fmt:formatDate value="${reservation.revDate}" pattern="yy.MM.dd"/></td>
-			                            <td class="text-center"><%-- <fmt:formatDate value="${reservation.dDay}" pattern="yyyy-MM-dd"/> --%></td>
+			                            <td class="text-center"><fmt:formatDate value="${reservation.day}" pattern="yy.MM.dd"/></td>
 			                            <td class="text-center">${reservation.startHour}시 - ${reservation.endHour}시</td>
 			                            <td class="text-center">
 			                                ${ reservation.revCancle == 0 ? "-" : "취소" }

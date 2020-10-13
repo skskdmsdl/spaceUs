@@ -56,7 +56,7 @@
 		<id column="rev_no" property="revNo"/>
 		<result column="member_email" property="memberEmail"/>
 		<result column="space_no" property="spaceNo"/>
-		<result column="d_day" property="dDay"/>
+		<result column="d_day" property="day"/>
 		<result column="rev_date" property="revDate"/>
 		<result column="start_hour" property="startHour"/>
 		<result column="end_hour" property="endHour"/>
