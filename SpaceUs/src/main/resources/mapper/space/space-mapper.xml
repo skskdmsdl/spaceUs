@@ -80,6 +80,7 @@
 		<result column="star_rating" property="starRating"/>
 		<result column="review_content" property="reviewContent"/>		
 		<result column="review_comment" property="reviewComment"/>		
+		<result column="review_cnt" property="reviewCnt"/>		
 		<collection property="attachList" ofType="Attachment">
 			<id column="file_no" property="fileNo"/>
 			<result column="space_no" property="spaceNo"/>
@@ -528,17 +529,30 @@
 	<!-- spaceNo로 space 데이터 가져오기 -->
 	<select id="selectSearchSpaceList" resultMap="spaceMap">
 		select
-		    space_no,
-		    space_name, 
+		    S.space_no,
+		    S.space_name, 
 		    REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
-		    hourly_price,
-		    views,
-		    like_cnt,
-		    nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as review
+		    S.hourly_price,
+		    S.views,
+		    S.like_cnt,
+		    S.star_avg,
+		    nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as review_cnt,
+            SI.renamed_filename
 		from 
-		    space S
-		where status = 'O' and space_no= #{searchSpace}
+		    space S join(
+                select space_no,renamed_filename 
+                from( select 
+                        S.space_no,
+                        SI.renamed_filename,
+                        rank()over(partition by S.space_no order by SI.renamed_filename) as rnum 
+                      from space S left join space_image SI 
+                                    on S.space_no = SI.space_no)
+                      where rnum=1
+            )SI
+                on S.space_no = SI.space_no
+		where S.status = 'O' and S.space_no= #{
 	</select>
+	
 	
 	<!-- searchSpace 끝-->
 </mapper>

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spaceus.admin.model.vo.ConfirmSpaceImage;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Category;
@@ -231,6 +232,7 @@ public class SpaceDAOImpl implements SpaceDAO{
 	public List<Space> selectSearchSpaceList(String searchSpace) {
 		return sqlSession.selectList("space.selectSearchSpaceList", searchSpace);
 	}
+	
 
 	@Override
 	public Wish selectOneWish(Wish wish) {

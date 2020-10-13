@@ -2,6 +2,7 @@ package com.kh.spaceus.space.model.service;
 
 import java.util.List;
 
+import com.kh.spaceus.admin.model.vo.ConfirmSpaceImage;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.Option;

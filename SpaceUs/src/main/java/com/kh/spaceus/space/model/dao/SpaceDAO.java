@@ -2,6 +2,7 @@ package com.kh.spaceus.space.model.dao;
 
 import java.util.List;
 
+import com.kh.spaceus.admin.model.vo.ConfirmSpaceImage;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Category;
