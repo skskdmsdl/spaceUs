@@ -306,17 +306,19 @@ function searchSpace(){
 					<br />
 				</div>  
 					
-				<div id="collapseOne" class="collapse">
+				<div id="collapseOne" class="collapse" style="margin:auto 0;">
 					<div class="card-body">
 						<span><b>편의시설</b>을 선택하세요.</span>
 						<hr />
 						<div class="mo-list">
+							<c:forEach items="${optionList}" var="option">
 							<div class="ml-column">
 								<label for="${option.optionNO}">${option.optionName}
 									<input type="checkbox" id="${option.optionNO}" value="${option.optionNO}">
 									<span class="checkbox"></span>
 								</label>
 							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div> 
