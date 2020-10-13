@@ -15,6 +15,7 @@ import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceList;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,8 +37,8 @@ public class SearchSpaceController {
 		// 입력값을 통해 spaceNo가져오기
 		List<String> spaceNoList = spaceSerive.selectSpaceNoList(keyword);
 		
-		List<Space> space = null;
-		List<Space> spaceList = new ArrayList<>();
+		List<SpaceList> space = null;
+		List<SpaceList> spaceList = new ArrayList<>();
 		
 		 //spaceNo 하나씩 나누기
 		 for(int i=0; i<spaceNoList.size(); i++) {

@@ -2,13 +2,13 @@ package com.kh.spaceus.space.model.service;
 
 import java.util.List;
 
-import com.kh.spaceus.admin.model.vo.ConfirmSpaceImage;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceList;
 import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
@@ -91,7 +91,7 @@ public interface SpaceService {
 
 	Wish selectOneWish(Wish wish);
 
-	List<Space> selectSearchSpaceList(String searchSpace);
+	List<SpaceList> selectSearchSpaceList(String searchSpace);
 	
 	/* List<Space> selectListSpaceCollection(String email); */
 

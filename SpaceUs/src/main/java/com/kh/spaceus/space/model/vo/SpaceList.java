@@ -1,8 +1,5 @@
 package com.kh.spaceus.space.model.vo;
 
-import java.sql.Date;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

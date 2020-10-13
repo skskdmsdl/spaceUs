@@ -348,10 +348,9 @@ function searchSpace(){
 <div class="container search-result">
     <div class="row">
 	<c:forEach items="${spaceList}" var="space">
-   
 		<div class="col-md-4">
 			<div class="property-wrap ftco-animate">
-    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/${image.renamedFilename});"></a>
+    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/${space.renamedFilename});"></a>
     			<div class="text">
     				<p class="price"><span class="space-price">${space.hourlyPrice}<small>원/시간</small></span></p>
     				<ul class="property_list">

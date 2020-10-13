@@ -527,7 +527,7 @@
 	</select>
 	
 	<!-- spaceNo로 space 데이터 가져오기 -->
-	<select id="selectSearchSpaceList" resultMap="spaceMap">
+	<select id="selectSearchSpaceList" resultMap="spaceListMap">
 		select
 		    S.space_no,
 		    S.space_name, 
@@ -550,9 +550,9 @@
                       where rnum=1
             )SI
                 on S.space_no = SI.space_no
-		where S.status = 'O' and S.space_no= #{
+		where S.status = 'O' and S.space_no= #{searchSpace}
 	</select>
-	
+	<resultMap type="spaceList" id="spaceListMap"></resultMap>
 	
 	<!-- searchSpace 끝-->
 </mapper>

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kh.spaceus.admin.model.vo.ConfirmSpaceImage;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.dao.SpaceDAO;
 import com.kh.spaceus.space.model.vo.Attachment;
@@ -16,6 +15,7 @@ import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceList;
 import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
@@ -258,7 +258,7 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public List<Space> selectSearchSpaceList(String searchSpace) {
+	public List<SpaceList> selectSearchSpaceList(String searchSpace) {
 		return spaceDAO.selectSearchSpaceList(searchSpace);
 	}
 
