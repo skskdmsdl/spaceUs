@@ -136,6 +136,18 @@ public class MemberController {
 		model.addAttribute("wlist", list);
 		return "member/wishList";
 	}
+	
+	//위시리스트 삭제
+		@RequestMapping("/deleteWish.do")
+		public String deleteWish(Wish wish, HttpServletResponse response, RedirectAttributes redirectAttr) {
+
+			int result = spaceService.deleteWish(wish);
+			String msg = (result>0) ? "위시 삭제 성공!" : "위시 삭제 실패";
+
+			redirectAttr.addFlashAttribute("msg", msg);
+
+			return "redirect:/member/wishList.do";
+		}
 
 	// 쿠폰함
 	@RequestMapping("/couponList.do")
