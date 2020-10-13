@@ -14,6 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class OptionList implements Serializable{
+	
 	private String optionNO;
 	private String optionName;
 }

@@ -19,11 +19,13 @@ public class Reservation implements Serializable {
 	private String memberEmail;
 	private String spaceNo;
 	private Date revDate;
-	private Date dDay;
+	private Date day;
 	private int startHour;
 	private int endHour;
 	private String pay;
 	private int totalPrice;
 	private int revCancle;
 	private int revComplete;
+	private String nickName;
+	private String phone;
 }

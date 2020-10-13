@@ -84,17 +84,32 @@
 		    					<img class="img-circle" src="${ pageContext.request.contextPath }/resources/upload/space/${list.rname}" alt="..."> 
                                  </div>
                                    <div class="mt-2 col-md p-20">
-                                       <div><a href="#">${ list.spaceName }</a> <span class="sl-date">${ list.enrollDate }</span></div>
+                                       <div><a style="color:#666;" href="${ pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${ list.spaceNo }">${ list.spaceName }</a> <span class="sl-date">${ list.enrollDate }</span></div>
                                    	<div class="row"> 
-                                        <div class="col-md-9 m-b-30">${ fn:substring(list.content,0,30) }</div>
+                                   	 <c:if test="${ list.reviewContent == null }">
+                                        <div class="col-md-9 m-b-30" style="min-height: 15px;">리뷰를 작성해주세요</div>
+									</c:if>
+                                   	 <c:if test="${ list.reviewContent != null }">
+                                        <div class="col-md-9 m-b-30" style="min-height: 15px;">${list.reviewContent }</div>
+									</c:if>
+									<c:if test="${ not empty list.reviewComment }">
+			                         	<div class="mt-4" style=" width: 500px; cursor:default;  padding-bottom: 10px; ">
+				                         <div class="pl-3 pr-5 ">
+				                         	<p><i class="fa fa-quote-left mr-1 font-20" style="color: #0785fe;"></i> 호스트 답글</p>
+				                         	<p>${ list.reviewComment }</p><i class="fa fa-quote-right mr-1 ml-1 font-20" style="color: #0785fe;"></i>
+				                         </div>
+			                         	</div>
+			                         </c:if> 
+
+<%--                                         <div class="col-md-9 m-b-30">${ fn:substring(list.content,0,30) }</div> --%>
                                         <div class="col-md-9">
                                          <c:if test="${ list.reviewNo == null }">
-                                            	<a class="btn m-r-5 btn-rounded btn-outline-success reviewBtn">리뷰등록</a> 
+                                            	<a class="btn m-r-5 btn-rounded btn-outline-success reviewBtn" style="position: absolute;right: -140px;bottom: 1px;">리뷰등록</a> 
                                             </c:if>
                                             <c:if test="${ list.reviewNo != null }">
                                             <input type="hidden" name="starInfo" value="${ list.starRating }" />
                                             <input type="hidden" name="className" value="${ list.reviewNo }" />
-                                            	<a class="btn btn-rounded btn-outline-secondary modifyBtn">리뷰수정</a> 
+                                            	<a class="btn btn-rounded btn-outline-secondary modifyBtn" style="position: absolute;right: -140px;bottom: 10px;">리뷰수정</a> 
                                             </c:if> 
                                         </div>
                                        </div>
@@ -106,11 +121,11 @@
 				                         	<div class="row pl-3 align-items-xl-center">
 				                         		<p class="m-1" style="font-size: 15px;">별점 &nbsp;&nbsp;:</p>
 				                         		<div class="star-box">
-												  <i class="fa fa-star-o star mt-2 star1" aria-hidden="true"></i>
-												  <i class="fa fa-star-o star star2" aria-hidden="true"></i>
-												  <i class="fa fa-star-o star star3" aria-hidden="true"></i>
-												 <i class="fa fa-star-o star star4" aria-hidden="true"></i>
-												 <i class="fa fa-star-o star star5" aria-hidden="true"></i>
+												  <i class="fa fa-star-o star mt-2 star1" style="color:#f7b71d;" aria-hidden="true"></i>
+												  <i class="fa fa-star-o star star2" style="color:#f7b71d;" aria-hidden="true"></i>
+												  <i class="fa fa-star-o star star3" style="color:#f7b71d;" aria-hidden="true"></i>
+												 <i class="fa fa-star-o star star4" style="color:#f7b71d;" aria-hidden="true"></i>
+												 <i class="fa fa-star-o star star5" style="color:#f7b71d;" aria-hidden="true"></i>
 												</div>
 												<form name="ReviewFrm" 
 													  action="${pageContext.request.contextPath}/member/insertReview.do" 
@@ -144,11 +159,11 @@
 				                         	<div class="row pl-3 align-items-xl-center">
 				                         		<p class="m-1" style="font-size: 15px;">별점 &nbsp;&nbsp;:</p>
 				                         		<div class="star-box">
-												  <i class="fa fa-star-o star mt-2 star1 starInfo${ list.reviewNo }" aria-hidden="true"></i>
-												  <i class="fa fa-star-o star star2 starInfo${ list.reviewNo }" aria-hidden="true"></i>
-												  <i class="fa fa-star-o star star3 starInfo${ list.reviewNo }" aria-hidden="true"></i>
-												 <i class="fa fa-star-o star star4 starInfo${ list.reviewNo }" aria-hidden="true"></i>
-												 <i class="fa fa-star-o star star5 starInfo${ list.reviewNo }" aria-hidden="true"></i>
+												  <i class="fa fa-star-o star mt-2 star1 starInfo${ list.reviewNo }" style="color:#f7b71d;" aria-hidden="true"></i>
+												  <i class="fa fa-star-o star star2 starInfo${ list.reviewNo }" style="color:#f7b71d;" aria-hidden="true"></i>
+												  <i class="fa fa-star-o star star3 starInfo${ list.reviewNo }" style="color:#f7b71d;" aria-hidden="true"></i>
+												 <i class="fa fa-star-o star star4 starInfo${ list.reviewNo }" style="color:#f7b71d;" aria-hidden="true"></i>
+												 <i class="fa fa-star-o star star5 starInfo${ list.reviewNo }" style="color:#f7b71d;" aria-hidden="true"></i>
 												</div>
 												<form name="ReviewUpdateFrm" 
 													  action="${pageContext.request.contextPath}/member/updateReview.do" 

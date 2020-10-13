@@ -140,7 +140,7 @@
 	from
 		member
 	where
-		birthday like '%%%%-'||(select to_char(sysdate, 'MM-dd') from dual)
+		birthday like '%%/'||(select to_char(sysdate+1, 'MM/dd') sys_month from dual)
 </insert>
 
 <update id="deleteToday">

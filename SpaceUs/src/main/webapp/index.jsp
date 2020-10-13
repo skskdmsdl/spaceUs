@@ -32,26 +32,26 @@ font-family: 'NEXON Lv1 Gothic OTF';
   position: relative;
 }
 
-input[type="text"] {
+.searchInput{
   height: 40px;
+  width: 400px;
   font-size: 20px;
   display: inline-block;
   font-family: "NEXON Lv1 Gothic OTF";
+  text-align: center;
   font-weight: 100;
-  border: none;
+  border:none;
+  border-bottom : 1px solid #d0d0d0;
+  margin-right:10px;
   outline: none;
   color: black;
   padding: 3px;
   padding-right: 60px;
   padding-left: 60px;
-  width: 0px;
-  position: absolute;
   top: 0;
   right: 0;
   background: none;
-  z-index: 3;
-  transition: .4s cubic-bezier(0.5, 0.795, 0.5, 0.50);
-  cursor: pointer;
+  cursor: pointer; 
 }
 
 #search_keyword {
@@ -62,7 +62,7 @@ input[type="text"] {
   border-bottom: 1px solid black;
 }
 
-input[type="text"]:focus {
+.searchInput:focus {
   width: 400px;
   z-index: 1;
   border-bottom: 1px solid black;
@@ -70,7 +70,8 @@ input[type="text"]:focus {
   left: -180px;
   top: 55px;
   text-align: center;
-}
+} 
+
 
 #search_submit:hover {
   opacity: 0.8;
@@ -144,10 +145,9 @@ $(function() {
           			<p></p>
      					<div style="margin-top:-20px">
      						<div id="wrap">
-							  <form id="searchFrm" onsubmit="searchSpace();" action="" autocomplete="on"> 
-								  <input id="searchInput" name="search_keyword" type="text" placeholder="키워드를 입력하세요">
-								  <i class="fas fa-search fa-2x" id="search_submit" type="submit" style="color:#00C89E"></i>
-							  </form> 
+		  						<input id="searchInput" class="searchInput" name="search_keyword" placeholder="키워드를 입력하세요">
+		  						<input type="submit" class="btn-lg search-btn" value="입력" onclick="searchSpace();" />
+		  						<!-- <i class="fas fa-search fa-2x" style="color:#00C89E"></i> -->	
 							</div>
          				</div>
        			</div>
@@ -475,10 +475,18 @@ function review(){
 };
 		
 function searchSpace(){
+	var keyword = $(".searchInput").val();
+	alert(keyword);
+
+	keyword = keyword.replace('#','%23');
 	
-	$("#searchFrm").attr("action", 
-				"${ pageContext.request.contextPath}/space/searchSpace.do")
-				.attr("method", "GET");
+	if(keyword == null || keyword == ''){
+		alert("키워드를 입력해주세요!");
+		return;
+	}
+	else{
+		location.href='${pageContext.request.contextPath}/space/searchSpace.do?keyword='+keyword;
+	}
 }
 
 document.querySelector('.stick').addEventListener('click',()=>{
