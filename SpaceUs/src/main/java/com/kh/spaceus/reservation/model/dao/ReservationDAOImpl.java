@@ -43,10 +43,6 @@ public class ReservationDAOImpl implements ReservationDAO{
 		return sqlSession.selectList("reservation.ingReservation", email);
 	}
 
-	public List<Reservation> selectHostReservationList(String memberEmail) {
-		return sqlSession.selectList("reservation.selectHostReservationList", memberEmail);
-	}
-
 	@Override
 	public List<Reservation> finishReservation(String email) {
 		return sqlSession.selectList("reservation.finishReservation", email);
@@ -55,5 +51,9 @@ public class ReservationDAOImpl implements ReservationDAO{
 	@Override
 	public int cancleReservation(String revNo) {
 		return sqlSession.update("reservation.cancleReservation", revNo);
+	}
+	
+	public List<Reservation> selectHostReservationList(String memberEmail) {
+		return sqlSession.selectList("reservation.selectHostReservationList", memberEmail);
 	}
 }

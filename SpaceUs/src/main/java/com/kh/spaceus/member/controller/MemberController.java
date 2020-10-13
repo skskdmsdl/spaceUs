@@ -167,6 +167,7 @@ public class MemberController {
 		mav.addObject("spaceList",spaceList);
 		mav.setViewName("member/usageHistory");
 		return mav;
+
 	}
 
 	// 위시리스트
