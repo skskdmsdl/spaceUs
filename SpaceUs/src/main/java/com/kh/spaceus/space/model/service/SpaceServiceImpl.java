@@ -249,10 +249,18 @@ public class SpaceServiceImpl implements SpaceService{
 		return spaceDAO.selectSpaceNoList(keyword);
 	}
 	
+	
+
 	@Override
 	public Wish selectOneWish(Wish wish) {
 		return spaceDAO.selectOneWish(wish);
 	}
+
+	@Override
+	public List<Space> selectSearchSpaceList(String searchSpace) {
+		return spaceDAO.selectSearchSpaceList(searchSpace);
+	}
+	
 	
 	
 	/*@Override

@@ -89,6 +89,8 @@ public interface SpaceService {
 	List<String> selectSpaceNoList(String keyword);
 
 	Wish selectOneWish(Wish wish);
+
+	List<Space> selectSearchSpaceList(String searchSpace);
 	
 	/* List<Space> selectListSpaceCollection(String email); */
 
