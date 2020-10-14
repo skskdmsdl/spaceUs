@@ -48,7 +48,6 @@
   	<id column="settlement_date" property="date" />
   	<id column="daily_total_hour" property="totalHour" />
   	<id column="daily_revenue" property="revenue" />
-  	
   </resultMap>
   
   <select id="selectSettlementList" resultMap= "settlementMap">
@@ -64,5 +63,37 @@
 	where 
 		member_email=#{hostId}
   </select>
+  
+  <select id="selectReservationSpaceNo" resultType="string">
+	select 
+		space_no
+	from 
+		reservation 
+	where 
+		rev_cancle = 0  
+		and to_char(d_day) = to_char(sysdate-1) 
+	group by 
+		space_no
+  </select>
+  
+  <insert id="insertSettlement">
+	insert all
+	    into daily_sale
+	    values(
+	        'DAY'||seq_daily_sale_no.nextval,
+	        space_no,
+	        today,
+	        result,
+	        total
+	    )
+		select 
+			max(space_no) space_no, sum(column1-column2) as result, sum(total_price) as total, sysdate-1 as today
+		from (
+			select space_no, end_hour as column1, start_hour as column2, total_price
+			from reservation
+			where space_no=#{spaceNo} and to_char(d_day) = to_char(sysdate-1) and rev_cancle = 0
+		)
+  </insert>
+  
 
 </mapper>

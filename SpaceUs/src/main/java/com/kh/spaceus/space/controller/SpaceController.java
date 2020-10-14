@@ -24,10 +24,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.common.Utils;
+import com.kh.spaceus.host.model.service.HostService;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.reservation.model.service.ReservationService;
+import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Attachment;
@@ -57,6 +59,9 @@ public class SpaceController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private HostService hostService;
 
 	// 공간등록하기 화면
 	@RequestMapping(value = "/insertSpace.do", method = RequestMethod.GET)
@@ -410,7 +415,6 @@ public class SpaceController {
 			s.setAttach(att.getRName());
 			list.add(s);
 		}
-		
 		
 		mav.addObject("list", list);
 		mav.setViewName("jsonView");

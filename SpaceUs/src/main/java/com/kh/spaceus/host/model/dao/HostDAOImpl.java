@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.qna.model.vo.Qna;
+import com.kh.spaceus.reservation.model.vo.Reservation;
+import com.kh.spaceus.space.model.vo.Space;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,6 +35,16 @@ public class HostDAOImpl implements HostDAO {
 	@Override
 	public List<Qna> selectQuestionList(String hostId) {
 		return session.selectList("host.selectQuestionList", hostId);
+	}
+
+	@Override
+	public List<String> selectReservationSpaceNo() {
+		return session.selectList("host.selectReservationSpaceNo");
+	}
+
+	@Override
+	public int insertSettlement(String spaceNo) {
+		return session.insert("host.insertSettlement", spaceNo);
 	}
 
 	

@@ -17,7 +17,9 @@ import org.springframework.stereotype.Component;
 import com.kh.spaceus.host.model.service.HostService;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.space.model.service.SpaceService;
+import com.kh.spaceus.space.model.vo.Space;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j; 
@@ -46,8 +48,6 @@ public class Scheduler {
 		
 		System.out.println("출석데이터 삭제"); 
 		int result3 = memberService.deleteAttendance();
-		
-		
 	}
 
 	@Scheduled(cron ="0 0 0 * * *") 
@@ -63,7 +63,12 @@ public class Scheduler {
 		int result3 = memberService.deleteCoupon();
 		
 		System.out.println("정산내역 db 저장"); 
-		/* int result4 = hostService.insertSettlement(); */
+		List<String> list = hostService.selectReservationSpaceNo();
+		System.out.println(list);
+		for(String str : list) {
+			System.out.println(str);
+			 int result4 = hostService.insertSettlement(str); 
+		}
 	} 
 }
 
