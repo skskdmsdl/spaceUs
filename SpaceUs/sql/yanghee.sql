@@ -1092,7 +1092,7 @@ select * from member;
 select * from space where member_email='rhkim999@gmail.com';
 delete from space where space_no = 'space60';
 commit;
-update space set hourly_price='50000' where space_no = 'space2';
+
 
 select 
         S.space_no,
@@ -1127,10 +1127,31 @@ select
                       where rnum=1
             )SI
                 on S.space_no = SI.space_no
-		where S.status = 'O' and S.space_no= 'space61';
+		where S.status = 'O' and S.space_no= 'space22';
         
 --
--- 공간 대표사진 
-select * from space_image ;
-select space_no,renamed_filename from( select S.space_no,SI.renamed_filename,rank()over(partition by S.space_no order by SI.renamed_filename) as rnum from space S left join space_image SI on S.space_no = SI.space_no)
-where rnum = 1 and status = 'O';
+select category_name
+from category
+where category_name like '%강남%'
+union
+select tag_name
+from tag
+where tag_name like '%강남%'
+union
+select option_name 
+from option_list
+where option_name like '%강남%'
+union
+select REGEXP_SUBSTR(address,'[^ ]+',1,3) as address
+from space
+where address like '%강남%';
+
+-------------------------------------------
+-- 10/14
+-------------------------------------------
+select * from
+(SELECT rank()over(partition by space_no order by OPTION_NO) as rnum , space_no, option_name
+FROM (select * from space_option join option_List using(option_no)  where option_no IN('OPTION13', 'OPTION14')));
+WHERE rnum=2 ;
+
+select * from space_option;
