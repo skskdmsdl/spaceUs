@@ -94,7 +94,7 @@ public interface SpaceService {
 
 	List<SpaceList> selectSearchSpaceList(String searchSpace);
 
-	List<Map<String, Object>> selectSearchDetailSpace(Map<String, Object> map);
+	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
 	
 	/* List<Space> selectListSpaceCollection(String email); */
 

@@ -264,13 +264,10 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectSearchDetailSpace(Map<String, Object> map) {
-		return spaceDAO.selectSearchDetailSpace(map);
+	public List<String> selectSearchDetailSpaceNo(Map<String, String> map) {
+		return spaceDAO.selectSearchDetailSpaceNo(map);
 	}
 
-	
-	
-	
 	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {

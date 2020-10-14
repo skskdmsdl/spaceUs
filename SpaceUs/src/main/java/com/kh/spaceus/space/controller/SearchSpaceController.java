@@ -74,32 +74,46 @@ public class SearchSpaceController {
 		return mav;
 	}
 	
-	@GetMapping("/searchDetailSpace222.do")
-	@ResponseBody
-	public void searchDetailSpace(@ModelAttribute SearchDetailSpace param1) {
-		System.out.println(param1); 
-		
-		Map<String,Object> map = new HashMap<>();
-		map.put("category", param1.getCategory());
-		map.put("location", param1.getLocation());
-		map.put("optionArr", param1.getOption());
-		
-		System.out.println(map);
-		
-		List<Map<String,Object>> list = spaceSerive.selectSearchDetailSpace(map);
-		log.info("list= {}",list);
-	}
-	
 	@GetMapping("/searchDetailSpace.do")
 	public ModelAndView searchDetailSpace(ModelAndView mav, @RequestParam String category, @RequestParam String location, @RequestParam String option) {
-		log.info("category={}",category);
-		log.info("location={}",location);
-		log.info("option={}",option);
-		String keyword = category+" "+location+" "+option;
+		String keyword = location+" "+category+" "+option;
 		
+		Map<String,String> map = new HashMap<>();
+		map.put("category", category);
+		map.put("location", location);
+		map.put("option", option);
+		log.info("map={}",map);
+		
+		// category List
+		List<Category> categoryList = spaceSerive.selectCategoryList();
+		// option List
+		List<OptionList> optionList = spaceSerive.selectOptionList1();
+		//space_no 가져오기
+		List<String> spaceNo = spaceSerive.selectSearchDetailSpaceNo(map);
+		log.info("spaceNo={}",spaceNo);
+		
+		//space_no로 차례로 space 데이터 가져오기
+		List<SpaceList> space = null;
+		List<SpaceList> spaceList = new ArrayList<>();
+		
+		for(int i=0;i<spaceNo.size();i++) {
+			List<String> spaceNo1 = spaceNo.subList(i, i+1);
+			String spaceNo2 = spaceNo1.toString();
+			spaceNo2 = spaceNo2.replace("[", "");
+			spaceNo2 = spaceNo2.replace("]", "");
+			
+			space = spaceSerive.selectSearchSpaceList(spaceNo2);
+			spaceList.addAll(space);
+			System.out.println(spaceList);
+			
+		}
 		
 		mav.setViewName("space/searchSpace");
 		mav.addObject("keyword", keyword);
+		mav.addObject("categoryList", categoryList);
+		mav.addObject("optionList",optionList);
+		mav.addObject("spaceList",spaceList);
+
 		return mav;
 	}
 

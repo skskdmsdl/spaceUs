@@ -556,38 +556,33 @@
 	</select>
 	<resultMap type="spaceList" id="spaceListMap"></resultMap>
 	
-	<!-- search Detail로 space 가져오기 -->
-	<select id="selectSearchDetailSpace" resultType="string">
+	<!-- search Detail space_no가져오기 -->
+	<select id="selectSearchDetailSpaceNo" resultType="string">
 		select 
-			space_no		
+            space_no
 		from
 		    (
 		        SELECT rank()over(partition by space_no order by OPTION_NO) as rnum,
 		                E.* 
 		        FROM (
 		                select * 
-		                from space left join space_option using(space_no) left join option_List using(option_no)  
-		                <where>
-		                	<if test="optionArr != ''">
-		                		option_no IN
-		                		<foreach collection="optionArr" open="(" close=")" separator="," item="option">
-		                			#{option} 
-		                		</foreach>
-		                	</if>
-		                	<if test="category != ''">
-		                		and category_no = #{category} 
-		                	</if>
-		                	<if test="location != ''">
-		                		and address like '%'|| #{location} ||'%' 
-		                	</if>
-		                </where> 
+		                from space left join space_option using(space_no) 
+                                   left join option_List using(option_no)
+                                   left join category using(category_no)
+                        <where>
+                        	<if test="option != ''">
+		                		option_name = #{option} 
+                        	</if>
+                        	<if test="category != ''">
+                            and category_name = #{category}
+                        	</if>
+                        	<if test="address != ''">
+                            and address like '%'|| #{address} ||'%'  
+                        	</if>
+                        </where>
 		              ) E
 		     )
-		<where>
-			<if test="optionCnt != null">
-				rnum = #{optionCnt}
-			</if>		
-		</where> 
+		group by space_no
 	</select>
 	<!-- searchSpace 끝-->
 </mapper>

@@ -235,14 +235,15 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 	
 	@Override
-	public List<Map<String, Object>> selectSearchDetailSpace(Map<String, Object> map) {
-		return sqlSession.selectList("space.selectSearchDetailSpace", map);
-	}
-	
-	@Override
 	public Wish selectOneWish(Wish wish) {
 		return sqlSession.selectOne("space.selectOneWish", wish);
 	}
 
+	@Override
+	public List<String> selectSearchDetailSpaceNo(Map<String, String> map) {
+		return sqlSession.selectList("space.selectSearchDetailSpaceNo", map);
+	}
+
+	
 
 }
