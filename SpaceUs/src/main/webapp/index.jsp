@@ -310,58 +310,103 @@ $(document).on("click",".fa-2x",function(){
     <div id="popularList" class="row">
     	  <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
-    		<a href="" class="pop0"></a>
+    		<span class="pop0"></span>
     			<div class="text">
     				<p class="price"><span class="space-price price0"></span><small>원/시간</small></p>
     				<ul class="property_list">
-    					<li class="view0"><span class="icon-eye"></span></li>
+    					<li class="view0"><span class="icon-star"></span></li>
     					<li class="like0"><span class="icon-heart"></span></li>
-    					<li class="star0"><span class="icon-star"></span></li>
+    					<li class="star0"><span class="icon-comments"></span></li>
     				</ul>
     				<h3 class="title0"></h3>
     				<small><span class="icon-my_location location0"></span></small>
-    				<a class="d-flex align-items-center justify-content-center btn-custom button0">
-    				<span class="icon-heart"></span>
-    				</a>
+    	
     			</div>
     		</div>
     	</div>
     	  <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
-    		<a href="" class="pop1"></a>
+    		<span class="pop1"></span>
     			<div class="text">
     				<p class="price"><span class="space-price price1"></span><small>원/시간</small></p>
     				<ul class="property_list">
-    					<li class="view1"><span class="icon-eye"></span></li>
+    					<li class="view1"><span class="icon-star"></span></li>
     					<li class="like1"><span class="icon-heart"></span></li>
-    					<li class="star1"><span class="icon-star"></span></li>
+    					<li class="star1"><span class="icon-comments"></span></li>
     				</ul>
     				<h3 class="title1"></h3>
     				<small><span class="icon-my_location location1"></span></small>
-    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    				<span class="icon-heart"></span>
-    				</a>
+    
     			</div>
     		</div>
     	</div>
-    	 <!--  <div class="col-md-4">
+    	 <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
-    		<a href="" class="pop2"></a>
+    		<span class="pop2"></span>
     			<div class="text">
-    				<p class="price"><span class="space-price price0"></span><small>원/시간</small></p>
+    				<p class="price"><span class="space-price price2"></span><small>원/시간</small></p>
     				<ul class="property_list">
-    					<li class="view2"><span class="icon-eye"></span></li>
+    					<li class="view2"><span class="icon-star"></span></li>
     					<li class="like2"><span class="icon-heart"></span></li>
-    					<li class="star2"><span class="icon-star"></span></li>
+    					<li class="star2"><span class="icon-comments"></span></li>
     				</ul>
     				<h3 class="title2"></h3>
     				<small><span class="icon-my_location location2"></span></small>
+    				
+    			</div>
+    		</div>
+    	</div> 
+<!--     	 <div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    		<a href="" class="pop3"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price price3"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view3"><span class="icon-eye"></span></li>
+    					<li class="like3"><span class="icon-heart"></span></li>
+    					<li class="star3"><span class="icon-star"></span></li>
+    				</ul>
+    				<h3 class="title3"></h3>
+    				<small><span class="icon-my_location location3"></span></small>
+    			</div>
+    		</div>
+    	</div> 
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    		<a href="" class="pop4"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price price4"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view4"><span class="icon-eye"></span></li>
+    					<li class="like4"><span class="icon-heart"></span></li>
+    					<li class="star4"><span class="icon-star"></span></li>
+    				</ul>
+    				<h3 class="title4"></h3>
+    				<small><span class="icon-my_location location4"></span></small>
     				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
     				<span class="icon-heart"></span>
     				</a>
     			</div>
     		</div>
-    	</div> -->
+    	</div> 
+    	<div class="col-md-5">
+    		<div class="property-wrap ftco-animate">
+    		<a href="" class="pop5"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price price5"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view5"><span class="icon-eye"></span></li>
+    					<li class="like5"><span class="icon-heart"></span></li>
+    					<li class="star5"><span class="icon-star"></span></li>
+    				</ul>
+    				<h3 class="title5"></h3>
+    				<small><span class="icon-my_location location5"></span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>  -->
     	
 			<!-- 인기공간 리스트 -->
     </div>
@@ -496,12 +541,14 @@ function popular(){
 		success : function(data){
 			console.log(data.list);
 			 $.each(data.list, function(i, list){
-
-				$(".pop"+i).append("<a href=''></a>").addClass('img').css("background-image", "url(${pageContext.request.contextPath }/resources/upload/space/"+list.attach+")")
+				$(".pop"+i).before("<a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+list.spaceNo+"'>");
+				//$("link_"+i).append("<a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+list.spaceNo+"'>");
+				$(".pop"+i).addClass('img').css("background-image", "url(${pageContext.request.contextPath }/resources/upload/space/"+list.renamedFilename+")")
+				$(".pop"+i).after("</a>");
 				$(".price"+i).append(list.hourlyPrice);
-				$(".view"+i).append(list.views);
+				$(".view"+i).append(Math.round(list.starAvg * 10)/10);
 				$(".like"+i).append(list.likeCnt);
-				$(".star"+i).append(Math.round(list.starAvg * 10)/10);
+				$(".star"+i).append(list.reviewCnt);
 				$(".title"+i).append("<a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+list.spaceNo+"'>"+list.spaceName+"</a>");
 				$(".location"+i).append(list.address);
 				

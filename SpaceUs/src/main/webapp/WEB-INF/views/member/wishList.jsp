@@ -119,7 +119,7 @@ span > a:hover{
 							        
 							        <ul class="space_list">
 								        <li><i class="icon-won badge badge-secondary"><fmt:formatNumber value="${wish.hourlyPrice }" type="number"/><small>원/시간</small></i><li>
-					    					<li><span class="icon-star"></span><fmt:formatNumber value="${wish.starAvg }" pattern=".00"/></li>
+					    					<li><span class="icon-star"></span><fmt:formatNumber value="${wish.starAvg }" pattern=".0" type="number"/></li>
 					    					<li><span class="icon-heart"></span>${wish.likeCnt }</li>
 					    					<li><span class="icon-comments"></span>${wish.reviewCnt }</li>
 		    							</ul>

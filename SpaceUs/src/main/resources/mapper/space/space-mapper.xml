@@ -296,7 +296,7 @@ select
 		          S.views,
 		          S.like_cnt,
 		          S.star_avg,
-		          <!-- nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as review_cnt, -->
+		          (select count(*) from review where space_no=S.space_no) as review_cnt,
 		          D.renamed_filename	
 			from
 				space S join (SELECT * FROM space_image S
@@ -482,9 +482,17 @@ select
 	</select>
 	
 	
-	<select id="selectPopularSpaces" resultMap="spaceMap">
+	<select id="selectPopularSpaces" resultMap="spaceListMap">
 		select
-			*
+			S.space_no,
+            S.category_no,
+            S.space_name,
+            REGEXP_SUBSTR(S.address,'[^ ]+',1,3) as address,
+            S.HOURLY_PRICE,
+            S.STAR_AVG,
+            S.LIKE_CNT,
+            S.STATUS,
+            (select count(*) from review where space_no=S.space_no) as review_cnt
 		from(		
 			select rownum, D.* from
 				(select 
@@ -492,15 +500,15 @@ select
 				from
 				    reservation
 				where
-				<![CDATA[ 
+				<![CDATA[
 				   to_char(rev_date, 'yyyy/mm/dd') <= to_char(sysdate, 'yyyy/mm/dd') and
 				     to_char(rev_date, 'yyyy/mm/dd') > to_char(sysdate-14, 'yyyy/mm/dd') 
-				     ]]> 
+				]]>
 				group by space_no
 				order by cnt desc ) D
 				where rownum between 1 and 6
-				) R join space on space.space_no= R.space_no
-		 where space.status='O'
+				) R join space S on S.space_no= R.space_no
+		 where S.status='O'
 		
 	</select>
 		
