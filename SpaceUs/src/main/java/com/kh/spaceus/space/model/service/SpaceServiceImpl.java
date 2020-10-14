@@ -225,7 +225,7 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 	
 	@Override
-	public List<Space> selectPopularSpaces() {
+	public List<SpaceList> selectPopularSpaces() {
 		return spaceDAO.selectPopularSpaces();
 	}
 	
