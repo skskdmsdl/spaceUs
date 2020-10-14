@@ -81,7 +81,7 @@ public interface SpaceService {
 
 	List<OptionList> selectOptionList(String spaceNo);
 	
-	List<Space> selectPopularSpaces();
+	List<SpaceList> selectPopularSpaces();
 
 	List<Object> selectAutoList(String value);
 
