@@ -65,7 +65,9 @@ p#qna-content > a:hover{
                     		 </div>
                           <!-- 질문글 시작 -->
                           <div class="qna-container">
-                         <c:if test="${ not empty list }">
+                          <c:choose>
+				          <c:when test="${ not empty list }">
+                         <%-- <c:if test="${ not empty list }"> --%>
 						<c:forEach items="${ list }" var="qna" varStatus="vs">
 				          <div class="col-md-10 d-flex">
 				          	<div class="blog-entry justify-content-end">
@@ -95,7 +97,13 @@ p#qna-content > a:hover{
 				          </div>
 				        <!-- 질문글 끝 -->
 				        </c:forEach>
-                    	</c:if> 
+                    	</c:when>
+                    	<c:otherwise>
+                    		<div style="text-align: center; width: 90%; padding:20px;">
+									<span class="icon-folder" style="letter-spacing:1px;">등록된 질문글이 없습니다.</span>
+								</div>
+                    	</c:otherwise>
+                    	</c:choose>
 				         </div>
 				        </div>
 	                   </div>
@@ -148,10 +156,11 @@ function unreplied(){
 		},
 		dataType: "json",
 		success: function(data){
-			 console.log(data);
+			 //console.log(data);
 			 console.log($("#check-unreplied").attr('class'));
 			 
 			 if($("#check-unreplied").attr('class')=="fa fa-check") {
+				 //button 안의 i class 속성
 				//눌려진 상태라면 추가된 class 속성을 제거한다.
 				//css변경
 					$("#check-unreplied").removeClass("fa fa-check");
@@ -160,20 +169,20 @@ function unreplied(){
 					
 			 }else{
 				 $("div.qna-container").empty();
+					 //미답변 질문글 버튼이 눌려진 상태가 아닌 경우 class 속성 추가
+					 //css변경 
+					 $("#check-unreplied").addClass("fa fa-check");
+					 $("#show-unreplied").css('background-color','#20c997');
 			 
 				 $.each(data, function(i, item){
 				 
 					 var html="";
 	
-					 //미답변 질문글 버튼이 눌려진 상태가 아닌 경우 class 속성 추가
-					 //css변경 
-					 $("#check-unreplied").addClass("fa fa-check");
-					 $("#show-unreplied").css('background-color','#20c997');
 						 
-					 if(data!=null){
+					 if(data!=null && data!=undefined){
 						 var date = new Date(item.date);
 						 /**
-						  *  yyyy년 MM 월 dd일 hh:mm 포맷으로 반환
+						  *  yyyy년 MM 월 dd일 포맷으로 반환
 						  */
 						 function getFormatDate(date){
 						     var year = date.getFullYear();              //yyyy
@@ -181,11 +190,11 @@ function unreplied(){
 						     month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
 						     var day = date.getDate();                   //d
 						     day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-							 var hh = date.getHours();
-							 hh = hh>=10 ? hh : '0' + hh;
-							 var mm = date.getMinutes();	
+							 //var hh = date.getHours();
+							 //hh = hh>=10 ? hh : '0' + hh;
+							 //var mm = date.getMinutes();	
 								
-						     return ' '+year + '년 ' + month + '월 ' + day + '일 ' + hh + ':' + mm;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+						     return ' '+year + '년 ' + month + '월 ' + day + '일 ';       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
 						 }
 						 
 						 html += "<div class=\"qna-container_\">";
@@ -210,7 +219,11 @@ function unreplied(){
 				    
 	                html += "</div></div></div></div></div>";
 					 } else {
-						html += "답변을 기다리는 최근 질문이 없습니다.";										
+						html += "<div class=\"qna-container_\">";
+						 html+= "답변을 기다리는 질문글이 없습니다.";
+						//html += "<div style='text-align: center; width: 90%; padding:20px;'><span class='icon-folder' style='letter-spacing:1px;'>답변을 기다리는 질문글이 없습니다.</span></div>";										
+						html += "</div>";
+						
 						 }
 					console.log(html);
 		            $(".qna-container").append(html);                    

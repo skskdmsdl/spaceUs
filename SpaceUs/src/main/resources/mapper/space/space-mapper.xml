@@ -259,8 +259,35 @@
 		order by R.review_date desc
 	</select>
 	
-	<select id="selectSameCategory" resultMap="spaceMap">
-			select *	
+	<select id="selectSameCategory" resultMap="spaceListMap">
+select rownum, JJ.* from(
+select
+          S.space_no,
+          S.space_name, 
+          REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
+          S.hourly_price,
+          S.views,
+          S.like_cnt,
+          S.star_avg,
+          nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as review_cnt,
+            SI.renamed_filename
+      from 
+          space S join(
+                select space_no,renamed_filename 
+                from( select 
+                        S.space_no,
+                        SI.renamed_filename,
+                        rank()over(partition by S.space_no order by SI.renamed_filename) as rnum 
+                      from space S left join space_image SI 
+                                    on S.space_no = SI.space_no)
+                      where rnum=1
+            )SI
+                on S.space_no = SI.space_no
+      where S.status = 'O' and S.category_no=#{categoryNo} and S.space_no!=#{spaceNo}
+      order by s.like_cnt desc) JJ
+      where rownum between 1 and 6
+	
+<!-- 			select *	
 			from
 				space A join (SELECT * FROM space_image S
                     WHERE S.ROWID IN (SELECT MAX(ROWID)
@@ -270,7 +297,7 @@
 				A.category_no=#{categoryNo} and A.space_no!=#{spaceNo}
                 and A.status='O'
             order by
-				A.like_cnt asc
+				A.like_cnt asc -->
 	</select>
 	
 	<select id="selectCateName" resultType="string">
@@ -491,6 +518,10 @@
 		select option_name 
 		from option_list
 		where option_name like'%'|| #{value} ||'%'
+		union
+		select REGEXP_SUBSTR(address,'[^ ]+',1,3) as address
+		from space
+		where address like '%'|| #{value} ||'%'
 	</select>
 	
 	<!-- search Space -->

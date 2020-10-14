@@ -133,7 +133,7 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public List<Space> selectSameCategory(Space space) {
+	public List<SpaceList> selectSameCategory(Space space) {
 		return sqlSession.selectList("space.selectSameCategory", space);
 	}
 

@@ -35,6 +35,7 @@ import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceList;
 import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
@@ -178,7 +179,7 @@ public class SpaceController {
 		System.out.println("spaceNo="+ spaceNo);
 
 		// 같은 카테고리 공간 리스트(최대 3개)
-		List<Space> spcList = spaceService.selectSameCategory(space);
+		List<SpaceList> spcList = spaceService.selectSameCategory(space);
 		log.debug("같은 카테고리 공간 리스트={}",spcList);
 
 		// 추천 공간 카테고리명
@@ -241,8 +242,8 @@ public class SpaceController {
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
 		System.out.println("spaceNo="+ spaceNo);
 
-		// 같은 카테고리 공간 리스트(최대 3개)
-		List<Space> spcList = spaceService.selectSameCategory(space);
+		// 같은 카테고리 공간 리스트(최대 6개)
+		List<SpaceList> spcList = spaceService.selectSameCategory(space);
 		log.debug("같은 카테고리 공간 리스트={}",spcList);
 
 		// 추천 공간 카테고리명
