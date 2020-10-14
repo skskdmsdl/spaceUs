@@ -388,6 +388,8 @@ $(document).on("click",".fa-2x",function(){
     				</a>
     			</div>
     		</div>
+    	</div>
+    	 
     	</div> 
     	<div class="col-md-5">
     		<div class="property-wrap ftco-animate">
@@ -484,12 +486,11 @@ function review(){
 						
 				     return ' '+year + '년 ' + month + '월 ' + day + '일 ';       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
 				 }
-				
-				
+				/* html += for(var i=0; i<${item.starRating}; i++){+"<span class=\"icon-star\"></span>"+}; */
 				html  +=  "<div class=\"col-md-3 d-flex\">";
 	          	html  += "<div class=\"blog-entry justify-content-end\">";
           	    html  += "<div class=\"text\">";
-	          	html  += "<h3 class=\"headig mb-2 text-center\"><a style=\"color :#343a40;\" class=\"font-bold\" href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h3>";
+	          	html  += "<h4 class=\"headig mb-2 text-center\"><a style=\"color :#343a40;\" class=\"font-bold\" href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h4>";
           		html  += "<img class=\"lock-20 mt-2 img\" style=\"width:100%; height:200px;\" src=\'${pageContext.request.contextPath}/resources/upload/review/"+item.image+"\'>";
 	          	html  += "<div class=\"meta mt-1 mb-1\">";
 	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+getFormatDate(date)+"</a></div>";
@@ -498,7 +499,7 @@ function review(){
           		html  += "</div>";
           		html += "<p style=\"margin-top:10px; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; -webkit-line-clamp: 3; display: -webkit-box;\"  >"+item.content+"</p>";
           		html  += "</div></div></div>";
-				console.log(html);
+				/* console.log(html); */
 				$("#review-wrapper").append(html);
 			}); 
 		},error:function(){
