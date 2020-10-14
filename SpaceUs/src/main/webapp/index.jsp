@@ -567,14 +567,14 @@ function review(){
 				html  +=  "<div class=\"col-md-3 d-flex\">";
 	          	html  += "<div class=\"blog-entry justify-content-end\">";
           	    html  += "<div class=\"text\">";
-	          	html  += "<h3 class=\"headig\"><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h3>";
-	          	html  += "<div class=\"meta mb-3\">";
+	          	html  += "<h3 class=\"headig mb-2 text-center\"><a style=\"color :black;\" class=\"font-bold\" href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h3>";
+          		html  += "<img class=\"lock-20 mt-2 img\" style=\"width:100%; height:200px;\" src=\'${pageContext.request.contextPath}/resources/upload/review/"+item.image+"\'>";
+	          	html  += "<div class=\"meta mt-1 mb-1\">";
 	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+getFormatDate(date)+"</a></div>";
 	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.nickName+"</a></div>";
 	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\" class=\"meta-chat\"><span class=\"icon-star\"></span>"+item.starRating+"</a></div>";
           		html  += "</div>";
-          		html += "<p>"+item.content+"</p>";
-          		html  += "<img class=\"lock-20 img\" src=\'${pageContext.request.contextPath}/resources/upload/review/"+item.image+"\'>";
+          		html += "<p style=\"margin-top:10px; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; -webkit-line-clamp: 3; display: -webkit-box;\"  >"+item.content+"</p>";
           		html  += "</div></div></div>";
 				console.log(html);
 				$("#review-wrapper").append(html);
@@ -615,9 +615,8 @@ function popular(){
 				$(".price"+i).append(list.hourlyPrice);
 				$(".view"+i).append(list.views);
 				$(".like"+i).append(list.likeCnt);
-				$(".star"+i).append(list.starAvg);
+				$(".star"+i).append(Math.round(list.starAvg * 10)/10);
 				$(".title"+i).append("<a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+list.spaceNo+"'>"+list.spaceName+"</a>");
-				$(".star"+i).append(list.starAvg);
 				$(".location"+i).append(list.address);
 				
 			 });
