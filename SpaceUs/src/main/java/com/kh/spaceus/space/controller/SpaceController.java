@@ -290,7 +290,7 @@ public class SpaceController {
 		model.addAttribute("pageBar", pageBar);
 		
 		model.addAttribute("optionList",optionList);
-		model.addAttribute("true", 1);
+		model.addAttribute("bool", 1);
 		
 		
 		return "space/spaceDetail";
@@ -396,31 +396,22 @@ public class SpaceController {
 		return mav;
 	}
 	
-	//인덱스 페이지 인기공간리스트
-	/*@RequestMapping(value = "/popular.do", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Space> selectPopularSpaces(){
-		List<Space> popularList = spaceService.selectPopularSpaces();
-		log.debug("리뷰목록={}"+popularList);
-		return popularList;
-	}*/
-		
-	
 	//인덱스 페이지
 	@GetMapping("/selectPopularSpaces.do")
 	public ModelAndView selectPopularSpaces(ModelAndView mav) {
 
 		List<Space> popularList = spaceService.selectPopularSpaces();
-		List<Attachment> imageList = new ArrayList<>();
+		/* List<Attachment> imageList = new ArrayList<>(); */
+		List<Space> list = new ArrayList<>();
 		for(Space s : popularList) {
-			System.out.println("@@@@@@@@@@@@"+s.getSpaceNo());
 			Attachment att = spaceService.selectPopularImage(s.getSpaceNo());
-			imageList.add(att);
+			s.setAddress(s.getAddress().substring(0, s.getAddress().indexOf(" ")));
+			s.setAttach(att.getRName());
+			list.add(s);
 		}
 		
 		
-		mav.addObject("popularList", popularList);
-		mav.addObject("imageList", imageList);
+		mav.addObject("list", list);
 		mav.setViewName("jsonView");
 
 		return mav;

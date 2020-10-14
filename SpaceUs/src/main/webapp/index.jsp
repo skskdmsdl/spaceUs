@@ -307,26 +307,62 @@ $(document).on("click",".fa-2x",function(){
         <h2 class="mb-2">인기 공간</h2>
       </div>
     </div>
-    <div class="row">
+    <div id="popularList" class="row">
     	  <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
-    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    		<a href="" class="pop0"></a>
     			<div class="text">
-    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
+    				<p class="price"><span class="space-price price0"></span><small>원/시간</small></p>
     				<ul class="property_list">
-    					<li><span class="icon-people"></span>최대3인</li>
-    					<li><span class="icon-heart"></span>55</li>
-    					<li><span class="icon-comments"></span>29</li>
+    					<li class="view0"><span class="icon-eye"></span></li>
+    					<li class="like0"><span class="icon-heart"></span></li>
+    					<li class="star0"><span class="icon-star"></span></li>
     				</ul>
-    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=space2">The Blue Sky Home</a></h3>
-    				<small><span class="icon-my_location">문발리</span></small>
+    				<h3 class="title0"></h3>
+    				<small><span class="icon-my_location location0"></span></small>
+    				<a class="d-flex align-items-center justify-content-center btn-custom button0">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	  <div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    		<a href="" class="pop1"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price price1"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view1"><span class="icon-eye"></span></li>
+    					<li class="like1"><span class="icon-heart"></span></li>
+    					<li class="star1"><span class="icon-star"></span></li>
+    				</ul>
+    				<h3 class="title1"></h3>
+    				<small><span class="icon-my_location location1"></span></small>
     				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
     				<span class="icon-heart"></span>
     				</a>
     			</div>
     		</div>
     	</div>
-    	<div class='col-md-4'><div class='property-wrap ftco-animate'><a href='' class='img' style='background-image: url(/spaceus/resources/images/work-1.jpg);'></a><div class='text'><p class='price'><span class='space-price'>25000<small>원/시간</small></span></p><ul class='property_list'><li><span class='icon-eye'></span>0</li><li><span class='icon-heart'></span>0</li><li><span class='icon-star'></span>0</li></ul><h3><a href='/spaceus/space/spaceDetail.do?spaceNo=space26'>노르웨이숲</a></h3><small><span class='icon-my_location'>경기도 수원시 영통구</span></small><a href='#' class='d-flex align-items-center justify-content-center btn-custom'><span class='icon-heart'></span></a></div></div></div>
+    	 <!--  <div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    		<a href="" class="pop2"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price price0"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view2"><span class="icon-eye"></span></li>
+    					<li class="like2"><span class="icon-heart"></span></li>
+    					<li class="star2"><span class="icon-star"></span></li>
+    				</ul>
+    				<h3 class="title2"></h3>
+    				<small><span class="icon-my_location location2"></span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div> -->
+    	
 			<!-- 인기공간 리스트 -->
     </div>
 	</div>
@@ -368,54 +404,11 @@ $(document).on("click",".fa-2x",function(){
 <!-- 이용자리뷰 끝-->
 <script>
 $(function () { 
-	popular();
-});
-
-/* function popular(){
-	console.log("인기공간function 실행");
-	$.ajax({
-		type:"GET",
-		url:"${pageContext.request.contextPath}/space/popular.do",
-		dataType:"json",
-		success:function(data){
-			console.log("ajax 요청 성공!");
-			console.log(data);
-			 $.each(data, function(i, item){
-				var html="";
-
-			    html+= "<div class='col-md-4'>";
-		    	html+= "<div class='property-wrap ftco-animate'>";
- 		    	html+= "<a href='' class='img' style='background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);'></a>";
-		    	html+= "<div class='text'>";
-		    	html+= "<p class='price'><span class='space-price'>"+item.hourlyPrice+"<small>원/시간</small></span></p>";
-		    	html+= "<ul class='property_list'>";
-		    	html+= "<li><span class='icon-eye'></span>"+item.views+"</li>";
-		    	html+= "<li><span class='icon-heart'></span>"+item.likeCnt+"</li>";
-		    	html+= "<li><span class='icon-star'></span>"+item.starAvg+"</li>";
-		    	html+= "</ul>";
-		    	html+= "<h3><a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"'>"+item.spaceName+"</a></h3>"; 
-		    	html+= "<small><span class='icon-my_location'>"+item.address+"</span></small>";
-		    	//html+= "<a href='#' class='d-flex align-items-center justify-content-center btn-custom'>"; 
-		    	//html+= "<span class='icon-heart'></span></a>";
-		    	html+= "</div></div></div>";
-				
-				console.log(html);
-				$("#popular").append(html);
-			}); 
-		},error:function(){
-			console.log("ajax 요청 실패");
-			}
-		}); */
-	//AJAX요청끝
-};
-//인기공간리스트 끝
-
-$(function () { 
 	memberId();
 });
 $(function () { 
 	popular();
-});
+}); 
 //이용자 리뷰 ajax 요청
 $(function () { 
 	review();
@@ -494,13 +487,25 @@ function popular(){
 		url : "${ pageContext.request.contextPath }/space/selectPopularSpaces.do",
 		dataType : "json",
 		success : function(data){
-			console.log("@@@@성공!!@@@@");
+			console.log(data.list);
+			 $.each(data.list, function(i, list){
+
+				$(".pop"+i).append("<a href=''></a>").addClass('img').css("background-image", "url(${pageContext.request.contextPath }/resources/upload/space/"+list.attach+")")
+				$(".price"+i).append(list.hourlyPrice);
+				$(".view"+i).append(list.views);
+				$(".like"+i).append(list.likeCnt);
+				$(".star"+i).append(list.starAvg);
+				$(".title"+i).append("<a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+list.spaceNo+"'>"+list.spaceName+"</a>");
+				$(".star"+i).append(list.starAvg);
+				$(".location"+i).append(list.address);
+				
+			 });
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
 		}
 	}); 
-};
+}; 
 
 </script>
 <!-- 컨텐츠 끝 -->
