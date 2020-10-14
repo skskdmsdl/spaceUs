@@ -58,7 +58,7 @@ public interface SpaceDAO {
 
 	int insertWish(Wish wish);
 
-	List<Space> selectSameCategory(Space space);
+	List<SpaceList> selectSameCategory(Space space);
 
 	int selectLikeCnt(String spaceNo);
 

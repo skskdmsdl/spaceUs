@@ -554,7 +554,7 @@ function review(){
 				
 				 var date = new Date(item.enrollDate);
 				 /**
-				  *  yyyy년 MM 월 dd일 hh:mm 포맷으로 반환
+				  *  yyyy년 MM 월 dd일 포맷으로 반환
 				  */
 				 function getFormatDate(date){
 				     var year = date.getFullYear();              //yyyy
@@ -562,11 +562,9 @@ function review(){
 				     month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
 				     var day = date.getDate();                   //d
 				     day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-					 var hh = date.getHours();
-					 hh = hh>=10 ? hh : '0' + hh;
-					 var mm = date.getMinutes();	
+					 	
 						
-				     return ' '+year + '년 ' + month + '월 ' + day + '일 ' + hh + ':' + mm;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+				     return ' '+year + '년 ' + month + '월 ' + day + '일 ';       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
 				 }
 				
 				
