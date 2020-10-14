@@ -234,7 +234,7 @@
 		          S.content,
 		          S.like_cnt,
 		          S.star_avg,
-		          nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as review_cnt,
+		         <!--  nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as review_cnt, -->
 		            SI.renamed_filename
 		      from 
 		          space S join(

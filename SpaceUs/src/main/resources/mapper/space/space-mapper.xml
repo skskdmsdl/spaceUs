@@ -260,7 +260,7 @@
 	</select>
 	
 	<select id="selectSameCategory" resultMap="spaceListMap">
-select rownum, JJ.* from(
+<!-- select rownum, JJ.* from(
 select
           S.space_no,
           S.space_name, 
@@ -285,19 +285,30 @@ select
                 on S.space_no = SI.space_no
       where S.status = 'O' and S.category_no=#{categoryNo} and S.space_no!=#{spaceNo}
       order by s.like_cnt desc) JJ
-      where rownum between 1 and 6
+      where rownum between 1 and 6 -->
 	
-<!-- 			select *	
+ 			select rownum, C.* from(
+            select 
+ 				  S.space_no,
+		          S.space_name, 
+		          REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
+		          S.hourly_price,
+		          S.views,
+		          S.like_cnt,
+		          S.star_avg,
+		          <!-- nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as review_cnt, -->
+		          D.renamed_filename	
 			from
-				space A join (SELECT * FROM space_image S
+				space S join (SELECT * FROM space_image S
                     WHERE S.ROWID IN (SELECT MAX(ROWID)
                     FROM space_image
-                    GROUP BY space_no)) D on A.space_no=D.space_no
+                    GROUP BY space_no)) D on S.space_no=D.space_no
 			where 
-				A.category_no=#{categoryNo} and A.space_no!=#{spaceNo}
-                and A.status='O'
+				S.category_no=#{categoryNo} and S.space_no!=#{spaceNo}
+                and S.status='O'
             order by
-				A.like_cnt asc -->
+				S.like_cnt asc) C
+                where rownum between 1 and 6
 	</select>
 	
 	<select id="selectCateName" resultType="string">
@@ -487,7 +498,7 @@ select
 				     ]]> 
 				group by space_no
 				order by cnt desc ) D
-				where rownum between 1 and 3
+				where rownum between 1 and 6
 				) R join space on space.space_no= R.space_no
 		 where space.status='O'
 		
