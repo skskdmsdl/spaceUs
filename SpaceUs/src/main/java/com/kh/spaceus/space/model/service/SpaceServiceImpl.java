@@ -1,6 +1,7 @@
 package com.kh.spaceus.space.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -250,6 +251,8 @@ public class SpaceServiceImpl implements SpaceService{
 		return spaceDAO.selectSpaceNoList(keyword);
 	}
 	
+	
+
 	@Override
 	public Wish selectOneWish(Wish wish) {
 		return spaceDAO.selectOneWish(wish);
@@ -261,12 +264,15 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
+	public List<String> selectSearchDetailSpaceNo(Map<String, String> map) {
+		return spaceDAO.selectSearchDetailSpaceNo(map);
+	}
+	
+	@Override
 	public Attachment selectPopularImage(String spaceNo) {
 		return spaceDAO.selectPopularImage(spaceNo);
 	}
 
-	
-	
 	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {

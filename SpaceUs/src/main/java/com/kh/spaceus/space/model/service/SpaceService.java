@@ -1,6 +1,7 @@
 package com.kh.spaceus.space.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Attachment;
@@ -98,6 +99,8 @@ public interface SpaceService {
 	Attachment selectPopularImage(String spaceNo);
 
 	List<SpaceList> selectSearchSpaceList(String searchSpace);
+
+	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
 	
 	/* List<Space> selectListSpaceCollection(String email); */
 

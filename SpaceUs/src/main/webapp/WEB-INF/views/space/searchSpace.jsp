@@ -213,34 +213,18 @@ function searchSpace(){
 	else{
 		location.href='${pageContext.request.contextPath}/space/searchSpace.do?keyword='+keyword;
 	}
+
 }
 
 function searchDetailSpace(){
-	
-	/* var category = $("select[name=space_type]").val();
-	alert(category);
+
+	var category = $("select[name=space_type]").val();
 	var location = $("select[name=space_location]").val();
-	alert(location);
-	var date = $("[name=space_date]").val();
-	alert(date); */
-	
-	/* var option = $('input[name="checkbox_name"]:checked').val();
-	alert(option); */
+	var option = $("select[name=space_option]").val();
 
-	var checkBoxArr = [];
-
-	$('input[name="checkbox_name"]:checked').each(function(i){
-
-	checkBoxArr.push($(this).val());
-
-	});
-
-	alert(checkBoxArr);
-
-
-
-	//location.href='${pageContext.request.contextPath}/space/searchSpace.do?category='+category+'&location='+location+'&date='+date;
+	window.location.href="${pageContext.request.contextPath}/space/searchDetailSpace.do?category="+category+"&location="+location+"&option="+option;
 }
+
 
 </script>
 
@@ -290,20 +274,20 @@ function searchDetailSpace(){
 			<div class="flex-wrap">
 				<div class="search-category">공간유형</div>
 				<div class="search-category">지역</div>
-				<div class="search-category">날짜</div>
+				<div class="search-category">옵션</div>
 				<form id="filter-search" class="filter-form">
 					<!-- 카테고리 선택 시작 -->
 					<select name="space_type" id="space_type" class="nice-select sm-width">
-						<option value="all_category">모든유형</option>
+						<option value="">모든유형</option>
 						<c:forEach items="${categoryList}" var="category">
-							<option value="${category.categoryNo}">${category.categoryName}</option>
+							<option value="${category.categoryName}">${category.categoryName}</option>
 						</c:forEach>
 					</select>
 					<!-- 카테고리 선택 끝-->
 					
 					<!-- 지역 선택 시작 -->
 					<select name="space_location" id="space_location" class="nice-select sm-width">		
-						<option value="all_location">모든지역</option>
+						<option value="">모든 지역</option>
 						<option value="서울">서울특별시</option>
 						<option value="인천">인천광역시</option>
 						<option value="경기">경기도</option>
@@ -311,48 +295,21 @@ function searchDetailSpace(){
 					</select>
 					<!-- 지역 선택 끝-->
 					
-					<!-- 날짜 선택 시작 -->
-					<input type="date" name="space_date" id="space_date" class="nice-select sm-width"/>
-					<!-- 날짜 선택 끝 -->
+					<!-- 옵션 선택 시작 -->
+					<select name="space_option" id="space_option" class="nice-select sm-width">		
+						<option value="">모든 옵션</option>
+						<c:forEach items="${optionList}" var="option">
+							<option value="${option.optionName}">${option.optionName}</option>
+						</c:forEach>
+					</select>
+					<!-- 옵션 선택 끝 -->
 				</form>				
 				<div class="container">
-					<button type="submit" class="search-btn" onclick="searchDetailSpace();">검색</button>
+					<!-- <button type="submit" class="search-btn search-detail" onclick="searchDetailSpace();">검색</button> -->
+					<input type="submit" value="검색" onclick="searchDetailSpace();" class="search-btn search-detail" />
 				</div>
 			</div>
 	</div>
-	
-	<!-- 더많은 옵션 시작-->   
-	<div class="more-option">
-		<div class="accordion" id="accordionExample">
-			<div class="card">
-				<div class="card-heading-active" id="btn-wrap">
-					<a class="icon-arrow_drop_down_circle" data-toggle="collapse" data-target="#collapseOne">
-						<b>더 많은 옵션</b>
-					</a>
-					<br />
-				</div>  
-					
-				<div id="collapseOne" class="collapse" style="margin:auto 0;">
-					<div class="card-body">
-						<span><b>편의시설</b>을 선택하세요.</span>
-						<hr />
-						<div class="mo-list">
-							<c:forEach items="${optionList}" var="option">
-							<div class="ml-column">
-								<label for="${option.optionNO}">${option.optionName}
-									<input type="checkbox" id="${option.optionNO}" name="checkbox_name" value="${option.optionNO}">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							</c:forEach>
-						</div>
-					</div>
-				</div> 
-				
-			</div>
-		</div>
-	</div>
-	<!-- 더많은 옵션 끝 -->    
 </div>
 <!-- 옵션/카테고리/지역 선택 끝 -->
 
