@@ -1149,9 +1149,102 @@ where address like '%강남%';
 -------------------------------------------
 -- 10/14
 -------------------------------------------
-select * from
-(SELECT rank()over(partition by space_no order by OPTION_NO) as rnum , space_no, option_name
-FROM (select * from space_option join option_List using(option_no)  where option_no IN('OPTION13', 'OPTION14')));
-WHERE rnum=2 ;
+select * from reservation_avail;
+select * 
+from
+    (
+        SELECT 
+                *
+        FROM (
+                select * 
+                from space left join space_option using(space_no) left join option_List using(option_no)
+                where category_no = 'cate3' and option_no = 'OPTION14' and address like '%서울%'
+              ) E
+     );
 
-select * from space_option;
+select * from space; where space_no = 'space101';
+select * from category;
+-----------
+-- 여기서 서치 디테일을 where절에 해야한다
+select
+		    S.space_no,
+		    S.space_name, 
+		    REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
+		    S.hourly_price,
+		    S.views,
+		    S.like_cnt,
+		    S.star_avg,
+		    nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as review_cnt,
+            SI.renamed_filename
+		from 
+		    space S join(
+                select space_no,renamed_filename 
+                from( select 
+                        S.space_no,
+                        SI.renamed_filename,
+                        rank()over(partition by S.space_no order by SI.renamed_filename) as rnum 
+                      from space S left join space_image SI 
+                                    on S.space_no = SI.space_no)
+                      where rnum=1
+            )SI
+                on S.space_no = SI.space_no
+		where S.status = 'O' and S.space_no= 'space22';
+        
+--아니면 저런 값들이 가지고 있는 spaceNo을 먼저 가져오는 게 낫겠지?
+--{date=, optionArr=OPTION3,OPTION7, location=all_location, category=cate6}
+select 
+    *
+from 
+    space left join space_option
+            using(space_no);
+            
+-------
+select
+		    S.space_no,
+		    S.space_name, 
+		    REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
+		    S.hourly_price,
+		    S.views,
+		    S.like_cnt,
+		    S.star_avg,
+--		    nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as review_cnt,
+            SI.renamed_filename
+		from 
+		    space S join(
+                select space_no,renamed_filename 
+                from( select 
+                        S.space_no,
+                        SI.renamed_filename,
+                        rank()over(partition by S.space_no order by SI.renamed_filename) as rnum 
+                      from space S left join space_image SI 
+                                    on S.space_no = SI.space_no)
+                      where rnum=1
+            )SI
+                on S.space_no = SI.space_no
+		where S.status = 'O' and S.space_no= 'space2';
+        
+        
+ nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as review_cnt,
+ 
+select 
+    rank()over(partition by space_no order by reviews) as rnum
+from( 
+    select count(*)over(partition by space_no) as reviews,space_no, rownum
+    from review
+    );
+
+-- 리뷰수 space_no에 1개씩
+select reviews,space_no
+from(
+    select
+        ROW_NUMBER() OVER(partition by space_no ORDER BY space_no,reviews) row_num,
+        space_no,
+        reviews
+    from(    
+        select count(*)over(partition by space_no) as reviews,
+                space_no 
+        from review
+        )
+    )
+where row_num =1 and space_no='space2';
+ 

@@ -74,21 +74,33 @@ public class SearchSpaceController {
 		return mav;
 	}
 	
-	@GetMapping("/searchDetailSpace.do")
+	@GetMapping("/searchDetailSpace222.do")
 	@ResponseBody
 	public void searchDetailSpace(@ModelAttribute SearchDetailSpace param1) {
-		System.out.println(param1); //SearchDetailSpace(category=cate6, location=all_location, date=, optionArr=OPTION3,OPTION7)
+		System.out.println(param1); 
 		
-		Map<String,String> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("category", param1.getCategory());
 		map.put("location", param1.getLocation());
-		map.put("date", param1.getDate());
-		map.put("optionArr", param1.getOptionArr());
+		map.put("optionArr", param1.getOption());
 		
-		System.out.println(map);//{date=, optionArr=OPTION3,OPTION7, location=all_location, category=cate6}
+		System.out.println(map);
 		
-		List<Map<String,String>> list = spaceSerive.selectSearchDetailSpace(map);
+		List<Map<String,Object>> list = spaceSerive.selectSearchDetailSpace(map);
+		log.info("list= {}",list);
+	}
+	
+	@GetMapping("/searchDetailSpace.do")
+	public ModelAndView searchDetailSpace(ModelAndView mav, @RequestParam String category, @RequestParam String location, @RequestParam String option) {
+		log.info("category={}",category);
+		log.info("location={}",location);
+		log.info("option={}",option);
+		String keyword = category+" "+location+" "+option;
 		
+		
+		mav.setViewName("space/searchSpace");
+		mav.addObject("keyword", keyword);
+		return mav;
 	}
 
 }
