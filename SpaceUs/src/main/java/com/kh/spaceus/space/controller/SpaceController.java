@@ -370,7 +370,7 @@ public class SpaceController {
 	@ResponseBody
 	public String deleteWishList(Wish wish, HttpServletResponse response) {
 		int result = spaceService.deleteWish(wish);
-		
+		spaceService.minusLikeCnt(wish);
 		String msg = (result>0) ? "위시 삭제 성공!" : "위시 삭제 실패";
 		return msg;
 	}

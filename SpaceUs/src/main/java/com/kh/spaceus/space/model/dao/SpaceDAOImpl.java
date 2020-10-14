@@ -249,6 +249,11 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.selectList("space.selectSearchDetailSpaceNo", map);
 	}
 
+	@Override
+	public int minusLikeCnt(Wish wish) {
+		return sqlSession.update("space.minusLikeCnt", wish);
+	}
+
 	
 
 }
