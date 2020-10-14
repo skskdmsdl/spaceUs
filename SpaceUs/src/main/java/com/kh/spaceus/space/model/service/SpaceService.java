@@ -101,6 +101,8 @@ public interface SpaceService {
 	List<SpaceList> selectSearchSpaceList(String searchSpace);
 
 	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
+
+	int minusLikeCnt(Wish wish);
 	
 	/* List<Space> selectListSpaceCollection(String email); */
 

@@ -183,8 +183,9 @@ public class MemberController {
 		@RequestMapping("/deleteWish.do")
 		public String deleteWish(Wish wish, HttpServletResponse response, RedirectAttributes redirectAttr) {
 
-			int result = spaceService.deleteWish(wish);
-			String msg = (result>0) ? "위시 삭제 성공!" : "위시 삭제 실패";
+			int result1 = spaceService.deleteWish(wish);
+			spaceService.minusLikeCnt(wish);
+			String msg = (result1>0) ? "위시 삭제 성공!" : "위시 삭제 실패";
 
 			redirectAttr.addFlashAttribute("msg", msg);
 
