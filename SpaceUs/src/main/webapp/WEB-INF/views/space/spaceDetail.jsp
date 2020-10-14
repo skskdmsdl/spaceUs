@@ -204,14 +204,22 @@ function naverShare() {
 		<div class="row justify-content-center">
 			<div class="col-md-12">
 				<div class="property-details">
-					<div class="mySlides fade1">
+					<c:if test="${ not empty space.attachList}">
+						<c:forEach items="${ space.attachList }" var="attach">
+								<div class="mySlides fade1">
+									<div class="img"
+										style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/${attach.rname });"></div>
+								</div>
+						</c:forEach>
+					</c:if>
+<%-- 					<div class="mySlides fade1">
 						<div class="img"
 							style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></div>
 					</div>
 					<div class="mySlides fade1">
 						<div class="img"
 							style="background-image: url(${pageContext.request.contextPath }/resources/images/work-2.jpg);"></div>
-					</div>
+					</div> --%>
 					<i class="prev fas fa-chevron-left fa-2x" onclick="plusSlides(-1)"></i>
 					<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i>
 					<div class="text text-center">
@@ -713,7 +721,7 @@ function naverShare() {
     				<p class="price"><span class="space-price" style="color: #007bff;">
     				<fmt:formatNumber value="${space.hourlyPrice }" type="number"/><small>원/시간</small></span></p>
     				<ul class="property_list">
-    					<li><span class="icon-star"></span>${space.starAvg }</li>
+    					<li><span class="icon-star"></span><fmt:formatNumber value="${space.starAvg }" pattern=".00"/></li>
     					<li><span class="icon-heart"></span>${space.likeCnt }</li>
     					<li><span class="icon-comments"></span>${space.reviewCnt }</li>
     				</ul>
