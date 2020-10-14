@@ -357,8 +357,8 @@ select
 		values (
 			'SPIMG'||seq_space_image_no.nextval,
 			#{ spaceNo },
-			#{ oName },
-			#{ rName }
+			#{ oname },
+			#{ rname }
 		)
 	</insert>
 	
@@ -598,8 +598,8 @@ select
 	<resultMap type="attachment" id="attachMap">
 		<id column="file_no" property="fileNo"/>
 		<result column="space_no" property="spaceNo"/>
-		<result column="original_filename" property="oName"/>
-		<result column="renamed_filename" property="rName"/>
+		<result column="original_filename" property="oname"/>
+		<result column="renamed_filename" property="rname"/>
 		<result column="upload_date" property="uploadDate"/>
 		<result column="status" property="status"/>
 	</resultMap>

@@ -412,7 +412,7 @@ public class SpaceController {
 		for(Space s : popularList) {
 			Attachment att = spaceService.selectPopularImage(s.getSpaceNo());
 			s.setAddress(s.getAddress().substring(0, s.getAddress().indexOf(" ")));
-			s.setAttach(att.getRName());
+			s.setAttach(att.getRname());
 			list.add(s);
 		}
 		
