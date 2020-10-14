@@ -215,6 +215,33 @@ function searchSpace(){
 	}
 }
 
+function searchDetailSpace(){
+	
+	/* var category = $("select[name=space_type]").val();
+	alert(category);
+	var location = $("select[name=space_location]").val();
+	alert(location);
+	var date = $("[name=space_date]").val();
+	alert(date); */
+	
+	/* var option = $('input[name="checkbox_name"]:checked').val();
+	alert(option); */
+
+	var checkBoxArr = [];
+
+	$('input[name="checkbox_name"]:checked').each(function(i){
+
+	checkBoxArr.push($(this).val());
+
+	});
+
+	alert(checkBoxArr);
+
+
+
+	//location.href='${pageContext.request.contextPath}/space/searchSpace.do?category='+category+'&location='+location+'&date='+date;
+}
+
 </script>
 
 
@@ -260,39 +287,38 @@ function searchSpace(){
 <!-- 옵션/카테고리/지역 선택 시작-->
 <div class="container">
 	<div class="search-form-content" style="margin-top:100px;">
-		<div class="flex-wrap">
-			<div class="search-category">공간유형</div>
-			<div class="search-category">지역</div>
-			<div class="search-category">날짜</div>
-			<form id="filter-search" class="filter-form">
-				<!-- 카테고리 선택 시작 -->
-				<select name="space_type" id="space_type" class="nice-select sm-width">
-					<option value="all_category">모든유형</option>
-					<c:forEach items="${categoryList}" var="category">
-						<option value="${category.categoryNo}">${category.categoryName}</option>
-					</c:forEach>
-				</select>
-				<!-- 카테고리 선택 끝-->
-				
-				<!-- 지역 선택 시작 -->
-				<select name="space_location" id="space_location" class="nice-select sm-width">		
-					<option value="all_location">모든지역</option>
-					<option value="seoul">서울특별시</option>
-					<option value="seoul">인천광역시</option>
-					<option value="seoul">경기도</option>
-					<option value="seoul">강원도</option>
-				</select>
-				<!-- 지역 선택 끝-->
-				
-				<!-- 날짜 선택 시작 -->
-				<input type="date" name="space_date" id="space_date" class="nice-select sm-width"/>
-				<!-- 날짜 선택 끝 -->
-			</form>
-			
-			<div class="container">
-				<button type="button" class="search-btn" onclick="searchSpace();">검색</button>
+			<div class="flex-wrap">
+				<div class="search-category">공간유형</div>
+				<div class="search-category">지역</div>
+				<div class="search-category">날짜</div>
+				<form id="filter-search" class="filter-form">
+					<!-- 카테고리 선택 시작 -->
+					<select name="space_type" id="space_type" class="nice-select sm-width">
+						<option value="all_category">모든유형</option>
+						<c:forEach items="${categoryList}" var="category">
+							<option value="${category.categoryNo}">${category.categoryName}</option>
+						</c:forEach>
+					</select>
+					<!-- 카테고리 선택 끝-->
+					
+					<!-- 지역 선택 시작 -->
+					<select name="space_location" id="space_location" class="nice-select sm-width">		
+						<option value="all_location">모든지역</option>
+						<option value="서울">서울특별시</option>
+						<option value="인천">인천광역시</option>
+						<option value="경기">경기도</option>
+						<option value="강원">강원도</option>
+					</select>
+					<!-- 지역 선택 끝-->
+					
+					<!-- 날짜 선택 시작 -->
+					<input type="date" name="space_date" id="space_date" class="nice-select sm-width"/>
+					<!-- 날짜 선택 끝 -->
+				</form>				
+				<div class="container">
+					<button type="submit" class="search-btn" onclick="searchDetailSpace();">검색</button>
+				</div>
 			</div>
-		</div>
 	</div>
 	
 	<!-- 더많은 옵션 시작-->   
@@ -306,17 +332,19 @@ function searchSpace(){
 					<br />
 				</div>  
 					
-				<div id="collapseOne" class="collapse">
+				<div id="collapseOne" class="collapse" style="margin:auto 0;">
 					<div class="card-body">
 						<span><b>편의시설</b>을 선택하세요.</span>
 						<hr />
 						<div class="mo-list">
+							<c:forEach items="${optionList}" var="option">
 							<div class="ml-column">
 								<label for="${option.optionNO}">${option.optionName}
-									<input type="checkbox" id="${option.optionNO}" value="${option.optionNO}">
+									<input type="checkbox" id="${option.optionNO}" name="checkbox_name" value="${option.optionNO}">
 									<span class="checkbox"></span>
 								</label>
 							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div> 
