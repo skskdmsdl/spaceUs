@@ -589,7 +589,6 @@
 			</if>		
 		</where> 
 	</select>
-	
 	<!-- searchSpace 끝-->
 </mapper>
 
