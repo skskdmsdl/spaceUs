@@ -236,61 +236,61 @@ $(document).on("click",".fa-2x",function(){
 			<form id="filter-search" class="filter-form">
 				<!-- 카테고리 선택 시작 -->
 				<select name="space_type" id="space_type" class="nice-select sm-width">
-					<option value="all_category">모든유형</option>
-					<option value="cate1">회의실</option>
-					<option value="cate2">세미나실</option>
-					<option value="cate3">다목적홀</option>
-					<option value="cate4">작업실</option>
-					<option value="cate5">파티룸</option>
-					<option value="cate6">공연장</option>
-					<option value="cate7">연습실</option>
-					<option value="cate8">카페</option>
-					<option value="cate9">스터디룸</option>
-					<option value="cate10">엠티장소</option>
-					<option value="cate11">독립 오피스</option>
-					<option value="cate12">코워커 스페이스</option>	
+					<option value="">모든유형</option>
+					<option value="회의실">회의실</option>
+					<option value="세미나실">세미나실</option>
+					<option value="다목적홀">다목적홀</option>
+					<option value="작업실">작업실</option>
+					<option value="파티룸">파티룸</option>
+					<option value="공연장">공연장</option>
+					<option value="연습실">연습실</option>
+					<option value="카페">카페</option>
+					<option value="스터디룸">스터디룸</option>
+					<option value="엠티장소">엠티장소</option>
+					<option value="독립 오피스">독립 오피스</option>
+					<option value="코워커 스페이스">코워커 스페이스</option>	
 				</select>
 				<!-- 카테고리 선택 끝-->
 				
 				<!-- 지역 선택 시작 -->
 				<select name="space_location" id="space_location" class="nice-select sm-width">		
-					<option value="all_location">모든지역</option>
-					<option value="seoul">서울특별시</option>
-					<option value="seoul">인천광역시</option>
-					<option value="seoul">경기도</option>
-					<option value="seoul">강원도</option>
+					<option value="">모든지역</option>
+					<option value="서울">서울특별시</option>
+					<option value="인천">인천광역시</option>
+					<option value="경기">경기도</option>
+					<option value="강원">강원도</option>
 				</select>
 				<!-- 지역 선택 끝-->
 				
 				<!-- 옵션 선택 시작 -->
 				<select name="space_option" id="space_option" class="nice-select sm-width">		
 					<option value="">모든 옵션</option>
-					<option value="OPTION1">TV/프로젝터</option>
-					<option value="OPTION2">인터넷/와이파이</option>
-					<option value="OPTION3">복사/인쇄기</option>
-					<option value="OPTION4">화이트보드</option>
-					<option value="OPTION5">음향/마이크</option>
-					<option value="OPTION6">취사시설</option>
-					<option value="OPTION7">음식물반입가능</option>
-					<option value="OPTION8">주류반입가능</option>
-					<option value="OPTION9">샤워시설</option>
-					<option value="OPTION10">주차</option>
-					<option value="OPTION11">금연</option>
-					<option value="OPTION12">반려동물 동반가능</option>
-					<option value="OPTION13">PC/노트북</option>
-					<option value="OPTION14">의자/테이블</option>
-					<option value="OPTION15">내부화장실</option>
-					<option value="OPTION16">탈의실</option>
-					<option value="OPTION17">테라스/루프탑</option>
-					<option value="OPTION18">공용라운지</option>
-					<option value="OPTION19">전신거울</option>
-					<option value="OPTION20">바베큐시설</option>
+					<option value="TV/프로젝터">TV/프로젝터</option>
+					<option value="인터넷/와이파이">인터넷/와이파이</option>
+					<option value="복사/인쇄기">복사/인쇄기</option>
+					<option value="화이트보드">화이트보드</option>
+					<option value="음향/마이크">음향/마이크</option>
+					<option value="취사시설">취사시설</option>
+					<option value="음식물반입가능">음식물반입가능</option>
+					<option value="주류반입가능">주류반입가능</option>
+					<option value="샤워시설">샤워시설</option>
+					<option value="주차">주차</option>
+					<option value="금연">금연</option>
+					<option value="반려동물 동반가능">반려동물 동반가능</option>
+					<option value="PC/노트북">PC/노트북</option>
+					<option value="의자/테이블">의자/테이블</option>
+					<option value="내부화장실">내부화장실</option>
+					<option value="탈의실">탈의실</option>
+					<option value="테라스/루프탑">테라스/루프탑</option>
+					<option value="공용라운지">공용라운지</option>
+					<option value="전신거울">전신거울</option>
+					<option value="바베큐시설">바베큐시설</option>
 				</select>
 				<!-- 옵션 선택 끝 -->
 			</form>
 			
 			<div class="container">
-				<button type="button" class="search-btn" onclick="searchSpace();">검색</button>
+				<button type="button" class="search-btn" onclick="searchDetailSpace();">검색</button>
 			</div>
 		</div>
 	</div>
@@ -521,6 +521,15 @@ function searchSpace(){
 	else{
 		location.href='${pageContext.request.contextPath}/space/searchSpace.do?keyword='+keyword;
 	}
+}
+
+function searchDetailSpace(){
+
+	var category = $("select[name=space_type]").val();
+	var location = $("select[name=space_location]").val();
+	var option = $("select[name=space_option]").val();
+
+	window.location.href="${pageContext.request.contextPath}/space/searchDetailSpace.do?category="+category+"&location="+location+"&option="+option;
 }
 
 document.querySelector('.stick').addEventListener('click',()=>{
