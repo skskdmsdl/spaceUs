@@ -96,8 +96,8 @@ public class SpaceController {
 					}
 				//3. attachment객체 생성(db 저장을 위한 준비)
 				Attachment attach = new Attachment();
-				attach.setOName(f.getOriginalFilename());
-				attach.setRName(renamedFileName);
+				attach.setOname(f.getOriginalFilename());
+				attach.setRname(renamedFileName);
 				attachList.add(attach);
 			}
 		}

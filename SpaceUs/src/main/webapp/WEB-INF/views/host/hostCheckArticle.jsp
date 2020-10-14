@@ -40,7 +40,7 @@ p#qna-content > a:hover{
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">호스트 센터</a></li>
-                                <li class="breadcrumb-item active">공간 정보</li>
+                                <li class="breadcrumb-item active">최근 질문글</li>
                             </ol>
                         </div>
                     </div>
@@ -52,11 +52,10 @@ p#qna-content > a:hover{
                         <div id="qna-wrapper" class="row"> 
                          <div class="col-md-11">
                            
-                             <ul class="nav nav-tabs">
-                             	<li class="nav-item"><a class="nav-link active" href="#">최근 질문 게시글</a></li>
-                             </ul>
-	                    
-	                  
+	                       <div class="col-md-10">
+	                           <h5 class="card-title">공간 리뷰</h5>
+	                           <h6 class="card-subtitle">이용자들의 리뷰입니다</h6>
+	                       </div>
                     	     <div class="qna-filter-container">
 								  <button id="show-unreplied" class="btn btn-secondary btn-sm" type="button" onclick="unreplied();" value="${member.memberEmail}">
 								  <i id="check-unreplied"></i>
@@ -72,15 +71,56 @@ p#qna-content > a:hover{
 				          <div class="col-md-10 d-flex">
 				          	<div class="blog-entry justify-content-end">
 				              <div class="text">
-				                <h3 class="heading"><a href="${pageContext.request.contextPath}/space/qna.do?no=${qna.qnaNo}">${ qna.qnaNo }</a></h3>
+				                <h3 class="badge badge-secondary"><a href="${pageContext.request.contextPath}/space/spacedetail.do?=${qna.spaceNo}">${qna.name }</a></h3>
 				              <%--   <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');"> </a> --%>
 					              
 				                <p id="qna-content"><a href="${pageContext.request.contextPath}/space/qna.do?no=${qna.qnaNo}">
 				                <c:set var="str" value="${qna.content }"/>
 				                ${ fn:substring(str, 0, 100) }</a></p>
+				                	<div class="qnaToggle">
+							   			<div class="row reviewDetailBtn" style="cursor: pointer;">
+								   			<%-- <p style="position: absolute; margin:10px 85px 0 215px; overflow: hidden; text-overflow: ellipsis; width:60%; -webkit-box-orient: vertical;-webkit-line-clamp: 3;display: -webkit-box;">${ qna.content }</p> --%>
+											<p style="margin:105px 0 0 25px; font-weight: 600;" class="detailBtn">더보기</p>
+							   			</div>
+							   			<div class="reviewSimpleBtn" style="cursor: pointer; display:none; height: 100%">
+							   				<div class="reviewSimple">
+									   			<p >${ qna.content }</p>
+												<p style="font-weight: 600;" class="simpleBtn">접기</p>
+									   			
+							   				</div>
+							   				<!-- 답변 -->
+							   				<div class="commentBox" style="background-color: #fafafa;  cursor:default; border: 1px solid #edeceb; padding-bottom: 30px; ">
+					                         <div class="pl-5 pr-5 pt-4 commentBox">
+					                         	<p class="commentBox"><i class="fa fa-comment mr-1 commentBox"></i>답변</p>
+												<c:choose>
+													<c:when test="${ qna.answer != null }">
+														<div class="modifyFrm">
+															<p class="commentBox">${ qna.answer }</p>
+															<button type="button" class="btn btn-secondary commentBox modifyBtn" style="margin-left: 95%;">수정</button>
+														</div>
+														<div class="row commentBox modifyDiv" style="height: 110px;">
+															<input type="hidden" name="reviewNo" value="${ qna.qnaNo }" />
+								                         	<textarea class="ml-2 mr-1 mt-1 commentBox content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px; width:90%">${ qna.answer }</textarea>
+								                           	<button type="button" class="btn mt-1 commentBox insertAnswer" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">수정</button>
+							                         	</div>
+													</c:when>
+													<c:otherwise>
+														<div class="row commentBox" style="height: 110px; ">
+															<input type="hidden" name="reviewNo" value="${ qna.qnaNo }" />
+								                         	<textarea class="col ml-2 mr-1 mt-1 commentBox content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
+								                           	<button type="button" class="btn mt-1 commentBox insertAnswer" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+							                         	</div>
+													</c:otherwise>
+												</c:choose>
+				                         		</div>
+					                           </div>
+							   				<!-- 답변 끝 -->
+							   			</div>
+							   			
+						   			</div>
 				                <div class="meta mb-3">
-				                  <div class="badge badge-secondary">${ qna.name }</div>
-				                  <div style="letter-spacing:1px;"><fmt:formatDate value="${ qna.date }" pattern="yyyy년 MM월 dd일 hh:mm"/></div>
+				                 
+				                  <div style="letter-spacing:1px;"><fmt:formatDate value="${ qna.date }" pattern="yyyy년 MM월 dd일"/></div>
 				                  <div>
 				                  <c:choose>
 				                  <c:when test="${ qna.status == false }">
@@ -92,6 +132,7 @@ p#qna-content > a:hover{
 				                  </c:choose>
 				                  </div>
 				                </div>
+
 				              </div>
 				            </div>
 				          </div>
@@ -143,6 +184,55 @@ p#qna-content > a:hover{
   <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
 
 <script>
+/* 리뷰 디테일 호버 */
+$(document).ready(function (){
+	$(".reviewDetailBtn").mouseenter(function(){
+		$(this).children(".detailBtn").css('text-decoration', 'underline');
+	});
+	$(".reviewDetailBtn").mouseleave(function(){
+		$(".detailBtn").css('text-decoration', 'none');
+	});
+});
+$(document).ready(function (){
+	$(".reviewSimpleBtn").children(".reviewSimple").mouseenter(function(){
+		$(this).children(".simpleBtn").css('text-decoration', 'underline');
+	});
+	$(".reviewSimpleBtn").children(".reviewSimple").mouseleave(function(){
+		$(".simpleBtn").css('text-decoration', 'none');
+	});
+});
+/* 질문글 디테일 */
+$(".qnaToggle").click(function(e){
+	if($(e.target).hasClass("commentBox")) return;
+	$(this).children(".reviewDetailBtn").toggle();
+	$(this).children(".reviewSimpleBtn").toggle();
+});
+/*질문글 답변 등록*/
+$(".insertAnswer").click(function(){
+	let reviewNo = $(this).siblings('input').val();
+	let content = $(this).siblings('.content').val();
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/host/updateReviewComment.do",
+		data : {
+			reviewNo : reviewNo,
+			content : content
+		},
+		dataType : "json",
+		success : function(data){
+			alert("댓글이 등록되었습니다!");
+			location.reload();
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	}); 
+	
+});
+//리뷰 수정
+$(".modifyBtn").click(function(){
+	$(this).parent(".modifyFrm").hide();
+	$(this).parent("div").siblings(".modifyDiv").show();
+});
 function unreplied(){
 	var hostId = $("#show-unreplied").val();
 	
@@ -168,7 +258,7 @@ function unreplied(){
 					location.href="${pageContext.request.contextPath}/host/hostCheckArticle.do";
 					
 			 }else{
-				 $("div.qna-container").empty();
+				 	$("div.qna-container").empty();
 					 //미답변 질문글 버튼이 눌려진 상태가 아닌 경우 class 속성 추가
 					 //css변경 
 					 $("#check-unreplied").addClass("fa fa-check");
@@ -179,7 +269,8 @@ function unreplied(){
 					 var html="";
 	
 						 
-					 if(data!=null && data!=undefined){
+					 if(data!=null){
+						
 						 var date = new Date(item.date);
 						 /**
 						  *  yyyy년 MM 월 dd일 포맷으로 반환
@@ -201,14 +292,14 @@ function unreplied(){
 				         html += "<div class=\"col-md-10 d-flex\">"; 
 			          	 html +="<div class=\"blog-entry justify-content-end\">";
 			          	 html +="<div class=\"text\">"; 
-			          	 html +="<h3 class=\"heading\"><a href=\"${pageContext.request.contextPath}/space/qna.do?no="+item.qnaNo;
-					     html +="\">"+item.qnaNo+"</a></h3>";
+			          	 html +="<h3 class=\"badge badge-secondary\"><a href=\"${pageContext.request.contextPath}/space/spacedetail.do?"+item.spaceNo;
+					     html +="\">"+item.name+"</a></h3>";
 					     html +="<p id=\"qna-content\"><a href=\"${pageContext.request.contextPath}/space/qna.do?no="+item.qnaNo+"\">";
 					     html += (item.content).substring(0,100);
 				         html +="</a></p>";
 					     html +="<div class=\"meta mb-3\">";
-					     html +="<div class=\"badge badge-secondary\">";
-					     html +=""+item.name+"</div>";
+					     //html +="<div class=\"badge badge-secondary\">";
+					     //html +=""+item.name+"</div>";
 					     html +="<div> "+getFormatDate(date)+"</div>";
 					     html +="<div>";
 							
@@ -219,10 +310,10 @@ function unreplied(){
 				    
 	                html += "</div></div></div></div></div>";
 					 } else {
-						html += "<div class=\"qna-container_\">";
-						 html+= "답변을 기다리는 질문글이 없습니다.";
+						//html += "<div class=\"qna-container_\">";
+						 //html+= "답변을 기다리는 질문글이 없습니다.";
 						//html += "<div style='text-align: center; width: 90%; padding:20px;'><span class='icon-folder' style='letter-spacing:1px;'>답변을 기다리는 질문글이 없습니다.</span></div>";										
-						html += "</div>";
+						//html += "</div>";
 						
 						 }
 					console.log(html);

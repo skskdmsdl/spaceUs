@@ -204,14 +204,22 @@ function naverShare() {
 		<div class="row justify-content-center">
 			<div class="col-md-12">
 				<div class="property-details">
-					<div class="mySlides fade1">
+					<c:if test="${ not empty space.attachList}">
+						<c:forEach items="${ space.attachList }" var="attach">
+								<div class="mySlides fade1">
+									<div class="img"
+										style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/${attach.rname });"></div>
+								</div>
+						</c:forEach>
+					</c:if>
+<%-- 					<div class="mySlides fade1">
 						<div class="img"
 							style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></div>
 					</div>
 					<div class="mySlides fade1">
 						<div class="img"
 							style="background-image: url(${pageContext.request.contextPath }/resources/images/work-2.jpg);"></div>
-					</div>
+					</div> --%>
 					<i class="prev fas fa-chevron-left fa-2x" onclick="plusSlides(-1)"></i>
 					<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i>
 					<div class="text text-center">

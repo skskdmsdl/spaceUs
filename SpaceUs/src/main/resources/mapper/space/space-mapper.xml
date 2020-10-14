@@ -42,7 +42,7 @@
 		    from
 		        space join space_image using (space_no) 
 		    where 
-		         space_no= #{spaceNo} and rownum=1
+		         space_no= #{spaceNo}
 		    order by
 		        upload_date )
 		 
@@ -84,8 +84,8 @@
 		<collection property="attachList" ofType="Attachment">
 			<id column="file_no" property="fileNo"/>
 			<result column="space_no" property="spaceNo"/>
-			<result column="original_filename" property="oName" jdbcType="VARCHAR" javaType="string"/>
-			<result column="renamed_filename" property="rName" jdbcType="VARCHAR" javaType="string"/>
+			<result column="original_filename" property="oname" jdbcType="VARCHAR" javaType="string"/>
+			<result column="renamed_filename" property="rname" jdbcType="VARCHAR" javaType="string"/>
 			<result column="upload_date" property="uploadDate"/>
 <!-- 			<result column="status" property="status" 
 								javaType="_int"

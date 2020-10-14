@@ -211,6 +211,7 @@
 		<result column="star_avg" property="starAvg"/>
 		<result column="like_cnt" property="likeCnt"/>
 		<result column="address" property="address"/>
+		<result column="review_cnt" property="reviewCnt"/>
 		<result column="renamed_filename" property="image"/>
 		<result column="hourly_price" property="hourlyPrice"/>	
 <!-- 		<collection property="attachList" ofType="Attachment">
@@ -223,17 +224,33 @@
 </resultMap>
 
 <select id="selectWishList" resultMap="wishMap">
-	select 
-		wish.member_email, space.space_name, 
-		space.hourly_price, space.star_avg, 
-		space.like_cnt, space.status, space.content, 
-		space.space_no, wish.like_date 
-	from 
-		space join wish on space.space_no=wish.space_no 
-	where 
-		wish.member_email=#{email} and space.status='O'
-	order by 
-		like_date desc
+		SELECT * FROM WISH JOIN (
+		select
+		          S.space_no,
+		          S.space_name, 
+		          REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
+		          S.hourly_price,
+		          S.views,
+		          S.content,
+		          S.like_cnt,
+		          S.star_avg,
+		          nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as review_cnt,
+		            SI.renamed_filename
+		      from 
+		          space S join(
+		                select space_no,renamed_filename 
+		                from( select 
+		                        S.space_no,
+		                        SI.renamed_filename,
+		                        rank()over(partition by S.space_no order by SI.renamed_filename) as rnum 
+		                      from space S left join space_image SI 
+		                                    on S.space_no = SI.space_no)
+		                      where rnum=1
+		            )SI
+		                on S.space_no = SI.space_no
+		      where S.status = 'O') JJ ON JJ.space_no=wish.space_no
+		      where member_email=#{email}
+		      order by like_date desc
 
 </select>
 

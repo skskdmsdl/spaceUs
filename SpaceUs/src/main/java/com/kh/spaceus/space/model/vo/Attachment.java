@@ -18,8 +18,8 @@ public class Attachment implements Serializable{
 
 	private String fileNo;
 	private String spaceNo;
-	private String oName;
-	private String rName;
+	private String oname;
+	private String rname;
 	private Date uploadDate;
 	private boolean status;
 }
