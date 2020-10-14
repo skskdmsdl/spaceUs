@@ -586,6 +586,24 @@ select
 	<resultMap type="spaceList" id="spaceListMap"></resultMap>
 	
 	<!-- searchSpace 끝-->
+	
+	<select id="selectPopularImage" resultMap="attachMap">
+		select 
+			* 
+		from 
+			(select * from space_image order by to_number(substr(file_no, 6))) 
+		where 
+			space_no=#{spaceNo} and rownum=1
+	</select>
+	<resultMap type="attachment" id="attachMap">
+		<id column="file_no" property="fileNo"/>
+		<result column="space_no" property="spaceNo"/>
+		<result column="original_filename" property="oName"/>
+		<result column="renamed_filename" property="rName"/>
+		<result column="upload_date" property="uploadDate"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
 </mapper>
 
 
