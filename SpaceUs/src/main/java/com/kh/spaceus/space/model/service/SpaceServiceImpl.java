@@ -161,7 +161,7 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public List<Space> selectSameCategory(Space space) {
+	public List<SpaceList> selectSameCategory(Space space) {
 		return spaceDAO.selectSameCategory(space);
 	}
 
@@ -266,6 +266,11 @@ public class SpaceServiceImpl implements SpaceService{
 	@Override
 	public List<String> selectSearchDetailSpaceNo(Map<String, String> map) {
 		return spaceDAO.selectSearchDetailSpaceNo(map);
+	}
+	
+	@Override
+	public Attachment selectPopularImage(String spaceNo) {
+		return spaceDAO.selectPopularImage(spaceNo);
 	}
 
 	

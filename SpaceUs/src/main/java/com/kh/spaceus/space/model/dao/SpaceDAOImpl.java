@@ -134,7 +134,7 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public List<Space> selectSameCategory(Space space) {
+	public List<SpaceList> selectSameCategory(Space space) {
 		return sqlSession.selectList("space.selectSameCategory", space);
 	}
 
@@ -237,6 +237,11 @@ public class SpaceDAOImpl implements SpaceDAO{
 	@Override
 	public Wish selectOneWish(Wish wish) {
 		return sqlSession.selectOne("space.selectOneWish", wish);
+	}
+	
+	@Override
+	public Attachment selectPopularImage(String spaceNo) {
+		return sqlSession.selectOne("space.selectPopularImage", spaceNo);
 	}
 
 	@Override

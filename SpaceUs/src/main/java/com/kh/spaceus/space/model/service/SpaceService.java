@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.spaceus.qna.model.vo.Qna;
+import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.OptionList;
@@ -54,7 +55,7 @@ public interface SpaceService {
 	
 	int insertWish(Wish wish);
 
-	List<Space> selectSameCategory(Space space);
+	List<SpaceList> selectSameCategory(Space space);
 
 	int selectLikeCnt(String spaceNo);
 
@@ -91,6 +92,11 @@ public interface SpaceService {
 	List<String> selectSpaceNoList(String keyword);
 
 	Wish selectOneWish(Wish wish);
+
+	//물어보기
+	/* List<Space> selectSearchSpaceList(String searchSpace); */
+
+	Attachment selectPopularImage(String spaceNo);
 
 	List<SpaceList> selectSearchSpaceList(String searchSpace);
 

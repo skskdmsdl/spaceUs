@@ -72,13 +72,13 @@ a:hover {opacity: 0.3; color:black;}
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor ml-5">마이페이지</h4>
+                        <h4 class="text-themecolor ml-5">호스트 센터</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:void(0)">마이페이지</a></li>
-                                <li class="breadcrumb-item active">리뷰</li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0)">호스트 센터</a></li>
+                                <li class="breadcrumb-item active">공간 리뷰</li>
                             </ol>
                         </div>
                     </div>
@@ -99,13 +99,13 @@ a:hover {opacity: 0.3; color:black;}
 							<c:when test="${ comment == 'no' }">
                               <select class="custom-select b-0" id="selectId">
                                   <option value="1">전체 리뷰</option>
-                                  <option value="2" selected>작성 안한 댓글</option>
+                                  <option value="2" selected>답변을 기다리는 리뷰</option>
                               </select>
                              </c:when>
                              <c:otherwise>
                               <select class="custom-select b-0" id="selectId">
                                   <option value="1">전체 리뷰</option>
-                                  <option value="2">작성 안한 댓글</option>
+                                  <option value="2">답변을 기다리는 리뷰</option>
                               </select>
                              </c:otherwise>
                            </c:choose>

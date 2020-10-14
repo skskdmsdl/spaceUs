@@ -307,26 +307,62 @@ $(document).on("click",".fa-2x",function(){
         <h2 class="mb-2">인기 공간</h2>
       </div>
     </div>
-    <div class="row">
+    <div id="popularList" class="row">
     	  <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
-    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    		<a href="" class="pop0"></a>
     			<div class="text">
-    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
+    				<p class="price"><span class="space-price price0"></span><small>원/시간</small></p>
     				<ul class="property_list">
-    					<li><span class="icon-people"></span>최대3인</li>
-    					<li><span class="icon-heart"></span>55</li>
-    					<li><span class="icon-comments"></span>29</li>
+    					<li class="view0"><span class="icon-eye"></span></li>
+    					<li class="like0"><span class="icon-heart"></span></li>
+    					<li class="star0"><span class="icon-star"></span></li>
     				</ul>
-    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=space2">The Blue Sky Home</a></h3>
-    				<small><span class="icon-my_location">문발리</span></small>
+    				<h3 class="title0"></h3>
+    				<small><span class="icon-my_location location0"></span></small>
+    				<a class="d-flex align-items-center justify-content-center btn-custom button0">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	  <div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    		<a href="" class="pop1"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price price1"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view1"><span class="icon-eye"></span></li>
+    					<li class="like1"><span class="icon-heart"></span></li>
+    					<li class="star1"><span class="icon-star"></span></li>
+    				</ul>
+    				<h3 class="title1"></h3>
+    				<small><span class="icon-my_location location1"></span></small>
     				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
     				<span class="icon-heart"></span>
     				</a>
     			</div>
     		</div>
     	</div>
-    	<div class='col-md-4'><div class='property-wrap ftco-animate'><a href='' class='img' style='background-image: url(/spaceus/resources/images/work-1.jpg);'></a><div class='text'><p class='price'><span class='space-price'>25000<small>원/시간</small></span></p><ul class='property_list'><li><span class='icon-eye'></span>0</li><li><span class='icon-heart'></span>0</li><li><span class='icon-star'></span>0</li></ul><h3><a href='/spaceus/space/spaceDetail.do?spaceNo=space26'>노르웨이숲</a></h3><small><span class='icon-my_location'>경기도 수원시 영통구</span></small><a href='#' class='d-flex align-items-center justify-content-center btn-custom'><span class='icon-heart'></span></a></div></div></div>
+    	 <!--  <div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    		<a href="" class="pop2"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price price0"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view2"><span class="icon-eye"></span></li>
+    					<li class="like2"><span class="icon-heart"></span></li>
+    					<li class="star2"><span class="icon-star"></span></li>
+    				</ul>
+    				<h3 class="title2"></h3>
+    				<small><span class="icon-my_location location2"></span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div> -->
+    	
 			<!-- 인기공간 리스트 -->
     </div>
 	</div>
@@ -368,51 +404,11 @@ $(document).on("click",".fa-2x",function(){
 <!-- 이용자리뷰 끝-->
 <script>
 $(function () { 
-	popular();
-});
-
-function popular(){
-	console.log("인기공간function 실행");
-	$.ajax({
-		type:"GET",
-		url:"${pageContext.request.contextPath}/space/popular.do",
-		dataType:"json",
-		success:function(data){
-			console.log("ajax 요청 성공!");
-			console.log(data);
-			 $.each(data, function(i, item){
-				var html="";
-
-			    html+= "<div class='col-md-4'>";
-		    	html+= "<div class='property-wrap ftco-animate'>";
- 		    	html+= "<a href='' class='img' style='background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);'></a>";
-		    	html+= "<div class='text'>";
-		    	html+= "<p class='price'><span class='space-price'>"+item.hourlyPrice+"<small>원/시간</small></span></p>";
-		    	html+= "<ul class='property_list'>";
-		    	html+= "<li><span class='icon-eye'></span>"+item.views+"</li>";
-		    	html+= "<li><span class='icon-heart'></span>"+item.likeCnt+"</li>";
-		    	html+= "<li><span class='icon-star'></span>"+item.starAvg+"</li>";
-		    	html+= "</ul>";
-		    	html+= "<h3><a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"'>"+item.spaceName+"</a></h3>"; 
-		    	html+= "<small><span class='icon-my_location'>"+item.address+"</span></small>";
-		    	//html+= "<a href='#' class='d-flex align-items-center justify-content-center btn-custom'>"; 
-		    	//html+= "<span class='icon-heart'></span></a>";
-		    	html+= "</div></div></div>";
-				
-				console.log(html);
-				$("#popular").append(html);
-			}); 
-		},error:function(){
-			console.log("ajax 요청 실패");
-			}
-		});
-	//AJAX요청끝
-};
-//인기공간리스트 끝
-
-$(function () { 
 	memberId();
 });
+$(function () { 
+	popular();
+}); 
 //이용자 리뷰 ajax 요청
 $(function () { 
 	review();
@@ -431,7 +427,7 @@ function review(){
 				
 				 var date = new Date(item.enrollDate);
 				 /**
-				  *  yyyy년 MM 월 dd일 hh:mm 포맷으로 반환
+				  *  yyyy년 MM 월 dd일 포맷으로 반환
 				  */
 				 function getFormatDate(date){
 				     var year = date.getFullYear();              //yyyy
@@ -439,25 +435,23 @@ function review(){
 				     month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
 				     var day = date.getDate();                   //d
 				     day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-					 var hh = date.getHours();
-					 hh = hh>=10 ? hh : '0' + hh;
-					 var mm = date.getMinutes();	
+					 	
 						
-				     return ' '+year + '년 ' + month + '월 ' + day + '일 ' + hh + ':' + mm;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+				     return ' '+year + '년 ' + month + '월 ' + day + '일 ';       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
 				 }
 				
 				
 				html  +=  "<div class=\"col-md-3 d-flex\">";
 	          	html  += "<div class=\"blog-entry justify-content-end\">";
           	    html  += "<div class=\"text\">";
-	          	html  += "<h3 class=\"headig\"><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h3>";
-	          	html  += "<div class=\"meta mb-3\">";
+	          	html  += "<h3 class=\"headig mb-2 text-center\"><a style=\"color :#343a40;\" class=\"font-bold\" href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h3>";
+          		html  += "<img class=\"lock-20 mt-2 img\" style=\"width:100%; height:200px;\" src=\'${pageContext.request.contextPath}/resources/upload/review/"+item.image+"\'>";
+	          	html  += "<div class=\"meta mt-1 mb-1\">";
 	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+getFormatDate(date)+"</a></div>";
 	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.nickName+"</a></div>";
 	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\" class=\"meta-chat\"><span class=\"icon-star\"></span>"+item.starRating+"</a></div>";
           		html  += "</div>";
-          		html += "<p>"+item.content+"</p>";
-          		html  += "<img class=\"lock-20 img\" src=\'${pageContext.request.contextPath}/resources/upload/review/"+item.image+"\'>";
+          		html += "<p style=\"margin-top:10px; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; -webkit-line-clamp: 3; display: -webkit-box;\"  >"+item.content+"</p>";
           		html  += "</div></div></div>";
 				console.log(html);
 				$("#review-wrapper").append(html);
@@ -486,17 +480,29 @@ function searchSpace(){
 document.querySelector('.stick').addEventListener('click',()=>{
 	  document.querySelector('.four').value = '';
 	}); 
+function popular(){
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/space/selectPopularSpaces.do",
+		dataType : "json",
+		success : function(data){
+			console.log(data.list);
+			 $.each(data.list, function(i, list){
 
-$.ajax({
-	url : "${ pageContext.request.contextPath }/space/indexList.do",
-	dataType : "json",
-	success : function(data){
-		alert("index List!");
-	},
-	error : function(xhr, status, err){
-		console.log("처리실패", xhr, status, err);
-	}
-}); 
+				$(".pop"+i).append("<a href=''></a>").addClass('img').css("background-image", "url(${pageContext.request.contextPath }/resources/upload/space/"+list.attach+")")
+				$(".price"+i).append(list.hourlyPrice);
+				$(".view"+i).append(list.views);
+				$(".like"+i).append(list.likeCnt);
+				$(".star"+i).append(Math.round(list.starAvg * 10)/10);
+				$(".title"+i).append("<a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+list.spaceNo+"'>"+list.spaceName+"</a>");
+				$(".location"+i).append(list.address);
+				
+			 });
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	}); 
+}; 
 
 </script>
 <!-- 컨텐츠 끝 -->

@@ -24,10 +24,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.common.Utils;
+import com.kh.spaceus.host.model.service.HostService;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.reservation.model.service.ReservationService;
+import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Attachment;
@@ -35,6 +37,7 @@ import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceList;
 import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
@@ -56,12 +59,16 @@ public class SpaceController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private HostService hostService;
 
 	// 공간등록하기 화면
 	@RequestMapping(value = "/insertSpace.do", method = RequestMethod.GET)
 	public String insertSpace() {
 		return "space/insertSpace";
 	}
+	
 	//공간등록 제출
 	@RequestMapping(value="/insertSpace.do",method = RequestMethod.POST)
 	public String insertSpace(Space space,
@@ -95,8 +102,8 @@ public class SpaceController {
 					}
 				//3. attachment객체 생성(db 저장을 위한 준비)
 				Attachment attach = new Attachment();
-				attach.setOName(f.getOriginalFilename());
-				attach.setRName(renamedFileName);
+				attach.setOname(f.getOriginalFilename());
+				attach.setRname(renamedFileName);
 				attachList.add(attach);
 			}
 		}
@@ -177,7 +184,7 @@ public class SpaceController {
 		System.out.println("spaceNo="+ spaceNo);
 
 		// 같은 카테고리 공간 리스트(최대 3개)
-		List<Space> spcList = spaceService.selectSameCategory(space);
+		List<SpaceList> spcList = spaceService.selectSameCategory(space);
 		log.debug("같은 카테고리 공간 리스트={}",spcList);
 
 		// 추천 공간 카테고리명
@@ -240,8 +247,8 @@ public class SpaceController {
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
 		System.out.println("spaceNo="+ spaceNo);
 
-		// 같은 카테고리 공간 리스트(최대 3개)
-		List<Space> spcList = spaceService.selectSameCategory(space);
+		// 같은 카테고리 공간 리스트(최대 6개)
+		List<SpaceList> spcList = spaceService.selectSameCategory(space);
 		log.debug("같은 카테고리 공간 리스트={}",spcList);
 
 		// 추천 공간 카테고리명
@@ -289,7 +296,7 @@ public class SpaceController {
 		model.addAttribute("pageBar", pageBar);
 		
 		model.addAttribute("optionList",optionList);
-		model.addAttribute("true", 1);
+		model.addAttribute("bool", 1);
 		
 		
 		return "space/spaceDetail";
@@ -377,16 +384,6 @@ public class SpaceController {
 		return revList;
 	}
 
-	//인덱스 페이지 인기공간리스트
-	@RequestMapping(value = "/popular.do", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Space> selectPopularSpaces(){
-		List<Space> popularList = spaceService.selectPopularSpaces();
-		log.debug("리뷰목록={}"+popularList);
-		return popularList;
-	}
-	
-	
 	
 	// 사업자등록증 조회
 	@GetMapping("/checkIdDuplicate.do")
@@ -406,5 +403,23 @@ public class SpaceController {
 	}
 	
 	//인덱스 페이지
+	@GetMapping("/selectPopularSpaces.do")
+	public ModelAndView selectPopularSpaces(ModelAndView mav) {
 
+		List<Space> popularList = spaceService.selectPopularSpaces();
+		/* List<Attachment> imageList = new ArrayList<>(); */
+		List<Space> list = new ArrayList<>();
+		for(Space s : popularList) {
+			Attachment att = spaceService.selectPopularImage(s.getSpaceNo());
+			s.setAddress(s.getAddress().substring(0, s.getAddress().indexOf(" ")));
+			s.setAttach(att.getRname());
+			list.add(s);
+		}
+		
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+
+		return mav;
+	}
+	
 }

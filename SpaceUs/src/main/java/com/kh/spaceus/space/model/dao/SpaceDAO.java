@@ -59,7 +59,7 @@ public interface SpaceDAO {
 
 	int insertWish(Wish wish);
 
-	List<Space> selectSameCategory(Space space);
+	List<SpaceList> selectSameCategory(Space space);
 
 	int selectLikeCnt(String spaceNo);
 
@@ -101,6 +101,8 @@ public interface SpaceDAO {
 	List<SpaceList> selectSearchSpaceList(String searchSpace);
 
 	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
+	
+	Attachment selectPopularImage(String spaceNo);
 
 
 	/* List<Space> selectListSpaceCollection(String email); */

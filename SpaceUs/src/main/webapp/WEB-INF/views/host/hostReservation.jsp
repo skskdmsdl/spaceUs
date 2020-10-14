@@ -22,7 +22,7 @@
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">호스트 센터</a></li>
-                                <li class="breadcrumb-item active">공간 정보</li>
+                                <li class="breadcrumb-item active">공간 예약 현황</li>
                             </ol>
                         </div>
                     </div>

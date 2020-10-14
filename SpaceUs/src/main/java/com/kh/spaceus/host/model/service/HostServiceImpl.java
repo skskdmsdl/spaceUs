@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spaceus.host.model.dao.HostDAO;
 import com.kh.spaceus.qna.model.vo.Qna;
+import com.kh.spaceus.reservation.model.vo.Reservation;
+import com.kh.spaceus.space.model.vo.Space;
 
 @Service
 public class HostServiceImpl implements HostService {
@@ -28,6 +30,16 @@ public class HostServiceImpl implements HostService {
 	@Override
 	public List<Qna> selectQuestionList(String hostId) {
 		return hostDAO.selectQuestionList(hostId);
+	}
+
+	@Override
+	public List<String> selectReservationSpaceNo() {
+		return hostDAO.selectReservationSpaceNo();
+	}
+
+	@Override
+	public int insertSettlement(String spaceNo) {
+		return hostDAO.insertSettlement(spaceNo);
 	}
 
 }
