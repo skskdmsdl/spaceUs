@@ -239,4 +239,9 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.selectOne("space.selectOneWish", wish);
 	}
 
+	@Override
+	public Attachment selectPopularImage(String spaceNo) {
+		return sqlSession.selectOne("space.selectPopularImage", spaceNo);
+	}
+
 }

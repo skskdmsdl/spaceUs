@@ -729,6 +729,7 @@ function naverShare() {
 	</c:if>
 	</div>
 </div>
+<input type="hidden" id="bool" value="${ bool }" />
 
 <!-- 추천시스템 끝 -->
 
@@ -909,17 +910,14 @@ $(".reviewToggle").on('click', function(){
 
 $(function () { 
 
-	var bool = ${true};
-	//console.log(bool);
-	
-	if(${true}==1){
+	if($("#bool").val() == 1){
 	$("#detail-description-tab").removeClass('active');
 	$("#detail-review-tab").addClass('active');
 	$("#detail-description").removeClass('active');
 	$("#detail-description").removeClass('show');
 	$("#detail-review").addClass('active');
 	$("#detail-review").addClass('show');
-	}
+	} 
 });
 
 

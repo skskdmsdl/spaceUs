@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Component;
 
+import com.kh.spaceus.host.model.service.HostService;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.space.model.service.SpaceService;
@@ -30,6 +31,9 @@ public class Scheduler {
 	
 	@Autowired
 	private SpaceService spaceService;
+	
+	@Autowired
+	private HostService hostService;
 	
 	/** 
 	 * cron표현식 초 분 시 일 월 요일 년(생략가능)
@@ -58,6 +62,8 @@ public class Scheduler {
 		System.out.println("사용기간 만료 쿠폰 삭제 "); 
 		int result3 = memberService.deleteCoupon();
 		
+		System.out.println("정산내역 db 저장"); 
+		/* int result4 = hostService.insertSettlement(); */
 	} 
 }
 
