@@ -58,6 +58,7 @@
                            
                                <div class="steamline m-t-40">
                                		<c:forEach items="${revList}" var="info" varStatus="vs">
+                               		<p>${ spaceList[vs.index] }</p>
 										<div>
 		                                     <c:choose>
 									   				<c:when test="${ info.revCancle eq info.revComplete}">
