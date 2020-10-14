@@ -762,4 +762,13 @@ select * from monthly_sale;
 select * from yearly_sale;
 
 commit;
-
+select * from reservation;
+select 
+      space_no
+   from 
+      reservation 
+   where 
+      to_char(d_day) = to_char(sysdate-1) 
+      and rev_cancle = 0  
+   group by 
+      space_no;
