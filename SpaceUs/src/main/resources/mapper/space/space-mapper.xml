@@ -491,6 +491,10 @@
 		select option_name 
 		from option_list
 		where option_name like'%'|| #{value} ||'%'
+		union
+		select REGEXP_SUBSTR(address,'[^ ]+',1,3) as address
+		from space
+		where address like '%'|| #{value} ||'%'
 	</select>
 	
 	<!-- search Space -->

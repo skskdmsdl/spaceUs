@@ -237,9 +237,18 @@ $(document).on("click",".fa-2x",function(){
 				<!-- 카테고리 선택 시작 -->
 				<select name="space_type" id="space_type" class="nice-select sm-width">
 					<option value="all_category">모든유형</option>
-					<c:forEach items="${categoryList}" var="category">
-						<option value="${category.categoryNo}">${category.categoryName}</option>
-					</c:forEach>
+					<option value="cate1">회의실</option>
+					<option value="cate2">세미나실</option>
+					<option value="cate3">다목적홀</option>
+					<option value="cate4">작업실</option>
+					<option value="cate5">파티룸</option>
+					<option value="cate6">공연장</option>
+					<option value="cate7">연습실</option>
+					<option value="cate8">카페</option>
+					<option value="cate9">스터디룸</option>
+					<option value="cate10">엠티장소</option>
+					<option value="cate11">독립 오피스</option>
+					<option value="cate12">코워커 스페이스</option>	
 				</select>
 				<!-- 카테고리 선택 끝-->
 				
@@ -281,8 +290,122 @@ $(document).on("click",".fa-2x",function(){
 						<hr />
 						<div class="mo-list">
 							<div class="ml-column">
-								<label for="${option.optionNO}">${option.optionName}
-									<input type="checkbox" id="${option.optionNO}" value="${option.optionNO}">
+								<label for="OPTION1">TV/프로젝터
+									<input type="checkbox" id="OPTION1" value="OPTION1">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION2">인터넷/와이파이
+									<input type="checkbox" id="OPTION2" value="OPTION2">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION3">복사/인쇄기 
+									<input type="checkbox" id="OPTION3" value="OPTION3">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION4">화이트보드
+									<input type="checkbox" id="OPTION4" value="OPTION4">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION5">음향/마이크
+									<input type="checkbox" id="OPTION5" value="OPTION5">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION6">취사시설
+									<input type="checkbox" id="OPTION6" value="OPTION6">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION7">음식물반입가능
+									<input type="checkbox" id="OPTION7" value="OPTION7">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION8">주류반입가능
+									<input type="checkbox" id="OPTION8" value="OPTION8">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION9">샤워시설 
+									<input type="checkbox" id="OPTION9" value="OPTION9">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION10">주차
+									<input type="checkbox" id="OPTION10" value="OPTION10">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION11">금연
+									<input type="checkbox" id="OPTION11" value="OPTION11">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION12">반려동물 동반가능
+									<input type="checkbox" id="OPTION12" value="OPTION12">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION13">PC/노트북
+									<input type="checkbox" id="OPTION13" value="OPTION13">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION14">의자/테이블
+									<input type="checkbox" id="OPTION14" value="OPTION14">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION15">내부화장실
+									<input type="checkbox" id="OPTION15" value="OPTION15">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION16">탈의실
+									<input type="checkbox" id="OPTION16" value="OPTION16">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION17">테라스/루프탑
+									<input type="checkbox" id="OPTION17" value="OPTION17">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION18">공용라운지
+									<input type="checkbox" id="OPTION18" value="OPTION18">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION19">전신거울
+									<input type="checkbox" id="OPTION19" value="OPTION19">
+									<span class="checkbox"></span>
+								</label>
+							</div>
+							<div class="ml-column">
+								<label for="OPTION20">바베큐시설 
+									<input type="checkbox" id="OPTION20" value="OPTION20">
 									<span class="checkbox"></span>
 								</label>
 							</div>
