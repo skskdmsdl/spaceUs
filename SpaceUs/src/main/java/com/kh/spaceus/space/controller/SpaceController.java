@@ -402,21 +402,21 @@ public class SpaceController {
 		return mav;
 	}
 	
-	//인덱스 페이지
+	//인덱스 페이지 인기공간
 	@GetMapping("/selectPopularSpaces.do")
 	public ModelAndView selectPopularSpaces(ModelAndView mav) {
 
-		List<Space> popularList = spaceService.selectPopularSpaces();
-		/* List<Attachment> imageList = new ArrayList<>(); */
-		List<Space> list = new ArrayList<>();
-		for(Space s : popularList) {
-			Attachment att = spaceService.selectPopularImage(s.getSpaceNo());
-			s.setAddress(s.getAddress().substring(9, s.getAddress().indexOf(" ",10)));
-			s.setAttach(att.getRname());
-			list.add(s);
-		}
+		List<SpaceList> popularList = spaceService.selectPopularSpaces();
+		List<Attachment> imageList = new ArrayList<>(); 
+		List<SpaceList> list = new ArrayList<>(); 
 		
-		mav.addObject("list", list);
+		 for(SpaceList s : popularList) { Attachment att =
+		 spaceService.selectPopularImage(s.getSpaceNo());
+		 s.setAddress(s.getAddress());
+		 s.setRenamedFilename(att.getRname()); list.add(s); }
+		 
+		
+		mav.addObject("list", popularList);
 		mav.setViewName("jsonView");
 
 		return mav;

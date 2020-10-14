@@ -1,6 +1,7 @@
 package com.kh.spaceus.space.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Attachment;
@@ -85,7 +86,7 @@ public interface SpaceDAO {
 
 	List<OptionList> selectOptionList(String spaceNo);
 	
-	List<Space> selectPopularSpaces();
+	List<SpaceList> selectPopularSpaces();
 
 	List<Object> selectAutoList(String value);
 	
@@ -99,6 +100,8 @@ public interface SpaceDAO {
 
 	List<SpaceList> selectSearchSpaceList(String searchSpace);
 
+	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
+	
 	Attachment selectPopularImage(String spaceNo);
 
 

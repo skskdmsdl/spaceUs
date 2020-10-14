@@ -262,9 +262,31 @@ $(document).on("click",".fa-2x",function(){
 				</select>
 				<!-- 지역 선택 끝-->
 				
-				<!-- 날짜 선택 시작 -->
-				<input type="date" name="space_date" id="space_date" class="nice-select sm-width"/>
-				<!-- 날짜 선택 끝 -->
+				<!-- 옵션 선택 시작 -->
+				<select name="space_option" id="space_option" class="nice-select sm-width">		
+					<option value="">모든 옵션</option>
+					<option value="OPTION1">TV/프로젝터</option>
+					<option value="OPTION2">인터넷/와이파이</option>
+					<option value="OPTION3">복사/인쇄기</option>
+					<option value="OPTION4">화이트보드</option>
+					<option value="OPTION5">음향/마이크</option>
+					<option value="OPTION6">취사시설</option>
+					<option value="OPTION7">음식물반입가능</option>
+					<option value="OPTION8">주류반입가능</option>
+					<option value="OPTION9">샤워시설</option>
+					<option value="OPTION10">주차</option>
+					<option value="OPTION11">금연</option>
+					<option value="OPTION12">반려동물 동반가능</option>
+					<option value="OPTION13">PC/노트북</option>
+					<option value="OPTION14">의자/테이블</option>
+					<option value="OPTION15">내부화장실</option>
+					<option value="OPTION16">탈의실</option>
+					<option value="OPTION17">테라스/루프탑</option>
+					<option value="OPTION18">공용라운지</option>
+					<option value="OPTION19">전신거울</option>
+					<option value="OPTION20">바베큐시설</option>
+				</select>
+				<!-- 옵션 선택 끝 -->
 			</form>
 			
 			<div class="container">
@@ -272,151 +294,6 @@ $(document).on("click",".fa-2x",function(){
 			</div>
 		</div>
 	</div>
-	
-	<!-- 더많은 옵션 시작-->   
-	<div class="more-option">
-		<div class="accordion" id="accordionExample">
-			<div class="card">
-				<div class="card-heading-active" id="btn-wrap">
-					<a class="icon-arrow_drop_down_circle" data-toggle="collapse" data-target="#collapseOne">
-						<b>더 많은 옵션</b>
-					</a>
-					<br />
-				</div>  
-					
-				<div id="collapseOne" class="collapse">
-					<div class="card-body">
-						<span><b>편의시설</b>을 선택하세요.</span>
-						<hr />
-						<div class="mo-list">
-							<div class="ml-column">
-								<label for="OPTION1">TV/프로젝터
-									<input type="checkbox" id="OPTION1" value="OPTION1">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION2">인터넷/와이파이
-									<input type="checkbox" id="OPTION2" value="OPTION2">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION3">복사/인쇄기 
-									<input type="checkbox" id="OPTION3" value="OPTION3">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION4">화이트보드
-									<input type="checkbox" id="OPTION4" value="OPTION4">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION5">음향/마이크
-									<input type="checkbox" id="OPTION5" value="OPTION5">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION6">취사시설
-									<input type="checkbox" id="OPTION6" value="OPTION6">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION7">음식물반입가능
-									<input type="checkbox" id="OPTION7" value="OPTION7">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION8">주류반입가능
-									<input type="checkbox" id="OPTION8" value="OPTION8">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION9">샤워시설 
-									<input type="checkbox" id="OPTION9" value="OPTION9">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION10">주차
-									<input type="checkbox" id="OPTION10" value="OPTION10">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION11">금연
-									<input type="checkbox" id="OPTION11" value="OPTION11">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION12">반려동물 동반가능
-									<input type="checkbox" id="OPTION12" value="OPTION12">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION13">PC/노트북
-									<input type="checkbox" id="OPTION13" value="OPTION13">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION14">의자/테이블
-									<input type="checkbox" id="OPTION14" value="OPTION14">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION15">내부화장실
-									<input type="checkbox" id="OPTION15" value="OPTION15">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION16">탈의실
-									<input type="checkbox" id="OPTION16" value="OPTION16">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION17">테라스/루프탑
-									<input type="checkbox" id="OPTION17" value="OPTION17">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION18">공용라운지
-									<input type="checkbox" id="OPTION18" value="OPTION18">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION19">전신거울
-									<input type="checkbox" id="OPTION19" value="OPTION19">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION20">바베큐시설 
-									<input type="checkbox" id="OPTION20" value="OPTION20">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-						</div>
-					</div>
-				</div> 
-				
-			</div>
-		</div>
-	</div>
-	<!-- 더많은 옵션 끝 -->    
 </div>
 <!-- 옵션/카테고리/지역 선택 끝 -->
 <!-- 검색창 끝 -->
@@ -433,52 +310,79 @@ $(document).on("click",".fa-2x",function(){
     <div id="popularList" class="row">
     	  <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
-    		<a href="" class="pop0"></a>
+    		<span class="pop0"></span>
     			<div class="text">
     				<p class="price"><span class="space-price price0"></span><small>원/시간</small></p>
     				<ul class="property_list">
-    					<li class="view0"><span class="icon-eye"></span></li>
+    					<li class="view0"><span class="icon-star"></span></li>
     					<li class="like0"><span class="icon-heart"></span></li>
-    					<li class="star0"><span class="icon-star"></span></li>
+    					<li class="star0"><span class="icon-comments"></span></li>
     				</ul>
     				<h3 class="title0"></h3>
     				<small><span class="icon-my_location location0"></span></small>
-    				<a class="d-flex align-items-center justify-content-center btn-custom button0">
-    				<span class="icon-heart"></span>
-    				</a>
+    	
     			</div>
     		</div>
     	</div>
     	  <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
-    		<a href="" class="pop1"></a>
+    		<span class="pop1"></span>
     			<div class="text">
     				<p class="price"><span class="space-price price1"></span><small>원/시간</small></p>
     				<ul class="property_list">
-    					<li class="view1"><span class="icon-eye"></span></li>
+    					<li class="view1"><span class="icon-star"></span></li>
     					<li class="like1"><span class="icon-heart"></span></li>
-    					<li class="star1"><span class="icon-star"></span></li>
+    					<li class="star1"><span class="icon-comments"></span></li>
     				</ul>
     				<h3 class="title1"></h3>
     				<small><span class="icon-my_location location1"></span></small>
-    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    				<span class="icon-heart"></span>
-    				</a>
+    
     			</div>
     		</div>
     	</div>
-    	  <div class="col-md-4">
+    	 <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
-    		<a href="" class="pop2"></a>
+    		<span class="pop2"></span>
     			<div class="text">
     				<p class="price"><span class="space-price price2"></span><small>원/시간</small></p>
     				<ul class="property_list">
-    					<li class="view2"><span class="icon-eye"></span></li>
+    					<li class="view2"><span class="icon-star"></span></li>
     					<li class="like2"><span class="icon-heart"></span></li>
-    					<li class="star2"><span class="icon-star"></span></li>
+    					<li class="star2"><span class="icon-comments"></span></li>
     				</ul>
     				<h3 class="title2"></h3>
     				<small><span class="icon-my_location location2"></span></small>
+    				
+    			</div>
+    		</div>
+    	</div> 
+<!--     	 <div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    		<a href="" class="pop3"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price price3"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view3"><span class="icon-eye"></span></li>
+    					<li class="like3"><span class="icon-heart"></span></li>
+    					<li class="star3"><span class="icon-star"></span></li>
+    				</ul>
+    				<h3 class="title3"></h3>
+    				<small><span class="icon-my_location location3"></span></small>
+    			</div>
+    		</div>
+    	</div> 
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    		<a href="" class="pop4"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price price4"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view4"><span class="icon-eye"></span></li>
+    					<li class="like4"><span class="icon-heart"></span></li>
+    					<li class="star4"><span class="icon-star"></span></li>
+    				</ul>
+    				<h3 class="title4"></h3>
+    				<small><span class="icon-my_location location4"></span></small>
     				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
     				<span class="icon-heart"></span>
     				</a>
@@ -486,6 +390,26 @@ $(document).on("click",".fa-2x",function(){
     		</div>
     	</div>
     	 
+    	</div> 
+    	<div class="col-md-5">
+    		<div class="property-wrap ftco-animate">
+    		<a href="" class="pop5"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price price5"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view5"><span class="icon-eye"></span></li>
+    					<li class="like5"><span class="icon-heart"></span></li>
+    					<li class="star5"><span class="icon-star"></span></li>
+    				</ul>
+    				<h3 class="title5"></h3>
+    				<small><span class="icon-my_location location5"></span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>  -->
+    	
 			<!-- 인기공간 리스트 -->
     </div>
 	</div>
@@ -609,12 +533,14 @@ function popular(){
 		success : function(data){
 			console.log(data.list);
 			 $.each(data.list, function(i, list){
-
-				$(".pop"+i).append("<a href=''></a>").addClass('img').css("background-image", "url(${pageContext.request.contextPath }/resources/upload/space/"+list.attach+")")
+				$(".pop"+i).before("<a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+list.spaceNo+"'>");
+				//$("link_"+i).append("<a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+list.spaceNo+"'>");
+				$(".pop"+i).addClass('img').css("background-image", "url(${pageContext.request.contextPath }/resources/upload/space/"+list.renamedFilename+")")
+				$(".pop"+i).after("</a>");
 				$(".price"+i).append(list.hourlyPrice);
-				$(".view"+i).append(list.views);
+				$(".view"+i).append(Math.round(list.starAvg * 10)/10);
 				$(".like"+i).append(list.likeCnt);
-				$(".star"+i).append(Math.round(list.starAvg * 10)/10);
+				$(".star"+i).append(list.reviewCnt);
 				$(".title"+i).append("<a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+list.spaceNo+"'>"+list.spaceName+"</a>");
 				$(".location"+i).append(list.address);
 				
