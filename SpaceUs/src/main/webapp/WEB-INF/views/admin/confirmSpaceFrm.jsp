@@ -305,8 +305,8 @@ $(".confirm").click(function(){
 	
 	var spaceNo = $(this).val();
 	var memberEmail = $(this).siblings(".member").val();
-	alert(spaceNo);
-	alert(memberEmail);
+	//alert(spaceNo);
+	//alert(memberEmail);
 
 	var param1 = "spaceNo="+spaceNo+
 				"&memberEmail="+memberEmail;

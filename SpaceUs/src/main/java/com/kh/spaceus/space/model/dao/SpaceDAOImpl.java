@@ -1,6 +1,7 @@
 package com.kh.spaceus.space.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,6 +16,7 @@ import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceList;
 import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
@@ -132,7 +134,7 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public List<Space> selectSameCategory(Space space) {
+	public List<SpaceList> selectSameCategory(Space space) {
 		return sqlSession.selectList("space.selectSameCategory", space);
 	}
 
@@ -202,7 +204,7 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 	
 	@Override	
-	public List<Space> selectPopularSpaces() {
+	public List<SpaceList> selectPopularSpaces() {
 		return sqlSession.selectList("space.selectPopularSpaces");
 	}
 
@@ -228,13 +230,30 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}*/
 	
 	@Override
-	public List<Space> selectSearchSpaceList(String searchSpace) {
+	public List<SpaceList> selectSearchSpaceList(String searchSpace) {
 		return sqlSession.selectList("space.selectSearchSpaceList", searchSpace);
 	}
-
+	
 	@Override
 	public Wish selectOneWish(Wish wish) {
 		return sqlSession.selectOne("space.selectOneWish", wish);
 	}
+	
+	@Override
+	public Attachment selectPopularImage(String spaceNo) {
+		return sqlSession.selectOne("space.selectPopularImage", spaceNo);
+	}
+
+	@Override
+	public List<String> selectSearchDetailSpaceNo(Map<String, String> map) {
+		return sqlSession.selectList("space.selectSearchDetailSpaceNo", map);
+	}
+
+	@Override
+	public int minusLikeCnt(Wish wish) {
+		return sqlSession.update("space.minusLikeCnt", wish);
+	}
+
+	
 
 }

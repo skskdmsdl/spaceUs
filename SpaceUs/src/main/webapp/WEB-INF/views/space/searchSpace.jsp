@@ -202,7 +202,7 @@ $(function() {
 
 function searchSpace(){
 	var keyword = $(".searchInput").val();
-	alert(keyword);
+	//alert(keyword);
 
 	keyword = keyword.replace('#','%23');
 	
@@ -213,7 +213,18 @@ function searchSpace(){
 	else{
 		location.href='${pageContext.request.contextPath}/space/searchSpace.do?keyword='+keyword;
 	}
+
 }
+
+function searchDetailSpace(){
+
+	var category = $("select[name=space_type]").val();
+	var location = $("select[name=space_location]").val();
+	var option = $("select[name=space_option]").val();
+
+	window.location.href="${pageContext.request.contextPath}/space/searchDetailSpace.do?category="+category+"&location="+location+"&option="+option;
+}
+
 
 </script>
 
@@ -260,71 +271,45 @@ function searchSpace(){
 <!-- 옵션/카테고리/지역 선택 시작-->
 <div class="container">
 	<div class="search-form-content" style="margin-top:100px;">
-		<div class="flex-wrap">
-			<div class="search-category">공간유형</div>
-			<div class="search-category">지역</div>
-			<div class="search-category">날짜</div>
-			<form id="filter-search" class="filter-form">
-				<!-- 카테고리 선택 시작 -->
-				<select name="space_type" id="space_type" class="nice-select sm-width">
-					<option value="all_category">모든유형</option>
-					<c:forEach items="${categoryList}" var="category">
-						<option value="${category.categoryNo}">${category.categoryName}</option>
-					</c:forEach>
-				</select>
-				<!-- 카테고리 선택 끝-->
-				
-				<!-- 지역 선택 시작 -->
-				<select name="space_location" id="space_location" class="nice-select sm-width">		
-					<option value="all_location">모든지역</option>
-					<option value="seoul">서울특별시</option>
-					<option value="seoul">인천광역시</option>
-					<option value="seoul">경기도</option>
-					<option value="seoul">강원도</option>
-				</select>
-				<!-- 지역 선택 끝-->
-				
-				<!-- 날짜 선택 시작 -->
-				<input type="date" name="space_date" id="space_date" class="nice-select sm-width"/>
-				<!-- 날짜 선택 끝 -->
-			</form>
-			
-			<div class="container">
-				<button type="button" class="search-btn" onclick="searchSpace();">검색</button>
-			</div>
-		</div>
-	</div>
-	
-	<!-- 더많은 옵션 시작-->   
-	<div class="more-option">
-		<div class="accordion" id="accordionExample">
-			<div class="card">
-				<div class="card-heading-active" id="btn-wrap">
-					<a class="icon-arrow_drop_down_circle" data-toggle="collapse" data-target="#collapseOne">
-						<b>더 많은 옵션</b>
-					</a>
-					<br />
-				</div>  
+			<div class="flex-wrap">
+				<div class="search-category">공간유형</div>
+				<div class="search-category">지역</div>
+				<div class="search-category">옵션</div>
+				<form id="filter-search" class="filter-form">
+					<!-- 카테고리 선택 시작 -->
+					<select name="space_type" id="space_type" class="nice-select sm-width">
+						<option value="">모든유형</option>
+						<c:forEach items="${categoryList}" var="category">
+							<option value="${category.categoryName}">${category.categoryName}</option>
+						</c:forEach>
+					</select>
+					<!-- 카테고리 선택 끝-->
 					
-				<div id="collapseOne" class="collapse">
-					<div class="card-body">
-						<span><b>편의시설</b>을 선택하세요.</span>
-						<hr />
-						<div class="mo-list">
-							<div class="ml-column">
-								<label for="${option.optionNO}">${option.optionName}
-									<input type="checkbox" id="${option.optionNO}" value="${option.optionNO}">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-						</div>
-					</div>
-				</div> 
-				
+					<!-- 지역 선택 시작 -->
+					<select name="space_location" id="space_location" class="nice-select sm-width">		
+						<option value="">모든 지역</option>
+						<option value="서울">서울특별시</option>
+						<option value="인천">인천광역시</option>
+						<option value="경기">경기도</option>
+						<option value="강원">강원도</option>
+					</select>
+					<!-- 지역 선택 끝-->
+					
+					<!-- 옵션 선택 시작 -->
+					<select name="space_option" id="space_option" class="nice-select sm-width">		
+						<option value="">모든 옵션</option>
+						<c:forEach items="${optionList}" var="option">
+							<option value="${option.optionName}">${option.optionName}</option>
+						</c:forEach>
+					</select>
+					<!-- 옵션 선택 끝 -->
+				</form>				
+				<div class="container">
+					<!-- <button type="submit" class="search-btn search-detail" onclick="searchDetailSpace();">검색</button> -->
+					<input type="submit" value="검색" onclick="searchDetailSpace();" class="search-btn search-detail" />
+				</div>
 			</div>
-		</div>
 	</div>
-	<!-- 더많은 옵션 끝 -->    
 </div>
 <!-- 옵션/카테고리/지역 선택 끝 -->
 
@@ -346,26 +331,41 @@ function searchSpace(){
 
 <!-- 공간 리스트 시작 -->
 <div class="container search-result">
+    <c:if test="${!empty spaceList}">
     <div class="row">
-		<div class="col-md-4">
-			<div class="property-wrap ftco-animate">
-    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
-    			<div class="text">
-    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
-    				<ul class="property_list">
-    					<li><span class="icon-eye"></span>0</li>
-    					<li><span class="icon-heart"></span>55</li> <!-- 좋아요 수 -->
-    					<li><span class="icon-comments"></span>29</li><!-- 후기 수 -->
-    				</ul>
-    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">The Blue Sky Home</a></h3>
-    				<small><span class="icon-my_location">조원동</span></small>
-    				<!-- <a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    				<span class="icon-heart"></span>
-    				</a> -->
-    			</div>
-			</div>
-    	</div>
+		<c:forEach items="${spaceList}" var="space">
+			<div class="col-md-4">
+				<div class="property-wrap ftco-animate">
+	    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/${space.renamedFilename});"></a>
+	    			<div class="text">
+	    				<p class="price"><span class="space-price">${space.hourlyPrice}<small>원/시간</small></span></p>
+	    				<ul class="property_list">
+	    					<li><span class="icon-star"></span>${space.starAvg }</li><!-- 평균 별점 수 -->
+	    					<li><span class="icon-heart"></span>${space.likeCnt }</li> <!-- 좋아요 수 -->
+	    					<li><span class="icon-comments"></span>${space.reviewCnt}</li><!-- 리뷰 수 -->
+	    				</ul>
+	    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">${space.spaceName}</a></h3>
+	    				<small><span class="icon-my_location">${space.address}</span></small>
+	    				<!-- <a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+	    				<span class="icon-heart"></span>
+	    				</a> -->
+	    			</div>
+				</div>
+	    	</div>		
+		</c:forEach>
 	</div>
+	</c:if>
+	<c:if test="${empty spaceList}">
+	<div class="row" style="font-size: 20px; margin:auto;">
+		<div class="col-md-4" style="margin:auto;">
+			<div class="property-wrap ftco-animate" style="margin-top:10px; text-align: center;">
+				검색 결과가 없습니다. <br />
+				다른 검색조건으로 공간을 찾아보세요.
+			</div>
+		</div>
+	</div>
+	</c:if>
+	
 </div>
 <!-- 공간 리스트 끝-->
 </section>	

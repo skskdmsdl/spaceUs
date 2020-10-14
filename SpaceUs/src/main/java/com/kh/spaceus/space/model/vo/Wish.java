@@ -24,5 +24,6 @@ public class Wish implements Serializable{
 	String address;
 	int hourlyPrice;
 	String image;
+	int reviewCnt;
 	Date date;
 }

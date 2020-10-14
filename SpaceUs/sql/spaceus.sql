@@ -604,12 +604,17 @@ create table wish(
     member_email varchar(256) not null,
     like_date date not null,
     
+    constraint pk_wish_no_email primary key(member_email, space_no),
     constraints fk_wish_email foreign key(member_email) references member(member_email) on delete cascade,
-    constraints fk_wish_space_no foreign key(space_no) references space(space_no)
+    constraints fk_wish_space_no foreign key(space_no) references space(space_no) on delete cascade
 
 );
 
 select * from wish;
+--commit;
+--alter table wish add constraint fk_wish_space_no foreign key(space_no) references space(space_no) on delete cascade; 
+--alter table wish drop constraint fk_wish_space_no ;
+
 
 
 -----------------------------
@@ -659,15 +664,17 @@ create table daily_sale(
   settlement_date date default sysdate, --날짜
   daily_total_hour number not null,
   daily_revenue number not null, --일별 총 매출
-  
-  constraint fk_ds_space_no foreign key(space_no) references space(space_no) on delete set null,
+
   constraint pk_ds_sale_no primary key(daily_sale_no)
 
 );
 
+
 create sequence seq_daily_sale_no;
 
 select * from daily_sale;
+
+--alter table daily_sale add constraint fk_ds_space_no foreign key(space_no) references space(space_no) on delete set null;
 
 
 -----------------------------
@@ -706,7 +713,7 @@ create sequence seq_year_sale;
 
 
 --------------------------------------------------
--- 위시리스트 추가/삭제시 공간 좋아요수 컬럼 수정 트리거
+-- 위시리스트 추가시 공간 좋아요수 컬럼 수정 트리거
 --------------------------------------------------
 create or replace trigger trig_addlike
     after
@@ -717,17 +724,6 @@ begin
     where space_no = :new.space_no;
 end;
 /
-
-create or replace trigger trig_unlike
-    after
-    delete on wish
-    for each row
-begin 
-    update space set like_cnt= like_cnt-1
-    where space_no = :old.space_no;
-end;
-/
-
 
 
 

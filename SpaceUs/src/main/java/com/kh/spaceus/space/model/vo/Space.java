@@ -1,7 +1,7 @@
 package com.kh.spaceus.space.model.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -41,6 +41,7 @@ public class Space implements Serializable{
 	private String starRating;
 	private String reviewContent;
 	private String reviewComment;
+	private String attach;
 	
 	private List<Attachment> attachList;
 }

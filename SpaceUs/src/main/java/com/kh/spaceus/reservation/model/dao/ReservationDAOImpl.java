@@ -56,4 +56,15 @@ public class ReservationDAOImpl implements ReservationDAO{
 	public List<Reservation> selectHostReservationList(String memberEmail) {
 		return sqlSession.selectList("reservation.selectHostReservationList", memberEmail);
 	}
+		
+	@Override
+	public List<Reservation> hostSearchReservation(Reservation reservation) {
+		return sqlSession.selectList("reservation.hostSearchReservation", reservation);
+	}
+
+	@Override
+	public List<Reservation> selectUseReservation(String memberEmail) {
+		return sqlSession.selectList("reservation.selectUseReservation", memberEmail);
+	}
+
 }

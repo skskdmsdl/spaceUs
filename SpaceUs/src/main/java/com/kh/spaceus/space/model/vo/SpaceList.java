@@ -1,8 +1,5 @@
 package com.kh.spaceus.space.model.vo;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,13 +11,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Attachment implements Serializable{
-
-	private String fileNo;
+public class SpaceList {
+	
 	private String spaceNo;
-	private String oname;
-	private String rname;
-	private Date uploadDate;
-	private boolean status;
+	private String spaceName;
+	private String address;
+	private int hourlyPrice;
+	private int views;
+	private int likeCnt;
+	private float starAvg;
+	private int reviewCnt;
+	private String renamedFilename;
 }
-

@@ -13,6 +13,10 @@
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/mypageMenu.jsp" />
 <style>
+span > a:hover{
+	color: #ffc107;
+}
+
 .content{
 	background-color: #f8f9fa; 
 	color:#343a40;
@@ -95,27 +99,36 @@
                             <h6 class="card-subtitle">위시리스트를 확인하세요</h6>
                         </div>
                         <div class="row">
-                        	 <c:if test="${ not empty wlist }">
-							<c:forEach items="${ wlist }" var="wish" varStatus="vs">
+                        	<c:choose>
+				         	 <c:when test="${ not empty wlist }">
+                        	<c:forEach items="${ wlist }" var="wish" varStatus="vs">
 							<div class="col-md-3">
 							    <div class="thumbnail block-20" >
-							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/images/image_1.jpg" alt="..."> 
+							    <a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${wish.spaceNo}">
+							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/upload/space/${wish.image}" alt="..."> 
+							    </a>
 							</div>
 						     <div class="caption">
-						     	<a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${wish.spaceNo}">
 						     	<div class="space-detail">
-							        <span class="badge badge-light">${ wish.spaceName}</span>
+
+							        <span class="badge badge-light">
+							       		 <a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${wish.spaceNo}">${ wish.spaceName}</a>
+							        </span>
+						        
+							        <span style="font-size:13px;"><i class="icon-my_location badge badge-secondary">${ wish.address}</i></span>
+							        
 							        <ul class="space_list">
-							        <li><i class="icon-won badge badge-secondary"><fmt:formatNumber value="${wish.hourlyPrice }" type="number"/><small>원/시간</small></i><li>
-				    					<li><span class="icon-star"></span>${wish.starAvg }</li>
-				    					<li><span class="icon-heart"></span>${wish.likeCnt }</li>
-				    					<%-- <li><span class="icon-eye"></span>${space.views }</li> --%>
-	    							</ul>
+								        <li><i class="icon-won badge badge-secondary"><fmt:formatNumber value="${wish.hourlyPrice }" type="number"/><small>원/시간</small></i><li>
+					    					<li><span class="icon-star"></span><fmt:formatNumber value="${wish.starAvg }" pattern=".0" type="number"/></li>
+					    					<li><span class="icon-heart"></span>${wish.likeCnt }</li>
+					    					<li><span class="icon-comments"></span>${wish.reviewCnt }</li>
+		    							</ul>
 						        </div>
 						        <div class="content">
+						        	<a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${wish.spaceNo}">
 						        	<p class="content" style="width:250px;">${ wish.content}</p>
+						        	</a>
 						        </div>
-						        </a>
 						        <form name="deleteFrm" 
 									  action="${pageContext.request.contextPath}/member/deleteWish.do" 
 									  method="post" >
@@ -123,12 +136,18 @@
 						        <input type="hidden" name="spaceNo" value="${wish.spaceNo }"/>
 						        <input type="hidden" name="email" value="${wish.email }"/>
 						        
-						        <p><button class="delete btn btn-secondary" type="submit">위시리스트 삭제</button></p>
+						        <p style="text-align:center; width: 75%;"><button class="delete btn btn-secondary" type="submit">위시리스트 삭제</button></p>
 						        </form>
 						     </div>
 							  </div>
 							</c:forEach>
-							</c:if>		
+							</c:when>
+							<c:otherwise>
+								<div style="text-align: center; width: 90%; padding:20px;">
+									<span class="icon-folder" style="letter-spacing:1px;">조회된 위시리스트가 없습니다.</span>
+								</div>
+							</c:otherwise>
+							</c:choose>	
 						  </div>
 						</div>
 						</div>

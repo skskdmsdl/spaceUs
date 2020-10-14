@@ -133,7 +133,7 @@
 <script type="text/javascript">
 	$(".spaceTwo").click(function(){
 		var spaceNo = $(this).siblings("[name=spaceNo]").val();
-		alert(spaceNo);
+		//alert(spaceNo);
 		
 		location.href="${pageContext.request.contextPath}/admin/confirmSpaceFrm.do?spaceNo="+spaceNo;
 	});

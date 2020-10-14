@@ -15,6 +15,10 @@ public interface ReservationDAO {
 	
 	int insertReservation(Reservation reservation);
 
+	List<Reservation> hostSearchReservation(Reservation reservation);
+
+	List<Reservation> selectUseReservation(String memberEmail);
+
 	List<Reservation> selectListReservation(String email);
 
 	List<Reservation>ingReservation(String email);

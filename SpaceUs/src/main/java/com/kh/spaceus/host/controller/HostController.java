@@ -77,9 +77,39 @@ public class HostController {
 	@RequestMapping("/hostReservation.do")
 	public String ManageHostReservation(Principal principal, Model model) {
 		
-		String member_email = principal.getName();
-		List<Reservation> list = reservationService.selectHostReservationList(member_email);
+		String memberEmail = principal.getName();
+		List<Reservation> list = reservationService.selectHostReservationList(memberEmail);
 	
+		model.addAttribute("list", list);
+		return "host/hostReservation";
+	}	
+	
+	//순서별 예약현황
+	@RequestMapping("/hostReservationOrder.do")
+	public String hostReservationOrder(Principal principal, Model model, @RequestParam String order) {
+		
+		String memberEmail = principal.getName();
+		System.out.println(order);
+		if(order.equals("all")) {
+			List<Reservation> list = reservationService.selectHostReservationList(memberEmail);
+			model.addAttribute("list", list);
+			System.out.println(list);
+		}
+		else {
+			List<Reservation> list = reservationService.selectUseReservation(memberEmail);
+			model.addAttribute("list", list);
+			System.out.println(list);
+		}
+		return "host/hostReservation";
+	}	
+	
+	//예약 회원 조회 
+	@RequestMapping("/hostSearchReservation.do")
+	public String hostSearchReservation(Principal principal, Model model, Reservation reservation) {
+		
+		reservation.setHostEmail(principal.getName());
+		List<Reservation> list = reservationService.hostSearchReservation(reservation);
+		
 		model.addAttribute("list", list);
 		return "host/hostReservation";
 	}	

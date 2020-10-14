@@ -1,13 +1,16 @@
 package com.kh.spaceus.space.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.spaceus.qna.model.vo.Qna;
+import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.Option;
 import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceList;
 import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
@@ -52,7 +55,7 @@ public interface SpaceService {
 	
 	int insertWish(Wish wish);
 
-	List<Space> selectSameCategory(Space space);
+	List<SpaceList> selectSameCategory(Space space);
 
 	int selectLikeCnt(String spaceNo);
 
@@ -78,7 +81,7 @@ public interface SpaceService {
 
 	List<OptionList> selectOptionList(String spaceNo);
 	
-	List<Space> selectPopularSpaces();
+	List<SpaceList> selectPopularSpaces();
 
 	List<Object> selectAutoList(String value);
 
@@ -90,7 +93,16 @@ public interface SpaceService {
 
 	Wish selectOneWish(Wish wish);
 
-	List<Space> selectSearchSpaceList(String searchSpace);
+	//물어보기
+	/* List<Space> selectSearchSpaceList(String searchSpace); */
+
+	Attachment selectPopularImage(String spaceNo);
+
+	List<SpaceList> selectSearchSpaceList(String searchSpace);
+
+	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
+
+	int minusLikeCnt(Wish wish);
 	
 	/* List<Space> selectListSpaceCollection(String email); */
 

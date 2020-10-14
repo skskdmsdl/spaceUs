@@ -1,6 +1,7 @@
 package com.kh.spaceus.space.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceList;
 import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
@@ -159,7 +161,7 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public List<Space> selectSameCategory(Space space) {
+	public List<SpaceList> selectSameCategory(Space space) {
 		return spaceDAO.selectSameCategory(space);
 	}
 
@@ -224,7 +226,7 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 	
 	@Override
-	public List<Space> selectPopularSpaces() {
+	public List<SpaceList> selectPopularSpaces() {
 		return spaceDAO.selectPopularSpaces();
 	}
 	
@@ -257,11 +259,25 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public List<Space> selectSearchSpaceList(String searchSpace) {
+	public List<SpaceList> selectSearchSpaceList(String searchSpace) {
 		return spaceDAO.selectSearchSpaceList(searchSpace);
 	}
+
+	@Override
+	public List<String> selectSearchDetailSpaceNo(Map<String, String> map) {
+		return spaceDAO.selectSearchDetailSpaceNo(map);
+	}
 	
-	
+	@Override
+	public Attachment selectPopularImage(String spaceNo) {
+		return spaceDAO.selectPopularImage(spaceNo);
+	}
+
+	@Override
+	public int minusLikeCnt(Wish wish) {
+		return spaceDAO.minusLikeCnt(wish);
+	}
+
 	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {

@@ -32,6 +32,65 @@ font-family: 'NEXON Lv1 Gothic OTF';
   position: relative;
 }
 
+.search-btn{
+  float: right;
+  right: 30px;
+  padding-right: 15px;
+  padding-left: 15px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: #20c997;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border-style: groove;
+  border-color: #20c997;
+}
+
+#btn-wrap{
+  display: block;
+  width: 100%;
+  color: #17a2b8;
+  text-align: center;
+  margin-left: 10px;
+  argin-right: 20px;
+  margin-top: 10px;
+  padding-left: 15px;
+}
+
+.sort-wrap{ 
+  display:block;
+  width: 100%;
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+#space-sort{
+  width: 240px;
+  height: 40px;
+}
+
+.flex-wrap{
+  display:block;
+  width: 100%;
+}
+
+.search-category{
+  display:inline-block;
+  width: 33%;
+  height: 50px;
+  text-align: left;
+  color:#343a40;
+  padding: 13px;
+}
+
+.search-result {
+  background-color: #f8f9fa;
+  padding-top: 20px;
+}
+
 .searchInput{
   height: 40px;
   width: 400px;
@@ -79,7 +138,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
 .space-price{
   color: #007bff;
 }
-
+#disapear {display: none;}
 </style>
 
 
@@ -129,6 +188,11 @@ $(function() {
     });
     
 });
+
+$(document).on("click",".fa-2x",function(){
+   $(this).siblings("#disapear").toggle('30000');
+});
+
 </script>
 
 <!-- 컨텐츠 시작 -->
@@ -143,11 +207,11 @@ $(function() {
       			<div class="text text-center mx-auto" style="margin-bottom:25%;">
           			<h1 class="mb-4">어떤 공간을<br>찾고 있나요?</h1>
           			<p></p>
-     					<div style="margin-top:-20px">
+		  				<i class="fas fa-search fa-2x" style="color:#00C89E"></i>	
+     					<div id="disapear" style="margin-top:-20px">
      						<div id="wrap">
 		  						<input id="searchInput" class="searchInput" name="search_keyword" placeholder="키워드를 입력하세요">
-		  						<input type="submit" class="btn-lg search-btn" value="입력" onclick="searchSpace();" />
-		  						<!-- <i class="fas fa-search fa-2x" style="color:#00C89E"></i> -->	
+		  						<input type="submit" class="btn-lg search-btn" value="입력" onclick="searchSpace();" style="background: #00c89e;"/>
 							</div>
          				</div>
        			</div>
@@ -161,147 +225,77 @@ $(function() {
  </div>
 </div>
 <!-- 검색창 시작 -->
-<section class="ftco-section goto-here">
-<section class="search-section spad">
-    <div class="container">
-           		<div class="row justify-content-center">
-      <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-      	<span class="subheading">원하는 옵션으로 검색해보세요</span>
-        <h2 class="mb-2">공간 검색</h2>
-      </div>
-    </div>
-        <div class="search-form-content">
-            <form id="filter-search" class="filter-form">
-                <select class="nice-select sm-width">
-                    <option value="">Chose The City</option>
-                </select>
-                <select class="nice-select sm-width">
-                    <option value="">Location</option>
-                </select>
-                <select class="nice-select sm-width">
-                    <option value="">Property Status</option>
-                </select>
-                <select class="nice-select sm-width">
-                    <option value="">Property Type</option>
-                </select>
-                <select class="nice-select sm-width">
-                    <option value="">No Of Bedrooms</option>
-                </select>
-                <select class="nice-select sm-width">
-                    <option value="">No Of Bathrooms</option>
-                </select>
-                <div class="room-size-range-wrap sm-width">
-                    <div class="price-text">
-                        <label for="roomsizeRange">Size:</label>
-                        <input type="text" id="roomsizeRange" readonly>
-                    </div>
-                    <div id="roomsize-range" class="slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
-                    <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 14.2857%; width: 42.8571%;"></div>
-                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 14.2857%;"></span>
-                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 57.1429%;"></span>
-                    </div>
-                </div>
-                <div class="price-range-wrap sm-width">
-                    <div class="price-text">
-                        <label for="priceRange">Price:</label>
-                        <input type="text" id="priceRange" readonly>
-                    </div>
-                    <div id="price-range" class="slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
-                    <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 6.66667%; width: 60%;"></div>
-                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 6.66667%;"></span>
-                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 66.6667%;"></span>
-                    </div>
-                </div>
-                <button type="button" onclick="location.href='${pageContext.request.contextPath}/space/searchSpace.do?search_keyword=';" class="search-btn sm-width">검색</button>
-            </form>
-        </div>
-        <div class="more-option">
-            <div class="accordion" id="accordionExample">
-                <div class="card">
-                    <div class="card-heading active">
-                        <a data-toggle="collapse" data-target="#collapseOne">
-                            더 많은 옵션
-                        </a>
-                    </div>
-                    <div id="collapseOne" class="collapse" data-parent="#accordionExample">
-                        <div class="card-body">
-                            <div class="mo-list">
-                                <div class="ml-column">
-                                    <label for="air">Air conditioning
-                                        <input type="checkbox" id="air">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="lundry">Laundry
-                                        <input type="checkbox" id="lundry">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="refrigerator">Refrigerator
-                                        <input type="checkbox" id="refrigerator">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="washer">Washer
-                                        <input type="checkbox" id="washer">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                </div>
-                                <div class="ml-column">
-                                    <label for="barbeque">Barbeque
-                                        <input type="checkbox" id="barbeque">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="lawn">Lawn
-                                        <input type="checkbox" id="lawn">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="sauna">Sauna
-                                        <input type="checkbox" id="sauna">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="wifi">Wifi
-                                        <input type="checkbox" id="wifi">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                </div>
-                                <div class="ml-column">
-                                    <label for="dryer">Dryer
-                                        <input type="checkbox" id="dryer">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="microwave">Microwave
-                                        <input type="checkbox" id="microwave">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="pool">Swimming Pool
-                                        <input type="checkbox" id="pool">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="window">Window Coverings
-                                        <input type="checkbox" id="window">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                </div>
-                                <div class="ml-column last-column">
-                                    <label for="gym">Gym
-                                        <input type="checkbox" id="gym">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="shower">OutdoorShower
-                                        <input type="checkbox" id="shower">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                    <label for="tv">Tv Cable
-                                        <input type="checkbox" id="tv">
-                                        <span class="checkbox"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<section class="ftco-section goto-here search-section spad">
+<!-- 옵션/카테고리/지역 선택 시작-->
+<div class="container">
+	<div class="search-form-content" style="margin-top:100px;">
+		<div class="flex-wrap">
+			<div class="search-category">공간유형</div>
+			<div class="search-category">지역</div>
+			<div class="search-category">날짜</div>
+			<form id="filter-search" class="filter-form">
+				<!-- 카테고리 선택 시작 -->
+				<select name="space_type" id="space_type" class="nice-select sm-width">
+					<option value="">모든유형</option>
+					<option value="회의실">회의실</option>
+					<option value="세미나실">세미나실</option>
+					<option value="다목적홀">다목적홀</option>
+					<option value="작업실">작업실</option>
+					<option value="파티룸">파티룸</option>
+					<option value="공연장">공연장</option>
+					<option value="연습실">연습실</option>
+					<option value="카페">카페</option>
+					<option value="스터디룸">스터디룸</option>
+					<option value="엠티장소">엠티장소</option>
+					<option value="독립 오피스">독립 오피스</option>
+					<option value="코워커 스페이스">코워커 스페이스</option>	
+				</select>
+				<!-- 카테고리 선택 끝-->
+				
+				<!-- 지역 선택 시작 -->
+				<select name="space_location" id="space_location" class="nice-select sm-width">		
+					<option value="">모든지역</option>
+					<option value="서울">서울특별시</option>
+					<option value="인천">인천광역시</option>
+					<option value="경기">경기도</option>
+					<option value="강원">강원도</option>
+				</select>
+				<!-- 지역 선택 끝-->
+				
+				<!-- 옵션 선택 시작 -->
+				<select name="space_option" id="space_option" class="nice-select sm-width">		
+					<option value="">모든 옵션</option>
+					<option value="TV/프로젝터">TV/프로젝터</option>
+					<option value="인터넷/와이파이">인터넷/와이파이</option>
+					<option value="복사/인쇄기">복사/인쇄기</option>
+					<option value="화이트보드">화이트보드</option>
+					<option value="음향/마이크">음향/마이크</option>
+					<option value="취사시설">취사시설</option>
+					<option value="음식물반입가능">음식물반입가능</option>
+					<option value="주류반입가능">주류반입가능</option>
+					<option value="샤워시설">샤워시설</option>
+					<option value="주차">주차</option>
+					<option value="금연">금연</option>
+					<option value="반려동물 동반가능">반려동물 동반가능</option>
+					<option value="PC/노트북">PC/노트북</option>
+					<option value="의자/테이블">의자/테이블</option>
+					<option value="내부화장실">내부화장실</option>
+					<option value="탈의실">탈의실</option>
+					<option value="테라스/루프탑">테라스/루프탑</option>
+					<option value="공용라운지">공용라운지</option>
+					<option value="전신거울">전신거울</option>
+					<option value="바베큐시설">바베큐시설</option>
+				</select>
+				<!-- 옵션 선택 끝 -->
+			</form>
+			
+			<div class="container">
+				<button type="button" class="search-btn" onclick="searchDetailSpace();">검색</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 옵션/카테고리/지역 선택 끝 -->
 <!-- 검색창 끝 -->
 <br />
 <br />
@@ -313,26 +307,109 @@ $(function() {
         <h2 class="mb-2">인기 공간</h2>
       </div>
     </div>
-    <div class="row">
+    <div id="popularList" class="row">
     	  <div class="col-md-4">
     		<div class="property-wrap ftco-animate">
-    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></a>
+    		<span class="pop0"></span>
     			<div class="text">
-    				<p class="price"><span class="space-price">70,000<small>원/시간</small></span></p>
+    				<p class="price"><span class="space-price price0"></span><small>원/시간</small></p>
     				<ul class="property_list">
-    					<li><span class="icon-people"></span>최대3인</li>
-    					<li><span class="icon-heart"></span>55</li>
-    					<li><span class="icon-comments"></span>29</li>
+    					<li class="view0"><span class="icon-star"></span></li>
+    					<li class="like0"><span class="icon-heart"></span></li>
+    					<li class="star0"><span class="icon-comments"></span></li>
     				</ul>
-    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=space2">The Blue Sky Home</a></h3>
-    				<small><span class="icon-my_location">문발리</span></small>
+    				<h3 class="title0"></h3>
+    				<small><span class="icon-my_location location0"></span></small>
+    	
+    			</div>
+    		</div>
+    	</div>
+    	  <div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    		<span class="pop1"></span>
+    			<div class="text">
+    				<p class="price"><span class="space-price price1"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view1"><span class="icon-star"></span></li>
+    					<li class="like1"><span class="icon-heart"></span></li>
+    					<li class="star1"><span class="icon-comments"></span></li>
+    				</ul>
+    				<h3 class="title1"></h3>
+    				<small><span class="icon-my_location location1"></span></small>
+    
+    			</div>
+    		</div>
+    	</div>
+    	 <div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    		<span class="pop2"></span>
+    			<div class="text">
+    				<p class="price"><span class="space-price price2"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view2"><span class="icon-star"></span></li>
+    					<li class="like2"><span class="icon-heart"></span></li>
+    					<li class="star2"><span class="icon-comments"></span></li>
+    				</ul>
+    				<h3 class="title2"></h3>
+    				<small><span class="icon-my_location location2"></span></small>
+    				
+    			</div>
+    		</div>
+    	</div> 
+<!--     	 <div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    		<a href="" class="pop3"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price price3"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view3"><span class="icon-eye"></span></li>
+    					<li class="like3"><span class="icon-heart"></span></li>
+    					<li class="star3"><span class="icon-star"></span></li>
+    				</ul>
+    				<h3 class="title3"></h3>
+    				<small><span class="icon-my_location location3"></span></small>
+    			</div>
+    		</div>
+    	</div> 
+    	<div class="col-md-4">
+    		<div class="property-wrap ftco-animate">
+    		<a href="" class="pop4"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price price4"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view4"><span class="icon-eye"></span></li>
+    					<li class="like4"><span class="icon-heart"></span></li>
+    					<li class="star4"><span class="icon-star"></span></li>
+    				</ul>
+    				<h3 class="title4"></h3>
+    				<small><span class="icon-my_location location4"></span></small>
     				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
     				<span class="icon-heart"></span>
     				</a>
     			</div>
     		</div>
     	</div>
-    	<div class='col-md-4'><div class='property-wrap ftco-animate'><a href='' class='img' style='background-image: url(/spaceus/resources/images/work-1.jpg);'></a><div class='text'><p class='price'><span class='space-price'>25000<small>원/시간</small></span></p><ul class='property_list'><li><span class='icon-eye'></span>0</li><li><span class='icon-heart'></span>0</li><li><span class='icon-star'></span>0</li></ul><h3><a href='/spaceus/space/spaceDetail.do?spaceNo=space26'>노르웨이숲</a></h3><small><span class='icon-my_location'>경기도 수원시 영통구</span></small><a href='#' class='d-flex align-items-center justify-content-center btn-custom'><span class='icon-heart'></span></a></div></div></div>
+    	 
+    	</div> 
+    	<div class="col-md-5">
+    		<div class="property-wrap ftco-animate">
+    		<a href="" class="pop5"></a>
+    			<div class="text">
+    				<p class="price"><span class="space-price price5"></span><small>원/시간</small></p>
+    				<ul class="property_list">
+    					<li class="view5"><span class="icon-eye"></span></li>
+    					<li class="like5"><span class="icon-heart"></span></li>
+    					<li class="star5"><span class="icon-star"></span></li>
+    				</ul>
+    				<h3 class="title5"></h3>
+    				<small><span class="icon-my_location location5"></span></small>
+    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+    				<span class="icon-heart"></span>
+    				</a>
+    			</div>
+    		</div>
+    	</div>  -->
+    	
 			<!-- 인기공간 리스트 -->
     </div>
 	</div>
@@ -374,51 +451,11 @@ $(function() {
 <!-- 이용자리뷰 끝-->
 <script>
 $(function () { 
-	popular();
-});
-
-function popular(){
-	console.log("인기공간function 실행");
-	$.ajax({
-		type:"GET",
-		url:"${pageContext.request.contextPath}/space/popular.do",
-		dataType:"json",
-		success:function(data){
-			console.log("ajax 요청 성공!");
-			console.log(data);
-			 $.each(data, function(i, item){
-				var html="";
-
-			    html+= "<div class='col-md-4'>";
-		    	html+= "<div class='property-wrap ftco-animate'>";
- 		    	html+= "<a href='' class='img' style='background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);'></a>";
-		    	html+= "<div class='text'>";
-		    	html+= "<p class='price'><span class='space-price'>"+item.hourlyPrice+"<small>원/시간</small></span></p>";
-		    	html+= "<ul class='property_list'>";
-		    	html+= "<li><span class='icon-eye'></span>"+item.views+"</li>";
-		    	html+= "<li><span class='icon-heart'></span>"+item.likeCnt+"</li>";
-		    	html+= "<li><span class='icon-star'></span>"+item.starAvg+"</li>";
-		    	html+= "</ul>";
-		    	html+= "<h3><a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+item.spaceNo+"'>"+item.spaceName+"</a></h3>"; 
-		    	html+= "<small><span class='icon-my_location'>"+item.address+"</span></small>";
-		    	//html+= "<a href='#' class='d-flex align-items-center justify-content-center btn-custom'>"; 
-		    	//html+= "<span class='icon-heart'></span></a>";
-		    	html+= "</div></div></div>";
-				
-				console.log(html);
-				$("#popular").append(html);
-			}); 
-		},error:function(){
-			console.log("ajax 요청 실패");
-			}
-		});
-	//AJAX요청끝
-};
-//인기공간리스트 끝
-
-$(function () { 
 	memberId();
 });
+$(function () { 
+	popular();
+}); 
 //이용자 리뷰 ajax 요청
 $(function () { 
 	review();
@@ -437,7 +474,7 @@ function review(){
 				
 				 var date = new Date(item.enrollDate);
 				 /**
-				  *  yyyy년 MM 월 dd일 hh:mm 포맷으로 반환
+				  *  yyyy년 MM 월 dd일 포맷으로 반환
 				  */
 				 function getFormatDate(date){
 				     var year = date.getFullYear();              //yyyy
@@ -445,27 +482,24 @@ function review(){
 				     month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
 				     var day = date.getDate();                   //d
 				     day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-					 var hh = date.getHours();
-					 hh = hh>=10 ? hh : '0' + hh;
-					 var mm = date.getMinutes();	
+					 	
 						
-				     return ' '+year + '년 ' + month + '월 ' + day + '일 ' + hh + ':' + mm;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+				     return ' '+year + '년 ' + month + '월 ' + day + '일 ';       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
 				 }
-				
-				
+				/* html += for(var i=0; i<${item.starRating}; i++){+"<span class=\"icon-star\"></span>"+}; */
 				html  +=  "<div class=\"col-md-3 d-flex\">";
 	          	html  += "<div class=\"blog-entry justify-content-end\">";
           	    html  += "<div class=\"text\">";
-	          	html  += "<h3 class=\"headig\"><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h3>";
-	          	html  += "<div class=\"meta mb-3\">";
+	          	html  += "<h4 class=\"headig mb-2 text-center\"><a style=\"color :#343a40;\" class=\"font-bold\" href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.spaceName+"</a></h4>";
+          		html  += "<img class=\"lock-20 mt-2 img\" style=\"width:100%; height:200px;\" src=\'${pageContext.request.contextPath}/resources/upload/review/"+item.image+"\'>";
+	          	html  += "<div class=\"meta mt-1 mb-1\">";
 	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+getFormatDate(date)+"</a></div>";
 	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\">"+item.nickName+"</a></div>";
 	          	html  +=  "<div><a href=\"${pageContext.request.contextPath }/space/spaceReviewDetail.do?spaceNo="+item.spaceNo+"\" class=\"meta-chat\"><span class=\"icon-star\"></span>"+item.starRating+"</a></div>";
           		html  += "</div>";
-          		html += "<p>"+item.content+"</p>";
-          		html  += "<img class=\"lock-20 img\" src=\'${pageContext.request.contextPath}/resources/upload/review/"+item.image+"\'>";
+          		html += "<p style=\"margin-top:10px; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; -webkit-line-clamp: 3; display: -webkit-box;\"  >"+item.content+"</p>";
           		html  += "</div></div></div>";
-				console.log(html);
+				/* console.log(html); */
 				$("#review-wrapper").append(html);
 			}); 
 		},error:function(){
@@ -476,7 +510,7 @@ function review(){
 		
 function searchSpace(){
 	var keyword = $(".searchInput").val();
-	alert(keyword);
+	//alert(keyword);
 
 	keyword = keyword.replace('#','%23');
 	
@@ -489,20 +523,43 @@ function searchSpace(){
 	}
 }
 
+function searchDetailSpace(){
+
+	var category = $("select[name=space_type]").val();
+	var location = $("select[name=space_location]").val();
+	var option = $("select[name=space_option]").val();
+
+	window.location.href="${pageContext.request.contextPath}/space/searchDetailSpace.do?category="+category+"&location="+location+"&option="+option;
+}
+
 document.querySelector('.stick').addEventListener('click',()=>{
 	  document.querySelector('.four').value = '';
 	}); 
-
-$.ajax({
-	url : "${ pageContext.request.contextPath }/space/indexList.do",
-	dataType : "json",
-	success : function(data){
-		alert("index List!");
-	},
-	error : function(xhr, status, err){
-		console.log("처리실패", xhr, status, err);
-	}
-}); 
+function popular(){
+	$.ajax({
+		url : "${ pageContext.request.contextPath }/space/selectPopularSpaces.do",
+		dataType : "json",
+		success : function(data){
+			console.log(data.list);
+			 $.each(data.list, function(i, list){
+				$(".pop"+i).before("<a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+list.spaceNo+"'>");
+				//$("link_"+i).append("<a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+list.spaceNo+"'>");
+				$(".pop"+i).addClass('img').css("background-image", "url(${pageContext.request.contextPath }/resources/upload/space/"+list.renamedFilename+")")
+				$(".pop"+i).after("</a>");
+				$(".price"+i).append(list.hourlyPrice);
+				$(".view"+i).append(Math.round(list.starAvg * 10)/10);
+				$(".like"+i).append(list.likeCnt);
+				$(".star"+i).append(list.reviewCnt);
+				$(".title"+i).append("<a href='${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+list.spaceNo+"'>"+list.spaceName+"</a>");
+				$(".location"+i).append(list.address);
+				
+			 });
+		},
+		error : function(xhr, status, err){
+			console.log("처리실패", xhr, status, err);
+		}
+	}); 
+}; 
 
 </script>
 <!-- 컨텐츠 끝 -->

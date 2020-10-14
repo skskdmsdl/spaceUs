@@ -1,6 +1,7 @@
 package com.kh.spaceus.space.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Attachment;
@@ -10,6 +11,7 @@ import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.ReviewAttachment;
 import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SpaceList;
 import com.kh.spaceus.space.model.vo.SpaceTag;
 import com.kh.spaceus.space.model.vo.Star;
 import com.kh.spaceus.space.model.vo.Tag;
@@ -57,7 +59,7 @@ public interface SpaceDAO {
 
 	int insertWish(Wish wish);
 
-	List<Space> selectSameCategory(Space space);
+	List<SpaceList> selectSameCategory(Space space);
 
 	int selectLikeCnt(String spaceNo);
 
@@ -84,7 +86,7 @@ public interface SpaceDAO {
 
 	List<OptionList> selectOptionList(String spaceNo);
 	
-	List<Space> selectPopularSpaces();
+	List<SpaceList> selectPopularSpaces();
 
 	List<Object> selectAutoList(String value);
 	
@@ -96,7 +98,13 @@ public interface SpaceDAO {
 
 	List<String> selectSpaceNoList(String keyword);
 
-	List<Space> selectSearchSpaceList(String searchSpace);
+	List<SpaceList> selectSearchSpaceList(String searchSpace);
+
+	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
+	
+	Attachment selectPopularImage(String spaceNo);
+
+	int minusLikeCnt(Wish wish);
 
 
 	/* List<Space> selectListSpaceCollection(String email); */
