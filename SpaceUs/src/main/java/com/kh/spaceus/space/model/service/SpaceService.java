@@ -1,6 +1,7 @@
 package com.kh.spaceus.space.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Category;
@@ -92,6 +93,8 @@ public interface SpaceService {
 	Wish selectOneWish(Wish wish);
 
 	List<SpaceList> selectSearchSpaceList(String searchSpace);
+
+	List<Map<String, String>> selectSearchDetailSpace(Map<String, String> map);
 	
 	/* List<Space> selectListSpaceCollection(String email); */
 

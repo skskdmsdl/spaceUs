@@ -1,6 +1,7 @@
 package com.kh.spaceus.space.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.space.model.vo.Attachment;
@@ -98,6 +99,8 @@ public interface SpaceDAO {
 	List<String> selectSpaceNoList(String keyword);
 
 	List<SpaceList> selectSearchSpaceList(String searchSpace);
+
+	List<Map<String, String>> selectSearchDetailSpace(Map<String, String> map);
 
 
 	/* List<Space> selectListSpaceCollection(String email); */

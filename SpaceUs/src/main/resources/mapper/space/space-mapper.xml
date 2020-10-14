@@ -558,6 +558,11 @@
 	</select>
 	<resultMap type="spaceList" id="spaceListMap"></resultMap>
 	
+	<!-- search Detail로 space 가져오기 -->
+	<select id="selectSearchDetailSpace">
+	
+	</select>
+	
 	<!-- searchSpace 끝-->
 </mapper>
 

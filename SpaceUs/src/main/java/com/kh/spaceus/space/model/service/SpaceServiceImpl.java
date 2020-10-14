@@ -1,6 +1,7 @@
 package com.kh.spaceus.space.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -262,6 +263,12 @@ public class SpaceServiceImpl implements SpaceService{
 		return spaceDAO.selectSearchSpaceList(searchSpace);
 	}
 
+	@Override
+	public List<Map<String, String>> selectSearchDetailSpace(Map<String, String> map) {
+		return spaceDAO.selectSearchDetailSpace(map);
+	}
+
+	
 	
 	
 	

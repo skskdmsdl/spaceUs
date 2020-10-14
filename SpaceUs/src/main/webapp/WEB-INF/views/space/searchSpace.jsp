@@ -213,33 +213,38 @@ function searchSpace(){
 	else{
 		location.href='${pageContext.request.contextPath}/space/searchSpace.do?keyword='+keyword;
 	}
+
 }
 
 function searchDetailSpace(){
 	
-	/* var category = $("select[name=space_type]").val();
-	alert(category);
+	var category = $("select[name=space_type]").val();
 	var location = $("select[name=space_location]").val();
-	alert(location);
 	var date = $("[name=space_date]").val();
-	alert(date); */
-	
-	/* var option = $('input[name="checkbox_name"]:checked').val();
-	alert(option); */
 
-	var checkBoxArr = [];
+	var optionArr = [];
 
 	$('input[name="checkbox_name"]:checked').each(function(i){
-
-	checkBoxArr.push($(this).val());
-
+		optionArr.push($(this).val());
 	});
 
-	alert(checkBoxArr);
+	var param1 = "category="+category+
+				 "&location="+location+
+				 "&date="+date+
+				 "&optionArr="+optionArr;
 
-
-
-	//location.href='${pageContext.request.contextPath}/space/searchSpace.do?category='+category+'&location='+location+'&date='+date;
+	$.ajax({
+		type:'get',
+		url:'${pageContext.request.contextPath}/space/searchDetailSpace.do',
+		data: param1,
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		sucess: function(){
+			alert("성공!");
+		},
+		error: function(x,h,r){
+			alert("실패!");
+		}
+	});
 }
 
 </script>

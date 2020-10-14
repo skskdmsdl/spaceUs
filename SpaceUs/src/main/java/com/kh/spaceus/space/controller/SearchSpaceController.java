@@ -1,20 +1,24 @@
 package com.kh.spaceus.space.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.spaceus.admin.model.vo.ConfirmSpaceImage;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.OptionList;
-import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SearchDetailSpace;
 import com.kh.spaceus.space.model.vo.SpaceList;
 
 import lombok.extern.slf4j.Slf4j;
@@ -68,6 +72,23 @@ public class SearchSpaceController {
 		 mav.addObject("spaceNoList", spaceNoList);
 		 mav.addObject("spaceList", spaceList);
 		return mav;
+	}
+	
+	@GetMapping("/searchDetailSpace.do")
+	@ResponseBody
+	public void searchDetailSpace(@ModelAttribute SearchDetailSpace param1) {
+		System.out.println(param1); //SearchDetailSpace(category=cate6, location=all_location, date=, optionArr=OPTION3,OPTION7)
+		
+		Map<String,String> map = new HashMap<>();
+		map.put("category", param1.getCategory());
+		map.put("location", param1.getLocation());
+		map.put("date", param1.getDate());
+		map.put("optionArr", param1.getOptionArr());
+		
+		System.out.println(map);//{date=, optionArr=OPTION3,OPTION7, location=all_location, category=cate6}
+		
+		List<Map<String,String>> list = spaceSerive.selectSearchDetailSpace(map);
+		
 	}
 
 }
