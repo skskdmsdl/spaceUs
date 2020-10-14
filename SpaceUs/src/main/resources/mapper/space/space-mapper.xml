@@ -571,31 +571,57 @@ select
 	<!-- spaceNo로 space 데이터 가져오기 -->
 	<select id="selectSearchSpaceList" resultMap="spaceListMap">
 		select
-		    S.space_no,
-		    S.space_name, 
-		    REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
-		    S.hourly_price,
-		    S.views,
-		    S.like_cnt,
-		    S.star_avg,
-		    nvl((select count(*)over(partition by space_no)from review R where S.space_no = R.space_no),0) as review_cnt,
-            SI.renamed_filename
-		from 
-		    space S join(
-                select space_no,renamed_filename 
-                from( select 
-                        S.space_no,
-                        SI.renamed_filename,
-                        rank()over(partition by S.space_no order by SI.renamed_filename) as rnum 
-                      from space S left join space_image SI 
-                                    on S.space_no = SI.space_no)
-                      where rnum=1
-            )SI
-                on S.space_no = SI.space_no
+				    S.space_no,
+				    S.space_name, 
+				    REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
+				    S.hourly_price,
+				    S.views,
+				    S.like_cnt,
+				    S.star_avg,
+				    (select reviews from( select ROW_NUMBER() OVER(partition by space_no ORDER BY space_no,reviews) row_num, space_no,reviews from( select count(*)over(partition by space_no) as reviews, space_no from review))where row_num =1 and space_no = #{searchSpace}) as reviews,
+		            SI.renamed_filename
+		from space S join(
+		                            select space_no,renamed_filename 
+		                            from( select 
+		                                    S.space_no,
+		                                    SI.renamed_filename,
+		                                    rank()over(partition by S.space_no order by SI.renamed_filename) as rnum 
+		                                  from space S left join space_image SI 
+		                                                on S.space_no = SI.space_no)
+		                                  where rnum=1
+		                        )SI on S.space_no = SI.space_no
 		where S.status = 'O' and S.space_no= #{searchSpace}
 	</select>
 	<resultMap type="spaceList" id="spaceListMap"></resultMap>
 	
+	<!-- search Detail space_no가져오기 -->
+	<select id="selectSearchDetailSpaceNo" resultType="string">
+		select 
+            space_no
+		from
+		    (
+		        SELECT rank()over(partition by space_no order by OPTION_NO) as rnum,
+		                E.* 
+		        FROM (
+		                select * 
+		                from space left join space_option using(space_no) 
+                                   left join option_List using(option_no)
+                                   left join category using(category_no)
+                        <where>
+                        	<if test="option != ''">
+		                		option_name = #{option} 
+                        	</if>
+                        	<if test="category != ''">
+                            and category_name = #{category}
+                        	</if>
+                        	<if test="address != ''">
+                            and address like '%'|| #{address} ||'%'  
+                        	</if>
+                        </where>
+		              ) E
+		     )
+		group by space_no
+	</select>
 	<!-- searchSpace 끝-->
 	
 	<select id="selectPopularImage" resultMap="attachMap">

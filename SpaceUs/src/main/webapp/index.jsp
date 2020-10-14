@@ -262,9 +262,31 @@ $(document).on("click",".fa-2x",function(){
 				</select>
 				<!-- 지역 선택 끝-->
 				
-				<!-- 날짜 선택 시작 -->
-				<input type="date" name="space_date" id="space_date" class="nice-select sm-width"/>
-				<!-- 날짜 선택 끝 -->
+				<!-- 옵션 선택 시작 -->
+				<select name="space_option" id="space_option" class="nice-select sm-width">		
+					<option value="">모든 옵션</option>
+					<option value="OPTION1">TV/프로젝터</option>
+					<option value="OPTION2">인터넷/와이파이</option>
+					<option value="OPTION3">복사/인쇄기</option>
+					<option value="OPTION4">화이트보드</option>
+					<option value="OPTION5">음향/마이크</option>
+					<option value="OPTION6">취사시설</option>
+					<option value="OPTION7">음식물반입가능</option>
+					<option value="OPTION8">주류반입가능</option>
+					<option value="OPTION9">샤워시설</option>
+					<option value="OPTION10">주차</option>
+					<option value="OPTION11">금연</option>
+					<option value="OPTION12">반려동물 동반가능</option>
+					<option value="OPTION13">PC/노트북</option>
+					<option value="OPTION14">의자/테이블</option>
+					<option value="OPTION15">내부화장실</option>
+					<option value="OPTION16">탈의실</option>
+					<option value="OPTION17">테라스/루프탑</option>
+					<option value="OPTION18">공용라운지</option>
+					<option value="OPTION19">전신거울</option>
+					<option value="OPTION20">바베큐시설</option>
+				</select>
+				<!-- 옵션 선택 끝 -->
 			</form>
 			
 			<div class="container">
@@ -272,151 +294,6 @@ $(document).on("click",".fa-2x",function(){
 			</div>
 		</div>
 	</div>
-	
-	<!-- 더많은 옵션 시작-->   
-	<div class="more-option">
-		<div class="accordion" id="accordionExample">
-			<div class="card">
-				<div class="card-heading-active" id="btn-wrap">
-					<a class="icon-arrow_drop_down_circle" data-toggle="collapse" data-target="#collapseOne">
-						<b>더 많은 옵션</b>
-					</a>
-					<br />
-				</div>  
-					
-				<div id="collapseOne" class="collapse">
-					<div class="card-body">
-						<span><b>편의시설</b>을 선택하세요.</span>
-						<hr />
-						<div class="mo-list">
-							<div class="ml-column">
-								<label for="OPTION1">TV/프로젝터
-									<input type="checkbox" id="OPTION1" value="OPTION1">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION2">인터넷/와이파이
-									<input type="checkbox" id="OPTION2" value="OPTION2">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION3">복사/인쇄기 
-									<input type="checkbox" id="OPTION3" value="OPTION3">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION4">화이트보드
-									<input type="checkbox" id="OPTION4" value="OPTION4">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION5">음향/마이크
-									<input type="checkbox" id="OPTION5" value="OPTION5">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION6">취사시설
-									<input type="checkbox" id="OPTION6" value="OPTION6">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION7">음식물반입가능
-									<input type="checkbox" id="OPTION7" value="OPTION7">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION8">주류반입가능
-									<input type="checkbox" id="OPTION8" value="OPTION8">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION9">샤워시설 
-									<input type="checkbox" id="OPTION9" value="OPTION9">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION10">주차
-									<input type="checkbox" id="OPTION10" value="OPTION10">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION11">금연
-									<input type="checkbox" id="OPTION11" value="OPTION11">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION12">반려동물 동반가능
-									<input type="checkbox" id="OPTION12" value="OPTION12">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION13">PC/노트북
-									<input type="checkbox" id="OPTION13" value="OPTION13">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION14">의자/테이블
-									<input type="checkbox" id="OPTION14" value="OPTION14">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION15">내부화장실
-									<input type="checkbox" id="OPTION15" value="OPTION15">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION16">탈의실
-									<input type="checkbox" id="OPTION16" value="OPTION16">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION17">테라스/루프탑
-									<input type="checkbox" id="OPTION17" value="OPTION17">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION18">공용라운지
-									<input type="checkbox" id="OPTION18" value="OPTION18">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION19">전신거울
-									<input type="checkbox" id="OPTION19" value="OPTION19">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-							<div class="ml-column">
-								<label for="OPTION20">바베큐시설 
-									<input type="checkbox" id="OPTION20" value="OPTION20">
-									<span class="checkbox"></span>
-								</label>
-							</div>
-						</div>
-					</div>
-				</div> 
-				
-			</div>
-		</div>
-	</div>
-	<!-- 더많은 옵션 끝 -->    
 </div>
 <!-- 옵션/카테고리/지역 선택 끝 -->
 <!-- 검색창 끝 -->

@@ -1,20 +1,24 @@
 package com.kh.spaceus.space.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.spaceus.admin.model.vo.ConfirmSpaceImage;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.OptionList;
-import com.kh.spaceus.space.model.vo.Space;
+import com.kh.spaceus.space.model.vo.SearchDetailSpace;
 import com.kh.spaceus.space.model.vo.SpaceList;
 
 import lombok.extern.slf4j.Slf4j;
@@ -67,6 +71,49 @@ public class SearchSpaceController {
 		 mav.addObject("optionList",optionList);
 		 mav.addObject("spaceNoList", spaceNoList);
 		 mav.addObject("spaceList", spaceList);
+		return mav;
+	}
+	
+	@GetMapping("/searchDetailSpace.do")
+	public ModelAndView searchDetailSpace(ModelAndView mav, @RequestParam String category, @RequestParam String location, @RequestParam String option) {
+		String keyword = location+" "+category+" "+option;
+		
+		Map<String,String> map = new HashMap<>();
+		map.put("category", category);
+		map.put("location", location);
+		map.put("option", option);
+		log.info("map={}",map);
+		
+		// category List
+		List<Category> categoryList = spaceSerive.selectCategoryList();
+		// option List
+		List<OptionList> optionList = spaceSerive.selectOptionList1();
+		//space_no 가져오기
+		List<String> spaceNo = spaceSerive.selectSearchDetailSpaceNo(map);
+		log.info("spaceNo={}",spaceNo);
+		
+		//space_no로 차례로 space 데이터 가져오기
+		List<SpaceList> space = null;
+		List<SpaceList> spaceList = new ArrayList<>();
+		
+		for(int i=0;i<spaceNo.size();i++) {
+			List<String> spaceNo1 = spaceNo.subList(i, i+1);
+			String spaceNo2 = spaceNo1.toString();
+			spaceNo2 = spaceNo2.replace("[", "");
+			spaceNo2 = spaceNo2.replace("]", "");
+			
+			space = spaceSerive.selectSearchSpaceList(spaceNo2);
+			spaceList.addAll(space);
+			System.out.println(spaceList);
+			
+		}
+		
+		mav.setViewName("space/searchSpace");
+		mav.addObject("keyword", keyword);
+		mav.addObject("categoryList", categoryList);
+		mav.addObject("optionList",optionList);
+		mav.addObject("spaceList",spaceList);
+
 		return mav;
 	}
 

@@ -1,6 +1,7 @@
 package com.kh.spaceus.space.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -233,15 +234,21 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.selectList("space.selectSearchSpaceList", searchSpace);
 	}
 	
-
 	@Override
 	public Wish selectOneWish(Wish wish) {
 		return sqlSession.selectOne("space.selectOneWish", wish);
 	}
-
+	
 	@Override
 	public Attachment selectPopularImage(String spaceNo) {
 		return sqlSession.selectOne("space.selectPopularImage", spaceNo);
 	}
+
+	@Override
+	public List<String> selectSearchDetailSpaceNo(Map<String, String> map) {
+		return sqlSession.selectList("space.selectSearchDetailSpaceNo", map);
+	}
+
+	
 
 }
