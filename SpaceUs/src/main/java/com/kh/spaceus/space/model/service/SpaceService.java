@@ -101,6 +101,8 @@ public interface SpaceService {
 	List<SpaceList> selectSearchSpaceList(String searchSpace);
 
 	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
+
+	int increaseSpaceReadCnt(String spaceNo);
 	
 	/* List<Space> selectListSpaceCollection(String email); */
 

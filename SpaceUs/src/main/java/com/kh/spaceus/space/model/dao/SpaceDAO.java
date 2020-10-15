@@ -104,6 +104,8 @@ public interface SpaceDAO {
 	
 	Attachment selectPopularImage(String spaceNo);
 
+	int increaseSpaceReadCnt(String spaceNo);
+
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

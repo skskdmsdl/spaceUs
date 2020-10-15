@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -176,13 +177,46 @@ public class SpaceController {
 
 	@RequestMapping("/spaceDetail.do")
 	public String spaceDetail(Model model, @RequestParam("spaceNo") String spaceNo, Principal principal,
-			@RequestParam(defaultValue = "1", value = "cPage") int cPage, HttpServletRequest request) {
+			@RequestParam(defaultValue = "1", value = "cPage") int cPage, HttpServletRequest request, HttpServletResponse response) {
 
+		try {
+			//쿠키검사 : spaceCookie
+			Cookie[] cookies = request.getCookies();
+			String spaceCookieVal = "";
+			boolean hasRead = false;
+			
+			if(cookies != null) {
+				for(Cookie c : cookies) {
+					String name = c.getName();
+					String value = c.getValue();
+					
+					if("spaceCookie".equals(name)) {
+						spaceCookieVal = value;
+						
+						if(value.contains("[" + spaceNo + "]"))
+							hasRead = true;
+					}
+				}
+			}
+			if(!hasRead) {
+				//spaceCookie생성
+				Cookie spaceCookie = new Cookie("spaceCookie", spaceCookieVal + "["+ spaceNo +"]");
+				spaceCookie.setPath(request.getContextPath()+"/space");
+				spaceCookie.setMaxAge(24*60*60);
+				response.addCookie(spaceCookie);
+				int result = spaceService.increaseSpaceReadCnt(spaceNo);
+				log.info("result = {}",result);			
+			}
+		
+		
+		
 		Space space = spaceService.selectOneSpace(spaceNo);
 		System.out.println("@@"+space);
+		
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
 		System.out.println("spaceNo="+ spaceNo);
 
+		
 		// 같은 카테고리 공간 리스트(최대 3개)
 		List<SpaceList> spcList = spaceService.selectSameCategory(space);
 		log.debug("같은 카테고리 공간 리스트={}",spcList);
@@ -232,7 +266,9 @@ public class SpaceController {
 		model.addAttribute("pageBar", pageBar);
 		
 		model.addAttribute("optionList",optionList);
-
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "space/spaceDetail";
 	}
 	
