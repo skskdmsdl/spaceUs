@@ -112,7 +112,8 @@ span > a:hover{
 						     	<div class="space-detail">
 
 							        <span class="badge badge-light">
-							       		 <a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${wish.spaceNo}">${ wish.spaceName}</a>
+							       		 <a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${wish.spaceNo}"> <c:set var="str1" value="${wish.spaceName }"/>
+				                ${ fn:substring(str1, 0, 12) }</a>
 							        </span>
 						        
 							        <span style="font-size:13px;"><i class="icon-my_location badge badge-secondary">${ wish.address}</i></span>
@@ -126,7 +127,7 @@ span > a:hover{
 						        </div>
 						        <div class="content">
 						        	<a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${wish.spaceNo}">
-						        	<p class="content" style="width:250px;">${ wish.content}</p>
+						        	<p class="content" style="width:250px;"> <c:set var="str2" value="${wish.content }"/>${ fn:substring(str2, 0, 120) }</p>
 						        	</a>
 						        </div>
 						        <form name="deleteFrm" 
