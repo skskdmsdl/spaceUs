@@ -609,6 +609,14 @@ select
 		                                  where rnum=1
 		                        )SI on S.space_no = SI.space_no
 		where S.status = 'O' and S.space_no= #{searchSpace}
+		<if test="sort != null"> order by
+			<choose>
+				<when test="sort eq 'price'">S.hourly_price desc</when>
+				<when test="sort eq 'star'">S.like_cnt desc</when>
+				<when test="sort eq 'review'">reviews desc</when>
+				<otherwise>S.space_name desc</otherwise>
+			</choose>
+		</if>			
 	</select>
 	<resultMap type="spaceList" id="spaceListMap"></resultMap>
 	
@@ -632,8 +640,8 @@ select
                         	<if test="category != ''">
                             and category_name = #{category}
                         	</if>
-                        	<if test="address != ''">
-                            and address like '%'|| #{address} ||'%'  
+                        	<if test="location != ''">
+                            and address like '%'|| #{location} ||'%'  
                         	</if>
                         </where>
 		              ) E
