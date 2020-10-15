@@ -12,6 +12,8 @@ public interface ReservationService {
 
 	int insertReservationVail(ReservationAvail reservationAvail);
 	
+	int deleteRevAvail(String spaceNo);
+	
 	//공간별 예약
 	int insertReservation(Reservation reservation);
 	
@@ -28,4 +30,5 @@ public interface ReservationService {
 	int cancleReservation(String revNo);
 	
 	List<Reservation> selectHostReservationList(String memberEmail);
+
 }

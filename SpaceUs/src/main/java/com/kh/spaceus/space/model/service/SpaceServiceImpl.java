@@ -283,6 +283,16 @@ public class SpaceServiceImpl implements SpaceService{
 		return spaceDAO.minusLikeCnt(wish);
 	}
 
+	@Override
+	public int deleteOption(String spaceNo) {
+		return spaceDAO.deleteOption(spaceNo);
+	}
+
+	@Override
+	public int updateStatus(String spaceNo, String status) {
+		return spaceDAO.updateStatus(spaceNo, status);
+	}
+
 	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {

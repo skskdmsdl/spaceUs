@@ -27,7 +27,7 @@
 	</insert>
       
 <!-- space -->
-	<select id="selectAll" resultType="space">
+	<select id="selectAll" resultMap="spaceMap">
 		select
 			*
 		from space
@@ -238,7 +238,7 @@
 		where space_no = #{spaceNo}
 	</select>
 	
-	<select id="selectOneSpaceNo" resultType="space">
+	<select id="selectOneSpaceNo" resultMap="spaceMap">
 		select 
 			*
 		from 
@@ -664,6 +664,23 @@ select
 			space
 		set
 			views = views + 1
+		where
+			space_no = #{spaceNo}
+	</update>
+	
+	<delete id="deleteOption">
+		delete
+		from
+			space_option
+		where
+			space_no=#{spaceNo}
+	</delete>
+	
+	<update id="updateStatus">
+		update 
+			space
+		set
+			status = #{status}
 		where
 			space_no = #{spaceNo}
 	</update>

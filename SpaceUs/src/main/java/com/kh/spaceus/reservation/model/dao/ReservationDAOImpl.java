@@ -67,4 +67,9 @@ public class ReservationDAOImpl implements ReservationDAO{
 		return sqlSession.selectList("reservation.selectUseReservation", memberEmail);
 	}
 
+	@Override
+	public int deleteRevAvail(String spaceNo) {
+		return sqlSession.delete("reservation.deleteRevAvail", spaceNo);
+	}
+
 }

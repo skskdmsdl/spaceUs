@@ -62,5 +62,10 @@ public class ReservationServiceImpl implements ReservationService{
 	public List<Reservation> selectHostReservationList(String memberEmail) {
 		return reservationDAO.selectHostReservationList(memberEmail);
 	}
+
+	@Override
+	public int deleteRevAvail(String spaceNo) {
+		return reservationDAO.deleteRevAvail(spaceNo);
+	}
 	
 }
