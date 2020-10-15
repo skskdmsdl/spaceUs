@@ -89,7 +89,7 @@ public interface SpaceService {
 
 	List<OptionList> selectOptionList1();
 
-	List<String> selectSpaceNoList(String keyword);
+	List<String> selectSpaceNoList(String keyword, String sort);
 
 	Wish selectOneWish(Wish wish);
 
@@ -98,7 +98,7 @@ public interface SpaceService {
 
 	Attachment selectPopularImage(String spaceNo);
 
-	List<SpaceList> selectSearchSpaceList(String searchSpace, String sort);
+	List<SpaceList> selectSearchSpaceList(String searchSpace);
 
 	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
 	
