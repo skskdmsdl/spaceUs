@@ -106,8 +106,6 @@ public interface SpaceService {
 	
 	int minusLikeCnt(Wish wish);
 
-	//List<SpaceList> selectSearchSpaceSortList(String searchSpace, String sort);
-	
 	/* List<Space> selectListSpaceCollection(String email); */
 
 
