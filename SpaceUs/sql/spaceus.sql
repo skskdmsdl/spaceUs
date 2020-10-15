@@ -669,9 +669,12 @@ create table daily_sale(
 
 );
 
+
 create sequence seq_daily_sale_no;
 
 select * from daily_sale;
+
+--alter table daily_sale add constraint fk_ds_space_no foreign key(space_no) references space(space_no) on delete set null;
 
 
 -----------------------------
@@ -709,9 +712,8 @@ create table yearly_sale(
 create sequence seq_year_sale;
 
 
-
 --------------------------------------------------
--- 위시리스트 추가/삭제시 공간 좋아요수 컬럼 수정 트리거
+-- 위시리스트 추가시 공간 좋아요수 컬럼 수정 트리거
 --------------------------------------------------
 create or replace trigger trig_addlike
     after
@@ -722,47 +724,6 @@ begin
     where space_no = :new.space_no;
 end;
 /
-
-----공간 삭제될 때 위시리스트도 삭제되도록 트리거
---create or replace trigger trig_delete
---    after
---    delete on space
---    for each row
---begin
---    delete wish where space_no=:old.space_no;
---end;
---/
-
---drop trigger trig_delete;
-
---제약조건 조회
-select *
-from user_constraints
-where table_name = 'wish';
-
-
-create or replace trigger trig_unlike
-    after
-    delete on wish
-    for each row
-declare
-   space_exists number :=0;
-begin
-    select count(*)
-    into space_exists
-    from space
-    where space_no=:old.space_no;
-if
-    (space_exists>0) then
-        update space set like_cnt= like_cnt-1
-        where  space_no = :old.space_no;
-
-end if;
-
-
-end;
-/
-commit;
 
 
 

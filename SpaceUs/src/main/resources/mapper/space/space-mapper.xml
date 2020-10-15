@@ -164,6 +164,16 @@
 			member_email=#{email}
 	</delete>
 
+	<update id="minusLikeCnt">
+		update
+		space
+		set
+			like_cnt=like_cnt-1
+		where
+			space_no=#{spaceNo}
+		
+	</update>
+
 	<insert id="insertReviewAttahment">
 		insert into
 			review_image (

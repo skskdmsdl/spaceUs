@@ -277,6 +277,11 @@ public class SpaceServiceImpl implements SpaceService{
 	public int increaseSpaceReadCnt(String spaceNo) {
 		return spaceDAO.increaseSpaceReadCnt(spaceNo);
 	}
+	
+	@Override
+	public int minusLikeCnt(Wish wish) {
+		return spaceDAO.minusLikeCnt(wish);
+	}
 
 	
 	/*@Override

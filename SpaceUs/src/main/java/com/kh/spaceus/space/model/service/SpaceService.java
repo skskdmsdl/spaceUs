@@ -104,6 +104,8 @@ public interface SpaceService {
 
 	int increaseSpaceReadCnt(String spaceNo);
 	
+	int minusLikeCnt(Wish wish);
+	
 	/* List<Space> selectListSpaceCollection(String email); */
 
 
