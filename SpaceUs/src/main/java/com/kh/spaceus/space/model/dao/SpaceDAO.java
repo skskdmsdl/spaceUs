@@ -98,11 +98,12 @@ public interface SpaceDAO {
 
 	List<String> selectSpaceNoList(String keyword);
 
-	List<SpaceList> selectSearchSpaceList(String searchSpace);
+	List<SpaceList> selectSearchSpaceList(Map<String, String> map);
 
 	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
 	
 	Attachment selectPopularImage(String spaceNo);
+
 
 
 	/* List<Space> selectListSpaceCollection(String email); */
