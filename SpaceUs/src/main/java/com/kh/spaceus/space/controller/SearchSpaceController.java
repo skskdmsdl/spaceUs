@@ -32,7 +32,7 @@ public class SearchSpaceController {
 	public ModelAndView searchSpace(ModelAndView mav, @RequestParam("keyword") String keyword, @RequestParam String sort) {
 		//log.info("sort={}",sort);
 		// 입력값을 통해 spaceNo가져오기
-		List<String> spaceNoList = spaceSerive.selectSpaceNoList(keyword);
+		List<String> spaceNoList = spaceSerive.selectSpaceNoList(keyword,sort);
 		
 		List<SpaceList> space = null;
 		List<SpaceList> spaceList = new ArrayList<>();
@@ -49,7 +49,7 @@ public class SearchSpaceController {
 			 
 			 
 			 // 가져온 spaceNo로 space테이블 데이터 가져오기
-			 space = spaceSerive.selectSearchSpaceList(searchSpace,sort);
+			 space = spaceSerive.selectSearchSpaceList(searchSpace);
 			 
 			 //리스트로 space 정보들 합쳐 list저장
 			 spaceList.addAll(space);
@@ -87,7 +87,7 @@ public class SearchSpaceController {
 			spaceNo2 = spaceNo2.replace("[", "");
 			spaceNo2 = spaceNo2.replace("]", "");
 			
-			space = spaceSerive.selectSearchSpaceList(spaceNo2,sort);
+			space = spaceSerive.selectSearchSpaceList(spaceNo2);
 			spaceList.addAll(space);
 			System.out.println(spaceList);
 			

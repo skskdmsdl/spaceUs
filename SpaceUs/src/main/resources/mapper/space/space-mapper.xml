@@ -580,8 +580,25 @@ select
 		   select tag_name as name, space_no from space_tag join tag using(tag_no)
 		)
 		SELECT space_no
-		   FROM TEMP_TABLE
+		   FROM TEMP_TABLE join space using(space_no) left join (select reviews , 
+		   																space_no from( 
+		   																				select ROW_NUMBER() OVER(partition by space_no ORDER BY space_no,reviews) row_num, 
+		   																						space_no, 
+		   																						reviews 
+		   																				from( select count(*)over(partition by space_no) as reviews, space_no from review )
+		   																				)
+		   														 where row_num =1
+		   														) using(space_no)
 		 WHERE name like '%' || #{keyword}  || '%'
+		 <if test="sort != null"> order by
+			<choose>
+				<when test="sort eq 'price'">hourly_price</when>
+				<when test="sort eq 'star'">star_avg desc</when>
+				<when test="sort eq 'review'">reviews desc nulls last</when>
+				<otherwise>space_name desc</otherwise>
+			</choose>
+		</if>
+		 
 	</select>
 	
 	<!-- spaceNo로 space 데이터 가져오기 -->
@@ -594,7 +611,7 @@ select
 				    S.views,
 				    S.like_cnt,
 				    S.star_avg,
-				    (select reviews from( select ROW_NUMBER() OVER(partition by space_no ORDER BY space_no,reviews) row_num, space_no,reviews from( select count(*)over(partition by space_no) as reviews, space_no from review))where row_num =1 and space_no = #{searchSpace}) as reviews,
+				    (select reviews from( select ROW_NUMBER() OVER(partition by space_no ORDER BY space_no,reviews) row_num, space_no,reviews from( select count(*)over(partition by space_no) as reviews, space_no from review))where row_num =1 and space_no = #{searchSpace}) as review_cnt,
 		            SI.renamed_filename
 		from space S join(
 		                            select space_no,renamed_filename 
@@ -606,15 +623,7 @@ select
 		                                                on S.space_no = SI.space_no)
 		                                  where rnum=1
 		                        )SI on S.space_no = SI.space_no
-		where S.status = 'O' and S.space_no= #{searchSpace}
-		<if test="sort != null"> order by
-			<choose>
-				<when test="sort eq 'price'">S.hourly_price desc</when>
-				<when test="sort eq 'star'">S.star_avg desc</when>
-				<when test="sort eq 'review'">reviews desc</when>
-				<otherwise>S.space_name desc</otherwise>
-			</choose>
-		</if>			
+		where S.status = 'O' and S.space_no= #{searchSpace}			
 	</select>
 	<resultMap type="spaceList" id="spaceListMap"></resultMap>
 	

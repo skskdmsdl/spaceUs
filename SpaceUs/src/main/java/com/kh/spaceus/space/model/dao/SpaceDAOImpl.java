@@ -219,8 +219,8 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public List<String> selectSpaceNoList(String keyword) {
-		return sqlSession.selectList("space.selectSpaceNoList", keyword);
+	public List<String> selectSpaceNoList(Map<String, String> map) {
+		return sqlSession.selectList("space.selectSpaceNoList", map);
 	}
 
 	
@@ -230,8 +230,8 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}*/
 		
 	@Override
-	public List<SpaceList> selectSearchSpaceList(Map<String, String> map) {
-		return sqlSession.selectList("space.selectSearchSpaceList", map);
+	public List<SpaceList> selectSearchSpaceList(String searchSpace) {
+		return sqlSession.selectList("space.selectSearchSpaceList", searchSpace);
 	}
 
 	@Override
