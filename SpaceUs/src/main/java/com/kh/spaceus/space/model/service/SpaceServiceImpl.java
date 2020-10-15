@@ -278,6 +278,16 @@ public class SpaceServiceImpl implements SpaceService{
 		return spaceDAO.selectPopularImage(spaceNo);
 	}
 
+	@Override
+	public int increaseSpaceReadCnt(String spaceNo) {
+		return spaceDAO.increaseSpaceReadCnt(spaceNo);
+	}
+	
+	@Override
+	public int minusLikeCnt(Wish wish) {
+		return spaceDAO.minusLikeCnt(wish);
+	}
+
 	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {

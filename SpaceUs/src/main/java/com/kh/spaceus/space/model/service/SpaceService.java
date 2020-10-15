@@ -101,6 +101,10 @@ public interface SpaceService {
 	List<SpaceList> selectSearchSpaceList(String searchSpace, String sort);
 
 	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
+	
+	int increaseSpaceReadCnt(String spaceNo);
+	
+	int minusLikeCnt(Wish wish);
 
 	//List<SpaceList> selectSearchSpaceSortList(String searchSpace, String sort);
 	

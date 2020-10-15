@@ -248,7 +248,7 @@
                      
                          <c:if test="${!empty spaceOneTagList}">
                          	<c:forEach items="${spaceOneTagList}" var="tag">	                         		
-                         		<span class="badge badge-success badge-pill" style="font-size: 15px;"># ${tag.tagName }</span>
+                         		<span class="badge badge-success badge-pill" style="font-size: 15px;">${tag.tagName }</span>
                      	 	</c:forEach>
 	                     </c:if>
 	                     <c:if test="${empty spaceOneTagList}">
