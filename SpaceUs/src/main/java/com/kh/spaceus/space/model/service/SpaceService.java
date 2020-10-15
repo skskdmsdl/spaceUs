@@ -98,14 +98,14 @@ public interface SpaceService {
 
 	Attachment selectPopularImage(String spaceNo);
 
-	List<SpaceList> selectSearchSpaceList(String searchSpace);
+	List<SpaceList> selectSearchSpaceList(String searchSpace, String sort);
 
 	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
-
+	
 	int increaseSpaceReadCnt(String spaceNo);
 	
 	int minusLikeCnt(Wish wish);
-	
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

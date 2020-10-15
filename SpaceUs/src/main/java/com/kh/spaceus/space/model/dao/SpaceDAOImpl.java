@@ -228,12 +228,12 @@ public class SpaceDAOImpl implements SpaceDAO{
 	public List<Space> selectListSpaceCollection(String email) {
 		return sqlSession.selectList("space.selectListSpaceCollection", email);
 	}*/
-	
+		
 	@Override
-	public List<SpaceList> selectSearchSpaceList(String searchSpace) {
-		return sqlSession.selectList("space.selectSearchSpaceList", searchSpace);
+	public List<SpaceList> selectSearchSpaceList(Map<String, String> map) {
+		return sqlSession.selectList("space.selectSearchSpaceList", map);
 	}
-	
+
 	@Override
 	public Wish selectOneWish(Wish wish) {
 		return sqlSession.selectOne("space.selectOneWish", wish);

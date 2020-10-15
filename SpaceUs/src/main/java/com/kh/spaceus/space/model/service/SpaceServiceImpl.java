@@ -1,8 +1,10 @@
 package com.kh.spaceus.space.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -259,8 +261,11 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public List<SpaceList> selectSearchSpaceList(String searchSpace) {
-		return spaceDAO.selectSearchSpaceList(searchSpace);
+	public List<SpaceList> selectSearchSpaceList(String searchSpace, String sort) {
+		Map<String,String> map = new HashMap<>();
+		map.put("searchSpace", searchSpace);
+		map.put("sort", sort);
+		return spaceDAO.selectSearchSpaceList(map);
 	}
 
 	@Override

@@ -98,7 +98,7 @@ public interface SpaceDAO {
 
 	List<String> selectSpaceNoList(String keyword);
 
-	List<SpaceList> selectSearchSpaceList(String searchSpace);
+	List<SpaceList> selectSearchSpaceList(Map<String, String> map);
 
 	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
 	
@@ -107,6 +107,7 @@ public interface SpaceDAO {
 	int increaseSpaceReadCnt(String spaceNo);
 	
 	int minusLikeCnt(Wish wish);
+
 
 
 	/* List<Space> selectListSpaceCollection(String email); */
