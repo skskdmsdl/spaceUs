@@ -12,11 +12,11 @@
 	background-color:#f7f7f7;
 	border:1px solid gray;
 	display:inline-block;
-	width:200px;
+	width:300px;
 	height: 200px;
-	margin-right: 20px;
+	margin: 0 20px 15px 15px;
 }
-.fas {position: absolute; padding: 90px;}
+.fas {position: absolute; padding: 90px 140px 80px 143px;}
 input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 #error, #duplicate, #ok{display: none;}
 </style>
@@ -258,24 +258,27 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                             </div>
                             <div class="pf-feature-image">
                                 <h4>공간이미지<span class="text-danger">*</span></h4>
-                                <div class="image-div">
-	                                <div>
-	                                	<i class="fas fa-plus"></i>
-	                                </div>
-	                            </div>
-                                <div class="image-div">
-	                                <div>
-	                                	<i class="fas fa-plus"></i>
-	                                </div>
-	                            </div>
-                                <div class="image-div">
-	                                <div>
-	                                	<i class="fas fa-plus"></i>
-	                                </div>
-	                            </div>
-	                            <input type="file" name="upFile" />
-	                            <input type="file" name="upFile" />
-	                            <input type="file" name="upFile" />
+                                <div class="row"> 
+	                                <div class="image-div">
+		                                <i class="fas fa-plus"></i>
+		                                <img id="preImage0" style="object-fit: cover;width: 100%;height: 200px;" />
+		                            </div>
+	                                <div class="image-div">
+		                                <div>
+		                                	<i class="fas fa-plus"></i>
+		                                	<img id="preImage1" style="object-fit: cover;width: 100%;height: 200px;" />
+		                                </div>
+		                            </div>
+	                                <div class="image-div">
+		                                <div>
+		                                	<i class="fas fa-plus"></i>
+		                                	<img id="preImage2" style="object-fit: cover;width: 100%;height: 200px;" />
+		                                </div>
+		                            </div>
+                                </div>
+	                            <input type="file" name="upFile" class="upFile f0" />
+	                            <input type="file" name="upFile" class="upFile f1" />
+	                            <input type="file" name="upFile" class="upFile f2" />
                             </div>
                             <div class="pf-feature-price">
                                 <h4>사업자등록번호<span class="text-danger">*</span></h4>
@@ -681,6 +684,40 @@ $("#spaceFrm").submit(function(){
 
 	return true;
 });
+//이미지 미리보기
+$(function() {
+    $(".upFile").on('change', function(){
+        readURL(this);
+    });
+});
+function readURL(input) {
+	console.log($(input).hasClass('f0'));
+    if (input.files && input.files[0] && $(input).hasClass('f0') ) {
+       var reader = new FileReader();
+       reader.onload = function (e) {
+          $('#preImage0').siblings('i').removeClass(".fas fa-plus");
+          $('#preImage0').attr('src', e.target.result);
+       }
+       reader.readAsDataURL(input.files[0]);
+    }
+    if (input.files && input.files[0] && $(input).hasClass('f1') ) {
+       var reader = new FileReader();
+       reader.onload = function (e) {
+          $('#preImage1').siblings('i').removeClass(".fas fa-plus");
+          $('#preImage1').attr('src', e.target.result);
+       }
+       reader.readAsDataURL(input.files[0]);
+    }
+    if (input.files && input.files[0] && $(input).hasClass('f2') ) {
+       var reader = new FileReader();
+       reader.onload = function (e) {
+          $('#preImage2').siblings('i').removeClass(".fas fa-plus");
+          $('#preImage2').attr('src', e.target.result);
+       }
+       reader.readAsDataURL(input.files[0]);
+    }
+}
+
 </script>
 <script>$(function () { memberId();});</script>
 <!-- 컨텐츠 끝 -->
