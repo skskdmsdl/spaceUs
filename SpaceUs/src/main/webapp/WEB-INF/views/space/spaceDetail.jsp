@@ -314,7 +314,7 @@ function naverShare() {
 						<!-- contact 시작 -->
 						<div class="tab-pane fade show active" id="detail-description" role="tabpanel"
 							aria-labelledby="detail-manufacturer-tab" style="padding-top: 50px;">
-							<div class="row">
+							<div class="row pb-5" style="border-bottom: 1px solid #ddd;">
 								<c:forEach items="${optionList}" var="info" varStatus="vs">
 								<div class="col-md-4">
 									<ul class="features">
@@ -324,14 +324,14 @@ function naverShare() {
 								</c:forEach>
 							</div>	
 							<!-- 공간설명 시작-->
-							<div>
-								<p style="font-size: 18px; min-height:300px; padding-top: 50px;">
+							<div class="col-11" style="margin-bottom:70px; padding-left:80px;">
+								<p style="font-size: 16px; min-height:300px; padding-top: 50px; line-height: 30px;">
 									${ space.content } <br /> </p>
 							</div>
 							<!-- 공간위치 -->	
 							<div class="row" style="margin-left: 5em;">
-								<div id="kakaomap" style="width:500px;height:400px; "></div>
-								<div class="contact-info" style="padding-left: 100px;">
+								<div id="kakaomap" style="width:450px;height:400px; "></div>
+								<div class="contact-info" style="padding-left: 70px;">
 									<div class="ci-item">
 										<div class="ci-icon">
 											<i class="fa fa-map-marker"></i>

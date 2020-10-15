@@ -259,6 +259,10 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.update("space.minusLikeCnt", wish);
 	}
 
+	@Override
+	public int selectHostReviewTotalContents(String spaceNo) {
+		return sqlSession.selectOne("space.selectHostReviewTotalContents", spaceNo);
+	}
 	
 
 }

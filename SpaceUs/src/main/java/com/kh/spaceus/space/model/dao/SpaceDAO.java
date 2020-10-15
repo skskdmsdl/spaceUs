@@ -108,6 +108,8 @@ public interface SpaceDAO {
 	
 	int minusLikeCnt(Wish wish);
 
+	int selectHostReviewTotalContents(String spaceNo);
+
 
 
 	/* List<Space> selectListSpaceCollection(String email); */

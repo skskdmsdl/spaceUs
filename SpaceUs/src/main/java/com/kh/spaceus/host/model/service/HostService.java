@@ -19,5 +19,6 @@ public interface HostService {
 
 	int insertSettlement(String spaceNo);
 
+
 	
 }

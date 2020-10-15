@@ -288,6 +288,10 @@ public class SpaceServiceImpl implements SpaceService{
 		return spaceDAO.minusLikeCnt(wish);
 	}
 
+	@Override
+	public int selectHostReviewTotalContents(String spaceNo) {
+		return spaceDAO.selectHostReviewTotalContents(spaceNo);
+	}
 	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {

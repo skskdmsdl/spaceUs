@@ -2,6 +2,7 @@ package com.kh.spaceus.reservation.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -53,8 +54,9 @@ public class ReservationDAOImpl implements ReservationDAO{
 		return sqlSession.update("reservation.cancleReservation", revNo);
 	}
 	
-	public List<Reservation> selectHostReservationList(String memberEmail) {
-		return sqlSession.selectList("reservation.selectHostReservationList", memberEmail);
+	public List<Reservation> selectHostReservationList(String memberEmail, int limit, int offset) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("reservation.selectHostReservationList", memberEmail, rowBounds);
 	}
 		
 	@Override
@@ -63,8 +65,16 @@ public class ReservationDAOImpl implements ReservationDAO{
 	}
 
 	@Override
-	public List<Reservation> selectUseReservation(String memberEmail) {
-		return sqlSession.selectList("reservation.selectUseReservation", memberEmail);
+	public List<Reservation> selectUseReservation(String memberEmail, int limit, int offset) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("reservation.selectUseReservation", memberEmail, rowBounds);
 	}
+
+	@Override
+	public int selectHostRevTotalContents(String memberEmail) {
+		return sqlSession.selectOne("reservation.selectHostRevTotalContents", memberEmail);
+	}
+
+	
 
 }
