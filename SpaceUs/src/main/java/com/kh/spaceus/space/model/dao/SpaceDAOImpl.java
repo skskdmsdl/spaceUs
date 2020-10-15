@@ -149,8 +149,8 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public String selectCateName(String cateNo) {
-		return sqlSession.selectOne("space.selectCateName", cateNo);
+	public String selectCateName(String spaceNo) {
+		return sqlSession.selectOne("space.selectCateName", spaceNo);
 	}
 
 	@Override
