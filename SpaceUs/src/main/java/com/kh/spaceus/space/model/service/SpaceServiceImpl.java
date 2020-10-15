@@ -249,8 +249,11 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public List<String> selectSpaceNoList(String keyword) {
-		return spaceDAO.selectSpaceNoList(keyword);
+	public List<String> selectSpaceNoList(String keyword, String sort) {
+		Map<String,String> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("sort", sort);
+		return spaceDAO.selectSpaceNoList(map);
 	}
 	
 	
@@ -261,11 +264,8 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public List<SpaceList> selectSearchSpaceList(String searchSpace, String sort) {
-		Map<String,String> map = new HashMap<>();
-		map.put("searchSpace", searchSpace);
-		map.put("sort", sort);
-		return spaceDAO.selectSearchSpaceList(map);
+	public List<SpaceList> selectSearchSpaceList(String searchSpace) {
+		return spaceDAO.selectSearchSpaceList(searchSpace);
 	}
 
 	@Override

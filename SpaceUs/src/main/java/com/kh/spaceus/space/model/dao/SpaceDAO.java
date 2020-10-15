@@ -96,9 +96,9 @@ public interface SpaceDAO {
 
 	List<OptionList> selectOptionList1();
 
-	List<String> selectSpaceNoList(String keyword);
+	List<String> selectSpaceNoList(Map<String, String> map);
 
-	List<SpaceList> selectSearchSpaceList(Map<String, String> map);
+	List<SpaceList> selectSearchSpaceList(String searchSpace);
 
 	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
 	
