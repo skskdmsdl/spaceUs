@@ -65,7 +65,7 @@ public interface SpaceDAO {
 
 	int deleteWish(Wish wish);
 
-	String selectCateName(String cateNo);
+	String selectCateName(String spaceNo);
 
 	List<Space> selectReviewList(String email);
 

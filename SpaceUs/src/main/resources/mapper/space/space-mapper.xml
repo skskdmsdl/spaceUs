@@ -323,11 +323,9 @@ select
 	
 	<select id="selectCateName" resultType="string">
 		select 
-			category_name
-		from
-			category
-		where 
-			category_no=#{cateNo}
+			category_name 
+		from space join category on space.category_no=category.category_no 
+		where space_no=#{spaceNo}
 	</select>
 	
 	<insert id="insertSpace">

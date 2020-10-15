@@ -222,8 +222,13 @@ public class SpaceController {
 		log.debug("같은 카테고리 공간 리스트={}",spcList);
 
 		// 추천 공간 카테고리명
-		String cateName = spaceService.selectCateName(space.getCategoryNo());
-
+		try {
+			String cateName = spaceService.selectCateName(spaceNo);
+			throw new Exception(); 
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		// 리뷰 한 페이지당 개수 제한
 		final int limit = 10; // 사용용도는 numPerPage와 똑같음
 		int offset = (cPage - 1) * limit;
@@ -288,8 +293,13 @@ public class SpaceController {
 		log.debug("같은 카테고리 공간 리스트={}",spcList);
 
 		// 추천 공간 카테고리명
-		String cateName = spaceService.selectCateName(space.getCategoryNo());
-
+		try {
+			String cateName = spaceService.selectCateName(spaceNo);
+			throw new Exception(); 
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		// 리뷰 한 페이지당 개수 제한
 		final int limit = 10; // 사용용도는 numPerPage와 똑같음
 		int offset = (cPage - 1) * limit;

@@ -176,8 +176,8 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public String selectCateName(String cateNo) {
-		return spaceDAO.selectCateName(cateNo);
+	public String selectCateName(String spaceNo) {
+		return spaceDAO.selectCateName(spaceNo);
 	}
 
 	@Override
