@@ -208,8 +208,6 @@ public class SpaceController {
 				log.info("result = {}",result);			
 			}
 		
-		
-		
 		Space space = spaceService.selectOneSpace(spaceNo);
 		System.out.println("@@"+space);
 		
@@ -281,8 +279,38 @@ public class SpaceController {
 	//리뷰링크 클릭시 이동하는 공간상세페이지
 	@RequestMapping("/spaceReviewDetail.do")
 	public String spaceReviewDetail(Model model, @RequestParam("spaceNo") String spaceNo, Principal principal,
-			@RequestParam(defaultValue = "1", value = "cPage") int cPage, HttpServletRequest request) {
+			@RequestParam(defaultValue = "1", value = "cPage") int cPage, HttpServletRequest request, HttpServletResponse response) {
 
+		try {
+			//쿠키검사 : spaceCookie
+			Cookie[] cookies = request.getCookies();
+			String spaceCookieVal = "";
+			boolean hasRead = false;
+			
+			if(cookies != null) {
+				for(Cookie c : cookies) {
+					String name = c.getName();
+					String value = c.getValue();
+					
+					if("spaceCookie".equals(name)) {
+						spaceCookieVal = value;
+						
+						if(value.contains("[" + spaceNo + "]"))
+							hasRead = true;
+					}
+				}
+			}
+			if(!hasRead) {
+				//spaceCookie생성
+				Cookie spaceCookie = new Cookie("spaceCookie", spaceCookieVal + "["+ spaceNo +"]");
+				spaceCookie.setPath(request.getContextPath()+"/space");
+				spaceCookie.setMaxAge(24*60*60);
+				response.addCookie(spaceCookie);
+				int result = spaceService.increaseSpaceReadCnt(spaceNo);
+				log.info("result = {}",result);			
+			}
+		
+		
 		Space space = spaceService.selectOneSpace(spaceNo);
 		System.out.println("@@"+space);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
@@ -343,7 +371,9 @@ public class SpaceController {
 		
 		model.addAttribute("optionList",optionList);
 		model.addAttribute("bool", 1);
-		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		return "space/spaceDetail";
 	}
