@@ -612,7 +612,7 @@ select
 		<if test="sort != null"> order by
 			<choose>
 				<when test="sort eq 'price'">S.hourly_price desc</when>
-				<when test="sort eq 'star'">S.like_cnt desc</when>
+				<when test="sort eq 'star'">S.star_avg desc</when>
 				<when test="sort eq 'review'">reviews desc</when>
 				<otherwise>S.space_name desc</otherwise>
 			</choose>
