@@ -224,7 +224,8 @@ function naverShare() {
 					<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i>
 					<div class="text text-center">
 						<div style="text-align: right; padding-right: 5px">
-							
+							<i class="fa fa-eye fa-2x"></i>
+							<span>${ space.views }</span>
 							<c:choose>
 							<c:when test="${ loginMember.principal.memberEmail != null }">
 							<a href=javascript:; id="heart-a"><i id="addLike" class="far fa-heart" style="margin:2px;"></i></a>

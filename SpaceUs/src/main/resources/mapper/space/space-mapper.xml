@@ -659,6 +659,15 @@ select
 		<result column="status" property="status"/>
 	</resultMap>
 	
+	<update id="increaseSpaceReadCnt">
+		update 
+			space
+		set
+			views = views + 1
+		where
+			space_no = #{spaceNo}
+	</update>
+	
 </mapper>
 
 

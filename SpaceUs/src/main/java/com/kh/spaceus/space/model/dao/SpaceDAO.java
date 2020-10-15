@@ -104,6 +104,8 @@ public interface SpaceDAO {
 	
 	Attachment selectPopularImage(String spaceNo);
 
+	int increaseSpaceReadCnt(String spaceNo);
+	
 	int minusLikeCnt(Wish wish);
 
 
