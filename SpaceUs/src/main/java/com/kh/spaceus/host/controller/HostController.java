@@ -6,6 +6,7 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.xssf.streaming.SXSSFCell;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.host.model.service.HostService;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
@@ -75,37 +77,60 @@ public class HostController {
 	
 	//예약 현황 
 	@RequestMapping("/hostReservation.do")
-	public String ManageHostReservation(Principal principal, Model model) {
+	public String ManageHostReservation(Principal principal, Model model, HttpServletRequest request,
+										@RequestParam(defaultValue = "1", value = "cPage") int cPage) {
 		
+		final int limit = 15; 
+		int offset = (cPage - 1) * limit;
 		String memberEmail = principal.getName();
-		List<Reservation> list = reservationService.selectHostReservationList(memberEmail);
+		List<Reservation> list = reservationService.selectHostReservationList(memberEmail, limit, offset);
 	
+		int totalContents = reservationService.selectHostRevTotalContents(memberEmail); 
+		String url = request.getRequestURI() + "?";
+		String pageBar = Utils.getPageBarHtml(cPage, limit, totalContents, url);
+		
 		model.addAttribute("list", list);
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("totalContents", totalContents);
 		return "host/hostReservation";
 	}	
 	
 	//순서별 예약현황
 	@RequestMapping("/hostReservationOrder.do")
-	public String hostReservationOrder(Principal principal, Model model, @RequestParam String order) {
+	public String hostReservationOrder(Principal principal, Model model, @RequestParam String order, HttpServletRequest request,
+										@RequestParam(defaultValue = "1", value = "cPage") int cPage) {
 		
+		final int limit = 15; 
+		int offset = (cPage - 1) * limit;
 		String memberEmail = principal.getName();
 		System.out.println(order);
 		if(order.equals("all")) {
-			List<Reservation> list = reservationService.selectHostReservationList(memberEmail);
+			List<Reservation> list = reservationService.selectHostReservationList(memberEmail, limit, offset);
+			int totalContents = reservationService.selectHostRevTotalContents(memberEmail); 
+			String url = request.getRequestURI() + "?order=all&";
+			String pageBar = Utils.getPageBarHtml(cPage, limit, totalContents, url);
+			
 			model.addAttribute("list", list);
-			System.out.println(list);
+			model.addAttribute("pageBar", pageBar);
+			model.addAttribute("totalContents", totalContents);
+			return "host/hostReservation";
 		}
 		else {
-			List<Reservation> list = reservationService.selectUseReservation(memberEmail);
+			List<Reservation> list = reservationService.selectUseReservation(memberEmail, limit, offset);
+			int totalContents = reservationService.selectHostRevTotalContents(memberEmail); 
+			String url = request.getRequestURI() +"?order=rev&";
+			String pageBar = Utils.getPageBarHtml(cPage, limit, totalContents, url);
 			model.addAttribute("list", list);
-			System.out.println(list);
+			model.addAttribute("pageBar", pageBar);
+			model.addAttribute("totalContents", totalContents);
+			return "host/hostReservation";
 		}
-		return "host/hostReservation";
 	}	
 	
 	//예약 회원 조회 
 	@RequestMapping("/hostSearchReservation.do")
-	public String hostSearchReservation(Principal principal, Model model, Reservation reservation) {
+	public String hostSearchReservation(Principal principal, Model model, Reservation reservation, HttpServletRequest request,
+			@RequestParam(defaultValue = "1", value = "cPage") int cPage) {
 		
 		reservation.setHostEmail(principal.getName());
 		List<Reservation> list = reservationService.hostSearchReservation(reservation);
@@ -113,16 +138,6 @@ public class HostController {
 		model.addAttribute("list", list);
 		return "host/hostReservation";
 	}	
-	
-	
-	//공간 리뷰 조회
-	@RequestMapping("/hostCheckReview.do")
-	public String CheckNewReview(Principal principal, Model model) {
-		log.debug("principal = {}", principal);
-		model.addAttribute("loginMember", principal);
-		
-		return "host/hostCheckReview";
-	}
 	
 	//공간 질문글 조회
 	@RequestMapping(value="/hostCheckArticle.do", method=RequestMethod.GET)
@@ -223,19 +238,42 @@ public class HostController {
 	//리뷰 목록
 	@RequestMapping("/reviewList.do")
 	public String reviewList(Principal principal,
-							 Model model,
-							 @RequestParam(defaultValue = "1", value = "cPage")
-							 int cPage) {
+							 Model model, HttpServletRequest request,
+							 @RequestParam(defaultValue = "1", value = "cPage") int cPage) {
 		final int limit = 10; 
 		int offset = (cPage - 1) * limit;
 		Space space = spaceService.selectOneSpaceNo(principal.getName());
 		String spaceNo = space.getSpaceNo();
 		List<Review> review = spaceService.selectListReview(spaceNo, limit, offset);
+		int totalContents = spaceService.selectHostReviewTotalContents(spaceNo); 
+		String url = request.getRequestURI() + "?";
+		String pageBar = Utils.getPageBarHtml(cPage, limit, totalContents, url);
 		
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("totalContents", totalContents);
 		model.addAttribute("review", review);
 		model.addAttribute("spaceNo", spaceNo);
 		
 		return "host/hostReviewList";
+	}
+	
+	//리뷰 조회(페이징 처리 안함)
+	@GetMapping("/selectReviewComment.do")
+	public ModelAndView selectReviewComment(ModelAndView mav,
+			@RequestParam("spaceNo") String spaceNo,
+			@RequestParam(defaultValue = "1", value = "cPage") int cPage) {
+		
+		final int limit = 10; 
+		int offset = (cPage - 1) * limit;
+		
+		List<Review> review = spaceService.selectReviewComment(spaceNo, limit, offset);
+		
+		mav.addObject("review", review);
+		mav.addObject("spaceNo", spaceNo);
+		mav.addObject("comment", "no");
+		mav.setViewName("host/hostReviewList");
+		System.out.println(review);
+		return mav;
 	}
 	
 	//댓글 등록
@@ -252,25 +290,6 @@ public class HostController {
 		
 		mav.setViewName("jsonView");
 		
-		return mav;
-	}
-	
-	//리뷰 조회
-	@GetMapping("/selectReviewComment.do")
-	public ModelAndView selectReviewComment(ModelAndView mav,
-											@RequestParam("spaceNo") String spaceNo,
-											@RequestParam(defaultValue = "1", value = "cPage")
-											int cPage) {
-		final int limit = 10; 
-		int offset = (cPage - 1) * limit;
-		
-		List<Review> review = spaceService.selectReviewComment(spaceNo, limit, offset);
-		
-		mav.addObject("review", review);
-		mav.addObject("spaceNo", spaceNo);
-		mav.addObject("comment", "no");
-		mav.setViewName("host/hostReviewList");
-		System.out.println(review);
 		return mav;
 	}
 	
