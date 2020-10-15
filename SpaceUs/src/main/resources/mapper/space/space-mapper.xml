@@ -683,6 +683,16 @@ select
 			space_no = #{spaceNo}
 	</update>
 	
+	<!-- 사용안하면 걍 지우기 호스트 페이지 리뷰 목록개수 -->
+	<select id="selectHostReviewTotalContents" resultType="_int">
+	    select
+			count(*)
+		from
+			review 
+		where 
+			space_no = #{ spaceNo }
+	</select>
+	
 </mapper>
 
 
