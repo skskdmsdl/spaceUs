@@ -727,7 +727,11 @@ function naverShare() {
     				<p class="price"><span class="space-price" style="color: #007bff;">
     				<fmt:formatNumber value="${space.hourlyPrice }" type="number"/><small>원/시간</small></span></p>
     				<ul class="property_list">
-    					<li><span class="icon-star"></span><fmt:formatNumber value="${space.starAvg }" pattern=".0" type="number"/></li>
+    					<li><i class="icon-star"></i>
+    						<c:if test="${space.starAvg != 0 }">
+		    					<fmt:formatNumber value="${space.starAvg}" pattern="0.0" type="number"/>
+	    					</c:if>
+	    					<c:if test="${space.starAvg == 0 }">0</c:if></li>
     					<li><span class="icon-heart"></span>${space.likeCnt }</li>
     					<li><span class="icon-comments"></span>${space.reviewCnt }</li>
     				</ul>
