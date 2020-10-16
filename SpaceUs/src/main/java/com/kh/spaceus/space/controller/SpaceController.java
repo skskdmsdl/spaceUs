@@ -176,10 +176,25 @@ public class SpaceController {
 	}
 
 	@RequestMapping("/spaceDetail.do")
-	public String spaceDetail(Model model, @RequestParam("spaceNo") String spaceNo, Principal principal,
+	public String spaceDetail(Model model, @RequestParam("spaceNo") String spaceNo, Principal principal, Space space,
 			@RequestParam(defaultValue = "1", value = "cPage") int cPage, HttpServletRequest request, HttpServletResponse response) {
-
+		
 		try {
+			System.out.println("111111qnaPaging"+space.getQnaPaging());
+			int qnaTotal = spaceService.selectQuestionTotalContents(spaceNo);
+			
+			// qna 조회
+			final int limit1 = 5 + space.getQnaPaging(); // 사용용도는 numPerPage와 똑같음
+			int offset1 = (cPage - 1) * limit1;
+			int qnaPaging = space.getQnaPaging();
+			System.out.println("111111qnaPaging"+qnaPaging);
+			
+			List<Qna> qlist = spaceService.selectQuestionList(spaceNo, limit1, offset1);
+			
+			int width = space.getWidth();
+			System.out.println("@@@@@@@@"+width);
+			
+			
 			//쿠키검사 : spaceCookie
 			Cookie[] cookies = request.getCookies();
 			String spaceCookieVal = "";
@@ -208,7 +223,7 @@ public class SpaceController {
 				log.info("result = {}",result);			
 			}
 		
-		Space space = spaceService.selectOneSpace(spaceNo);
+		space = spaceService.selectOneSpace(spaceNo);
 		System.out.println("@@"+space);
 		
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
@@ -224,8 +239,11 @@ public class SpaceController {
 			
 		
 		// 리뷰 한 페이지당 개수 제한
-		final int limit = 10; // 사용용도는 numPerPage와 똑같음
+		final int limit = 5 ; // 사용용도는 numPerPage와 똑같음
 		int offset = (cPage - 1) * limit;
+		/*int pagingNo = space.getPaging();
+		System.out.println("pagingNo"+pagingNo);*/
+		
 		List<Review> review = spaceService.selectListReview(spaceNo, limit, offset);
 
 		// 전체리뷰수 구하기
@@ -239,20 +257,16 @@ public class SpaceController {
 		String url = request.getRequestURI() + "?spaceNo=" + spaceNo;
 		String pageBar = Utils.getPageBarHtml(cPage, limit, reviewTotal, url);
 
-		int qnaTotal = spaceService.selectQuestionTotalContents(spaceNo);
-
-		// qna 조회
-		List<Qna> qlist = spaceService.selectQuestionList(spaceNo, limit, offset);
-		String qPageBar = Utils.getPageBarHtml(cPage, limit, qnaTotal, url);
-
 		// option 조회
 		List<OptionList> optionList = spaceService.selectOptionList(spaceNo);
+		
+		
 		
 		model.addAttribute("spcList", spcList);
 		model.addAttribute("cateName", cateName);
 
 		model.addAttribute("qlist", qlist);
-		model.addAttribute("qPageBar", qPageBar);
+		/* model.addAttribute("qPageBar", qPageBar); */
 		model.addAttribute("qnaTotal", qnaTotal);
 
 		model.addAttribute("space", space);
@@ -263,6 +277,8 @@ public class SpaceController {
 		model.addAttribute("reviewTotal", reviewTotal);
 		model.addAttribute("star", star); 
 		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("qnaPaging", qnaPaging);
+		model.addAttribute("width", width);
 		
 		model.addAttribute("optionList",optionList);
 		}catch(Exception e) {

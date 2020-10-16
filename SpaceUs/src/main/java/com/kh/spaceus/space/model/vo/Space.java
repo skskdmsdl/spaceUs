@@ -42,6 +42,8 @@ public class Space implements Serializable{
 	private String reviewContent;
 	private String reviewComment;
 	private String attach;
+	private int qnaPaging;
+	private int width;
 	
 	private List<Attachment> attachList;
 }

@@ -266,7 +266,7 @@ function naverShare() {
 							<!-- 예약버튼 -->
 							<input type="hidden" name="memberId" id="memberId" value="${loginMember.principal.memberEmail}" />
 							<input type="submit" onclick="rvSubmit();" value="예약하기"
-								class="btn py-3 px-5 btn-primary" style="margin-left: 70px"> 
+								class="btn py-3 px-5 btn-primary font-bold" style="font-size:16px;margin-left: 70px"> 
 							<form id="reserveFrm">
 								<input type="hidden" name="spaceNo" value="${ space.spaceNo }" />
 							</form>
@@ -509,7 +509,8 @@ function naverShare() {
 			</c:choose>   	
 			</c:forEach>
 		   	</c:if>
-		   	<!-- <button type="button" class="btn btn-primary">더보기</button> -->
+		   	<button type="button" class="btn btn-primary col-3 font-bold" style="margin-left: 33%;" name="qnaPaging" value="${ qnaPaging+5 }">더보기</button> 
+			<button type="button" class="btn btn-primary ml-5 font-bold pull-right arrowUp"><i class="fa fa-arrow-up"></i></button>
    		</div>
 		   	
 <%-- 			<nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 45%; margin-top:50px;">
@@ -933,15 +934,37 @@ $(".reviewToggle").on('click', function(){
 $(function () { 
 
 	if($("#bool").val() == 1){
-	$("#detail-description-tab").removeClass('active');
-	$("#detail-review-tab").addClass('active');
-	$("#detail-description").removeClass('active');
-	$("#detail-description").removeClass('show');
-	$("#detail-review").addClass('active');
-	$("#detail-review").addClass('show');
+		$("#detail-description-tab").removeClass('active');
+		$("#detail-review-tab").addClass('active');
+		$("#detail-description").removeClass('active');
+		$("#detail-description").removeClass('show');
+		$("#detail-review").addClass('active');
+		$("#detail-review").addClass('show');
+	} 
+	
+	if("${qnaPaging}" > 0){
+		$("#detail-description-tab").removeClass('active');
+		$("#detail-qna-tab").addClass('active');
+		$("#detail-description").removeClass('active');
+		$("#detail-description").removeClass('show');
+		$("#detail-qna").addClass('active');
+		$("#detail-qna").addClass('show');
+		window.scrollTo(200, "${width}");
+	} 
+	if("${qnaPaging}" > 9){
+		window.scrollTo(200, "${width}");
 	} 
 });
 
+//페이징
+$("[name=qnaPaging]").click(function(){
+		var position = $(window).scrollTop(); 
+		location.href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+"${space.spaceNo}"+"&qnaPaging="+$(this).val()+"&width="+position;
+});
+//맨위로
+$(".arrowUp").click(function(){
+	window.scrollTo(200, 0);
+})
 
 </script>
 
