@@ -241,22 +241,24 @@ function naverShare() {
 							<span class="like-count"></span>
 							</c:otherwise>
 							</c:choose>
-							&emsp; <a href="javascript:;" id="kakao-link-btn"> <img
+							&emsp; <%-- <a href="javascript:;" id="kakao-link-btn"> <img
 								src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png"
 								width="30px" />
-							</a>
+							</a> --%>
 							<!-- 공유하기 팝오버 시작-->
-							<a href=javascript:; data-toggle="popover" data-trigger="focus"
+							<!--  <a href=javascript:; data-toggle="popover" data-trigger="focus"
 								data-placement="bottom" tabindex="0" title="공유하기"
 								data-html="true" data-popover-content="#a1"> <i
 								class="far fa-share-square"></i>
-							</a>
-							<div class="d-none" id="a1">
+							</a> -->
+							<i class="far fa-share-square"></i>
+							<div class="d-none" id="a1" style="padding:5px; font-size: 16px; border:1px solid #efefef; right: 140px;top: 420px;position: absolute; z-index: 10;background-color: white; width:250px; text-align: center; border-radius: 5px;" >
+								<p style="border-bottom:1px solid #efefef; padding:5px;">공유하기</p>
 								<div class="popover-body">
-									<%-- <img src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png" onclick="kakaoShare();"/> --%>
+									<img src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png" id="kakao-link-btn"/> 
 									<img src="${pageContext.request.contextPath }/resources/images/icons/twitter-icon.png" onclick="twitterShare();" />
 									<img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg" onclick="naverShare();" />
-									<input class="input-group-text w-100 mt-2 mb-2" type="text" id="url-input">
+									<input class="input-group-text w-100 mt-4 mb-2" type="text" id="url-input">
 									<button class="btn btn-primary w-100" id="url-btn" onclick="urlcopy();">URL 복사</button>
 								</div>
 							</div>
@@ -781,12 +783,10 @@ geocoder.addressSearch('${ space.address }', function(result, status) {
 } 
 });  
 
-
-
 </script>
 <!-- 카카오톡 공유 -->
 <script type='text/javascript'>
-    Kakao.init('455b391796eaae1861145a078007af70');
+    Kakao.init('d6ea51fdfee1be1e548d05a904a861bc');
 
     	 Kakao.Link.createDefaultButton({
     	      container: '#kakao-link-btn',
@@ -796,10 +796,10 @@ geocoder.addressSearch('${ space.address }', function(result, status) {
     	      content: {
     	        title: '${ space.spaceName }',
     	        description: '${ space.content }',
-    	        imageUrl: 'http://mud-kage.kakao.co.kr/dn/bSbH9w/btqgegaEDfW/vD9KKV0hEintg6bZT4v4WK/kakaolink40_original.png',
+    	        imageUrl: 'https://moplqfgeemqv2103108.cdn.ntruss.com/service/158321359_3969307adb111d972a661a99fd3629af.jpg?type=m&w=900&h=900&autorotate=true&quality=90',
     	        link: {
-    	          mobileWebUrl: 'https://developers.kakao.com',
-    	          webUrl: 'https://developers.kakao.com'
+    	          mobileWebUrl: 'https://www.spacecloud.kr/',
+    	          webUrl: 'https://www.spacecloud.kr/'
     	        }
     	      },
     	      social: {
@@ -811,8 +811,8 @@ geocoder.addressSearch('${ space.address }', function(result, status) {
     	        {
     	          title: '웹으로 보기',
     	          link: {
-    	            mobileWebUrl: 'https://developers.kakao.com',
-    	            webUrl: 'https://developers.kakao.com'
+    	            mobileWebUrl: 'https://www.spacecloud.kr/',
+    	            webUrl: 'https://www.spacecloud.kr/'
     	          	}
     	        }]
     	    });
@@ -826,6 +826,13 @@ geocoder.addressSearch('${ space.address }', function(result, status) {
 		center:true
 })
  */
+$(".fa-share-square").click(function(){
+	if($("#a1").hasClass('d-none'))
+		$("#a1").removeClass('d-none');
+	else
+		$("#a1").addClass('d-none');
+	
+})
 function answer(){
 	alert(${qna.qnaNo});
 	
