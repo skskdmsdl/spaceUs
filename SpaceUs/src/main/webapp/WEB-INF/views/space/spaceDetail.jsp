@@ -374,14 +374,14 @@ function naverShare() {
 						
 
 <div class="tab-pane fade" id="detail-qna" role="tabpanel" aria-labelledby="detail-qna-tab">
-     <div class="row">
-   		<div class="col-md-10">
-   			<h3 class="head fa fa-pencil">${qnaTotal }개의 질문글</h3>
+     <div class="row mt-5">
+   		<div class="col-md-10" style="margin: 0 auto;">
+   			<h3 class="head fa fa-pencil"> ${qnaTotal }개의 질문글</h3>
    				
 			 	<!-- 질문글 등록 모달창 -->
 				<sec:authorize access="hasAnyRole('USER','HOST','ADMIN')"> 
 				<!-- 질문글쓰기 버튼 -->
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#qnaModal" data-whatever="@fat" style="float: right; margin: 10px; letter-spacing:1px; font-weight:bold; font-size:1em;">질문글 작성</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#qnaModal" data-whatever="@fat" style="float: right; margin-right: 70px; letter-spacing:1px; font-weight:bold; font-size:1em;">질문글 작성</button>
 								
 				<div class="modal fade" id="qnaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  <div class="modal-dialog" role="document">
@@ -430,15 +430,15 @@ function naverShare() {
 			<div class="review d-flex">
 		   		<div class="desc" style="background-color:#f8f9fa; padding:5px;">
 		   			<h4>
-		   			<span class="text-left badge">Q.</span>
+		   			<span class="text-left badge" style="font-size: 20px;">Q.</span>
 		   			</h4>
 		   			<h4>
-		   				<span class="text-left badge">${ qna.name}</span>
-		   				<span class="text-right"><fmt:formatDate value="${ qna.date}" pattern="yyyy-MM-dd"/></span>
+		   				<span class="text-left badge mb-3" style="padding-left:20px;">${ qna.name}</span>
+		   				<span class="text-right pr-2"><fmt:formatDate value="${ qna.date}" pattern="yyyy-MM-dd"/></span>
 		   			</h4>
 		   			<c:choose>
 		   				<c:when test="${qna.status eq false}">
-			   			    <p style="padding-left:20px; text-align:justify;">${qna.content }</p>
+			   			    <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
 		   			 	</c:when>
 		   			 	<c:otherwise>
 		   			 		<p style="padding-left:20px; text-align:justify;"><i class="fa fa-lock">비공개</i></p>
@@ -476,7 +476,7 @@ function naverShare() {
 		   	<c:choose>
 				<c:when test="${ qna.answer != null && qna.status eq false }">
 				
-	   			<div class="review d-flex" style="padding: 10px;">
+	   			<div class="review d-flex" style="padding:0 10px 10px 10px;">
 			   		<div class="desc" style="background-color:#dfe8e6; padding:5px">
 			   			<h4>
 			   				<span class="text-left"><i class="mdi mdi-subdirectory-arrow-right"></i>A. 호스트님의 답글</span>
@@ -509,6 +509,7 @@ function naverShare() {
 			</c:choose>   	
 			</c:forEach>
 		   	</c:if>
+		   	<!-- <button type="button" class="btn btn-primary">더보기</button> -->
    		</div>
 		   	
 <%-- 			<nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 45%; margin-top:50px;">

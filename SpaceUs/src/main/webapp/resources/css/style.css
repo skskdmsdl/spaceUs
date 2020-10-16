@@ -8715,7 +8715,7 @@ h1, h2, h3, h4, h5,
         color: red; }
   .pills .head {
     font-size: 18px;
-    margin-bottom: 30px;
+    margin:10px 0 70px 30px;
     font-weight: 600; }
   .pills .review {
     width: 100%;

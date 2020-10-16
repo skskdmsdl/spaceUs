@@ -120,6 +120,12 @@
 <style type="text/css">
 .abcRioButtonContentWrapper{
 	border: none !important;
+	font-family: Poppins-Regular;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #666666;
+	
+	
 }
 </style>
 
