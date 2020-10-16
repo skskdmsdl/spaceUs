@@ -36,10 +36,11 @@
 .popover-body img {width: 30px;	margin-right: 10px;}
 .popover-body img:hover {cursor: pointer;}
 .fa-share-square, .fa-heart {
-	color: black;
+	color: #333;
 	font-size: 25px;
-	margin-right: 10px;
+	cursor:pointer;
 }
+.fa-eye{color: #333; margin-right:3px;}
 .fab {margin-right: 5px;}
 a:hover {opacity: 0.3; color: black;}
 .fade1 {
@@ -226,10 +227,10 @@ function naverShare() {
 						<div style="text-align: right; padding-right: 5px">
 							<i class="fa fa-eye fa-2x" style="color: black;font-size: x-large;"></i>
 							<c:if test="${ empty space.views }">
-								<span>0</span>
+								<span class="mr-2">0</span>
 							</c:if>
 							<c:if test="${ not empty space.views }">
-								<span>${ space.views }</span>
+								<span class="mr-2">${ space.views }</span>
 							</c:if>
 							<c:choose>
 							<c:when test="${ loginMember.principal.memberEmail != null }">
