@@ -1295,3 +1295,7 @@ WITH TEMP_TABLE AS (
 		   FROM TEMP_TABLE join space space using(space_no) left join (select reviews , space_no from( select ROW_NUMBER() OVER(partition by space_no ORDER BY space_no,reviews) row_num, space_no, reviews  from( select count(*)over(partition by space_no) as reviews, space_no from review ))where row_num =1) using(space_no)
         WHERE name like '%서울%'
         order by reviews;
+-------------------------------------------------------------------------------------------
+-- 10/16
+-------------------------------------------------------------------------------------------
+select * from reservation;

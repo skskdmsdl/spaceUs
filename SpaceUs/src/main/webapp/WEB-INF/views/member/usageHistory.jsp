@@ -109,10 +109,10 @@
 															
 															<c:choose>
 													   				<c:when test="${ info.revCancle eq info.revComplete}">
-														   			   <button type="submit" class="btn btn-rounded btn-outline-danger">예약취소</button>
+														   			   <button type="button" class="btn btn-rounded btn-outline-danger" data-toggle="modal" data-target="#cancelModal${ vs.index }">예약취소</button>
 													   			 	</c:when>
 													   			 	<c:otherwise>
-													   			 		<button type="button" class="btn btn-rounded btn-outline-danger">예약취소</button>
+													   			 		<button type="button" class="btn btn-rounded btn-outline-danger" data-toggle="modal" data-target="#cancelModal${ vs.index }">예약취소</button>
 													   			 	</c:otherwise>
 													   		 </c:choose>
 															
@@ -123,7 +123,7 @@
 		                                	</div>
 		                            	</div>
 		                            	
-		                            	<!-- Modal -->
+		                            	<!-- confrim Modal -->
 										<div class="modal fade" id="confirmModal${ vs.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 										  <div class="modal-dialog">
 										    <div class="modal-content">
@@ -155,6 +155,96 @@
 										    </div>
 										  </div>
 										</div>
+										<!-- confirm modal 끝 -->
+										
+										<!-- cancel modal 시작 -->
+										<!-- Modal: modalPoll -->
+										<div class="modal fade" id="cancelModal${ vs.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										  <div class="modal-dialog" role="document">
+										    <div class="modal-content">
+										      <!--Header-->
+										      <div class="modal-header">
+										        <p class="heading lead">예약 취소
+										        </p>
+										
+										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										          <span aria-hidden="true" class="white-text">×</span>
+										        </button>
+										       </div>
+												<!-- /Header -->
+										       <!--Body-->
+										       <div class="modal-body">
+										         <div class="text-center">
+										           <i class="far fa-file-alt fa-4x mb-3 animated rotateIn"></i>
+										           <p>
+										             <strong>취소 사유를 선택해주세요</strong>
+										           </p>
+										         </div>
+										
+										         <hr>
+										
+										         <!-- Radio -->
+										         <div class="form-check mb-4">
+										           <input class="form-check-input" name="group1" type="radio" id="radio-179" value="option1" checked>
+										           <label class="form-check-label" for="radio-179">공간 대여 일정이 미뤄짐</label>
+										         </div>
+										
+										         <div class="form-check mb-4">
+										           <input class="form-check-input" name="group1" type="radio" id="radio-279" value="option2">
+										           <label class="form-check-label" for="radio-279">타 공간 대여를 하기로 하였음</label>
+										         </div>
+										
+										         <div class="form-check mb-4">
+										           <input class="form-check-input" name="group1" type="radio" id="radio-379" value="option3">
+										           <label class="form-check-label" for="radio-379">서비스 및 공간의 불만족</label>
+										         </div>
+										         <div class="form-check mb-4">
+										           <input class="form-check-input" name="group1" type="radio" id="radio-479" value="option4">
+										           <label class="form-check-label" for="radio-479">공간 대여의 비용의 문제점</label>
+										         </div>
+										         <div class="form-check mb-4">
+										           <input class="form-check-input" name="group1" type="radio" id="radio-579" value="option5">
+										           <label class="form-check-label" for="radio-579">공간 위치상 안전상의 문제점</label>
+										         </div>
+										        <!-- /Radio -->
+										
+										        <p class="text-center">
+										          <strong>예약 무료 취소</strong>
+										        </p>
+										        <!--Basic textarea-->
+										        <table class="table table-hover" style="border:0;">
+										          <tbody>
+										            <tr>
+										              <th colspan="2">총 결제 금액</th>
+										              <td>KRW</td>
+										              <td>${ info.totalPrice }</td>
+										            </tr>
+										            <tr>
+										              <th colspan="2">취소 수수료</th>
+										              <td>KRW</td>
+										              <td>0</td>
+										            </tr>
+										            <tr>
+										              <th colspan="2"><strong>환불 금액</strong></th>
+										              <td>KRW</td>
+										              <td style="color: red;">${ info.totalPrice }</td>
+										            </tr>
+										          </tbody>
+										        </table>
+										      </div>
+										
+										      <!--Footer-->
+										      <div class="modal-footer justify-content-center">
+										        <a type="button" class="btn btn-primary waves-effect waves-light">Send
+										          <i class="fa fa-paper-plane ml-1"></i>
+										        </a>
+										        <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Cancel</a>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+										<!-- Modal: modalPoll -->
+										<!-- cancel modal 끝 -->
 									</c:forEach>
                                 </div>
                             </div>

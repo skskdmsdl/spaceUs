@@ -412,6 +412,7 @@ function iamport(){
 	        msg += '에러내용 : ' + rsp.error_msg;
 	    }
 	    alert(msg);
+	    alert(rsp.imp_uid);
 	    //나중에 지우기
 	    document.insertReservation.submit();
 	});
