@@ -161,9 +161,11 @@
 										<div class="modal fade" id="cancelModal${ vs.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 										  <div class="modal-dialog" role="document">
 										    <div class="modal-content">
-										       <form:form name="cancelReservation" id="cancelReservation"
-						                         	  action="${pageContext.request.contextPath}/reservation/cancelReservation.do"
-													  method="POST">
+										       <form:form name="cancelReservation" id="cancelReservation" action="${pageContext.request.contextPath}/reservation/cancelReservation.do" method="POST">							      
+											      
+											      <input type="hidden" name="revNo" value="${info.revNo}" />
+											      <input type="hidden" name="reasonCancel" value="" />
+											      
 											      <!--Header-->
 											      <div class="modal-header">
 											        <p class="heading lead">예약 취소
@@ -189,25 +191,25 @@
 											      
 											         <div>
 												         <div class="form-check mb-4">
-												           <input class="form-check-input" name="group1" type="radio" id="radio-179" value="option1" checked>
+												           <input class="form-check-input" name="reason" type="radio" id="reason" value="공간 대여 일정이 미뤄짐" checked>
 												           <label class="form-check-label" for="radio-179">공간 대여 일정이 미뤄짐</label>
 												         </div>
 												
 												         <div class="form-check mb-4">
-												           <input class="form-check-input" name="group1" type="radio" id="radio-279" value="option2">
+												           <input class="form-check-input" name="reason" type="radio" id="reason" value="타 공간 대여를 하기로 하였음">
 												           <label class="form-check-label" for="radio-279">타 공간 대여를 하기로 하였음</label>
 												         </div>
 												
 												         <div class="form-check mb-4">
-												           <input class="form-check-input" name="group1" type="radio" id="radio-379" value="option3">
+												           <input class="form-check-input" name="reason" type="radio" id="reason" value="서비스 및 공간의 불만족">
 												           <label class="form-check-label" for="radio-379">서비스 및 공간의 불만족</label>
 												         </div>
 												         <div class="form-check mb-4">
-												           <input class="form-check-input" name="group1" type="radio" id="radio-479" value="option4">
+												           <input class="form-check-input" name="reason" type="radio" id="reason" value="공간 대여의 비용의 문제점">
 												           <label class="form-check-label" for="radio-479">공간 대여의 비용의 문제점</label>
 												         </div>
 												         <div class="form-check mb-4">
-												           <input class="form-check-input" name="group1" type="radio" id="radio-579" value="option5">
+												           <input class="form-check-input" name="reason" type="radio" id="reason" value="공간 위치상 안전상의 문제점">
 												           <label class="form-check-label" for="radio-579">공간 위치상 안전상의 문제점</label>
 												         </div>
 											         </div>
@@ -228,7 +230,7 @@
 											            <tr style="border-bottom: 1px #d0d0d0 !important;">
 											              <th colspan="2">취소 수수료</th>
 											              <td>KRW</td>
-											              <td>0</td>
+											              <td>${info.revNo }</td>
 											            </tr>
 											          </tbody>
 											        </table>
@@ -246,10 +248,11 @@
 											
 											      <!--Footer-->
 											      <div class="modal-footer justify-content-center">
-											        <a type="submit" class="btn btn-warning waves-effect waves-light" style="color:darkblack;"
-											           id="refund" class="site-btn">환불
-											          <i class="fas fa-hand-holding-usd cc_pointer"></i>
+											        <a type="button" class="btn btn-warning waves-effect waves-light" style="color:darkblack;"
+											           id="refund" onclick="refund();">환불
+											         	<i class="fas fa-hand-holding-usd cc_pointer"></i>
 											        </a>
+											        <input type="hidden" name="revNo" value="${info.revNo}" />
 											        <a type="button" class="btn btn-outline-link waves-effect" data-dismiss="modal">Cancel</a>
 											      </div>
 										      </form:form>
@@ -285,10 +288,41 @@ $("#selectId").change(function(){
 });
 </script>
 <script type="text/javascript">
-$("#refund").click(function(){
-	alert("ssssssss");
-	document.cancelReservation.submit();
-});
+
+function refund(){
+	//$("#cancelReservation").submit();
+	var reason = $("input[name='reason']:checked").val();
+	$("[name=reasonCancel]").val(reason);
+	alert(reason);
+
+	var revNo = $(this).siblings("input").val();
+	alert(revNo);
+	//cancelPay();	
+}
+
+function cancelPay() {
+	/* var reason = $("input[name='reason']:checked").val();
+	$("[name=reasonCancel]").val(reason);
+
+	var revNo = $(this).val();
+	alert();
+ */
+   /*  jQuery.ajax({
+      "url": "http://www.myservice.com/payments/cancel",
+      "type": "POST",
+      "contentType": "application/json",
+      "data": JSON.stringify({
+        "merchant_uid": "mid_" + new Date().getTime(), // 주문번호
+        "cancel_request_amount": 2000, // 환불금액
+        "reason": "테스트 결제 환불" // 환불사유
+      }),
+      "dataType": "json"
+    }).done(function(result) { // 환불 성공시 로직 
+        alert("환불 성공");
+    }).fail(function(error) { // 환불 실패시 로직
+      alert("환불 실패");
+    }); */
+  }
 </script>
 
 
@@ -305,3 +339,5 @@ $("#refund").click(function(){
 <script src="${ pageContext.request.contextPath }/resources/js/sidebarmenu.js"></script>
 <!--Custom JavaScript -->
 <script src="${ pageContext.request.contextPath }/resources/js/custom.min.js"></script>
+<!-- jQuery CDN --->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
