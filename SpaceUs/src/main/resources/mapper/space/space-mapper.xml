@@ -324,7 +324,7 @@ select
 	<select id="selectCateName" resultType="string">
 		select 
 			category_name 
-		from space join category on space.category_no=category.category_no 
+		from space join category using(category_no)
 		where space_no=#{spaceNo}
 	</select>
 	

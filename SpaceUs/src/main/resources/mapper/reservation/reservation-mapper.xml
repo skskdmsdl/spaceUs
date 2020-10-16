@@ -37,7 +37,7 @@
 		insert into
 			reservation
 		values (
-			'REV'||seq_rev_no.nextval,
+			#{revNo},
 			#{ memberEmail },
 			#{ spaceNo },
 			sysdate,

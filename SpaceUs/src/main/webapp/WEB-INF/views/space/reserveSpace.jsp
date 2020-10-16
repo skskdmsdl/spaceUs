@@ -178,6 +178,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 							  class="calculator-form">
 							 <input type="hidden" name="memberEmail" value="${ member.memberEmail }">
 							 <input type="hidden" name="spaceNo" value="${ space.spaceNo }">
+							 <input type="hidden" name="revNo" value="">
 		
 	                         <div class="filter-input">
 	                             <p>예약 날짜</p>
@@ -406,15 +407,19 @@ function iamport(){
 	        msg += '결제 금액 : ' + rsp.paid_amount;
 	        msg += '카드 승인번호 : ' + rsp.apply_num;
 
+	        $("[name=revNo]").val(rsp.imp_uid);
 	        document.insertReservation.submit();
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;
 	    }
+	    
 	    alert(msg);
+	    
+	    /* //나중에 지우기
 	    alert(rsp.imp_uid);
-	    //나중에 지우기
-	    document.insertReservation.submit();
+	    $("[name=revNo]").val(rsp.imp_uid);
+	    document.insertReservation.submit(); */
 	});
 }
 </script>

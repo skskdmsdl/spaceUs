@@ -232,7 +232,7 @@ $(document).on("click",".fa-2x",function(){
 		<div class="flex-wrap">
 			<div class="search-category">공간유형</div>
 			<div class="search-category">지역</div>
-			<div class="search-category">날짜</div>
+			<div class="search-category">옵션</div>
 			<form id="filter-search" class="filter-form">
 				<!-- 카테고리 선택 시작 -->
 				<select name="space_type" id="space_type" class="nice-select sm-width">
