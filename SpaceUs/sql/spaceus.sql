@@ -22,7 +22,7 @@ commit;
 --        '01012341234','2000/01/01',sysdate,0);
 
 --권한 컬럼 삭제
-ALTER TABLE member DROP COLUMN authority;
+--ALTER TABLE member DROP COLUMN authority;
 
 
 -----------------------------
@@ -40,6 +40,12 @@ create table auth (
 select * from auth;
 --insert into auth
 --values ('seung@naver.com','ROLE_USER');
+update auth
+set 
+    authority = 'ROLE_USER'
+where 
+    member_email = 'seung@naver.com';
+commit;
 -----------------------------
 ---------- 카테고리 ----------
 -----------------------------
