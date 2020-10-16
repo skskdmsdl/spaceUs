@@ -49,7 +49,7 @@
 		from 
 			reservation
 		where
-			member_email = #{ email }
+			member_email = #{ memberEmail }
 		order by rev_date desc
 	</select>
 	
@@ -131,8 +131,16 @@
 			and member_email like '%'||#{ memberEmail }||'%'
 		order by rev_date desc
 	</select>
-
-
+	
+	<select id="selectHostRevTotalContents" resultType="_int">
+	    select 
+        	count(*) 
+		from 
+			member join reservation using(member_email) 
+		where 
+			space_no=(select space_no from space where member_email = #{ memberEmail })
+	</select>
+	
 
 
 </mapper>

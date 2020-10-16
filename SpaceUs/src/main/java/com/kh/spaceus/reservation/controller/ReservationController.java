@@ -24,7 +24,7 @@ public class ReservationController {
 		System.out.println("reservation="+reservation);
 		
 		int result = reservationService.insertReservation(reservation);
-		
+	
 		return "redirect:/member/usageHistory.do";
 	}
 	
