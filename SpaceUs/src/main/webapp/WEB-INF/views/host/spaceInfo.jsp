@@ -61,7 +61,7 @@
 							</tr>
 							<tr>
 						      <td class="align-baseline">카테고리</td>
-						      <td><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="${cateName }" readonly /></td>
+						      <td><input type="text" class="col-8 input-group-text mb-4 mr-5 pull-right" value="${cateName}" readonly /></td>
 							</tr>
 						    <tr>
 						      <td class="align-baseline">사업자 번호</td>
@@ -262,7 +262,8 @@ $(function(){
 	</c:forEach>
 
 	document.getElementById('mon').checked = true;
-
+	day=0;
+	
 	//셀 색 지우기
 	for(var i=0; i<33; i++)
 		$("#"+i).removeClass("bg-primary");
