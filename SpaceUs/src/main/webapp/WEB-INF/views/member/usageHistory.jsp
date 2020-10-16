@@ -29,7 +29,7 @@
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">마이페이지</a></li>
-                                <li class="breadcrumb-item active">사용 내역</li>
+                                <li class="breadcrumb-item active">나의 예약내역</li>
                             </ol>
                         </div>
                     </div>
@@ -41,8 +41,8 @@
                            <div class="card-body">
 	                            <div class="row"> 
 		                           <div class="col-md-9">
-		                                <h5 class="card-title">사용 내역</h5>
-		                                <h6 class="card-subtitle">사용 공간 내역을 확인하세요</h6>
+		                                <h5 class="card-title">나의 예약내역</h5>
+		                                <h6 class="card-subtitle">공간 예약 내역을 확인하세요</h6>
 		                           </div>
 	                       		   <div class="col-md-3">
 	                                   <select class="custom-select b-0" id="selectId" >
@@ -58,7 +58,6 @@
                            
                                <div class="steamline m-t-40">
                                		<c:forEach items="${revList}" var="info" varStatus="vs">
-                               		<p>${ spaceList[vs.index] }</p>
 										<div>
 		                                     <c:choose>
 									   				<c:when test="${ info.revCancle eq info.revComplete}">
