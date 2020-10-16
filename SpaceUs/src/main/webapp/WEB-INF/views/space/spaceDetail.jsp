@@ -238,7 +238,7 @@ function naverShare() {
 							<span class="like-count"></span>
 							</c:when>
 							<c:otherwise>
-							<i id="addLike" class="far fa-heart" style="margin:2px;"></i>
+							<i id="likeLogin" class="far fa-heart" style="margin:2px;"></i>
 							<span class="like-count"></span>
 							</c:otherwise>
 							</c:choose>
@@ -511,7 +511,7 @@ function naverShare() {
 			</c:forEach>
 		   	</c:if>
 		   	<button type="button" class="btn btn-primary col-3 font-bold" style="margin-left: 33%;" name="qnaPaging" value="${ qnaPaging+5 }">더보기</button> 
-			<button type="button" class="btn btn-primary ml-5 font-bold pull-right arrowUp"><i class="fa fa-arrow-up"></i></button>
+			<!-- <button type="button" class="btn btn-primary ml-5 font-bold pull-right arrowUp"><i class="fa fa-arrow-up"></i></button> -->
    		</div>
 		   	
 <%-- 			<nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 45%; margin-top:50px;">
@@ -963,9 +963,14 @@ $("[name=qnaPaging]").click(function(){
 		location.href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+"${space.spaceNo}"+"&qnaPaging="+$(this).val()+"&width="+position;
 });
 //맨위로
-$(".arrowUp").click(function(){
+/* $(".arrowUp").click(function(){
 	window.scrollTo(200, 0);
-})
+}); */
+//로그인 후 이용 처리
+$("#likeLogin").click(function(){
+	alert("로그인 후 이용할 수 있습니다.");
+  	location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+});
 
 </script>
 
