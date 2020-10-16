@@ -59,17 +59,19 @@ public class ReservationServiceImpl implements ReservationService{
 		return reservationDAO.cancleReservation(revNo);
 	}
 
+	@Override
 	public List<Reservation> selectHostReservationList(String memberEmail, int limit, int offset) {
 		return reservationDAO.selectHostReservationList(memberEmail, limit, offset);
+	}
+
+	@Override
+	public int deleteRevAvail(String spaceNo) {
+		return reservationDAO.deleteRevAvail(spaceNo);
 	}
 
 	@Override
 	public int selectHostRevTotalContents(String memberEmail) {
 		return reservationDAO.selectHostRevTotalContents(memberEmail);
 	}
-
-
-	
-
 	
 }

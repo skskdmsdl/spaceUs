@@ -71,10 +71,13 @@ public class ReservationDAOImpl implements ReservationDAO{
 	}
 
 	@Override
+	public int deleteRevAvail(String spaceNo) {
+		return sqlSession.delete("reservation.deleteRevAvail", spaceNo);
+	}
+
+	@Override
 	public int selectHostRevTotalContents(String memberEmail) {
 		return sqlSession.selectOne("reservation.selectHostRevTotalContents", memberEmail);
 	}
-
-	
 
 }

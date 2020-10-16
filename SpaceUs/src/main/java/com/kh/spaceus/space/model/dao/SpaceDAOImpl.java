@@ -1,5 +1,6 @@
 package com.kh.spaceus.space.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -260,9 +261,21 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
+	public int deleteOption(String spaceNo) {
+		return sqlSession.delete("space.deleteOption", spaceNo);
+	}
+
+	@Override
+	public int updateStatus(String spaceNo, String status) {
+		Map<String,String> map = new HashMap<>();
+		map.put("spaceNo", spaceNo);
+		map.put("status", status);
+		return sqlSession.update("space.updateStatus", map);
+	}
+
+	@Override
 	public int selectHostReviewTotalContents(String spaceNo) {
 		return sqlSession.selectOne("space.selectHostReviewTotalContents", spaceNo);
 	}
-	
 
 }

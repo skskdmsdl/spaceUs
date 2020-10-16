@@ -27,7 +27,7 @@
 	</insert>
       
 <!-- space -->
-	<select id="selectAll" resultType="space">
+	<select id="selectAll" resultMap="spaceMap">
 		select
 			*
 		from space
@@ -238,7 +238,7 @@
 		where space_no = #{spaceNo}
 	</select>
 	
-	<select id="selectOneSpaceNo" resultType="space">
+	<select id="selectOneSpaceNo" resultMap="spaceMap">
 		select 
 			*
 		from 
@@ -324,7 +324,7 @@ select
 	<select id="selectCateName" resultType="string">
 		select 
 			category_name 
-		from space join category on space.category_no=category.category_no 
+		from space join category using(category_no)
 		where space_no=#{spaceNo}
 	</select>
 	
@@ -683,6 +683,23 @@ select
 			space_no = #{spaceNo}
 	</update>
 	
+	<delete id="deleteOption">
+		delete
+		from
+			space_option
+		where
+			space_no=#{spaceNo}
+	</delete>
+	
+	<update id="updateStatus">
+		update 
+			space
+		set
+			status = #{status}
+		where
+			space_no = #{spaceNo}
+	</update>
+
 	<!-- 사용안하면 걍 지우기 호스트 페이지 리뷰 목록개수 -->
 	<select id="selectHostReviewTotalContents" resultType="_int">
 	    select
@@ -692,6 +709,7 @@ select
 		where 
 			space_no = #{ spaceNo }
 	</select>
+
 	
 </mapper>
 

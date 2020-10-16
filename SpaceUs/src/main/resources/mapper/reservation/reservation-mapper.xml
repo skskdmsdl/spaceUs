@@ -24,12 +24,20 @@
 		)
 	</insert>
 	
+	<delete id="deleteRevAvail">
+		delete
+		from
+			reservation_avail
+		where
+			space_no=#{spaceNo}
+	</delete>
+	
 <!-- reservation -->
 	<insert id="insertReservation">
 		insert into
 			reservation
 		values (
-			'REV'||seq_rev_no.nextval,
+			#{revNo},
 			#{ memberEmail },
 			#{ spaceNo },
 			sysdate,
