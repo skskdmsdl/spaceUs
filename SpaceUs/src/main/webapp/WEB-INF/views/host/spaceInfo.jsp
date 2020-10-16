@@ -413,7 +413,6 @@ $("#spaceFrm").submit(function(){
 	if(result){	
 		$("[name=day]").val(JSON.stringify(dayTime));
 	}else{
-		$('html, body').animate({scrollTop : $("#time").offset().top}, 100);
 	    return false;
 	}
 
