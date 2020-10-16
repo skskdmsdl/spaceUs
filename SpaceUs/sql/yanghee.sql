@@ -1234,17 +1234,64 @@ from(
     );
 
 -- 리뷰수 space_no에 1개씩
-select reviews,space_no
-from(
-    select
-        ROW_NUMBER() OVER(partition by space_no ORDER BY space_no,reviews) row_num,
-        space_no,
-        reviews
-    from(    
-        select count(*)over(partition by space_no) as reviews,
-                space_no 
-        from review
-        )
-    )
-where row_num =1 and space_no='space2';
- 
+select reviews,space_no from( select ROW_NUMBER() OVER(partition by space_no ORDER BY space_no,reviews) row_num, space_no,reviews from( select count(*)over(partition by space_no) as reviews, space_no from review))where row_num =1 ;
+--
+select
+		    S.space_no,
+		    S.space_name, 
+		    REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
+		    S.hourly_price,
+		    S.views,
+		    S.like_cnt,
+		    S.star_avg,
+		    (select reviews from( select ROW_NUMBER() OVER(partition by space_no ORDER BY space_no,reviews) row_num, space_no,reviews from( select count(*)over(partition by space_no) as reviews, space_no from review))where row_num =1 and space_no = 'space2') as reviews,
+            SI.renamed_filename
+from space S join(
+                            select space_no,renamed_filename 
+                            from( select 
+                                    S.space_no,
+                                    SI.renamed_filename,
+                                    rank()over(partition by S.space_no order by SI.renamed_filename) as rnum 
+                                  from space S left join space_image SI 
+                                                on S.space_no = SI.space_no)
+                                  where rnum=1
+                        )SI on S.space_no = SI.space_no
+		where S.status = 'O' and S.space_no= 'space2';
+
+----- search Detail
+
+	select 
+            space_no
+		from
+		    (
+		        SELECT rank()over(partition by space_no order by OPTION_NO) as rnum,
+		                E.* 
+		        FROM (
+		                select * 
+		                from space left join space_option using(space_no) 
+                                   left join option_List using(option_no)
+                                   left join category using(category_no)
+                        where
+		                		option_name = '인터넷/와이파이' 
+                            and category_name = '카페' 
+                            and address like '%서울%'  
+		              ) E
+		     )
+group by space_no;
+-----------------------------
+--10/15
+select count(*),space_no from review where space_no='space2';   
+select reviews , space_no from( select ROW_NUMBER() OVER(partition by space_no ORDER BY space_no,reviews) row_num, space_no, reviews  from( select count(*)over(partition by space_no) as reviews, space_no from review ))where row_num =1 and space_no = 'space2';
+------------------------------
+select * from reservation_avail;
+
+WITH TEMP_TABLE AS (
+		   SELECT address as name, space_no FROM space union all
+		   select category_name as name, space_no from category join space using(category_no) union all
+		   select option_name as name, space_no from space_option join option_list using(option_no) union all
+		   select tag_name as name, space_no from space_tag join tag using(tag_no)
+		)
+		SELECT space_no
+		   FROM TEMP_TABLE join space space using(space_no) left join (select reviews , space_no from( select ROW_NUMBER() OVER(partition by space_no ORDER BY space_no,reviews) row_num, space_no, reviews  from( select count(*)over(partition by space_no) as reviews, space_no from review ))where row_num =1) using(space_no)
+        WHERE name like '%서울%'
+        order by reviews;

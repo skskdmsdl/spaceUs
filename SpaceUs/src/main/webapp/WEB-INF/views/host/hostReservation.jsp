@@ -63,7 +63,7 @@
 						                   		<div class="btn-div" style="display: inline-block; float: right;">
 													<form action="${pageContext.request.contextPath }/host/hostReservationOrder.do">
 														<button type="submit" class="btn" name="order" value="all" style="background:#019efb; color: #fff;">예약일순</button>
-														<button type="submit" class="btn mr-3" name="order" value="cancel" style="background:#ffbc34; color: #fff;">이용일순</button>
+														<button type="submit" class="btn mr-3" name="order" value="rev" style="background:#ffbc34; color: #fff;">이용일순</button>
 													</form>
 												</div>
 						             
@@ -100,6 +100,13 @@
 						                    	</c:forEach>
 						                    </tbody>
 						                </table>
+						                 <div class="container">
+							                 <div class="container">
+							                 <nav class="mt-5" >
+												<ul class="justify-content-center pagination">${ pageBar }</ul>
+											</nav>
+							 			</div>
+							 			</div>
 						            </div>
 						        </div>
 						    </div>

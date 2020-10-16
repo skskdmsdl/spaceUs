@@ -61,7 +61,7 @@ public interface SpaceService {
 
 	int deleteWish(Wish wish);
 
-	String selectCateName(String cateNo);
+	String selectCateName(String spaceNo);
 
 	List<Space> selectReviewList(String email);
 
@@ -89,7 +89,7 @@ public interface SpaceService {
 
 	List<OptionList> selectOptionList1();
 
-	List<String> selectSpaceNoList(String keyword);
+	List<String> selectSpaceNoList(String keyword, String sort);
 
 	Wish selectOneWish(Wish wish);
 
@@ -101,7 +101,7 @@ public interface SpaceService {
 	List<SpaceList> selectSearchSpaceList(String searchSpace);
 
 	List<String> selectSearchDetailSpaceNo(Map<String, String> map);
-
+	
 	int increaseSpaceReadCnt(String spaceNo);
 	
 	int minusLikeCnt(Wish wish);
@@ -109,7 +109,9 @@ public interface SpaceService {
 	int deleteOption(String spaceNo);
 
 	int updateStatus(String spaceNo, String status);
-	
+
+	int selectHostReviewTotalContents(String spaceNo);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

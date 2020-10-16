@@ -19,7 +19,7 @@ public interface ReservationDAO {
 
 	List<Reservation> hostSearchReservation(Reservation reservation);
 
-	List<Reservation> selectUseReservation(String memberEmail);
+	List<Reservation> selectUseReservation(String memberEmail, int limit, int offset);
 
 	List<Reservation> selectListReservation(String email);
 
@@ -29,6 +29,8 @@ public interface ReservationDAO {
 
 	int cancleReservation(String revNo);
 	
-	List<Reservation> selectHostReservationList(String memberEmail);
+	List<Reservation> selectHostReservationList(String memberEmail, int limit, int offset);
+
+	int selectHostRevTotalContents(String memberEmail);
 
 }

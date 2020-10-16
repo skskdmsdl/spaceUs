@@ -150,8 +150,8 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public String selectCateName(String cateNo) {
-		return sqlSession.selectOne("space.selectCateName", cateNo);
+	public String selectCateName(String spaceNo) {
+		return sqlSession.selectOne("space.selectCateName", spaceNo);
 	}
 
 	@Override
@@ -220,8 +220,8 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public List<String> selectSpaceNoList(String keyword) {
-		return sqlSession.selectList("space.selectSpaceNoList", keyword);
+	public List<String> selectSpaceNoList(Map<String, String> map) {
+		return sqlSession.selectList("space.selectSpaceNoList", map);
 	}
 
 	
@@ -229,12 +229,12 @@ public class SpaceDAOImpl implements SpaceDAO{
 	public List<Space> selectListSpaceCollection(String email) {
 		return sqlSession.selectList("space.selectListSpaceCollection", email);
 	}*/
-	
+		
 	@Override
 	public List<SpaceList> selectSearchSpaceList(String searchSpace) {
 		return sqlSession.selectList("space.selectSearchSpaceList", searchSpace);
 	}
-	
+
 	@Override
 	public Wish selectOneWish(Wish wish) {
 		return sqlSession.selectOne("space.selectOneWish", wish);
@@ -273,6 +273,9 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.update("space.updateStatus", map);
 	}
 
-	
+	@Override
+	public int selectHostReviewTotalContents(String spaceNo) {
+		return sqlSession.selectOne("space.selectHostReviewTotalContents", spaceNo);
+	}
 
 }

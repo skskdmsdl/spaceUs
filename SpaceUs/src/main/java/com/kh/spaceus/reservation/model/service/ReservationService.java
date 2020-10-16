@@ -21,7 +21,7 @@ public interface ReservationService {
 
 	List<Reservation> hostSearchReservation(Reservation reservation);
 
-	List<Reservation> selectUseReservation(String memberEmail);
+	List<Reservation> selectUseReservation(String memberEmail, int limit, int offset);
 	
 	List<Reservation> ingReservation(String email);
 
@@ -29,6 +29,10 @@ public interface ReservationService {
 
 	int cancleReservation(String revNo);
 	
-	List<Reservation> selectHostReservationList(String memberEmail);
+
+	List<Reservation> selectHostReservationList(String memberEmail, int limit, int offset);
+
+	int selectHostRevTotalContents(String memberEmail);
+
 
 }

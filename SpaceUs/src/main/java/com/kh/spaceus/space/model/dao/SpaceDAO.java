@@ -65,7 +65,7 @@ public interface SpaceDAO {
 
 	int deleteWish(Wish wish);
 
-	String selectCateName(String cateNo);
+	String selectCateName(String spaceNo);
 
 	List<Space> selectReviewList(String email);
 
@@ -96,7 +96,7 @@ public interface SpaceDAO {
 
 	List<OptionList> selectOptionList1();
 
-	List<String> selectSpaceNoList(String keyword);
+	List<String> selectSpaceNoList(Map<String, String> map);
 
 	List<SpaceList> selectSearchSpaceList(String searchSpace);
 
@@ -111,6 +111,8 @@ public interface SpaceDAO {
 	int deleteOption(String spaceNo);
 
 	int updateStatus(String spaceNo, String status);
+
+	int selectHostReviewTotalContents(String spaceNo);
 
 
 	/* List<Space> selectListSpaceCollection(String email); */

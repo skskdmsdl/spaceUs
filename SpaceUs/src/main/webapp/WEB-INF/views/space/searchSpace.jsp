@@ -197,22 +197,21 @@ $(function() {
         }
         
     });
-    
 });
 
 function searchSpace(){
 	var keyword = $(".searchInput").val();
-	//alert(keyword);
-
+	var sort = $("select[name=space-sort]").val(); //all
+	
 	keyword = keyword.replace('#','%23');
 	
-	if(keyword == null || keyword == ''){
+	 if(keyword == null || keyword == ''){
 		alert("키워드를 입력해주세요!");
 		return;
 	}
 	else{
-		location.href='${pageContext.request.contextPath}/space/searchSpace.do?keyword='+keyword;
-	}
+		location.href='${pageContext.request.contextPath}/space/searchSpace.do?keyword='+keyword+"&sort="+ sort;
+	}  
 
 }
 
@@ -221,8 +220,27 @@ function searchDetailSpace(){
 	var category = $("select[name=space_type]").val();
 	var location = $("select[name=space_location]").val();
 	var option = $("select[name=space_option]").val();
+	var sort = $("select[name=space-sort]").val();
 
-	window.location.href="${pageContext.request.contextPath}/space/searchDetailSpace.do?category="+category+"&location="+location+"&option="+option;
+	window.location.href="${pageContext.request.contextPath}/space/searchDetailSpace.do?category="+category+"&location="+location+"&option="+option+"&sort="+sort;
+}
+
+function sortChange(obj){
+
+	var category = $("select[name=space_type]").val();
+	var location = $("select[name=space_location]").val();
+	var option = $("select[name=space_option]").val();
+	var keyword = $("[name=keyword]").val();
+	var sort = $("select[name=space-sort]").val();
+	
+	if((category == null && location == null && option == null) || (category == "" && location == "" && option == "")){
+		//alert("키워드");
+		window.location.href='${pageContext.request.contextPath}/space/searchSpace.do?keyword='+keyword+"&sort="+ sort;
+	}
+	else{
+		//alert("세부입력");
+		window.location.href="${pageContext.request.contextPath}/space/searchDetailSpace.do?category="+category+"&location="+location+"&option="+option+"&sort="+sort;
+	}
 }
 
 
@@ -239,6 +257,7 @@ function searchDetailSpace(){
  				<div class="text text-center mx-auto" style="margin-bottom:25%;">
  					<!-- 검색결과 시작 -->
      				<div class="container col-md-12 heading-section text-center mb-5">
+     					<input type="hidden" name="keyword" value="${keyword}"/>
     					<span class="txt_keyword" style="font-size:40px !important;">${ keyword }</span>
     					<span class="txt_result" style="font-size:20px !important;">(으)로 검색한 결과입니다.</span>
   					</div>
@@ -278,31 +297,59 @@ function searchDetailSpace(){
 				<form id="filter-search" class="filter-form">
 					<!-- 카테고리 선택 시작 -->
 					<select name="space_type" id="space_type" class="nice-select sm-width">
-						<option value="">모든유형</option>
-						<c:forEach items="${categoryList}" var="category">
-							<option value="${category.categoryName}">${category.categoryName}</option>
-						</c:forEach>
+						<option value=""  ${category == ''? 'selected':'' }>모든유형</option>
+						<option value="회의실" ${category == '회의실'? 'selected':'' }>회의실</option>
+						<option value="세미나실" ${category == '세미나실'? 'selected':'' }>세미나실</option>
+						<option value="다목적홀" ${category == '다목적홀'? 'selected':'' }>다목적홀</option>
+						<option value="작업실" ${category == '작업실'? 'selected':'' }>작업실</option>
+						<option value="파티룸" ${category == '파티룸'? 'selected':'' }>파티룸</option>
+						<option value="공연장" ${category == '공연장'? 'selected':'' }>공연장</option>
+						<option value="연습실" ${category == '연습실'? 'selected':'' }>연습실</option>
+						<option value="카페" ${category == '카페'? 'selected':'' }>카페</option>
+						<option value="스터디룸" ${category == '스터디룸'? 'selected':'' }>스터디룸</option>
+						<option value="엠티장소" ${category == '엠티장소'? 'selected':'' }>엠티장소</option>
+						<option value="독립 오피스" ${category == '독립 오피스'? 'selected':'' }>독립 오피스</option>
+						<option value="코워커 스페이스"  ${category == '코워커 스페이스'? 'selected':'' }>코워커 스페이스</option>	
 					</select>
 					<!-- 카테고리 선택 끝-->
 					
 					<!-- 지역 선택 시작 -->
 					<select name="space_location" id="space_location" class="nice-select sm-width">		
-						<option value="">모든 지역</option>
-						<option value="서울">서울특별시</option>
-						<option value="인천">인천광역시</option>
-						<option value="경기">경기도</option>
-						<option value="강원">강원도</option>
+						<option value="" ${location == ''?'selected':''}>모든 지역</option>
+						<option value="서울" ${location == '서울'?'selected':''}>서울특별시</option>
+						<option value="인천" ${location == '인천'?'selected':''}>인천광역시</option>
+						<option value="경기" ${location == '경기'?'selected':''}>경기도</option>
+						<option value="강원" ${location == '강원'?'selected':''}>강원도</option>
 					</select>
 					<!-- 지역 선택 끝-->
 					
 					<!-- 옵션 선택 시작 -->
 					<select name="space_option" id="space_option" class="nice-select sm-width">		
-						<option value="">모든 옵션</option>
-						<c:forEach items="${optionList}" var="option">
-							<option value="${option.optionName}">${option.optionName}</option>
-						</c:forEach>
+						<option value="" ${option == ''?'selected':''}>모든 옵션</option>
+						<option value="TV/프로젝터" ${option == 'TV/프로젝터'?'selected':''}>TV/프로젝터</option>
+						<option value="인터넷/와이파이" ${option == '인터넷/와이파이'?'selected':''}>인터넷/와이파이</option>
+						<option value="복사/인쇄기" ${option == '복사/인쇄기'?'selected':''}>복사/인쇄기</option>
+						<option value="화이트보드" ${option == '화이트보드'?'selected':''}>화이트보드</option>
+						<option value="음향/마이크" ${option == '음향/마이크'?'selected':''}>음향/마이크</option>
+						<option value="취사시설" ${option == '취사시설'?'selected':''}>취사시설</option>
+						<option value="음식물반입가능" ${option == '음식물반입가능'?'selected':''}>음식물반입가능</option>
+						<option value="주류반입가능" ${option == '주류반입가능'?'selected':''}>주류반입가능</option>
+						<option value="샤워시설" ${option == '샤워시설'?'selected':''}>샤워시설</option>
+						<option value="주차" ${option == '주차'?'selected':''}>주차</option>
+						<option value="금연" ${option == '금연'?'selected':''}>금연</option>
+						<option value="반려동물 동반가능" ${option == '반려동물 동반가능'?'selected':''}>반려동물 동반가능</option>
+						<option value="PC/노트북" ${option == 'PC/노트북'?'selected':''}>PC/노트북</option>
+						<option value="의자/테이블" ${option == '의자/테이블'?'selected':''}>의자/테이블</option>
+						<option value="내부화장실" ${option == '내부화장실'?'selected':''}>내부화장실</option>
+						<option value="탈의실" ${option == '탈의실'?'selected':''}>탈의실</option>
+						<option value="테라스/루프탑" ${option == '테라스/루프탑'?'selected':''}>테라스/루프탑</option>
+						<option value="공용라운지" ${option == '공용라운지'?'selected':''}>공용라운지</option>
+						<option value="전신거울" ${option == '전신거울'?'selected':''}>전신거울</option>
+						<option value="바베큐시설" ${option == '바베큐시설'?'selected':''}>바베큐시설</option>
 					</select>
 					<!-- 옵션 선택 끝 -->
+					
+					
 				</form>				
 				<div class="container">
 					<!-- <button type="submit" class="search-btn search-detail" onclick="searchDetailSpace();">검색</button> -->
@@ -315,19 +362,19 @@ function searchDetailSpace(){
 
 <hr />
    
-   
 <!-- 리스트 정렬 순서 시작 -->   
 <div class="container">
 	<div class="sort-wrap" name="sort-wrap">
-		<select name="space-sort" id="space-sort" class="nice-select">
-			<option value="price">가격 순</option>
-			<option value="price">날짜 순</option>
-			<option value="price">별점 높은 순</option>
-			<option value="price">이용후기 많은 순</option>
+		<select name="space-sort" id="space-sort" class="nice-select" onchange="sortChange(this.value);">
+			<option value="all" ${sort == 'all'?'selected':''}>전체보기 순</option>
+			<option value="price" ${sort == 'price'?'selected':''}>가격 순</option>
+			<option value="star" ${sort == 'star'?'selected':''}>별점 높은 순</option>
+			<option value="review" ${sort == 'review'?'selected':''}>이용후기 많은 순</option>
 		</select>
 	</div>
 </div>
-<!-- 리스트 정렬 순서 끝 -->   
+<!-- 리스트 정렬 순서 끝 -->     
+
 
 <!-- 공간 리스트 시작 -->
 <div class="container search-result">
@@ -336,19 +383,22 @@ function searchDetailSpace(){
 		<c:forEach items="${spaceList}" var="space">
 			<div class="col-md-4">
 				<div class="property-wrap ftco-animate">
-	    			<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/${space.renamedFilename});"></a>
+		    		<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/${space.renamedFilename});"></a>
 	    			<div class="text">
 	    				<p class="price"><span class="space-price">${space.hourlyPrice}<small>원/시간</small></span></p>
 	    				<ul class="property_list">
-	    					<li><span class="icon-star"></span>${space.starAvg }</li><!-- 평균 별점 수 -->
+	    					<li>
+	    						<i class="fa fa-star"></i>
+	    						<c:if test="${space.starAvg != 0 }">
+		    						<fmt:formatNumber value="${space.starAvg}" pattern="0.0" type="number"/>
+	    						</c:if>
+	    						<c:if test="${space.starAvg == 0 }">0</c:if>
+	    					</li><!-- 평균 별점 수 -->
 	    					<li><span class="icon-heart"></span>${space.likeCnt }</li> <!-- 좋아요 수 -->
 	    					<li><span class="icon-comments"></span>${space.reviewCnt}</li><!-- 리뷰 수 -->
 	    				</ul>
-	    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do">${space.spaceName}</a></h3>
+	    				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${space.spaceNo}">${space.spaceName}</a></h3>
 	    				<small><span class="icon-my_location">${space.address}</span></small>
-	    				<!-- <a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-	    				<span class="icon-heart"></span>
-	    				</a> -->
 	    			</div>
 				</div>
 	    	</div>		
@@ -370,6 +420,6 @@ function searchDetailSpace(){
 <!-- 공간 리스트 끝-->
 </section>	
 
-<!-- <script>$(function () { memberId();});</script> -->
+<script>$(function () { memberId();});</script>
 	
 <jsp:include page="/WEB-INF/views/common/footer1.jsp" />

@@ -8,17 +8,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.OptionList;
-import com.kh.spaceus.space.model.vo.SearchDetailSpace;
 import com.kh.spaceus.space.model.vo.SpaceList;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,14 +29,10 @@ public class SearchSpaceController {
 	private SpaceService spaceSerive;
 
 	@RequestMapping(value = "/searchSpace.do", method = RequestMethod.GET)
-	public ModelAndView searchSpace(ModelAndView mav, @RequestParam("keyword") String keyword) {
-		// category List
-		List<Category> categoryList = spaceSerive.selectCategoryList();
-		// option List
-		List<OptionList> optionList = spaceSerive.selectOptionList1();
-
+	public ModelAndView searchSpace(ModelAndView mav, @RequestParam("keyword") String keyword, @RequestParam String sort) {
+		//log.info("sort={}",sort);
 		// 입력값을 통해 spaceNo가져오기
-		List<String> spaceNoList = spaceSerive.selectSpaceNoList(keyword);
+		List<String> spaceNoList = spaceSerive.selectSpaceNoList(keyword,sort);
 		
 		List<SpaceList> space = null;
 		List<SpaceList> spaceList = new ArrayList<>();
@@ -62,20 +55,16 @@ public class SearchSpaceController {
 			 spaceList.addAll(space);
 			 
 		 }
-		 System.out.println(spaceList);
-		 
-		 
 		 mav.addObject("keyword", keyword);
-		
-		 mav.addObject("categoryList", categoryList);
-		 mav.addObject("optionList",optionList);
-		 mav.addObject("spaceNoList", spaceNoList);
 		 mav.addObject("spaceList", spaceList);
+		 mav.addObject("sort", sort);
 		return mav;
 	}
 	
 	@GetMapping("/searchDetailSpace.do")
-	public ModelAndView searchDetailSpace(ModelAndView mav, @RequestParam String category, @RequestParam String location, @RequestParam String option) {
+	public ModelAndView searchDetailSpace(ModelAndView mav, @RequestParam String category, @RequestParam String location, @RequestParam String option, @RequestParam String sort) {
+		log.info("sort={}",sort);
+		
 		String keyword = location+" "+category+" "+option;
 		
 		Map<String,String> map = new HashMap<>();
@@ -84,10 +73,6 @@ public class SearchSpaceController {
 		map.put("option", option);
 		log.info("map={}",map);
 		
-		// category List
-		List<Category> categoryList = spaceSerive.selectCategoryList();
-		// option List
-		List<OptionList> optionList = spaceSerive.selectOptionList1();
 		//space_no 가져오기
 		List<String> spaceNo = spaceSerive.selectSearchDetailSpaceNo(map);
 		log.info("spaceNo={}",spaceNo);
@@ -107,14 +92,14 @@ public class SearchSpaceController {
 			System.out.println(spaceList);
 			
 		}
-		
 		mav.setViewName("space/searchSpace");
+		mav.addObject("category", category);
+		mav.addObject("option", option);
+		mav.addObject("location", location);
 		mav.addObject("keyword", keyword);
-		mav.addObject("categoryList", categoryList);
-		mav.addObject("optionList",optionList);
 		mav.addObject("spaceList",spaceList);
-
+		mav.addObject("spaceNo", spaceNo);
+		mav.addObject("sort", sort);
 		return mav;
 	}
-
 }

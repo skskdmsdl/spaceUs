@@ -1,8 +1,10 @@
 package com.kh.spaceus.space.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -176,8 +178,8 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public String selectCateName(String cateNo) {
-		return spaceDAO.selectCateName(cateNo);
+	public String selectCateName(String spaceNo) {
+		return spaceDAO.selectCateName(spaceNo);
 	}
 
 	@Override
@@ -247,8 +249,11 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public List<String> selectSpaceNoList(String keyword) {
-		return spaceDAO.selectSpaceNoList(keyword);
+	public List<String> selectSpaceNoList(String keyword, String sort) {
+		Map<String,String> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("sort", sort);
+		return spaceDAO.selectSpaceNoList(map);
 	}
 	
 	
@@ -293,6 +298,10 @@ public class SpaceServiceImpl implements SpaceService{
 		return spaceDAO.updateStatus(spaceNo, status);
 	}
 
+	@Override
+	public int selectHostReviewTotalContents(String spaceNo) {
+		return spaceDAO.selectHostReviewTotalContents(spaceNo);
+	}
 	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {

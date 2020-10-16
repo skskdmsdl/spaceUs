@@ -36,8 +36,8 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public List<Reservation> selectUseReservation(String memberEmail) {
-		return reservationDAO.selectUseReservation(memberEmail);
+	public List<Reservation> selectUseReservation(String memberEmail, int limit, int offset) {
+		return reservationDAO.selectUseReservation(memberEmail, limit, offset);
 	}
 
 	public List<Reservation> selectListReservation(String email) {
@@ -59,13 +59,19 @@ public class ReservationServiceImpl implements ReservationService{
 		return reservationDAO.cancleReservation(revNo);
 	}
 
-	public List<Reservation> selectHostReservationList(String memberEmail) {
-		return reservationDAO.selectHostReservationList(memberEmail);
+	@Override
+	public List<Reservation> selectHostReservationList(String memberEmail, int limit, int offset) {
+		return reservationDAO.selectHostReservationList(memberEmail, limit, offset);
 	}
 
 	@Override
 	public int deleteRevAvail(String spaceNo) {
 		return reservationDAO.deleteRevAvail(spaceNo);
+	}
+
+	@Override
+	public int selectHostRevTotalContents(String memberEmail) {
+		return reservationDAO.selectHostRevTotalContents(memberEmail);
 	}
 	
 }

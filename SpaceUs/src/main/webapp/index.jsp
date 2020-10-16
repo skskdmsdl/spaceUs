@@ -519,7 +519,7 @@ function searchSpace(){
 		return;
 	}
 	else{
-		location.href='${pageContext.request.contextPath}/space/searchSpace.do?keyword='+keyword;
+		location.href='${pageContext.request.contextPath}/space/searchSpace.do?keyword='+keyword+"&sort=all";
 	}
 }
 
@@ -529,7 +529,7 @@ function searchDetailSpace(){
 	var location = $("select[name=space_location]").val();
 	var option = $("select[name=space_option]").val();
 
-	window.location.href="${pageContext.request.contextPath}/space/searchDetailSpace.do?category="+category+"&location="+location+"&option="+option;
+	window.location.href="${pageContext.request.contextPath}/space/searchDetailSpace.do?category="+category+"&location="+location+"&option="+option+"&sort=all";
 }
 
 document.querySelector('.stick').addEventListener('click',()=>{
