@@ -13,6 +13,8 @@ public interface ReservationDAO {
 
 	int insertReservationVail(ReservationAvail reservationAvail);
 	
+	int deleteRevAvail(String spaceNo);
+	
 	int insertReservation(Reservation reservation);
 
 	List<Reservation> hostSearchReservation(Reservation reservation);
@@ -30,6 +32,5 @@ public interface ReservationDAO {
 	List<Reservation> selectHostReservationList(String memberEmail, int limit, int offset);
 
 	int selectHostRevTotalContents(String memberEmail);
-
 
 }

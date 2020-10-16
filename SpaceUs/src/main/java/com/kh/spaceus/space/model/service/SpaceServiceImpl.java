@@ -289,6 +289,16 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
+	public int deleteOption(String spaceNo) {
+		return spaceDAO.deleteOption(spaceNo);
+	}
+
+	@Override
+	public int updateStatus(String spaceNo, String status) {
+		return spaceDAO.updateStatus(spaceNo, status);
+	}
+
+	@Override
 	public int selectHostReviewTotalContents(String spaceNo) {
 		return spaceDAO.selectHostReviewTotalContents(spaceNo);
 	}

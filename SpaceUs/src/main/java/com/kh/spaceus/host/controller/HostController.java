@@ -3,8 +3,10 @@ package com.kh.spaceus.host.controller;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,12 +32,15 @@ import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.Reservation;
+import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.service.SpaceService;
+import com.kh.spaceus.space.model.vo.Option;
+import com.kh.spaceus.space.model.vo.OptionList;
 import com.kh.spaceus.space.model.vo.Review;
 import com.kh.spaceus.space.model.vo.Space;
-import com.kh.spaceus.space.model.vo.Tag;
 
 import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSONArray;
 
 @Controller
 @Slf4j
@@ -63,16 +68,69 @@ public class HostController {
 	
 	//공간정보
 	@RequestMapping("/spaceInfo.do")
-	public ModelAndView ManageSpace(Principal principal, ModelAndView mav) {
+	public ModelAndView ManageSpace(Principal principal, ModelAndView mav, Model model) {
 		Space space = spaceService.selectOneSpaceNo(principal.getName());
-		System.out.println(space);
+		String cateName = spaceService.selectCateName(space.getCategoryNo());
+		//List<Tag> tag = spaceService.selectListSpaceTag(space.getSpaceNo());
+		List<OptionList> optionList = spaceService.selectOptionList(space.getSpaceNo());
+		List<ReservationAvail> revAvail = reservationService.selectListAvail(space.getSpaceNo());
 		
-		List<Tag> tags = spaceService.selectListSpaceTag(space.getSpaceNo());
-		
+		model.addAttribute("cateName", cateName);
 		mav.addObject("space", space);
+		mav.addObject("optionList", optionList);
+		mav.addObject("revAvail",revAvail);
+		
 		mav.setViewName("host/spaceInfo");
 		
 		return mav;
+	}
+	
+	@RequestMapping("/updateSpace.do")
+	public String updateSpace(@RequestParam String optionNo,
+							  @RequestParam String day,
+							  @RequestParam String status,
+							  @RequestParam String spaceNo) {
+		//option 삭제
+		int result = spaceService.deleteOption(spaceNo);
+		
+		//option 추가
+		String[] array = optionNo.split(",");
+	    List<Option> optionList = new ArrayList<>();
+	    Option option = new Option();
+	    for(String str : array) {
+	    	option.setOptionNo(str);
+	    	option.setSpaceNo(spaceNo);
+	    	int result2 = spaceService.insertOption(option);
+	    }
+	    
+	    //reservation_avail 삭제
+	    int result3 = reservationService.deleteRevAvail(spaceNo);
+	    
+	    //reservation_avail 추가
+	    List<Map<String,Object>> info = new ArrayList<Map<String,Object>>();
+		ReservationAvail reservationAvail = new ReservationAvail();
+		
+	    info = JSONArray.fromObject(day);
+	    for (Map<String, Object> memberInfo : info) {
+	    	if((int)memberInfo.get("startHour")==-1||(int)memberInfo.get("endHour")==-1)
+	    		continue;
+	    	reservationAvail.setDay((String) memberInfo.get("day"));
+	    	reservationAvail.setSpaceNo(spaceNo);
+	    	reservationAvail.setStartHour((int)memberInfo.get("startHour"));
+	    	reservationAvail.setEndHour((int)memberInfo.get("endHour"));
+	    	int result4 = reservationService.insertReservationVail(reservationAvail);
+	    } 
+	    
+	    //status 수정
+	    int result5 = spaceService.updateStatus(spaceNo, status);
+		
+	    System.out.println("=======================");
+	    System.out.println(result);
+	    System.out.println(result3);
+	    System.out.println(result5);
+	    System.out.println("=======================");
+	    
+		return "redirect:/host/spaceInfo.do";
 	}
 	
 	//예약 현황 
