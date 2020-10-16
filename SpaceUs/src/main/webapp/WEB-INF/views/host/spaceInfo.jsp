@@ -241,8 +241,8 @@
 									<div class="panel-body">삭제하시면 모든 정보가 삭제됩니다.<br/>정말로 삭제하시겠습니까?</div>
 									<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="btn btn-outline-secondary font-bold mr-3 pull-right">취소</a>
 									<button id="deleteBtn" class="btn btn-danger font-bold mr-2 pull-right">삭제</button>
-									<form action="${pageContext.request.contextPath }/member/deleteMember.do" id="deleteFrm">
-										<input type="hidden" name="memberEmail" value="${ member.memberEmail}"/>
+									<form action="${pageContext.request.contextPath }/space/deleteSpace.do" id="deleteFrm">
+										<input type="hidden" name="spaceNo" value="${space.spaceNo}"/>
 									</form>
 								</div>
 							</div>
@@ -452,6 +452,14 @@ $("#spaceFrm").submit(function(){
 	}
 
 	return true;
+});
+</script>
+
+<script>
+//탈퇴
+$("#deleteBtn").click(function(){
+	 if(!confirm("정말로 탈퇴하시겠습니까?")) return;
+	 $("#deleteFrm").submit();
 });
 </script>
 
