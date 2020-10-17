@@ -37,7 +37,7 @@
     <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
 	<!-- default header name is X-CSRF-TOKEN -->
 	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
-    
+	
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${ pageContext.request.contextPath }/assets/images/favicon.png">
     <!-- This page CSS -->
@@ -96,7 +96,7 @@
 		      <div class="collapse navbar-collapse">
 		        <ul class="navbar-nav ml-auto">
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
-		          <li class="nav-item"><a href="${pageContext.request.contextPath }/space/insertSpace.do" class="nav-link">공간 등록하기</a></li>
+		          <li class="nav-item"><a onclick="enrollSpace();" class="nav-link" style="cursor:pointer;">공간 등록하기</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/community/group/groupList.do" class="nav-link">커뮤니티</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberLoginForm.do" class="nav-link">로그인</a></li>
 		          <li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberEnrollForm.do" class="nav-link">회원가입</a></li>
@@ -215,5 +215,8 @@ function memberId(){
 			}
 		});
 };
-
+function enrollSpace(){
+   	alert("로그인 후 이용할 수 있습니다.");
+   	location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+}
 </script>

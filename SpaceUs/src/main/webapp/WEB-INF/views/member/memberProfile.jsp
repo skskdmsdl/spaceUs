@@ -25,7 +25,7 @@
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">마이페이지</a></li>
-                                <li class="breadcrumb-item active">내 정보관리</li>
+                                <li class="breadcrumb-item active">회원 정보</li>
                             </ol>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                        <div class="card-body">
                         <div class="row"> 
                          <div class="col-md-10">
-                             <h5 class="card-title">나의 정보</h5>
+                             <h5 class="card-title">회원 정보</h5>
                              <h6 class="card-subtitle mb-5">회원정보를 확인하세요</h6>
                          </div>
 	                    </div>
