@@ -510,8 +510,9 @@ function naverShare() {
 			</c:choose>   	
 			</c:forEach>
 		   	</c:if>
-		   	<button type="button" class="btn btn-primary col-3 font-bold" style="margin-left: 33%;" name="qnaPaging" value="${ qnaPaging+5 }">더보기</button> 
-			<!-- <button type="button" class="btn btn-primary ml-5 font-bold pull-right arrowUp"><i class="fa fa-arrow-up"></i></button> -->
+		   	<c:if test="${qnaTotal > qnaPaging+5 }">
+		   		<button type="button" class="btn btn-primary col-3 font-bold" style="margin-left: 33%;" name="qnaPaging" value="${ qnaPaging+5 }">더보기</button> 
+   			</c:if>
    		</div>
 		   	
 <%-- 			<nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 45%; margin-top:50px;">
@@ -645,7 +646,11 @@ function naverShare() {
 									<nav aria-label="Page navigation"
 										style="display: inline text-align: center; margin-left: 45%; margin-top: 50px;">
 										<ul class="pagination" style="border: 0; margin-right: 10px;">
-											${pageBar}
+										<c:if test="${reviewTotal > reviewPaging+5 }">
+											<button type="button" class="btn btn-primary col-3 font-bold" style="left: -35px;" name="reviewPaging" value="${ reviewPaging+5 }" >더보기</button>
+										</c:if>
+										<%-- <button type="button" class="btn btn-primary col-3 font-bold"  name="reviewPaging"  value="${ reviewPaging+5 }" >더보기</button> --%>
+											<%-- ${pageBar} --%>
 										</ul>
 									</nav>
 								</div>
@@ -942,6 +947,18 @@ $(function () {
 		$("#detail-review").addClass('active');
 		$("#detail-review").addClass('show');
 	} 
+	if("${reviewPaging}" > 0){
+		$("#detail-description-tab").removeClass('active');
+		$("#detail-review-tab").addClass('active');
+		$("#detail-description").removeClass('active');
+		$("#detail-description").removeClass('show');
+		$("#detail-review").addClass('active');
+		$("#detail-review").addClass('show');
+		window.scrollTo(200, "${width}");
+	} 
+	if("${reviewPaging}" > 9){
+		window.scrollTo(200, "${width}");
+	} 
 	
 	if("${qnaPaging}" > 0){
 		$("#detail-description-tab").removeClass('active');
@@ -961,6 +978,10 @@ $(function () {
 $("[name=qnaPaging]").click(function(){
 		var position = $(window).scrollTop(); 
 		location.href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+"${space.spaceNo}"+"&qnaPaging="+$(this).val()+"&width="+position;
+});
+$("[name=reviewPaging]").click(function(){
+		var position = $(window).scrollTop(); 
+		location.href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+"${space.spaceNo}"+"&reviewPaging="+$(this).val()+"&width="+position;
 });
 //맨위로
 /* $(".arrowUp").click(function(){
