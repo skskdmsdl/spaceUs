@@ -361,7 +361,7 @@ function naverShare() {
 										</div>
 										<div class="ci-text">
 											<h5>이메일주소</h5>
-											<p>Support.aler@gmail.com</p>
+											<p>${space.memberEmail }</p>
 										</div>
 									</div>
 									
@@ -462,11 +462,12 @@ function naverShare() {
 	   				<sec:authorize access="hasRole('HOST')">
    					<sec:authentication property="principal.username" var="loginMember"/>
    					<c:if test="${loginMember != null && loginMember eq space.memberEmail }">
+   						
 	 					<h4 style="text-align: center;">
 		   					<span style="background: #F0F0F0; padding: 4px 10px; width: 100px; height: 24.8px; margin: 3px;">
 		   						<button class="fa fa-mail-reply" style="color:#20c997; border: none;" onclick="answer();">답변하기</button>
 	  						</span>   						
-	   					</h4>
+	   					</h4> 
    					</c:if>
    					</sec:authorize>
    					
@@ -488,6 +489,7 @@ function naverShare() {
 			   	
 			   	</c:when>
 			   	<c:otherwise>
+			   		<!-- 비공개 글이고 유저가 공간 호스트이거나 관리자 이거나 글 작성자 일 때 -->
 				   	<sec:authorize access="hasRole('HOST')">
 	   					<sec:authentication property="principal.username" var="loginMember"/>
 	   					<c:if test="${loginMember != null && loginMember eq space.memberEmail }">
@@ -495,13 +497,13 @@ function naverShare() {
 					   		<div class="desc" style="background-color:#dfe8e6; padding:5px">
 			   					<h4 style="text-align: right;">
 					   				<span style="background: #F0F0F0; padding: 4px 10px; width: 80px; height: 24.8px; margin: 3px;">
-					   					<button type="button" class="fa fa-send" style="color:#20c997; border: none;" onclick="sendAnswer();">전송</button>
+					   					<button type="button" class="fa fa-send" style="color:#20c997; border: none;" onclick="sendAnswer();">답변</button>
 			   						</span>   						
 				   				</h4>
-				   				<form id="answerFrm" action="${pageContext.request.contextPath }/qna/insertAnswer.do">
+				   			<%-- 	<form type=""id="answerFrm" action="${pageContext.request.contextPath }/qna/insertAnswer.do">
 				   					<input type="hidden" name="qnaNo" value="${qna.qnaNo}"/>
 				   					<textarea id="answer-content" name="answer" rows="4" cols="70"></textarea>
-				   				</form>
+				   				</form>  --%>
 				   			</div>
 				   		</div>
 		   				</c:if>
@@ -737,7 +739,11 @@ function naverShare() {
     				<p class="price"><span class="space-price" style="color: #007bff;">
     				<fmt:formatNumber value="${space.hourlyPrice }" type="number"/><small>원/시간</small></span></p>
     				<ul class="property_list">
-    					<li><span class="icon-star"></span><fmt:formatNumber value="${space.starAvg }" pattern=".0" type="number"/></li>
+    					<li><i class="icon-star"></i>
+    						<c:if test="${space.starAvg != 0 }">
+		    					<fmt:formatNumber value="${space.starAvg}" pattern="0.0" type="number"/>
+	    					</c:if>
+	    					<c:if test="${space.starAvg == 0 }">0</c:if></li>
     					<li><span class="icon-heart"></span>${space.likeCnt }</li>
     					<li><span class="icon-comments"></span>${space.reviewCnt }</li>
     				</ul>
