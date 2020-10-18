@@ -302,11 +302,11 @@ function meeting(){
        			</div>
      		</div>
    		</div>
-  <div class="mouse">
+  <!-- <div class="mouse">
 	<a href="#" class="mouse-icon">
 		<div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
 	</a>
-</div>
+</div> -->
  </div>
 <!-- 옵션/카테고리/지역 선택 시작-->
 <div class="container">
