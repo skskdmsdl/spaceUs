@@ -4,9 +4,6 @@ import java.util.List;
 
 import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
-import com.kh.spaceus.space.model.vo.Space;
-import com.kh.spaceus.space.model.vo.Tag;
-
 public interface ReservationDAO {
 
 	List<ReservationAvail> selectListAvail(String spaceNo);
@@ -22,8 +19,10 @@ public interface ReservationDAO {
 	List<Reservation> selectUseReservation(String memberEmail, int limit, int offset);
 
 	List<Reservation> selectListReservation(String email);
-
-	List<Reservation>ingReservation(String email);
+	
+	List<Reservation> ingReservation(int limit, int offset, String email);
+	
+	int selectingReservationTotalCnt(String email);
 
 	List<Reservation> finishReservation(String email);
 
@@ -32,5 +31,13 @@ public interface ReservationDAO {
 	List<Reservation> selectHostReservationList(String memberEmail, int limit, int offset);
 
 	int selectHostRevTotalContents(String memberEmail);
+
+	List<Reservation> reservationPaging(int limit, int offset, String memberEmail);
+
+	int selectTotalCnt(String memberEmail);
+
+
+
+	
 
 }

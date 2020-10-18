@@ -23,7 +23,9 @@ public interface ReservationService {
 
 	List<Reservation> selectUseReservation(String memberEmail, int limit, int offset);
 	
-	List<Reservation> ingReservation(String email);
+	List<Reservation> ingReservation(int limit, int offset, String email);
+
+	int selectingReservationTotalCnt(String email);
 
 	List<Reservation> finishReservation(String email);
 
@@ -33,6 +35,11 @@ public interface ReservationService {
 	List<Reservation> selectHostReservationList(String memberEmail, int limit, int offset);
 
 	int selectHostRevTotalContents(String memberEmail);
+
+	List<Reservation> reservationPaging(int limit, int offset, String memberEmail);
+
+	int selectTotalCnt(String memberEmail);
+
 
 
 }

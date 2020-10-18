@@ -8,4 +8,8 @@ public interface QnaService {
 
 	int updateAnswer(Qna qna);
 
+	int deleteQna(Qna qna);
+
+	int updateQna(Qna qna);
+
 }

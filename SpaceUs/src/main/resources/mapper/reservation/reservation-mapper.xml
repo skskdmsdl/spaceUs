@@ -73,6 +73,19 @@
 		order by rev_date desc
 	</select>
 	
+	<select id= "selectingReservationTotalCnt" resultType="_int">
+		select
+			count(*)
+		from
+			reservation
+		where
+			member_email = #{ email }
+			and
+			rev_cancle = rev_comple
+		order by rev_date desc
+			
+	</select>
+	
 	<select id="finishReservation" resultMap="reservationMap">
         select 
 			* 
@@ -149,7 +162,26 @@
 			space_no=(select space_no from space where member_email = #{ memberEmail })
 	</select>
 	
-
+	<!-- 페이징 처리 -->
+	<select id="reservationPaging" resultMap="reservationMap">
+		select
+			*
+		from
+			reservation
+		where 
+			member_email = #{memberEmail}
+		order by rev_date desc
+	</select>
+	
+	<select id="selectTotalCnt" resultType="_int">
+		select
+			count(*)
+		from 
+			reservation
+		where 
+			member_email = #{memberEmail}
+	</select>
+	
 
 </mapper>
 
