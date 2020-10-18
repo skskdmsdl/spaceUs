@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.vo.Space;
@@ -40,8 +41,14 @@ public class ReservationDAOImpl implements ReservationDAO{
 	}
 
 	@Override
-	public List<Reservation> ingReservation(String email) {
-		return sqlSession.selectList("reservation.ingReservation", email);
+	public List<Reservation> ingReservation(int limit, int offset, String email) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("reservation.ingReservation", email, rowBounds);
+	}
+
+	@Override
+	public int selectingReservationTotalCnt(String email) {
+		return sqlSession.selectOne("reservation.selectingReservationTotalCnt", email);
 	}
 
 	@Override
@@ -79,5 +86,20 @@ public class ReservationDAOImpl implements ReservationDAO{
 	public int selectHostRevTotalContents(String memberEmail) {
 		return sqlSession.selectOne("reservation.selectHostRevTotalContents", memberEmail);
 	}
+
+	@Override
+	public List<Reservation> reservationPaging(int limit, int offset, String memberEmail) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("reservation.reservationPaging", memberEmail, rowBounds);
+	}
+
+	@Override
+	public int selectTotalCnt(String memberEmail) {
+		return sqlSession.selectOne("reservation.selectTotalCnt", memberEmail);
+	}
+
+	
+	
+	
 
 }

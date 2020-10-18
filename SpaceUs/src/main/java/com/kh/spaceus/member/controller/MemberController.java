@@ -35,6 +35,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.common.Utils;
+import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Coupon;
 import com.kh.spaceus.member.model.vo.Member;
@@ -111,9 +112,14 @@ public class MemberController {
 	
 	// 이용내역
 	@RequestMapping("/usageHistory.do")
-	public ModelAndView usageHistory(Principal principal, ModelAndView mav, Model model) {
+	public ModelAndView usageHistory(Principal principal, ModelAndView mav, Model model, HttpServletRequest request,
+			 @RequestParam(defaultValue = "1", value="cPage") int cPage) {
 
-		List<Reservation> revList = reservationService.selectListReservation(principal.getName());
+		//페이징처리
+		final int limit = 5;
+		int offset = (cPage -1) * limit;
+	
+		List<Reservation> revList = reservationService.reservationPaging(limit,offset,principal.getName());
 		List<Space> spaceList = new ArrayList<Space>();
 		
 		for(int i=0; i<revList.size(); i++) {
@@ -122,17 +128,30 @@ public class MemberController {
 			spaceList.add(space);
 		}
 		
+		int totalCnt = reservationService.selectTotalCnt(principal.getName());
+		String url = request.getRequestURI() + "?";
+		String pageBar = Utils.getPageBarHtml(cPage, limit, totalCnt, url);
+		
 		model.addAttribute("status", "all");
 		mav.addObject("revList",revList);
 		mav.addObject("spaceList",spaceList);
+		
+		mav.addObject("totalCnt", totalCnt);	
+		mav.addObject("pageBar", pageBar);
+		
 		mav.setViewName("member/usageHistory");
 		return mav;
 	}
 	
 	@RequestMapping("/usageIng.do")
-	public ModelAndView usageIng(Principal principal, ModelAndView mav, Model model) {
+	public ModelAndView usageIng(Principal principal, ModelAndView mav, Model model, @RequestParam(defaultValue = "1", value="cPage") int cPage,
+			 HttpServletRequest request) {
+		
+		//페이징처리
+		final int limit = 5;
+		int offset = (cPage -1) * limit;
 
-		List<Reservation> revList = reservationService.ingReservation(principal.getName());
+		List<Reservation> revList = reservationService.ingReservation(limit,offset,principal.getName());
 		List<Space> spaceList = new ArrayList<Space>();
 		
 		for(int i=0; i<revList.size(); i++) {
@@ -141,9 +160,17 @@ public class MemberController {
 			spaceList.add(space);
 		}
 		
+		int totalCnt = reservationService.selectingReservationTotalCnt(principal.getName());
+		String url = request.getRequestURI() + "?";
+		String pageBar = Utils.getPageBarHtml(cPage, limit, totalCnt, url);
+		
 		model.addAttribute("status", "ing");
 		mav.addObject("revList",revList);
 		mav.addObject("spaceList",spaceList);
+		
+		mav.addObject("totalCnt", totalCnt);	
+		mav.addObject("pageBar", pageBar);
+		
 		mav.setViewName("member/usageHistory");
 		return mav;
 

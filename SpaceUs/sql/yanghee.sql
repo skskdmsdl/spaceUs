@@ -1298,6 +1298,7 @@ WITH TEMP_TABLE AS (
 -------------------------------------------------------------------------------------------
 -- 10/16
 -------------------------------------------------------------------------------------------
-select * from reservation where member_email='rhkim999@gmail.com';
-update reservation set rev_cancle=0 where member_email='rhkim999@gmail.com';
+select * from reservation; where member_email='rhkim999@gmail.com';
+select * from reservation where member_email='honggd@naver.com';
+update reservation set rev_cancle=0 where member_email='honggd@naver.com';
 commit;

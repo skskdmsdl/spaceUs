@@ -12,10 +12,29 @@
 			#{content},
 			null,
 			default,
-			default			
+			#{status}			
 		)
 		
 	</insert>
+	
+	<delete id="deleteQuestion">
+		delete
+			qna
+		where 
+			qna_no=#{qnaNo}
+	
+	</delete>
+	
+	<update id="updateQuestion">
+		update
+			qna
+		set 
+			qna_content=#{content}
+			, qna_status=#{status}
+		where
+			qna_no=#{qnaNo}
+			
+	</update>
 	
 	<select id="selectQuestionList" resultMap="qnaMap">
 		select
