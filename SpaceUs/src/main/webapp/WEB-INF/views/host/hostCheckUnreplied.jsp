@@ -78,14 +78,14 @@ p#qna-content > a{
                          <div class="col-md-11">
                            
 	                       <div class="col-md-10">
-	                           <h5 class="card-title">공간 리뷰</h5>
-	                           <h6 class="card-subtitle">이용자들의 리뷰입니다</h6>
+	                           <h5 class="card-title">최근 질문글</h5>
+	                           <h6 class="card-subtitle">공간 페이지에 올라온 질문글을 확인하세요</h6>
 	                         
 	                       </div>
                     	     <div class="qna-filter-container">
 								  <button id="show-unreplied" class="btn btn-secondary btn-sm" type="button" onclick="unreplied();" style="background-color:#6c757d;" value="${member.memberEmail}">
-								  <i id="check-unreplied fa fa-check"></i>
-								  		  모든 최근 질문
+								  <i class="fa fa-check" id="check-unreplied"></i>
+								  		  ${member.nickName }님의 답변을 기다리는 질문
 								  </button>
 								  
                     		 </div>
