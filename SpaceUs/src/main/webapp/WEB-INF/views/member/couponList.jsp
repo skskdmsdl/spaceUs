@@ -51,24 +51,21 @@
                                    </select>
                                 </div> 
                             </div>
+                            <c:choose>
+				         	<c:when test="${ not empty coupon }">
                             <c:forEach items="${coupon}" var="coupon" varStatus="vs">
 								<div class="col-md pull-left ml-5 mr-5" style="width:480px;">
 				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/coupon/${ coupon.type }.png" alt="..."> 
-	                               	<p id="couponEnd">2020.10.23 까지</p>
+	                               	<p id="couponEnd"><fmt:formatDate value="${ coupon.deadLine }" pattern="yyyy.MM.dd"/> 까지</p>
 	                            </div>
 	                        </c:forEach>
-								<%-- <div class="col-md pull-left" style="width:480px;">
-				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/coupon/btd.png" alt="..."> 
-                                	 <p id="couponEnd2">2020.10.23 까지</p>
-                                </div>
-								<div class="col-md pull-left ml-5 mr-5" style="width:480px;">
-				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/coupon/attend3.png" alt="..."> 
-	                               	 <p id="couponEnd">2020.10.23 까지</p>
-	                            </div> --%>
-								<%-- <div class="col-md pull-left" style="width:480px;">
-				    				<img class="couponImg" src="${ pageContext.request.contextPath }/resources/images/attend2.png" alt="..."> 
-                                	 <p id="couponEnd2">2020.10.23 까지</p>
-                                </div> --%>
+	                        </c:when>
+								<c:otherwise>
+									<div style="text-align: center; width: 90%; padding:20px;">
+										<span class="icon-folder" style="letter-spacing:1px;"> 조회된 쿠폰이 없습니다.</span>
+									</div>
+								</c:otherwise>
+								</c:choose>
 						</div>
 					</div>
 				</div>

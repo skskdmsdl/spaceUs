@@ -77,6 +77,8 @@
                            </div> 
                       </div>
                        <div class="steamline m-t-40">
+                       <c:choose>
+				         <c:when test="${ not empty spaceList }">
                        <c:forEach items="${spaceList}" var="list" varStatus="vs">
                            <div class="sl-item">
                             <div class="row parent">
@@ -189,6 +191,13 @@
 										</form>
                                  	</div>
                                  </c:forEach>
+                                 </c:when>
+								<c:otherwise>
+									<div style="text-align: center; width: 90%; padding:20px;">
+										<span class="icon-folder" style="letter-spacing:1px;"> 조회된 리뷰가 없습니다.</span>
+									</div>
+								</c:otherwise>
+								</c:choose>
                         </div>
                     </div>
                 </div>
