@@ -381,7 +381,8 @@ function naverShare() {
    			<h3 class="head fa fa-pencil"> ${qnaTotal }개의 질문글</h3>
    				
 			 	<!-- 질문글 등록 모달창 -->
-				<sec:authorize access="hasAnyRole('USER','HOST','ADMIN')"> 
+				<sec:authorize access="hasAnyRole('USER','HOST')"> 
+				
 				<!-- 질문글쓰기 버튼 -->
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#qnaModal" data-whatever="@fat" style="float: right; margin-right: 70px; letter-spacing:1px; font-weight:bold; font-size:1em;">질문글 작성</button>
 								
@@ -570,7 +571,7 @@ function naverShare() {
 						   							value="${qna.qnaNo }">수정</button>
 						   						
    												<button type="button" class="btn btn-secondary"
-						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="Btn('${qna.qnaNo }');" 
+						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="deleteBtn('${qna.qnaNo }');" 
 						   							value="${qna.qnaNo }">삭제</button>
 						   							
    											
@@ -586,7 +587,7 @@ function naverShare() {
 		   			 		<sec:authorize access="hasAnyRole('HOST', 'USER')">
    							<sec:authentication property="principal.username" var="loginMember"/>
    								
-								<c:if test="${loginMember != null && loginMember eq qna.email }">
+								<c:if test="${loginMember != null && loginMember eq qna.email && loginMember ne space.memberEmail }">
 										<div style="margin-right:15px;">
 					   			   		 <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
 					   			    	</div>
@@ -621,7 +622,7 @@ function naverShare() {
 	 					<h4 style="text-align: center;">
 		   					
 		   					<button type="button" class="btn btn-primary answerbtn" data-toggle="modal" data-target="#answerModal" data-whatever="@fat" 
-					   						style="margin-right: 70px; margin-bottom:7px; letter-spacing:1px; font-weight:bold; font-size:13px;"value=${qna.qnaNo }>답변하기</button>
+					   						style="margin-right: 70px; margin-bottom:7px; letter-spacing:1px; font-weight:bold; font-size:13px;" onclick="selectQnaNo('${qna.qnaNo}');">답변하기</button>
 					   					
 	  						   						
 	   					</h4> 
@@ -697,7 +698,7 @@ function naverShare() {
 				   					<h4 style="text-align: right;">
 						   				<!-- <span style="width: 80px; height: 24.8px; margin: 3px;"> -->
 						   					<button type="button" class="btn btn-secondary answerbtn" data-toggle="modal" data-target="#answerModal" data-whatever="@fat" 
-						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="selectQnaNo();" 
+						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="selectQnaNo('${qna.qnaNo }');" 
 						   							value="${qna.qnaNo }">답변 수정</button>
 						   					
 				   						<!-- </span> -->   						
@@ -706,7 +707,7 @@ function naverShare() {
 					   		</div>
 			   				</c:if>
 			   		<!-- 다른 공간의 호스트인데 비공개 글 작성자인경우 -->
-			   				<c:if test="${loginMember != null && loginMember eq qna.email }">
+			   				<c:if test="${loginMember != null && loginMember eq qna.email && loginMember ne space.memberEmail }">
 			   				<div class="review d-flex" style="padding:0 10px 20px 10px; margin-left:30px;">
 					   		<div class="desc" style="background-color:#dfe8e6; padding:15px; border-radius:10px;">
 					   			<h4>
@@ -1059,10 +1060,10 @@ $(".fa-share-square").click(function(){
 		$("#a1").addClass('d-none');
 	
 })
-function selectQnaNo(){
-	console.log(${qna.qnaNo});
-	document.getElementById("qnaNo").value = $(".answerbtn").val();
-	
+function selectQnaNo(no){
+	console.log(no);
+	$("#qnaNo").val(no);
+		
 }
 
 function popModify(){
