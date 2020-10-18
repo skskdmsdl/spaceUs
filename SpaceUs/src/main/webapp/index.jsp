@@ -105,8 +105,8 @@ font-family: 'NEXON Lv1 Gothic OTF';
   outline: none;
   color: black;
   padding: 3px;
-  padding-right: 60px;
-  padding-left: 60px;
+ /*  padding-right: 60px;
+  padding-left: 60px; */
   top: 0;
   right: 0;
   background: none;
@@ -242,7 +242,7 @@ function meeting(){
  --%>
  
 
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="top:8%;">
+<div id="carouselExampleControls" class="carousel slide " data-ride="carousel" style="top:8%;">
   <div class="carousel-inner">
     <div class="carousel-item active" style="height: 500px;">
       <img src="${pageContext.request.contextPath }/resources/images/cook.jpg" class="d-block w-100" style="opacity: .5;">
@@ -292,10 +292,10 @@ function meeting(){
       			<div class="text text-center mx-auto" style="margin-top:5%; margin-bottom :5%;">
           			<h2 class="mb-4"><strong>당신은 어떤 공간을 찾고 있나요?</strong></h2>
           			<p></p>
-		  				<i class="fas fa-search fa-2x" style="color:#00C89E"></i>	
+		  				<i class="fas fa-search fa-2x mt-4" style="color:#00C89E"></i>	
      					<div id="disapear" style="margin-top:-20px">
-     						<div id="wrap" style="width: 100%;">
-		  						<input id="searchInput" class="searchInput" name="search_keyword" placeholder="지역 또는 공간유형을 검색해보세요!" style="width: 90%; display: inline-block; text-align: center;">
+     						<div id="wrap" class="mb-5 mt-3" >
+		  						<input id="searchInput" class="searchInput" name="search_keyword" placeholder="지역 또는 공간유형을 검색해보세요!" style="width: 400px; display: inline-block; text-align: center;">
 		  						<input type="submit" class="search-btn btn btn-primary " value="입력" onclick="searchSpace();" style="background: #00c89e; display: inline-block;"/>
 							</div>
          				</div>

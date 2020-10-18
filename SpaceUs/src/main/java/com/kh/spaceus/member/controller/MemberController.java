@@ -239,6 +239,7 @@ public class MemberController {
 		for(Space s : spaceList) {
 			System.out.println(s.getReviewComment());
 			System.out.println(s.getSpaceNo());
+			System.out.println(s.getRevNo());
 		}
 		
 		model.addAttribute("spaceList", spaceList);

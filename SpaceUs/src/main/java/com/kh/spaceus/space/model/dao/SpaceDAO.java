@@ -67,7 +67,7 @@ public interface SpaceDAO {
 
 	String selectCateName(String spaceNo);
 
-	List<Space> selectReviewList(String email);
+	List<Space> selectReviewList(String memberEmail);
 
 	int updateReview(Review review);
 

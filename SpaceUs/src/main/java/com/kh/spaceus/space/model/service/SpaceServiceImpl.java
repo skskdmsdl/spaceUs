@@ -183,8 +183,8 @@ public class SpaceServiceImpl implements SpaceService{
 	}
 
 	@Override
-	public List<Space> selectReviewList(String email) {
-		return spaceDAO.selectReviewList(email);
+	public List<Space> selectReviewList(String memberEmail) {
+		return spaceDAO.selectReviewList(memberEmail);
 	}
 
 	@Override
