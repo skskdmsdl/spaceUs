@@ -141,6 +141,9 @@ font-family: 'NEXON Lv1 Gothic OTF';
   color: #007bff;
 }
 #disapear {display: none;}
+
+/*  내가 추가 한 것 */
+
 </style>
 
 
@@ -195,10 +198,20 @@ $(document).on("click",".fa-2x",function(){
    $(this).siblings("#disapear").toggle('30000');
 });
 
+function cook(){
+	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tag=요리";
+}
+function birthday(){
+	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tag=힐링";
+}
+function meeting(){
+	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tag=오피스";
+}
 </script>
 
 <!-- 컨텐츠 시작 -->
-<div class="hero-wrap ftco-degree-bg"
+
+<%-- <div class="ftco-degree-bg"
 	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_1.jpg');
 	 		height: 600px"
 	 data-stellar-background-ratio="0.5">
@@ -225,12 +238,79 @@ $(document).on("click",".fa-2x",function(){
 	</a>
 </div>
  </div>
+</div> 
+ --%>
+ 
+
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="top:8%;">
+  <div class="carousel-inner">
+    <div class="carousel-item active" style="height: 500px;">
+      <img src="${pageContext.request.contextPath }/resources/images/cook.jpg" class="d-block w-100" style="opacity: .5;">
+      <div class="carousel-caption d-none d-md-block" style="top: 6em;">
+        <h2 class="mb-4" style="text-decoration: underline; text-underline-position: under;">"제일 잘하는 요리 친구들에게 만들어줘요!"</h2>
+        <h4 class="mb-4">우리만의 요리대회 공간</h4>
+        <button type="submit" class="btn-lg btn-dark mt-4" style="border-radius: 100px;" onclick="cook();">바로가기</button>
+      </div>
+	</div>
+    <div class="carousel-item" style="height: 500px;">
+      <img src="${pageContext.request.contextPath }/resources/images/birthday.jpg" class="d-block w-100" style="opacity: .5;">
+   	  <div class="carousel-caption d-none d-md-block" style="top: 6em;">
+        <h2 class="mb-4" style="text-decoration: underline; text-underline-position: under;">"1년에 한번! 나를 더욱 더 사랑하는 방법"</h2>
+        <h4 class="mb-4">특별한 생일을 위한 공간</h4>
+        <button type="submit" class="btn-lg btn-dark mt-4" style="border-radius: 100px;" onclick="birthday();">바로가기</button>
+      </div>
+    </div>
+    <div class="carousel-item" style="height: 500px;">
+      <img src="${pageContext.request.contextPath }/resources/images/meeting.jpg" class="d-block w-100" style="opacity: .5;">
+      <div class="carousel-caption d-none d-md-block" style="top: 6em;">
+        <h2 class="mb-4" style="text-decoration: underline; text-underline-position: under;">"스마트한 팀워크를 위한 공유오피스 모음"</h2>
+        <h4 class="mb-4">팀을 위한 공유 오피스</h4>
+        <button type="submit" class="btn-lg btn-dark mt-4" style="border-radius: 100px;" onclick="meeting();">바로가기</button>
+      </div>	
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
+
+
+
+
+
+
 <!-- 검색창 시작 -->
 <section class="ftco-section goto-here search-section spad">
+ <div class="container">
+    	<div class="row justify-content-center align-items-center">
+      		<div class="col-lg-9 col-md-1">
+      			<div class="text text-center mx-auto" style="margin-top:5%; margin-bottom :5%;">
+          			<h2 class="mb-4"><strong>당신은 어떤 공간을 찾고 있나요?</strong></h2>
+          			<p></p>
+		  				<i class="fas fa-search fa-2x" style="color:#00C89E"></i>	
+     					<div id="disapear" style="margin-top:-20px">
+     						<div id="wrap" style="width: 100%;">
+		  						<input id="searchInput" class="searchInput" name="search_keyword" placeholder="지역 또는 공간유형을 검색해보세요!" style="width: 90%; display: inline-block; text-align: center;">
+		  						<input type="submit" class="search-btn btn btn-primary " value="입력" onclick="searchSpace();" style="background: #00c89e; display: inline-block;"/>
+							</div>
+         				</div>
+       			</div>
+     		</div>
+   		</div>
+  <!-- <div class="mouse">
+	<a href="#" class="mouse-icon">
+		<div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
+	</a>
+</div> -->
+ </div>
 <!-- 옵션/카테고리/지역 선택 시작-->
 <div class="container">
-	<div class="search-form-content" style="margin-top:100px;">
+	<div class="search-form-content">
 		<div class="flex-wrap">
 			<div class="search-category">공간유형</div>
 			<div class="search-category">지역</div>
