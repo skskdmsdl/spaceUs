@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.Reservation;
@@ -21,16 +20,13 @@ public class ReservationController {
 	 
 	@RequestMapping(value="/insertReservation.do")
 	public String insertReservation(Reservation reservation) {
-		System.out.println("reservation="+reservation);
-		
 		int result = reservationService.insertReservation(reservation);
-	
+
 		return "redirect:/member/usageHistory.do";
 	}
-	
-	@RequestMapping(value="/cancleReservation.do")
+		
+	@RequestMapping(value="/cancelReservation.do")
 	public String cancleReservation(@RequestParam("revNo") String revNo) {
-		System.out.println("revNO="+revNo);
 		
 		int result = reservationService.cancleReservation(revNo);
 		

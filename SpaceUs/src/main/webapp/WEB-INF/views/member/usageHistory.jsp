@@ -13,7 +13,8 @@
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/mypageMenu.jsp" />
 <style>
-.nochoose {background-color:#e6e6e6;}
+.nochoose {background-color:#e8f5e9; border-radius: 20px;}
+.cancel {background-color:#fbe9e7; border-radius: 20px;}
 </style>
 
         <div class="page-wrapper">
@@ -58,14 +59,18 @@
                            
                                <div class="steamline m-t-40">
                                		<c:forEach items="${revList}" var="info" varStatus="vs">
-										<div>
+										<div style="margin-top:80px; padding-left: 20px;">
 		                                     <c:choose>
 									   				<c:when test="${ info.revCancle eq info.revComplete}">
-										   			   <div class="row">
+										   			   <div class="row" style="margin-top:80px; padding-left: 20px;  padding-top:20px;">
+										   			   <p>${ vs.index + 1 }</p>
+									   			 	</c:when>
+									   			 	<c:when test="${ info.revCancle eq 1 }">
+									   			 	   <div class="row cancel" style="margin-top:80px; padding-left: 20px;  padding-top:20px;">
 										   			   <p>${ vs.index + 1 }</p>
 									   			 	</c:when>
 									   			 	<c:otherwise>
-									   			 		<div class="row nochoose">
+									   			 		<div class="row nochoose" style="margin-top:80px; padding-top:20px; padding-left: 20px;">
 									   			 		<p>${ vs.index + 1 }</p>
 									   			 	</c:otherwise>
 									   		 </c:choose>
@@ -100,22 +105,13 @@
 			                                            	</c:choose>
 			                                            </div>
 			                                            <div class="col-md-9">
-			                                               <%--  <form:form name="revCancle" id="revCancle"
-										                         	   action="${pageContext.request.contextPath}/reservation/cancleReservation.do"
-																	   method="POST"> --%>
 															<input type="hidden" name="revNo" value="${ info.revNo }">
 			                                                <button type="button" class="btn m-r-5 btn-rounded btn-outline-success" data-toggle="modal" data-target="#confirmModal${ vs.index }">예약확인</button>
-															
 															<c:choose>
-													   				<c:when test="${ info.revCancle eq info.revComplete}">
+													   				<c:when test="${ info.revCancle eq 0 && info.revComplete eq 0}">
 														   			   <button type="button" class="btn btn-rounded btn-outline-danger" data-toggle="modal" data-target="#cancelModal${ vs.index }">예약취소</button>
 													   			 	</c:when>
-													   			 	<c:otherwise>
-													   			 		<button type="button" class="btn btn-rounded btn-outline-danger" data-toggle="modal" data-target="#cancelModal${ vs.index }">예약취소</button>
-													   			 	</c:otherwise>
 													   		 </c:choose>
-															
-															<%-- </form:form> --%>
 			                                            </div>
 		                                            </div>
 		                                        </div>
@@ -161,11 +157,7 @@
 										<div class="modal fade" id="cancelModal${ vs.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 										  <div class="modal-dialog" role="document">
 										    <div class="modal-content">
-										       <form:form name="cancelReservation" id="cancelReservation" action="${pageContext.request.contextPath}/reservation/cancelReservation.do" method="POST">							      
-											      
-											      <input type="hidden" name="revNo" value="${info.revNo}" />
-											      <input type="hidden" name="reasonCancel" value="" />
-											      
+										     <%--   <form:form name="cancelReservation" id="cancelReservation" action="${pageContext.request.contextPath}/reservation/cancelReservation.do" method="POST">--%>	
 											      <!--Header-->
 											      <div class="modal-header">
 											        <p class="heading lead">예약 취소
@@ -178,6 +170,7 @@
 													<!-- /Header -->
 											       <!--Body-->
 											       <div class="modal-body">
+											       
 											         <div class="text-center">
 											           <i class="far fa-file-alt fa-4x mb-3 animated rotateIn"></i>
 											           <p>
@@ -191,7 +184,7 @@
 											      
 											         <div>
 												         <div class="form-check mb-4">
-												           <input class="form-check-input" name="reason" type="radio" id="reason" value="공간 대여 일정이 미뤄짐" checked>
+												           <input class="form-check-input" name="reason" type="radio" id="reason" value="공간 대여 일정이 미뤄짐" checked="checked">
 												           <label class="form-check-label" for="radio-179">공간 대여 일정이 미뤄짐</label>
 												         </div>
 												
@@ -230,7 +223,7 @@
 											            <tr style="border-bottom: 1px #d0d0d0 !important;">
 											              <th colspan="2">취소 수수료</th>
 											              <td>KRW</td>
-											              <td>${info.revNo }</td>
+											              <td>0</td>
 											            </tr>
 											          </tbody>
 											        </table>
@@ -249,13 +242,13 @@
 											      <!--Footer-->
 											      <div class="modal-footer justify-content-center">
 											        <a type="button" class="btn btn-warning waves-effect waves-light" style="color:darkblack;"
-											           id="refund" onclick="refund();">환불
+											           id="refund" onclick="refund('${info.revNo}');">
+											           	환불
 											         	<i class="fas fa-hand-holding-usd cc_pointer"></i>
 											        </a>
-											        <input type="hidden" name="revNo" value="${info.revNo}" />
 											        <a type="button" class="btn btn-outline-link waves-effect" data-dismiss="modal">Cancel</a>
 											      </div>
-										      </form:form>
+										    <%--   </form:form> --%>
 										    </div>
 										  </div>
 										</div>
@@ -265,19 +258,21 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- 페이징처리 시작 -->
+            				<nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 45%;">
+							  <ul class="pagination" style="border:0; margin-right:10px;">
+							    ${pageBar}
+							  </ul>
+							</nav>
+						<!-- 페이징 처리 끝 -->
                     </div>
               	<!-- 이용내역 끝 -->
-    </div>
-</div>
-</div>
+    		</div>
+		</div>
+	</div>
 </div>
 
 <script>
-
-//제출전처리
-$("#revCancle").submit(function(){
-	return confirm('정말 예약을 취소하시겠습니까?');
-});
 
 //사용내역 모아보기
 $("#selectId").change(function(){
@@ -286,45 +281,14 @@ $("#selectId").change(function(){
 	else if(option == 2) location.href="${pageContext.request.contextPath }/member/usageIng.do";
 	else location.href="${pageContext.request.contextPath }/member/usageFinish.do";
 });
-</script>
-<script type="text/javascript">
 
-function refund(){
-	//$("#cancelReservation").submit();
-	var reason = $("input[name='reason']:checked").val();
-	$("[name=reasonCancel]").val(reason);
-	alert(reason);
-
-	var revNo = $(this).siblings("input").val();
-	alert(revNo);
-	//cancelPay();	
+//예약취소
+function refund(revNo){
+	
+	window.location.href="${pageContext.request.contextPath}/reservation/cancelReservation.do?revNo="+revNo;
+	
 }
-
-function cancelPay() {
-	/* var reason = $("input[name='reason']:checked").val();
-	$("[name=reasonCancel]").val(reason);
-
-	var revNo = $(this).val();
-	alert();
- */
-   /*  jQuery.ajax({
-      "url": "http://www.myservice.com/payments/cancel",
-      "type": "POST",
-      "contentType": "application/json",
-      "data": JSON.stringify({
-        "merchant_uid": "mid_" + new Date().getTime(), // 주문번호
-        "cancel_request_amount": 2000, // 환불금액
-        "reason": "테스트 결제 환불" // 환불사유
-      }),
-      "dataType": "json"
-    }).done(function(result) { // 환불 성공시 로직 
-        alert("환불 성공");
-    }).fail(function(error) { // 환불 실패시 로직
-      alert("환불 실패");
-    }); */
-  }
 </script>
-
 
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
