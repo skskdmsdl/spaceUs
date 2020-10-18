@@ -205,14 +205,9 @@ public class SpaceController {
 			
 			star.setSumStar(star.getStar1() + star.getStar2() + star.getStar3() + star.getStar4() + star.getStar5());
 			
-			
 			String url = request.getRequestURI() + "?spaceNo=" + spaceNo;
 			String pageBar = Utils.getPageBarHtml(cPage, limit, reviewTotal, url);
-			
-			
-			
-			
-			
+
 			//쿠키검사 : spaceCookie
 			Cookie[] cookies = request.getCookies();
 			String spaceCookieVal = "";
@@ -246,7 +241,6 @@ public class SpaceController {
 		
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
 		System.out.println("spaceNo="+ spaceNo);
-
 		
 		// 같은 카테고리 공간 리스트(최대 3개)
 		List<SpaceList> spcList = spaceService.selectSameCategory(space);
@@ -254,20 +248,15 @@ public class SpaceController {
 
 		// 추천 공간 카테고리명
 		String cateName = spaceService.selectCateName(spaceNo);
-			
-		
-		
 
 		// option 조회
 		List<OptionList> optionList = spaceService.selectOptionList(spaceNo);
-		
-		
 		
 		model.addAttribute("spcList", spcList);
 		model.addAttribute("cateName", cateName);
 
 		model.addAttribute("qlist", qlist);
-		/* model.addAttribute("qPageBar", qPageBar); */
+		model.addAttribute("qnaPaging", qnaPaging);
 		model.addAttribute("qnaTotal", qnaTotal);
 
 		model.addAttribute("space", space);
@@ -279,7 +268,6 @@ public class SpaceController {
 		model.addAttribute("reviewPaging", reviewPaging);
 		model.addAttribute("star", star); 
 		model.addAttribute("pageBar", pageBar);
-		model.addAttribute("qnaPaging", qnaPaging);
 		model.addAttribute("width", width);
 		
 		model.addAttribute("optionList",optionList);
@@ -292,10 +280,37 @@ public class SpaceController {
 	
 	//리뷰링크 클릭시 이동하는 공간상세페이지
 	@RequestMapping("/spaceReviewDetail.do")
-	public String spaceReviewDetail(Model model, @RequestParam("spaceNo") String spaceNo, Principal principal,
+	public String spaceReviewDetail(Model model, @RequestParam("spaceNo") String spaceNo, Principal principal, Space space,
 			@RequestParam(defaultValue = "1", value = "cPage") int cPage, HttpServletRequest request, HttpServletResponse response) {
 
 		try {
+			int qnaTotal = spaceService.selectQuestionTotalContents(spaceNo);
+			
+			// qna 조회
+			final int limit1 = 5 + space.getQnaPaging(); 
+			int offset1 = (cPage - 1) * limit1;
+			int qnaPaging = space.getQnaPaging();
+			int width = space.getWidth();
+			
+			List<Qna> qlist = spaceService.selectQuestionList(spaceNo, limit1, offset1);
+			
+			// 리뷰 한 페이지당 개수 제한
+			final int limit = 5 + space.getReviewPaging(); 
+			int offset = (cPage - 1) * limit;
+			int reviewPaging = space.getReviewPaging();
+			
+			List<Review> review = spaceService.selectListReview(spaceNo, limit, offset);
+
+			// 전체리뷰수 구하기
+			int reviewTotal = spaceService.selectReviewTotalContents(spaceNo);
+			// 별점조회
+			Star star = spaceService.selectStar(spaceNo);
+			
+			star.setSumStar(star.getStar1() + star.getStar2() + star.getStar3() + star.getStar4() + star.getStar5());
+			
+			String url = request.getRequestURI() + "?spaceNo=" + spaceNo;
+			String pageBar = Utils.getPageBarHtml(cPage, limit, reviewTotal, url);
+			
 			//쿠키검사 : spaceCookie
 			Cookie[] cookies = request.getCookies();
 			String spaceCookieVal = "";
@@ -325,7 +340,7 @@ public class SpaceController {
 			}
 		
 		
-		Space space = spaceService.selectOneSpace(spaceNo);
+		space = spaceService.selectOneSpace(spaceNo);
 		System.out.println("@@"+space);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
 		System.out.println("spaceNo="+ spaceNo);
@@ -337,28 +352,6 @@ public class SpaceController {
 		// 추천 공간 카테고리명
 		String cateName = spaceService.selectCateName(spaceNo);
 		
-		// 리뷰 한 페이지당 개수 제한
-		final int limit = 10; // 사용용도는 numPerPage와 똑같음
-		int offset = (cPage - 1) * limit;
-		List<Review> review = spaceService.selectListReview(spaceNo, limit, offset);
-
-		// 전체리뷰수 구하기
-		int reviewTotal = spaceService.selectReviewTotalContents(spaceNo);
-		// 별점조회
-		Star star = spaceService.selectStar(spaceNo);
-		
-		star.setSumStar(star.getStar1() + star.getStar2() + star.getStar3() + star.getStar4() + star.getStar5());
-		
-		
-		String url = request.getRequestURI() + "?spaceNo=" + spaceNo;
-		String pageBar = Utils.getPageBarHtml(cPage, limit, reviewTotal, url);
-
-		int qnaTotal = spaceService.selectQuestionTotalContents(spaceNo);
-
-		// qna 조회
-		List<Qna> qlist = spaceService.selectQuestionList(spaceNo, limit, offset);
-		String qPageBar = Utils.getPageBarHtml(cPage, limit, qnaTotal, url);
-
 		// option 조회
 		List<OptionList> optionList = spaceService.selectOptionList(spaceNo);
 		
@@ -366,7 +359,7 @@ public class SpaceController {
 		model.addAttribute("cateName", cateName);
 
 		model.addAttribute("qlist", qlist);
-		model.addAttribute("qPageBar", qPageBar);
+		model.addAttribute("qnaPaging", qnaPaging);
 		model.addAttribute("qnaTotal", qnaTotal);
 
 		model.addAttribute("space", space);
@@ -375,6 +368,7 @@ public class SpaceController {
 
 		model.addAttribute("review", review);
 		model.addAttribute("reviewTotal", reviewTotal);
+		model.addAttribute("reviewPaging", reviewPaging);
 		model.addAttribute("star", star); 
 		model.addAttribute("pageBar", pageBar);
 		
