@@ -174,7 +174,7 @@ p#qna-content > a{
                     	</c:when>
                     	<c:otherwise>
                     		<div style="text-align: center; width: 90%; padding:20px;">
-									<span class="icon-folder" style="letter-spacing:1px;">등록된 질문글이 없습니다.</span>
+									<span class="icon-folder" style="letter-spacing:1px;"> 등록된 질문글이 없습니다.</span>
 								</div>
                     	</c:otherwise>
                     	</c:choose>

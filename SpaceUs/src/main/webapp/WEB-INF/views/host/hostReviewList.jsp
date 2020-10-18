@@ -121,6 +121,8 @@ a:hover {opacity: 0.3; color:black;}
 				   			<%-- <p class="head ml-4">${ reviewTotal }개의 리뷰</p> --%>
 				   			
 				   		</div>
+				   		<c:choose>
+				         <c:when test="${ not empty review }">
 						 <c:forEach items="${review}" var="review" varStatus="vs">
 						 <c:choose>
 							<c:when test="${ review.image != null }">
@@ -249,6 +251,13 @@ a:hover {opacity: 0.3; color:black;}
 							</c:otherwise>
 							</c:choose>
 						 </c:forEach>	
+						 </c:when>
+								<c:otherwise>
+									<div style="text-align: center; width: 90%; padding:20px;">
+										<span class="icon-folder" style="letter-spacing:1px;"> 조회된 리뷰가 없습니다.</span>
+									</div>
+								</c:otherwise>
+								</c:choose>
 						 <nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 45%; margin-top:50px;">
 							<ul class="pagination" style="border:0; margin-right:10px;"> ${pageBar}</ul>
 						</nav>
