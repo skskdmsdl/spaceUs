@@ -241,9 +241,9 @@ body{
         <div class='c'>
             <div class='_404'>404</div>
             <hr>
-            <div class='_1'>페이지를</div>
-            <div class='_2'>찾을 수 없습니다.</div>
-            <a class='btn' href='#'>이전 페이지로 돌아가기</a>
+            <div class='_1' style="margin:10px;">페이지를</div>
+            <div class='_2' style="font-size: 30px; margin:10px 0 30px 0;">찾을 수 없습니다.</div>
+            <a class='btn' href='${pageContext.request.contextPath }'>메인 페이지로 돌아가기</a>
         </div>
 
 

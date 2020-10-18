@@ -149,7 +149,7 @@ span > a:hover{
 							</c:when>
 							<c:otherwise>
 								<div style="text-align: center; width: 90%; padding:20px;">
-									<span class="icon-folder" style="letter-spacing:1px;">조회된 위시리스트가 없습니다.</span>
+									<span class="icon-folder" style="letter-spacing:1px;"> 조회된 위시리스트가 없습니다.</span>
 								</div>
 							</c:otherwise>
 							</c:choose>	

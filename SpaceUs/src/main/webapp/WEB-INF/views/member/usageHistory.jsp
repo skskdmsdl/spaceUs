@@ -58,6 +58,8 @@
 	                           </div>
                            
                                <div class="steamline m-t-40">
+                               <c:choose>
+				         		 <c:when test="${ not empty revList }">
                                		<c:forEach items="${revList}" var="info" varStatus="vs">
 										<div style="margin-top:80px; padding-left: 20px;">
 		                                     <c:choose>
@@ -255,6 +257,13 @@
 										<!-- Modal: modalPoll -->
 										<!-- cancel modal 끝 -->
 									</c:forEach>
+									</c:when>
+								<c:otherwise>
+									<div style="text-align: center; width: 90%; padding:20px;">
+										<span class="icon-folder" style="letter-spacing:1px;"> 조회된 예약이 없습니다.</span>
+									</div>
+								</c:otherwise>
+								</c:choose>	
                                 </div>
                             </div>
                         </div>
