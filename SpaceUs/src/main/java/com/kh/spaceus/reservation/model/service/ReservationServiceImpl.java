@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.reservation.model.dao.ReservationDAO;
 import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
@@ -44,11 +45,18 @@ public class ReservationServiceImpl implements ReservationService{
 		return reservationDAO.selectListReservation(email);
 	}
 	
-	@Override
-	public List<Reservation> ingReservation(String email) {
-		return reservationDAO.ingReservation(email);
-	}
 	
+	
+	@Override
+	public List<Reservation> ingReservation(int limit, int offset, String email) {
+		return reservationDAO.ingReservation(limit,offset,email);
+	}
+
+	@Override
+	public int selectingReservationTotalCnt(String email) {
+		return reservationDAO.selectingReservationTotalCnt(email);
+	}
+
 	@Override
 	public List<Reservation> finishReservation(String email) {
 		return reservationDAO.finishReservation(email);
@@ -73,5 +81,19 @@ public class ReservationServiceImpl implements ReservationService{
 	public int selectHostRevTotalContents(String memberEmail) {
 		return reservationDAO.selectHostRevTotalContents(memberEmail);
 	}
+
+	@Override
+	public List<Reservation> reservationPaging(int limit, int offset, String memberEmail) {
+		return reservationDAO.reservationPaging(limit, offset, memberEmail);
+	}
+
+	@Override
+	public int selectTotalCnt(String memberEmail) {
+		return reservationDAO.selectTotalCnt(memberEmail);
+	}
+
+	
+	
+	
 	
 }
