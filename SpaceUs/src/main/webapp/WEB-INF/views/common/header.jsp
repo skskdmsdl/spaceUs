@@ -94,6 +94,7 @@ $(function(){
 	@media (min-width: 900px){
 		.oi-menu{display: none;}
 		.small{display: none;}
+		.big{margin-left: 18rem;}
 	}
 	@media (max-width: 899px){
 		.big{display: none;}
@@ -139,6 +140,7 @@ $(function(){
 	      </button>
 	      </div>
 	     
+	     		 
 	      <sec:authorize access="isAnonymous()">
 	      
 		      <div class="collapse navbar-collapse">
