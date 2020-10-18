@@ -501,4 +501,16 @@ public class SpaceController {
 		return mav;
 	}
 	
+	//에러페이지
+	@RequestMapping("/myFunction.do")
+	public String myFunction(HttpServletRequest request,
+		            RedirectAttributes redirectAttributes
+		            ) {
+		
+		redirectAttributes.addFlashAttribute("okList", "AA BB CC");
+		
+		String referer = request.getHeader("Referer");
+		return "redirect:"+ referer;
+	}
+	
 }
