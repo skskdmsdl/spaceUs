@@ -83,7 +83,7 @@ p#qna-content > a{
 	                         
 	                       </div>
                     	     <div class="qna-filter-container">
-								  <button id="show-unreplied" class="btn btn-secondary btn-sm" type="button" style="background-color:#6c757d;" onclick="unreplied();" value="${member.memberEmail}">
+								  <button id="show-unreplied" class="btn btn-secondary btn-sm" type="button" style="background-color:#00c89e;" onclick="unreplied();" value="${member.memberEmail}">
 								  <i id="check-unreplied"></i>
 								    ${member.nickName }님의 답변을 기다리는 질문
 								  </button>

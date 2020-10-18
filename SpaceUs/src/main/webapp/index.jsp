@@ -242,7 +242,7 @@ function meeting(){
  --%>
  
 
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="top:8%;">
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="top:12%;">
   <div class="carousel-inner">
     <div class="carousel-item active" style="height: 500px;">
       <img src="${pageContext.request.contextPath }/resources/images/cook.jpg" class="d-block w-100" style="opacity: .5;">
