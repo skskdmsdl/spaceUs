@@ -52,6 +52,36 @@ public class QnaController {
 
 		 return "redirect:/space/spaceDetail.do?spaceNo=" + spaceNo;
 	}
+	
+	@RequestMapping(value = "/deleteQuestion.do", method = RequestMethod.POST)
+	public String deleteQna(Qna qna, @RequestParam("spaceNo") String spaceNo, RedirectAttributes redirectAttr) {
+		log.debug("qna 답변 삭제 요청");
+
+		int result = qnaService.deleteQna(qna);
+
+		
+		 String msg = result > 0 ? "질문이 삭제되었습니다." : "질문을 삭제하는데 실패했습니다.";
+		 redirectAttr.addFlashAttribute("msg", msg);
+		 
+
+		 return "redirect:/space/spaceDetail.do?spaceNo=" + spaceNo;
+	}
+	
+	@RequestMapping(value = "/modifyQuestion.do", method = RequestMethod.POST)
+	public String updateQna(Qna qna, @RequestParam("spaceNo") String spaceNo, RedirectAttributes redirectAttr) {
+		log.debug("질문글 수정 요청");
+
+		int result = qnaService.updateQna(qna);
+
+		
+		 String msg = result > 0 ? "질문이 수정되었습니다." : "질문을 수정하는데 실패했습니다.";
+		 redirectAttr.addFlashAttribute("msg", msg);
+		 
+
+		 return "redirect:/space/spaceDetail.do?spaceNo=" + spaceNo;
+	}
+	
+	
 
 	@RequestMapping(value = "/updateAnswer.do", method = RequestMethod.POST)
 	public ModelAndView insertAnswer(Qna qna, RedirectAttributes redirectAttr, ModelAndView mav) {

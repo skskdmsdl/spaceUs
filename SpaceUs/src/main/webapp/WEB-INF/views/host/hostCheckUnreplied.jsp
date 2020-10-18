@@ -83,9 +83,9 @@ p#qna-content > a{
 	                         
 	                       </div>
                     	     <div class="qna-filter-container">
-								  <button id="show-unreplied" class="btn btn-secondary btn-sm" type="button" style="background-color:#6c757d;" onclick="unreplied();" value="${member.memberEmail}">
-								  <i id="check-unreplied"></i>
-								    ${member.nickName }님의 답변을 기다리는 질문
+								  <button id="show-unreplied" class="btn btn-secondary btn-sm" type="button" onclick="unreplied();" style="background-color:#6c757d;" value="${member.memberEmail}">
+								  <i id="check-unreplied fa fa-check"></i>
+								  		  모든 최근 질문
 								  </button>
 								  
                     		 </div>
@@ -270,7 +270,7 @@ $(".modifyBtn").click(function(){
 
 //미답변 질문 ajax 요청
 function unreplied(){
-	location.href='${pageContext.request.contextPath}/host/unreplied.do';
+	location.href='${pageContext.request.contextPath}/host/hostCheckArticle.do';
 };
 </script>
 </body>

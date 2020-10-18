@@ -424,7 +424,11 @@ function naverShare() {
 				</div>
 				</sec:authorize>
 				<!-- 질문글 등록 모달창 끝-->
-
+				
+<!-- 				<div id="dialog">
+					<p>질문글을 삭제하시겠습니까?</p>
+				</div> -->
+				
 				<!-- 답변 모달창-->
 				<sec:authorize access="hasRole('HOST')">
 				<div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -463,8 +467,45 @@ function naverShare() {
 				</div>
 				</sec:authorize>
 				<!-- 질문글 답변 모달창 끝 -->
-				
-				
+					<!-- 질문글 수정 모달창 -->			
+				 <div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title  fa fa-pencil" id="exampleModalLabel" style="letter-spacing:1px; font-weight:bold;">질문글 수정</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				      	<form id="modifyFrm">
+				      
+				          <div class="form-group">
+				            <label for="recipient-name" class="col-form-label">글쓴이</label>
+				            <input type="text" class="form-control" name ="name" id="modify-name" value="${loginMember.principal.nickName }" placeholder="${loginMember.principal.nickName }" readonly>
+				           
+				          </div>
+				          <div class="form-group">
+				            <label for="message-text" class="col-form-label">내용</label>
+				            <textarea class="form-control" id="modify-text" name="content" style="height: 400px;" ></textarea>
+				          </div>
+				            <div class="form-group">
+				            <label for="qna-status" >비밀글</label>
+				            <input type="checkbox" name = "status" class="form-control" style="width: 27px; height: 24px;" id="modify-status" value="false" onClick="modifyCheck();">
+				          </div>
+		   				 	<input type="hidden" name = "qnaNo" id="modifyNo" value="" />
+		   				 	<input type="hidden" name = "spaceNo" value="${ space.spaceNo }" />
+				        </form>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-right:10px; letter-spacing: 2px;">닫기</button>
+		   			  <input class="btn btn-primary" value = "전송" type="submit" onclick="modifyBtn();" 
+		   					style="float:right; margin-right:10px; letter-spacing: 2px; ">
+				        
+				      </div>
+				    </div>
+				  </div>
+				</div>	 
 				
 		 	<!-- 질문글 시작 -->
 		 	<c:if test="${ not empty qlist }">
@@ -479,25 +520,34 @@ function naverShare() {
 		   				<span class="text-right pr-2"><fmt:formatDate value="${ qna.date}" pattern="yyyy-MM-dd"/></span>
 		   			</h4>
 		   			<c:choose>
-		   				
 		   				<c:when test="${qna.status eq false}">
-			   			 			<div style="margin-right:15px;">
-   										<!-- 질문 작성자일 때 수정삭제버튼 -->
+			   			 			<!-- <div style="margin-right:15px;"> -->
+   											<div style="margin-right:15px;">
+						   			   		 <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
+						   			    	</div>
+   										<!-- 질문 작성자일 때 수정삭제 가능 -->
 			   			 				<sec:authorize access="hasAnyRole('HOST', 'USER')">
    										<sec:authentication property="principal.username" var="loginMember"/>
    											<c:if test="${loginMember != null && loginMember eq qna.email }">
-   												<button type="button" class="btn btn-secondary modify" data-toggle="modal" data-target="#qnaModal" data-whatever="@fat" 
-						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="modifyBtn();" 
+   												
+   											
+   												<button type="button" class="btn btn-secondary modify" data-toggle="modal" data-target="#modifyModal" data-whatever="@fat" 
+						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="popModify();" 
 						   							value="${qna.qnaNo }">수정</button>
+						   							
+   												<form id="deleteFrm" action="${pageContext.request.contextPath }/qna/deleteQ.do">
+   													<input type="hidden" name="spaceNo" value="${space.spaceNo }"/>
+   													<input type="hidden" name="qnaNo" id="deleteNo" value="${qna.qnaNo }"/>
+   												</form>
+   												
    												<button type="button" class="btn btn-secondary deleteQ"
 						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="deleteBtn();" 
 						   							value="${qna.qnaNo }">삭제</button>
-   												
+						   							
+   											
    											</c:if>
-   										 </sec:authorize>
-					   			   		 <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
-					   			   		 
-					   			    </div>
+   										 </sec:authorize> 
+					   			    <!-- </div> -->
 		   			 	</c:when>
 		   			 	
 		   			 	<c:otherwise>
@@ -508,8 +558,11 @@ function naverShare() {
    							<sec:authentication property="principal.username" var="loginMember"/>
    								
 								<c:if test="${loginMember != null && loginMember eq qna.email }">
+										<div style="margin-right:15px;">
+					   			   		 <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
+					   			    	</div>
  												<button type="button" class="btn btn-secondary modify" data-toggle="modal" data-target="#qnaModal" data-whatever="@fat" 
-				   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="modifyBtn();" 
+				   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="popModify();" 
 				   							value="${qna.qnaNo }">수정</button>
  												<button type="button" class="btn btn-secondary deleteQ" 
 				   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="deleteBtn();" 
@@ -983,16 +1036,40 @@ function selectQnaNo(){
 	
 }
 
+function popModify(){
+	/* document.getElementById("modify-text").val = "${qna.content}"; */
+	document.getElementById("modifyNo").value = $(".modify").val();
+	
+}
+
 function modifyBtn(){
-	document.getElementById("qnaNo").value = $(".modify").val();
+	
+	$("#modifyFrm").attr("action",
+	"${ pageContext.request.contextPath}/qna/modifyQuestion.do")
+			.attr("method", "POST")
+			.submit();
 }
 
 function deleteBtn(){
-	document.getElementById("qnaNo").value = $(".deleteQ").val();
+	document.getElementById("deleteNo").value = $(".deleteQ").val();
+	$('#dialog').dialog({
+	    title: '다이얼로그 제목을 넣자',
+	    modal: true,
+	    width: '300',
+	    height: '300'
+	});
+	
+}
+
+
+function deleteQuestion(){
+	if($("#deleteNo").value!=null){
 		$("#deleteFrm").attr("action",
 		"${ pageContext.request.contextPath}/qna/deleteQuestion.do")
 				.attr("method", "POST")
 				.submit();
+	}
+	
 }
 
 function sendAnswer(){
@@ -1005,6 +1082,14 @@ function sendAnswer(){
 	} else{
 		alert("답변 내용을 입력하세요.");
 		}
+}
+
+function modifyCheck(){
+
+	if($("#modify-status").is(':checked')){
+		//비밀글 설정 체크시 이벤트
+		 document.getElementById("modify-status").value = 'true';
+	} else{document.getElementById("modify-status").value = 'false'; }
 }
 
 function onCheck(){
