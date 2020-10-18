@@ -80,17 +80,65 @@
 	<c:if test="${ not empty script }">
 		self.close();	
 	</c:if>
+$(function(){
+	$(".nav-ul").hide();
+	
+	
+	$(".oi-menu").click(function(){
+		$(".nav-ul").toggle(100);
+	});
+})	
 </script>
+<style type="text/css">
+	.nav-ul{list-style: none;}
+	@media (min-width: 900px){
+		.oi-menu{display: none;}
+		.small{display: none;}
+	}
+	@media (max-width: 899px){
+		.big{display: none;}
+	}
+</style>
   </head>
   
   <body>
-	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light">
-	    <div class="container">
-	      <a class="navbar-brand" href="${pageContext.request.contextPath }">SpaceUs</a>
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" style="display: flex;">
+	    <a class="navbar-brand big" href="${pageContext.request.contextPath }">SpaceUs</a>
+	    <a class="navbar-brand small" href="${pageContext.request.contextPath }">SpaceUs</a>
+	    <span class="oi oi-menu" ></span>
+	   <div class="container">
+	    <div class="menu1" style="margin: auto; text-align: center;">
 	      <button class="navbar-toggler" type="button">
-	        <span class="oi oi-menu"></span>
+	        <div class="menu2">
+	        	<ul class="nav-ul" style="display: block;">
+		         
+		          <sec:authorize access="isAnonymous()">
+	   	            <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
+		            <li class="nav-item"><a href="${pageContext.request.contextPath }/community/group/groupList.do" class="nav-link">커뮤니티</a></li>
+		          	<li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberLoginForm.do" class="nav-link">로그인</a></li>
+		          	<li class="nav-item"><a href="${pageContext.request.contextPath }/member/memberEnrollForm.do" class="nav-link">회원가입</a></li>
+		          </sec:authorize>
+		          <sec:authorize access="hasRole('ROLE_HOST')">
+		          	<li class="nav-item"><a href="${pageContext.request.contextPath }/host/spaceInfo.do" class="nav-link">호스트 센터</a></li>
+				    <li class="nav-item"><a href="${pageContext.request.contextPath }/community/group/groupList.do" class="nav-link">커뮤니티</a></li>
+				    <li class="nav-item"><a href="${pageContext.request.contextPath }/exhibition/exhibition.do" class="nav-link">기획전</a></li>
+		          	<li class="nav-item"><a href="${ pageContext.request.contextPath }/member/memberLogout.do" class="nav-link">로그아웃하기</a></li>
+				    <li class="nav-item">
+		        		<li class="memberId" style="display: block; margin: 10px;">반갑습니다. &nbsp;</li>
+	        		</li>
+		          </sec:authorize>
+		          <sec:authorize access="hasAnyRole('USER','ADMIN')">
+		          	<li class="nav-item"><a onclick="enrollSpace();" class="nav-link" style="cursor:pointer; color:#00c89e;">공간 등록하기</a></li>
+		          	<li class="nav-item"><a href="${ pageContext.request.contextPath }/member/memberLogout.do" class="nav-link">로그아웃하기</a></li>
+	        		<li class="nav-item">
+		        		<li class="memberId" style="display: block; margin: 10px;">반갑습니다. &nbsp;</li>
+	        		</li>
+		          </sec:authorize>
+	        	</ul>
+	        </div>
 	      </button>
-	      
+	      </div>
+	     
 	      <sec:authorize access="isAnonymous()">
 	      
 		      <div class="collapse navbar-collapse">
