@@ -94,7 +94,7 @@ $(function(){
 	@media (min-width: 900px){
 		.oi-menu{display: none;}
 		.small{display: none;}
-		.big{margin-left: 18rem;}
+		 .big{margin-left: 5rem;} 
 	}
 	@media (max-width: 899px){
 		.big{display: none;}
