@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -506,6 +507,39 @@ function naverShare() {
 				    </div>
 				  </div>
 				</div>	 
+				<!-- 질문글 삭제 Modal -->
+				<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				    
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="deleteModalLabel">질문글 삭제</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true"></span>
+				        </button>
+				      </div>
+				      
+				    <!-- _csrf 인증 토큰 발행 -->
+				    <form:form 
+				    	action="${pageContext.request.contextPath }/qna/deleteQuestion.do" 
+				    	method="POST">
+				      <div class="modal-body">
+				      	<span>질문글을 삭제하시겠습니까?</span>
+				        <input type="hidden" class="form-control" 
+				        				name="spaceNo" value="${space.spaceNo }" />
+				        <br />
+						 <input type="hidden" id="deleteNo" class="form-control" 
+				        				name="qnaNo" />        
+				      </div>
+				      
+				      <div class="modal-footer">
+				        <button type="submit" class="btn btn-outline-success deleteQ">삭제</button>
+				        <button type="button" class="btn btn-outline-success" data-dismiss="modal">취소</button>
+				      </div>
+				    </form:form>
+				    </div>
+				  </div>
+				</div>
 				
 		 	<!-- 질문글 시작 -->
 		 	<c:if test="${ not empty qlist }">
@@ -534,14 +568,9 @@ function naverShare() {
    												<button type="button" class="btn btn-secondary modify" data-toggle="modal" data-target="#modifyModal" data-whatever="@fat" 
 						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="popModify();" 
 						   							value="${qna.qnaNo }">수정</button>
-						   							
-   												<form id="deleteFrm" action="${pageContext.request.contextPath }/qna/deleteQ.do">
-   													<input type="hidden" name="spaceNo" value="${space.spaceNo }"/>
-   													<input type="hidden" name="qnaNo" id="deleteNo" value="${qna.qnaNo }"/>
-   												</form>
-   												
-   												<button type="button" class="btn btn-secondary deleteQ"
-						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="deleteBtn();" 
+						   						
+   												<button type="button" class="btn btn-secondary"
+						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="Btn('${qna.qnaNo }');" 
 						   							value="${qna.qnaNo }">삭제</button>
 						   							
    											
@@ -561,11 +590,11 @@ function naverShare() {
 										<div style="margin-right:15px;">
 					   			   		 <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
 					   			    	</div>
- 												<button type="button" class="btn btn-secondary modify" data-toggle="modal" data-target="#qnaModal" data-whatever="@fat" 
+ 												<button type="button" class="btn btn-secondary modify" data-toggle="modal" data-target="#modifyModal" data-whatever="@fat" 
 				   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="popModify();" 
 				   							value="${qna.qnaNo }">수정</button>
- 												<button type="button" class="btn btn-secondary deleteQ" 
-				   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="deleteBtn();" 
+ 												<button type="button" class="btn btn-secondary" 
+				   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="deleteBtn('${qna.qnaNo }');" 
 				   							value="${qna.qnaNo }">삭제</button>
  												
 								</c:if>
@@ -945,7 +974,7 @@ function naverShare() {
 <input type="hidden" id="bool" value="${ bool }" />
 
 <!-- 추천시스템 끝 -->
-
+      
 <script>
 <!-- 지도 -->
 var mapContainer = document.getElementById('kakaomap'), // 지도를 표시할 div 
@@ -1050,27 +1079,13 @@ function modifyBtn(){
 			.submit();
 }
 
-function deleteBtn(){
-	document.getElementById("deleteNo").value = $(".deleteQ").val();
-	$('#dialog').dialog({
-	    title: '다이얼로그 제목을 넣자',
-	    modal: true,
-	    width: '300',
-	    height: '300'
-	});
+function deleteBtn(no){
+	$("#deleteNo").val(no);
+	/* alert(no); */
+	$('#deleteModal').modal();
 	
 }
 
-
-function deleteQuestion(){
-	if($("#deleteNo").value!=null){
-		$("#deleteFrm").attr("action",
-		"${ pageContext.request.contextPath}/qna/deleteQuestion.do")
-				.attr("method", "POST")
-				.submit();
-	}
-	
-}
 
 function sendAnswer(){
 	
