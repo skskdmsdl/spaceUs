@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -505,6 +507,33 @@ public class SpaceController {
 		mav.setViewName("jsonView");
 
 		return mav;
+	}
+	
+	@RequestMapping("/deleteSpace.do")
+	public String deleteMember (@RequestParam("spaceNo") String spaceNo,
+								Principal principal,
+								RedirectAttributes redirectAttr) {
+		//완료되지 않은 예약이 있으면 삭제못하게 막기
+		System.out.println("===========================");
+		System.out.println("===========================");
+		System.out.println("===========================");
+		System.out.println("===========================");
+		System.out.println("===========================");
+		System.out.println("===========================");
+		System.out.println("===========================");
+		System.out.println(spaceNo+ " : " + principal.getName());
+		
+		/*
+		 * //삭제 int result = spaceService.deleteSpace(spaceNo);
+		 * 
+		 * //성공하면 호스트->유저로 바꾸기 if(result>0) { //권한변경
+		 * 
+		 * redirectAttr.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다."); } else
+		 * redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");
+		 */
+		
+		return "redirect:/";
+
 	}
 	
 }
