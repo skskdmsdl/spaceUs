@@ -173,7 +173,7 @@ a:hover {opacity: 0.3; color:black;}
 														<div class="row commentBox" style="height: 110px; ">
 															<input type="hidden" name="reviewNo" value="${ review.reviewNo }" />
 								                         	<textarea class="col ml-2 mr-1 mt-1 commentBox content" style="resize: none; border:1px solid #edeceb; height: 80px; border-radius: 4px;"></textarea>
-								                           	<button type="button" class="btn mt-1 commentBox insertComment" style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
+								                           	<button type="button" class="btn mt-1 commentBox insertComment"  style="margin-bottom: 70px;height: 80px; border: 1px solid #dddddd;width: 70px;">등록</button>
 							                         	</div>
 													</c:otherwise>
 												</c:choose>

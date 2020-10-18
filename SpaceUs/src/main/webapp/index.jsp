@@ -93,14 +93,14 @@ font-family: 'NEXON Lv1 Gothic OTF';
 
 .searchInput{
   height: 40px;
-  width: 400px;
+  width: 300px;
   font-size: 20px;
   display: inline-block;
   font-family: "NEXON Lv1 Gothic OTF";
   text-align: center;
   font-weight: 100;
   border:none;
-  border-bottom : 1px solid #d0d0d0;
+  border-bottom : 1px solid gray;
   margin-right:10px;
   outline: none;
   color: black;
@@ -112,7 +112,9 @@ font-family: 'NEXON Lv1 Gothic OTF';
   background: none;
   cursor: pointer; 
 }
-
+/* #searchInput::placeholder {
+  color: white;
+} */
 #search_keyword {
 	color: black;
 }
@@ -122,7 +124,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
 }
 
 .searchInput:focus {
-  width: 400px;
+  width: 300px;
   z-index: 1;
   border-bottom: 1px solid black;
   cursor: text;
@@ -211,7 +213,7 @@ $(document).on("click",".fa-2x",function(){
      					<div id="disapear" style="margin-top:-20px">
      						<div id="wrap">
 		  						<input id="searchInput" class="searchInput" name="search_keyword" placeholder="키워드를 입력하세요">
-		  						<input type="submit" class="btn-lg search-btn" value="입력" onclick="searchSpace();" style="background: #00c89e;"/>
+		  						<input type="submit" class="search-btn btn btn-primary " value="입력" onclick="searchSpace();" style="background: #00c89e;"/>
 							</div>
          				</div>
        			</div>
@@ -290,7 +292,7 @@ $(document).on("click",".fa-2x",function(){
 			</form>
 			
 			<div class="container">
-				<button type="button" class="search-btn" onclick="searchDetailSpace();">검색</button>
+				<button type="button" class="search-btn btn btn-primary" onclick="searchDetailSpace();">검색</button>
 			</div>
 		</div>
 	</div>
