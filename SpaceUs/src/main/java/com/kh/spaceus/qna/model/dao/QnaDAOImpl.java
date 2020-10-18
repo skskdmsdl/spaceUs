@@ -25,6 +25,16 @@ public class QnaDAOImpl implements QnaDAO {
 		return session.update("qna.updateAnswer", qna);
 	}
 
+	@Override
+	public int deleteQna(Qna qna) {
+		return session.delete("qna.deleteQuestion", qna);
+	}
+
+	@Override
+	public int updateQna(Qna qna) {
+		return session.delete("qna.updateQuestion", qna);
+	}
+
 	
 
 }

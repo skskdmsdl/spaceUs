@@ -205,7 +205,7 @@ public class HostController {
 		String hostId = principal.getName();
 		
 		List<Qna> list = hostService.selectQuestionList(hostId);
-		Member member = memberService.selectOneMember(principal.getName());
+		Member member = memberService.selectOneMember(hostId);
 		mav.addObject("member", member);
 		mav.addObject("list", list);
 		mav.setViewName("host/hostCheckArticle");
@@ -215,15 +215,18 @@ public class HostController {
 	
 	//공간 미답변 질문글 조회
 	@RequestMapping(value= "/unreplied.do", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Qna> SelectUnreplied(@RequestParam("hostId") String hostId) {
-		
+	public ModelAndView SelectUnreplied(Principal principal, ModelAndView mav) {
+		String hostId = principal.getName();
 		
 		List<Qna> list = hostService.selectUnreplied(hostId);
-	
-		log.debug("list = {}", list);
+		Member member = memberService.selectOneMember(hostId);
 		
-		return list;
+		log.debug("list = {}", list);
+		mav.addObject("member", member);
+		mav.addObject("list", list);
+		mav.setViewName("host/hostCheckUnreplied");
+		
+		return mav;
 	}
 	
 	//정산 내역 엑셀 파일 다운로드
