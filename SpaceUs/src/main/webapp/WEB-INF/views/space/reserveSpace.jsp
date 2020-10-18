@@ -416,10 +416,9 @@ function iamport(){
 	    
 	    alert(msg);
 	    
-	    /* //나중에 지우기
-	    alert(rsp.imp_uid);
+	    //나중에 지우기
 	    $("[name=revNo]").val(rsp.imp_uid);
-	    document.insertReservation.submit(); */
+	    document.insertReservation.submit();
 	});
 }
 </script>
