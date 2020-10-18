@@ -27,7 +27,7 @@
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">마이페이지</a></li>
-                                <li class="breadcrumb-item active">쿠폰함</li>
+                                <li class="breadcrumb-item active">쿠폰 목록</li>
                             </ol>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
 		                <div class="card-body">
 			                <div class="row"> 
 	                            <div class="col-md-10">
-	                                <h5 class="card-title">쿠폰함</h5>
+	                                <h5 class="card-title">쿠폰 목록</h5>
 	                                <h6 class="card-subtitle mb-5">쿠폰을 확인하세요</h6>
 	                            </div>
 	                            <!-- 이 부분 지울때 위에 row도 div도 지우기 -->

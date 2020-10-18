@@ -420,7 +420,7 @@ select
 			        space join space_image using (space_no) left outer join reservation using(space_no) left outer join review using(rev_no)
 			    where 
 			         reservation.member_email= #{email} ) S ) SS
-	     where RNUM =1
+	     where RNUM =1 and rev_comple=1
 	     order by SS.rev_date desc
 	</select>
 	
@@ -434,7 +434,7 @@ select
 		            space join space_image using (space_no) left outer join reservation using(space_no) left outer join review using(rev_no)
 		        where 
 		             reservation.member_email= #{email} and review_no is null  ) S ) SS
-		 where RNUM =1
+		 where RNUM =1 and rev_comple=1
 		 order by SS.rev_date desc
 	</select>
 	
@@ -448,7 +448,7 @@ select
 		            space join space_image using (space_no) left outer join reservation using(space_no) left outer join review using(rev_no)
 		        where 
 		             reservation.member_email= #{email} and review_no is not null  ) S ) SS
-		 where RNUM =1
+		 where RNUM =1 and rev_comple=1
 		 order by SS.rev_date desc
 	</select>
 	

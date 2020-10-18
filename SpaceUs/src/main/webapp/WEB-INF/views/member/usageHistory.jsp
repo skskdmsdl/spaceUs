@@ -29,7 +29,7 @@
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">마이페이지</a></li>
-                                <li class="breadcrumb-item active">사용 내역</li>
+                                <li class="breadcrumb-item active">예약 내역</li>
                             </ol>
                         </div>
                     </div>
@@ -41,8 +41,8 @@
                            <div class="card-body">
 	                            <div class="row"> 
 		                           <div class="col-md-9">
-		                                <h5 class="card-title">사용 내역</h5>
-		                                <h6 class="card-subtitle">사용 공간 내역을 확인하세요</h6>
+		                                <h5 class="card-title">예약 내역</h5>
+		                                <h6 class="card-subtitle">공간 예약 내역을 확인하세요</h6>
 		                           </div>
 	                       		   <div class="col-md-3">
 	                                   <select class="custom-select b-0" id="selectId" >
@@ -58,7 +58,6 @@
                            
                                <div class="steamline m-t-40">
                                		<c:forEach items="${revList}" var="info" varStatus="vs">
-                               		<p>${ spaceList[vs.index] }</p>
 										<div>
 		                                     <c:choose>
 									   				<c:when test="${ info.revCancle eq info.revComplete}">
@@ -101,9 +100,9 @@
 			                                            	</c:choose>
 			                                            </div>
 			                                            <div class="col-md-9">
-			                                                <form:form name="revCancle" id="revCancle"
+			                                               <%--  <form:form name="revCancle" id="revCancle"
 										                         	   action="${pageContext.request.contextPath}/reservation/cancleReservation.do"
-																	   method="POST">
+																	   method="POST"> --%>
 															<input type="hidden" name="revNo" value="${ info.revNo }">
 			                                                <button type="button" class="btn m-r-5 btn-rounded btn-outline-success" data-toggle="modal" data-target="#confirmModal${ vs.index }">예약확인</button>
 															
@@ -116,7 +115,7 @@
 													   			 	</c:otherwise>
 													   		 </c:choose>
 															
-															</form:form>
+															<%-- </form:form> --%>
 			                                            </div>
 		                                            </div>
 		                                        </div>
@@ -162,84 +161,101 @@
 										<div class="modal fade" id="cancelModal${ vs.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 										  <div class="modal-dialog" role="document">
 										    <div class="modal-content">
-										      <!--Header-->
-										      <div class="modal-header">
-										        <p class="heading lead">예약 취소
-										        </p>
-										
-										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										          <span aria-hidden="true" class="white-text">×</span>
-										        </button>
-										       </div>
-												<!-- /Header -->
-										       <!--Body-->
-										       <div class="modal-body">
-										         <div class="text-center">
-										           <i class="far fa-file-alt fa-4x mb-3 animated rotateIn"></i>
-										           <p>
-										             <strong>취소 사유를 선택해주세요</strong>
-										           </p>
-										         </div>
-										
-										         <hr>
-										
-										         <!-- Radio -->
-										         <div class="form-check mb-4">
-										           <input class="form-check-input" name="group1" type="radio" id="radio-179" value="option1" checked>
-										           <label class="form-check-label" for="radio-179">공간 대여 일정이 미뤄짐</label>
-										         </div>
-										
-										         <div class="form-check mb-4">
-										           <input class="form-check-input" name="group1" type="radio" id="radio-279" value="option2">
-										           <label class="form-check-label" for="radio-279">타 공간 대여를 하기로 하였음</label>
-										         </div>
-										
-										         <div class="form-check mb-4">
-										           <input class="form-check-input" name="group1" type="radio" id="radio-379" value="option3">
-										           <label class="form-check-label" for="radio-379">서비스 및 공간의 불만족</label>
-										         </div>
-										         <div class="form-check mb-4">
-										           <input class="form-check-input" name="group1" type="radio" id="radio-479" value="option4">
-										           <label class="form-check-label" for="radio-479">공간 대여의 비용의 문제점</label>
-										         </div>
-										         <div class="form-check mb-4">
-										           <input class="form-check-input" name="group1" type="radio" id="radio-579" value="option5">
-										           <label class="form-check-label" for="radio-579">공간 위치상 안전상의 문제점</label>
-										         </div>
-										        <!-- /Radio -->
-										
-										        <p class="text-center">
-										          <strong>예약 무료 취소</strong>
-										        </p>
-										        <!--Basic textarea-->
-										        <table class="table table-hover" style="border:0;">
-										          <tbody>
-										            <tr>
-										              <th colspan="2">총 결제 금액</th>
-										              <td>KRW</td>
-										              <td>${ info.totalPrice }</td>
-										            </tr>
-										            <tr>
-										              <th colspan="2">취소 수수료</th>
-										              <td>KRW</td>
-										              <td>0</td>
-										            </tr>
-										            <tr>
-										              <th colspan="2"><strong>환불 금액</strong></th>
-										              <td>KRW</td>
-										              <td style="color: red;">${ info.totalPrice }</td>
-										            </tr>
-										          </tbody>
-										        </table>
-										      </div>
-										
-										      <!--Footer-->
-										      <div class="modal-footer justify-content-center">
-										        <a type="button" class="btn btn-primary waves-effect waves-light">Send
-										          <i class="fa fa-paper-plane ml-1"></i>
-										        </a>
-										        <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Cancel</a>
-										      </div>
+										       <form:form name="cancelReservation" id="cancelReservation" action="${pageContext.request.contextPath}/reservation/cancelReservation.do" method="POST">							      
+											      
+											      <input type="hidden" name="revNo" value="${info.revNo}" />
+											      <input type="hidden" name="reasonCancel" value="" />
+											      
+											      <!--Header-->
+											      <div class="modal-header">
+											        <p class="heading lead">예약 취소
+											        </p>
+											
+											        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											          <span aria-hidden="true" class="white-text">×</span>
+											        </button>
+											       </div>
+													<!-- /Header -->
+											       <!--Body-->
+											       <div class="modal-body">
+											         <div class="text-center">
+											           <i class="far fa-file-alt fa-4x mb-3 animated rotateIn"></i>
+											           <p>
+											             <strong>취소 사유를 선택해주세요</strong>
+											           </p>
+											         </div>
+											
+											         <hr>
+											
+											         <!-- Radio -->
+											      
+											         <div>
+												         <div class="form-check mb-4">
+												           <input class="form-check-input" name="reason" type="radio" id="reason" value="공간 대여 일정이 미뤄짐" checked>
+												           <label class="form-check-label" for="radio-179">공간 대여 일정이 미뤄짐</label>
+												         </div>
+												
+												         <div class="form-check mb-4">
+												           <input class="form-check-input" name="reason" type="radio" id="reason" value="타 공간 대여를 하기로 하였음">
+												           <label class="form-check-label" for="radio-279">타 공간 대여를 하기로 하였음</label>
+												         </div>
+												
+												         <div class="form-check mb-4">
+												           <input class="form-check-input" name="reason" type="radio" id="reason" value="서비스 및 공간의 불만족">
+												           <label class="form-check-label" for="radio-379">서비스 및 공간의 불만족</label>
+												         </div>
+												         <div class="form-check mb-4">
+												           <input class="form-check-input" name="reason" type="radio" id="reason" value="공간 대여의 비용의 문제점">
+												           <label class="form-check-label" for="radio-479">공간 대여의 비용의 문제점</label>
+												         </div>
+												         <div class="form-check mb-4">
+												           <input class="form-check-input" name="reason" type="radio" id="reason" value="공간 위치상 안전상의 문제점">
+												           <label class="form-check-label" for="radio-579">공간 위치상 안전상의 문제점</label>
+												         </div>
+											         </div>
+											         
+											        <!-- /Radio -->
+											
+											        <p class="text-center">
+											          <strong>예약 무료 취소</strong>
+											        </p>
+											        <!-- table -->
+											        <table class="table table-borderless">
+											          <tbody>
+											            <tr>
+											              <th colspan="2">총 결제 금액</th>
+											              <td>KRW</td>
+											              <td>${ info.totalPrice }</td>
+											            </tr>
+											            <tr style="border-bottom: 1px #d0d0d0 !important;">
+											              <th colspan="2">취소 수수료</th>
+											              <td>KRW</td>
+											              <td>${info.revNo }</td>
+											            </tr>
+											          </tbody>
+											        </table>
+											        <table class="table">
+											          <tbody>
+											            <tr>
+											              <th colspan="2"><strong>환불 총 금액</strong></th>
+											              <td>KRW</td>
+											              <td style="color: red;">${ info.totalPrice }</td>
+											            </tr>
+											          </tbody>
+											        </table>
+											        <!-- /table -->
+											      </div>
+											
+											      <!--Footer-->
+											      <div class="modal-footer justify-content-center">
+											        <a type="button" class="btn btn-warning waves-effect waves-light" style="color:darkblack;"
+											           id="refund" onclick="refund();">환불
+											         	<i class="fas fa-hand-holding-usd cc_pointer"></i>
+											        </a>
+											        <input type="hidden" name="revNo" value="${info.revNo}" />
+											        <a type="button" class="btn btn-outline-link waves-effect" data-dismiss="modal">Cancel</a>
+											      </div>
+										      </form:form>
 										    </div>
 										  </div>
 										</div>
@@ -271,6 +287,43 @@ $("#selectId").change(function(){
 	else location.href="${pageContext.request.contextPath }/member/usageFinish.do";
 });
 </script>
+<script type="text/javascript">
+
+function refund(){
+	//$("#cancelReservation").submit();
+	var reason = $("input[name='reason']:checked").val();
+	$("[name=reasonCancel]").val(reason);
+	alert(reason);
+
+	var revNo = $(this).siblings("input").val();
+	alert(revNo);
+	//cancelPay();	
+}
+
+function cancelPay() {
+	/* var reason = $("input[name='reason']:checked").val();
+	$("[name=reasonCancel]").val(reason);
+
+	var revNo = $(this).val();
+	alert();
+ */
+   /*  jQuery.ajax({
+      "url": "http://www.myservice.com/payments/cancel",
+      "type": "POST",
+      "contentType": "application/json",
+      "data": JSON.stringify({
+        "merchant_uid": "mid_" + new Date().getTime(), // 주문번호
+        "cancel_request_amount": 2000, // 환불금액
+        "reason": "테스트 결제 환불" // 환불사유
+      }),
+      "dataType": "json"
+    }).done(function(result) { // 환불 성공시 로직 
+        alert("환불 성공");
+    }).fail(function(error) { // 환불 실패시 로직
+      alert("환불 실패");
+    }); */
+  }
+</script>
 
 
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
@@ -286,3 +339,5 @@ $("#selectId").change(function(){
 <script src="${ pageContext.request.contextPath }/resources/js/sidebarmenu.js"></script>
 <!--Custom JavaScript -->
 <script src="${ pageContext.request.contextPath }/resources/js/custom.min.js"></script>
+<!-- jQuery CDN --->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

@@ -32,7 +32,7 @@
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">마이페이지</a></li>
-                                <li class="breadcrumb-item active">리뷰</li>
+                                <li class="breadcrumb-item active">리뷰 목록</li>
                             </ol>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                       <div class="card-body">
                        <div class="row"> 
                        <div class="col-md-10">
-                           <h5 class="card-title">공간 리뷰</h5>
+                           <h5 class="card-title">리뷰 목록</h5>
                            <h6 class="card-subtitle">이용한 공간의 리뷰를 작성해주세요</h6>
                        </div>
                           <div class="col-md-2">

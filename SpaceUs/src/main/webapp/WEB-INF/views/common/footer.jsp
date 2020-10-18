@@ -34,6 +34,7 @@
 	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
 	                <li><a href="#"><span class="icon icon-envelope pr-4"></span><span class="text">spaceus@spaceus.com</span></a></li>
 	              </ul>
+	              <div class="pull-right arrowUp" style="margin-top: 50px;background-color: #00c89e;width: 32px;height: 32px;padding: 3px 4px 0px 4px;border-radius: 3px;cursor: pointer;"><span class="icon-arrow-up" style="font-size: 25px;color: white;"></span></div>
 	            </div>
             </div>
           </div>
@@ -53,6 +54,13 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
+<script>
+//맨위로
+$(".arrowUp").click(function(){
+	window.scrollTo(200, 0);
+});
+</script>
   <script src="${pageContext.request.contextPath }/resources/js/aos.js"></script>
   <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/raphael/raphael-min.js"></script>
 <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/morrisjs/morris.min.js"></script>

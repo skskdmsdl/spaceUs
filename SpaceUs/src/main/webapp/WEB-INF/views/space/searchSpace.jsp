@@ -106,14 +106,14 @@ font-family: 'NEXON Lv1 Gothic OTF';
 
 .searchInput{
   height: 40px;
-  width: 400px;
+  width: 300px;
   font-size: 20px;
   display: inline-block;
   font-family: "NEXON Lv1 Gothic OTF";
   text-align: center;
   font-weight: 100;
   border:none;
-  border-bottom : 1px solid #d0d0d0;
+  border-bottom : 1px solid gray;
   margin-right:10px;
   outline: none;
   color: black;
@@ -135,7 +135,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
 }
 
 .searchInput:focus {
-  width: 400px;
+  width: 300px;
   z-index: 1;
   border-bottom: 1px solid black;
   cursor: text;
@@ -267,7 +267,7 @@ function sortChange(obj){
 						<!-- 검색시작 -->
 						<div id="wrap">
 	  						<input id="searchInput" class="searchInput" name="search_keyword" placeholder="키워드를 입력하세요">
-	  						<input type="submit" class="btn-lg search-btn" value="입력" onclick="searchSpace();" />
+	  						<input type="submit" class="btn btn-primary search-btn" value="입력" onclick="searchSpace();" />
 	  						<!-- <i class="fas fa-search fa-2x" style="color:#00C89E"></i> -->	
 						</div>
 						<!-- 검색끝 -->
@@ -353,7 +353,7 @@ function sortChange(obj){
 				</form>				
 				<div class="container">
 					<!-- <button type="submit" class="search-btn search-detail" onclick="searchDetailSpace();">검색</button> -->
-					<input type="submit" value="검색" onclick="searchDetailSpace();" class="search-btn search-detail" />
+					<input type="submit" value="검색" onclick="searchDetailSpace();" class="search-btn btn btn-primary search-detail" />
 				</div>
 			</div>
 	</div>
