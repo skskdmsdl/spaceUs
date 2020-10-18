@@ -289,7 +289,7 @@ function meeting(){
  <div class="container">
     	<div class="row justify-content-center align-items-center">
       		<div class="col-lg-9 col-md-1">
-      			<div class="text text-center mx-auto" style="margin-top:5%; margin-bottom :5%;">
+      			<div class="text text-center mx-auto" style="margin-top:5%; margin-bottom :10%;">
           			<h2 class="mb-4"><strong>당신은 어떤 공간을 찾고 있나요?</strong></h2>
           			<p></p>
 		  				<i class="fas fa-search fa-2x" style="color:#00C89E"></i>	
