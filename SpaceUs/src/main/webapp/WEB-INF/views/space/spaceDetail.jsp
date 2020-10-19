@@ -1015,7 +1015,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 //주소로 좌표를 검색합니다
-geocoder.addressSearch('${ space.address }', function(result, status) {
+geocoder.addressSearch(address, function(result, status) {
 
 // 정상적으로 검색이 완료됐으면 
  if (status === kakao.maps.services.Status.OK) {
@@ -1037,16 +1037,18 @@ geocoder.addressSearch('${ space.address }', function(result, status) {
 </script>
 <!-- 카카오톡 공유 -->
 <script type='text/javascript'>
+
+	
     Kakao.init('d6ea51fdfee1be1e548d05a904a861bc');
 
     	 Kakao.Link.createDefaultButton({
     	      container: '#kakao-link-btn',
     	      objectType: 'location',
-    	      address: '${ space.address }',
+    	      address: '${space.address}',
     	      addressTitle: '${ space.spaceName }',
     	      content: {
     	        title: '${ space.spaceName }',
-    	        description: '${ space.content }',
+    	        description: '1222',
     	        imageUrl: 'https://moplqfgeemqv2103108.cdn.ntruss.com/service/158321359_3969307adb111d972a661a99fd3629af.jpg?type=m&w=900&h=900&autorotate=true&quality=90',
     	        link: {
     	          mobileWebUrl: 'https://www.spacecloud.kr/',
