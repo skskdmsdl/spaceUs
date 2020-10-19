@@ -249,7 +249,7 @@ function meeting(){
       <div class="carousel-caption d-none d-md-block" style="top: 6em;">
         <h2 class="mb-4" style="text-decoration: underline; text-underline-position: under;">"제일 잘하는 요리 친구들에게 만들어줘요!"</h2>
         <h4 class="mb-4">우리만의 요리대회 공간</h4>
-        <button type="submit" class="btn-lg btn-dark mt-4" style="border-radius: 100px;" onclick="cook();">바로가기</button>
+        <button type="submit" class="btn-lg btn btn-black font-18 mt-4" style="border-radius: 100px;" onclick="cook();">바로가기</button>
       </div>
 	</div>
     <div class="carousel-item" style="height: 500px;">
@@ -257,7 +257,7 @@ function meeting(){
    	  <div class="carousel-caption d-none d-md-block" style="top: 6em;">
         <h2 class="mb-4" style="text-decoration: underline; text-underline-position: under;">"1년에 한번! 나를 더욱 더 사랑하는 방법"</h2>
         <h4 class="mb-4">특별한 생일을 위한 공간</h4>
-        <button type="submit" class="btn-lg btn-dark mt-4" style="border-radius: 100px;" onclick="birthday();">바로가기</button>
+        <button type="submit" class="btn-lg btn btn-black font-18 mt-4" style="border-radius: 100px;" onclick="birthday();">바로가기</button>
       </div>
     </div>
     <div class="carousel-item" style="height: 500px;">
@@ -265,7 +265,7 @@ function meeting(){
       <div class="carousel-caption d-none d-md-block" style="top: 6em;">
         <h2 class="mb-4" style="text-decoration: underline; text-underline-position: under;">"스마트한 팀워크를 위한 공유오피스 모음"</h2>
         <h4 class="mb-4">팀을 위한 공유 오피스</h4>
-        <button type="submit" class="btn-lg btn-dark mt-4" style="border-radius: 100px;" onclick="meeting();">바로가기</button>
+        <button type="submit" class="btn-lg btn btn-black font-18 mt-4" style="border-radius: 100px;" onclick="meeting();">바로가기</button>
       </div>	
     </div>
   </div>
@@ -278,11 +278,6 @@ function meeting(){
     <span class="sr-only">Next</span>
   </a>
 </div>
-
-
-
-
-
 
 <!-- 검색창 시작 -->
 <section class="ftco-section goto-here search-section spad">
@@ -534,7 +529,7 @@ function meeting(){
 <script>
 $(function () { 
 	memberId();
-});
+}); 
 $(function () { 
 	popular();
 }); 

@@ -310,7 +310,7 @@ select
 		          D.renamed_filename	
 			from
 				space S join (SELECT * FROM space_image S
-                    WHERE S.ROWID IN (SELECT MAX(ROWID)
+                    WHERE S.ROWID IN (SELECT MIN(ROWID)
                     FROM space_image
                     GROUP BY space_no)) D on S.space_no=D.space_no
 			where 

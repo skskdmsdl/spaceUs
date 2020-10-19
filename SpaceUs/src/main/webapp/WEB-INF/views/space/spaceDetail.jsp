@@ -1014,7 +1014,6 @@ geocoder.addressSearch('${ space.address }', function(result, status) {
 <!-- 카카오톡 공유 -->
 <script type='text/javascript'>
     Kakao.init('d6ea51fdfee1be1e548d05a904a861bc');
-
     	 Kakao.Link.createDefaultButton({
     	      container: '#kakao-link-btn',
     	      objectType: 'location',
@@ -1043,6 +1042,8 @@ geocoder.addressSearch('${ space.address }', function(result, status) {
     	          	}
     	        }]
     	    });
+
+
 </script>
 <script>$(function () { memberId();});</script>
 <script>

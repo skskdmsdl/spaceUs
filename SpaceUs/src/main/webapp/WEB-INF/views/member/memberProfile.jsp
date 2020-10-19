@@ -67,6 +67,7 @@
 						      <td class="align-baseline">핸드폰 <i class="fa fa-check phoneCheck ml-2" style="display:none; color:#3ab549;" aria-hidden="true"></i> <i class="fa fa-close phoneFalse ml-2" style="display:none; color:red;" aria-hidden="true"></i></td>
 						      <td>
 							      <div class="row" style="margin-right: 50px;">
+							      <input type="hidden" id="memberPhone" value="${ member.memberPhone }"/>
 								      <input type="tel" id="phone" class="col-5 input-group-text mb-4 ml-auto mr-5" style="background-color: white;" maxlength="11" value="${ member.memberPhone}" required />
 								      <div class="btn-wrap">
 										<button class="btn btn-primary font-bold phone-btn">휴대폰 인증</button>				
@@ -248,7 +249,7 @@ $("#infoUpdate").on("click", function(){
 		 alert("닉네임을 확인해주세요!");
 		 return;
 	}
-	if(!$(".phoneCheck").hasClass('show')){
+	if(!$(".phoneCheck").hasClass('show')&&!$("#phone").val()==$("#memberPhone").val()){
 		 alert("핸드폰을 확인해주세요!");
 		 return;
 	}
