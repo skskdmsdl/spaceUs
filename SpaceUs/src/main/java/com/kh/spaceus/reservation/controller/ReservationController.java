@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.Reservation;
 
@@ -17,10 +18,14 @@ public class ReservationController {
 	
 	@Autowired 
 	private ReservationService reservationService;
+	
+	@Autowired
+	private MemberService memberService;
 	 
 	@RequestMapping(value="/insertReservation.do")
-	public String insertReservation(Reservation reservation) {
+	public String insertReservation(Reservation reservation, @RequestParam("couponNo") String couponNo) {
 		int result = reservationService.insertReservation(reservation);
+		int result2 = memberService.deleteCoupon(couponNo);
 
 		return "redirect:/member/usageHistory.do";
 	}

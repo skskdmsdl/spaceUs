@@ -185,6 +185,10 @@
 	delete from coupon where to_char(coupon_deadline) = to_date(sysdate, 'yy/MM/dd')
 </delete>
 
+<delete id="deleteCouponNo">
+	delete from coupon where coupon_no = #{couponNo}
+</delete>
+
 <select id="selectCouponList" resultMap="couponMap">
 	select
 		* 
@@ -253,6 +257,15 @@
 		      where member_email=#{email}
 		      order by like_date desc
 
+</select>
+
+<select id="selectWishTotal" resultType="_int">
+	select
+		count(*)
+	from 
+		wish
+	where 
+		member_email = #{email}
 </select>
 
 <update id="updateUser">

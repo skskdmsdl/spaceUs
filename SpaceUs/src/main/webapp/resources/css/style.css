@@ -10224,7 +10224,7 @@ select:focus{
 
 .search-form-content {
   overflow: hidden;
-  margin-bottom: 26px;
+  /* margin-bottom: 26px; */
 }
 .search-form-content .filter-form {
   margin-right: -20px;
@@ -11287,7 +11287,7 @@ ol {
 
 .search-form-content {
   overflow: hidden;
-  margin-bottom: 26px;
+  /* margin-bottom: 26px; */
 }
 .search-form-content .filter-form {
   margin-right: -20px;

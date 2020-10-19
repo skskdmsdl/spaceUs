@@ -44,10 +44,14 @@ public interface MemberDAO {
 
 	int deleteCoupon();
 
+	int deleteCoupon(String couponNo);
+	
 	List<Coupon> selectCouponList(String email);
 
 	List<Wish> selectWishList(String email);
 
+	int selectWishTotal(String email);
+	
 	int updatePwd(String memberEmail);
 
 }

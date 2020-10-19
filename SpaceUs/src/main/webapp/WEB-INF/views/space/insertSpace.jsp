@@ -554,8 +554,8 @@ $("#addTags").on('click', function(){
 		,
 		dataType : "json",
 		success : function(data){
-			
-			$("#tags").append("<input type='checkbox' name='tag' style='display:none' value="+$('#tagName').val() +" checked/><span class='label label-success m-2 p-2 small'>#"+$('#tagName').val() +" X</span>"); 
+			alert(data.hashTag);
+			$("#tags").append("<span class='label label-success m-2 p-2'>#"+$('#tagName').val() +" X</span>"); 
 			/* $("#tags").append("<span class='label label-success m-2 p-2 small'>#"+$('#tagName').val() +" X</span>");  */
 	    	$("#tagName").val("");	
 		},
@@ -566,9 +566,9 @@ $("#addTags").on('click', function(){
     }
 });
 //태그 삭제 클릭이벤트
-$("#tags").on("click", function(){
+/* $("#tags").on("click", function(){
    //내용작성하기 
-});
+}); */
 </script>
 
 <!-- 사업자등록 script -->
