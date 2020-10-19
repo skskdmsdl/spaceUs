@@ -1311,3 +1311,22 @@ commit;
 --10/19
 -------------------------------
 select * from member;
+select * from exhibition;
+select * from tag;
+
+update exhibition set tag_no = 'TAG182' where ex_no='21'; 
+commit;
+
+
+create table exhibition (
+    ex_title varchar2(256) not null,
+    ex_subtitle varchar2(256) not null,
+    tag varchar2(100) not null
+);
+select * from exhibition;
+-- tag_no 추가
+alter table exhibition modify(tag_no varchar2(256));
+-- tag_no tag와 fk
+alter table exhibition add constraints fk_exhibition_tag_no foreign key(tag_no) references tag(tag_no);
+-- RENAMED_FILENAME
+alter table exhibition drop column;

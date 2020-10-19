@@ -33,7 +33,7 @@
 	      	<br />
 	      	</sec:authorize>
 	      	<input type="hidden" id="exNo" value="${ list.exNo }"/>
-	      		<div class="agent space1" onclick="exhibitionList('${list.tag}');">
+	      		<div class="agent space1" onclick="exhibitionList('${list.tagNo}');">
   					<div class="img">
 	  					<c:if test="${ not empty list.imageUrl }">
 	    					<img src="${ list.imageUrl  }">
@@ -76,9 +76,9 @@ function deleteEx(exNo){
 	});
 }
 
-function exhibitionList (tag) {
-	console.log("tag = " + tag);
-	location.href = "${pageContext.request.contextPath}/exhibition/exhibitionList.do?tag=" + tag;
+function exhibitionList (tagNo) {
+	
+	location.href = "${pageContext.request.contextPath}/exhibition/exhibitionList.do?tagNo=" + tagNo;
 };
 
 </script>

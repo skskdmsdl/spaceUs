@@ -1061,11 +1061,7 @@ var geocoder = new kakao.maps.services.Geocoder();
     	      addressTitle: '${ space.spaceName }',
     	      content: {
     	        title: '${ space.spaceName }',
-<<<<<<< HEAD
-    	        description: 'ssss',
-=======
     	        description: $('#spaceCon').val(),
->>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
     	        imageUrl: 'https://moplqfgeemqv2103108.cdn.ntruss.com/service/158321359_3969307adb111d972a661a99fd3629af.jpg?type=m&w=900&h=900&autorotate=true&quality=90',
     	        link: {
     	          mobileWebUrl: 'https://www.spacecloud.kr/',
