@@ -69,7 +69,18 @@ public class HostController {
 	@RequestMapping("/settlementDetails.do")
 	public ModelAndView settlementDetails (Principal principal, ModelAndView mav) {
 		List<DailySale> list = hostService.selectSettlementList(principal.getName());
+		ArrayList<String> datelist = new ArrayList<String>();
+		ArrayList<Long> revenuelist = new ArrayList<Long>();
 		
+		
+		for(DailySale ds : list) {
+			datelist.add(ds.getDate());
+			revenuelist.add(ds.getRevenue());
+		}
+		
+		//일정산내역 리스트
+		mav.addObject("revenuelist", revenuelist);
+		mav.addObject("datelist", datelist);
 		mav.addObject("list", list);
 		mav.setViewName("host/settlementDetails");
 		
@@ -296,8 +307,17 @@ public class HostController {
        mergeRowStyle1.setFillForegroundColor(IndexedColors.AQUA.getIndex());
        mergeRowStyle1.setFillPattern(FillPatternType.BRICKS);
        //foregroundcolor 대표색
+       
        XSSFCellStyle mergeRowStyle2 = (XSSFCellStyle) workbook.createCellStyle();
-       	
+       mergeRowStyle2.setAlignment(HorizontalAlignment.CENTER);
+       mergeRowStyle2.setVerticalAlignment(VerticalAlignment.TOP);
+       mergeRowStyle2.setBorderTop(BorderStyle.THIN);
+       mergeRowStyle2.setBorderLeft(BorderStyle.DOTTED);
+       mergeRowStyle2.setBorderBottom(BorderStyle.SLANTED_DASH_DOT);
+       mergeRowStyle2.setBorderRight(BorderStyle.HAIR);
+       mergeRowStyle2.setFillForegroundColor(new XSSFColor(new byte[] {(byte) 192,(byte) 192,(byte) 192}));
+       mergeRowStyle2.setFillPattern(FillPatternType.FINE_DOTS);
+       
        
        //cell font 설정
        Font headerFont = workbook.createFont();
@@ -318,6 +338,7 @@ public class HostController {
        // 해당 행의 두번째 열 셀 생성
        headerCell = headerRow.createCell(1);
        headerCell.setCellValue("정산날짜");
+       headerCell.setCellStyle(mergeRowStyle1);
        // 해당 행의 세번째 열 셀 생성
        headerCell = headerRow.createCell(2);
        headerCell.setCellValue("총 이용시간");
@@ -337,13 +358,14 @@ public class HostController {
            // 데이터 번호 표시
            bodyCell = bodyRow.createCell(0);
            bodyCell.setCellValue(i + 1);
+           bodyCell.setCellStyle(mergeRowStyle2);
            // 정산날짜 
            bodyCell = bodyRow.createCell(1);
            bodyCell.setCellValue(ds.getDate());
            // 일일 총 이용시간
            bodyCell = bodyRow.createCell(2);
            bodyCell.setCellValue(ds.getTotalHour());
-
+           
            // 일매출 표시
            bodyCell = bodyRow.createCell(3);
            bodyCell.setCellValue(ds.getRevenue());

@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DailySale implements Serializable{
 	String saleNo;
-	Date date;
+	String date;
 	int totalHour;
 	long revenue;
 	

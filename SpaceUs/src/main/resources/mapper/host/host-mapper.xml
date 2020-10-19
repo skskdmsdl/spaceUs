@@ -51,16 +51,24 @@
   </resultMap>
   
   <select id="selectSettlementList" resultMap= "settlementMap">
-	select 
-		D.daily_sale_no,
-		D.settlement_date,
-		D.daily_total_hour,
-		D.daily_revenue		
-	from 
-		daily_sale D join space S
-	    on D.space_no=S.space_no
-	where 
-		S.member_email=#{hostId}
+	SELECT TO_CHAR(b.dt, 'YY-MM-DD') AS settlement_date
+     , NVL(daily_revenue, 0) daily_revenue, NVL(a.daily_total_hour, 0) as daily_total_hour
+  FROM (   SELECT TO_CHAR(D.settlement_date, 'YY-MM-DD') AS settlement_date,
+               S.member_email, D.daily_revenue, d.daily_total_hour
+           FROM daily_sale D join space S on S.space_no=D.space_no 
+          WHERE D.settlement_date BETWEEN TO_DATE(sysdate-30, 'YY-MM-DD')
+                             AND TO_DATE(sysdate, 'YY-MM-DD')
+                AND S.member_email=#{hostId}
+        ) a
+      , ( SELECT TO_DATE(sysdate-30,'YY-MM-DD') + LEVEL - 1 AS dt
+            FROM dual 
+          <![CDATA[
+         CONNECT BY LEVEL <= ( TO_DATE(sysdate,'YY-MM-DD') 
+                            - TO_DATE(sysdate-30,'YY-MM-DD')]]> + 1)
+        ) b
+  WHERE b.dt = a.settlement_date(+)
+  ORDER BY b.dt
+  
   </select>
   
   
