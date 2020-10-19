@@ -150,10 +150,6 @@ $(function(){
                             <h4>기획전 소제목</h4>
                             <input type="text" name="exSubtitle" id="exSubtitle">
                         </div>
-                        <!-- <div class="pf-title">
-                            <h4>태그<span class="text-danger">*</span></h4>
-                            <input type="text" name="tag" id="tag" required>
-                        </div> -->
                         <div class="pf-feature-price">
                                <h4>공간 태그<span class="text-danger">*</span></h4>
                                
@@ -167,7 +163,7 @@ $(function(){
 	                            </div>
                             </div>
 	                        <span id="tags" style="cursor: pointer;"></span>
-                           </div>
+                         </div>
                         
                         <div class="pf-title">
                             <h4 data-toggle="modal" data-target="#imageModal">이미지 등록</h4>
