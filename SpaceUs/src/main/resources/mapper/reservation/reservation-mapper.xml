@@ -193,6 +193,22 @@
 			rev_cancle=rev_comple
 	</select>
 
+<select id="unselectableList" resultMap="unselectableMap">
+        select 
+        	d_day, start_hour, end_hour
+		from 
+			reservation
+		where 
+			space_no = #{spaceNo}
+		    and
+		    rev_cancle = rev_comple
+	</select>
+	
+	<resultMap type="reservation" id="unselectableMap">
+		<result column="d_day" property="day"/>
+		<result column="rev_date" property="revDate"/>
+		<result column="start_hour" property="startHour"/>
+	</resultMap>
 </mapper>
 
 

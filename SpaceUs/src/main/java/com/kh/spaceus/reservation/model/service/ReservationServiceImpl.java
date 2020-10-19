@@ -9,6 +9,7 @@ import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.reservation.model.dao.ReservationDAO;
 import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
+import com.kh.spaceus.reservation.model.vo.Unselectable;
 
 @Service
 public class ReservationServiceImpl implements ReservationService{
@@ -95,6 +96,11 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public int confirmReservation(String spaceNo) {
 		return reservationDAO.confirmReservation(spaceNo);
+	}
+
+	@Override
+	public List<Unselectable> unselectableList(String spaceNo) {
+		return reservationDAO.unselectableList(spaceNo);
 	}
 
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
+import com.kh.spaceus.reservation.model.vo.Unselectable;
 public interface ReservationDAO {
 
 	List<ReservationAvail> selectListAvail(String spaceNo);
@@ -37,6 +38,8 @@ public interface ReservationDAO {
 	int selectTotalCnt(String memberEmail);
 
 	int confirmReservation(String spaceNo);
+
+	List<Unselectable> unselectableList(String spaceNo);
 
 
 

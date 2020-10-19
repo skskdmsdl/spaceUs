@@ -37,6 +37,7 @@ import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
+import com.kh.spaceus.reservation.model.vo.Unselectable;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Option;
@@ -401,6 +402,9 @@ public class SpaceController {
 		//spaceNo로 예약가능한 날짜 가져오기
 		List<ReservationAvail> availList = reservationService.selectListAvail(spaceNo);
 
+		//예약된 날짜와 시간
+		List<Unselectable> unselectableList = reservationService.unselectableList(spaceNo);
+		
 		//쿠폰 보내기
 		List<Coupon> couponList = memberService.selectCouponList(principal.getName());
 		for(int i=0; i<couponList.size(); i++) {
@@ -419,6 +423,7 @@ public class SpaceController {
 		mav.addObject("member",member);
 		mav.addObject("optionList",optionList);
 		mav.addObject("availList",availList);
+		mav.addObject("unselectableList",unselectableList);
 		mav.addObject("couponList",couponList);
 		
 		mav.setViewName("space/reserveSpace");

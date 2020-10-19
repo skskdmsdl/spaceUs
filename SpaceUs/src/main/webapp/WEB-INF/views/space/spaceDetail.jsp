@@ -319,13 +319,21 @@ function naverShare() {
 						<div class="tab-pane fade show active" id="detail-description" role="tabpanel"
 							aria-labelledby="detail-manufacturer-tab" style="padding-top: 50px;">
 							<div class="row pb-5" style="border-bottom: 1px solid #ddd;">
-								<c:forEach items="${optionList}" var="info" varStatus="vs">
-								<div class="col-md-4">
-									<ul class="features">
-										<li class="check"><span class="ion-ios-checkmark"></span>${ info.optionName }</li>
-									</ul>
-								</div>
-								</c:forEach>
+								<c:choose>
+									<c:when test="${ empty optionList }">
+										<p style="font-size: 16px; padding-left:100px;">
+			                              	옵션 없음</p>
+		                             </c:when>
+		                             <c:otherwise>
+										<c:forEach items="${optionList}" var="info" varStatus="vs">
+										<div class="col-md-4">
+											<ul class="features">
+												<li class="check"><span class="ion-ios-checkmark"></span>${ info.optionName }</li>
+											</ul>
+										</div>
+										</c:forEach>									      		                             
+		                             </c:otherwise>
+	                           </c:choose>
 							</div>	
 							<!-- 공간설명 시작-->
 							<div class="col-11" style="margin-bottom:70px; padding-left:80px;">

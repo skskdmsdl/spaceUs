@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
+import com.kh.spaceus.reservation.model.vo.Unselectable;
 import com.kh.spaceus.space.model.vo.Space;
 import com.kh.spaceus.space.model.vo.Tag;
 
@@ -101,6 +102,11 @@ public class ReservationDAOImpl implements ReservationDAO{
 	@Override
 	public int confirmReservation(String spaceNo) {
 		return sqlSession.selectOne("reservation.confirmReservation", spaceNo);
+	}
+
+	@Override
+	public List<Unselectable> unselectableList(String spaceNo) {
+		return sqlSession.selectList("reservation.unselectableList", spaceNo);
 	}
 
 	
