@@ -55,6 +55,27 @@
              ) G
 	</select>
 	
+	<!-- sorted broupBoard List Cnt -->
+	<select id="selectSortedListCnt" resultType="_int">
+	select 
+  			count(*)
+        from
+            (
+             select 
+             	* 
+             from 
+             	board join group_board using(board_no) 
+             <where>
+   				<if test="boardRef != null and boardRef !=''">
+   					board_no = #{boardNo}
+   				</if>
+   				<if test="boardRef.equals('')">
+	             	board_ref = #{boardNo}          	
+	             </if>	
+             </where> 
+             ) G
+	</select>
+	
 	<!-- total Baord Cnt -->
 	<select id="selectTotalCnt" resultType="_int">
 		select

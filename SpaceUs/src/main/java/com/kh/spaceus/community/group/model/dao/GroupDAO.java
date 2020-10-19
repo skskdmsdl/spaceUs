@@ -15,7 +15,9 @@ public interface GroupDAO {
 
 	List<GroupBoard> selectListGroupBoard(int limit, int offset);
 
-	List<GroupBoard> selectSortedListGroupBoard(Map<String, String> listMap);
+	List<GroupBoard> selectSortedListGroupBoard(Map<String, String> listMap, int limit, int offset);
+
+	int selectSortedListCnt(Map<String, String> listMap);
 
 	int selectTotalCnt();
 
@@ -52,5 +54,7 @@ public interface GroupDAO {
 	List<CmtReport> selectReport(); 
 
 	int updateReportCnt(String groupBoardCommentNo);
+
+	
 
 }

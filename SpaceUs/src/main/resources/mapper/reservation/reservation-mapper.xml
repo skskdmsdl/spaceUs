@@ -182,6 +182,16 @@
 			member_email = #{memberEmail}
 	</select>
 	
+	<select id="confirmReservation" resultType="_int">
+		select
+			count(*)
+		from 
+			reservation
+		where 
+			space_no = #{spaceNo}
+			AND
+			rev_cancle=rev_comple
+	</select>
 
 </mapper>
 

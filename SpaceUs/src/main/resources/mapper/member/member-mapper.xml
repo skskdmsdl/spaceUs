@@ -41,6 +41,7 @@
 			#{ memberPhone },
 			#{ birthDay },
 			default,
+			default,
 			default
 		)
 		into auth values (
@@ -184,6 +185,10 @@
 	delete from coupon where to_char(coupon_deadline) = to_date(sysdate, 'yy/MM/dd')
 </delete>
 
+<delete id="deleteCouponNo">
+	delete from coupon where coupon_no = #{couponNo}
+</delete>
+
 <select id="selectCouponList" resultMap="couponMap">
 	select
 		* 
@@ -254,5 +259,22 @@
 
 </select>
 
+<select id="selectWishTotal" resultType="_int">
+	select
+		count(*)
+	from 
+		wish
+	where 
+		member_email = #{email}
+</select>
+
+<update id="updateUser">
+		update
+			auth
+		set
+			authority = 'ROLE_USER'
+		where
+			member_email = #{memberEmail}
+</update>
 
 </mapper>

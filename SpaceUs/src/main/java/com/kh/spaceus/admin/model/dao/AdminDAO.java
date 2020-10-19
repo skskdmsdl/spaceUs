@@ -16,13 +16,21 @@ import com.kh.spaceus.space.model.vo.Space;
 
 public interface AdminDAO {
 
-	List<ManageMember> selectList();
+	List<ManageMember> selectList(int limit, int offset);
+	
+	int selectTotalCnt();
+	
+	List<ManageMember> findUserIdList(String searchKeyword, int limit, int offset);
 
-	List<ManageMember> findUserIdList(String searchKeyword);
-
-	List<ManageMember> findUserNameList(String searchKeyword);
-
-	List<ManageMember> findUserRoleList(String searchKeyword);
+	List<ManageMember> findUserNameList(String searchKeyword, int limit, int offset);
+	
+	int selectUserIdCnt(String searchKeyword);
+	
+	List<ManageMember> findUserRoleList(String searchKeyword, int limit, int offset);
+	
+	int selectUserRoleCnt(String searchKeyword);
+	
+	int selectUserNameCnt(String searchKeyword);
 
 	List<ManageBlackList> selectGroupList();
 

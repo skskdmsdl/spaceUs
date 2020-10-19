@@ -63,7 +63,7 @@ public interface SpaceService {
 
 	String selectCateName(String spaceNo);
 
-	List<Space> selectReviewList(String email);
+	List<Space> selectReviewList(String memberEmail);
 
 	int updateReview(Review review);
 
@@ -111,6 +111,8 @@ public interface SpaceService {
 	int updateStatus(String spaceNo, String status);
 
 	int selectHostReviewTotalContents(String spaceNo);
+
+	int deleteSpace(String spaceNo);
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

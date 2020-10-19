@@ -371,7 +371,11 @@ function naverShare() {
 							</div>
 						</div>
 						<!-- contact 끝 -->
-
+<input type="hidden" id="spaceCon" value="${ space.content }" />
+<input type="hidden" id="spaceAddr" value="${ space.address }" />
+<input type="hidden" id="spaceTitle" value="${ space.spaceName }" />
+						
+	
 						
 						
 
@@ -1014,8 +1018,8 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 //주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-//주소로 좌표를 검색합니다
-geocoder.addressSearch(address, function(result, status) {
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch($("#spaceAddr").val().substr(9), function(result, status) {
 
 // 정상적으로 검색이 완료됐으면 
  if (status === kakao.maps.services.Status.OK) {
@@ -1048,7 +1052,7 @@ geocoder.addressSearch(address, function(result, status) {
     	      addressTitle: '${ space.spaceName }',
     	      content: {
     	        title: '${ space.spaceName }',
-    	        description: '1222',
+    	        description: $('#spaceCon').val(),
     	        imageUrl: 'https://moplqfgeemqv2103108.cdn.ntruss.com/service/158321359_3969307adb111d972a661a99fd3629af.jpg?type=m&w=900&h=900&autorotate=true&quality=90',
     	        link: {
     	          mobileWebUrl: 'https://www.spacecloud.kr/',
@@ -1156,6 +1160,7 @@ function ask(){
 
 //예약하기
 function rvSubmit(){
+	alert($("#spaceAddr").val().substr(9));
    	if($("#memberId").val()){
 		$("#reserveFrm").attr("action", "${ pageContext.request.contextPath }/space/reserveSpace.do")
 		.submit();

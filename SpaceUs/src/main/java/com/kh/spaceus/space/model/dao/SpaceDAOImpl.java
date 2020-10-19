@@ -155,8 +155,8 @@ public class SpaceDAOImpl implements SpaceDAO{
 	}
 
 	@Override
-	public List<Space> selectReviewList(String email) {
-		return sqlSession.selectList("space.selectReviewList", email);
+	public List<Space> selectReviewList(String memberEmail) {
+		return sqlSession.selectList("space.selectReviewList", memberEmail);
 	}
 
 	@Override
@@ -276,6 +276,11 @@ public class SpaceDAOImpl implements SpaceDAO{
 	@Override
 	public int selectHostReviewTotalContents(String spaceNo) {
 		return sqlSession.selectOne("space.selectHostReviewTotalContents", spaceNo);
+	}
+
+	@Override
+	public int deleteSpace(String spaceNo) {
+		return sqlSession.delete("space.deleteSpace", spaceNo);
 	}
 
 }

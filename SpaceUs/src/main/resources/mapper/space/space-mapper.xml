@@ -57,7 +57,7 @@
 			business_license = #{ businessNo }
 	</select>
 	<resultMap type="space" id="spaceMap">
-		<id column="space_no" property="spaceNo"/>
+		<id column="space_no" property="spaceNo"  jdbcType="VARCHAR" javaType="string"/>
 		<result column="category_no" property="categoryNo"/>
 		<result column="member_email" property="memberEmail"/>
 		<result column="business_license" property="businessNo"/>
@@ -75,7 +75,7 @@
 		<result column="content" property="content"/>
 		<result column="bank" property="bank"/>
 		<result column="renamed_filename" property="rname"/>
-		<result column="rev_no" property="revNo"/>
+		<result column="rev_no" property="revNo"  jdbcType="VARCHAR" javaType="string"/>
 		<result column="review_no" property="reviewNo"/>
 		<result column="star_rating" property="starRating"/>
 		<result column="review_content" property="reviewContent"/>		
@@ -310,7 +310,7 @@ select
 		          D.renamed_filename	
 			from
 				space S join (SELECT * FROM space_image S
-                    WHERE S.ROWID IN (SELECT MAX(ROWID)
+                    WHERE S.ROWID IN (SELECT MIN(ROWID)
                     FROM space_image
                     GROUP BY space_no)) D on S.space_no=D.space_no
 			where 
@@ -410,7 +410,7 @@ select
 		)
 	</insert>
 	
-	<select id="selectReviewList" resultMap="spaceMap">
+	<select id="selectReviewList" resultMap="spaceReviewMap">
 		select SS.* from(
 			select  row_number() over(partition by rev_no order by rev_date ) as RNUM, S.*
 			from(
@@ -419,12 +419,38 @@ select
 			    from
 			        space join space_image using (space_no) left outer join reservation using(space_no) left outer join review using(rev_no)
 			    where 
-			         reservation.member_email= #{email} ) S ) SS
-	     where RNUM =1 and rev_comple=1
+			         reservation.member_email= #{memberEmail} ) S ) SS
+	     where rev_comple=1
 	     order by SS.rev_date desc
 	</select>
+	<resultMap type="space" id="spaceReviewMap">
+		<result column="space_no" property="spaceNo" />
+		<result column="category_no" property="categoryNo"/>
+		<result column="member_email" property="memberEmail"/>
+		<result column="business_license" property="businessNo"/>
+		<result column="space_name" property="spaceName"/>
+		<result column="address" property="address"/>
+		<result column="space_phone" property="spacePhone"/>
+		<result column="hourly_price" property="hourlyPrice"/>
+		<result column="star_avg" property="starAvg"/>
+		<result column="enroll_date" property="enrollDate"/>
+		<result column="modification_date" property="modificationDate"/>
+		<result column="views" property="views"/>
+		<result column="like_cnt" property="likeCnt"/>
+		<result column="status" property="status"/>
+		<result column="account" property="account"/>
+		<result column="content" property="content"/>
+		<result column="bank" property="bank"/>
+		<result column="renamed_filename" property="rname"/>
+		<result column="rev_no" property="revNo"  />
+		<result column="review_no" property="reviewNo"/>
+		<result column="star_rating" property="starRating"/>
+		<result column="review_content" property="reviewContent"/>		
+		<result column="review_comment" property="reviewComment"/>		
+		<result column="review_cnt" property="reviewCnt"/>		
+	</resultMap>
 	
-	<select id="selectReviewPossible" resultMap="spaceMap">
+	<select id="selectReviewPossible" resultMap="spaceReviewMap">
 		select SS.* from(
 		    select  row_number() over(partition by rev_no order by rev_date ) as RNUM, S.*
 		    from(
@@ -438,7 +464,7 @@ select
 		 order by SS.rev_date desc
 	</select>
 	
-	<select id="selectReviewComplete" resultMap="spaceMap">
+	<select id="selectReviewComplete" resultMap="spaceReviewMap">
 		select SS.* from(
 		    select  row_number() over(partition by rev_no order by rev_date ) as RNUM, S.*
 		    from(
@@ -710,6 +736,13 @@ select
 			space_no = #{ spaceNo }
 	</select>
 
+	<delete id="deleteSpace">
+		delete
+		from
+			space
+		where
+			space_no=#{spaceNo}
+	</delete>
 	
 </mapper>
 
