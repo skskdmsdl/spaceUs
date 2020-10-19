@@ -444,7 +444,8 @@ public class MemberController {
 	@ResponseBody
 	public HashMap<String, String> sendSms(HttpServletRequest request, RedirectAttributes redirectAttr,
 			@RequestParam("phone") String phone) throws Exception {
-
+		System.out.println("ssssssssssssssss");
+		
 		String api_key = "NCSCE6UYF5ENLSNF";
 		String api_secret = "WBPW8N0BWEWOGVYGYMNKNGQEB6QFPZZH";
 		String phoneChk = RandomStringUtils.randomNumeric(4);
@@ -452,6 +453,7 @@ public class MemberController {
 		Message coolsms = new Message(api_key, api_secret);
 
 		Member member = memberService.selectOnePhone(phone);
+		
 		log.info("phoneChk = {}", phoneChk);
 		log.info("member = {}", member);
 
