@@ -55,6 +55,7 @@
 	  join tag using(tag_no)
 	where
 	  tag_name = '#'||#{tag}
+	   and status='O'
 </select>
 
 <select id="selectOneByTag" resultMap="exhibitionMap">

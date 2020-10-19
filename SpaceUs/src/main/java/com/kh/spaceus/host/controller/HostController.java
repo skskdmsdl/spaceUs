@@ -70,7 +70,7 @@ public class HostController {
 	public ModelAndView settlementDetails (Principal principal, ModelAndView mav) {
 		List<DailySale> list = hostService.selectSettlementList(principal.getName());
 		
-		mav.addObject(list);
+		mav.addObject("list", list);
 		mav.setViewName("host/settlementDetails");
 		
 		return mav;
