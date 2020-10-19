@@ -137,9 +137,22 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 						      </td>
 							</tr>
 						</table>
-						
-						
 						<table id="tbl-reserve4" class="table table-striped table-hover">
+	                        <div class="section-title sidebar-title-b mt-5">
+	                            <h6>쿠폰사용</h6>
+	                        </div>
+						    <tr>
+						    	<td>
+							      	<select size="1" name="coupon" id="coupon" onchange="discount()">
+										<option id="no" value="no" select>쿠폰 없음</option>
+										<c:forEach items="${couponList}" var="info">
+											<option id="${info.no}" value="${info.no}">${info.type}  <fmt:formatNumber value="${info.discount}" type="percent"/>  [만료일 : ${info.deadLine}]</option>
+										</c:forEach>
+									</select>
+						      	</td>
+							</tr>
+						</table>
+						<table id="tbl-reserve5" class="table table-striped table-hover">
 	                        <div class="section-title sidebar-title-b mt-5">
 	                            <h6>서비스 동의</h6>
 	                        </div>
@@ -186,8 +199,8 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                         </div>
 	                         <div class="filter-input">
 	                             <p>예약 시간</p>
-	                             <input type="text" name="startHour" style="width:45%;" readonly> ~ 
-	                             <input type="text" name="endHour" style="width:45%;" readonly>
+	                             <input type="text" name="startHour" value="" style="width:45%;" readonly> ~ 
+	                             <input type="text" name="endHour" value="" style="width:45%;" readonly>
 	                         </div>
 	                         <div class="filter-input">
 	                             <p>결제 방법</p>
@@ -227,6 +240,9 @@ $(function(){
     today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
     console.log(today);
 
+    for(var i=0; i<24; i++){
+		$("#"+i).addClass("nochoose");
+	}
 });
 
 //예약 날짜 클릭이벤트
@@ -244,7 +260,7 @@ function selectDay(val){
 		
 		resetHour();
 		for(var i=0; i<24; i++){
-			$("#"+i).removeClass("nochoose");
+			$("#"+i).addClass("nochoose");
 		}
 		return;
 	}
@@ -252,13 +268,22 @@ function selectDay(val){
 	//날짜 선택
 	var day = week[date.getDay()];
 	index = avail.findIndex(obj => obj.day == day);
-
+	
+	if(index == -1){
+		alert("예약가능한 시간이 없는 요일입니다. 다른 요일을 선택해주세요.");
+		$("#D-day").val('');
+	}
+	
 	//가능시간 표시
 	for(var i=0; i<24; i++){
-		if(i >= avail[index].start && i <= avail[index].end)
-			$("#"+i).removeClass("nochoose");
-		else
+		if(index == -1)
 			$("#"+i).addClass("nochoose");
+		else{
+			if(i >= avail[index].start && i <= avail[index].end)
+				$("#"+i).removeClass("nochoose");
+			else
+				$("#"+i).addClass("nochoose");
+		}
 	}
 	resetHour();
 
@@ -328,12 +353,19 @@ function resetHour(){
 	$("[name=endHour]").val('');
 	$("[name=pay]").val('');
 	$("[name=totalPrice]").val('');
+	$("input:radio[name='selectPay']").removeAttr("checked");
 }
 
 </script>
 <script>
 $("[name='selectPay']").change(function(){
-	checkTime();
+	if($("[name=endHour]").val() == ""){
+		$("input:radio[name='selectPay']").removeAttr("checked");
+		$("[name=pay]").val('');
+		alert("시간을 설정해주세요");
+		$('html, body').animate({scrollTop : $("#D-day").offset().top}, 100);
+		return;
+	}
 	
 	$("[name=pay]").val($("[name='selectPay']:checked").val());
 
@@ -343,13 +375,29 @@ $("[name='selectPay']").change(function(){
 	$("[name=totalPrice]").val(totalPrice);
 });
 
-function checkTime(){
-	if($("[name=endHour]").val() == ""){
-		alert("시간을 설정해주세요");
-		$('html, body').animate({scrollTop : $("#D-day").offset().top}, 100);
-		return false;
+function discount(){
+	if(!$("input:radio[name='selectPay']").is(':checked')){
+		$("#coupon").val("no").prop("selected", true);
+		alert("결제방법을 선택해주세요");
+		document.getElementById("pay").focus();
+		return;
 	}
-}
+
+	var totalPrice = $("[name=totalPrice]").val();
+	var coupon = $("select[name=coupon]").val();
+	if(coupon == 'no')
+		return;
+	else{
+		<c:forEach items="${couponList}" var="info">
+			if(coupon == "${info.no}")
+				discount = ${info.discount};
+		</c:forEach>
+	}
+
+	totalPrice *= (1-discount);
+	
+	$("[name=totalPrice]").val(totalPrice);
+};
 </script>
 <script>
 $("#sub").on("click", function(){
@@ -360,7 +408,11 @@ $("#sub").on("click", function(){
 		return false;
 	}
 
-	checkTime();
+	if($("[name=endHour]").val() == ""){
+		alert("시간을 설정해주세요");
+		$('html, body').animate({scrollTop : $("#D-day").offset().top}, 100);
+		return false;
+	}
 
 	if($("[name=pay]").val() == ""){
 		alert("결제 방법을 선택해주세요.");
@@ -421,6 +473,7 @@ function iamport(){
 	    document.insertReservation.submit();
 	});
 }
+
 </script>
 <script>$(function () { memberId();});</script>
 

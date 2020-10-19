@@ -643,7 +643,12 @@ create sequence seq_coupon_no;
 
 select * from coupon;
 
+insert into coupon
+values('C300','come','seung@naver.com',0.3,sysdate,'2020/11/19',1);
+insert into coupon
+values('C301','btd','seung@naver.com',0.3,sysdate,'2020/11/19',1);
 
+commit;
 
 
 -----------------------------
@@ -774,3 +779,12 @@ select
       and rev_cancle = 0  
    group by 
       space_no;
+select *
+from 
+			reservation;
+select
+			count(*)
+		from 
+			reservation
+		where 
+			space_no = 'space121' and rev_cancle=rev_comple;

@@ -92,6 +92,11 @@ public class ReservationServiceImpl implements ReservationService{
 		return reservationDAO.selectTotalCnt(memberEmail);
 	}
 
+	@Override
+	public int confirmReservation(String spaceNo) {
+		return reservationDAO.confirmReservation(spaceNo);
+	}
+
 	
 	
 	

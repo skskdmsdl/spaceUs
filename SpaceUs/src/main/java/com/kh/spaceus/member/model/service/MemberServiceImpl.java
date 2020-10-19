@@ -116,5 +116,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectWishList(email);
 	}
 
+	@Override
+	public int updateUser(String memberEmail) {
+		return memberDAO.updatePwd(memberEmail);
+	}
+
 
 }

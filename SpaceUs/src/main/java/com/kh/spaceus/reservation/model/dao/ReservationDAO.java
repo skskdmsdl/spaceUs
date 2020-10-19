@@ -36,6 +36,8 @@ public interface ReservationDAO {
 
 	int selectTotalCnt(String memberEmail);
 
+	int confirmReservation(String spaceNo);
+
 
 
 	

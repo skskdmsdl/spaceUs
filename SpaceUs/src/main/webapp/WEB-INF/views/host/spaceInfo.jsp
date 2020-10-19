@@ -458,7 +458,7 @@ $("#spaceFrm").submit(function(){
 <script>
 //탈퇴
 $("#deleteBtn").click(function(){
-	 if(!confirm("정말로 탈퇴하시겠습니까?")) return;
+	 if(!confirm("정말로 공간을 삭제하시겠습니까?")) return;
 	 $("#deleteFrm").submit();
 });
 </script>

@@ -254,5 +254,13 @@
 
 </select>
 
+<update id="updateUser">
+		update
+			auth
+		set
+			authority = 'ROLE_USER'
+		where
+			member_email = #{memberEmail}
+</update>
 
 </mapper>
