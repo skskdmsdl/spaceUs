@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -29,10 +28,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.host.model.service.HostService;
 import com.kh.spaceus.member.model.service.MemberService;
+import com.kh.spaceus.member.model.vo.Coupon;
 import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.reservation.model.service.ReservationService;
-import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Attachment;
@@ -391,13 +390,10 @@ public class SpaceController {
 
 	// 예약하기버튼
 	@RequestMapping("/reserveSpace.do")
-	public ModelAndView reserveSpace(Model model,
+	public ModelAndView reserveSpace(
 							   ModelAndView mav,
 							   @RequestParam("spaceNo") String spaceNo,
 							   Principal principal) {
-		//log.debug("spaceNo= {}",spaceNo);
-		//log.debug("spaceName= {}",spaceName);
-		//System.out.println("memberId = "+memberId);
 		Space space = spaceService.selectOneSpace(spaceNo);
 		Member member = memberService.selectOneMember(principal.getName());
 		
@@ -407,11 +403,25 @@ public class SpaceController {
 		//spaceNo로 예약가능한 날짜 가져오기
 		List<ReservationAvail> availList = reservationService.selectListAvail(spaceNo);
 
-		//model.addAttribute("spaceName", spaceName);
+		//쿠폰 보내기
+		List<Coupon> couponList = memberService.selectCouponList(principal.getName());
+		for(int i=0; i<couponList.size(); i++) {
+			if(couponList == null)
+				break;
+			
+			if(couponList.get(i).getType().equals("come"))
+				couponList.get(i).setType("회원가입 축하 쿠폰");
+			else if(couponList.get(i).getType().equals("btd"))
+				couponList.get(i).setType("생일 축하 쿠폰");
+			else
+				couponList.get(i).setType("기타");
+		}
+		
 		mav.addObject("space",space);
 		mav.addObject("member",member);
 		mav.addObject("optionList",optionList);
 		mav.addObject("availList",availList);
+		mav.addObject("couponList",couponList);
 		
 		mav.setViewName("space/reserveSpace");
 		return mav;
@@ -514,25 +524,28 @@ public class SpaceController {
 								Principal principal,
 								RedirectAttributes redirectAttr) {
 		//완료되지 않은 예약이 있으면 삭제못하게 막기
-		System.out.println("===========================");
-		System.out.println("===========================");
-		System.out.println("===========================");
-		System.out.println("===========================");
-		System.out.println("===========================");
-		System.out.println("===========================");
-		System.out.println("===========================");
-		System.out.println(spaceNo+ " : " + principal.getName());
+		//System.out.println(spaceNo+ " : " + principal.getName());
+		int remainder = reservationService.confirmReservation(spaceNo);
 		
-		/*
-		 * //삭제 int result = spaceService.deleteSpace(spaceNo);
-		 * 
-		 * //성공하면 호스트->유저로 바꾸기 if(result>0) { //권한변경
-		 * 
-		 * redirectAttr.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다."); } else
-		 * redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");
-		 */
+		if(remainder != 0) {
+			redirectAttr.addFlashAttribute("msg", "아직 예약이 있어 공간삭제가 불가능합니다.");
+			return "redirect:/host/spaceInfo.do";
+		}
 		
-		return "redirect:/";
+		 //삭제 
+		int result = spaceService.deleteSpace(spaceNo);
+		 
+		 //성공하면 호스트->유저로 바꾸기 
+		if(result>0) { 
+			//권한변경
+			int authResult = memberService.updateUser(principal.getName());
+			redirectAttr.addFlashAttribute("msg", "성공적으로 공간을 삭제했습니다.");
+			//SecurityContextHolder.clearContext();
+		 } else
+			 redirectAttr.addFlashAttribute("msg", "공간 삭제에 실패했습니다.");
+		 
+		
+		return "redirect:/member/memberProfile.do";
 
 	}
 	

@@ -49,4 +49,6 @@ public interface MemberService {
 
 	List<Wish> selectWishList(String email);
 
+	int updateUser(String memberEmail);
+
 }

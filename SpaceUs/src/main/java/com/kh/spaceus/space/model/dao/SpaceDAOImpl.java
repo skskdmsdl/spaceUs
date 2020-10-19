@@ -278,4 +278,9 @@ public class SpaceDAOImpl implements SpaceDAO{
 		return sqlSession.selectOne("space.selectHostReviewTotalContents", spaceNo);
 	}
 
+	@Override
+	public int deleteSpace(String spaceNo) {
+		return sqlSession.delete("space.deleteSpace", spaceNo);
+	}
+
 }

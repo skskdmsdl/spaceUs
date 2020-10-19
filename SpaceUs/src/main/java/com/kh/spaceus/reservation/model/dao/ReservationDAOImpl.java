@@ -98,6 +98,11 @@ public class ReservationDAOImpl implements ReservationDAO{
 		return sqlSession.selectOne("reservation.selectTotalCnt", memberEmail);
 	}
 
+	@Override
+	public int confirmReservation(String spaceNo) {
+		return sqlSession.selectOne("reservation.confirmReservation", spaceNo);
+	}
+
 	
 	
 	

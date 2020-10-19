@@ -302,6 +302,11 @@ public class SpaceServiceImpl implements SpaceService{
 	public int selectHostReviewTotalContents(String spaceNo) {
 		return spaceDAO.selectHostReviewTotalContents(spaceNo);
 	}
+
+	@Override
+	public int deleteSpace(String spaceNo) {
+		return spaceDAO.deleteSpace(spaceNo);
+	}
 	
 	/*@Override
 	public List<Space> selectListSpaceCollection(String email) {
