@@ -79,6 +79,7 @@ from space S join(
 
 <!-- resultMap -->
 <resultMap type="SpaceList" id="SpaceListMap">
+</resultMap>
 
 <resultMap type="tag" id="tagMap">
 </resultMap>
