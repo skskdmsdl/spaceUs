@@ -203,9 +203,18 @@ public class MemberController {
 	@RequestMapping("/wishList.do")
 	public String wishList(Principal principal, Model model, HttpServletRequest request,
 			@RequestParam(defaultValue = "1", value = "cPage") int cPage) {
+		
+		final int limit = 12; 
+		int offset = (cPage - 1) * limit;
+		
 		List<Wish> list = memberService.selectWishList(principal.getName());
 		
+		int totalContents = memberService.selectWishTotal(principal.getName()); 
+		String url = request.getRequestURI() + "?";
+		String pageBar = Utils.getPageBarHtml(cPage, limit, totalContents, url);
+		
 		model.addAttribute("wlist", list);
+		model.addAttribute("pageBar", pageBar);
 		return "member/wishList";
 	}
 	
