@@ -254,11 +254,18 @@ public class SpaceController {
 		// 추천 공간 카테고리명
 		String cateName = spaceService.selectCateName(spaceNo);
 
+		
+		System.out.println("1."+space.getAddress());
+		System.out.println("2."+space.getSpaceName());
+		System.out.println("3."+space.getContent());
 		// option 조회
 		List<OptionList> optionList = spaceService.selectOptionList(spaceNo);
 		
 		model.addAttribute("spcList", spcList);
 		model.addAttribute("cateName", cateName);
+		model.addAttribute("spaceAddr", space.getAddress());
+		model.addAttribute("spaceName", space.getSpaceName());
+		model.addAttribute("spaceCon", space.getContent());
 
 		model.addAttribute("qlist", qlist);
 		model.addAttribute("qnaPaging", qnaPaging);

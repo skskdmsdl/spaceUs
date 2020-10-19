@@ -259,6 +259,15 @@
 
 </select>
 
+<select id="selectWishTotal" resultType="_int">
+	select
+		count(*)
+	from 
+		wish
+	where 
+		member_email = #{email}
+</select>
+
 <update id="updateUser">
 		update
 			auth

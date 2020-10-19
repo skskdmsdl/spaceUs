@@ -154,9 +154,18 @@ span > a:hover{
 							</c:otherwise>
 							</c:choose>	
 						  </div>
+						  
+							<div class="container">
+							                 <div class="container">
+							                 <nav class="mt-5" >
+												<ul class="justify-content-center pagination">${ pageBar }</ul>
+											</nav>
+							 			</div>
+							 			</div>
 						</div>
 						</div>
 					</div>
+					
 				</div>
                 <!-- 위시리스트 끝 -->
     </div>

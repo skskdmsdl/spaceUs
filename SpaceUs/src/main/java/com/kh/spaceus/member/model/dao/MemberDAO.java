@@ -50,6 +50,8 @@ public interface MemberDAO {
 
 	List<Wish> selectWishList(String email);
 
+	int selectWishTotal(String email);
+	
 	int updatePwd(String memberEmail);
 
 }

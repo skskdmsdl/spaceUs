@@ -15,9 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -199,10 +201,20 @@ public class MemberController {
 
 	// 위시리스트
 	@RequestMapping("/wishList.do")
-	public String wishList(Principal principal, Model model) {
+	public String wishList(Principal principal, Model model, HttpServletRequest request,
+			@RequestParam(defaultValue = "1", value = "cPage") int cPage) {
+		
+		final int limit = 12; 
+		int offset = (cPage - 1) * limit;
+		
 		List<Wish> list = memberService.selectWishList(principal.getName());
 		
+		int totalContents = memberService.selectWishTotal(principal.getName()); 
+		String url = request.getRequestURI() + "?";
+		String pageBar = Utils.getPageBarHtml(cPage, limit, totalContents, url);
+		
 		model.addAttribute("wlist", list);
+		model.addAttribute("pageBar", pageBar);
 		return "member/wishList";
 	}
 	
@@ -239,6 +251,7 @@ public class MemberController {
 		for(Space s : spaceList) {
 			System.out.println(s.getReviewComment());
 			System.out.println(s.getSpaceNo());
+			System.out.println(s.getRevNo());
 		}
 		
 		model.addAttribute("spaceList", spaceList);
@@ -300,6 +313,8 @@ public class MemberController {
 
 		return mav;
 	}
+	
+	
 
 //	// 로그인 폼
 //	@RequestMapping("/memberLoginForm.do")
@@ -636,6 +651,7 @@ public class MemberController {
 
 		return map;
 	}
+	
 	
 	//비밀번호 변경
 	@GetMapping("/updatePwd.do")
