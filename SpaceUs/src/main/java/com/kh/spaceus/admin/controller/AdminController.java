@@ -1,5 +1,6 @@
 package com.kh.spaceus.admin.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ import com.kh.spaceus.admin.model.vo.ManageRecruit;
 import com.kh.spaceus.admin.model.vo.ManageSpace;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
+import com.kh.spaceus.member.model.service.MemberService;
+import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.Space;
 
@@ -37,12 +40,17 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
+	@Autowired
+	private MemberService memberService;
+	
 	//회원관리 폼
 	@RequestMapping("/memberManage.do")
-	public String memberManage(Model model) {
+	public String memberManage(Model model, Principal principal) {
 		List<ManageMember> memberList = adminService.selectList();
 		log.info("memberList={}",memberList);
+		Member member = memberService.selectOneMember(principal.getName());
 		
+		model.addAttribute("member", member);
 		model.addAttribute("memberList", memberList);
 		return "admin/memberManage";
 	}
