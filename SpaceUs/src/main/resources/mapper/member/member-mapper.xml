@@ -185,6 +185,10 @@
 	delete from coupon where to_char(coupon_deadline) = to_date(sysdate, 'yy/MM/dd')
 </delete>
 
+<delete id="deleteCouponNo">
+	delete from coupon where coupon_no = #{couponNo}
+</delete>
+
 <select id="selectCouponList" resultMap="couponMap">
 	select
 		* 

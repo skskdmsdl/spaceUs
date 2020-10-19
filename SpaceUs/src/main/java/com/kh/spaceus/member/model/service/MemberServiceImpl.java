@@ -107,6 +107,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public int deleteCoupon(String couponNo) {
+		return memberDAO.deleteCoupon(couponNo);
+	}
+	
+	@Override
 	public List<Coupon> selectCouponList(String email) {
 		return memberDAO.selectCouponList(email);
 	}
@@ -120,6 +125,5 @@ public class MemberServiceImpl implements MemberService {
 	public int updateUser(String memberEmail) {
 		return memberDAO.updatePwd(memberEmail);
 	}
-
 
 }

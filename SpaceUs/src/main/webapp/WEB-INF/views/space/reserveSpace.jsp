@@ -132,8 +132,8 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 						      	<label>카드결제</label>
 						      </td>
 						      <td>
-						      	<input type="radio" name="selectPay" value="네이버페이" />
-						      	<label>네이버페이</label>
+						      	<input type="radio" name="selectPay" value="카카오페이" />
+						      	<label>카카오페이</label>
 						      </td>
 							</tr>
 						</table>
@@ -192,6 +192,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 							 <input type="hidden" name="memberEmail" value="${ member.memberEmail }">
 							 <input type="hidden" name="spaceNo" value="${ space.spaceNo }">
 							 <input type="hidden" name="revNo" value="">
+							 <input type="hidden" name="couponNo" value="">
 		
 	                         <div class="filter-input">
 	                             <p>예약 날짜</p>
@@ -305,7 +306,7 @@ $("#availableTime th").on("click", function(){
 
 	if(start == -1){
 		start = Number($(this).attr("id"));
-		console.log("start : "+ start);
+		//console.log("start : "+ start);
 		//셀 색 바꾸기
 	    $(this).addClass("bg-primary");
 	    return;
@@ -385,6 +386,7 @@ function discount(){
 
 	var totalPrice = $("[name=totalPrice]").val();
 	var coupon = $("select[name=coupon]").val();
+	$("[name=couponNo]").val(coupon);
 	if(coupon == 'no')
 		return;
 	else{
@@ -438,40 +440,84 @@ $("#sub").on("click", function(){
 });
 
 function iamport(){
-	//아임포트
-	var IMP = window.IMP; // 생략가능
-	IMP.init('imp84323249');
+	var pay = $("[name='selectPay']:checked").val();
+	
+	if("카드결제" == pay){
+		//아임포트
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp84323249');
+		
+		IMP.request_pay({
+		    pg : 'inicis', // version 1.1.0부터 지원.
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '${ space.spaceName }',
+		    amount : $("[name=totalPrice]").val(),
+		    buyer_email : '${ member.memberEmail }',
+		    buyer_name : '${ member.nickName }',
+		    buyer_tel : '${ member.memberPhone }'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
 
-	IMP.request_pay({
-	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '${ space.spaceName }',
-	    amount : $("[name=totalPrice]").val(),
-	    buyer_email : '${ member.memberEmail }',
-	    buyer_name : '${ member.nickName }',
-	    buyer_tel : '${ member.memberPhone }'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
-	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
+		        $("[name=revNo]").val(rsp.imp_uid);
+		        document.insertReservation.submit();
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    
+		    alert(msg);
+		    
+		    //나중에 지우기
+		    $("[name=revNo]").val(rsp.imp_uid);
+		    document.insertReservation.submit();
+		});
 
-	        $("[name=revNo]").val(rsp.imp_uid);
-	        document.insertReservation.submit();
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    
-	    alert(msg);
-	    
-	    //나중에 지우기
-	    $("[name=revNo]").val(rsp.imp_uid);
-	    document.insertReservation.submit();
-	});
+	}
+	else{
+
+		//아임포트
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp84323249');
+		
+		IMP.request_pay({
+		    pg : 'kakaopay',
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '${ space.spaceName }',
+		    amount : $("[name=totalPrice]").val(),
+		    buyer_email : '${ member.memberEmail }',
+		    buyer_name : '${ member.nickName }',
+		    buyer_tel : '${ member.memberPhone }'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+
+		        $("[name=revNo]").val(rsp.imp_uid);
+		        document.insertReservation.submit();
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    
+		    alert(msg);
+		    
+		    //나중에 지우기
+		    $("[name=revNo]").val(rsp.imp_uid);
+		    document.insertReservation.submit();
+		});
+
+	}
+
 }
 
 </script>

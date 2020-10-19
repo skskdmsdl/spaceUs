@@ -45,10 +45,11 @@ public interface MemberService {
 
 	int deleteCoupon();
 
+	int deleteCoupon(String couponNo);
+	
 	List<Coupon> selectCouponList(String email);
 
 	List<Wish> selectWishList(String email);
 
 	int updateUser(String memberEmail);
-
 }
