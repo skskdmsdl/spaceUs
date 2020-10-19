@@ -65,15 +65,18 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                             <table class="table">
 	                                     <tr>
 	                                         <th style="width:7%;">분류</th>
-	                                         <th><select class="nice-select sm-width small" name="boardNo" id="boardNo">
-								                    <option value="" selected hidden>분류선택</option>
-                           							 <c:forEach items="${boardList}" var="board">
-								                    	<option value="${board.boardNo}">
-								                    		${board.boardName eq "함께할 사람을 찾습니다" || board.boardName eq "공간을 같이 쓸 사람을 찾습니다" || board.boardName eq "소모임 자랑하기"?
-								                    			" " : board.boardName}
-								                    	</option>
-	                                  				</c:forEach>
-								                </select>
+	                                         <th>
+	                                           <select class="nice-select" name="boardNo" id="boardNo">
+                           							 	<c:forEach items="${boardList}" var="board">
+								                    		<option value="${board.boardNo}">${board.boardName}</option>
+	                                  					 </c:forEach>
+								                </select> 
+								               <!--  <select name="job">
+												    <option value="">직업선택</option>
+												    <option value="학생">학생</option>
+												    <option value="회사원">회사원</option>
+												    <option value="기타">기타</option>
+												</select> -->
 								             </th>
 	                                     </tr>
 	                                     <tr>

@@ -17,14 +17,20 @@ import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.Space;
 
 public interface AdminService {
+	
+	List<ManageMember> selectList(int limit, int offset);
+	
+	int selectTotalCnt();
 
-	List<ManageMember> selectList();
+	List<ManageMember> findUserIdList(int limit, int offset, String searchKeyword);
+	
+	int selectUserIdCnt(String searchKeyword);
 
-	List<ManageMember> findUserIdList(String searchKeyword);
+	List<ManageMember> findUserNameList(int limit, int offset, String searchKeyword);
 
-	List<ManageMember> findUserNameList(String searchKeyword);
-
-	List<ManageMember> findUserRoleList(String searchKeyword);
+	int selectUserNameCnt(String searchKeyword);
+	
+	List<ManageMember> findUserRoleList(int limit, int offset, String searchKeyword);
 
 	List<ManageBlackList> selectGroupList();
 
@@ -51,5 +57,7 @@ public interface AdminService {
 	int updatdStatus(Space param1);
 
 	int updateHost(Space param1);
+
+	int selectUserRoleCnt(String searchKeyword);
 
 }
