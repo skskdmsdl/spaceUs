@@ -292,9 +292,9 @@ public class HostController {
        
        //시트 열 너비 설정
        sheet.setColumnWidth(0, 1500);
-       sheet.setColumnWidth(0, 3000);
-       sheet.setColumnWidth(0, 3000);
-       sheet.setColumnWidth(0, 1500);
+       sheet.setColumnWidth(0, 4000);
+       sheet.setColumnWidth(0, 4000);
+       sheet.setColumnWidth(0, 2000);
        
        //cell 정렬 
        CellStyle mergeRowStyle1 = workbook.createCellStyle();
@@ -335,6 +335,7 @@ public class HostController {
        // 해당 행의 첫번째 열 셀 생성
        Cell headerCell = headerRow.createCell(0);
        headerCell.setCellValue("번호");
+       headerCell.setCellStyle(mergeRowStyle1);
        // 해당 행의 두번째 열 셀 생성
        headerCell = headerRow.createCell(1);
        headerCell.setCellValue("정산날짜");
@@ -342,9 +343,11 @@ public class HostController {
        // 해당 행의 세번째 열 셀 생성
        headerCell = headerRow.createCell(2);
        headerCell.setCellValue("총 이용시간");
+       headerCell.setCellStyle(mergeRowStyle1);
        // 해당 행의 네번째 열 셀 생성
        headerCell = headerRow.createCell(3);
        headerCell.setCellValue("일매출");
+       headerCell.setCellStyle(mergeRowStyle1);
        
        // 과일표 내용 행 및 셀 생성
        Row bodyRow = null;
