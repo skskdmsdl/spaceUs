@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -528,7 +532,7 @@ public class SpaceController {
 		
 		 //삭제 
 		int result = spaceService.deleteSpace(spaceNo);
-		 
+		
 		 //성공하면 호스트->유저로 바꾸기 
 		if(result>0) { 
 			//권한변경
@@ -537,7 +541,12 @@ public class SpaceController {
 			//SecurityContextHolder.clearContext();
 		 } else
 			 redirectAttr.addFlashAttribute("msg", "공간 삭제에 실패했습니다.");
-		 
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		List<GrantedAuthority> updatedAuthorities = new ArrayList<>();
+		updatedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
+		SecurityContextHolder.getContext().setAuthentication(newAuth);
 		
 		return "redirect:/member/memberProfile.do";
 
