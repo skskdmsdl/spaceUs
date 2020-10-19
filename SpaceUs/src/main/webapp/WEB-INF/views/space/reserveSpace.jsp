@@ -192,6 +192,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 							 <input type="hidden" name="memberEmail" value="${ member.memberEmail }">
 							 <input type="hidden" name="spaceNo" value="${ space.spaceNo }">
 							 <input type="hidden" name="revNo" value="">
+							 <input type="hidden" name="couponNo" value="">
 		
 	                         <div class="filter-input">
 	                             <p>예약 날짜</p>
@@ -385,6 +386,7 @@ function discount(){
 
 	var totalPrice = $("[name=totalPrice]").val();
 	var coupon = $("select[name=coupon]").val();
+	$("[name=couponNo]").val(coupon);
 	if(coupon == 'no')
 		return;
 	else{
