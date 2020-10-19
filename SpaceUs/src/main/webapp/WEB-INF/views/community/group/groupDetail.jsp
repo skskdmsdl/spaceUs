@@ -219,7 +219,7 @@ body{
 						                                    </c:if>
 					                                    	<script type="text/javascript">
 																function alertCommentBtn${cm.groupBoardCommentNo}(){
-																	alert("sss");
+																	//alert("sss");
 																}
 					                                    	
 						                                    	function menu${cm.groupBoardCommentNo}(){
@@ -239,7 +239,7 @@ body{
 				                                	<c:choose>
 				                                		<c:when test="${cm.reportCnt eq '0'}">
 				                                			<c:choose>
-					                                			<c:when test="${cm.secret eq '0' && cm.writer eq loginMember}">
+					                                			<c:when test="${cm.secret eq '0' || cm.writer eq loginMember}">
 					                                				<div style="border-bottom : .5px solid #d0d0d0; padding-bottom: 10px;">${cm.groupBoardContent}</div>
 					                                			</c:when>
 					                                			<c:otherwise>
@@ -410,7 +410,7 @@ body{
 															"&groupBoardCommentLevel="+groupBoardCommentLevel+
 															"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret+
 															"&groupBoardCommentNo="+groupBoardCommentNo;
-												alert(param1);
+												//alert(param1);
 												
 											$.ajax({
 													method:"post",
@@ -724,7 +724,7 @@ $("#inserCommentFrm #insertCmt").click(function(){
 
 $("[name=alertComment]").click(function(){
 	var groupBoardCommentNo = $(this).val();
-	alert(groupBoardCommentNo);
+	//alert(groupBoardCommentNo);
 	
 	$.ajax({
 		method:"post",

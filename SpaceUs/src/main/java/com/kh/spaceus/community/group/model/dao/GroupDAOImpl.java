@@ -30,10 +30,17 @@ public class GroupDAOImpl implements GroupDAO {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return session.selectList("board.selectListGroupBoard",null,rowBounds);
 	}	
+	
 
 	@Override
-	public List<GroupBoard> selectSortedListGroupBoard(Map<String, String> listMap) {
-		return session.selectList("board.selectSortedListGroupBoard", listMap);
+	public List<GroupBoard> selectSortedListGroupBoard(Map<String, String> listMap, int limit, int offset) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return session.selectList("board.selectSortedListGroupBoard", listMap, rowBounds);
+	}
+
+	@Override
+	public int selectSortedListCnt(Map<String, String> listMap) {
+		return session.selectOne("board.selectSortedListCnt", listMap);
 	}
 
 	@Override
