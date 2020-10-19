@@ -12,7 +12,17 @@
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/hostpageMenu.jsp" />
+<style>
+.subject:hover{
+	 color: #ffbc34 !important;
+}
+.subject{
+	font-family: "Font Awesome 5 Free";
+	font-size:16px;
+	font-weight: bold;
+}
 
+</style>
 
         <div class="page-wrapper">
             <div class="container-fluid">
@@ -27,7 +37,7 @@
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">호스트 센터</a></li>
-                                <li class="breadcrumb-item active">정산 내역</li>
+                                <li class="breadcrumb-item active">일간 정산 내역</li>
                             </ol>
                         </div>
                     </div>
@@ -35,54 +45,75 @@
 
             	<div class="ml-5 mr-5">
 	           		<div class="card p-5">
-	           			 <div class="card-body-wrapper">
-							<div class="btn-group">
-							
-							<form id="excelForm" name="excelForm" method="post" enctype="multipart/form-data">
-							    <button type="button" onclick="doExcelDownloadProcess()">정산내역 다운로드(.xlsx)</button>
-							</form>
-							<div id="result">
-							</div>			 
-							</div>
-						 </div>
-
+	           			
+								 <div class="col-md-10">
+		                           <h5 class="card-title">일간 정산 내역</h5>
+		                           <h6 class="card-subtitle">최근 30일간의 일일 정산 내역을 확인하세요</h6>
+		                         
+		                      	 </div>
+							  	<div>
+									<div class="btn-group" style="float:right; display:block; margin: 10px 20px;">
+											<form id="excelForm" name="excelForm" method="post" enctype="multipart/form-data">
+										    <button id="excelBtn" class="btn btn-primary" type="button" onclick="doExcelDownloadProcess()"><i class="fa fa-file-excel"></i> 정산내역 다운로드(.xlsx)</button>
+										    
+											</form>
+									</div>
+										<div id="result">
+										</div>			 
+							  </div>
+							 <div class="card-body-wrapper">
 	           			 	<div class="card-body">
-			                	<h5 class=" mb-1">일간 정산 내역</h5>
-			                	<table class="table table-hover">
+			                	<h5 class="mb-1 subject"><i class="fa fa-table"></i> 일매출 표</h5>
+			                	<table class="table table-hover" style="margin: 10px;">
 			                	   <thead class="thead-dark">
 				                	   <tr>
-				                		<th scope="col">공간 번호</th>
+				                		<th scope="col">번호</th>
 				                		<th scope="col">날짜</th>
 				                		<th scope="col">일 이용시간</th>
 				                		<th scope="col">일매출</th>
 				                	   </tr>
 			                	   </thead>
 			                	   <tbody>
+			                	  
+				         		   <c:if test="${ not empty list }">
+			                	   	<c:forEach items="${list }" var="item" varStatus="vs"> 
+			                	       
 				                	   <tr>
-				                		<th scope="row">S1001</th>
-				                		<td>2020/09/20</td>
-				                		<td>3</td>
-				                		<td>120,000</td>
+				                		<th scope="row">${vs.index+1}</th>
+				                		<td>${item.date }</td>
+				                		<td>${item.totalHour }</td>
+				                		<td>${item.revenue }</td>
 				                	   </tr>
-				                	   <tr>
-				                		<th scope="row">S1001</th>
-				                		<td>2020/09/21</td>
-				                		<td>2</td>
-				                		<td>80,000</td>
-				                	   </tr>					                   
+				                	   
+				                	</c:forEach>
+				                	</c:if>
+				                	<c:if test="${ empty list }"> 
+				                		<tr>
+				                		<td colspan="4" style="text-align:center;">
+				                		조회된 일 매출이 없습니다.
+				                		</td>
+				                		</tr>
+				                	</c:if>
+				               
+				                			                   
 				                  </tbody>               		
 			                	</table>
+	           					</div>
+	           					<div class="card-body-wrapper">
+	           			 	
+	           					<div class="card-body">
+	           						<div class="card-title">
+	            					<h5 class="mb-1 subject"><i class="fa fa-chart-bar"> 일 매출 추이</i></h5>
+	            					</div>
+						 			<canvas id="bar-chart">차트가 들어갈 자리</canvas>
+		                		</div>
 		                	</div>
-	           				<div class="card-body">
-	            				<h5 class="card-title">
-	            				월간 매출 추이 
-	            				</h5>
-				 		 	</div>
-						 	<canvas id="bar-chart">차트가 들어갈 자리</canvas>
 						</div>
 	 				</div>
+	 				</div>
  				</div>
-    </div>
+ 			</div>
+    
 
 
 <script src="${pageContext.request.contextPath }/resources/js/Chart.js"></script>
@@ -104,8 +135,8 @@
 
 	<script>
 	let canvas = document.getElementById("bar-chart").getContext('2d');
-	let ylabel= [0,0,0,0,0,9,9,9,9,9,10,10];
-	let xdata = [1,2,3,4,5,6,7,8,9,10,11,12];
+	let ylabel= [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	let xdata = [];
 
 	let barChart = new Chart(canvas, {
 		type:'bar',
