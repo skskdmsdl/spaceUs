@@ -1,20 +1,26 @@
 package com.kh.spaceus.host.controller;
 
-import java.io.OutputStream;
-import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.xssf.streaming.SXSSFCell;
-import org.apache.poi.xssf.streaming.SXSSFRow;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +28,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.host.model.service.HostService;
+import com.kh.spaceus.host.model.vo.DailySale;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.qna.model.vo.Qna;
@@ -61,9 +67,13 @@ public class HostController {
 	
 	//정산내역
 	@RequestMapping("/settlementDetails.do")
-	public String settlementDetails () {
+	public ModelAndView settlementDetails (Principal principal, ModelAndView mav) {
+		List<DailySale> list = hostService.selectSettlementList(principal.getName());
 		
-		return "host/settlementDetails";
+		mav.addObject(list);
+		mav.setViewName("host/settlementDetails");
+		
+		return mav;
 	}
 	
 	//공간정보
@@ -230,71 +240,126 @@ public class HostController {
 	}
 	
 	//정산 내역 엑셀 파일 다운로드
-	@RequestMapping(value="/excelDown.do", method = RequestMethod.POST)
-	public SXSSFWorkbook ExcelDownload(@RequestParam String hostId, HttpServletResponse response, Model model)
-			throws Exception {
-		
-		SXSSFWorkbook objWorkBook = new SXSSFWorkbook();
-		SXSSFSheet objSheet = null;
-		SXSSFRow objRow = null;
-		SXSSFCell objCell = null; // 셀 생성
-		
-		objSheet = objWorkBook.createSheet("일별 정산내역"); // 워크시트 생성
-		
-		List<HashMap<String,Object>> rowList = hostService.selectSettlementList(hostId);
-		
-		// 1행
-		objRow = objSheet.createRow(0);
-		objRow.setHeight((short) 0x150);
+	@RequestMapping(value = "/excelDown", method = RequestMethod.POST)
+    public String downloadExcelFile(Model model, Principal principal) {
+
+		List<DailySale> list = hostService.selectSettlementList(principal.getName());
+        
+		/* SXSSFWorkbook workbook = hostService.makeSheet(list); */
+		SXSSFWorkbook workbook = excelFileDownloadProcess(list);
+        
+        model.addAttribute("locale", Locale.KOREA);
+        model.addAttribute("workbook", workbook);
+        model.addAttribute("workbookName", "정산내역");
+        
+        return "excelDownloadView";
+    }
 	
-		objCell = objRow.createCell(0);
-		objCell.setCellValue("공간 번호");
-		
-		objCell = objRow.createCell(1);
-		objCell.setCellValue("공간 명");
-		
-		objCell = objRow.createCell(2);
-		objCell.setCellValue("총 이용시간");
-		
-		objCell = objRow.createCell(3);
-		objCell.setCellValue("정산 액수");
-		
-		int index = 1;
-		for (HashMap<String,Object> map : rowList) {
-			objRow = objSheet.createRow(index);
-			objRow.setHeight((short) 0x150);
-			
-			objCell = objRow.createCell(0);
-			objCell.setCellValue((String)map.get("spaceNo"));
-			
-			objCell = objRow.createCell(1);
-			objCell.setCellValue((String)map.get("spaceName"));
-			
-			objCell = objRow.createCell(2);
-			objCell.setCellValue((String)map.get("totalHour"));
-			
-			objCell = objRow.createCell(3);
-			objCell.setCellValue((String)map.get("revenue"));
-			index++;
-		}
-		
-		for (int i = 0; i < rowList.size(); i++) {
-			objSheet.autoSizeColumn(i);
-		}
-		
-		response.setContentType("Application/Msexcel");
-		response.setHeader("Content-Disposition", "ATTachment; Filename="
-				+ URLEncoder.encode(hostId, "UTF-8") + ".xlsx");
-		
-		OutputStream fileOut = response.getOutputStream();
-		objWorkBook.write(fileOut);
-		fileOut.close();
-		
-		response.getOutputStream().flush();
-		response.getOutputStream().close();
-		
-		return objWorkBook;
-	}
+
+	 /**
+    * 엑셀파일로 만들 리스트 생성
+    * @param names
+    * @param prices
+    * @param quantities
+    * @return 엑셀파일 리스트
+    */
+		/*
+		 * public List<DailySale> makeSheet(List<DailySale> list){ return
+		 * List<DailySale> list; }
+		 */
+   
+   /**
+    * 과일 리스트를 간단한 엑셀 워크북 객체로 생성
+    * @param list
+    * @return 생성된 워크북
+    */
+   public SXSSFWorkbook makeSimpleExcelWorkbook(List<DailySale> list) {
+       SXSSFWorkbook workbook = new SXSSFWorkbook();
+       
+       // 시트 생성
+       SXSSFSheet sheet = workbook.createSheet("정산내역");
+       
+       //시트 열 너비 설정
+       sheet.setColumnWidth(0, 1500);
+       sheet.setColumnWidth(0, 3000);
+       sheet.setColumnWidth(0, 3000);
+       sheet.setColumnWidth(0, 1500);
+       
+       //cell 정렬 
+       CellStyle mergeRowStyle1 = workbook.createCellStyle();
+       mergeRowStyle1.setAlignment(HorizontalAlignment.CENTER);
+       mergeRowStyle1.setVerticalAlignment(VerticalAlignment.CENTER);
+       //셀테두리 border
+       mergeRowStyle1.setBorderTop(BorderStyle.THICK);
+       mergeRowStyle1.setBorderLeft(BorderStyle.MEDIUM_DASH_DOT_DOT);
+       
+       mergeRowStyle1.setFillForegroundColor(IndexedColors.AQUA.getIndex());
+       mergeRowStyle1.setFillPattern(FillPatternType.BRICKS);
+       //foregroundcolor 대표색
+       XSSFCellStyle mergeRowStyle2 = (XSSFCellStyle) workbook.createCellStyle();
+       	
+       
+       //cell font 설정
+       Font headerFont = workbook.createFont();
+       headerFont.setFontName("나눔고딕");
+       headerFont.setFontHeight((short)1000);
+       headerFont.setColor(IndexedColors.GREEN.getIndex());
+       headerFont.setBold(true);
+               
+       CellStyle headerStyle = workbook.createCellStyle();
+       headerStyle.setFont(headerFont);
+       
+       
+       // 헤더 행 생
+       Row headerRow = sheet.createRow(0);
+       // 해당 행의 첫번째 열 셀 생성
+       Cell headerCell = headerRow.createCell(0);
+       headerCell.setCellValue("번호");
+       // 해당 행의 두번째 열 셀 생성
+       headerCell = headerRow.createCell(1);
+       headerCell.setCellValue("정산날짜");
+       // 해당 행의 세번째 열 셀 생성
+       headerCell = headerRow.createCell(2);
+       headerCell.setCellValue("총 이용시간");
+       // 해당 행의 네번째 열 셀 생성
+       headerCell = headerRow.createCell(3);
+       headerCell.setCellValue("일매출");
+       
+       // 과일표 내용 행 및 셀 생성
+       Row bodyRow = null;
+       Cell bodyCell = null;
+       
+       for(int i=0; i<list.size(); i++) {
+           DailySale ds = list.get(i);
+           
+           // 행 생성
+           bodyRow = sheet.createRow(i+1);
+           // 데이터 번호 표시
+           bodyCell = bodyRow.createCell(0);
+           bodyCell.setCellValue(i + 1);
+           // 정산날짜 
+           bodyCell = bodyRow.createCell(1);
+           bodyCell.setCellValue(ds.getDate());
+           // 일일 총 이용시간
+           bodyCell = bodyRow.createCell(2);
+           bodyCell.setCellValue(ds.getTotalHour());
+
+           // 일매출 표시
+           bodyCell = bodyRow.createCell(3);
+           bodyCell.setCellValue(ds.getRevenue());
+       }
+       
+       return workbook;
+   }
+   
+   /**
+    * 생성한 엑셀 워크북을 컨트롤레에서 받게해줄 메소드
+    * @param list
+    * @return
+    */
+   public SXSSFWorkbook excelFileDownloadProcess(List<DailySale> list) {
+       return this.makeSimpleExcelWorkbook(list);
+   }
 	
 	//리뷰 목록
 	@RequestMapping("/reviewList.do")

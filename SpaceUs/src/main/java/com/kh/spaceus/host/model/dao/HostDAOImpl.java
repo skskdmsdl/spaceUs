@@ -1,15 +1,14 @@
 package com.kh.spaceus.host.model.dao;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spaceus.host.model.vo.DailySale;
 import com.kh.spaceus.qna.model.vo.Qna;
-import com.kh.spaceus.reservation.model.vo.Reservation;
-import com.kh.spaceus.space.model.vo.Space;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,7 +27,7 @@ public class HostDAOImpl implements HostDAO {
 	}
 
 	@Override
-	public List<HashMap<String,Object>> selectSettlementList(String hostId) {
+	public List<DailySale> selectSettlementList(String hostId) {
 		return session.selectList("host.selectSettlementList", hostId);
 	}
 
