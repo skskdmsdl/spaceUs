@@ -112,9 +112,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
   background: none;
   cursor: pointer; 
 }
-/* #searchInput::placeholder {
-  color: white;
-} */
+
 #search_keyword {
 	color: black;
 }

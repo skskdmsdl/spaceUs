@@ -41,6 +41,7 @@
 			#{ memberPhone },
 			#{ birthDay },
 			default,
+			default,
 			default
 		)
 		into auth values (
