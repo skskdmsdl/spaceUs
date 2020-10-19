@@ -112,6 +112,8 @@ public interface SpaceService {
 
 	int selectHostReviewTotalContents(String spaceNo);
 
+	int deleteSpace(String spaceNo);
+
 	/* List<Space> selectListSpaceCollection(String email); */
 
 

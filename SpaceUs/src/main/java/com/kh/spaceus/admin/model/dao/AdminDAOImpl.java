@@ -2,6 +2,7 @@ package com.kh.spaceus.admin.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,24 +26,54 @@ public class AdminDAOImpl implements AdminDAO {
 	private SqlSessionTemplate session;
 
 	@Override
-	public List<ManageMember> selectList() {
-		return session.selectList("admin.selectList");
+	public List<ManageMember> selectList(int limit, int offset) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return session.selectList("admin.selectList",null,rowBounds);
+	}
+	
+
+	@Override
+	public int selectTotalCnt() {
+		return session.selectOne("admin.selectTotalCnt");
 	}
 
 	@Override
-	public List<ManageMember> findUserIdList(String searchKeyword) {
-		return session.selectList("admin.findUserIdList", searchKeyword);
+	public List<ManageMember> findUserIdList(String searchKeyword, int limit, int offset) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return session.selectList("admin.findUserIdList", searchKeyword,rowBounds);
+	}
+	
+	@Override
+	public int selectUserIdCnt(String searchKeyword) {
+		return session.selectOne("admin.selectUserIdCnt");
 	}
 
-	@Override
-	public List<ManageMember> findUserNameList(String searchKeyword) {
-		return session.selectList("admin.findUserNameList", searchKeyword);
-	}
 
 	@Override
-	public List<ManageMember> findUserRoleList(String searchKeyword) {
-		return session.selectList("admin.findUserRoleList", searchKeyword);
+	public List<ManageMember> findUserNameList(String searchKeyword, int limit, int offset) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return session.selectList("admin.findUserNameList", searchKeyword,rowBounds);
 	}
+
+
+	@Override
+	public int selectUserNameCnt(String searchKeyword) {
+		return session.selectOne("admin.selectUserNameCnt");
+	}
+
+	
+	@Override
+	public List<ManageMember> findUserRoleList(String searchKeyword, int limit, int offset) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return session.selectList("admin.findUserRoleList", searchKeyword, rowBounds);
+	}
+
+
+	@Override
+	public int selectUserRoleCnt(String searchKeyword) {
+		return session.selectOne("admin.selectUserRoleCnt", searchKeyword);
+	}
+
 
 	@Override
 	public List<ManageBlackList> selectGroupList() {

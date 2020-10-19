@@ -40,6 +40,8 @@ public interface ReservationService {
 
 	int selectTotalCnt(String memberEmail);
 
+	int confirmReservation(String spaceNo);
+
 
 
 

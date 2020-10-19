@@ -736,6 +736,13 @@ select
 			space_no = #{ spaceNo }
 	</select>
 
+	<delete id="deleteSpace">
+		delete
+		from
+			space
+		where
+			space_no=#{spaceNo}
+	</delete>
 	
 </mapper>
 

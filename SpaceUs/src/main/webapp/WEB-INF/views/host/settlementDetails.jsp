@@ -37,6 +37,14 @@
 	           		<div class="card p-5">
 	           			 <div class="card-body-wrapper">
 							<div class="btn-group">
+							
+							<form id="form1" name="form1" method="post" enctype="multipart/form-data">
+							    <input type="file" id="fileInput" name="fileInput">
+							    <button type="button" onclick="doExcelUploadProcess()">엑셀업로드 작업</button>
+							    <button type="button" onclick="doExcelDownloadProcess()">엑셀다운로드 작업</button>
+							</form>
+							<div id="result">
+							</div>
 								   <sec:authorize access="hasRole('HOST')"> 
 								  <form:form id="excelForm" name="excelForm" method="post" action="${pageContext.request.contextPath }/host/excelDown.do" enctype="multipart/form-data">
 									  <button id="file-download" name="hostId" type="submit" class="btn btn-primary alig-right" value="${loginMember.principal.memberEmail}">
@@ -125,6 +133,60 @@
     </div>
 </div>
 </div>
+	<script>
+	
+/*   	function download(){
+		$("#file-download").attr("action", 
+		"${ pageContext.request.contextPath}/host/excelDown.do")
+		.attr("method", "POST")
+		.submit();	
+	} */
+
+	let canvas = document.getElementById("bar-chart").getContext('2d');
+	let ylabel= [0,0,0,0,0,9,9,9,9,9,10,10];
+	let xdata = [1,2,3,4,5,6,7,8,9,10,11,12];
+
+	let barChart = new Chart(canvas, {
+		type:'bar',
+		data: {labels: ylabel,
+	    	datasets:[{
+	    		label: "2020",
+	    		backgroundColor: '#fe7096',
+	    		borderColor: '#58c5ed',
+	    		data: xdata,
+	    	}]
+	    	
+	    },
+	     options: {
+	         title: {
+	             text: "월간 매출 추이",
+	             display: true
+	         }
+	     }
+	 }); 
+
+    function doExcelUploadProcess(){
+        var f = new FormData(document.getElementById('form1'));
+        $.ajax({
+            url: "uploadExcelFile",
+            data: f,
+            processData: false,
+            contentType: false,
+            type: "POST",
+            success: function(data){
+                console.log(data);
+                document.getElementById('result').innerHTML = JSON.stringify(data);
+            }
+        })
+    } 
+    
+    function doExcelDownloadProcess(){
+        var f = document.form1;
+        f.action = "downloadExcelFile";
+        f.submit();
+    }
+    
+</script>
 
 
 <script src="${pageContext.request.contextPath }/resources/js/Chart.js"></script>
@@ -172,45 +234,6 @@
   <script src="${pageContext.request.contextPath }/resources/js/scrollax.min.js"></script>
   <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>  --%>
 
-
-	<script>
-	
-	function download(){
-		/* var hostId = $("#file-download").val(); */
-		
-		$("#file-download").attr("action", 
-		"${ pageContext.request.contextPath}/host/excelDown.do")
-		.attr("method", "POST")
-		.submit();	
-	
-	}
-	
-	
-	let canvas = document.getElementById("bar-chart").getContext('2d');
-	
-	let ylabel= [0,0,0,0,0,9,9,9,9,9,10,10];
-	let xdata = [1,2,3,4,5,6,7,8,9,10,11,12];
-	
-	
-	let barChart = new Chart(canvas, {
-		type:'bar',
-		data: {labels: ylabel,
-	    	datasets:[{
-	    		label: "2020",
-	    		backgroundColor: '#fe7096',
-	    		borderColor: '#58c5ed',
-	    		data: xdata,
-	    	}]
-	    	
-	    },
-	     options: {
-	         title: {
-	             text: "월간 매출 추이",
-	             display: true
-	         }
-	     }
-	 });
-	</script>
   </body>
 
 </html>

@@ -132,14 +132,27 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 						      	<label>카드결제</label>
 						      </td>
 						      <td>
-						      	<input type="radio" name="selectPay" value="네이버페이" />
-						      	<label>네이버페이</label>
+						      	<input type="radio" name="selectPay" value="카카오페이" />
+						      	<label>카카오페이</label>
 						      </td>
 							</tr>
 						</table>
-						
-						
 						<table id="tbl-reserve4" class="table table-striped table-hover">
+	                        <div class="section-title sidebar-title-b mt-5">
+	                            <h6>쿠폰사용</h6>
+	                        </div>
+						    <tr>
+						    	<td>
+							      	<select size="1" name="coupon" id="coupon" onchange="discount()">
+										<option id="no" value="no" select>쿠폰 없음</option>
+										<c:forEach items="${couponList}" var="info">
+											<option id="${info.no}" value="${info.no}">${info.type}  <fmt:formatNumber value="${info.discount}" type="percent"/>  [만료일 : ${info.deadLine}]</option>
+										</c:forEach>
+									</select>
+						      	</td>
+							</tr>
+						</table>
+						<table id="tbl-reserve5" class="table table-striped table-hover">
 	                        <div class="section-title sidebar-title-b mt-5">
 	                            <h6>서비스 동의</h6>
 	                        </div>
@@ -179,6 +192,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 							 <input type="hidden" name="memberEmail" value="${ member.memberEmail }">
 							 <input type="hidden" name="spaceNo" value="${ space.spaceNo }">
 							 <input type="hidden" name="revNo" value="">
+							 <input type="hidden" name="couponNo" value="">
 		
 	                         <div class="filter-input">
 	                             <p>예약 날짜</p>
@@ -186,8 +200,8 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                         </div>
 	                         <div class="filter-input">
 	                             <p>예약 시간</p>
-	                             <input type="text" name="startHour" style="width:45%;" readonly> ~ 
-	                             <input type="text" name="endHour" style="width:45%;" readonly>
+	                             <input type="text" name="startHour" value="" style="width:45%;" readonly> ~ 
+	                             <input type="text" name="endHour" value="" style="width:45%;" readonly>
 	                         </div>
 	                         <div class="filter-input">
 	                             <p>결제 방법</p>
@@ -227,6 +241,9 @@ $(function(){
     today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
     console.log(today);
 
+    for(var i=0; i<24; i++){
+		$("#"+i).addClass("nochoose");
+	}
 });
 
 //예약 날짜 클릭이벤트
@@ -244,7 +261,7 @@ function selectDay(val){
 		
 		resetHour();
 		for(var i=0; i<24; i++){
-			$("#"+i).removeClass("nochoose");
+			$("#"+i).addClass("nochoose");
 		}
 		return;
 	}
@@ -252,13 +269,22 @@ function selectDay(val){
 	//날짜 선택
 	var day = week[date.getDay()];
 	index = avail.findIndex(obj => obj.day == day);
-
+	
+	if(index == -1){
+		alert("예약가능한 시간이 없는 요일입니다. 다른 요일을 선택해주세요.");
+		$("#D-day").val('');
+	}
+	
 	//가능시간 표시
 	for(var i=0; i<24; i++){
-		if(i >= avail[index].start && i <= avail[index].end)
-			$("#"+i).removeClass("nochoose");
-		else
+		if(index == -1)
 			$("#"+i).addClass("nochoose");
+		else{
+			if(i >= avail[index].start && i <= avail[index].end)
+				$("#"+i).removeClass("nochoose");
+			else
+				$("#"+i).addClass("nochoose");
+		}
 	}
 	resetHour();
 
@@ -280,7 +306,7 @@ $("#availableTime th").on("click", function(){
 
 	if(start == -1){
 		start = Number($(this).attr("id"));
-		console.log("start : "+ start);
+		//console.log("start : "+ start);
 		//셀 색 바꾸기
 	    $(this).addClass("bg-primary");
 	    return;
@@ -328,12 +354,19 @@ function resetHour(){
 	$("[name=endHour]").val('');
 	$("[name=pay]").val('');
 	$("[name=totalPrice]").val('');
+	$("input:radio[name='selectPay']").removeAttr("checked");
 }
 
 </script>
 <script>
 $("[name='selectPay']").change(function(){
-	checkTime();
+	if($("[name=endHour]").val() == ""){
+		$("input:radio[name='selectPay']").removeAttr("checked");
+		$("[name=pay]").val('');
+		alert("시간을 설정해주세요");
+		$('html, body').animate({scrollTop : $("#D-day").offset().top}, 100);
+		return;
+	}
 	
 	$("[name=pay]").val($("[name='selectPay']:checked").val());
 
@@ -343,13 +376,30 @@ $("[name='selectPay']").change(function(){
 	$("[name=totalPrice]").val(totalPrice);
 });
 
-function checkTime(){
-	if($("[name=endHour]").val() == ""){
-		alert("시간을 설정해주세요");
-		$('html, body').animate({scrollTop : $("#D-day").offset().top}, 100);
-		return false;
+function discount(){
+	if(!$("input:radio[name='selectPay']").is(':checked')){
+		$("#coupon").val("no").prop("selected", true);
+		alert("결제방법을 선택해주세요");
+		document.getElementById("pay").focus();
+		return;
 	}
-}
+
+	var totalPrice = $("[name=totalPrice]").val();
+	var coupon = $("select[name=coupon]").val();
+	$("[name=couponNo]").val(coupon);
+	if(coupon == 'no')
+		return;
+	else{
+		<c:forEach items="${couponList}" var="info">
+			if(coupon == "${info.no}")
+				discount = ${info.discount};
+		</c:forEach>
+	}
+
+	totalPrice *= (1-discount);
+	
+	$("[name=totalPrice]").val(totalPrice);
+};
 </script>
 <script>
 $("#sub").on("click", function(){
@@ -360,7 +410,11 @@ $("#sub").on("click", function(){
 		return false;
 	}
 
-	checkTime();
+	if($("[name=endHour]").val() == ""){
+		alert("시간을 설정해주세요");
+		$('html, body').animate({scrollTop : $("#D-day").offset().top}, 100);
+		return false;
+	}
 
 	if($("[name=pay]").val() == ""){
 		alert("결제 방법을 선택해주세요.");
@@ -386,41 +440,86 @@ $("#sub").on("click", function(){
 });
 
 function iamport(){
-	//아임포트
-	var IMP = window.IMP; // 생략가능
-	IMP.init('imp84323249');
+	var pay = $("[name='selectPay']:checked").val();
+	
+	if("카드결제" == pay){
+		//아임포트
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp84323249');
+		
+		IMP.request_pay({
+		    pg : 'inicis', // version 1.1.0부터 지원.
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '${ space.spaceName }',
+		    amount : $("[name=totalPrice]").val(),
+		    buyer_email : '${ member.memberEmail }',
+		    buyer_name : '${ member.nickName }',
+		    buyer_tel : '${ member.memberPhone }'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
 
-	IMP.request_pay({
-	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '${ space.spaceName }',
-	    amount : $("[name=totalPrice]").val(),
-	    buyer_email : '${ member.memberEmail }',
-	    buyer_name : '${ member.nickName }',
-	    buyer_tel : '${ member.memberPhone }'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
-	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
+		        $("[name=revNo]").val(rsp.imp_uid);
+		        document.insertReservation.submit();
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    
+		    alert(msg);
+		    
+		    //나중에 지우기
+		    $("[name=revNo]").val(rsp.imp_uid);
+		    document.insertReservation.submit();
+		});
 
-	        $("[name=revNo]").val(rsp.imp_uid);
-	        document.insertReservation.submit();
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    
-	    alert(msg);
-	    
-	    //나중에 지우기
-	    $("[name=revNo]").val(rsp.imp_uid);
-	    document.insertReservation.submit();
-	});
+	}
+	else{
+
+		//아임포트
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp84323249');
+		
+		IMP.request_pay({
+		    pg : 'kakaopay',
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '${ space.spaceName }',
+		    amount : $("[name=totalPrice]").val(),
+		    buyer_email : '${ member.memberEmail }',
+		    buyer_name : '${ member.nickName }',
+		    buyer_tel : '${ member.memberPhone }'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+
+		        $("[name=revNo]").val(rsp.imp_uid);
+		        document.insertReservation.submit();
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    
+		    alert(msg);
+		    
+		    //나중에 지우기
+		    $("[name=revNo]").val(rsp.imp_uid);
+		    document.insertReservation.submit();
+		});
+
+	}
+
 }
+
 </script>
 <script>$(function () { memberId();});</script>
 

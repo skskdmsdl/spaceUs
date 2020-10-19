@@ -107,6 +107,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public int deleteCoupon(String couponNo) {
+		return sqlSession.delete("member.deleteCouponNo",couponNo);
+	}
+	
+	@Override
 	public List<Coupon> selectCouponList(String email) {
 		return sqlSession.selectList("member.selectCouponList", email);
 	}
@@ -120,4 +125,10 @@ public class MemberDAOImpl implements MemberDAO {
 	public int selectWishTotal(String email) {
 		return sqlSession.selectOne("member.selectWishTotal", email);
 	}
+	
+	@Override
+	public int updatePwd(String memberEmail) {
+		return sqlSession.update("member.updateUser",memberEmail);
+	}
+
 }

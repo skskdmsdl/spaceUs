@@ -114,6 +114,8 @@ public interface SpaceDAO {
 
 	int selectHostReviewTotalContents(String spaceNo);
 
+	int deleteSpace(String spaceNo);
+
 
 	/* List<Space> selectListSpaceCollection(String email); */
 

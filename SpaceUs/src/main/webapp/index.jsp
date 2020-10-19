@@ -112,9 +112,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
   background: none;
   cursor: pointer; 
 }
-/* #searchInput::placeholder {
-  color: white;
-} */
+
 #search_keyword {
 	color: black;
 }
@@ -242,7 +240,7 @@ function meeting(){
  --%>
  
 
-<div id="carouselExampleControls" class="carousel slide " data-ride="carousel" style="top:8%;">
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="top:12%;">
   <div class="carousel-inner">
     <div class="carousel-item active" style="height: 500px;">
       <img src="${pageContext.request.contextPath }/resources/images/cook.jpg" class="d-block w-100" style="opacity: .5;">
@@ -284,7 +282,7 @@ function meeting(){
  <div class="container">
     	<div class="row justify-content-center align-items-center">
       		<div class="col-lg-9 col-md-1">
-      			<div class="text text-center mx-auto" style="margin-top:5%; margin-bottom :5%;">
+      			<div class="text text-center mx-auto" style="margin-top:5%; margin-bottom :10%;">
           			<h2 class="mb-4"><strong>당신은 어떤 공간을 찾고 있나요?</strong></h2>
           			<p></p>
 		  				<i class="fas fa-search fa-2x mt-4" style="color:#00C89E"></i>	
@@ -433,61 +431,6 @@ function meeting(){
     			</div>
     		</div>
     	</div> 
-<!--     	 <div class="col-md-4">
-    		<div class="property-wrap ftco-animate">
-    		<a href="" class="pop3"></a>
-    			<div class="text">
-    				<p class="price"><span class="space-price price3"></span><small>원/시간</small></p>
-    				<ul class="property_list">
-    					<li class="view3"><span class="icon-eye"></span></li>
-    					<li class="like3"><span class="icon-heart"></span></li>
-    					<li class="star3"><span class="icon-star"></span></li>
-    				</ul>
-    				<h3 class="title3"></h3>
-    				<small><span class="icon-my_location location3"></span></small>
-    			</div>
-    		</div>
-    	</div> 
-    	<div class="col-md-4">
-    		<div class="property-wrap ftco-animate">
-    		<a href="" class="pop4"></a>
-    			<div class="text">
-    				<p class="price"><span class="space-price price4"></span><small>원/시간</small></p>
-    				<ul class="property_list">
-    					<li class="view4"><span class="icon-eye"></span></li>
-    					<li class="like4"><span class="icon-heart"></span></li>
-    					<li class="star4"><span class="icon-star"></span></li>
-    				</ul>
-    				<h3 class="title4"></h3>
-    				<small><span class="icon-my_location location4"></span></small>
-    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    				<span class="icon-heart"></span>
-    				</a>
-    			</div>
-    		</div>
-    	</div>
-    	 
-    	</div> 
-    	<div class="col-md-5">
-    		<div class="property-wrap ftco-animate">
-    		<a href="" class="pop5"></a>
-    			<div class="text">
-    				<p class="price"><span class="space-price price5"></span><small>원/시간</small></p>
-    				<ul class="property_list">
-    					<li class="view5"><span class="icon-eye"></span></li>
-    					<li class="like5"><span class="icon-heart"></span></li>
-    					<li class="star5"><span class="icon-star"></span></li>
-    				</ul>
-    				<h3 class="title5"></h3>
-    				<small><span class="icon-my_location location5"></span></small>
-    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    				<span class="icon-heart"></span>
-    				</a>
-    			</div>
-    		</div>
-    	</div>  -->
-    	
-			<!-- 인기공간 리스트 -->
     </div>
 	</div>
 </section>
@@ -503,26 +446,6 @@ function meeting(){
         </div>
         <div class="row d-flex" id="review-wrapper">
          
-<%--           <div class="col-md-3 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <div class="text">
-                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-                <div class="meta mb-3">
-                  <div><a href="#">July. 24, 2019</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');">
-	              </a>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-              </div>
-            </div>
-          </div> --%>
-          <%-- <div class="col-md-3 d-flex ftco-animate"><div class="blog-entry justify-content-end"><div class="text"><h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3><div class="meta mb-3">
-          <div><a href="#">1601471972000</a></div><div><a href="#">홍길동</a></div><div><a href="#" class="meta-chat"><span class="icon-heart"></span>5</a></div></div><a href="blog-single.html" class="lock-20 img" 
-          							style="background-image:url('${pageContext.request.contextPath }
-										/resources/upload/review/20201001_071933031_653.jpg');"></a><p>❤❤같이 예약 시간을 잘못알았네요 잊고있다가 갑자기 생각나서 갔는데 시간도 미뤄주시고 정말 감사했습니다. 깔끔했구요 덕분에 좋은 추억 만들 수 있었습니다! </p></div></div></div>
-        </div> --%>
       </div>
     </section>	
 <!-- 이용자리뷰 끝-->

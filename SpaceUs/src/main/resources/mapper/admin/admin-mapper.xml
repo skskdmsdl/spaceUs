@@ -18,6 +18,14 @@
 	</select>
 	<resultMap type="manageMember" id="memberMap"></resultMap>
 	
+	<!-- member totalCnt 출력-->
+	<select id="selectTotalCnt" resultType="_int">
+		select
+			count(*)
+		from
+			member
+	</select>
+	
 	<!-- user Id로  memberList 출력-->
 	<select id="findUserIdList" resultMap="memberMap">
 		select
@@ -26,6 +34,17 @@
 		    M.member_phone,
 		    M.member_regdate,
 		    A.authority
+		from 
+		    member M join auth A
+		            on M.member_email = A.member_email
+		where
+			M.member_email like '%' || #{searchKeyword} || '%'
+	</select>
+	
+	<!-- user Id로  cnt 출력-->
+	<select id="selectUserIdCnt">
+		select
+		    count(*)
 		from 
 		    member M join auth A
 		            on M.member_email = A.member_email
@@ -48,6 +67,17 @@
 			M.nickname like '%' || #{searchKeyword} || '%'
 	</select>
 	
+	<!-- user Name로 cnt 출력 -->
+	<select id="selectUserNameCnt">
+		select
+		    count(*)
+		from 
+		    member M join auth A
+		            on M.member_email = A.member_email
+		where
+			M.nickname like '%' || #{searchKeyword} || '%'
+	</select>
+	
 	<!-- user Role로 memberList 출력 -->
 	<select id="findUserRoleList" resultMap="memberMap">
 		select
@@ -62,6 +92,18 @@
 		where
 			A.authority = #{searchKeyword}
 	</select>
+	
+	<!-- user Role로 memberList 출력 -->
+	<select id="selectUserRoleCnt" resultType="_int">
+		select
+		   count(*)
+		from 
+		    member M join auth A
+		            on M.member_email = A.member_email
+		where
+			A.authority = #{searchKeyword}
+	</select>
+	
 	
 	<!-- blackList group -->
 	<select id="selectGroupList" resultMap="manageBlackListMap">

@@ -3,13 +3,14 @@ package com.kh.spaceus.admin.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import com.kh.spaceus.admin.model.vo.ManageBlackList;
 import com.kh.spaceus.admin.model.vo.ManageMember;
 import com.kh.spaceus.admin.model.vo.ManageRecruit;
 import com.kh.spaceus.admin.model.vo.ManageSpace;
+import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
 import com.kh.spaceus.member.model.service.MemberService;
@@ -45,40 +47,70 @@ public class AdminController {
 	
 	//회원관리 폼
 	@RequestMapping("/memberManage.do")
-	public String memberManage(Model model, Principal principal) {
-		List<ManageMember> memberList = adminService.selectList();
+	public String memberManage(Model model,HttpServletRequest request, Principal principal,
+								@RequestParam(defaultValue = "1", value="cPage") int cPage) {
+		//페이징 처리
+		final int limit = 10;
+		int offset = (cPage -1) * limit;
+		
+		List<ManageMember> memberList = adminService.selectList(limit,offset);
 		log.info("memberList={}",memberList);
 		Member member = memberService.selectOneMember(principal.getName());
 		
 		model.addAttribute("member", member);
+		int totalCnt = adminService.selectTotalCnt();
+		String url = request.getRequestURI() + "?";
+		String pageBar = Utils.getPageBarHtml(cPage, limit, totalCnt, url);
+		log.info("totalCnt = {}", totalCnt);
+		
+		model.addAttribute("member", member);
+		model.addAttribute("totalCnt", totalCnt);
+		model.addAttribute("pageBar", pageBar);
 		model.addAttribute("memberList", memberList);
 		return "admin/memberManage";
 	}
 	
 	//Id로 입력시 회원목록 조회
 	@RequestMapping("/findUserList.do")
-	public String findUserList(Model model, @RequestParam String searchType, @RequestParam String searchKeyword) {
-		log.info("searchType={}", searchType);
-		log.info("searchKeyword={}",searchKeyword);
+	public String findUserList(Model model, @RequestParam String searchType, @RequestParam String searchKeyword,
+								HttpServletRequest request,@RequestParam(defaultValue = "1", value="cPage") int cPage) {
+		
+		//페이징 처리
+		final int limit = 10;
+		int offset = (cPage -1) * limit;
 		
 		List<ManageMember> memberList = null;
+		int totalCnt = 0;
+		String url = null;
 		if(searchType.equals("userId")) {
-			memberList = adminService.findUserIdList(searchKeyword);
+			memberList = adminService.findUserIdList(limit,offset,searchKeyword);
 			log.info("memberList = {}", memberList);
+			totalCnt = adminService.selectUserIdCnt(searchKeyword);
+			url= request.getRequestURI() + "?searchType=userId&searchkeyword="+ searchKeyword + "&";
 		}
 		else if(searchType.equals("userName")) {
-			memberList = adminService.findUserNameList(searchKeyword);						
+			memberList = adminService.findUserNameList(limit,offset,searchKeyword);						
 			log.info("memberList = {}", memberList);
+			totalCnt = adminService.selectUserNameCnt(searchKeyword);
+			url= request.getRequestURI() + "?searchType=userName&searchkeyword="+searchKeyword+"&";
 		}
 		else if(searchType.equals("userRole")) {
 			if(searchKeyword.equals("total")) {
-				memberList = adminService.selectList();
+				memberList = adminService.selectList(limit,offset);
+				totalCnt = adminService.selectTotalCnt();
+				url = request.getRequestURI() + "?searchType=userRole&searchKeyword=total&";
 			}else{
-				memberList = adminService.findUserRoleList(searchKeyword);
+				memberList = adminService.findUserRoleList(limit,offset,searchKeyword);
+				totalCnt = adminService.selectUserRoleCnt(searchKeyword);
+				url= request.getRequestURI() + "?searchType=userRole&searchKeyword="+searchKeyword+"&";
 			}
 		}
 		
+		String pageBar = Utils.getPageBarHtml(cPage, limit, totalCnt, url);
+				
+		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("memberList", memberList);
+		model.addAttribute("pageBar", pageBar);
 		return "admin/memberManage";
 	}
 	

@@ -68,9 +68,8 @@ public class GroupController {
 
 	// 소모임 게시판 분류별 리스트
 	@GetMapping("/groupList/{boardNo}/{boardRef}.do")
-	public String groupBoardList(@PathVariable("boardNo") String boardNo, 
-								 @PathVariable("boardRef") String boardRef,
-								 Model model) {
+	public String groupBoardList(@PathVariable("boardNo") String boardNo, @PathVariable("boardRef") String boardRef,
+								 Model model, HttpServletRequest request, @RequestParam(defaultValue = "1", value="cPage") int cPage) {
 
 		List<Board> boardList = groupService.selectListBoard();
 
@@ -78,14 +77,20 @@ public class GroupController {
 		listMap.put("boardNo", boardNo);
 		listMap.put("boardRef", boardRef);
 
-		List<GroupBoard> groupBoardList = groupService.selectSortedListGroupBoard(listMap);
-		int totalCnt = groupService.selectTotalCnt();
+		//페이징 처리
+		final int limit = 10;
+		int offset = (cPage -1) * limit;
+				
+		List<GroupBoard> groupBoardList = groupService.selectSortedListGroupBoard(listMap,limit,offset);
 		
-		log.info("groupBoardList = {}",groupBoardList);
+		int totalCnt = groupService.selectSortedListCnt(listMap);
+		String url = request.getRequestURI() + "?";
+		String pageBar = Utils.getPageBarHtml(cPage, limit, totalCnt, url);
 		
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("groupBoardList", groupBoardList);
+		model.addAttribute("pageBar", pageBar);
 
 		return "community/group/groupBoard";
 	}
@@ -156,9 +161,9 @@ public class GroupController {
 	public String groupEnrollForm(Model model) {
 
 		List<Board> boardList = groupService.selectListBoard();
-
+		System.out.println(boardList);
+		
 		model.addAttribute("boardList", boardList);
-
 		return "/community/group/groupEnrollForm";
 	}
 
