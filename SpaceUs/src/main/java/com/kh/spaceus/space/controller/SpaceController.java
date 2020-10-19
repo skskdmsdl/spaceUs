@@ -548,16 +548,6 @@ public class SpaceController {
 		Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
 		SecurityContextHolder.getContext().setAuthentication(newAuth);
 		
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//
-//		List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
-//		
-//		updatedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER")); //add your role here [e.g., new SimpleGrantedAuthority("ROLE_NEW_ROLE")]
-//
-//		Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
-//
-//		SecurityContextHolder.getContext().setAuthentication(newAuth);
-		
 		return "redirect:/member/memberProfile.do";
 
 	}
