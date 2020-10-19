@@ -321,7 +321,7 @@ conversation.setAttributes({
 	<div id="main-wrapper">
 	    <!-- 마이페이지 헤더 -->
 	    <!-- 채팅 -->
-<div id="talkjs-container" style="background-color: rgba(0,0,0,0);margin-left: 300px; height: 500px; position: fixed; z-index: 10;box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px; display:none;">
+<div id="talkjs-container" style="background-color: rgba(0,0,0,0);margin-left: 40%;margin-top:10%; height: 500px; position: fixed; z-index: 10;box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px; display:none;">
     <i>Loading chat...</i>
 </div> 
 <div>
