@@ -34,7 +34,9 @@
                          <div class="col">
                              <h5 class="card-title">공간 예약 현황</h5>
                              <h6 class="card-subtitle mb-5">공간 예약 현황을 확인하세요</h6>
-                             
+                              <c:choose>
+	         					 <c:when test="${ not empty list }">
+			                    	<c:forEach items="${list}" var="reservation" varStatus="vs">
                               <!--reservationList시작 -->
 				            <div class="container-xl ml-5 mr-5">
 						        <div class="table-responsive card p-5">
@@ -47,6 +49,7 @@
 							                    <div class="row">
 							                    </div>
 							                    <div class="row">
+							                   
 													<div class="font-bold mr-4 ml-5 align-self-center">회원 조회</div>
 													<div id="search-userId" class="input-group-prepend">
 														<form action="${ pageContext.request.contextPath }/host/hostSearchReservation.do" class="input-group-prepend">
@@ -70,7 +73,9 @@
 						                    </div>
 						                </div>
 						            	<!-- 테이블 타이틀 끝 -->
+						            	
 						                <table class="table table-striped table-hover mt-4">
+						                
 						                    <thead>
 						                        <tr>
 						                            <th class="text-center">NO</th>
@@ -84,7 +89,7 @@
 						                        </tr>
 						                    </thead>
 						                    <tbody>
-						                    	<c:forEach items="${list}" var="reservation" varStatus="vs">
+						                    
 							                        <tr>
 							                            <td class="text-center">${vs.count }</td>
 							                            <td class="text-center">${reservation.nickName}</td>
@@ -97,9 +102,18 @@
 							                                ${ reservation.revCancle == 0 ? "-" : "취소" }
 							                            </td>
 							                        </tr>
-						                    	</c:forEach>
+						                    	
 						                    </tbody>
 						                </table>
+						                </c:forEach>
+						                    	</c:when>
+												<c:otherwise>
+													<div style="text-align: center; width: 90%; padding:20px;">
+														<span class="icon-folder" style="letter-spacing:1px;"> 조회된 예약이 없습니다.</span>
+													</div>
+												</c:otherwise>
+												</c:choose>	
+						                    	
 						                 <div class="container">
 							                 <div class="container">
 							                 <nav class="mt-5" >
