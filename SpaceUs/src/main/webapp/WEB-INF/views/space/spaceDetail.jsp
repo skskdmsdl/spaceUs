@@ -257,7 +257,11 @@ function naverShare() {
 							<div class="d-none" id="a1" style="padding:5px; font-size: 16px; border:1px solid #efefef; right: 140px;top: 420px;position: absolute; z-index: 10;background-color: white; width:250px; text-align: center; border-radius: 5px;" >
 								<p style="border-bottom:1px solid #efefef; padding:5px;">공유하기</p>
 								<div class="popover-body">
+								
+									<!-- 카카오 -->
 									<img src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png" id="kakao-link-btn"/> 
+									<!-- 카카오 -->
+								
 									<img src="${pageContext.request.contextPath }/resources/images/icons/twitter-icon.png" onclick="twitterShare();" />
 									<img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg" onclick="naverShare();" />
 									<input class="input-group-text w-100 mt-4 mb-2" type="text" id="url-input">
@@ -1046,7 +1050,7 @@ geocoder.addressSearch('${ space.address }', function(result, status) {
     	      addressTitle: '${ space.spaceName }',
     	      content: {
     	        title: '${ space.spaceName }',
-    	        description: '${ space.content }',
+    	        description: 'ssss',
     	        imageUrl: 'https://moplqfgeemqv2103108.cdn.ntruss.com/service/158321359_3969307adb111d972a661a99fd3629af.jpg?type=m&w=900&h=900&autorotate=true&quality=90',
     	        link: {
     	          mobileWebUrl: 'https://www.spacecloud.kr/',

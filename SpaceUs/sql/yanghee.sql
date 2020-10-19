@@ -40,13 +40,18 @@ insert into member values('user28@naver.com','유저28','$2a$10$Qc91X8k0YEUfCTws
 insert into member values('user29@naver.com','유저29','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-16',default,0,default);
 insert into member values('user30@naver.com','유저30','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-17',default,0,default);
 
-
-
+select * from member where member_phone = '01048179843';
+select * from auth where member_email='rhkim10@naver.com';
+update member set member_phone='01045674567' where member_phone='01048179843';
+commit;
 
 update member set password = '$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu' where member_email = 'admin@spaceus.com';
 
-delete from member where member_email='rhkim10@naver.com';
-delete from auth where member_email='rhkim10@naver.com';
+delete from member where member_email='rhkim999@gmail.com';
+delete from auth where member_email='rhkim999@gmail.com';
+select * from tag;
+select * from exhibition;
+delete from exhibition where ex_no='90';
 
 commit;
 
@@ -1302,3 +1307,7 @@ select * from reservation; where member_email='rhkim999@gmail.com';
 select * from reservation where member_email='honggd@naver.com';
 update reservation set rev_cancle=0 where member_email='honggd@naver.com';
 commit;
+-------------------------------
+--10/19
+-------------------------------
+select * from member;

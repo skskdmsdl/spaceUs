@@ -115,7 +115,7 @@ $(function(){
 			$tagName.val("");
 		}
 		else if($tagName.val() != ""){
-			$("#tags").append("<span class='label label-success m-2 p-2 small'>#" + $tagName.val() + " X</span>");
+			$("#tags").append("<span class='label label-success m-2 p-2'>#" + $tagName.val() + " X</span>");
 			$("#tag").val($tagName.val());
 			$tagName.val("");
 			
@@ -167,7 +167,7 @@ $(function(){
 	                            </div>
                             </div>
 	                        <span id="tags" style="cursor: pointer;"></span>
-                           </div>
+                         </div>
                         
                         <div class="pf-title">
                             <h4 data-toggle="modal" data-target="#imageModal">이미지 등록</h4>
