@@ -397,11 +397,19 @@ div#search-userName {
 		            </div>
 		        </div>
 		    </div>
+		    <!-- 페이징처리 시작 -->
+	 		<nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 45%;">
+				<ul class="pagination" style="border:0; margin-right:10px;">
+					${pageBar}
+  				</ul>
+	 		</nav>
+	 		<!-- 페이징 처리 끝 -->
           <!-- memberManageList끝-->
        </div>
     </div>
 	 
 	 <!-- 어드민 memberManage1 본문 끝-->
+	 
 	 </div>
  </div>
  

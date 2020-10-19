@@ -14,8 +14,10 @@ public interface GroupService {
 	List<Board> selectListBoard();
 
 	List<GroupBoard> selectListGroupBoard(int limit, int offset);
-
-	List<GroupBoard> selectSortedListGroupBoard(Map<String, String> listMap);
+	
+	List<GroupBoard> selectSortedListGroupBoard(Map<String, String> listMap, int limit, int offset);
+	
+	int selectSortedListCnt(Map<String, String> listMap);
 
 	int selectTotalCnt();
 
@@ -52,5 +54,9 @@ public interface GroupService {
 	List<CmtReport> selectReport();
 
 	int updateReportCnt(String groupBoardCommentNo);
+
+	
+
+	
 
 }
