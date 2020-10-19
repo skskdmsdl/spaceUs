@@ -495,7 +495,7 @@ function naverShare() {
 				            <label for="qna-status" >비밀글</label>
 				            <input type="checkbox" name = "status" class="form-control" style="width: 27px; height: 24px;" id="modify-status" value="false" onClick="modifyCheck();">
 				          </div>
-		   				 	<input type="hidden" name = "qnaNo" id="modifyNo" value="" />
+		   				 	<input type="hidden" name = "qnaNo" id="modifyNo"/>
 		   				 	<input type="hidden" name = "spaceNo" value="${ space.spaceNo }" />
 				        </form>
 				      </div>
@@ -567,7 +567,7 @@ function naverShare() {
    												
    											
    												<button type="button" class="btn btn-secondary modify" data-toggle="modal" data-target="#modifyModal" data-whatever="@fat" 
-						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="popModify();" 
+						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="popModify('${qna.qnaNo }');" 
 						   							value="${qna.qnaNo }">수정</button>
 						   						
    												<button type="button" class="btn btn-secondary"
@@ -592,8 +592,8 @@ function naverShare() {
 					   			   		 <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
 					   			    	</div>
  												<button type="button" class="btn btn-secondary modify" data-toggle="modal" data-target="#modifyModal" data-whatever="@fat" 
-				   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="popModify();" 
-				   							value="${qna.qnaNo }">수정</button>
+				   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="popModify('${qna.qnaNo }');" 
+				   							>수정</button>
  												<button type="button" class="btn btn-secondary" 
 				   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="deleteBtn('${qna.qnaNo }');" 
 				   							value="${qna.qnaNo }">삭제</button>
@@ -604,6 +604,19 @@ function naverShare() {
 					   			   		 <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
 					   			    </div>
 			   			 			
+   										<sec:authentication property="principal.username" var="loginMember"/>
+   											<c:if test="${ loginMember eq qna.email }">
+   												
+   											
+   												<button type="button" class="btn btn-secondary modify" data-toggle="modal" data-target="#modifyModal" data-whatever="@fat" 
+						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="popModify('${qna.qnaNo }');" 
+						   							value="${qna.qnaNo }">수정</button>
+						   						
+   												<button type="button" class="btn btn-secondary"
+						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="deleteBtn('${qna.qnaNo }');" 
+						   							value="${qna.qnaNo }">삭제</button>
+						   					</c:if>
+									
 			   			 		</c:if>
 		   			 		</sec:authorize>
 		   			 		<sec:authorize access="hasRole('ADMIN')">
@@ -645,6 +658,17 @@ function naverShare() {
 							   						호스트님의 답글</span>
 			   			</h4>
 			   			<p style="padding-left:15px">${ qna.answer}</p>
+			   			<sec:authentication property="principal.username" var="loginMember"/>
+			   			<c:if test="${loginMember eq space.memberEmail}">
+			   			<h4 style="text-align: right;">
+						   				<!-- <span style="width: 80px; height: 24.8px; margin: 3px;"> -->
+						   					<button type="button" class="btn btn-secondary answerbtn" data-toggle="modal" data-target="#answerModal" data-whatever="@fat" 
+						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="selectQnaNo('${qna.qnaNo }');" 
+						   							value="${qna.qnaNo }">답변 수정</button>
+						   					
+				   						<!-- </span> -->   						
+					   				</h4>
+					   	</c:if>
 			   		</div>
 			   	</div>
 			   	
@@ -1066,9 +1090,9 @@ function selectQnaNo(no){
 		
 }
 
-function popModify(){
+function popModify(no){
 	/* document.getElementById("modify-text").val = "${qna.content}"; */
-	document.getElementById("modifyNo").value = $(".modify").val();
+	$("#modifyNo").val(no);
 	
 }
 
