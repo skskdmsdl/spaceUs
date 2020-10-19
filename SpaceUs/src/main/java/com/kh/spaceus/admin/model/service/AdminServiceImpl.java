@@ -25,23 +25,44 @@ public class AdminServiceImpl implements AdminService{
 	private AdminDAO adminDAO;
 
 	@Override
-	public List<ManageMember> selectList() {
-		return adminDAO.selectList();
+	public List<ManageMember> selectList(int limit, int offset) {
+		return adminDAO.selectList(limit,offset);
 	}
 
 	@Override
-	public List<ManageMember> findUserIdList(String searchKeyword) {
-		return adminDAO.findUserIdList(searchKeyword);
+	public int selectTotalCnt() {
+		return adminDAO.selectTotalCnt();
 	}
 
 	@Override
-	public List<ManageMember> findUserNameList(String searchKeyword) {
-		return adminDAO.findUserNameList(searchKeyword);
+	public List<ManageMember> findUserIdList(int limit, int offset, String searchKeyword) {
+		return adminDAO.findUserIdList(searchKeyword,limit,offset);
 	}
 
 	@Override
-	public List<ManageMember> findUserRoleList(String searchKeyword) {
-		return adminDAO.findUserRoleList(searchKeyword);
+	public int selectUserIdCnt(String searchKeyword) {
+		return adminDAO.selectUserIdCnt(searchKeyword);
+	}
+
+	@Override
+	public int selectUserNameCnt(String searchKeyword) {
+		return adminDAO.selectUserNameCnt(searchKeyword);
+	}
+
+	@Override
+	public List<ManageMember> findUserNameList(int limit, int offset, String searchKeyword) {
+		return adminDAO.findUserNameList(searchKeyword,limit,offset);
+	}
+
+
+	@Override
+	public List<ManageMember> findUserRoleList(int limit, int offset, String searchKeyword) {
+		return adminDAO.findUserRoleList(searchKeyword,limit,offset);
+	}
+
+	@Override
+	public int selectUserRoleCnt(String searchKeyword) {
+		return adminDAO.selectUserRoleCnt(searchKeyword);
 	}
 
 	@Override
