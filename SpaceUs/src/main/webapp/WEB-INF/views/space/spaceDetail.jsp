@@ -607,7 +607,7 @@ function naverShare() {
 			   			 			<div style="margin-right:15px;">
 					   			   		 <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
 					   			    </div>
-			   			 			
+			   			 				<sec:authorize access="hasAnyRole('HOST', 'USER')">
    										<sec:authentication property="principal.username" var="loginMember"/>
    											<c:if test="${ loginMember eq qna.email }">
    												
@@ -620,9 +620,10 @@ function naverShare() {
 						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="deleteBtn('${qna.qnaNo }');" 
 						   							value="${qna.qnaNo }">삭제</button>
 						   					</c:if>
-									
+									</sec:authorize>
 			   			 		</c:if>
 		   			 		</sec:authorize>
+		   			 		
 		   			 		<sec:authorize access="hasRole('ADMIN')">
 			   			 			<div style="margin-right:15px;">
 					   			   		 <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
@@ -662,6 +663,7 @@ function naverShare() {
 							   						호스트님의 답글</span>
 			   			</h4>
 			   			<p style="padding-left:15px">${ qna.answer}</p>
+			   			<sec:authorize access="hasRole('HOST')">
 			   			<sec:authentication property="principal.username" var="loginMember"/>
 			   			<c:if test="${loginMember eq space.memberEmail}">
 			   			<h4 style="text-align: right;">
@@ -673,6 +675,7 @@ function naverShare() {
 				   						<!-- </span> -->   						
 					   				</h4>
 					   	</c:if>
+					   	</sec:authorize>
 			   		</div>
 			   	</div>
 			   	
