@@ -607,7 +607,7 @@ function naverShare() {
 			   			 			<div style="margin-right:15px;">
 					   			   		 <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
 					   			    </div>
-			   			 			
+			   			 				<sec:authorize access="hasAnyRole('HOST', 'USER')">
    										<sec:authentication property="principal.username" var="loginMember"/>
    											<c:if test="${ loginMember eq qna.email }">
    												
@@ -620,9 +620,10 @@ function naverShare() {
 						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="deleteBtn('${qna.qnaNo }');" 
 						   							value="${qna.qnaNo }">삭제</button>
 						   					</c:if>
-									
+									</sec:authorize>
 			   			 		</c:if>
 		   			 		</sec:authorize>
+		   			 		
 		   			 		<sec:authorize access="hasRole('ADMIN')">
 			   			 			<div style="margin-right:15px;">
 					   			   		 <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
@@ -662,6 +663,7 @@ function naverShare() {
 							   						호스트님의 답글</span>
 			   			</h4>
 			   			<p style="padding-left:15px">${ qna.answer}</p>
+			   			<sec:authorize access="hasRole('HOST')">
 			   			<sec:authentication property="principal.username" var="loginMember"/>
 			   			<c:if test="${loginMember eq space.memberEmail}">
 			   			<h4 style="text-align: right;">
@@ -673,6 +675,7 @@ function naverShare() {
 				   						<!-- </span> -->   						
 					   				</h4>
 					   	</c:if>
+					   	</sec:authorize>
 			   		</div>
 			   	</div>
 			   	
@@ -1008,11 +1011,11 @@ function naverShare() {
 <!-- 지도 -->
 var mapContainer = document.getElementById('kakaomap'), // 지도를 표시할 div 
 mapOption = {
-    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
     level: 3 // 지도의 확대 레벨
 };  
 
-//지도를 생성합니다    
+// 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 
 //주소-좌표 변환 객체를 생성합니다
@@ -1031,7 +1034,9 @@ var geocoder = new kakao.maps.services.Geocoder();
         map: map,
         position: coords
     });
-
+ 	// 인포윈도우로 장소에 대한 설명을 표시합니다
+    var infowindow = new kakao.maps.InfoWindow({
+    });
 
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
     map.setCenter(coords);
