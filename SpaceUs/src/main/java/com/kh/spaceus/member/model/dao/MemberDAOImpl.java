@@ -115,4 +115,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<Wish> selectWishList(String email) {
 		return sqlSession.selectList("member.selectWishList", email);
 	}
+
+	@Override
+	public int updatePwd(String memberEmail) {
+		return sqlSession.update("member.updateUser",memberEmail);
+	}
 }
