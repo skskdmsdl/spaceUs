@@ -105,7 +105,7 @@
 	           						<div class="card-title">
 	            					<h5 class="mb-1 subject"><i class="fa fa-chart-bar"> 일 매출 추이</i></h5>
 	            					</div>
-						 			<canvas id="bar-chart">차트가 들어갈 자리</canvas>
+						 			<canvas id="achart">차트가 들어갈 자리</canvas>
 		                		</div>
 		                	</div>
 						</div>
@@ -114,6 +114,8 @@
  				</div>
  			</div>
     
+<%-- <c:out value="${datelist}"/>
+<c:out value="${revenuelist}"/> --%>
 
 
 <script src="${pageContext.request.contextPath }/resources/js/Chart.js"></script>
@@ -134,28 +136,70 @@
 <script src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
 
 	<script>
-	let canvas = document.getElementById("bar-chart").getContext('2d');
-	let ylabel= [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-	let xdata = [];
+	var canvas = document.getElementById("achart").getContext('2d');
+	var datelist= [];
+	var revenuelist = [];
 
-	let barChart = new Chart(canvas, {
-		type:'bar',
-		data: {labels: ylabel,
-	    	datasets:[{
-	    		label: "2020",
-	    		backgroundColor: '#fe7096',
-	    		borderColor: '#58c5ed',
-	    		data: xdata,
-	    	}]
-	    	
-	    },
-	     options: {
-	         title: {
-	             text: "일일 매출 추이",
-	             display: true
-	         }
-	     }
-	 }); 
+	datelist = '<c:out value="${datelist}"/>';
+	console.log(datelist);
+
+	revenuelist = '<c:out value="${revenuelist}"/>';
+	
+	/* 
+	ylabel = '<c:out value="${datelist}"/>';
+	xdata = '<c:out value="${revenuelist}"/>';
+ */
+	/* 
+	xdata.forEach(item=>{
+		ylabel.push("${item1.name}");
+		});
+	
+	ylabel.forEach(item=>{
+		console.log(item);
+		});
+	  */
+	
+	    let chart = new Chart(canvas, {
+	        type: 'line',
+	        data: {labels: datelist,
+	        	datasets:[{
+	        		label: "일매출",
+	        		borderColor: '#58c5ed',
+	        		data: revenuelist,
+	        	}
+	        	]	        	
+	        },
+	        options: {
+	            responsive: true,
+//	         tooltips: {
+//	           callbacks: {
+//	                 label: function(tooltipItem, data) {
+//	                     var value = data.datasets[0].data[tooltipItem.index];
+//	                     if(parseInt(value) >= 1000){
+//	                                return '￦'+value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+//	                             } else {
+//	                                return '￦'+value;
+//	                             }
+//	                 }
+//	           } // end callbacks:
+//	         }, //end tooltips                
+	            scales: {
+	                yAxes: [{
+	                    ticks: {
+	                        beginAtZero:true,
+	                        callback: function(value, index, values) {
+	                            if(parseInt(value) >= 1000){
+	                               return '￦'+value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	                            } else {
+	                               return '￦'+value;
+	                            }
+	                       }                            
+	                    }
+	                }]
+	            }
+	        }
+	        });
+	    
 
     function doExcelUploadProcess(){
         var f = new FormData(document.getElementById('excelForm'));
