@@ -309,6 +309,7 @@ public class HostController {
        //foregroundcolor 대표색
        
        XSSFCellStyle mergeRowStyle2 = (XSSFCellStyle) workbook.createCellStyle();
+       
        mergeRowStyle2.setAlignment(HorizontalAlignment.CENTER);
        mergeRowStyle2.setVerticalAlignment(VerticalAlignment.TOP);
        mergeRowStyle2.setBorderTop(BorderStyle.THIN);
