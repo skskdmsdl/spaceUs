@@ -112,36 +112,6 @@ $(function(){
 		   	});
 	 	}
    	});
-	//태그 추가 클릭이벤트
-	$("#addTags").on('click', function(){
-	
-		var $tagName = $("#tagName");
-		
-		if($tagName.val() == "")
-			alert("내용을 입력해주세요");
-		
-		if($tagName.val() == ${tagList})
-		
-		if($("#tags span").length >= 1){
-			alert("1개만 입력 가능합니다");
-			$tagName.val("");
-		}
-
-		else if($tagName.val() != ""){
-			$("#tags").append("<span class='label label-success m-2 p-2'>" + $tagName.val() + " X</span>");
-			$("#tag").val($tagName.val());
-			$tagName.val("");
-			
-	    }
-	});
-	//태그 삭제 클릭이벤트
-	$("#tags").on("click", function(){
-		$("#tags *").remove();
-		$("#tag").val("");
-		$("#tagName").val("");
-	});
-
-	
 
 });
 </script>
@@ -171,7 +141,7 @@ $(function(){
                             <h4>공간 태그<span class="text-danger">*</span></h4>
                             <div class="row">
 	                            <div class="ml-3 mb-5 wrapper" style="width:31%">
-			                        <select  size="30" class="selection nice-select sm-width">
+			                        <select  size="30" name="tagNo" class="selection nice-select sm-width">
 										<c:forEach items="${tagList}" var="tag">
 										<option value="${tag.tagNo}">${tag.tagName }</option>
 										</c:forEach>										
@@ -200,39 +170,40 @@ $(function(){
 									<div class="bd-example bd-example-tabs">
 								       <div class="d-flex justify-content-center">
 										  <ul class="nav nav-pills mb-3" id="detail-tab" role="tablist">
+										   
 										    <li class="nav-item">
-										      <a class="nav-link" id="url-upload-tab" data-toggle="pill"
+										      <a class="nav-link url-upload" id="url-upload-tab" data-toggle="pill"
 										      	 href="#url-upload" role="tab" aria-controls="url-upload"
 										      	 aria-expanded="true">Url로 업로드</a>
 										    </li>
 										    
-										    <li class="nav-item">
-										      <a class="nav-link active" id="file-upload-tab" data-toggle="pill"
+										    <li class="nav-item active">
+										      <a class="nav-link image-upload" id="file-upload-tab" data-toggle="pill"
 										      	 href="#file-upload" role="tab" aria-controls="file-upload"
 										      	 aria-expanded="true">이미지로 업로드</a>
 										    </li>
+										    
 										  </ul>
 										</div>
 						      		</div>
 						      </div>
 						      <!-- 모달바디 시작 -->
 						      <div class="modal-body">
-							   <div class="" id="file-upload" role="tabpanel" aria-labelledby="file-upload-tab">
-							    	<div class="input-group mb-3" style="padding:0px;">
-							    	 <!-- <form name="frm" method="post" enctype="multipart/form-data"> -->
-									  <div class="custom-file">
-									    <input type="file" class="custom-file-input" name="upFile" id="upFile">
-									    <label class="custom-file-label" for="upFile">이미지를 선택하세요</label>
-									  </div>
-									<!-- </form> -->
-									</div>
-							   </div>
-								   
-						      	<div class="" id="detail-tabContent">
-								   <div class="tab-pane" id="url-upload" role="tabpanel" aria-labelledby="url-upload-tab">
+						      	<div class="tab-content" id="detail-tabContent">
+								   <div class="tab-pane fade" id="url-upload" role="tabpanel" aria-labelledby="url-upload-tab">
 								    	<input type="text" name="upUrl" id="upUrl" placeholder="url을 입력하세요"/>
 								   </div>
 								    
+								   <div class="tab-pane fade" id="file-upload" role="tabpanel" aria-labelledby="file-upload-tab">
+								    	<div class="input-group mb-3" style="padding:0px;">
+								    	 <!-- <form name="frm" method="post" enctype="multipart/form-data"> -->
+										  <div class="custom-file">
+										    <input type="file" class="custom-file-input" name="upFile" id="upFile">
+										    <label class="custom-file-label" for="upFile">이미지를 선택하세요</label>
+										  </div>
+										<!-- </form> -->
+										</div>
+								   </div>
 						   		</div>
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-primary" id="image-upload">업로드</button>

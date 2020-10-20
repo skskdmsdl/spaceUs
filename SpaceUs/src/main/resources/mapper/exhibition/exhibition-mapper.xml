@@ -24,11 +24,11 @@
 		exhibition
 	values(
 		seq_ex.nextval,
-		#{exTitle},
-		#{exSubtitle},
-		#{tag},
-		#{imageUrl},
-		#{renamedFileName}
+		   #{exTitle},
+		   #{exSubtitle},
+		   #{imageUrl},
+		   #{renamedFileName},
+		   #{tagNo}
 	)
 </insert>
 
