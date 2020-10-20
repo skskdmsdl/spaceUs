@@ -3,6 +3,7 @@ package com.kh.spaceus.exhibition.model.service;
 import java.util.List;
 
 import com.kh.spaceus.exhibition.model.vo.Exhibition;
+import com.kh.spaceus.exhibition.model.vo.ExhibitionTag;
 import com.kh.spaceus.space.model.vo.SpaceList;
 
 public interface ExhibitionService {
@@ -18,4 +19,6 @@ public interface ExhibitionService {
 	List<SpaceList> selectByTagNo(String tagNo);
 
 	Exhibition selectOneByTag(String tag);
+
+	List<ExhibitionTag> selectTagList();
 }

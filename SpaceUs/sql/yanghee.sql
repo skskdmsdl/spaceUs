@@ -1330,3 +1330,52 @@ alter table exhibition modify(tag_no varchar2(256));
 alter table exhibition add constraints fk_exhibition_tag_no foreign key(tag_no) references tag(tag_no);
 -- RENAMED_FILENAME
 alter table exhibition drop column;
+
+select
+	  *
+from
+  (
+    select
+      *
+    from
+      space
+    join space_tag using(space_no)
+  )
+  join tag using(tag_no)
+where
+  tag_no = 'TAG182';
+  
+  
+-- list 불러오기
+select * from space_tag;
+
+select
+		    S.space_no,
+		    S.space_name, 
+		    REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
+		    S.hourly_price,
+		    S.views,
+		    S.like_cnt,
+		    S.star_avg,
+		    (select reviews from( select ROW_NUMBER() OVER(partition by space_no ORDER BY space_no,reviews) row_num, space_no,reviews from( select count(*)over(partition by space_no) as reviews, space_no from review))where row_num =1 and space_no = 'space2') as reviews,
+            SI.renamed_filename,
+            ST.tag_no,
+            T.tag_name
+from space S join(
+                            select space_no,renamed_filename 
+                            from( select 
+                                    S.space_no,
+                                    SI.renamed_filename,
+                                    rank()over(partition by S.space_no order by SI.renamed_filename) as rnum 
+                                  from space S left join space_image SI 
+                                                on S.space_no = SI.space_no)
+                                  where rnum=1
+                        )SI on S.space_no = SI.space_no
+              join space_tag ST on S.space_no = ST.space_no
+              join tag T on ST.tag_no = T.tag_no
+		where S.status = 'O' and ST.tag_no='TAG164';
+        
+select * from space_tag where tag_no = 'TAG182';
+select * from space where space_no='space112';
+select * from review;
+select * from tag;
