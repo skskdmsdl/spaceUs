@@ -404,6 +404,10 @@ public class SpaceController {
 
 		//예약된 날짜와 시간
 		List<Unselectable> unselectableList = reservationService.unselectableList(spaceNo);
+		for(int i=0; i<unselectableList.size(); i++) {
+			System.out.println(unselectableList.get(i));
+		}
+		
 		
 		//쿠폰 보내기
 		List<Coupon> couponList = memberService.selectCouponList(principal.getName());

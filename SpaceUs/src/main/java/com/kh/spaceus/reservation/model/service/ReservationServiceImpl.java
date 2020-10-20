@@ -103,6 +103,16 @@ public class ReservationServiceImpl implements ReservationService{
 		return reservationDAO.unselectableList(spaceNo);
 	}
 
+	@Override
+	public int updateRevNo(String oldRevNo, String newRevNo) {
+		return reservationDAO.updateRevNo(oldRevNo, newRevNo);
+	}
+
+	@Override
+	public int deleteReservation(String revNo) {
+		return reservationDAO.deleteReservation(revNo);
+	}
+
 	
 	
 	

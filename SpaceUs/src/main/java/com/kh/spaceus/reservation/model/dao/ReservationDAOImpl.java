@@ -1,6 +1,8 @@
 package com.kh.spaceus.reservation.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -109,8 +111,17 @@ public class ReservationDAOImpl implements ReservationDAO{
 		return sqlSession.selectList("reservation.unselectableList", spaceNo);
 	}
 
-	
-	
-	
+	@Override
+	public int updateRevNo(String oldRevNo, String newRevNo) {
+		Map<String,String> map = new HashMap<>();
+		map.put("oldRevNo", oldRevNo);
+		map.put("newRevNo", newRevNo);
+		return sqlSession.update("reservation.updateRevNo", map);
+	}
+
+	@Override
+	public int deleteReservation(String revNo) {
+		return sqlSession.delete("reservation.deleteReservation", revNo);
+	}
 
 }

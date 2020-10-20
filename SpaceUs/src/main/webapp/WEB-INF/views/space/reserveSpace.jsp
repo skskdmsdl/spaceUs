@@ -198,12 +198,12 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 							  class="calculator-form">
 							 <input type="hidden" name="memberEmail" value="${ member.memberEmail }">
 							 <input type="hidden" name="spaceNo" value="${ space.spaceNo }">
-							 <input type="hidden" name="revNo" value="">
+							 <input type="hidden" name="revNo" value="${space.spaceNo}${member.memberEmail}">
 							 <input type="hidden" name="couponNo" value="">
 		
 	                         <div class="filter-input">
 	                             <p>예약 날짜</p>
-	                             <input type="text" name="Day" readonly>
+	                             <input type="text" name="day" readonly>
 	                         </div>
 	                         <div class="filter-input">
 	                             <p>예약 시간</p>
@@ -264,7 +264,7 @@ function selectDay(val){
 	if(date.getTime() <= today.getTime()){
 		alert("오늘과 지난 날짜는 예약이 불가능합니다.");
 		$("#D-day").val('');
-		$("[name=Day]").val('');
+		$("[name=day]").val('');
 		
 		resetHour();
 		for(var i=0; i<24; i++){
@@ -308,7 +308,7 @@ function selectDay(val){
 	
 	resetHour();
 
-	$("[name=Day]").val($("#D-day").val());
+	$("[name=day]").val($("#D-day").val());
 }
 
 //가능시간 클릭이벤트
@@ -434,7 +434,7 @@ function discount(){
 <script>
 $("#sub").on("click", function(){
 	//빈칸이면 입력 요구
-	if($("[name=Day]").val() == ""){
+	if($("[name=day]").val() == ""){
 		alert("예약날짜를 선택해주세요.");
 		document.getElementById("D-day").focus();
 		return false;
@@ -465,8 +465,8 @@ $("#sub").on("click", function(){
 		return false;
 	}
 
-	iamport();
-	
+	//iamport();
+	document.insertReservation.submit();
 });
 
 function iamport(){

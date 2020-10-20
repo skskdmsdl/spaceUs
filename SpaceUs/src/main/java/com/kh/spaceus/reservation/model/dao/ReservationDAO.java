@@ -41,8 +41,8 @@ public interface ReservationDAO {
 
 	List<Unselectable> unselectableList(String spaceNo);
 
+	int updateRevNo(String oldRevNo, String newRevNo);
 
-
-	
+	int deleteReservation(String revNo);
 
 }
