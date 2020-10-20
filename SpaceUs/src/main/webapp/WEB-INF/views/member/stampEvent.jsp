@@ -182,7 +182,7 @@ $("#calendar_content").click(function(){
 		dataType : "json",
 		success : function(data){
 			alert("출석확인 되었습니다!");
-			location.reload();
+			 location.reload(); 
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
