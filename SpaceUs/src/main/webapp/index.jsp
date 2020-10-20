@@ -197,13 +197,13 @@ $(document).on("click",".fa-2x",function(){
 });
 
 function cook(){
-	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tag=요리";
+	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tagNo=TAG182";
 }
 function birthday(){
-	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tag=힐링";
+	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tagNo=TAG63";
 }
 function meeting(){
-	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tag=오피스";
+	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tagNo=TAG204";
 }
 </script>
 

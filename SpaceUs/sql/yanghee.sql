@@ -723,6 +723,8 @@ create table exhibition (
 select * from exhibition;
 
 
+
+
 -----------------------------
 ---- 좋아요(위시리스트) ------
 -----------------------------
@@ -1386,7 +1388,7 @@ delete tag where tag_no = 'TAG180';
 commit;
 select * from tag;
 
-select * from exhibition;
+select * from exhibition order by ex_no;
 
 insert into
 		exhibition
@@ -1397,3 +1399,6 @@ values(
     #{imageUrl},
     #{renamedFileName}
     #{tagNo}
+    
+    
+add 
