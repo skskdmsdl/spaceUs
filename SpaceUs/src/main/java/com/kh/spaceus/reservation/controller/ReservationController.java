@@ -19,13 +19,10 @@ import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.Reservation;
-<<<<<<< HEAD
 import com.kh.spaceus.reservation.model.vo.Unselectable;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Space;
-=======
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
->>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
 
 import lombok.extern.slf4j.Slf4j;
 
