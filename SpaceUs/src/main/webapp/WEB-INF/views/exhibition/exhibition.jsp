@@ -32,7 +32,6 @@
 	      	<button type="button" class="btn btn-outline-danger" onclick="deleteEx('${ list.exNo }');">삭제</button>
 	      	<br />
 	      	</sec:authorize>
-	      	<input type="hidden" id="exNo" value="${ list.exNo }"/>
 	      		<div class="agent space1" onclick="exhibitionList('${list.tagNo}');">
   					<div class="img">
 	  					<c:if test="${ not empty list.imageUrl }">
@@ -56,14 +55,13 @@
 <script>
 
 function deleteEx(exNo){
-
 	if(confirm("정말 삭제하시겠습니까?") == false)
 		return;
-
+	
 	$.ajax({
 		url : "${ pageContext.request.contextPath }/exhibition/deleteExhibition?no=" + exNo,
 		data : {
-			exNo : $("#exNo").val()
+			exNo : exNo
 		},
 		success : function(data){
 			//console.log(data);

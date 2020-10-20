@@ -187,6 +187,7 @@ $(function(){
 										</div>
 						      		</div>
 						      </div>
+
 						      <!-- 모달바디 시작 -->
 						      <div class="modal-body">
 						      	<div class="tab-content" id="detail-tabContent">
@@ -216,6 +217,7 @@ $(function(){
 				   	</div>
 			   </div>
 		   </div>
+						         
                         <!-- 이미지업로드 모달끝-->
                         <div class="pf-property-details">
                             <button type="submit" class="site-btn">기획전등록</button>

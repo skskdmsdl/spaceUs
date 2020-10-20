@@ -41,7 +41,7 @@ Talk.ready.then(function() {
         name: "SpaceUs",
         email: "admin@spaceus.com",
         photoUrl: "https://localhost:9090/spaceus/",
-        welcomeMessage: "Hey, how can I help?"
+        welcomeMessage: "무엇을 도와드릴까요❓"
     });
 
     var conversation = talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other))

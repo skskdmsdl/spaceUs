@@ -42,6 +42,8 @@ public class ExhibitionController {
 	public ModelAndView exhibition(ModelAndView mav) {
 		
 		List<Exhibition> list = exhibitionService.selectExList();
+
+		System.out.println("@@@@@@@@"+list);
 		
 		mav.addObject("list", list);
 		
@@ -58,6 +60,7 @@ public class ExhibitionController {
 		List<SpaceList> exList = exhibitionService.selectByTagNo(tagNo);
 		
 		Exhibition exhibition = exhibitionService.selectOneByTag(tagNo);
+		
 		
 		mav.addObject("exhibition", exhibition);
 		mav.addObject("exList", exList);
