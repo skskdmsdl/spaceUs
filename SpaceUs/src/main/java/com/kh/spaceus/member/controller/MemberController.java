@@ -372,10 +372,11 @@ public class MemberController {
 		String encryptedNewPassword = bcryptPasswordEncoder.encode(newPassword);
 
 		String setfrom = "noreply.spaceus@gmail.com";
-		String title = "SpaceUs : 임시비밀번호";
-		String content = "새로운 비밀번호 : " + newPassword + "\n";
+		String title = "SpaceUs 비밀번호 변경 인증번호 메일입니다❤";
+		String content = "새로운 비밀번호는  [" + newPassword + "]입니다. \n";
+		
 		content += "새로운 비밀번호로 로그인 후 비밀번호를 변경해주세요";
-
+		
 		// 이메일확인
 		Member member = memberService.selectOneMember(tomail);
 
@@ -459,12 +460,12 @@ public class MemberController {
 	@ResponseBody
 	public HashMap<String, String> sendSms(HttpServletRequest request, RedirectAttributes redirectAttr,
 			@RequestParam("phone") String phone) throws Exception {
-		System.out.println("ssssssssssssssss");
 		
 		String api_key = "NCSCE6UYF5ENLSNF";
 		String api_secret = "WBPW8N0BWEWOGVYGYMNKNGQEB6QFPZZH";
+		String phoneChk1 = "SpaceUs 인증번호 = ";
 		String phoneChk = RandomStringUtils.randomNumeric(4);
-
+		
 		Message coolsms = new Message(api_key, api_secret);
 
 		Member member = memberService.selectOnePhone(phone);
@@ -478,6 +479,7 @@ public class MemberController {
 			params.put("to", phone);
 			params.put("from", "01048179843"); // 무조건 자기번호 (인증)
 			params.put("type", "SMS");
+			params.put("text", phoneChk1);
 			params.put("text", phoneChk);
 			params.put("app_version", "spaceUs"); // application name and version
 
