@@ -420,7 +420,7 @@ select
 			        space join space_image using (space_no) left outer join reservation using(space_no) left outer join review using(rev_no)
 			    where 
 			         reservation.member_email= #{memberEmail} ) S ) SS
-	     where rev_comple=1
+	     where rev_comple=1 and RNUM=1
 	     order by SS.rev_date desc
 	</select>
 	<resultMap type="space" id="spaceReviewMap">

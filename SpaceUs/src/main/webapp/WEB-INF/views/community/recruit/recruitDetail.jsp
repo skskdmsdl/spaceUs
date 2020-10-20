@@ -169,7 +169,8 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                            		<tr class="col-md-1">                           		
                            			
                                     <th><b>${list.nickName}</b></th>
-                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"><fmt:formatDate value="${list.date}" pattern="yyyy.MM.dd HH:mm"/></p></th>
+                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"><fmt:formatDate value="${list.date}" pattern="yyyy.MM.dd"/></p></th>
+                                    	
                                     	<c:if test="${  list.reporter != loginMember  }">
                                     <th> |</th>
                                     <th>
@@ -235,7 +236,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                         	<div style="margin: 10px 0 0 3%;">
 	                         		<tr class="col-md-1">
 	                                    <th><b>${list.nickName}</b></th>
-	                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"><fmt:formatDate value="${list.date}" pattern="yyyy.MM.dd HH:mm"/></p></th>
+	                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"><fmt:formatDate value="${list.date}" pattern="yyyy.MM.dd"/></p></th>
 	                                     
 	                                     <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
 	                                         <th>	
