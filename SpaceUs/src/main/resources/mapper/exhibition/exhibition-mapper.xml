@@ -9,6 +9,7 @@
 	    * 
 	from 
 	    exhibition left join tag using(tag_no)
+	order by EX_NO desc
 </select>
 
 <delete id="deleteExhibition">
@@ -23,12 +24,12 @@
 	insert into
 		exhibition
 	values(
-		seq_ex.nextval,
 		   #{exTitle},
 		   #{exSubtitle},
 		   #{imageUrl},
 		   #{renamedFileName},
-		   #{tagNo}
+		   #{tagNo},
+		   seq_ex.nextval
 	)
 </insert>
 
