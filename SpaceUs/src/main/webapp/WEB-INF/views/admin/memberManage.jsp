@@ -233,6 +233,80 @@ div#search-userName {
 		});
 	});
 </script>
+<script>
+(function(t,a,l,k,j,s){
+s=a.createElement('script');s.async=1;s.src="https://cdn.talkjs.com/talk.js";a.head.appendChild(s)
+;k=t.Promise;t.Talk={v:3,ready:{then:function(f){if(k)return new k(function(r,e){l.push([f,r,e])});l
+.push([f])},catch:function(){return k&&new k()},c:l}};})(window,document,[]);
+</script>
+
+
+<input type="hidden" id="nick" value="${member.nickName}" />
+<input type="hidden" id="mail" value="${member.memberEmail}" />
+<input type="hidden" id="result" value="${member.nickName =='관리자'?'SpaceUs':'회원'}" />
+<script>
+
+Talk.ready.then(function() {
+    var me = new Talk.User({
+        id: $("#nick").val(),
+        name: $("#nick").val(),
+        email: $("#mail").val(),
+        photoUrl: "https://localhost:9090/spaceus/",
+        welcomeMessage: "Hey there! How are you? :-)"
+    });
+    window.talkSession = new Talk.Session({
+        appId: "t9ROalbH",
+        me: me
+    });
+    var other = new Talk.User({
+        id: "관리자",
+        name: "SpaceUs",
+        email: "admin@spaceus.com",
+        photoUrl: "https://localhost:9090/spaceus/",
+        welcomeMessage: "무엇을 도와드릴까요❓"
+    });
+
+    var conversation = talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other))
+    conversation.setParticipant(me);
+    conversation.setParticipant(other);
+
+
+    if($("#nick").val() == '관리자'){
+    	 var inbox = talkSession.createInbox({selected: conversation});
+ 	    inbox.mount(document.getElementById("talkjs-container"));
+    }
+    else{
+    var conversation = window.talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other));
+    conversation.setParticipant(me);
+    conversation.setParticipant(other);
+    var popup = window.talkSession.createPopup(conversation, { keepOpen: false });
+    popup.mount({ show: false });
+
+    var button = document.getElementById("btn-getInTouch");
+    button.addEventListener("click", function(event) {
+        event.preventDefault();
+        popup.show();
+    });
+    }
+});
+var other = new Talk.User({
+	 id: $("#nick").val(),
+    name: $("#result").val(),
+    email: $("#mail").val(),
+    photoUrl: "http://localhost:9090/spaceus/",
+    welcomeMessage: "무엇을 도와드릴까요?"
+});
+
+var conversation = talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other));
+conversation.setParticipant(me);
+conversation.setParticipant(other);
+
+var conversation = talkSession.getOrCreateConversation(user);
+
+conversation.setAttributes({
+   subject: "Hair Wax 5 Gallons"
+}); 
+</script>
 
 <div class="skin-default-dark fixed-layout">
    <div class="preloader">
@@ -246,6 +320,13 @@ div#search-userName {
 	<!-- ============================================================== -->
 	<div id="main-wrapper">
 	    <!-- 마이페이지 헤더 -->
+	    <!-- 채팅 -->
+<div id="talkjs-container" style="background-color: rgba(0,0,0,0);margin-left: 40%;margin-top:10%; height: 500px; position: fixed; z-index: 10;box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px; display:none;">
+    <i>Loading chat...</i>
+</div> 
+<div>
+	<button id="chatBtn">🧑</button>
+</div>
 	<header class="topbar">
 	    <nav class="navbar top-navbar navbar-expand-md navbar-light">
 	        <div class="navbar-header">
@@ -279,6 +360,7 @@ div#search-userName {
 	    <!-- End Sidebar scroll-->
 	</aside>
 	<!-- 왼쪽 목록 끝 -->
+	 
 	 
 	 <!-- 어드민 memberManage1 본문 시작 -->
     <div class="page-wrapper">
@@ -394,9 +476,11 @@ div#search-userName {
 		                    	</c:forEach>
 		                    </tbody>
 		                </table>
+		                    	
 		            </div>
 		        </div>
 		    </div>
+		    
 		    <!-- 페이징처리 시작 -->
 	 		<nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 45%;">
 				<ul class="pagination" style="border:0; margin-right:10px;">
@@ -405,6 +489,7 @@ div#search-userName {
 	 		</nav>
 	 		<!-- 페이징 처리 끝 -->
           <!-- memberManageList끝-->
+          
        </div>
     </div>
 	 
@@ -413,6 +498,13 @@ div#search-userName {
 	 </div>
  </div>
  
+ <script>
+ $(function(){
+		$("#chatBtn").click(function(){
+			$("#talkjs-container").toggle('show');
+		});
+	});
+ </script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap popper Core JavaScript -->

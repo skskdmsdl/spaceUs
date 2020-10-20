@@ -1,5 +1,6 @@
 package com.kh.spaceus.admin.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,8 @@ import com.kh.spaceus.admin.model.vo.ManageSpace;
 import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.community.group.model.vo.GroupBoard;
 import com.kh.spaceus.community.group.model.vo.Report;
+import com.kh.spaceus.member.model.service.MemberService;
+import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.space.model.vo.Category;
 import com.kh.spaceus.space.model.vo.Space;
 
@@ -39,22 +42,28 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
+	@Autowired
+	private MemberService memberService;
+	
 	//회원관리 폼
 	@RequestMapping("/memberManage.do")
-	public String memberManage(Model model,HttpServletRequest request,
-			@RequestParam(defaultValue = "1", value="cPage") int cPage) {
+	public String memberManage(Model model,HttpServletRequest request, Principal principal,
+								@RequestParam(defaultValue = "1", value="cPage") int cPage) {
 		//페이징 처리
 		final int limit = 10;
 		int offset = (cPage -1) * limit;
 		
 		List<ManageMember> memberList = adminService.selectList(limit,offset);
 		log.info("memberList={}",memberList);
+		Member member = memberService.selectOneMember(principal.getName());
 		
+		model.addAttribute("member", member);
 		int totalCnt = adminService.selectTotalCnt();
 		String url = request.getRequestURI() + "?";
 		String pageBar = Utils.getPageBarHtml(cPage, limit, totalCnt, url);
 		log.info("totalCnt = {}", totalCnt);
 		
+		model.addAttribute("member", member);
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("pageBar", pageBar);
 		model.addAttribute("memberList", memberList);

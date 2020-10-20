@@ -32,8 +32,7 @@
 	      	<button type="button" class="btn btn-outline-danger" onclick="deleteEx('${ list.exNo }');">삭제</button>
 	      	<br />
 	      	</sec:authorize>
-	      	<input type="hidden" id="exNo" value="${ list.exNo }"/>
-	      		<div class="agent space1" onclick="exhibitionList('${list.tag}');">
+	      		<div class="agent space1" onclick="exhibitionList('${list.tagNo}');">
   					<div class="img">
 	  					<c:if test="${ not empty list.imageUrl }">
 	    					<img src="${ list.imageUrl  }">
@@ -56,19 +55,20 @@
 <script>
 
 function deleteEx(exNo){
-
 	if(confirm("정말 삭제하시겠습니까?") == false)
 		return;
-
+	
 	$.ajax({
 		url : "${ pageContext.request.contextPath }/exhibition/deleteExhibition?no=" + exNo,
 		data : {
-			exNo : $("#exNo").val()
+			exNo : exNo
 		},
 		success : function(data){
-			//console.log(data);
-			alert('삭제가 완료되었습니다.');
-			window.location.reload();
+
+			swal("삭제가 완료되었습니다.")
+			.then((value) => {
+				window.location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -76,9 +76,9 @@ function deleteEx(exNo){
 	});
 }
 
-function exhibitionList (tag) {
-	console.log("tag = " + tag);
-	location.href = "${pageContext.request.contextPath}/exhibition/exhibitionList.do?tag=" + tag;
+function exhibitionList (tagNo) {
+	
+	location.href = "${pageContext.request.contextPath}/exhibition/exhibitionList.do?tagNo=" + tagNo;
 };
 
 </script>

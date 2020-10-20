@@ -45,6 +45,8 @@ public interface ReservationService {
 
 	List<Unselectable> unselectableList(String spaceNo);
 
+	int updateComple();
+
 	int updateRevNo(String oldRevNo, String newRevNo);
 
 	int deleteReservation(String revNo);

@@ -40,13 +40,18 @@ insert into member values('user28@naver.com','유저28','$2a$10$Qc91X8k0YEUfCTws
 insert into member values('user29@naver.com','유저29','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-16',default,0,default);
 insert into member values('user30@naver.com','유저30','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01048179843','1990-10-17',default,0,default);
 
-
-
+select * from member where member_phone = '01048179843';
+select * from auth where member_email='rhkim10@naver.com';
+update member set member_phone='01045674567' where member_phone='01048179843';
+commit;
 
 update member set password = '$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu' where member_email = 'admin@spaceus.com';
 
-delete from member where member_email='rhkim10@naver.com';
-delete from auth where member_email='rhkim10@naver.com';
+delete from member where member_email='rhkim999@gmail.com';
+delete from auth where member_email='rhkim999@gmail.com';
+select * from tag;
+select * from exhibition;
+delete from exhibition where ex_no='90';
 
 commit;
 
@@ -716,6 +721,12 @@ create table exhibition (
 
 
 select * from exhibition;
+COMMIT;
+update exhibition set ex_no= 6 where tag_no='TAG6';
+
+ALTER TABLE exhibition DROP COLUMN ex_no;
+ALTER TABLE exhibition ADD ex_no number;
+ALTER TABLE 테이블명 MODIFY (컬럼명 데이터타입(데이터길이));
 
 
 -----------------------------
@@ -1302,3 +1313,117 @@ select * from reservation; where member_email='rhkim999@gmail.com';
 select * from reservation where member_email='honggd@naver.com';
 update reservation set rev_cancle=0 where member_email='honggd@naver.com';
 commit;
+-------------------------------
+--10/19
+-------------------------------
+select * from member;
+select * from exhibition;
+select * from tag;
+
+update exhibition set tag_no = 'TAG182' where ex_no='21'; 
+commit;
+
+
+create table exhibition (
+    ex_title varchar2(256) not null,
+    ex_subtitle varchar2(256) not null,
+    tag varchar2(100) not null
+);
+select * from exhibition;
+-- tag_no 추가
+alter table exhibition modify(tag_no varchar2(256));
+-- tag_no tag와 fk
+alter table exhibition add constraints fk_exhibition_tag_no foreign key(tag_no) references tag(tag_no);
+-- RENAMED_FILENAME
+alter table exhibition drop column;
+
+select
+	  *
+from
+  (
+    select
+      *
+    from
+      space
+    join space_tag using(space_no)
+  )
+  join tag using(tag_no)
+where
+  tag_no = 'TAG182';
+  
+  
+-- list 불러오기
+select * from space_tag;
+
+select
+		    S.space_no,
+		    S.space_name, 
+		    REGEXP_SUBSTR(address,'[^ ]+',1,3) as address,
+		    S.hourly_price,
+		    S.views,
+		    S.like_cnt,
+		    S.star_avg,
+		    (select reviews from( select ROW_NUMBER() OVER(partition by space_no ORDER BY space_no,reviews) row_num, space_no,reviews from( select count(*)over(partition by space_no) as reviews, space_no from review))where row_num =1 and space_no = 'space2') as reviews,
+            SI.renamed_filename,
+            ST.tag_no,
+            T.tag_name
+from space S join(
+                            select space_no,renamed_filename 
+                            from( select 
+                                    S.space_no,
+                                    SI.renamed_filename,
+                                    rank()over(partition by S.space_no order by SI.renamed_filename) as rnum 
+                                  from space S left join space_image SI 
+                                                on S.space_no = SI.space_no)
+                                  where rnum=1
+                        )SI on S.space_no = SI.space_no
+              join space_tag ST on S.space_no = ST.space_no
+              join tag T on ST.tag_no = T.tag_no
+		where S.status = 'O' and ST.tag_no='TAG164';
+        
+select * from space_tag where tag_no = 'TAG182';
+select * from space where space_no='space112';
+select * from review;
+select * from tag;
+--------------------------------------
+--10/20
+--------------------------------------
+delete tag where tag_no = 'TAG180';
+commit;
+select * from tag;
+
+select * from exhibition order by ex_no;
+
+drop sequence seq_ex;
+create sequence seq_ex start with 7;
+
+insert into
+		exhibition
+values(
+    seq_ex.nextval,
+    #{exTitle},
+    #{exSubtitle},
+    #{imageUrl},
+    #{renamedFileName}
+    #{tagNo}
+add ;
+
+select * from exhibition;
+commit;
+update exhibition set tag_no='TAG89' where ex_no=8;
+rollback;
+
+select * from report;
+
+select * from group_board;
+select * from blackList;
+select * from space;
+select * from member;
+select * from auth;
+insert into auth values('jj@naver.com','ROLE_HOST');
+update auth set authority='ROLE_USER' where member_email='jj@naver.com';
+COMMIT;
+update space set hourly_price=500 where space_no = 'space108';
+commit;
+
+select * from reservation; 

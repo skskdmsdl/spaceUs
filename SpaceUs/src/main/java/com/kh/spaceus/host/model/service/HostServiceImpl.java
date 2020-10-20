@@ -1,15 +1,13 @@
 package com.kh.spaceus.host.model.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spaceus.host.model.dao.HostDAO;
+import com.kh.spaceus.host.model.vo.DailySale;
 import com.kh.spaceus.qna.model.vo.Qna;
-import com.kh.spaceus.reservation.model.vo.Reservation;
-import com.kh.spaceus.space.model.vo.Space;
 
 @Service
 public class HostServiceImpl implements HostService {
@@ -23,7 +21,7 @@ public class HostServiceImpl implements HostService {
 	}
 
 	@Override
-	public List<HashMap<String,Object>> selectSettlementList(String hostId) {
+	public List<DailySale> selectSettlementList(String hostId) {
 		return hostDAO.selectSettlementList(hostId);
 	}
 
@@ -41,5 +39,9 @@ public class HostServiceImpl implements HostService {
 	public int insertSettlement(String spaceNo) {
 		return hostDAO.insertSettlement(spaceNo);
 	}
+
+	
+
+
 
 }

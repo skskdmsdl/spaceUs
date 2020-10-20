@@ -7,7 +7,6 @@
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style>
 .carousel {
@@ -182,18 +181,14 @@
 				                <div id="myCarousel" class="carousel slide" data-ride="carousel">
 				                    <!-- Carousel indicators -->
 				                    <ol class="carousel-indicators" >
-				                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 				                    	<c:forEach items="${sapceOneImageList}" var="image" varStatus="vs">
 					                        <li data-target="#myCarousel" data-slide-to="${vs.count}"></li>
 				                        </c:forEach>
 				                    </ol>
 				                    <!-- Wrapper for carousel items -->
 				                    <div class="carousel-inner" >
-				                        <div class="carousel-item active">
-				                            <img src="${pageContext.request.contextPath}/resources/images/image_1.jpg" class="img-fluid" alt="">
-				                        </div>
 							            <c:forEach items="${sapceOneImageList}" var="image" varStatus="vs">
-					                        <div class="carousel-item">
+					                        <div class="carousel-item" id="spaceImg">
 					                            <img src="${pageContext.request.contextPath}/resources/upload/space/${image.renamedFilename}" class="img-fluid" alt="">
 					                        </div> 
 							            </c:forEach>
@@ -305,8 +300,6 @@ $(".confirm").click(function(){
 	
 	var spaceNo = $(this).val();
 	var memberEmail = $(this).siblings(".member").val();
-	//alert(spaceNo);
-	//alert(memberEmail);
 
 	var param1 = "spaceNo="+spaceNo+
 				"&memberEmail="+memberEmail;
@@ -325,12 +318,18 @@ $(".confirm").click(function(){
 				data:param1,
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				success: function(){
-					alert("공간 승인이 정상적으로 등록되었습니다.");
-					location.href="${pageContext.request.contextPath}/admin/spaceManage.do";
+					swal("공간 승인이 정상적으로 등록되었습니다.")
+					.then((value) => {
+						location.href="${pageContext.request.contextPath}/admin/spaceManage.do";
+					});
 				},
 				error: function(){
-					alert("공간 승인이 정상적으로 등록이 되지 않았습니다.");
-					location.href="${pageContext.request.contextPath}/admin/spaceManage.do";
+
+					swal("공간 승인이 정상적으로 등록이 되지 않았습니다.")
+					.then((value) => {
+						location.href="${pageContext.request.contextPath}/admin/spaceManage.do";
+					});
+					
 				}
 			});
 
@@ -341,6 +340,10 @@ $(".confirm").click(function(){
 
 			}); 
 });
+ $(function(){
+	$("#spaceImg").addClass("active");
+}); 
+
 </script>
     <!-- Property Submit Section End -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>

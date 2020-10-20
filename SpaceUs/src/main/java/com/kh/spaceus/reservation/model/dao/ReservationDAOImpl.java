@@ -124,4 +124,9 @@ public class ReservationDAOImpl implements ReservationDAO{
 		return sqlSession.delete("reservation.deleteReservation", revNo);
 	}
 
+	public int updateComple() {
+		return sqlSession.update("reservation.updateComple");
+	}
+
+
 }

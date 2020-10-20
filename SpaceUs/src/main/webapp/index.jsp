@@ -105,8 +105,8 @@ font-family: 'NEXON Lv1 Gothic OTF';
   outline: none;
   color: black;
   padding: 3px;
-  padding-right: 60px;
-  padding-left: 60px;
+ /*  padding-right: 60px;
+  padding-left: 60px; */
   top: 0;
   right: 0;
   background: none;
@@ -196,49 +196,18 @@ $(document).on("click",".fa-2x",function(){
 });
 
 function cook(){
-	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tag=요리";
+	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tagNo=TAG182";
 }
 function birthday(){
-	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tag=힐링";
+	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tagNo=TAG63";
 }
 function meeting(){
-	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tag=오피스";
+	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tagNo=TAG204";
 }
 </script>
 
 <!-- 컨텐츠 시작 -->
-
-<%-- <div class="ftco-degree-bg"
-	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_1.jpg');
-	 		height: 600px"
-	 data-stellar-background-ratio="0.5">
-  <div class="overlay"></div>
-  	<div class="container">
-    	<div class="row no-gutters slider-text justify-content-center align-items-center">
-      		<div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-end">
-      			<div class="text text-center mx-auto" style="margin-bottom:25%;">
-          			<h1 class="mb-4">어떤 공간을<br>찾고 있나요?</h1>
-          			<p></p>
-		  				<i class="fas fa-search fa-2x" style="color:#00C89E"></i>	
-     					<div id="disapear" style="margin-top:-20px">
-     						<div id="wrap">
-		  						<input id="searchInput" class="searchInput" name="search_keyword" placeholder="키워드를 입력하세요">
-		  						<input type="submit" class="search-btn btn btn-primary " value="입력" onclick="searchSpace();" style="background: #00c89e;"/>
-							</div>
-         				</div>
-       			</div>
-     		</div>
-   		</div>
-  <div class="mouse">
-	<a href="#" class="mouse-icon">
-		<div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
-	</a>
-</div>
- </div>
-</div> 
- --%>
  
-
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="top:12%;">
   <div class="carousel-inner">
     <div class="carousel-item active" style="height: 500px;">
@@ -246,7 +215,7 @@ function meeting(){
       <div class="carousel-caption d-none d-md-block" style="top: 6em;">
         <h2 class="mb-4" style="text-decoration: underline; text-underline-position: under;">"제일 잘하는 요리 친구들에게 만들어줘요!"</h2>
         <h4 class="mb-4">우리만의 요리대회 공간</h4>
-        <button type="submit" class="btn-lg btn-dark mt-4" style="border-radius: 100px;" onclick="cook();">바로가기</button>
+        <button type="submit" class="btn-lg btn btn-black font-18 mt-4" style="border-radius: 100px;" onclick="cook();">바로가기</button>
       </div>
 	</div>
     <div class="carousel-item" style="height: 500px;">
@@ -254,7 +223,7 @@ function meeting(){
    	  <div class="carousel-caption d-none d-md-block" style="top: 6em;">
         <h2 class="mb-4" style="text-decoration: underline; text-underline-position: under;">"1년에 한번! 나를 더욱 더 사랑하는 방법"</h2>
         <h4 class="mb-4">특별한 생일을 위한 공간</h4>
-        <button type="submit" class="btn-lg btn-dark mt-4" style="border-radius: 100px;" onclick="birthday();">바로가기</button>
+        <button type="submit" class="btn-lg btn btn-black font-18 mt-4" style="border-radius: 100px;" onclick="birthday();">바로가기</button>
       </div>
     </div>
     <div class="carousel-item" style="height: 500px;">
@@ -262,9 +231,27 @@ function meeting(){
       <div class="carousel-caption d-none d-md-block" style="top: 6em;">
         <h2 class="mb-4" style="text-decoration: underline; text-underline-position: under;">"스마트한 팀워크를 위한 공유오피스 모음"</h2>
         <h4 class="mb-4">팀을 위한 공유 오피스</h4>
-        <button type="submit" class="btn-lg btn-dark mt-4" style="border-radius: 100px;" onclick="meeting();">바로가기</button>
+        <button type="submit" class="btn-lg btn btn-black font-18 mt-4" style="border-radius: 100px;" onclick="meeting();">바로가기</button>
       </div>	
     </div>
+    <!-- 커뮤니티 -->
+    <div class="carousel-item" style="height: 500px;">
+      <img src="${pageContext.request.contextPath }/resources/images/work.jpg" class="d-block w-100" style="opacity: .5;">
+      <div class="carousel-caption d-none d-md-block" style="top: 6em;">
+        <h2 class="mb-4" style="text-decoration: underline; text-underline-position: under;">"JOB을 잡고 싶은 사람들을 위한 커뮤니티"</h2>
+        <h4 class="mb-4">구인/구직 어렵지 않아요</h4>
+        <button type="submit" class="btn-lg btn btn-black font-18 mt-4" style="border-radius: 100px;" onclick="work();">바로가기</button>
+      </div>	
+    </div>
+    <div class="carousel-item" style="height: 500px;">
+      <img src="${pageContext.request.contextPath }/resources/images/group.jpg" class="d-block w-100" style="opacity: .5;">
+      <div class="carousel-caption d-none d-md-block" style="top: 6em;">
+        <h2 class="mb-4" style="text-decoration: underline; text-underline-position: under;">"나도 똑똑하게 인맥을 쌓아간다!!"</h2>
+        <h4 class="mb-4">넓은 인맥을 공유하고 싶다면?</h4>
+        <button type="submit" class="btn-lg btn btn-black font-18 mt-4" style="border-radius: 100px;" onclick="group();">바로가기</button>
+      </div>	
+    </div>
+    <!-- /커뮤니티 -->
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -276,11 +263,6 @@ function meeting(){
   </a>
 </div>
 
-
-
-
-
-
 <!-- 검색창 시작 -->
 <section class="ftco-section goto-here search-section spad">
  <div class="container">
@@ -289,10 +271,10 @@ function meeting(){
       			<div class="text text-center mx-auto" style="margin-top:5%; margin-bottom :10%;">
           			<h2 class="mb-4"><strong>당신은 어떤 공간을 찾고 있나요?</strong></h2>
           			<p></p>
-		  				<i class="fas fa-search fa-2x" style="color:#00C89E"></i>	
+		  				<i class="fas fa-search fa-2x mt-4" style="color:#00C89E"></i>	
      					<div id="disapear" style="margin-top:-20px">
-     						<div id="wrap" style="width: 100%;">
-		  						<input id="searchInput" class="searchInput" name="search_keyword" placeholder="지역 또는 공간유형을 검색해보세요!" style="width: 90%; display: inline-block; text-align: center;">
+     						<div id="wrap" class="mb-5 mt-3" >
+		  						<input id="searchInput" class="searchInput" name="search_keyword" placeholder="지역 또는 공간유형을 검색해보세요!" style="width: 400px; display: inline-block; text-align: center;">
 		  						<input type="submit" class="search-btn btn btn-primary " value="입력" onclick="searchSpace();" style="background: #00c89e; display: inline-block;"/>
 							</div>
          				</div>
@@ -435,61 +417,6 @@ function meeting(){
     			</div>
     		</div>
     	</div> 
-<!--     	 <div class="col-md-4">
-    		<div class="property-wrap ftco-animate">
-    		<a href="" class="pop3"></a>
-    			<div class="text">
-    				<p class="price"><span class="space-price price3"></span><small>원/시간</small></p>
-    				<ul class="property_list">
-    					<li class="view3"><span class="icon-eye"></span></li>
-    					<li class="like3"><span class="icon-heart"></span></li>
-    					<li class="star3"><span class="icon-star"></span></li>
-    				</ul>
-    				<h3 class="title3"></h3>
-    				<small><span class="icon-my_location location3"></span></small>
-    			</div>
-    		</div>
-    	</div> 
-    	<div class="col-md-4">
-    		<div class="property-wrap ftco-animate">
-    		<a href="" class="pop4"></a>
-    			<div class="text">
-    				<p class="price"><span class="space-price price4"></span><small>원/시간</small></p>
-    				<ul class="property_list">
-    					<li class="view4"><span class="icon-eye"></span></li>
-    					<li class="like4"><span class="icon-heart"></span></li>
-    					<li class="star4"><span class="icon-star"></span></li>
-    				</ul>
-    				<h3 class="title4"></h3>
-    				<small><span class="icon-my_location location4"></span></small>
-    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    				<span class="icon-heart"></span>
-    				</a>
-    			</div>
-    		</div>
-    	</div>
-    	 
-    	</div> 
-    	<div class="col-md-5">
-    		<div class="property-wrap ftco-animate">
-    		<a href="" class="pop5"></a>
-    			<div class="text">
-    				<p class="price"><span class="space-price price5"></span><small>원/시간</small></p>
-    				<ul class="property_list">
-    					<li class="view5"><span class="icon-eye"></span></li>
-    					<li class="like5"><span class="icon-heart"></span></li>
-    					<li class="star5"><span class="icon-star"></span></li>
-    				</ul>
-    				<h3 class="title5"></h3>
-    				<small><span class="icon-my_location location5"></span></small>
-    				<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    				<span class="icon-heart"></span>
-    				</a>
-    			</div>
-    		</div>
-    	</div>  -->
-    	
-			<!-- 인기공간 리스트 -->
     </div>
 	</div>
 </section>
@@ -505,33 +432,13 @@ function meeting(){
         </div>
         <div class="row d-flex" id="review-wrapper">
          
-<%--           <div class="col-md-3 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <div class="text">
-                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-                <div class="meta mb-3">
-                  <div><a href="#">July. 24, 2019</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <a href="blog-single.html" class="block-20 img" style="background-image: url('${pageContext.request.contextPath }/resources/images/image_4.jpg');">
-	              </a>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-              </div>
-            </div>
-          </div> --%>
-          <%-- <div class="col-md-3 d-flex ftco-animate"><div class="blog-entry justify-content-end"><div class="text"><h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3><div class="meta mb-3">
-          <div><a href="#">1601471972000</a></div><div><a href="#">홍길동</a></div><div><a href="#" class="meta-chat"><span class="icon-heart"></span>5</a></div></div><a href="blog-single.html" class="lock-20 img" 
-          							style="background-image:url('${pageContext.request.contextPath }
-										/resources/upload/review/20201001_071933031_653.jpg');"></a><p>❤❤같이 예약 시간을 잘못알았네요 잊고있다가 갑자기 생각나서 갔는데 시간도 미뤄주시고 정말 감사했습니다. 깔끔했구요 덕분에 좋은 추억 만들 수 있었습니다! </p></div></div></div>
-        </div> --%>
       </div>
     </section>	
 <!-- 이용자리뷰 끝-->
 <script>
 $(function () { 
 	memberId();
-});
+}); 
 $(function () { 
 	popular();
 }); 
@@ -594,7 +501,7 @@ function searchSpace(){
 	keyword = keyword.replace('#','%23');
 	
 	if(keyword == null || keyword == ''){
-		alert("키워드를 입력해주세요!");
+		swal("키워드를 입력해주세요!");
 		return;
 	}
 	else{

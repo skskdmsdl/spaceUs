@@ -62,7 +62,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                              <table class="table">
                                      <tr>
                                          <th >분류</th>
-                                         <th><select class="nice-select sm-width small" name="header">
+                                         <th><select class="nice-select sm-width " name="header">
 							                    <option value="" selected hidden>분류선택</option>
 							                    <option value="구인">구인</option>
 							                    <option value="구직">구직</option>
@@ -70,7 +70,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                                      </tr>
                                      <tr>
                                          <td >제목</td>
-                                         <td><input type="text" placeholder="제목을 입력해주세요" style="border:none;" name="title"/></td>
+                                         <td><input type="text" placeholder="제목을 입력해주세요" style="border:none; width:500px;" name="title"/></td>
                                      </tr>
                                      <tr>
                                      <td >내용</td>
@@ -119,11 +119,11 @@ nhn.husky.EZCreator.createInIFrame({
 }); 
  $("#insertBtn").click( function(){
 	 if($("select[name=header]").val()==""){
-		alert("분류를 선택해주세요");
+		swal("분류를 선택해주세요");
 		return false;
 		 }
 	 if($("input[name=title]").val()==""){
-		alert("제목을 입력해주세요");
+		swal("제목을 입력해주세요");
 		return false;
 		 }
 	 oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);  

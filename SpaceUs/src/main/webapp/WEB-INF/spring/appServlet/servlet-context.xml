@@ -82,5 +82,8 @@
 	<context:component-scan base-package="com.kh.spaceus.scheduler" />
     <task:scheduler id="jobScheduler" pool-size="10" /> 
     <task:annotation-driven scheduler="jobScheduler" />
+    
+    
 
 </beans:beans>
+   

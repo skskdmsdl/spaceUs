@@ -43,27 +43,43 @@
 	where rownum between 1 and 50
   </select>
   
-  <resultMap id="settlementMap" type="HashMap">
-  	<id column="space_no" property="spaceNo" />
-  	<id column="space_name" property="spaceName" />
-  	<id column="settlement_date" property="date" />
-  	<id column="daily_total_hour" property="totalHour" />
-  	<id column="daily_revenue" property="revenue" />
+  <resultMap id="settlementMap" type="DailySale">
+  	<id column="daily_sale_no" property="saleNo" />
+  	<result column="settlement_date" property="date" />
+  	<result column="daily_total_hour" property="totalHour" />
+  	<result column="daily_revenue" property="revenue" />
   </resultMap>
   
   <select id="selectSettlementList" resultMap= "settlementMap">
-	select 
-		space.space_no,
-		space_name,
-		settlement_date,
-		daily_total_hour,
-		daily_revenue		
-	from 
-		daily_sale join space 
-	    on daily_sale.space_no=space.space_no
-	where 
-		member_email=#{hostId}
+  SELECT TO_CHAR(D.settlement_date, 'YYYY-MM-DD') AS settlement_date,
+               S.member_email, D.daily_revenue, d.daily_total_hour
+           FROM daily_sale D join space S on S.space_no=D.space_no 
+          WHERE D.settlement_date BETWEEN SYSDATE-30
+                             AND SYSDATE
+                AND S.member_email=#{hostId}
+  
+  
+<!-- 	SELECT TO_CHAR(b.dt, 'YYYY-MM-DD') AS settlement_date
+     , NVL(daily_revenue, 0) daily_revenue, NVL(a.daily_total_hour, 0) as daily_total_hour
+  FROM (   SELECT TO_CHAR(D.settlement_date, 'YYYY-MM-DD') AS settlement_date,
+               S.member_email, D.daily_revenue, d.daily_total_hour
+           FROM daily_sale D join space S on S.space_no=D.space_no 
+          WHERE D.settlement_date BETWEEN SYSDATE-30
+                             AND SYSDATE
+                AND S.member_email=#{hostId}
+        ) a
+      , ( SELECT (SYSDATE-30) + LEVEL - 1 AS dt
+            FROM dual 
+          <![CDATA[
+         CONNECT BY LEVEL <= ( SYSDATE 
+                            - (SYSDATE-30)]]> + 1)
+        ) b
+  WHERE b.dt = a.settlement_date(+)
+  ORDER BY b.dt -->
+  		
+  
   </select>
+  
   
   <select id="selectReservationSpaceNo" resultType="string">
 	select 

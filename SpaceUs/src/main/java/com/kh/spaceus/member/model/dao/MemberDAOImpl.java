@@ -122,6 +122,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public int selectWishTotal(String email) {
+		return sqlSession.selectOne("member.selectWishTotal", email);
+	}
+	
+	@Override
 	public int updatePwd(String memberEmail) {
 		return sqlSession.update("member.updateUser",memberEmail);
 	}

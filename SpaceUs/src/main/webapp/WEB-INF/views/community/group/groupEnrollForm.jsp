@@ -71,12 +71,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 								                    		<option value="${board.boardNo}">${board.boardName}</option>
 	                                  					 </c:forEach>
 								                </select> 
-								               <!--  <select name="job">
-												    <option value="">직업선택</option>
-												    <option value="학생">학생</option>
-												    <option value="회사원">회사원</option>
-												    <option value="기타">기타</option>
-												</select> -->
+								              
 								             </th>
 	                                     </tr>
 	                                     <tr>
@@ -141,11 +136,11 @@ nhn.husky.EZCreator.createInIFrame({
 }); 
  $("#insertBtn").click( function(){
 	 if($("select[name=boardNo]").val()==""){
-		alert("분류를 선택해주세요");
+		swal("분류를 선택해주세요");
 		return false;
 		 }
 	 if($("input[name=groupBoardTitle]").val()==""){
-		alert("제목을 입력해주세요");
+		swal("제목을 입력해주세요");
 		return false;
 		 }
 	 oEditors.getById["gb"].exec("UPDATE_CONTENTS_FIELD", []);  

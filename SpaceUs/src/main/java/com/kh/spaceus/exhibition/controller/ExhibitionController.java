@@ -6,14 +6,11 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.exhibition.model.service.ExhibitionService;
 import com.kh.spaceus.exhibition.model.vo.Exhibition;
+import com.kh.spaceus.exhibition.model.vo.ExhibitionTag;
+import com.kh.spaceus.space.model.vo.SpaceList;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,28 +42,28 @@ public class ExhibitionController {
 	public ModelAndView exhibition(ModelAndView mav) {
 		
 		List<Exhibition> list = exhibitionService.selectExList();
-		
-		//log.info("list = {}", list);
+
+		System.out.println("@@@@@@@@"+list);
 		
 		mav.addObject("list", list);
 		
 		mav.setViewName("exhibition/exhibition");
+		
 		return mav;
 	}
 	
 	//기획전리스트
 	@RequestMapping("/exhibitionList.do")
-	public ModelAndView exhibitionList(@RequestParam("tag") String tag, ModelAndView mav) {
+	public ModelAndView exhibitionList(@RequestParam("tagNo") String tagNo, ModelAndView mav) {
+		System.out.println(tagNo);
 		
-		List<Exhibition> exList = exhibitionService.selectByTag(tag);
-		Exhibition exhibition = exhibitionService.selectOneByTag(tag);
+		List<SpaceList> exList = exhibitionService.selectByTagNo(tagNo);
 		
-		//log.info("exList = {}", exList);
-		//log.info("exhibition = {}",exhibition);
+		Exhibition exhibition = exhibitionService.selectOneByTag(tagNo);
 		
-		mav.addObject("exList", exList);
+		
 		mav.addObject("exhibition", exhibition);
-		
+		mav.addObject("exList", exList);
 		mav.setViewName("exhibition/exhibitionList");
 		
 		return mav;
@@ -72,7 +71,10 @@ public class ExhibitionController {
 
 	//기획전추가폼
 	@RequestMapping("/insertExhibitionFrm.do")
-	public String insertExhibitionFrm() {
+	public String insertExhibitionFrm(Model model) {
+		List<ExhibitionTag> tagList = exhibitionService.selectTagList();
+		
+		model.addAttribute("tagList", tagList);
 		return "exhibition/insertExhibition";
 	}
 	
@@ -104,7 +106,6 @@ public class ExhibitionController {
 			}
 		}
 	}
-		//log.info("renamedFileName = {}", renamedFileName);
 		model.addAttribute("renamedFileName", renamedFileName);
 		return renamedFileName;
 	}
@@ -112,13 +113,10 @@ public class ExhibitionController {
 	//기획전추가
 	@GetMapping("/insertExhibition.do")
 	public String insertExhibition(Exhibition exhibition) {
-
-//		log.info("title = {}", exhibition.getExTitle());
-//		log.info("imageUrl = {}", exhibition.getImageUrl());
-//		log.info("image = {}", exhibition.getRenamedFileName());
+		
 		int result = exhibitionService.insertExhibition(exhibition);
 		
-		//log.info("result = {}", result);
+		log.info("result = {}", result);
 		
 		return "redirect:exhibition.do";
 	}

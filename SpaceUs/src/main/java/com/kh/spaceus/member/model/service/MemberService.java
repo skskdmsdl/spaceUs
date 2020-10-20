@@ -51,5 +51,8 @@ public interface MemberService {
 
 	List<Wish> selectWishList(String email);
 
+	int selectWishTotal(String email);
+
 	int updateUser(String memberEmail);
+	
 }

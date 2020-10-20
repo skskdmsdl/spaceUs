@@ -6,7 +6,7 @@
    xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-   
+  
    <!-- #8.1 암호화 처리 BCryptPasswordEncoder 등록 -->
    <beans:bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"
         id="bcryptPasswordEncoder"/>
@@ -38,7 +38,8 @@
          password-parameter="password"
          authentication-failure-forward-url="/member/memberLoginFailure.do"
        /> 
-      
+       
+     
       <logout
          invalidate-session="true"
          logout-url="/member/memberLogout.do"

@@ -71,11 +71,13 @@
 	
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	
-
+	<!-- sweet alert -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
 <script>
 	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
 	<c:if test="${ not empty msg }">
-		alert('${ msg }');	
+		alert('${ msg }');
 	</c:if>
 	<c:if test="${ not empty script }">
 		self.close();	
@@ -94,7 +96,7 @@ $(function(){
 	@media (min-width: 900px){
 		.oi-menu{display: none;}
 		.small{display: none;}
-		.big{margin-left: 5rem;}
+		 .big{margin-left: 5rem;} 
 	}
 	@media (max-width: 899px){
 		.big{display: none;}
@@ -165,7 +167,7 @@ $(function(){
 			  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
 	        		<div  data-toggle="modal" data-target="#exampleModal">
 			        	<div class="memberId" style="display: inline-block;">반갑습니다. &nbsp;</div>
-	        			<%-- <sec:authentication property="principal.nickName"/> --%>
+	        			<%-- <sec:authentication property="principal.nickName"/>  --%>
 	        		</div>
 	          </div>  	 
 		  	</ul>
@@ -181,7 +183,7 @@ $(function(){
 	        	  <div class="align-self-center navbar-nav ml-3" style="cursor: pointer !important;">
 	        		<div  data-toggle="modal" data-target="#exampleModal">
 		        		<div class="memberId" style="display: inline-block;">반갑습니다. &nbsp;</div>
-	        			<%--  <sec:authentication property="principal.nickName"/> --%>
+	        			 <%-- <sec:authentication property="principal.nickName"/> --%> 
 	        		</div>
 	        	  </div>
 	          </ul>
@@ -205,7 +207,7 @@ $(function(){
 	        	<div data-toggle="modal" class="row" data-target="#exampleModal">
 		        	<img class="ml-3" src="https://resource.miricanvas.com/image/common/profile_argo.svg" style="background: #22B47B; border-right: 0; border-radius: 90%; width: 40px;  height: 40px;">
 	        		<div  class="memberId mt-2 ml-2"></div>
-	        		<%-- <sec:authentication property="principal.nickName"/> --%> 
+	        		<%--  <sec:authentication property="principal.nickName"/>  --%>
 	        	</div>
 	        </h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -266,7 +268,9 @@ function memberId(){
 		});
 };
 function enrollSpace(){
-   	alert("로그인 후 이용할 수 있습니다.");
-   	location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+   	swal("로그인 후 이용할 수 있습니다.")
+   	.then((value) => {
+   		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+   	});
 }
 </script>

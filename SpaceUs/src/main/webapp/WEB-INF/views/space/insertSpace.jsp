@@ -379,7 +379,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 
     $("#sample6_detailAddress").focus(function(){
     	if($("#sample6_postcode").val()==""){
-        	alert("우편번호 주소검색을 먼저 해주세요.");
+        	swal("우편번호 주소검색을 먼저 해주세요.");
     		document.getElementById("sample6_postcode").focus();
         }
     });
@@ -481,7 +481,7 @@ $("#day input").on("click", function(){
 $("#availableTime th").on("click", function(){
 	//요일선택
 	if(day==null){
-		alert("요일을 먼저 선택해주세요");
+		swal("요일을 먼저 선택해주세요");
 		return;
 	}
 	
@@ -539,9 +539,9 @@ $("#availableTime th").on("click", function(){
 <script>
 //태그 추가 클릭이벤트
 $("#addTags").on('click', function(){
-	if($("#tagName").val()==""){alert("내용을 입력해주세요");};
+	if($("#tagName").val()==""){swal("내용을 입력해주세요");};
 	if($("#tags span").length>=5){
-		alert("최대 5개까지 입력 가능합니다");
+		swal("최대 5개까지 입력 가능합니다");
 	}
 	else if($("#tagName").val()!=""){
 		
@@ -554,8 +554,7 @@ $("#addTags").on('click', function(){
 		,
 		dataType : "json",
 		success : function(data){
-			
-			$("#tags").append("<input type='checkbox' name='tag' style='display:none' value="+$('#tagName').val() +" checked/><span class='label label-success m-2 p-2 small'>#"+$('#tagName').val() +" X</span>"); 
+			$("#tags").append("<input type='checkbox' name='tag' style='display:none' value="+$('#tagName').val() +" checked/><span class='label label-success m-2 p-2'>#"+$('#tagName').val() +" X</span>"); 
 			/* $("#tags").append("<span class='label label-success m-2 p-2 small'>#"+$('#tagName').val() +" X</span>");  */
 	    	$("#tagName").val("");	
 		},
@@ -565,10 +564,13 @@ $("#addTags").on('click', function(){
 		});  
     }
 });
-//태그 삭제 클릭이벤트
-$("#tags").on("click", function(){
-   //내용작성하기 
-});
+//태그 삭제 클릭이벤트	
+$("#tags").on("click", function(){	
+	$("#tags *").remove();	
+	$("#tag").val("");	
+	$("#tagName").val("");	
+});	
+
 </script>
 
 <!-- 사업자등록 script -->
@@ -618,48 +620,66 @@ $("#spaceFrm").submit(function(){
 	
 	//빈칸이면 입력 요구
 	if($("[name=spaceName]").val() == ""){
-		alert("공간이름을 입력해주세요.");
-		document.getElementById("spaceName").focus();
+		swal("공간이름을 입력해주세요.")
+		.then((value) => {
+			document.getElementById("spaceName").focus();
+		});
 		return false;
 	}
 	if($("[name=content]").val() == ""){
-		alert("공간설명을 입력해주세요.");
-		document.getElementById("content").focus();
+		swal("공간설명을 입력해주세요.")
+		.then((value) => {
+			document.getElementById("content").focus();
+		});
 		return false;
 	} 
 	if($("#sample6_detailAddress").val() == ""){
-		alert("주소를 입력해주세요.");
-		document.getElementById("sample6_postcode").focus();
+		swal("주소를 입력해주세요.")
+		.then((value) => {
+			document.getElementById("sample6_postcode").focus();
+		});
 		return false;
 	}
 	if($("[name=spacePhone]").val() == ""){
-		alert("전화번호를 입력해주세요.");
-		document.getElementById("phone3").focus();
+		swal("전화번호를 입력해주세요.")
+		.then((value) => {
+			document.getElementById("phone3").focus();
+		});
 		return false;
 	}
 	if($("[name=spacePhone]").val().length > 11){
-		alert("11자리까지 가능합니다. 전화번호를 확인해주세요");
-		document.getElementById("phone3").focus();
+		swal("11자리까지 가능합니다. 전화번호를 확인해주세요")
+		.then((value) => {
+			document.getElementById("phone3").focus();
+		});
 		return false;
 	}
 	if($("[name=categoryNo]").val() == ""){
-		alert("카테고리를 선택해주세요.");
-		$('html, body').animate({scrollTop : $("#phone1").offset().top}, 100);
+		swal("카테고리를 선택해주세요.")
+		.then((value) => {
+			$('html, body').animate({scrollTop : $("#phone1").offset().top}, 100);
+		});
 		return false;
 	} 
 	if($("[name=hourlyPrice]").val() == 0){
-		alert("시간당 가격을 입력해주세요.");
-		document.getElementById("hourlyPrice").focus();
+		swal("시간당 가격을 입력해주세요.")
+		.then((value) => {
+			document.getElementById("hourlyPrice").focus();
+		});
 		return false;
 	} 
 	if($("#idValid").val()!=1){
-		alert("올바른 사업자번호를 입력하세요.");
-		document.getElementById("businessNo").focus();
+		swal("올바른 사업자번호를 입력하세요.")
+		.then((value) => {
+			document.getElementById("businessNo").focus();
+		});
 		return false;
 	}
 	if($("[name=account]").val() == ""){
-		alert("계좌번호를 입력하세요.");
-		document.getElementById("account").focus();
+		swal("계좌번호를 입력하세요.")
+		.then((value) => {
+			document.getElementById("account").focus();
+		});
 		return false;
 	} 
 

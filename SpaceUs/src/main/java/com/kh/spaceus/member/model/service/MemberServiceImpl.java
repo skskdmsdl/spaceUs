@@ -122,6 +122,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public int selectWishTotal(String email) {
+		return memberDAO.selectWishTotal(email);
+	}
+
+	@Override
 	public int updateUser(String memberEmail) {
 		return memberDAO.updatePwd(memberEmail);
 	}

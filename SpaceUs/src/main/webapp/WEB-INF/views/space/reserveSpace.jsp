@@ -262,9 +262,12 @@ function selectDay(val){
 	
 	var date = new Date(val);
 	if(date.getTime() <= today.getTime()){
-		alert("오늘과 지난 날짜는 예약이 불가능합니다.");
-		$("#D-day").val('');
-		$("[name=day]").val('');
+
+		swal("오늘과 지난 날짜는 예약이 불가능합니다.")
+		.then((value) => {
+			$("#D-day").val('');
+			$("[name=Day]").val('');
+		});
 		
 		resetHour();
 		for(var i=0; i<24; i++){
@@ -278,8 +281,10 @@ function selectDay(val){
 	index = avail.findIndex(obj => obj.day == day);
 	
 	if(index == -1){
-		alert("예약가능한 시간이 없는 요일입니다. 다른 요일을 선택해주세요.");
-		$("#D-day").val('');
+		swal("예약가능한 시간이 없는 요일입니다. 다른 요일을 선택해주세요.")
+		.then((value) => {
+			$("#D-day").val('');
+		});
 	}
 	
 	//가능시간 표시
@@ -315,8 +320,10 @@ function selectDay(val){
 $("#availableTime th").on("click", function(){
 	//날짜,요일 선택여부
 	if($("#D-day").val()==''){
-		alert("예약 날짜를 먼저 선택해주세요");
-		document.getElementById("D-day").focus();
+		swal("예약 날짜를 먼저 선택해주세요")
+		.then((value) => {
+			document.getElementById("D-day").focus();
+		});
 		return;
 	}
 
@@ -393,8 +400,11 @@ $("[name='selectPay']").change(function(){
 	if($("[name=endHour]").val() == ""){
 		$("input:radio[name='selectPay']").removeAttr("checked");
 		$("[name=pay]").val('');
-		alert("시간을 설정해주세요");
-		$('html, body').animate({scrollTop : $("#D-day").offset().top}, 100);
+
+		swal("시간을 설정해주세요")
+		.then((value) => {
+			$('html, body').animate({scrollTop : $("#D-day").offset().top}, 100);
+		});
 		return;
 	}
 	
@@ -409,8 +419,11 @@ $("[name='selectPay']").change(function(){
 function discount(){
 	if(!$("input:radio[name='selectPay']").is(':checked')){
 		$("#coupon").val("no").prop("selected", true);
-		alert("결제방법을 선택해주세요");
-		document.getElementById("pay").focus();
+
+		swal("결제방법을 선택해주세요")
+		.then((value) => {
+			document.getElementById("pay").focus();
+		});
 		return;
 	}
 
@@ -434,21 +447,28 @@ function discount(){
 <script>
 $("#sub").on("click", function(){
 	//빈칸이면 입력 요구
-	if($("[name=day]").val() == ""){
-		alert("예약날짜를 선택해주세요.");
-		document.getElementById("D-day").focus();
+	if($("[name=Day]").val() == ""){
+
+		swal("예약날짜를 선택해주세요.")
+		.then((value) => {
+			document.getElementById("D-day").focus();
+		});
 		return false;
 	}
 
 	if($("[name=endHour]").val() == ""){
-		alert("시간을 설정해주세요");
-		$('html, body').animate({scrollTop : $("#D-day").offset().top}, 100);
+		swal("시간을 설정해주세요")
+		.then((value) => {
+			$('html, body').animate({scrollTop : $("#D-day").offset().top}, 100);
+		});
 		return false;
 	}
 
 	if($("[name=pay]").val() == ""){
-		alert("결제 방법을 선택해주세요.");
-		document.getElementById("pay").focus();
+		swal("결제 방법을 선택해주세요.")
+		.then((value) => {
+			document.getElementById("pay").focus();
+		});
 		return false;
 	}
 
@@ -501,7 +521,7 @@ function iamport(){
 		        msg += '에러내용 : ' + rsp.error_msg;
 		    }
 		    
-		    alert(msg);
+		    swal(msg);
 		    
 		    //나중에 지우기
 		    $("[name=revNo]").val(rsp.imp_uid);
@@ -538,8 +558,6 @@ function iamport(){
 		        var msg = '결제에 실패하였습니다.';
 		        msg += '에러내용 : ' + rsp.error_msg;
 		    }
-		    
-		    alert(msg);
 		    
 		    //나중에 지우기
 		    $("[name=revNo]").val(rsp.imp_uid);

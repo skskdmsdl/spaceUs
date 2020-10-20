@@ -175,7 +175,7 @@ function urlcopy(){
 	document.execCommand("copy");
 	document.body.removeChild(tempElem);
 
-	alert("url 복사완료!");
+	swal("url 복사완료!");
 }
 
 //트위터 공유
@@ -243,16 +243,7 @@ function naverShare() {
 							<span class="like-count"></span>
 							</c:otherwise>
 							</c:choose>
-							&emsp; <%-- <a href="javascript:;" id="kakao-link-btn"> <img
-								src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png"
-								width="30px" />
-							</a> --%>
-							<!-- 공유하기 팝오버 시작-->
-							<!--  <a href=javascript:; data-toggle="popover" data-trigger="focus"
-								data-placement="bottom" tabindex="0" title="공유하기"
-								data-html="true" data-popover-content="#a1"> <i
-								class="far fa-share-square"></i>
-							</a> -->
+							&emsp; 
 							<i class="far fa-share-square"></i>
 							<div class="d-none" id="a1" style="padding:5px; font-size: 16px; border:1px solid #efefef; right: 140px;top: 420px;position: absolute; z-index: 10;background-color: white; width:250px; text-align: center; border-radius: 5px;" >
 								<p style="border-bottom:1px solid #efefef; padding:5px;">공유하기</p>
@@ -379,7 +370,11 @@ function naverShare() {
 							</div>
 						</div>
 						<!-- contact 끝 -->
-
+<input type="hidden" id="spaceCon" value="${ space.content }" />
+<input type="hidden" id="spaceAddr" value="${ space.address }" />
+<input type="hidden" id="spaceTitle" value="${ space.spaceName }" />
+						
+	
 						
 						
 
@@ -611,7 +606,7 @@ function naverShare() {
 			   			 			<div style="margin-right:15px;">
 					   			   		 <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
 					   			    </div>
-			   			 			
+			   			 				<sec:authorize access="hasAnyRole('HOST', 'USER')">
    										<sec:authentication property="principal.username" var="loginMember"/>
    											<c:if test="${ loginMember eq qna.email }">
    												
@@ -624,9 +619,10 @@ function naverShare() {
 						   						style="float: right; margin-right: 10px; margin-bottom:7px; letter-spacing:1px; color:#a6e4d2; font-weight:bold; font-size:13px;" onclick="deleteBtn('${qna.qnaNo }');" 
 						   							value="${qna.qnaNo }">삭제</button>
 						   					</c:if>
-									
+									</sec:authorize>
 			   			 		</c:if>
 		   			 		</sec:authorize>
+		   			 		
 		   			 		<sec:authorize access="hasRole('ADMIN')">
 			   			 			<div style="margin-right:15px;">
 					   			   		 <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
@@ -666,6 +662,7 @@ function naverShare() {
 							   						호스트님의 답글</span>
 			   			</h4>
 			   			<p style="padding-left:15px">${ qna.answer}</p>
+			   			<sec:authorize access="hasRole('HOST')">
 			   			<sec:authentication property="principal.username" var="loginMember"/>
 			   			<c:if test="${loginMember eq space.memberEmail}">
 			   			<h4 style="text-align: right;">
@@ -677,6 +674,7 @@ function naverShare() {
 				   						<!-- </span> -->   						
 					   				</h4>
 					   	</c:if>
+					   	</sec:authorize>
 			   		</div>
 			   	</div>
 			   	
@@ -1012,18 +1010,18 @@ function naverShare() {
 <!-- 지도 -->
 var mapContainer = document.getElementById('kakaomap'), // 지도를 표시할 div 
 mapOption = {
-    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
     level: 3 // 지도의 확대 레벨
 };  
 
-//지도를 생성합니다    
+// 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 
 //주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-//주소로 좌표를 검색합니다
-geocoder.addressSearch('${ space.address }', function(result, status) {
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch($("#spaceAddr").val().substr(9), function(result, status) {
 
 // 정상적으로 검색이 완료됐으면 
  if (status === kakao.maps.services.Status.OK) {
@@ -1035,7 +1033,9 @@ geocoder.addressSearch('${ space.address }', function(result, status) {
         map: map,
         position: coords
     });
-
+ 	// 인포윈도우로 장소에 대한 설명을 표시합니다
+    var infowindow = new kakao.maps.InfoWindow({
+    });
 
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
     map.setCenter(coords);
@@ -1045,26 +1045,28 @@ geocoder.addressSearch('${ space.address }', function(result, status) {
 </script>
 <!-- 카카오톡 공유 -->
 <script type='text/javascript'>
+
+	
     Kakao.init('d6ea51fdfee1be1e548d05a904a861bc');
 
     	 Kakao.Link.createDefaultButton({
     	      container: '#kakao-link-btn',
     	      objectType: 'location',
-    	      address: '${ space.address }',
+    	      address: '${space.address}',
     	      addressTitle: '${ space.spaceName }',
     	      content: {
     	        title: '${ space.spaceName }',
-    	        description: '${ space.content }',
-    	        imageUrl: 'https://moplqfgeemqv2103108.cdn.ntruss.com/service/158321359_3969307adb111d972a661a99fd3629af.jpg?type=m&w=900&h=900&autorotate=true&quality=90',
+    	        description: $('#spaceCon').val(),
+    	        imageUrl: 'https://post-phinf.pstatic.net/MjAxOTA4MzBfMTQ0/MDAxNTY3MTQ5Njk5ODg1.sDdYLvHVexwz3_Y9g3gNw4abEH1H07TNO5xUJQTLfbYg.dfsCNys7wtBo0IMpY0soq9dASloUMMeiZ9Ozeb20plkg.PNG/%EA%B0%95%EC%9B%90%ED%98%B8_%ED%98%B8%ED%85%94%EB%A6%AC%EC%A1%B0%ED%8A%B8.PNG?type=w1200',
     	        link: {
     	          mobileWebUrl: 'https://www.spacecloud.kr/',
     	          webUrl: 'https://www.spacecloud.kr/'
     	        }
     	      },
     	      social: {
-    	        likeCount: 286,
-    	        commentCount: 45,
-    	        sharedCount: 845
+    	        likeCount: 12,
+    	        commentCount: 10,
+    	        sharedCount: 21
     	      },
     	      buttons: [
     	        {
@@ -1128,7 +1130,7 @@ function sendAnswer(){
 		.attr("method", "POST")
 		.submit();
 	} else{
-		alert("답변 내용을 입력하세요.");
+		swal("답변 내용을 입력하세요.");
 		}
 }
 
@@ -1156,7 +1158,7 @@ function ask(){
 		.attr("method", "POST")
 		.submit();
 	} else{
-		alert("질문 내용을 입력하세요.");
+		swal("질문 내용을 입력하세요.");
 		}
 }
 
@@ -1167,8 +1169,10 @@ function rvSubmit(){
 		.submit();
    	}
    	else{
-      	alert("로그인 후 이용할 수 있습니다.");
-      	location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+      	swal("로그인 후 이용할 수 있습니다.")
+      	.then((value) => {
+      		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+      	});
 	}
 	
 };
@@ -1285,8 +1289,11 @@ $("[name=reviewPaging]").click(function(){
 }); */
 //로그인 후 이용 처리
 $("#likeLogin").click(function(){
-	alert("로그인 후 이용할 수 있습니다.");
-  	location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+
+  	swal("로그인 후 이용할 수 있습니다.")
+  	.then((value) => {
+  		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+  	});
 });
 
 </script>

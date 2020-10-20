@@ -12,7 +12,17 @@
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/hostpageMenu.jsp" />
+<style>
+.subject:hover{
+	 color: #ffbc34 !important;
+}
+.subject{
+	font-family: "Font Awesome 5 Free";
+	font-size:16px;
+	font-weight: bold;
+}
 
+</style>
 
         <div class="page-wrapper">
             <div class="container-fluid">
@@ -27,7 +37,7 @@
                         <div class="d-flex justify-content-end align-items-center mr-5">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">호스트 센터</a></li>
-                                <li class="breadcrumb-item active">정산 내역</li>
+                                <li class="breadcrumb-item active">일간 정산 내역</li>
                             </ol>
                         </div>
                     </div>
@@ -35,158 +45,77 @@
 
             	<div class="ml-5 mr-5">
 	           		<div class="card p-5">
-	           			 <div class="card-body-wrapper">
-							<div class="btn-group">
-							
-							<form id="form1" name="form1" method="post" enctype="multipart/form-data">
-							    <input type="file" id="fileInput" name="fileInput">
-							    <button type="button" onclick="doExcelUploadProcess()">엑셀업로드 작업</button>
-							    <button type="button" onclick="doExcelDownloadProcess()">엑셀다운로드 작업</button>
-							</form>
-							<div id="result">
-							</div>
-								   <sec:authorize access="hasRole('HOST')"> 
-								  <form:form id="excelForm" name="excelForm" method="post" action="${pageContext.request.contextPath }/host/excelDown.do" enctype="multipart/form-data">
-									  <button id="file-download" name="hostId" type="submit" class="btn btn-primary alig-right" value="${loginMember.principal.memberEmail}">
-									  	정산내역 다운받기(.xlsx)
-									  </button>
-								  </form:form>	
-								  </sec:authorize>	
-								<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>				 
-							</div>
-						 </div>
-
+	           			
+								 <div class="col-md-10">
+		                           <h5 class="card-title">일간 정산 내역</h5>
+		                           <h6 class="card-subtitle">최근 30일간의 일일 정산 내역을 확인하세요</h6>
+		                         
+		                      	 </div>
+							  	<div>
+									<div class="btn-group" style="float:right; display:block; margin: 10px 20px;">
+											<form id="excelForm" name="excelForm" method="post" enctype="multipart/form-data">
+										    <button id="excelBtn" class="btn btn-primary" type="button" onclick="doExcelDownloadProcess()"><i class="fa fa-file-excel"></i> 정산내역 다운로드(.xlsx)</button>
+										    
+											</form>
+									</div>
+										<div id="result">
+										</div>			 
+							  </div>
+							 <div class="card-body-wrapper">
 	           			 	<div class="card-body">
-			                	<h5 class=" mb-1">일간 정산 내역</h5>
-			                	<table class="table table-hover">
+			                	<h5 class="mb-1 subject"><i class="fa fa-table"></i> 일매출 표</h5>
+			                	<table class="table table-hover" style="margin: 10px;">
 			                	   <thead class="thead-dark">
 				                	   <tr>
-				                		<th scope="col">공간 번호</th>
+				                		<th scope="col">번호</th>
 				                		<th scope="col">날짜</th>
 				                		<th scope="col">일 이용시간</th>
 				                		<th scope="col">일매출</th>
 				                	   </tr>
 			                	   </thead>
 			                	   <tbody>
+			                	  
+				         		   <c:if test="${ not empty list }">
+			                	   	<c:forEach items="${list }" var="item" varStatus="vs"> 
+			                	       
 				                	   <tr>
-				                		<th scope="row">S1001</th>
-				                		<td>2020/09/20</td>
-				                		<td>3</td>
-				                		<td>120,000</td>
+				                		<th scope="row">${vs.index+1}</th>
+				                		<td>${item.date }</td>
+				                		<td>${item.totalHour }</td>
+				                		<td>${item.revenue }</td>
 				                	   </tr>
-				                	   <tr>
-				                		<th scope="row">S1001</th>
-				                		<td>2020/09/21</td>
-				                		<td>2</td>
-				                		<td>80,000</td>
-				                	   </tr>					                   
+				                	   
+				                	</c:forEach>
+				                	</c:if>
+				                	<c:if test="${ empty list }"> 
+				                		<tr>
+				                		<td colspan="4" style="text-align:center;">
+				                		조회된 일 매출이 없습니다.
+				                		</td>
+				                		</tr>
+				                	</c:if>
+				               
+				                			                   
 				                  </tbody>               		
 			                	</table>
-		                	</div>
-	           				<div class="card-body">
-	            				<h5 class="card-title">
-	            				월간 매출 추이 
-	            				</h5>
-				 		 	</div>
-						 	<canvas id="bar-chart">차트가 들어갈 자리</canvas>
+	           					</div>
+<%-- 	           					<div class="card-body-wrapper">
+	           			 	
+	           					<div class="card-body">
+	           						<div class="card-title">
+	            					<h5 class="mb-1 subject"><i class="fa fa-chart-bar"> 일 매출 추이</i></h5>
+	            					</div>
+						 			<canvas id="achart">차트가 들어갈 자리</canvas>
+		                		</div>
+		                	</div> --%>
 						</div>
 	 				</div>
+	 				</div>
  				</div>
-<!--                 <div class="ml-5 mr-5">
-                    <div class="card p-5">
-                        <div class="card-body">
-                            <div class="col-md-10">
-                                <h5 class="card-title ">정산 내역</h5>
-                                <div class="ml-auto">
-                                    <ul class="list-inline font-12">
-                                        <li><i class="fa fa-circle text-info"></i> Iphone</li>
-                                        <li><i class="fa fa-circle text-primary"></i> Ipad</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div id="morris-area-chart" style="height: 350px;"></div>
-                        </div>
-                        <div class="card-body bg-light">
-                            <div class="row text-center m-b-20">
-                                <div class="col-lg-4 col-md-4 m-t-20">
-                                    <h2 class="m-b-0 font-light">6000</h2><span class="text-muted">Total sale</span>
-                                </div>
-                                <div class="col-lg-4 col-md-4 m-t-20">
-                                    <h2 class="m-b-0 font-light">4000</h2><span class="text-muted">Iphone</span>
-                                </div>
-                                <div class="col-lg-4 col-md-4 m-t-20">
-                                    <h2 class="m-b-0 font-light">2000</h2><span class="text-muted">Ipad</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-    </div>
-</div>
-</div>
-	<script>
-	
-/*   	function download(){
-		$("#file-download").attr("action", 
-		"${ pageContext.request.contextPath}/host/excelDown.do")
-		.attr("method", "POST")
-		.submit();	
-	} */
-
-	let canvas = document.getElementById("bar-chart").getContext('2d');
-	let ylabel= [0,0,0,0,0,9,9,9,9,9,10,10];
-	let xdata = [1,2,3,4,5,6,7,8,9,10,11,12];
-
-	let barChart = new Chart(canvas, {
-		type:'bar',
-		data: {labels: ylabel,
-	    	datasets:[{
-	    		label: "2020",
-	    		backgroundColor: '#fe7096',
-	    		borderColor: '#58c5ed',
-	    		data: xdata,
-	    	}]
-	    	
-	    },
-	     options: {
-	         title: {
-	             text: "월간 매출 추이",
-	             display: true
-	         }
-	     }
-	 }); 
-
-    function doExcelUploadProcess(){
-        var f = new FormData(document.getElementById('form1'));
-        $.ajax({
-            url: "uploadExcelFile",
-            data: f,
-            processData: false,
-            contentType: false,
-            type: "POST",
-            success: function(data){
-                console.log(data);
-                document.getElementById('result').innerHTML = JSON.stringify(data);
-            }
-        })
-    } 
+ 			</div>
     
-    function doExcelDownloadProcess(){
-        var f = document.form1;
-        f.action = "downloadExcelFile";
-        f.submit();
-    }
-    
-</script>
+<%-- <c:out value="${datelist}"/>
+<c:out value="${revenuelist}"/> --%>
 
 
 <script src="${pageContext.request.contextPath }/resources/js/Chart.js"></script>
@@ -203,36 +132,124 @@
 <script src="${ pageContext.request.contextPath }/resources/js/sidebarmenu.js"></script>
 <!--Custom JavaScript -->
 <script src="${ pageContext.request.contextPath }/resources/js/custom.min.js"></script>
-<!-- ============================================================== -->
-<!-- This page plugins -->
-<!-- ============================================================== -->
+<script src="${pageContext.request.contextPath }/resources/js/popper.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
 
-<!-- loader -->
-<%--   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-  <script src="${pageContext.request.contextPath }/resources/js/aos.js"></script>
-  <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/raphael/raphael-min.js"></script>
-<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/morrisjs/morris.min.js"></script>
-<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
-<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/d3/d3.min.js"></script>
-<script src="${ pageContext.request.contextPath }/resources/assets/node_modules/c3-master/c3.min.js"></script>
-  
-<!--c3 JavaScript -->
+	<script>
+	var canvas = document.getElementById("achart").getContext('2d');
+	var datelist= [];
+	var revenuelist = [];
 
-<!-- Chart JS -->
-  <script src="${pageContext.request.contextPath }/resources/js/jquery.min.js"></script>
-  <script src="${pageContext.request.contextPath }/resources/js/jquery-migrate-3.0.1.min.js"></script> --%>
-  <script src="${pageContext.request.contextPath }/resources/js/popper.min.js"></script>
-  <script src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
-<%--   <script src="${pageContext.request.contextPath }/resources/js/jquery.easing.1.3.js"></script>
-  <script src="${pageContext.request.contextPath }/resources/js/jquery.waypoints.min.js"></script>
-  <script src="${pageContext.request.contextPath }/resources/js/jquery.stellar.min.js"></script>
-  <script src="${pageContext.request.contextPath }/resources/js/owl.carousel.min.js"></script>
-  <script src="${pageContext.request.contextPath }/resources/js/jquery.magnific-popup.min.js"></script>
-  <script src="${pageContext.request.contextPath }/resources/js/jquery.animateNumber.min.js"></script>
-  <script src="${pageContext.request.contextPath }/resources/js/bootstrap-datepicker.js"></script>
-  <script src="${pageContext.request.contextPath }/resources/js/jquery.timepicker.min.js"></script>
-  <script src="${pageContext.request.contextPath }/resources/js/scrollax.min.js"></script>
-  <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>  --%>
+	datelist = '<c:out value="${datelist}"/>';
+	console.log(datelist);
+
+	revenuelist = '<c:out value="${revenuelist}"/>';
+	
+	/* 
+	ylabel = '<c:out value="${datelist}"/>';
+	xdata = '<c:out value="${revenuelist}"/>';
+ */
+	/* 
+	xdata.forEach(item=>{
+		ylabel.push("${item1.name}");
+		});
+	
+	ylabel.forEach(item=>{
+		console.log(item);
+		});
+	  */
+	
+	    let chart = new Chart(canvas, {
+	        type: 'line',
+	        data: {labels: datelist,
+	        	datasets:[{
+	        		label: "일매출",
+	        		borderColor: '#58c5ed',
+	        		data: revenuelist,
+	        	}
+	        	]	        	
+	        },
+	        options: {
+	            responsive: true,
+//	         tooltips: {
+//	           callbacks: {
+//	                 label: function(tooltipItem, data) {
+//	                     var value = data.datasets[0].data[tooltipItem.index];
+//	                     if(parseInt(value) >= 1000){
+//	                                return '￦'+value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+//	                             } else {
+//	                                return '￦'+value;
+//	                             }
+//	                 }
+//	           } // end callbacks:
+//	         }, //end tooltips                
+	            scales: {
+	                yAxes: [{
+	                    ticks: {
+	                        beginAtZero:true,
+	                        callback: function(value, index, values) {
+	                            if(parseInt(value) >= 1000){
+	                               return '￦'+value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	                            } else {
+	                               return '￦'+value;
+	                            }
+	                       }                            
+	                    }
+	                }]
+	            }
+	        }
+	        });
+	    
+
+    function doExcelUploadProcess(){
+        var f = new FormData(document.getElementById('excelForm'));
+        $.ajax({
+            url: "${pageContext.request.contextPath}/host/excelDown",
+            data: f,
+            processData: false,
+            contentType: false,
+            type: "POST",
+            success: function(data){
+                console.log(data);
+                document.getElementById('result').innerHTML = JSON.stringify(data);
+            }
+        })
+    } 
+    
+    function doExcelDownloadProcess(){
+        var f = document.excelForm;
+        f.action = "excelDown";
+        f.submit();
+    }
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+
+    <!-- loader -->
+    <%--   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+      <script src="${pageContext.request.contextPath }/resources/js/aos.js"></script>
+      <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/raphael/raphael-min.js"></script>
+    <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/morrisjs/morris.min.js"></script>
+    <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/d3/d3.min.js"></script>
+    <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/c3-master/c3.min.js"></script>
+      
+    <!--c3 JavaScript -->
+
+    <!-- Chart JS -->
+      <script src="${pageContext.request.contextPath }/resources/js/jquery.min.js"></script>
+      <script src="${pageContext.request.contextPath }/resources/js/jquery-migrate-3.0.1.min.js"></script> --%>
+    <%--   <script src="${pageContext.request.contextPath }/resources/js/jquery.easing.1.3.js"></script>
+      <script src="${pageContext.request.contextPath }/resources/js/jquery.waypoints.min.js"></script>
+      <script src="${pageContext.request.contextPath }/resources/js/jquery.stellar.min.js"></script>
+      <script src="${pageContext.request.contextPath }/resources/js/owl.carousel.min.js"></script>
+      <script src="${pageContext.request.contextPath }/resources/js/jquery.magnific-popup.min.js"></script>
+      <script src="${pageContext.request.contextPath }/resources/js/jquery.animateNumber.min.js"></script>
+      <script src="${pageContext.request.contextPath }/resources/js/bootstrap-datepicker.js"></script>
+      <script src="${pageContext.request.contextPath }/resources/js/jquery.timepicker.min.js"></script>
+      <script src="${pageContext.request.contextPath }/resources/js/scrollax.min.js"></script>
+      <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>  --%>
+</script>
 
   </body>
 

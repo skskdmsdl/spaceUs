@@ -112,6 +112,10 @@ public class ReservationServiceImpl implements ReservationService{
 	public int deleteReservation(String revNo) {
 		return reservationDAO.deleteReservation(revNo);
 	}
+	
+	public int updateComple() {
+		return reservationDAO.updateComple();
+	}
 
 	
 	

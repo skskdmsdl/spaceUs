@@ -277,12 +277,12 @@ $(".reviewBtn").on("click", function(){
  //리뷰 유효성 검사
 $(".submit").click(function(){
 	if($(this).siblings("[name=starRating]").val()==""){
-		alert("별점을 선택해주세요");
+		swal("별점을 선택해주세요");
 		return false;
 	}
 	
 	 if($(this).siblings(".reviewCon").val().length<10){
-		alert("내용을 최소 10자 이상 입력해주세요");
+		swal("내용을 최소 10자 이상 입력해주세요");
 		return false;
 	} 
 		

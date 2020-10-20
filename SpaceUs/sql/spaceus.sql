@@ -231,6 +231,8 @@ select * from reservation_avail;
 --    day = 'fri' and space_no='space2';
 --commit;
 
+select * from 
+
 -----------------------------
 ----------- 옵션 ------------
 -----------------------------

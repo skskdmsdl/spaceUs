@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import com.kh.spaceus.host.model.service.HostService;
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
+import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.Reservation;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Space;
@@ -37,10 +38,13 @@ public class Scheduler {
 	@Autowired
 	private HostService hostService;
 	
+	@Autowired
+	private ReservationService reservationService;
+	
 	/** 
 	 * cron표현식 초 분 시 일 월 요일 년(생략가능)
 	 */
-	@Scheduled(cron = "0 0 0 1 * *") 
+	 @Scheduled(cron = "0 0 0 1 * *")
 	public void monthlyScheduler(){ 
 		System.out.println("출석 쿠폰 발급"); 
 		int result1 = memberService.insertAttend2Coupon();
@@ -69,6 +73,9 @@ public class Scheduler {
 			System.out.println(str);
 			 int result4 = hostService.insertSettlement(str); 
 		}
+		
+		System.out.println("공간 사용완료 업데이트 "); 
+		int result5 = reservationService.updateComple();
 	} 
 }
 

@@ -35,11 +35,11 @@
 			 <div id="talkjs-container" style="background-color: rgba(0,0,0,0);margin-left: 300px; height: 500px; position: fixed; z-index: 10;box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px; display:none;">
 			    <i>Loading chat...</i>
 			</div> 
-			 <sec:authorize access="hasAnyRole('ADMIN')">
+			<%--  <sec:authorize access="hasAnyRole('ADMIN')">
 			<div>
 				<button id="chatBtn">🧑</button>
 			</div>
-			</sec:authorize>
+			</sec:authorize> --%>
                 <div id="profileEditPage" class="ml-5 mr-5">
                     <div class="card p-5">
                        <div class="card-body">
@@ -67,6 +67,7 @@
 						      <td class="align-baseline">핸드폰 <i class="fa fa-check phoneCheck ml-2" style="display:none; color:#3ab549;" aria-hidden="true"></i> <i class="fa fa-close phoneFalse ml-2" style="display:none; color:red;" aria-hidden="true"></i></td>
 						      <td>
 							      <div class="row" style="margin-right: 50px;">
+							      <input type="hidden" id="memberPhone" value="${ member.memberPhone }"/>
 								      <input type="tel" id="phone" class="col-5 input-group-text mb-4 ml-auto mr-5" style="background-color: white;" maxlength="11" value="${ member.memberPhone}" required />
 								      <div class="btn-wrap">
 										<button class="btn btn-primary font-bold phone-btn">휴대폰 인증</button>				
@@ -245,11 +246,11 @@ $("#nickName").on("blur", function(){
 $("#infoUpdate").on("click", function(){
 
 	if(!$(".nickNameCheck").hasClass('show')&&!$("#nickName").val()==$("#memberName").val()){
-		 alert("닉네임을 확인해주세요!");
+		 swal("닉네임을 확인해주세요!");
 		 return;
 	}
-	if(!$(".phoneCheck").hasClass('show')){
-		 alert("핸드폰을 확인해주세요!");
+	if(!$(".phoneCheck").hasClass('show')&&!$("#phone").val()==$("#memberPhone").val()){
+		 swal("핸드폰을 확인해주세요!");
 		 return;
 	}
 	if($("#nickName").val()==$("#memberName").val()&&!$("#certification").hasClass('show')) {
@@ -265,9 +266,11 @@ $("#infoUpdate").on("click", function(){
 		},
 		dataType : "json",
 		success : function(data){
-			/* alert(data.nick); */
-			alert("회원정보가 변경되었습니다.");
-			location.reload();
+
+			swal("회원정보가 변경되었습니다.")
+			.then((value) => {
+				location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -320,7 +323,7 @@ $("#updatePwd").on("click", function(){
 		 return;
 	}
 	if(!$("#passwordChk").hasClass('show')){
-		 alert("비밀번호가 서로 다릅니다!");
+		 swal("비밀번호가 서로 다릅니다!");
 		 return;
 	}
 	 $.ajax({
@@ -330,8 +333,11 @@ $("#updatePwd").on("click", function(){
 		},
 		dataType : "json",
 		success : function(data){
-			alert("비밀번호가 변경되었습니다.");
-			location.reload();
+
+			swal("비밀번호가 변경되었습니다.")
+			.then((value) => {
+				location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -362,12 +368,18 @@ $(function(){
 				//console.log(text);
 				
 				if(data.text != undefined) {
-					alert("인증번호를 전송했습니다.");
-					$("#certification").show();
-					$("#certification").addClass("show");
+		
+					swal("인증번호를 전송했습니다.")
+					.then((value) => {
+						$("#certification").show();
+						$("#certification").addClass("show");
+					});
 				} else {
-					alert("이미 등록된 번호입니다.");
-					$("#phone").val('');
+
+					swal("이미 등록된 번호입니다.")
+					.then((value) => {
+						$("#phone").val('');
+					});
 				}
 			},
 			error : function(xhr, status, err){

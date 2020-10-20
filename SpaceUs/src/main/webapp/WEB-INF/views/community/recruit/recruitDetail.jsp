@@ -169,7 +169,8 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
                            		<tr class="col-md-1">                           		
                            			
                                     <th><b>${list.nickName}</b></th>
-                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"><fmt:formatDate value="${list.date}" pattern="yyyy.MM.dd HH:mm"/></p></th>
+                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"><fmt:formatDate value="${list.date}" pattern="yyyy.MM.dd"/></p></th>
+                                    	
                                     	<c:if test="${  list.reporter != loginMember  }">
                                     <th> |</th>
                                     <th>
@@ -235,7 +236,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                         	<div style="margin: 10px 0 0 3%;">
 	                         		<tr class="col-md-1">
 	                                    <th><b>${list.nickName}</b></th>
-	                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"><fmt:formatDate value="${list.date}" pattern="yyyy.MM.dd HH:mm"/></p></th>
+	                                    <th><p style="display: inline; margin: 0 0 0 10px; color: #d0d0d0;"><fmt:formatDate value="${list.date}" pattern="yyyy.MM.dd"/></p></th>
 	                                     
 	                                     <sec:authorize access="hasAnyRole('USER', 'HOST','ADMIN')">
 	                                         <th>	
@@ -314,9 +315,9 @@ function reportBtn(){
 		success : function(data){
 			console.log(data);
 			if(data.duplication != 1)
-			alert("신고가 완료되었습니다!");
+			swal("신고가 완료되었습니다!");
 			else
-			alert("이미 신고된 게시물 입니다!");
+			swal("이미 신고된 게시물 입니다!");
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -344,8 +345,10 @@ $("#insertComment").click(function(){
 			},
 			dataType : "json",
 			success : function(data){
-				alert("댓글이 등록되었습니다!");
-				location.reload();
+				swal("댓글이 등록되었습니다!")
+				.then((value) => {
+					location.reload();
+				});
 			},
 			error : function(xhr, status, err){
 				console.log("처리실패", xhr, status, err);
@@ -412,8 +415,10 @@ $(".replyBtn").click(function(){
 		},
 		dataType : "json",
 		success : function(data){
-			alert("댓글이 등록되었습니다!");
-			location.reload();
+			swal("댓글이 등록되었습니다!")
+			.then((value) => {
+				location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -442,8 +447,10 @@ $(".commentModifyBtn").click(function(){
 		},
 		dataType : "json",
 		success : function(data){
-			alert("댓글이 수정되었습니다!");
-			location.reload();
+			swal("댓글이 수정되었습니다!")
+			.then((value) => {
+				location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -461,8 +468,10 @@ $(".commentDelete").click(function(){
 		},
 		dataType : "json",
 		success : function(data){
-			alert("댓글이 삭제되었습니다!");
-			location.reload();
+			swal("댓글이 삭제되었습니다!")
+			.then((value) => {
+				location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -480,8 +489,10 @@ $(".commentReport").click(function(){
 		},
 		dataType : "json",
 		success : function(data){
-			alert("댓글이 신고되었습니다!");
-			location.reload();
+			swal("댓글이 신고되었습니다!")
+			.then((value) => {
+				location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -492,14 +503,14 @@ $(".commentReport").click(function(){
 $("#content").keyup(function(){
 	if('${loginMember}' == 'anonymousUser'){
 		$("#content").val("");
-		alert("로그인 후 이용할 수 있습니다.");
+		swal("로그인 후 이용할 수 있습니다.");
 		return;
 	}
 });
 $(".replyCon").keyup(function(){
 	if('${loginMember}' == 'anonymousUser'){
 		$(".replyCon").val("");
-		alert("로그인 후 이용할 수 있습니다.");
+		swal("로그인 후 이용할 수 있습니다.");
 		return;
 	}
 });
