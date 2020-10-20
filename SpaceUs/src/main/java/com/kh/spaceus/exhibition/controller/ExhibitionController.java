@@ -106,7 +106,6 @@ public class ExhibitionController {
 			}
 		}
 	}
-		//log.info("renamedFileName = {}", renamedFileName);
 		model.addAttribute("renamedFileName", renamedFileName);
 		return renamedFileName;
 	}
@@ -114,13 +113,17 @@ public class ExhibitionController {
 	//기획전추가
 	@GetMapping("/insertExhibition.do")
 	public String insertExhibition(Exhibition exhibition) {
-
-//		log.info("title = {}", exhibition.getExTitle());
-//		log.info("imageUrl = {}", exhibition.getImageUrl());
-//		log.info("image = {}", exhibition.getRenamedFileName());
+		/*
+		 * log.info("exhibition={}",exhibition.getExNo()); // null
+		 * log.info("exhibition={}",exhibition.getExSubtitle()); //니니즈
+		 * log.info("exhibition={}",exhibition.getExTitle()); //니니즈
+		 * log.info("exhibition={}",exhibition.getImageUrl()); // ''
+		 * log.info("exhibition={}",exhibition.getRenamedFileName()); //사진
+		 * log.info("exhibition={}",exhibition.getTagNo()); //tag96
+		 */	
 		int result = exhibitionService.insertExhibition(exhibition);
 		
-		//log.info("result = {}", result);
+		log.info("result = {}", result);
 		
 		return "redirect:exhibition.do";
 	}

@@ -1379,3 +1379,21 @@ select * from space_tag where tag_no = 'TAG182';
 select * from space where space_no='space112';
 select * from review;
 select * from tag;
+--------------------------------------
+--10/20
+--------------------------------------
+delete tag where tag_no = 'TAG180';
+commit;
+select * from tag;
+
+select * from exhibition;
+
+insert into
+		exhibition
+values(
+    seq_ex.nextval,
+    #{exTitle},
+    #{exSubtitle},
+    #{imageUrl},
+    #{renamedFileName}
+    #{tagNo}
