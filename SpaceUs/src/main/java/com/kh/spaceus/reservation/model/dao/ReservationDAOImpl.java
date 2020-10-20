@@ -103,6 +103,12 @@ public class ReservationDAOImpl implements ReservationDAO{
 		return sqlSession.selectOne("reservation.confirmReservation", spaceNo);
 	}
 
+	@Override
+	public int updateComple() {
+		return sqlSession.update("reservation.updateComple");
+	}
+
+
 	
 	
 	

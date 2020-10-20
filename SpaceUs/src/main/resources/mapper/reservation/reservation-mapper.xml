@@ -192,6 +192,24 @@
 			AND
 			rev_cancle=rev_comple
 	</select>
+	
+	<select id="selectListReservationAvail" resultMap="reservationMap">
+		select 
+			* 
+		from 
+			reservation join reservation_avail using(space_no)
+		where 
+			space_no=#{spaceNo}
+	</select>
+	
+	<update id="updateComple">
+		update
+			reservation
+		set
+			rev_comple = 1
+		where
+			to_char(d_day) = to_date(sysdate-1, 'yy/MM/dd')
+	</update>
 
 </mapper>
 

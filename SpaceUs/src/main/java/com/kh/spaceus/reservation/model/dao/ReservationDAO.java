@@ -38,6 +38,8 @@ public interface ReservationDAO {
 
 	int confirmReservation(String spaceNo);
 
+	int updateComple();
+
 
 
 	
