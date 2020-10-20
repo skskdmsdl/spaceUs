@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spaceus.exhibition.model.vo.Exhibition;
+import com.kh.spaceus.exhibition.model.vo.ExhibitionTag;
 import com.kh.spaceus.space.model.vo.SpaceList;
 
 @Repository
@@ -44,5 +45,12 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 	public Exhibition selectOneByTag(String tag) {
 		return sqlSession.selectOne("exhibition.selectOneByTag", tag);
 	}
+
+	@Override
+	public List<ExhibitionTag> selectTagList() {
+		return sqlSession.selectList("exhibition.selectTagList");
+	}
+	
+	
 
 }

@@ -77,11 +77,18 @@ from space S join(
 		tag_no = #{tag}
 </select>
 
+<select id="selectTagList" resultMap="tagMap">
+	select
+		*
+	from
+		tag
+</select>
+
 <!-- resultMap -->
 <resultMap type="SpaceList" id="SpaceListMap">
 </resultMap>
 
-<resultMap type="tag" id="tagMap">
+<resultMap type="exhibitionTag" id="tagMap">
 </resultMap>
 
 <resultMap type="spaceTag" id="spaceTagMap">

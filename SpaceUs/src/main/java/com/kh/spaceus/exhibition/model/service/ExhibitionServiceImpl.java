@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spaceus.exhibition.model.dao.ExhibitionDAO;
 import com.kh.spaceus.exhibition.model.vo.Exhibition;
+import com.kh.spaceus.exhibition.model.vo.ExhibitionTag;
 import com.kh.spaceus.space.model.vo.SpaceList;
 
 @Service
@@ -39,5 +40,11 @@ public class ExhibitionServiceImpl implements ExhibitionService{
 	public Exhibition selectOneByTag(String tag) {
 		return exhibitionDAO.selectOneByTag(tag);
 	}
+	@Override
+	public List<ExhibitionTag> selectTagList() {
+		return exhibitionDAO.selectTagList();
+	}
+	
+	
 
 }

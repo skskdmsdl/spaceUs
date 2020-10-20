@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.spaceus.common.Utils;
 import com.kh.spaceus.exhibition.model.service.ExhibitionService;
 import com.kh.spaceus.exhibition.model.vo.Exhibition;
+import com.kh.spaceus.exhibition.model.vo.ExhibitionTag;
 import com.kh.spaceus.space.model.vo.SpaceList;
 
 import lombok.extern.slf4j.Slf4j;
@@ -56,10 +57,7 @@ public class ExhibitionController {
 		
 		List<SpaceList> exList = exhibitionService.selectByTagNo(tagNo);
 		
-		
 		Exhibition exhibition = exhibitionService.selectOneByTag(tagNo);
-		
-		
 		
 		mav.addObject("exhibition", exhibition);
 		mav.addObject("exList", exList);
@@ -70,7 +68,10 @@ public class ExhibitionController {
 
 	//기획전추가폼
 	@RequestMapping("/insertExhibitionFrm.do")
-	public String insertExhibitionFrm() {
+	public String insertExhibitionFrm(Model model) {
+		List<ExhibitionTag> tagList = exhibitionService.selectTagList();
+		
+		model.addAttribute("tagList", tagList);
 		return "exhibition/insertExhibition";
 	}
 	
