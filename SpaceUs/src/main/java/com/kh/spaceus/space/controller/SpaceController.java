@@ -166,7 +166,6 @@ public class SpaceController {
 
 	@GetMapping("/insertHashTag.do")
 	public ModelAndView insertHashTag(ModelAndView mav, @RequestParam("hashTag") String hashTag) {
-		log.debug("해쉬태그 등록 요청");
 		// 1.업무로직 : 중복체크
 		Tag tag = spaceService.selectOneTag(hashTag);
 		if (tag != null) {
@@ -237,19 +236,15 @@ public class SpaceController {
 				spaceCookie.setPath(request.getContextPath()+"/space");
 				spaceCookie.setMaxAge(24*60*60);
 				response.addCookie(spaceCookie);
-				int result = spaceService.increaseSpaceReadCnt(spaceNo);
-				log.info("result = {}",result);			
+				int result = spaceService.increaseSpaceReadCnt(spaceNo);	
 			}
 		
 		space = spaceService.selectOneSpace(spaceNo);
-		System.out.println("@@"+space);
 		
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
-		System.out.println("spaceNo="+ spaceNo);
 		
 		// 같은 카테고리 공간 리스트(최대 3개)
 		List<SpaceList> spcList = spaceService.selectSameCategory(space);
-		log.debug("같은 카테고리 공간 리스트={}",spcList);
 
 		// 추천 공간 카테고리명
 		String cateName = spaceService.selectCateName(spaceNo);
@@ -353,13 +348,10 @@ public class SpaceController {
 		
 		
 		space = spaceService.selectOneSpace(spaceNo);
-		System.out.println("@@"+space);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
-		System.out.println("spaceNo="+ spaceNo);
 
 		// 같은 카테고리 공간 리스트(최대 6개)
 		List<SpaceList> spcList = spaceService.selectSameCategory(space);
-		log.debug("같은 카테고리 공간 리스트={}",spcList);
 
 		// 추천 공간 카테고리명
 		String cateName = spaceService.selectCateName(spaceNo);
@@ -482,7 +474,6 @@ public class SpaceController {
 	@ResponseBody
 	public List<Review> selectRecentReviewList(){
 		List<Review> revList = spaceService.selectRecentReviewList();
-		log.debug("리뷰목록={}"+revList);
 		return revList;
 	}
 

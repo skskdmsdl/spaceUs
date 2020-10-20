@@ -126,7 +126,6 @@ public class MemberController {
 		
 		for(int i=0; i<revList.size(); i++) {
 			Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
-			System.out.println("space="+space);
 			spaceList.add(space);
 		}
 		
@@ -158,7 +157,6 @@ public class MemberController {
 		
 		for(int i=0; i<revList.size(); i++) {
 			Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
-			System.out.println("space="+space);
 			spaceList.add(space);
 		}
 		
@@ -187,7 +185,6 @@ public class MemberController {
 		
 		for(int i=0; i<revList.size(); i++) {
 			Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
-			System.out.println("space="+space);
 			spaceList.add(space);
 		}
 		
@@ -372,11 +369,59 @@ public class MemberController {
 		String encryptedNewPassword = bcryptPasswordEncoder.encode(newPassword);
 
 		String setfrom = "noreply.spaceus@gmail.com";
-		String title = "SpaceUs 비밀번호 변경 인증번호 메일입니다❤";
-		String content = "새로운 비밀번호는  [" + newPassword + "]입니다. \n";
+		String title = "[SpaceUs] 계정의 임시 비밀번호";
 		
-		content += "새로운 비밀번호로 로그인 후 비밀번호를 변경해주세요";
-		
+		String content = "<div style=\"display: block; margin: 30px;\"><img src=\"https://i.imgur.com/NBgCFoR.png\" width=\"66\" height=\"66\" /></div>\r\n" + 
+				"<table style=\"width:600px;\">\r\n" + 
+				"<thead></thead>\r\n" + 
+				"<tbody>\r\n" + 
+				"<tr style=\"height: 18px;\">\r\n" + 
+				"<td style=\"height: 18px;\">&nbsp;</td>\r\n" + 
+				"</tr>\r\n" + 
+				"<tr style=\"height: 18px;\">\r\n" + 
+				"<td style=\"height: 18px;\">&nbsp;</td>\r\n" + 
+				"</tr>\r\n" + 
+				"<tr style=\"height: 18px;\">\r\n" + 
+				"<td style=\"height: 18px;\">&nbsp;</td>\r\n" + 
+				"</tr>\r\n" + 
+				"<tr style=\"height: 18px;\" align=\"center\">\r\n" + 
+				"<td style=\"height: 18px;\"><span style=\"font-family: Montserrat-Bold;\"><strong>회원님께서 임시로 사용하실 수 있는 비밀번호를 재발급하여 안내드립니다.</strong></span></td>\r\n" + 
+				"</tr>\r\n" + 
+				"<tr style=\"height: 15px;\">\r\n" + 
+				"<td style=\"height: 15px;\">&nbsp;</td>\r\n" + 
+				"</tr>\r\n" + 
+				"<tr style=\"background-color: #00c89e; height: 52.9px;\" align=\"center\">\r\n" + 
+				"<td style=\"height: 52.9px;\"><strong><span style=\"color: #ffffff; font-family: Montserrat-Bold;\">새로운 비밀번호: "+newPassword+
+				"</span></strong></td>\r\n" + 
+				"</tr>\r\n" + 
+				"<tr style=\"height: 18px;\">\r\n" + 
+				"<td style=\"height: 18px;\">&nbsp;</td>\r\n" + 
+				"</tr>\r\n" + 
+				"<tr style=\"height: 18px;\" align=\"center\">\r\n" + 
+				"<td style=\"height: 18px;\"><strong>회원님이 맞는 경우:</strong> 임시 비밀번호로 로그인한 뒤 비밀번호를 변경해주세요!</td>\r\n" + 
+				"</tr>\r\n" + 
+				"<tr style=\"height: 18px;\">\r\n" + 
+				"<td style=\"height: 18px;\">&nbsp;</td>\r\n" + 
+				"</tr>\r\n" + 
+				"<tr style=\"height: 55px;\" align=\"center\">\r\n" + 
+				"<td style=\"height: 55px;\"><strong>회원님이 아닌 경우:</strong> 누군가 회원님의 로그인 정보를 알아내어 계정에 액세스했습니다. 계정 보호를 위해 비밀번호를 재설정하세요. 또한 KakaoTalk, Google, Naver 등 연결된 소셜 미디어 계정에 의심스러운 활동이 없는지 확인하세요.</td>\r\n" + 
+				"</tr>\r\n" + 
+				"<tr style=\"height: 18px;\">\r\n" + 
+				"<td style=\"height: 18px;\">&nbsp;</td>\r\n" + 
+				"</tr>\r\n" + 
+				"<tr style=\"height: 26px;\" align=\"center\">\r\n" + 
+				"<td style=\"height: 26px;\"><span style=\"color: #00c89e; font-size: 20px;\">SpaceUs</span></td>\r\n" + 
+				"</tr>\r\n" + 
+				"<tr style=\"height: 18px;\">\r\n" + 
+				"<td style=\"text-align: center; height: 18px;\"><span style=\"color: #333333;\">서울시 강남구 테헤란로 10길 9</span></td>\r\n" + 
+				"</tr>\r\n" + 
+				"<tr style=\"height: 18px;\">\r\n" + 
+				"<td style=\"text-align: center; height: 18px;\">tel. 1235 2355 98</td>\r\n" + 
+				"</tr>\r\n" + 
+				"</tbody>\r\n" + 
+				"</table>\r\n" + 
+				"<p>&nbsp;</p>";		
+
 		// 이메일확인
 		Member member = memberService.selectOneMember(tomail);
 
@@ -391,11 +436,13 @@ public class MemberController {
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-
+				message.setHeader("content-type", "text/html; charset=utf-8");
+				message.setContent(content, "text/html;charset=euc-kr");
+				
 				messageHelper.setFrom(setfrom);
 				messageHelper.setTo(tomail);
 				messageHelper.setSubject(title);
-				messageHelper.setText(content);
+			
 
 				mailSender.send(message);
 				redirectAttr.addFlashAttribute("msg", "이메일이 전송되었습니다.");
@@ -463,7 +510,6 @@ public class MemberController {
 		
 		String api_key = "NCSCE6UYF5ENLSNF";
 		String api_secret = "WBPW8N0BWEWOGVYGYMNKNGQEB6QFPZZH";
-		String phoneChk1 = "SpaceUs 인증번호 = ";
 		String phoneChk = RandomStringUtils.randomNumeric(4);
 		
 		Message coolsms = new Message(api_key, api_secret);
@@ -479,7 +525,6 @@ public class MemberController {
 			params.put("to", phone);
 			params.put("from", "01048179843"); // 무조건 자기번호 (인증)
 			params.put("type", "SMS");
-			params.put("text", phoneChk1);
 			params.put("text", phoneChk);
 			params.put("app_version", "spaceUs"); // application name and version
 
