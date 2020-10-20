@@ -533,7 +533,6 @@ public class SpaceController {
 		//완료되지 않은 예약이 있으면 삭제못하게 막기
 		//System.out.println(spaceNo+ " : " + principal.getName());
 		int remainder = reservationService.confirmReservation(spaceNo);
-		
 		if(remainder != 0) {
 			redirectAttr.addFlashAttribute("msg", "아직 예약이 있어 공간삭제가 불가능합니다.");
 			return "redirect:/host/spaceInfo.do";

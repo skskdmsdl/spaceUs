@@ -1,6 +1,7 @@
 package com.kh.spaceus.reservation.controller;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spaceus.member.model.service.MemberService;
 import com.kh.spaceus.member.model.vo.Member;
@@ -35,11 +37,13 @@ public class ReservationController {
 	private SpaceService spaceService;
 	 
 	@RequestMapping(value="/insertReservation.do")
-	public String insertReservation(Model model,
-									ModelAndView mav,
+	public ModelAndView insertReservation(
+			ModelAndView mav,
+									Model model,
 									Reservation reservation, 
 									@RequestParam("couponNo") String couponNo,
-									Principal principal) {
+									Principal principal,
+									RedirectAttributes redirectAttr) {
 		
 		boolean flag = true;
 		String msg = "";
@@ -47,29 +51,33 @@ public class ReservationController {
 		//예약된 날짜와 시간
 		List<Unselectable> unselectableList = reservationService.unselectableList(reservation.getSpaceNo());
 		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		for(int i=0; i<unselectableList.size(); i++) {
 			boolean dateCheck = false;
 			boolean startCheck = false;
 			boolean endCheck = false;
 			
-			System.out.println(unselectableList.get(i));
-			System.out.println(reservation.getDay());
+			String undate = dateFormat.format(unselectableList.get(i).getDay());
+			String revdate = dateFormat.format(reservation.getDay());
 			
-			if(unselectableList.get(i).getDay() == reservation.getDay()) {
+			if(revdate.equals(undate)) {
 				dateCheck = true;
 			}
-			
+			System.out.println("dateCheck : "+dateCheck);
 			if(unselectableList.get(i).getStartHour() <= reservation.getStartHour() 
 					&& reservation.getStartHour() <= unselectableList.get(i).getEndHour()) {
 				startCheck = true;
 			}
+			System.out.println("startCheck : "+startCheck);
 			
-			if(unselectableList.get(i).getStartHour() <= reservation.getEndHour()
-					&& reservation.getEndHour() <= unselectableList.get(i).getEndHour()) {
+			if(unselectableList.get(i).getStartHour() <= (reservation.getEndHour() -1)
+					&& (reservation.getEndHour() -1) <= unselectableList.get(i).getEndHour()) {
 				endCheck = true;
 			}
+			System.out.println("endCheck : "+endCheck);
 			
 			if(dateCheck && (startCheck || endCheck)) {
+				flag = false;
 				msg = "먼저 예약된 시간이 포함되어 있어 예약이 실패했습니다. \n 다시 시도해주세요.";
 				break;
 			}
@@ -82,15 +90,28 @@ public class ReservationController {
 			Space space = spaceService.selectOneSpace(reservation.getSpaceNo());
 			Member member = memberService.selectOneMember(principal.getName());;
 			
-			model.addAttribute("revNo",reservation.getRevNo());
-			model.addAttribute("space",space);
-			model.addAttribute("member",member);
-			model.addAttribute("couponNo",couponNo);
+			mav.addObject("revNo",reservation.getRevNo());
+			mav.addObject("space",space);
+			mav.addObject("member",member);
+			mav.addObject("couponNo",couponNo);
 			
-			return "space/payment";
+//			model.addAttribute("revNo",reservation.getRevNo());
+//			model.addAttribute("space",space);
+//			model.addAttribute("member",member);
+//			model.addAttribute("couponNo",couponNo);
+			
+			mav.setViewName("space/payment");
+			return mav;
+			
+			//return "space/payment";
 		}
 		else {
-			return msg;
+			//mav.addObject("msg",msg);
+			redirectAttr.addFlashAttribute("msg", msg);
+			mav.setViewName("redirect:/");
+			return mav;
+//			redirectAttr.addFlashAttribute("msg", msg);
+//			return "redirect:/";
 		}
 
 	}
@@ -106,12 +127,13 @@ public class ReservationController {
 		if("true".equals(flag)) {	
 			result = reservationService.updateRevNo(revNo, reservation.getRevNo());
 			int delCoupon = memberService.deleteCoupon(couponNo);
+			return "redirect:/member/usageHistory.do";
 		}
 		else {			
 			result = reservationService.deleteReservation(revNo);
+			return "redirect:/";
 		}
 
-		return "redirect:/member/usageHistory.do";
 	}
 		
 	@RequestMapping(value="/cancelReservation.do")
