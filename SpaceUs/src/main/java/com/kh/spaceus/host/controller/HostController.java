@@ -221,8 +221,6 @@ public class HostController {
 	//공간 질문글 조회
 	@RequestMapping(value="/hostCheckArticle.do", method=RequestMethod.GET)
 	public ModelAndView CheckNewArticle(Principal principal, ModelAndView mav){
-		log.debug("principal = {}", principal);
-		
 		String hostId = principal.getName();
 		
 		List<Qna> list = hostService.selectQuestionList(hostId);
@@ -242,7 +240,6 @@ public class HostController {
 		List<Qna> list = hostService.selectUnreplied(hostId);
 		Member member = memberService.selectOneMember(hostId);
 		
-		log.debug("list = {}", list);
 		mav.addObject("member", member);
 		mav.addObject("list", list);
 		mav.setViewName("host/hostCheckUnreplied");

@@ -126,7 +126,6 @@ public class MemberController {
 		
 		for(int i=0; i<revList.size(); i++) {
 			Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
-			System.out.println("space="+space);
 			spaceList.add(space);
 		}
 		
@@ -158,7 +157,6 @@ public class MemberController {
 		
 		for(int i=0; i<revList.size(); i++) {
 			Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
-			System.out.println("space="+space);
 			spaceList.add(space);
 		}
 		
@@ -187,7 +185,6 @@ public class MemberController {
 		
 		for(int i=0; i<revList.size(); i++) {
 			Space space = spaceService.selectOneSpace(revList.get(i).getSpaceNo());
-			System.out.println("space="+space);
 			spaceList.add(space);
 		}
 		
