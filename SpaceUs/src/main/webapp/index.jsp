@@ -208,38 +208,7 @@ function meeting(){
 </script>
 
 <!-- 컨텐츠 시작 -->
-
-<%-- <div class="ftco-degree-bg"
-	 style="background-image: url('${pageContext.request.contextPath }/resources/images/bg_1.jpg');
-	 		height: 600px"
-	 data-stellar-background-ratio="0.5">
-  <div class="overlay"></div>
-  	<div class="container">
-    	<div class="row no-gutters slider-text justify-content-center align-items-center">
-      		<div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-end">
-      			<div class="text text-center mx-auto" style="margin-bottom:25%;">
-          			<h1 class="mb-4">어떤 공간을<br>찾고 있나요?</h1>
-          			<p></p>
-		  				<i class="fas fa-search fa-2x" style="color:#00C89E"></i>	
-     					<div id="disapear" style="margin-top:-20px">
-     						<div id="wrap">
-		  						<input id="searchInput" class="searchInput" name="search_keyword" placeholder="키워드를 입력하세요">
-		  						<input type="submit" class="search-btn btn btn-primary " value="입력" onclick="searchSpace();" style="background: #00c89e;"/>
-							</div>
-         				</div>
-       			</div>
-     		</div>
-   		</div>
-  <div class="mouse">
-	<a href="#" class="mouse-icon">
-		<div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
-	</a>
-</div>
- </div>
-</div> 
- --%>
  
-
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="top:12%;">
   <div class="carousel-inner">
     <div class="carousel-item active" style="height: 500px;">
@@ -266,6 +235,24 @@ function meeting(){
         <button type="submit" class="btn-lg btn btn-black font-18 mt-4" style="border-radius: 100px;" onclick="meeting();">바로가기</button>
       </div>	
     </div>
+    <!-- 커뮤니티 -->
+    <div class="carousel-item" style="height: 500px;">
+      <img src="${pageContext.request.contextPath }/resources/images/work.jpg" class="d-block w-100" style="opacity: .5;">
+      <div class="carousel-caption d-none d-md-block" style="top: 6em;">
+        <h2 class="mb-4" style="text-decoration: underline; text-underline-position: under;">"JOB을 잡고 싶은 사람들을 위한 커뮤니티"</h2>
+        <h4 class="mb-4">구인/구직 어렵지 않아요</h4>
+        <button type="submit" class="btn-lg btn btn-black font-18 mt-4" style="border-radius: 100px;" onclick="work();">바로가기</button>
+      </div>	
+    </div>
+    <div class="carousel-item" style="height: 500px;">
+      <img src="${pageContext.request.contextPath }/resources/images/group.jpg" class="d-block w-100" style="opacity: .5;">
+      <div class="carousel-caption d-none d-md-block" style="top: 6em;">
+        <h2 class="mb-4" style="text-decoration: underline; text-underline-position: under;">"나도 똑똑하게 인맥을 쌓아간다!!"</h2>
+        <h4 class="mb-4">넓은 인맥을 공유하고 싶다면?</h4>
+        <button type="submit" class="btn-lg btn btn-black font-18 mt-4" style="border-radius: 100px;" onclick="group();">바로가기</button>
+      </div>	
+    </div>
+    <!-- /커뮤니티 -->
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

@@ -721,8 +721,12 @@ create table exhibition (
 
 
 select * from exhibition;
+COMMIT;
+update exhibition set ex_no= 6 where tag_no='TAG6';
 
-
+ALTER TABLE exhibition DROP COLUMN ex_no;
+ALTER TABLE exhibition ADD ex_no number;
+ALTER TABLE 테이블명 MODIFY (컬럼명 데이터타입(데이터길이));
 
 
 -----------------------------
@@ -1390,6 +1394,9 @@ select * from tag;
 
 select * from exhibition order by ex_no;
 
+drop sequence seq_ex;
+create sequence seq_ex start with 7;
+
 insert into
 		exhibition
 values(
@@ -1399,6 +1406,24 @@ values(
     #{imageUrl},
     #{renamedFileName}
     #{tagNo}
-    
-    
-add 
+add ;
+
+select * from exhibition;
+commit;
+update exhibition set tag_no='TAG89' where ex_no=8;
+rollback;
+
+select * from report;
+
+select * from group_board;
+select * from blackList;
+select * from space;
+select * from member;
+select * from auth;
+insert into auth values('jj@naver.com','ROLE_HOST');
+update auth set authority='ROLE_USER' where member_email='jj@naver.com';
+COMMIT;
+update space set hourly_price=500 where space_no = 'space108';
+commit;
+
+select * from reservation; 
