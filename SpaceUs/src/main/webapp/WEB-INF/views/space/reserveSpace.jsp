@@ -68,9 +68,16 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 						    <tr>
 						      <td>공간옵션</td>
 						      <td>
-						      	<c:forEach items="${optionList}" var="info" varStatus="vs">
-									${ info.optionName }${ vs.last ? '' : ', '}
-								</c:forEach>
+						      <c:choose>
+									<c:when test="${ empty optionList }">
+			                              	옵션 없음
+		                             </c:when>
+		                             <c:otherwise>
+									      <c:forEach items="${optionList}" var="info" varStatus="vs">
+												${ info.optionName }${ vs.last ? '' : ', '}
+										  </c:forEach>			                             
+		                             </c:otherwise>
+	                           </c:choose>
 							  </td>
 							</tr>
 						</table>
@@ -191,12 +198,12 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 							  class="calculator-form">
 							 <input type="hidden" name="memberEmail" value="${ member.memberEmail }">
 							 <input type="hidden" name="spaceNo" value="${ space.spaceNo }">
-							 <input type="hidden" name="revNo" value="">
+							 <input type="hidden" name="revNo" value="${space.spaceNo}${member.memberEmail}">
 							 <input type="hidden" name="couponNo" value="">
 		
 	                         <div class="filter-input">
 	                             <p>예약 날짜</p>
-	                             <input type="text" name="Day" readonly>
+	                             <input type="text" name="day" readonly>
 	                         </div>
 	                         <div class="filter-input">
 	                             <p>예약 시간</p>
@@ -255,7 +262,7 @@ function selectDay(val){
 	
 	var date = new Date(val);
 	if(date.getTime() <= today.getTime()){
-		
+
 		swal("오늘과 지난 날짜는 예약이 불가능합니다.")
 		.then((value) => {
 			$("#D-day").val('');
@@ -291,9 +298,22 @@ function selectDay(val){
 				$("#"+i).addClass("nochoose");
 		}
 	}
+
+	//이미 예약된 시간 지우기
+	console.log(date);
+	date = getFormatDate(date);
+	console.log(date);
+	
+	<c:forEach items="${unselectableList}" var="info">
+		if(date == "${info.day}"){
+			for(var i=${info.startHour}; i<${info.endHour}; i++)
+				$("#"+i).addClass("nochoose");
+		}
+	</c:forEach>
+	
 	resetHour();
 
-	$("[name=Day]").val($("#D-day").val());
+	$("[name=day]").val($("#D-day").val());
 }
 
 //가능시간 클릭이벤트
@@ -362,6 +382,16 @@ function resetHour(){
 	$("[name=pay]").val('');
 	$("[name=totalPrice]").val('');
 	$("input:radio[name='selectPay']").removeAttr("checked");
+}
+
+//날짜변환
+function getFormatDate(date){
+    var year = date.getFullYear();
+    var month = (1 + date.getMonth());
+    month = month >= 10 ? month : '0' + month;
+    var day = date.getDate();
+    day = day >= 10 ? day : '0' + day;
+    return year + '-' + month + '-' + day;
 }
 
 </script>
@@ -455,8 +485,8 @@ $("#sub").on("click", function(){
 		return false;
 	}
 
-	iamport();
-	
+	//iamport();
+	document.insertReservation.submit();
 });
 
 function iamport(){

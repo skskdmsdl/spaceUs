@@ -211,6 +211,41 @@
 			to_char(d_day) = to_date(sysdate-1, 'yy/MM/dd')
 	</update>
 
+	<select id="unselectableList" resultMap="unselectableMap">
+        select 
+        	d_day, start_hour, end_hour
+		from 
+			reservation
+		where 
+			space_no = #{spaceNo}
+		    and
+		    rev_cancle = rev_comple
+	</select>
+	
+	<resultMap type="unselectable" id="unselectableMap">
+		<result column="d_day" property="day"/>
+		<result column="rev_date" property="revDate"/>
+		<result column="start_hour" property="startHour"/>
+	</resultMap>
+	
+	<update id="updateRevNo">
+		update
+		reservation
+		set
+			rev_no=#{newRevNo}
+		where
+			rev_no=#{oldRevNo}
+		
+	</update>
+	
+	<delete id="deleteReservation">
+		delete
+		from
+			reservation
+		where
+			rev_no=#{revNo}
+	</delete>
+	
 </mapper>
 
 

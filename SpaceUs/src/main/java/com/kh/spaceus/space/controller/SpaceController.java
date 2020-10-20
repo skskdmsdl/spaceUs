@@ -37,6 +37,7 @@ import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
+import com.kh.spaceus.reservation.model.vo.Unselectable;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Option;
@@ -400,6 +401,13 @@ public class SpaceController {
 		//spaceNo로 예약가능한 날짜 가져오기
 		List<ReservationAvail> availList = reservationService.selectListAvail(spaceNo);
 
+		//예약된 날짜와 시간
+		List<Unselectable> unselectableList = reservationService.unselectableList(spaceNo);
+		for(int i=0; i<unselectableList.size(); i++) {
+			System.out.println(unselectableList.get(i));
+		}
+		
+		
 		//쿠폰 보내기
 		List<Coupon> couponList = memberService.selectCouponList(principal.getName());
 		for(int i=0; i<couponList.size(); i++) {
@@ -418,6 +426,7 @@ public class SpaceController {
 		mav.addObject("member",member);
 		mav.addObject("optionList",optionList);
 		mav.addObject("availList",availList);
+		mav.addObject("unselectableList",unselectableList);
 		mav.addObject("couponList",couponList);
 		
 		mav.setViewName("space/reserveSpace");
@@ -522,7 +531,6 @@ public class SpaceController {
 		//완료되지 않은 예약이 있으면 삭제못하게 막기
 		//System.out.println(spaceNo+ " : " + principal.getName());
 		int remainder = reservationService.confirmReservation(spaceNo);
-		
 		if(remainder != 0) {
 			redirectAttr.addFlashAttribute("msg", "아직 예약이 있어 공간삭제가 불가능합니다.");
 			return "redirect:/host/spaceInfo.do";
