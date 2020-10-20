@@ -353,9 +353,9 @@ $(function(){
 				//console.log(text);
 				
 				if(data.text != undefined) {
-					alert("인증번호를 전송했습니다.");
+					swal("인증번호를 전송했습니다.");
 				} else {
-					alert("이미 등록된 번호입니다.");
+					swal("이미 등록된 번호입니다.");
 					$("#phone").val('');
 				}
 			},

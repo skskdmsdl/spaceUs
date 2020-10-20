@@ -145,8 +145,12 @@ function recruitDetailFrm(recruit_no){
 };
 $("#recruitEnroll").click(function(){
 	if('${loginMember}' == 'anonymousUser'){
-		alert("로그인 후 이용할 수 있습니다.");
-		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+		
+		swal("로그인 후 이용할 수 있습니다.")
+		.then((value) => {
+			location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+		});
+		
 	}
 	else location.href="${pageContext.request.contextPath }/community/recruit/recruitEnrollForm.do";
 }); 

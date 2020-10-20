@@ -435,11 +435,9 @@ $("[name=reportBoardNo]").click(function(){
 			for(var i in data){
 				str=data[i].reportReason;
 			};
-				alert(str);
 			/* displayResultModal(data); */
 		},
 		error: function(x,s,e){
-			alert('실패');
 			console.log("처리실패",x,s,e);
 		} 
 	});

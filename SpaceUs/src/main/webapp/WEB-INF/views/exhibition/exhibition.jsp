@@ -64,9 +64,11 @@ function deleteEx(exNo){
 			exNo : exNo
 		},
 		success : function(data){
-			//console.log(data);
-			alert('삭제가 완료되었습니다.');
-			window.location.reload();
+
+			swal("삭제가 완료되었습니다.")
+			.then((value) => {
+				window.location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);

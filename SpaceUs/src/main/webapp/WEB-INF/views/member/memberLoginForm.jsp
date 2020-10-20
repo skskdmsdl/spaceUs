@@ -33,7 +33,7 @@
 		alert('${ msg }');	
 	</c:if>
 	<c:if test="${ not empty email }">
-		alert('이미 가입하신 이메일입니다. 로그인해주세요.');
+		swal('이미 가입하신 이메일입니다. 로그인해주세요.');
 	</c:if>
 	<c:if test="${ not empty closeFunction }">
 	    self.close();

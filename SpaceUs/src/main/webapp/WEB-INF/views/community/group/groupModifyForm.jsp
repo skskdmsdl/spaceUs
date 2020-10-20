@@ -66,7 +66,7 @@ input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 	                             <table class="table">
 	                                     <tr>
 	                                         <th style="width:7%;">분류</th>
-	                                         <th><select class="nice-select sm-width small" name="boardNo" id="boardNo">
+	                                         <th><select class="nice-select sm-width" name="boardNo" id="boardNo">
 								                    <option value="" selected hidden>분류선택</option>
                            							 <c:forEach items="${List}" var="board">
 								                    	<option value="${board.boardNo}" ${board.boardNo == gb.boardNo ? 'selected' : ''}>
@@ -143,11 +143,11 @@ nhn.husky.EZCreator.createInIFrame({
 }); 
  $("#insertBtn").click( function(){
 	 if($("select[name=boardNo]").val()==""){
-		alert("분류를 선택해주세요");
+		swal("분류를 선택해주세요");
 		return false;
 		 }
 	 if($("input[name=groupBoardTitle]").val()==""){
-		alert("제목을 입력해주세요");
+		swal("제목을 입력해주세요");
 		return false;
 		 }
 	 oEditors.getById["gb"].exec("UPDATE_CONTENTS_FIELD", []);  

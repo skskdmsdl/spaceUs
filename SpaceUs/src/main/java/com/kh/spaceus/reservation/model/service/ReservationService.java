@@ -42,6 +42,8 @@ public interface ReservationService {
 
 	int confirmReservation(String spaceNo);
 
+	int updateComple();
+
 
 
 
