@@ -97,6 +97,11 @@ public class ReservationServiceImpl implements ReservationService{
 		return reservationDAO.confirmReservation(spaceNo);
 	}
 
+	@Override
+	public int updateComple() {
+		return reservationDAO.updateComple();
+	}
+
 	
 	
 	
