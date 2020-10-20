@@ -215,36 +215,35 @@ $(function(){
 										</div>
 						      		</div>
 						      </div>
-						      <!-- 모달바디 시작 -->
-						      <div class="modal-body">
-							   <div class="" id="file-upload" role="tabpanel" aria-labelledby="file-upload-tab">
-							    	<div class="input-group mb-3" style="padding:0px;">
-							    	 <!-- <form name="frm" method="post" enctype="multipart/form-data"> -->
-									  <div class="custom-file">
-									    <input type="file" class="custom-file-input" name="upFile" id="upFile">
-									    <label class="custom-file-label" for="upFile">이미지를 선택하세요</label>
-									  </div>
-									<!-- </form> -->
-									</div>
-							   </div>
-								   
-						      	<div class="" id="detail-tabContent">
-								   <div class="tab-pane" id="url-upload" role="tabpanel" aria-labelledby="url-upload-tab">
-								    	<input type="text" name="upUrl" id="upUrl" placeholder="url을 입력하세요"/>
-								   </div>
-								    
-						   		</div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-primary" id="image-upload">업로드</button>
-						        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-						      </div>
-						      
-						    </div>
-						  </div>
-						</div>
-				   	</div>
-			   </div>
-		   </div>
+						           <!-- 모달바디 시작 -->
+                        <div class="modal-body">
+                           <div class="tab-content" id="detail-tabContent">
+                           <div class="tab-pane fade" id="url-upload" role="tabpanel" aria-labelledby="url-upload-tab">
+                               <input type="text" name="upUrl" id="upUrl" placeholder="url을 입력하세요"/>
+                           </div>
+                            
+                           <div class="tab-pane fade" id="file-upload" role="tabpanel" aria-labelledby="file-upload-tab">
+                               <div class="input-group mb-3" style="padding:0px;">
+                                <!-- <form name="frm" method="post" enctype="multipart/form-data"> -->
+                                <div class="custom-file">
+                                  <input type="file" class="custom-file-input" name="upFile" id="upFile">
+                                  <label class="custom-file-label" for="upFile">이미지를 선택하세요</label>
+                                </div>
+                              <!-- </form> -->
+                              </div>
+                           </div>
+                           </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" id="image-upload">업로드</button>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+            </div>
+         </div>
                         <!-- 이미지업로드 모달끝-->
                         <div class="pf-property-details">
                             <button type="submit" class="site-btn">기획전등록</button>
