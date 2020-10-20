@@ -98,8 +98,8 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public List<ReservationAvail> selectListReservationAvail(Reservation reservation) {
-		return reservationDAO.selectListReservationAvail(reservation);
+	public int updateComple() {
+		return reservationDAO.updateComple();
 	}
 
 	

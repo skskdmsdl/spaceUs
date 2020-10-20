@@ -104,9 +104,10 @@ public class ReservationDAOImpl implements ReservationDAO{
 	}
 
 	@Override
-	public List<ReservationAvail> selectListReservationAvail(Reservation reservation) {
-		return sqlSession.selectList("reservation.selectListReservationAvail",reservation);
+	public int updateComple() {
+		return sqlSession.update("reservation.updateComple");
 	}
+
 
 	
 	

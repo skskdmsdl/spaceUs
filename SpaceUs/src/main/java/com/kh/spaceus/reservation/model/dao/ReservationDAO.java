@@ -38,7 +38,7 @@ public interface ReservationDAO {
 
 	int confirmReservation(String spaceNo);
 
-	List<ReservationAvail> selectListReservationAvail(Reservation reservation);
+	int updateComple();
 
 
 
