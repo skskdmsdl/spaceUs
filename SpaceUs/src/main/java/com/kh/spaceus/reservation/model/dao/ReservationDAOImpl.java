@@ -103,6 +103,11 @@ public class ReservationDAOImpl implements ReservationDAO{
 		return sqlSession.selectOne("reservation.confirmReservation", spaceNo);
 	}
 
+	@Override
+	public List<ReservationAvail> selectListReservationAvail(Reservation reservation) {
+		return sqlSession.selectList("reservation.selectListReservationAvail",reservation);
+	}
+
 	
 	
 	

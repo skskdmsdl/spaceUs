@@ -192,6 +192,15 @@
 			AND
 			rev_cancle=rev_comple
 	</select>
+	
+	<select id="selectListReservationAvail" resultMap="reservationMap">
+		select 
+			* 
+		from 
+			reservation join reservation_avail using(space_no)
+		where 
+			space_no=#{spaceNo}
+	</select>
 
 </mapper>
 

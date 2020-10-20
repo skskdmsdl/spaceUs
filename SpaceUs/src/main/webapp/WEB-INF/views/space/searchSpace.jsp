@@ -265,7 +265,7 @@ function sortChange(obj){
  
 					<div>
 						<!-- 검색시작 -->
-						<div id="wrap" style="width: 90%;">
+						<div id="wrap" style="width: 100%;">
 	  						<input id="searchInput" class="searchInput" name="search_keyword" placeholder="키워드를 입력하세요">
 	  						<input type="submit" class="btn btn-primary search-btn" value="입력" onclick="searchSpace();" />
 	  						<!-- <i class="fas fa-search fa-2x" style="color:#00C89E"></i> -->	
