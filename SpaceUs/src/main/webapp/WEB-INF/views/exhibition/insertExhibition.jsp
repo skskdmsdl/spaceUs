@@ -71,7 +71,7 @@ $(function(){
 
 
    	 	if(($url == undefined || $url == "") && ($file == undefined || $label == "이미지를 선택하세요")) {
-   	   	 	alert("이미지를 업로드해주세요.");
+   	   	 	swal("이미지를 업로드해주세요.");
    	   	 	$("#upUrl").focus();
  	   	 } else if (($url != undefined || $url != "") && ($file == undefined || $label == "이미지를 선택하세요")){
  	 	   	$("#image-upload").attr("data-dismiss","modal");

@@ -23,14 +23,6 @@
 }
 .fa-caret-down {float:right;}
 .fa-arrow-right {float:left; margin-right: 1.5em; padding-top:.4em;}
-/* .fa-arrow-right.click {
-	transform: rotate(180deg);
-}
-.fa-arrow-right.click {
-    height: 100%;
-    transition: transform 300ms ease-in-out;
-}
- */
 input[type=file], .address-input {margin-bottom:20px; margin-top:10px;}
 .site-btn {width: 100%; font-size: 17px;}
 

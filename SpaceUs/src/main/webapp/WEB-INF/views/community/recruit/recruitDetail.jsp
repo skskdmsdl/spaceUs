@@ -314,9 +314,9 @@ function reportBtn(){
 		success : function(data){
 			console.log(data);
 			if(data.duplication != 1)
-			alert("신고가 완료되었습니다!");
+			swal("신고가 완료되었습니다!");
 			else
-			alert("이미 신고된 게시물 입니다!");
+			swal("이미 신고된 게시물 입니다!");
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -344,8 +344,10 @@ $("#insertComment").click(function(){
 			},
 			dataType : "json",
 			success : function(data){
-				alert("댓글이 등록되었습니다!");
-				location.reload();
+				swal("댓글이 등록되었습니다!")
+				.then((value) => {
+					location.reload();
+				});
 			},
 			error : function(xhr, status, err){
 				console.log("처리실패", xhr, status, err);
@@ -412,8 +414,10 @@ $(".replyBtn").click(function(){
 		},
 		dataType : "json",
 		success : function(data){
-			alert("댓글이 등록되었습니다!");
-			location.reload();
+			swal("댓글이 등록되었습니다!")
+			.then((value) => {
+				location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -442,8 +446,10 @@ $(".commentModifyBtn").click(function(){
 		},
 		dataType : "json",
 		success : function(data){
-			alert("댓글이 수정되었습니다!");
-			location.reload();
+			swal("댓글이 수정되었습니다!")
+			.then((value) => {
+				location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -461,8 +467,10 @@ $(".commentDelete").click(function(){
 		},
 		dataType : "json",
 		success : function(data){
-			alert("댓글이 삭제되었습니다!");
-			location.reload();
+			swal("댓글이 삭제되었습니다!")
+			.then((value) => {
+				location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -480,8 +488,10 @@ $(".commentReport").click(function(){
 		},
 		dataType : "json",
 		success : function(data){
-			alert("댓글이 신고되었습니다!");
-			location.reload();
+			swal("댓글이 신고되었습니다!")
+			.then((value) => {
+				location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -492,14 +502,14 @@ $(".commentReport").click(function(){
 $("#content").keyup(function(){
 	if('${loginMember}' == 'anonymousUser'){
 		$("#content").val("");
-		alert("로그인 후 이용할 수 있습니다.");
+		swal("로그인 후 이용할 수 있습니다.");
 		return;
 	}
 });
 $(".replyCon").keyup(function(){
 	if('${loginMember}' == 'anonymousUser'){
 		$(".replyCon").val("");
-		alert("로그인 후 이용할 수 있습니다.");
+		swal("로그인 후 이용할 수 있습니다.");
 		return;
 	}
 });

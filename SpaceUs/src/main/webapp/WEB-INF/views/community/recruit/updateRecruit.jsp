@@ -120,7 +120,7 @@ nhn.husky.EZCreator.createInIFrame({
 }); 
  $("#updateBtn").click( function(){
 	 if($("input[name=title]").val()==""){
-		alert("제목을 입력해주세요");
+		swal("제목을 입력해주세요");
 		return false;
 		 }
 	 oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);  

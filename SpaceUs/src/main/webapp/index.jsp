@@ -515,7 +515,7 @@ function searchSpace(){
 	keyword = keyword.replace('#','%23');
 	
 	if(keyword == null || keyword == ''){
-		alert("키워드를 입력해주세요!");
+		swal("키워드를 입력해주세요!");
 		return;
 	}
 	else{

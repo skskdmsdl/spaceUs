@@ -246,11 +246,11 @@ $("#nickName").on("blur", function(){
 $("#infoUpdate").on("click", function(){
 
 	if(!$(".nickNameCheck").hasClass('show')&&!$("#nickName").val()==$("#memberName").val()){
-		 alert("닉네임을 확인해주세요!");
+		 swal("닉네임을 확인해주세요!");
 		 return;
 	}
 	if(!$(".phoneCheck").hasClass('show')&&!$("#phone").val()==$("#memberPhone").val()){
-		 alert("핸드폰을 확인해주세요!");
+		 swal("핸드폰을 확인해주세요!");
 		 return;
 	}
 	if($("#nickName").val()==$("#memberName").val()&&!$("#certification").hasClass('show')) {
@@ -266,9 +266,11 @@ $("#infoUpdate").on("click", function(){
 		},
 		dataType : "json",
 		success : function(data){
-			/* alert(data.nick); */
-			alert("회원정보가 변경되었습니다.");
-			location.reload();
+
+			swal("회원정보가 변경되었습니다.")
+			.then((value) => {
+				location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -321,7 +323,7 @@ $("#updatePwd").on("click", function(){
 		 return;
 	}
 	if(!$("#passwordChk").hasClass('show')){
-		 alert("비밀번호가 서로 다릅니다!");
+		 swal("비밀번호가 서로 다릅니다!");
 		 return;
 	}
 	 $.ajax({
@@ -331,8 +333,11 @@ $("#updatePwd").on("click", function(){
 		},
 		dataType : "json",
 		success : function(data){
-			alert("비밀번호가 변경되었습니다.");
-			location.reload();
+
+			swal("비밀번호가 변경되었습니다.")
+			.then((value) => {
+				location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);
@@ -363,12 +368,18 @@ $(function(){
 				//console.log(text);
 				
 				if(data.text != undefined) {
-					alert("인증번호를 전송했습니다.");
-					$("#certification").show();
-					$("#certification").addClass("show");
+		
+					swal("인증번호를 전송했습니다.")
+					.then((value) => {
+						$("#certification").show();
+						$("#certification").addClass("show");
+					});
 				} else {
-					alert("이미 등록된 번호입니다.");
-					$("#phone").val('');
+
+					swal("이미 등록된 번호입니다.")
+					.then((value) => {
+						$("#phone").val('');
+					});
 				}
 			},
 			error : function(xhr, status, err){
