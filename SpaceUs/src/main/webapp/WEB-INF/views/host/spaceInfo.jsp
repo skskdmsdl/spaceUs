@@ -376,7 +376,7 @@ $("#day input").on("click", function(){
 $("#availableTime th").on("click", function(){
 	//요일선택
 	if(day==null){
-		alert("요일을 먼저 선택해주세요");
+		swal("요일을 먼저 선택해주세요");
 		return;
 	}
 	

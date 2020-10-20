@@ -119,11 +119,11 @@ nhn.husky.EZCreator.createInIFrame({
 }); 
  $("#insertBtn").click( function(){
 	 if($("select[name=header]").val()==""){
-		alert("분류를 선택해주세요");
+		swal("분류를 선택해주세요");
 		return false;
 		 }
 	 if($("input[name=title]").val()==""){
-		alert("제목을 입력해주세요");
+		swal("제목을 입력해주세요");
 		return false;
 		 }
 	 oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);  

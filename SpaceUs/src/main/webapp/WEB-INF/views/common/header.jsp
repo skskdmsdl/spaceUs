@@ -71,11 +71,13 @@
 	
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	
-
+	<!-- sweet alert -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
 <script>
 	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
 	<c:if test="${ not empty msg }">
-		alert('${ msg }');	
+		alert('${ msg }');
 	</c:if>
 	<c:if test="${ not empty script }">
 		self.close();	
@@ -266,7 +268,9 @@ function memberId(){
 		});
 };
 function enrollSpace(){
-   	alert("로그인 후 이용할 수 있습니다.");
-   	location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+   	swal("로그인 후 이용할 수 있습니다.")
+   	.then((value) => {
+   		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+   	});
 }
 </script>

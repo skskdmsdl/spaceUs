@@ -253,8 +253,10 @@ $(".updateAnswer").click(function(){
 		},
 		dataType : "json",
 		success : function(data){
-			alert("댓글이 등록되었습니다!");
-			location.reload();
+			swal("댓글이 등록되었습니다!")
+			.then((value) => {
+				location.reload();
+			});
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);

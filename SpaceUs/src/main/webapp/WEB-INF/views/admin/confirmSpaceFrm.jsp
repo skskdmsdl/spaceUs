@@ -7,7 +7,6 @@
 <!-- 한글 인코딩처리 -->
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style>
 .carousel {
@@ -305,8 +304,6 @@ $(".confirm").click(function(){
 	
 	var spaceNo = $(this).val();
 	var memberEmail = $(this).siblings(".member").val();
-	//alert(spaceNo);
-	//alert(memberEmail);
 
 	var param1 = "spaceNo="+spaceNo+
 				"&memberEmail="+memberEmail;
@@ -325,12 +322,18 @@ $(".confirm").click(function(){
 				data:param1,
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				success: function(){
-					alert("공간 승인이 정상적으로 등록되었습니다.");
-					location.href="${pageContext.request.contextPath}/admin/spaceManage.do";
+					swal("공간 승인이 정상적으로 등록되었습니다.")
+					.then((value) => {
+						location.href="${pageContext.request.contextPath}/admin/spaceManage.do";
+					});
 				},
 				error: function(){
-					alert("공간 승인이 정상적으로 등록이 되지 않았습니다.");
-					location.href="${pageContext.request.contextPath}/admin/spaceManage.do";
+
+					swal("공간 승인이 정상적으로 등록이 되지 않았습니다.")
+					.then((value) => {
+						location.href="${pageContext.request.contextPath}/admin/spaceManage.do";
+					});
+					
 				}
 			});
 

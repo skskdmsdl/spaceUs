@@ -723,6 +723,8 @@ create table exhibition (
 select * from exhibition;
 
 
+
+
 -----------------------------
 ---- 좋아요(위시리스트) ------
 -----------------------------
@@ -1379,3 +1381,24 @@ select * from space_tag where tag_no = 'TAG182';
 select * from space where space_no='space112';
 select * from review;
 select * from tag;
+--------------------------------------
+--10/20
+--------------------------------------
+delete tag where tag_no = 'TAG180';
+commit;
+select * from tag;
+
+select * from exhibition order by ex_no;
+
+insert into
+		exhibition
+values(
+    seq_ex.nextval,
+    #{exTitle},
+    #{exSubtitle},
+    #{imageUrl},
+    #{renamedFileName}
+    #{tagNo}
+    
+    
+add 
