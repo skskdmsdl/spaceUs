@@ -564,10 +564,13 @@ $("#addTags").on('click', function(){
 		});  
     }
 });
-//태그 삭제 클릭이벤트
-/* $("#tags").on("click", function(){
-   //내용작성하기 
-}); */
+//태그 삭제 클릭이벤트	
+$("#tags").on("click", function(){	
+	$("#tags *").remove();	
+	$("#tag").val("");	
+	$("#tagName").val("");	
+});	
+
 </script>
 
 <!-- 사업자등록 script -->
