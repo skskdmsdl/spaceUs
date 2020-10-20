@@ -243,25 +243,12 @@ function naverShare() {
 							<span class="like-count"></span>
 							</c:otherwise>
 							</c:choose>
-							&emsp; <%-- <a href="javascript:;" id="kakao-link-btn"> <img
-								src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png"
-								width="30px" />
-							</a> --%>
-							<!-- 공유하기 팝오버 시작-->
-							<!--  <a href=javascript:; data-toggle="popover" data-trigger="focus"
-								data-placement="bottom" tabindex="0" title="공유하기"
-								data-html="true" data-popover-content="#a1"> <i
-								class="far fa-share-square"></i>
-							</a> -->
+							&emsp; 
 							<i class="far fa-share-square"></i>
 							<div class="d-none" id="a1" style="padding:5px; font-size: 16px; border:1px solid #efefef; right: 140px;top: 420px;position: absolute; z-index: 10;background-color: white; width:250px; text-align: center; border-radius: 5px;" >
 								<p style="border-bottom:1px solid #efefef; padding:5px;">공유하기</p>
 								<div class="popover-body">
-								
-									<!-- 카카오 -->
 									<img src="${pageContext.request.contextPath }/resources/images/icons/kakao-icon.png" id="kakao-link-btn"/> 
-									<!-- 카카오 -->
-								
 									<img src="${pageContext.request.contextPath }/resources/images/icons/twitter-icon.png" onclick="twitterShare();" />
 									<img src="${pageContext.request.contextPath }/resources/images/icons/naver-icon.jpg" onclick="naverShare();" />
 									<input class="input-group-text w-100 mt-4 mb-2" type="text" id="url-input">
@@ -1062,16 +1049,16 @@ var geocoder = new kakao.maps.services.Geocoder();
     	      content: {
     	        title: '${ space.spaceName }',
     	        description: $('#spaceCon').val(),
-    	        imageUrl: 'https://moplqfgeemqv2103108.cdn.ntruss.com/service/158321359_3969307adb111d972a661a99fd3629af.jpg?type=m&w=900&h=900&autorotate=true&quality=90',
+    	        imageUrl: 'https://post-phinf.pstatic.net/MjAxOTA4MzBfMTQ0/MDAxNTY3MTQ5Njk5ODg1.sDdYLvHVexwz3_Y9g3gNw4abEH1H07TNO5xUJQTLfbYg.dfsCNys7wtBo0IMpY0soq9dASloUMMeiZ9Ozeb20plkg.PNG/%EA%B0%95%EC%9B%90%ED%98%B8_%ED%98%B8%ED%85%94%EB%A6%AC%EC%A1%B0%ED%8A%B8.PNG?type=w1200',
     	        link: {
     	          mobileWebUrl: 'https://www.spacecloud.kr/',
     	          webUrl: 'https://www.spacecloud.kr/'
     	        }
     	      },
     	      social: {
-    	        likeCount: 286,
-    	        commentCount: 45,
-    	        sharedCount: 845
+    	        likeCount: 12,
+    	        commentCount: 10,
+    	        sharedCount: 21
     	      },
     	      buttons: [
     	        {
