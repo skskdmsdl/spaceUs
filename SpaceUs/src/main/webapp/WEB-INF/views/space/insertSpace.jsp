@@ -554,7 +554,7 @@ $("#addTags").on('click', function(){
 		,
 		dataType : "json",
 		success : function(data){
-			$("#tags").append("<span class='label label-success m-2 p-2'>#"+$('#tagName').val() +" X</span>"); 
+			$("#tags").append("<input type='checkbox' name='tag' style='display:none' value="+$('#tagName').val() +" checked/><span class='label label-success m-2 p-2'>#"+$('#tagName').val() +" X</span>"); 
 			/* $("#tags").append("<span class='label label-success m-2 p-2 small'>#"+$('#tagName').val() +" X</span>");  */
 	    	$("#tagName").val("");	
 		},
