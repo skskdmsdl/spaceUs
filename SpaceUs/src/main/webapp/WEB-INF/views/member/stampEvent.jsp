@@ -171,7 +171,7 @@ $(function(){
 $("#calendar_content").css("cursor", "pointer");
 $("#calendar_content").click(function(){
 	if(${member.today} != 0){
-		alert('이미 출석하셨습니다.');
+		swal('이미 출석하셨습니다.');
 		return;
 	}
 	$.ajax({
@@ -181,8 +181,10 @@ $("#calendar_content").click(function(){
 		},
 		dataType : "json",
 		success : function(data){
-			alert("출석확인 되었습니다!");
-			 location.reload(); 
+			 swal("출석확인 되었습니다!")
+			 .then((value) => {
+				 location.reload(); 
+			 });
 		},
 		error : function(xhr, status, err){
 			console.log("처리실패", xhr, status, err);

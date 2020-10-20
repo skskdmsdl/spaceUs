@@ -175,7 +175,7 @@ function urlcopy(){
 	document.execCommand("copy");
 	document.body.removeChild(tempElem);
 
-	alert("url 복사완료!");
+	swal("url 복사완료!");
 }
 
 //트위터 공유
@@ -1135,7 +1135,7 @@ function sendAnswer(){
 		.attr("method", "POST")
 		.submit();
 	} else{
-		alert("답변 내용을 입력하세요.");
+		swal("답변 내용을 입력하세요.");
 		}
 }
 
@@ -1163,7 +1163,7 @@ function ask(){
 		.attr("method", "POST")
 		.submit();
 	} else{
-		alert("질문 내용을 입력하세요.");
+		swal("질문 내용을 입력하세요.");
 		}
 }
 
@@ -1174,8 +1174,10 @@ function rvSubmit(){
 		.submit();
    	}
    	else{
-      	alert("로그인 후 이용할 수 있습니다.");
-      	location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+      	swal("로그인 후 이용할 수 있습니다.")
+      	.then((value) => {
+      		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+      	});
 	}
 	
 };
@@ -1292,8 +1294,11 @@ $("[name=reviewPaging]").click(function(){
 }); */
 //로그인 후 이용 처리
 $("#likeLogin").click(function(){
-	alert("로그인 후 이용할 수 있습니다.");
-  	location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+
+  	swal("로그인 후 이용할 수 있습니다.")
+  	.then((value) => {
+  		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+  	});
 });
 
 </script>

@@ -218,10 +218,7 @@ body{
 						                                    	</th>
 						                                    </c:if>
 					                                    	<script type="text/javascript">
-																function alertCommentBtn${cm.groupBoardCommentNo}(){
-																	//alert("sss");
-																}
-					                                    	
+		
 						                                    	function menu${cm.groupBoardCommentNo}(){
 						                                    		var element = document.getElementById("main-menu${cm.groupBoardCommentNo}");
 						                                    		element.classList.toggle("click");
@@ -259,11 +256,13 @@ body{
 	                 					<!-- 대댓글 폼 시작 -->
 		                           		<script type="text/javascript">
 											$("#replyComment${cm.groupBoardCommentNo}").click(function(){
-												/* alert($(this).val()); */
+											
 												
 												if('${loginMember}' == 'anonymousUser'){
-													alert("로그인 후 사용해 주세요");
+													swal("로그인 후 사용해 주세요")
+													.then((value) => {
 													location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+													});
 												}
 												else{
 											
@@ -306,7 +305,7 @@ body{
 												var groupBoardContent = $('[name=textarea2]').val();
 												
 												if(groupBoardContent == null || groupBoardContent == ''){
-													alert("댓글을 입력해주세요");
+													swal("댓글을 입력해주세요");
 													return;
 												}
 											
@@ -322,7 +321,7 @@ body{
 															"&groupBoardRef="+groupBoardRef+"&writer="+writer+
 															"&groupBoardCommentLevel="+groupBoardCommentLevel+
 															"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret;
-												/* alert(param1); */
+												
 												
 											$.ajax({
 													method:"post",
@@ -330,12 +329,13 @@ body{
 													data:param1,
 													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 													success:function(){
-														alert("댓글이 정상적으로 등록되었습니다.");
-														/* location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do"; */
-														window.location.reload();
+														swal("댓글이 정상적으로 등록되었습니다.")
+														.then((value) => {
+															window.location.reload();
+														});
 													},
 													error: function(x,h,r){
-														alert("댓글이 정상적으로 등록이 되지 않았습니다.");
+														swal("댓글이 정상적으로 등록이 되지 않았습니다.");
 														console.log(x,h,r);
 													}
 												});
@@ -393,7 +393,7 @@ body{
 												/* alert(groupBoardContent); */
 												
 												if(groupBoardContent == null || groupBoardContent == ''){
-													alert("댓글을 입력해주세요");
+													swal("댓글을 입력해주세요");
 													return;
 												}
 												var groupBoardRef = $("[name=groupBoardRef]").val();
@@ -418,11 +418,13 @@ body{
 													data:param1,
 													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 													success:function(){
-														alert("댓글이 정상적으로 수정되었습니다.");
-														location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+														swal("댓글이 정상적으로 수정되었습니다.")
+														.then((value) => {
+															location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do";
+														});
 													},
 													error: function(x,h,r){
-														alert("댓글이 정상적으로 수정되지 않았습니다.");
+														swal("댓글이 정상적으로 수정되지 않았습니다.");
 														console.log(x,h,r);
 													}
 												});
@@ -439,11 +441,14 @@ body{
 													data : param1,
 													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 													success: function(data){
-														alert('댓글 삭제가 완료되었습니다');
-														window.location.reload();
+														
+														swal("댓글 삭제가 완료되었습니다")
+														.then((value) => {
+															window.location.reload();
+														});
 													} ,
 													errer: function(x,s,r){
-														alert('댓글 삭제가 실패하였습니다');
+														swal('댓글 삭제가 실패하였습니다');
 														console.log("처리실패",x,s,r);
 													}
 												});
@@ -554,10 +559,10 @@ body{
 												/*대댓글 수정*/
 												function updateReplyBtn_${cm.groupBoardCommentNo}(){
 													var groupBoardContent = $('[name=comment_${cm.groupBoardCommentNo}]').val();
-													/* alert(groupBoardContent); */
+													
 													
 													if(groupBoardContent == null || groupBoardContent == ''){
-														alert("댓글을 입력해주세요");
+														swal("댓글을 입력해주세요");
 														return;
 													}
 													var groupBoardRef = $("[name=groupBoardRef__]").val();
@@ -580,12 +585,15 @@ body{
 														data:param1,
 														contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 														success:function(){
-															alert("대댓글이 정상적으로 수정되었습니다.");
-															/* location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do"; */
-															window.location.reload();
+														
+															swal("대댓글이 정상적으로 수정되었습니다.")
+															.then((value) => {
+																window.location.reload();
+															});
+															
 														},
 														error: function(x,h,r){
-															alert("대댓글이 정상적으로 수정되지 않았습니다.");
+															swal("대댓글이 정상적으로 수정되지 않았습니다.");
 															console.log(x,h,r);
 														}
 													}); 
@@ -602,11 +610,13 @@ body{
 													data : param1,
 													contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 													success: function(data){
-														alert('댓글 삭제가 완료되었습니다');
-														window.location.reload();
+														swal("댓글 삭제가 완료되었습니다")
+														.then((value) => {
+															window.location.reload();
+														});
 													} ,
 													errer: function(x,s,r){
-														alert('댓글 삭제가 실패하였습니다');
+														swal('댓글 삭제가 실패하였습니다');
 														console.log("처리실패",x,s,r);
 													}
 												});
@@ -675,10 +685,11 @@ $("#alertBtn").click(function(){
 $(function(){
 	$('.sub-menu').hide();	
 $(".textarea1").click(function(){
-	/* alert('${loginMember}'); */
  	if('${loginMember}' == 'anonymousUser'){
-		alert("로그인 후 사용해 주세요");
+		swal("로그인 후 사용해 주세요")
+		.then((value) => {
 		location.href="${pageContext.request.contextPath }/member/memberLoginForm.do";
+		});
 	}
 	else{
 		return;
@@ -688,7 +699,7 @@ $(".textarea1").click(function(){
 $("#inserCommentFrm #insertCmt").click(function(){
 	var groupBoardContent = $("[name=textarea1]").val();
 	if(groupBoardContent == null || groupBoardContent == ''){
-		alert("댓글을 입력해주세요");
+		swal("댓글을 입력해주세요");
 		return;
 	}
 	var groupBoardRef = $("[name=groupBoardRef]").val();
@@ -703,20 +714,19 @@ $("#inserCommentFrm #insertCmt").click(function(){
 				"&groupBoardRef="+groupBoardRef+"&writer="+writer+
 				"&groupBoardCommentLevel="+groupBoardCommentLevel+
 				"&groupBoardCommentRef="+groupBoardCommentRef+"&secret="+secret;
-	/* alert(param1); */
-	
 	$.ajax({
 		method:"post",
 		url:"${pageContext.request.contextPath}/community/comment/insertComment/"+groupBoardRef+".do",
 		data:param1,
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		success:function(){
-			alert("댓글이 정상적으로 등록되었습니다.");
-			/* location.href="${pageContext.request.contextPath }/community/group/groupDetail/"+groupBoardRef+".do"; */
-			window.location.reload();
+			swal("댓글이 정상적으로 등록되었습니다.")
+			.then((value) => {
+				window.location.reload();
+			});
 		},
 		error: function(x,h,r){
-			alert("댓글이 정상적으로 등록이 되지 않았습니다.");
+			swal("댓글이 정상적으로 등록이 되지 않았습니다.");
 			console.log(x,h,r);
 		}
 	});
@@ -730,11 +740,13 @@ $("[name=alertComment]").click(function(){
 		method:"post",
 		url:"${pageContext.request.contextPath}/community/comment/alertComment.do?groupBoardCommentNo="+groupBoardCommentNo,
 		success:function(){
-			alert("댓글이 신고되었습니다")
-			window.location.reload();
+			swal("댓글이 신고되었습니다")
+			.then((value) => {
+				window.location.reload();
+			});
 		},
 		error: function(x,h,r){
-			alert("댓글 신고가 되지 않았습니다").
+			swal("댓글 신고가 되지 않았습니다");
 			console.log(x,h,r);
 		}
 	});	
