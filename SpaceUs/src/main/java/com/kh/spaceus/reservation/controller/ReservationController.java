@@ -1,10 +1,7 @@
 package com.kh.spaceus.reservation.controller;
 
-<<<<<<< HEAD
 import java.security.Principal;
 import java.text.SimpleDateFormat;
-=======
->>>>>>> branch 'master' of https://github.com/skskdmsdl/spaceUs.git
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
