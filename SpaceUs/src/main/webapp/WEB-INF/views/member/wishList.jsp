@@ -93,7 +93,7 @@ span > a:hover{
                 <!-- 위시리스트 -->  
                 <div id="wishListPage" class="ml-5 mr-5">
 	                <div class="card p-4">
-		                <div class="card-body">
+		                <div class="card-body"">
 		                <div class="col-md-10">
                             <h5 class="card-title">위시리스트</h5>
                             <h6 class="card-subtitle">위시리스트를 확인하세요</h6>
@@ -102,8 +102,8 @@ span > a:hover{
                         	<c:choose>
 				         	 <c:when test="${ not empty wlist }">
                         	<c:forEach items="${ wlist }" var="wish" varStatus="vs">
-							<div class="col-md-3">
-							    <div class="thumbnail block-20" >
+							<div class="col-md-3" style="width:90%; display:inline;">
+							    <div class="thumbnail block-18" >
 							    <a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${wish.spaceNo}">
 							    <img class="block-20" src="${ pageContext.request.contextPath }/resources/upload/space/${wish.image}" alt="..."> 
 							    </a>
@@ -155,14 +155,14 @@ span > a:hover{
 							</c:choose>	
 						  </div>
 						  
-							<div class="container">
-							                 <div class="container">
-							                 <nav class="mt-5" >
-												<ul class="justify-content-center pagination">${ pageBar }</ul>
-											</nav>
-							 			</div>
-							 			</div>
 						</div>
+<%-- 					<div class="container">
+			            <div class="container">
+			                 <nav class="mt-5" >
+								<ul class="justify-content-center pagination">${ pageBar }</ul>
+							</nav>
+			 			</div>
+					 </div> --%>
 						</div>
 					</div>
 					

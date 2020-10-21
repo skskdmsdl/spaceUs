@@ -17,6 +17,7 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -288,10 +289,12 @@ public class HostController {
        SXSSFSheet sheet = workbook.createSheet("정산내역");
        
        //시트 열 너비 설정
-       sheet.setColumnWidth(0, 1500);
-       sheet.setColumnWidth(0, 4000);
-       sheet.setColumnWidth(0, 4000);
-       sheet.setColumnWidth(0, 2000);
+       sheet.setColumnWidth(1, 3000);
+       sheet.setColumnWidth(2, 7000);
+       sheet.setColumnWidth(3, 7000);
+       sheet.setColumnWidth(4, 7000);
+       
+       sheet.addMergedRegion(new CellRangeAddress(1, 3, 1, 4));
        
        //cell 정렬 
        CellStyle mergeRowStyle1 = workbook.createCellStyle();
@@ -306,6 +309,12 @@ public class HostController {
        //foregroundcolor 대표색
        
        XSSFCellStyle mergeRowStyle2 = (XSSFCellStyle) workbook.createCellStyle();
+       //cell font 설정
+       Font headerFont = workbook.createFont();
+       headerFont.setFontName("나눔고딕");
+       headerFont.setFontHeight((short)200);
+       headerFont.setColor(IndexedColors.BLACK.getIndex());
+       headerFont.setBold(true);
        
        mergeRowStyle2.setAlignment(HorizontalAlignment.CENTER);
        mergeRowStyle2.setVerticalAlignment(VerticalAlignment.TOP);
@@ -314,62 +323,66 @@ public class HostController {
        mergeRowStyle2.setBorderBottom(BorderStyle.SLANTED_DASH_DOT);
        mergeRowStyle2.setBorderRight(BorderStyle.HAIR);
        mergeRowStyle2.setFillForegroundColor(new XSSFColor(new byte[] {(byte) 192,(byte) 192,(byte) 192}));
-       mergeRowStyle2.setFillPattern(FillPatternType.FINE_DOTS);
+       mergeRowStyle2.setFillPattern(FillPatternType.BRICKS);
+       mergeRowStyle2.setFont(headerFont);
        
-       
-       //cell font 설정
-       Font headerFont = workbook.createFont();
-       headerFont.setFontName("나눔고딕");
-       headerFont.setFontHeight((short)1000);
-       headerFont.setColor(IndexedColors.GREEN.getIndex());
-       headerFont.setBold(true);
+       CellStyle mergeRowStyle3 = workbook.createCellStyle();
+       mergeRowStyle3.setAlignment(HorizontalAlignment.CENTER);
+       mergeRowStyle3.setVerticalAlignment(VerticalAlignment.CENTER);
                
        CellStyle headerStyle = workbook.createCellStyle();
        headerStyle.setFont(headerFont);
        
+       Row titleRow = sheet.createRow(1);
+       Cell titleCell = titleRow.createCell(1);
+       titleCell.setCellValue("SpaceUs 호스트 정산내역");
+       titleCell.setCellStyle(mergeRowStyle1); 
        
        // 헤더 행 생
-       Row headerRow = sheet.createRow(0);
+       Row headerRow = sheet.createRow(4);
        // 해당 행의 첫번째 열 셀 생성
-       Cell headerCell = headerRow.createCell(0);
+       Cell headerCell = headerRow.createCell(1);
        headerCell.setCellValue("번호");
        headerCell.setCellStyle(mergeRowStyle1);
        // 해당 행의 두번째 열 셀 생성
-       headerCell = headerRow.createCell(1);
+       headerCell = headerRow.createCell(2);
        headerCell.setCellValue("정산날짜");
        headerCell.setCellStyle(mergeRowStyle1);
        // 해당 행의 세번째 열 셀 생성
-       headerCell = headerRow.createCell(2);
+       headerCell = headerRow.createCell(3);
        headerCell.setCellValue("총 이용시간");
        headerCell.setCellStyle(mergeRowStyle1);
        // 해당 행의 네번째 열 셀 생성
-       headerCell = headerRow.createCell(3);
+       headerCell = headerRow.createCell(4);
        headerCell.setCellValue("일매출");
        headerCell.setCellStyle(mergeRowStyle1);
        
-       // 과일표 내용 행 및 셀 생성
+       // 정산내역 내용 행 및 셀 생성
        Row bodyRow = null;
        Cell bodyCell = null;
        
-       for(int i=0; i<list.size(); i++) {
-           DailySale ds = list.get(i);
+       for(int i=5; i<list.size()+5; i++) {
+           DailySale ds = list.get(i-5);
            
            // 행 생성
-           bodyRow = sheet.createRow(i+1);
+           bodyRow = sheet.createRow(i);
            // 데이터 번호 표시
-           bodyCell = bodyRow.createCell(0);
-           bodyCell.setCellValue(i + 1);
-           bodyCell.setCellStyle(mergeRowStyle2);
-           // 정산날짜 
            bodyCell = bodyRow.createCell(1);
-           bodyCell.setCellValue(ds.getDate());
-           // 일일 총 이용시간
+           bodyCell.setCellValue(i-4);
+           bodyCell.setCellStyle(mergeRowStyle3); 
+           // 정산날짜 
            bodyCell = bodyRow.createCell(2);
+           bodyCell.setCellValue(ds.getDate());
+           bodyCell.setCellStyle(mergeRowStyle2); 
+           // 일일 총 이용시간
+           bodyCell = bodyRow.createCell(3);
            bodyCell.setCellValue(ds.getTotalHour());
+           bodyCell.setCellStyle(mergeRowStyle3); 
            
            // 일매출 표시
-           bodyCell = bodyRow.createCell(3);
+           bodyCell = bodyRow.createCell(4);
            bodyCell.setCellValue(ds.getRevenue());
+           bodyCell.setCellStyle(mergeRowStyle2); 
        }
        
        return workbook;
