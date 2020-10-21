@@ -165,7 +165,6 @@ $(function(){
 		});
     };
 
-    
 function urlcopy(){
 	var tempElem = document.createElement('textarea');
 
@@ -188,7 +187,6 @@ function twitterShare() {
 			, 'width=600,height=400,resizable=yes,scrollbars=yes'
 	);
 }
-
 
 //네이버 공유
 function naverShare() {
@@ -214,14 +212,6 @@ function naverShare() {
 								</div>
 						</c:forEach>
 					</c:if>
-<%-- 					<div class="mySlides fade1">
-						<div class="img"
-							style="background-image: url(${pageContext.request.contextPath }/resources/images/work-1.jpg);"></div>
-					</div>
-					<div class="mySlides fade1">
-						<div class="img"
-							style="background-image: url(${pageContext.request.contextPath }/resources/images/work-2.jpg);"></div>
-					</div> --%>
 					<i class="prev fas fa-chevron-left fa-2x" onclick="plusSlides(-1)"></i>
 					<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i>
 					<div class="text text-center">
@@ -288,11 +278,6 @@ function naverShare() {
 								href="#detail-description" role="tab"
 								aria-controls="detail-description" aria-expanded="true">공간설명</a>
 							</li>
-<!-- 							<li class="nav-item"><a class="nav-link active"
-								id="detail-description-tab" data-toggle="pill"
-								href="#detail-description" role="tab"
-								aria-controls="detail-description" aria-expanded="true">공간설명</a>
-							</li> -->
 							<li class="nav-item"><a class="nav-link" id="detail-qna-tab"
 								data-toggle="pill" href="#detail-qna" role="tab"
 								aria-controls="detail-qna" aria-expanded="true">Q&A</a></li>
@@ -374,10 +359,6 @@ function naverShare() {
 <input type="hidden" id="spaceAddr" value="${ space.address }" />
 <input type="hidden" id="spaceTitle" value="${ space.spaceName }" />
 						
-	
-						
-						
-
 <div class="tab-pane fade" id="detail-qna" role="tabpanel" aria-labelledby="detail-qna-tab">
      <div class="row mt-5">
    		<div class="col-md-10" style="margin: 0 auto;">
@@ -559,7 +540,6 @@ function naverShare() {
 		   			</h4>
 		   			<c:choose>
 		   				<c:when test="${qna.status eq false}">
-			   			 			<!-- <div style="margin-right:15px;"> -->
    											<div style="margin-right:15px;">
 						   			   		 <p style="padding:0 20px; text-align:justify;">${qna.content }</p>
 						   			    	</div>
@@ -580,7 +560,6 @@ function naverShare() {
    											
    											</c:if>
    										 </sec:authorize> 
-					   			    <!-- </div> -->
 		   			 	</c:when>
 		   			 	
 		   			 	<c:otherwise>
@@ -640,8 +619,6 @@ function naverShare() {
 		   					
 		   					<button type="button" class="btn btn-primary answerbtn" data-toggle="modal" data-target="#answerModal" data-whatever="@fat" 
 					   						style="margin-right: 70px; margin-bottom:7px; letter-spacing:1px; font-weight:bold; font-size:13px;" onclick="selectQnaNo('${qna.qnaNo}');">답변하기</button>
-					   					
-	  						   						
 	   					</h4> 
    					</c:if>
    					</sec:authorize>
@@ -760,9 +737,6 @@ function naverShare() {
    			</c:if>
    		</div>
 		   	
-<%-- 			<nav aria-label="Page navigation" style="display:inline text-align: center; margin-left: 45%; margin-top:50px;">
-			<ul class="pagination" style="border:0; margin-right:10px;"> ${qPageBar}</ul>
-			</nav> --%>
    		</div>
    		</div>
 <!-- qna끝 -->
@@ -894,8 +868,6 @@ function naverShare() {
 										<c:if test="${reviewTotal > reviewPaging+5 }">
 											<button type="button" class="btn btn-primary col-3 font-bold" style="left: -35px;" name="reviewPaging" value="${ reviewPaging+5 }" >더보기</button>
 										</c:if>
-										<%-- <button type="button" class="btn btn-primary col-3 font-bold"  name="reviewPaging"  value="${ reviewPaging+5 }" >더보기</button> --%>
-											<%-- ${pageBar} --%>
 										</ul>
 									</nav>
 								</div>
@@ -971,8 +943,6 @@ function naverShare() {
 					<c:when test="${ space.renamedFilename !=null }">
 					<!-- 이미지파일이 있을때 -->
 				   		<a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${space.spaceNo}" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/${space.renamedFilename});"></a> 
-							<!-- 	<i class="prev fas fa-chevron-left fa-2x" onclick="plusSlides(-1)"></i>
-								<i class="next fas fa-chevron-right fa-2x" onclick="plusSlides(1)"></i> -->
 					</c:when>
 					<c:otherwise>
 						<a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${space.spaceNo}" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/spcuslogo.png);"></a>
@@ -992,9 +962,6 @@ function naverShare() {
     				</ul>
     				<h3><a href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo=${space.spaceNo}">${space.spaceName }</a></h3>
     				<small><span class="icon-my_location">${space.address }</span></small>
-    			<!-- 	<a href="#" class="d-flex align-items-center justify-content-center btn-custom">
-    				 <span class="icon-heart"></span> 
-    				</a> -->
     			</div>
     		</div>
     	</div>
@@ -1291,10 +1258,6 @@ $("[name=reviewPaging]").click(function(){
 		var position = $(window).scrollTop(); 
 		location.href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+"${space.spaceNo}"+"&reviewPaging="+$(this).val()+"&width="+position;
 });
-//맨위로
-/* $(".arrowUp").click(function(){
-	window.scrollTo(200, 0);
-}); */
 //로그인 후 이용 처리
 $("#likeLogin").click(function(){
 
