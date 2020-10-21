@@ -32,7 +32,7 @@ public class QnaController {
 		String msg = result > 0 ? "질문 등록 성공!" : "답변 등록 실패";
 		redirectAttr.addFlashAttribute("msg", msg);
 
-		return "redirect:/space/spaceDetail.do?spaceNo=" + spaceNo;
+		return "redirect:/space/spaceQnaDetail.do?spaceNo=" + spaceNo;
 
 	}
 
@@ -47,7 +47,7 @@ public class QnaController {
 		 redirectAttr.addFlashAttribute("msg", msg);
 		 
 
-		 return "redirect:/space/spaceDetail.do?spaceNo=" + spaceNo;
+		 return "redirect:/space/spaceQnaDetail.do?spaceNo=" + spaceNo;
 	}
 	
 	@RequestMapping(value = "/deleteQuestion.do", method = RequestMethod.POST)
@@ -57,7 +57,7 @@ public class QnaController {
 		 String msg = result > 0 ? "질문이 삭제되었습니다." : "질문을 삭제하는데 실패했습니다.";
 		 redirectAttr.addFlashAttribute("msg", msg); 
 
-		 return "redirect:/space/spaceDetail.do?spaceNo=" + spaceNo;
+		 return "redirect:/space/spaceQnaDetail.do?spaceNo=" + spaceNo;
 	}
 	
 	@RequestMapping(value = "/modifyQuestion.do", method = RequestMethod.POST)
@@ -67,7 +67,7 @@ public class QnaController {
 		 String msg = result > 0 ? "질문이 수정되었습니다." : "질문을 수정하는데 실패했습니다.";
 		 redirectAttr.addFlashAttribute("msg", msg);
 
-		 return "redirect:/space/spaceDetail.do?spaceNo=" + spaceNo;
+		 return "redirect:/space/spaceQnaDetail.do?spaceNo=" + spaceNo;
 	}
 	
 	

@@ -12,7 +12,6 @@
 	  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 	  crossorigin="anonymous">
 
-
 <style>
 h1 {
 font-family: 'NEXON Lv1 Gothic OTF';
