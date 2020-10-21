@@ -1232,8 +1232,8 @@ $(document).ready(function (){
 });
 /* 리뷰 디테일 */
 $(".reviewToggle").on('click', function(){
-	$(this).children(".reviewDetailBtn").toggle('hide');
-	$(this).children(".reviewSimpleBtn").toggle('show');
+	$(this).children(".reviewDetailBtn").toggle();
+	$(this).children(".reviewSimpleBtn").toggle();
 	
 });
 
