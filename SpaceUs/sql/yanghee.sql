@@ -1427,3 +1427,45 @@ update space set hourly_price=500 where space_no = 'space108';
 commit;
 
 select * from reservation; 
+---------------------
+--10/21
+---------------------
+WITH TEMP_TABLE AS (
+SELECT address as name, space_no FROM space union all
+		   select category_name as name, space_no
+ from category join space using(category_no) union all
+		   select option_name as name, space_no
+ from space_option join option_list using(option_no) union all
+		   select tag_name as name, space_no
+ from space_tag join tag using(tag_no)
+		)
+		SELECT space_no, NAME
+		   FROM TEMP_TABLE join space using(space_no) left join 
+ (select reviews , 
+		   																space_no from( 
+		   																				select ROW_NUMBER() OVER(partition by space_no ORDER BY space_no,reviews) row_num, 
+		   																						space_no, 
+		   																						reviews 
+		   																				from( select count(*)over(partition by space_no) as reviews, space_no
+ from review )
+		   																				)
+		   														
+ where row_num =1
+		   														) using(space_no)
+		 WHERE name like '%카페%'
+		   order by
+			 space_name desc;
+             
+select * from member where member_phone='01048179843';
+
+delete from member where member_phone='01048179843';
+commit;
+
+select * from tag;
+
+select * from exhibition join tag using(tag_no);
+
+select * from reservation;
+update reservation set rev_comple = 1 where rev_no = 'imp_094016579288';
+select * from member join auth using(member_email);
+commit;

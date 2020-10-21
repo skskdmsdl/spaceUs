@@ -97,17 +97,23 @@ public class MemberController {
 	//탈퇴
 	@RequestMapping("/deleteMember.do")
 	public String deleteMember (@RequestParam("memberEmail") String memberEmail,
-								RedirectAttributes redirectAttr, SessionStatus sessionStatus) {
+								RedirectAttributes redirectAttr, SessionStatus sessionStatus, Model model) {
 		int result = memberService.deleteMember(memberEmail);
 		
+		String msg = "";
+		
 		if(result>0) {
-			redirectAttr.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다.");
+			
+			msg = "성공적으로 회원정보를 삭제했습니다.";
 			
 			SecurityContextHolder.clearContext();
 		}
 		else 
-			redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");
+			/*redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");*/
+			msg = "회원정보 삭제를 실패했습니다.";
+			
 		
+		model.addAttribute("msg", msg);
 		return "redirect:/";
 
 		}
