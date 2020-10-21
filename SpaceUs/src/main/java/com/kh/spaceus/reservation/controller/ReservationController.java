@@ -38,8 +38,7 @@ public class ReservationController {
 	private SpaceService spaceService;
 	 
 	@RequestMapping(value="/insertReservation.do")
-	public ModelAndView insertReservation(
-			ModelAndView mav,
+	public String insertReservation(
 									Model model,
 									Reservation reservation, 
 									@RequestParam("couponNo") String couponNo,
@@ -79,7 +78,7 @@ public class ReservationController {
 			
 			if(dateCheck && (startCheck || endCheck)) {
 				flag = false;
-				msg = "먼저 예약된 시간이 포함되어 있어 예약이 실패했습니다. \n 다시 시도해주세요.";
+				msg = "먼저 예약된 시간이 포함되어 있어 예약이 실패했습니다. 다시 시도해주세요.";
 				break;
 			}
 			
@@ -91,28 +90,16 @@ public class ReservationController {
 			Space space = spaceService.selectOneSpace(reservation.getSpaceNo());
 			Member member = memberService.selectOneMember(principal.getName());;
 			
-			mav.addObject("revNo",reservation.getRevNo());
-			mav.addObject("space",space);
-			mav.addObject("member",member);
-			mav.addObject("couponNo",couponNo);
+			model.addAttribute("revNo",reservation.getRevNo());
+			model.addAttribute("space",space);
+			model.addAttribute("member",member);
+			model.addAttribute("couponNo",couponNo);
 			
-//			model.addAttribute("revNo",reservation.getRevNo());
-//			model.addAttribute("space",space);
-//			model.addAttribute("member",member);
-//			model.addAttribute("couponNo",couponNo);
-			
-			mav.setViewName("space/payment");
-			return mav;
-			
-			//return "space/payment";
+			return "space/payment";
 		}
 		else {
-			//mav.addObject("msg",msg);
 			redirectAttr.addFlashAttribute("msg", msg);
-			mav.setViewName("redirect:/");
-			return mav;
-//			redirectAttr.addFlashAttribute("msg", msg);
-//			return "redirect:/";
+			return "redirect:/member/usageHistory.do";
 		}
 
 	}
@@ -128,12 +115,11 @@ public class ReservationController {
 		if("true".equals(flag)) {	
 			result = reservationService.updateRevNo(revNo, reservation.getRevNo());
 			int delCoupon = memberService.deleteCoupon(couponNo);
-			return "redirect:/member/usageHistory.do";
 		}
 		else {			
 			result = reservationService.deleteReservation(revNo);
-			return "redirect:/";
 		}
+		return "redirect:/member/usageHistory.do";
 
 	}
 	

@@ -63,14 +63,13 @@
 		        $("[name=flag]").val("true");
 		       
 		    } else {
-		    	$("[name=flag]").val("false");
 		        var msg = '결제에 실패하였습니다.';
 		        msg += '에러내용 : ' + rsp.error_msg;
+		    	$("[name=flag]").val("false");
 		    }
-		    
-		    
 
 		    $("[name=revNo]").val(rsp.imp_uid);
+		    alert(msg);
 		    document.payment.submit();
 		});
 
@@ -100,14 +99,13 @@
 
 		        $("[name=flag]").val("true");
 		    } else {
-		    	$("[name=flag]").val("false");
 		        var msg = '결제에 실패하였습니다.';
 		        msg += '에러내용 : ' + rsp.error_msg;
+		    	$("[name=flag]").val("false");
 		    }
 		    
-		    
-
 		    $("[name=revNo]").val(rsp.imp_uid);
+		    alert(msg);
 		    document.payment.submit();
 		});
 

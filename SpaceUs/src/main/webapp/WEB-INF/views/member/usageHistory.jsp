@@ -299,6 +299,16 @@ function refund(revNo){
 }
 </script>
 
+<script>
+<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
+<c:if test="${ not empty msg }">
+	alert('${ msg }');
+</c:if>
+<c:if test="${ not empty script }">
+	self.close();	
+</c:if>
+</script>
+
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${ pageContext.request.contextPath }/resources/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap popper Core JavaScript -->
