@@ -12,7 +12,6 @@
 	  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 	  crossorigin="anonymous">
 
-
 <style>
 h1 {
 font-family: 'NEXON Lv1 Gothic OTF';
@@ -201,13 +200,25 @@ function cook(){
 function birthday(){
 	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tagNo=TAG63";
 }
+function work(){
+	   window.location.href="${pageContext.request.contextPath}/community/recruit/recruitList.do";
+}
+function group(){
+	   window.location.href="${pageContext.request.contextPath}/community/group/groupList.do";
+}
 function meeting(){
 	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tagNo=TAG204";
+}
+function work(){
+	window.location.href="${pageContext.request.contextPath}/community/recruit/recruitList.do";
+}
+function group(){
+	window.location.href="${pageContext.request.contextPath}/community/group/groupList.do";
 }
 </script>
 
 <!-- 컨텐츠 시작 -->
- 
+
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="top:12%;">
   <div class="carousel-inner">
     <div class="carousel-item active" style="height: 500px;">
