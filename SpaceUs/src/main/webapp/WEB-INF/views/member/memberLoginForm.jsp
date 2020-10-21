@@ -32,7 +32,7 @@
 <script>
 	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
 	<c:if test="${ not empty msg }">
-		alert('${ msg }');	
+		alert("${msg}");	
 	</c:if>
 	<c:if test="${ not empty email }">
 		swal('이미 가입하신 이메일입니다. 로그인해주세요.');
@@ -61,21 +61,6 @@
 			location.href='${pageContext.request.contextPath }/member/googleLogin.do?idtoken='+id_token+'&tokenEmail='+tokenEmail;
 			<c:remove var = "tokenEmail"/>
 		</c:if>
-		/*
-		<c:if test="${ empty tokenEmail }">
-			var xhr = new XMLHttpRequest();
-			xhr.open('POST', '${pageContext.request.contextPath }/member/googleLogin.do');
-			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			xhr.onload = function() {
-			  console.log('Signed in as: ' + xhr.responseText);
-			  document.open();
-			  document.write(xhr.responseText);
-			  document.close();
-			  
-			};
-			xhr.send('idtoken=' + id_token+'&email='+email);
-		</c:if>
-		*/
 
 		}
 	 function onSuccess(googleUser) {
