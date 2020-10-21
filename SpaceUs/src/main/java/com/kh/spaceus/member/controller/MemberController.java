@@ -207,7 +207,7 @@ public class MemberController {
 	public String wishList(Principal principal, Model model, HttpServletRequest request,
 			@RequestParam(defaultValue = "1", value = "cPage") int cPage) {
 		
-		final int limit = 12; 
+		final int limit = 8; 
 		int offset = (cPage - 1) * limit;
 		
 		List<Wish> list = memberService.selectWishList(principal.getName());

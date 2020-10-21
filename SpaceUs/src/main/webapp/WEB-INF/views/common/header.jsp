@@ -39,7 +39,8 @@
 	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 	
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="${ pageContext.request.contextPath }/assets/images/favicon.png">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/assets/images/favicon.png">
+	<link rel="icon" href="${pageContext.request.contextPath }/resources/assets/images/favicon.png">  
     <!-- This page CSS -->
     <!-- chartist CSS -->
     <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/assets/node_modules/morrisjs/morris.css">

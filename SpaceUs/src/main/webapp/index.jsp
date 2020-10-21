@@ -209,12 +209,12 @@ function group(){
 function meeting(){
 	window.location.href="${pageContext.request.contextPath}/exhibition/exhibitionList.do?tagNo=TAG204";
 }
-function work(){
+/* function work(){
 	window.location.href="${pageContext.request.contextPath}/community/recruit/recruitList.do";
 }
 function group(){
 	window.location.href="${pageContext.request.contextPath}/community/group/groupList.do";
-}
+} */
 </script>
 
 <!-- 컨텐츠 시작 -->
