@@ -81,11 +81,12 @@
 <script>
 	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
 	<c:if test="${ not empty msg }">
-		alert('${ msg }');
+		swal('${ msg }');
 	</c:if>
 	<c:if test="${ not empty script }">
 		self.close();	
 	</c:if>
+	
 $(function(){
 	$(".nav-ul").hide();
 	

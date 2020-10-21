@@ -212,7 +212,7 @@ function group(){
 </script>
 
 <!-- 컨텐츠 시작 -->
- 
+
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="top:12%;">
   <div class="carousel-inner">
     <div class="carousel-item active" style="height: 500px;">
