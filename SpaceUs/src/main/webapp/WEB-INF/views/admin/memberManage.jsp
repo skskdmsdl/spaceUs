@@ -252,7 +252,7 @@ Talk.ready.then(function() {
         name: $("#nick").val(),
         email: $("#mail").val(),
         photoUrl: "https://localhost:9090/spaceus/",
-        welcomeMessage: "Hey there! How are you? :-)"
+        welcomeMessage: "대화를 시작하세요 :-)"
     });
     window.talkSession = new Talk.Session({
         appId: "t9ROalbH",
