@@ -1466,4 +1466,6 @@ select * from tag;
 select * from exhibition join tag using(tag_no);
 
 select * from reservation;
-update reservation set rev_comple = 1 where rev_no = '';
+update reservation set rev_comple = 1 where rev_no = 'imp_094016579288';
+select * from member join auth using(member_email);
+commit;
