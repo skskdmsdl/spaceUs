@@ -44,7 +44,7 @@ public class Scheduler {
 	/** 
 	 * cron표현식 초 분 시 일 월 요일 년(생략가능)
 	 */
-	 @Scheduled(cron = "0 0 0 1 * *")
+	@Scheduled(cron = "0 0 0 1 * *")
 	public void monthlyScheduler(){ 
 		System.out.println("출석 쿠폰 발급"); 
 		int result1 = memberService.insertAttend2Coupon();

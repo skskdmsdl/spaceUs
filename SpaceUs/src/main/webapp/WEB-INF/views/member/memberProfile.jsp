@@ -35,11 +35,11 @@
 			 <div id="talkjs-container" style="background-color: rgba(0,0,0,0);margin-left: 300px; height: 500px; position: fixed; z-index: 10;box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px; display:none;">
 			    <i>Loading chat...</i>
 			</div> 
-			<%--  <sec:authorize access="hasAnyRole('ADMIN')">
+		  <sec:authorize access="hasAnyRole('ADMIN')">
 			<div>
 				<button id="chatBtn">🧑</button>
 			</div>
-			</sec:authorize> --%>
+			</sec:authorize> 
                 <div id="profileEditPage" class="ml-5 mr-5">
                     <div class="card p-5">
                        <div class="card-body">
