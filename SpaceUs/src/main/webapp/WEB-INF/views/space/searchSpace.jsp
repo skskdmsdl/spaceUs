@@ -385,7 +385,7 @@ function sortChange(obj){
 				<div class="property-wrap ftco-animate">
 		    		<a href="" class="img" style="background-image: url(${pageContext.request.contextPath }/resources/upload/space/${space.renamedFilename});"></a>
 	    			<div class="text">
-	    				<p class="price"><span class="space-price">${space.hourlyPrice}<small>원/시간</small></span></p>
+	    				<p class="price"><span class="space-price"><fmt:formatNumber value="${space.hourlyPrice }" type="number"/><small>원/시간</small></span></p>
 	    				<ul class="property_list">
 	    					<li>
 	    						<i class="fa fa-star"></i>
