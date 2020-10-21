@@ -182,7 +182,15 @@ update reservation
 set rev_cancle = 0
 where rev_no = 'REV6';
 
+select d_day, start_hour, end_hour
+from reservation
+where space_no = 'space2'
+    and
+      rev_cancle = rev_comple;
+select * from reservation where space_no = 'space181';
 
+delete from reservation where rev_no='space181seung@naver.com';
+commit;
 -----------------------------
 ---- 공간별 예약가능 시간 ----
 -----------------------------

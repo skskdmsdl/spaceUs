@@ -143,10 +143,9 @@ font-family: 'NEXON Lv1 Gothic OTF';
 
 </style>
 
-
 <script type="text/javascript">
 $(function() { 
-    
+	
     $("#searchInput").autocomplete({
         
         source : function( request, response ) {
@@ -548,6 +547,7 @@ function popular(){
 }; 
 
 </script>
+
 <!-- 컨텐츠 끝 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
