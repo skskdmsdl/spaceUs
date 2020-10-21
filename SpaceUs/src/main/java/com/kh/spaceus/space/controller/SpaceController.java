@@ -37,6 +37,7 @@ import com.kh.spaceus.member.model.vo.Member;
 import com.kh.spaceus.qna.model.vo.Qna;
 import com.kh.spaceus.reservation.model.service.ReservationService;
 import com.kh.spaceus.reservation.model.vo.ReservationAvail;
+import com.kh.spaceus.reservation.model.vo.Unselectable;
 import com.kh.spaceus.space.model.service.SpaceService;
 import com.kh.spaceus.space.model.vo.Attachment;
 import com.kh.spaceus.space.model.vo.Option;
@@ -166,7 +167,6 @@ public class SpaceController {
 
 	@GetMapping("/insertHashTag.do")
 	public ModelAndView insertHashTag(ModelAndView mav, @RequestParam("hashTag") String hashTag) {
-		log.debug("해쉬태그 등록 요청");
 		// 1.업무로직 : 중복체크
 		Tag tag = spaceService.selectOneTag(hashTag);
 		if (tag != null) {
@@ -237,19 +237,15 @@ public class SpaceController {
 				spaceCookie.setPath(request.getContextPath()+"/space");
 				spaceCookie.setMaxAge(24*60*60);
 				response.addCookie(spaceCookie);
-				int result = spaceService.increaseSpaceReadCnt(spaceNo);
-				log.info("result = {}",result);			
+				int result = spaceService.increaseSpaceReadCnt(spaceNo);	
 			}
 		
 		space = spaceService.selectOneSpace(spaceNo);
-		System.out.println("@@"+space);
 		
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
-		System.out.println("spaceNo="+ spaceNo);
 		
 		// 같은 카테고리 공간 리스트(최대 3개)
 		List<SpaceList> spcList = spaceService.selectSameCategory(space);
-		log.debug("같은 카테고리 공간 리스트={}",spcList);
 
 		// 추천 공간 카테고리명
 		String cateName = spaceService.selectCateName(spaceNo);
@@ -353,13 +349,10 @@ public class SpaceController {
 		
 		
 		space = spaceService.selectOneSpace(spaceNo);
-		System.out.println("@@"+space);
 		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
-		System.out.println("spaceNo="+ spaceNo);
 
 		// 같은 카테고리 공간 리스트(최대 6개)
 		List<SpaceList> spcList = spaceService.selectSameCategory(space);
-		log.debug("같은 카테고리 공간 리스트={}",spcList);
 
 		// 추천 공간 카테고리명
 		String cateName = spaceService.selectCateName(spaceNo);
@@ -408,6 +401,13 @@ public class SpaceController {
 		//spaceNo로 예약가능한 날짜 가져오기
 		List<ReservationAvail> availList = reservationService.selectListAvail(spaceNo);
 
+		//예약된 날짜와 시간
+		List<Unselectable> unselectableList = reservationService.unselectableList(spaceNo);
+		for(int i=0; i<unselectableList.size(); i++) {
+			System.out.println(unselectableList.get(i));
+		}
+		
+		
 		//쿠폰 보내기
 		List<Coupon> couponList = memberService.selectCouponList(principal.getName());
 		for(int i=0; i<couponList.size(); i++) {
@@ -426,6 +426,7 @@ public class SpaceController {
 		mav.addObject("member",member);
 		mav.addObject("optionList",optionList);
 		mav.addObject("availList",availList);
+		mav.addObject("unselectableList",unselectableList);
 		mav.addObject("couponList",couponList);
 		
 		mav.setViewName("space/reserveSpace");
@@ -482,7 +483,6 @@ public class SpaceController {
 	@ResponseBody
 	public List<Review> selectRecentReviewList(){
 		List<Review> revList = spaceService.selectRecentReviewList();
-		log.debug("리뷰목록={}"+revList);
 		return revList;
 	}
 
@@ -531,7 +531,6 @@ public class SpaceController {
 		//완료되지 않은 예약이 있으면 삭제못하게 막기
 		//System.out.println(spaceNo+ " : " + principal.getName());
 		int remainder = reservationService.confirmReservation(spaceNo);
-		
 		if(remainder != 0) {
 			redirectAttr.addFlashAttribute("msg", "아직 예약이 있어 공간삭제가 불가능합니다.");
 			return "redirect:/host/spaceInfo.do";

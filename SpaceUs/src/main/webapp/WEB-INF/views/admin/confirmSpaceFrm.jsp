@@ -181,18 +181,14 @@
 				                <div id="myCarousel" class="carousel slide" data-ride="carousel">
 				                    <!-- Carousel indicators -->
 				                    <ol class="carousel-indicators" >
-				                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 				                    	<c:forEach items="${sapceOneImageList}" var="image" varStatus="vs">
 					                        <li data-target="#myCarousel" data-slide-to="${vs.count}"></li>
 				                        </c:forEach>
 				                    </ol>
 				                    <!-- Wrapper for carousel items -->
 				                    <div class="carousel-inner" >
-				                        <div class="carousel-item active">
-				                            <img src="${pageContext.request.contextPath}/resources/images/image_1.jpg" class="img-fluid" alt="">
-				                        </div>
 							            <c:forEach items="${sapceOneImageList}" var="image" varStatus="vs">
-					                        <div class="carousel-item">
+					                        <div class="carousel-item" id="spaceImg">
 					                            <img src="${pageContext.request.contextPath}/resources/upload/space/${image.renamedFilename}" class="img-fluid" alt="">
 					                        </div> 
 							            </c:forEach>
@@ -344,6 +340,10 @@ $(".confirm").click(function(){
 
 			}); 
 });
+ $(function(){
+	$("#spaceImg").addClass("active");
+}); 
+
 </script>
     <!-- Property Submit Section End -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
