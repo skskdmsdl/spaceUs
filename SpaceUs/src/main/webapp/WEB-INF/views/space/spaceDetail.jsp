@@ -1238,6 +1238,14 @@ $(".reviewToggle").on('click', function(){
 });
 
 $(function () { 
+	if($("#bool").val() == 2){
+		$("#detail-description-tab").removeClass('active');
+		$("#detail-qna-tab").addClass('active');
+		$("#detail-description").removeClass('active');
+		$("#detail-description").removeClass('show');
+		$("#detail-qna").addClass('active');
+		$("#detail-qna").addClass('show');
+	} 
 
 	if($("#bool").val() == 1){
 		$("#detail-description-tab").removeClass('active');
