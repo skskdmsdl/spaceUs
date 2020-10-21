@@ -152,8 +152,8 @@ input[type="text"] {
 			</div>
 				<div class="col-md-6 wrap-about py-md-5 ftco-animate">
 	         <div class="heading-section p-md-5">
-	           <p><strong><font size="3em" color="#00C89E">TMI(Too Much Idea)는</font></strong> '가성비와 취향을 동시에 잡자'라는 목표로 공간공유 서비스 SpaceUs를 기획했습니다. 부담스러운 부동산 비용, 그로 인해 점점 더 팍팍해지는 물가. 하지만 SpaceUs는 남다름을 추구하는 우리 세대들의 섬세한 취향과 비용절감이라는 두마리 토끼를 잡을 공간이 될 것이라 믿어 의심치 않습니다.</p>
-	           <p><strong><font size="2.5em">2020년 9월 2일 첫 기획 미팅으로부터 10월 23일까지,</font></strong> 프로젝트 구현을 위해 천 개가 넘는 커밋과 180여 시간의 회의를 하며 쉼없이 달리는 동안 저희는 많은 아이디어를 나누고 많이 웃었습니다. SpaceUs를 만들면서 쏟은 노력과 즐거운 시간들이 여러분에게도 전해졌으면 좋겠습니다.</p>
+	           <p><strong><font size="3em" color="#00C89E">TMI(Too Much Idea)는</font></strong> '가성비와 취향을 동시에 잡자'라는 목표로 공간공유 서비스 SpaceUs를 기획했습니다. 부담스러운 부동산 비용, 그로 인해 점점 더 팍팍해지는 물가. 그럼에도 불구하고 SpaceUs는 남다름을 추구하는 우리 세대들의 섬세한 취향과 비용절감이라는 두마리 토끼를 잡을 공간이 될 것이라 믿어 의심치 않습니다.</p>
+	           <p><strong><font size="2.5em">2020년 9월 2일 첫 기획 미팅으로부터 10월 23일까지,</font></strong> 프로젝트 구현을 위해 천 개가 넘는 커밋과 80여 시간의 회의를 하며 쉼없이 달리는 동안 저희는 많은 아이디어를 나누고 많이 웃었습니다. SpaceUs를 만들면서 쏟은 노력과 즐거운 시간들이 여러분에게도 전해졌으면 좋겠습니다.</p>
 	         </div>
 				</div>
 		</div>
