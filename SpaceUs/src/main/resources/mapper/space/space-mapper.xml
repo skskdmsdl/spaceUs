@@ -555,7 +555,7 @@ select
 				review join review_image using (review_no)
 			order by 
 				review_date desc) R join space on R.space_no=space.space_no
-	        where rownum between 1 and 4 and space.status='O'
+	        where rownum between 1 and 8 and space.status='O'
 	</select>
 	
 	<!-- autocomplete tag -->
