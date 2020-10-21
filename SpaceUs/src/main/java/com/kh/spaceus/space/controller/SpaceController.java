@@ -385,6 +385,114 @@ public class SpaceController {
 		
 		return "space/spaceDetail";
 	}
+	
+	@RequestMapping("/spaceQnaDetail.do")
+	public String spaceQnaDetail(Model model, @RequestParam("spaceNo") String spaceNo, Principal principal, Space space,
+			@RequestParam(defaultValue = "1", value = "cPage") int cPage, HttpServletRequest request, HttpServletResponse response) {
+		
+		try {
+			int qnaTotal = spaceService.selectQuestionTotalContents(spaceNo);
+			
+			// qna 조회
+			final int limit1 = 5 + space.getQnaPaging(); 
+			int offset1 = (cPage - 1) * limit1;
+			int qnaPaging = space.getQnaPaging();
+			int width = space.getWidth();
+			
+			List<Qna> qlist = spaceService.selectQuestionList(spaceNo, limit1, offset1);
+			
+			// 리뷰 한 페이지당 개수 제한
+			final int limit = 5 + space.getReviewPaging(); 
+			int offset = (cPage - 1) * limit;
+			int reviewPaging = space.getReviewPaging();
+			System.out.println("11111111reviewPaging"+reviewPaging);
+			
+			List<Review> review = spaceService.selectListReview(spaceNo, limit, offset);
+
+			// 전체리뷰수 구하기
+			int reviewTotal = spaceService.selectReviewTotalContents(spaceNo);
+			// 별점조회
+			Star star = spaceService.selectStar(spaceNo);
+			
+			star.setSumStar(star.getStar1() + star.getStar2() + star.getStar3() + star.getStar4() + star.getStar5());
+			
+			String url = request.getRequestURI() + "?spaceNo=" + spaceNo;
+			String pageBar = Utils.getPageBarHtml(cPage, limit, reviewTotal, url);
+
+			//쿠키검사 : spaceCookie
+			Cookie[] cookies = request.getCookies();
+			String spaceCookieVal = "";
+			boolean hasRead = false;
+			
+			if(cookies != null) {
+				for(Cookie c : cookies) {
+					String name = c.getName();
+					String value = c.getValue();
+					
+					if("spaceCookie".equals(name)) {
+						spaceCookieVal = value;
+						
+						if(value.contains("[" + spaceNo + "]"))
+							hasRead = true;
+					}
+				}
+			}
+			if(!hasRead) {
+				//spaceCookie생성
+				Cookie spaceCookie = new Cookie("spaceCookie", spaceCookieVal + "["+ spaceNo +"]");
+				spaceCookie.setPath(request.getContextPath()+"/space");
+				spaceCookie.setMaxAge(24*60*60);
+				response.addCookie(spaceCookie);
+				int result = spaceService.increaseSpaceReadCnt(spaceNo);	
+			}
+		
+		space = spaceService.selectOneSpace(spaceNo);
+		
+		List<Tag> tag = spaceService.selectListSpaceTag(spaceNo);
+		
+		// 같은 카테고리 공간 리스트(최대 3개)
+		List<SpaceList> spcList = spaceService.selectSameCategory(space);
+
+		// 추천 공간 카테고리명
+		String cateName = spaceService.selectCateName(spaceNo);
+
+		
+		System.out.println("1."+space.getAddress());
+		System.out.println("2."+space.getSpaceName());
+		System.out.println("3."+space.getContent());
+		// option 조회
+		List<OptionList> optionList = spaceService.selectOptionList(spaceNo);
+		
+		model.addAttribute("bool", 2);
+		model.addAttribute("spcList", spcList);
+		model.addAttribute("cateName", cateName);
+		model.addAttribute("spaceAddr", space.getAddress());
+		model.addAttribute("spaceName", space.getSpaceName());
+		model.addAttribute("spaceCon", space.getContent());
+
+		model.addAttribute("qlist", qlist);
+		model.addAttribute("qnaPaging", qnaPaging);
+		model.addAttribute("qnaTotal", qnaTotal);
+
+		model.addAttribute("space", space);
+		model.addAttribute("tag", tag);
+		model.addAttribute("loginMember", principal);
+
+		model.addAttribute("review", review);
+		model.addAttribute("reviewTotal", reviewTotal);
+		model.addAttribute("reviewPaging", reviewPaging);
+		model.addAttribute("star", star); 
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("width", width);
+		
+		model.addAttribute("optionList",optionList);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "space/spaceDetail";
+	}
+	
+	
 
 	// 예약하기버튼
 	@RequestMapping("/reserveSpace.do")
