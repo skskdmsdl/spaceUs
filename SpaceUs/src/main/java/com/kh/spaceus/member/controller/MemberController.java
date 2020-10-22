@@ -109,7 +109,6 @@ public class MemberController {
 			SecurityContextHolder.clearContext();
 		}
 		else 
-			/*redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");*/
 			msg = "회원정보 삭제를 실패했습니다.";
 			
 		
@@ -266,9 +265,6 @@ public class MemberController {
 	@RequestMapping("/reviewPossible.do")
 	public String reviewPossible (Model model, Principal principal) {
 		Member member = memberService.selectOneMember(principal.getName());
-		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
-		/*List<Reservation> revList = reservationService.selectListReservation(principal.getName());
-		System.out.println("@1"+revList);*/
 		List<Space> spaceList = spaceService.selectReviewPossible(principal.getName());
 		
 		System.out.println("@2"+spaceList); 
@@ -282,9 +278,6 @@ public class MemberController {
 	@RequestMapping("/reviewComplete.do")
 	public String reviewComplete (Model model, Principal principal) {
 		Member member = memberService.selectOneMember(principal.getName());
-		//예약테이블 조회 -> 해당 아이디의 모든 예약번호 조회 + 공간정보 가져오기
-		/*List<Reservation> revList = reservationService.selectListReservation(principal.getName());
-		System.out.println("@1"+revList);*/
 		List<Space> spaceList = spaceService.selectReviewComplete(principal.getName());
 		
 		System.out.println("@2"+spaceList); 
@@ -319,7 +312,7 @@ public class MemberController {
 	
 	
 
-//	// 로그인 폼
+//	**이쪽은 지우지 말기!!// 로그인 폼
 //	@RequestMapping("/memberLoginForm.do")
 //	public String memberLoginForm() {
 //
