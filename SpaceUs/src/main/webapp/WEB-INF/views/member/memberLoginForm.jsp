@@ -30,16 +30,7 @@
 	<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 	<meta name="google-signin-client_id" content="398489879454-c5aqb8i12qv1gku3dgtt31fd8iogm2hd.apps.googleusercontent.com">
 <script>
-	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
-	<c:if test="${ not empty msg }">
-		alert("${msg}");	
-	</c:if>
-	<c:if test="${ not empty email }">
-		alert('이미 가입하신 이메일입니다. 로그인해주세요.');
-	</c:if>
-	<c:if test="${ not empty closeFunction }">
-	    self.close();
-	</c:if>
+	
 	
 	function onSignIn(googleUser) {
 		var id_token = googleUser.getAuthResponse().id_token;
@@ -236,6 +227,7 @@
 	<script src="${pageContext.request.contextPath }/resources/vendor/countdowntime/countdowntime.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
 <script>
+
 //아이디저장
 	$("#memberEmail").val(Cookies.get('key'));      
 	if($("#memberEmail").val() != ""){
@@ -257,6 +249,16 @@
 	});
 </script>
 <script>
+	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
+	<c:if test="${ not empty msg }">
+		alert("${msg}");	
+	</c:if>
+	<c:if test="${ not empty email }">
+		alert('이미 가입하신 이메일입니다. 로그인해주세요.');
+	</c:if>
+	<c:if test="${ not empty closeFunction }">
+	    self.close();
+	</c:if>
 </script>
 </body>
 </html>
