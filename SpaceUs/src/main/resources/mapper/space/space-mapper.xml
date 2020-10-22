@@ -269,7 +269,7 @@
 		order by R.review_date desc
 	</select>
 	
-	<select id="selectSameCategory" resultMap="spaceListMap">
+	
 <!-- select rownum, JJ.* from(
 select
           S.space_no,
@@ -296,7 +296,7 @@ select
       where S.status = 'O' and S.category_no=#{categoryNo} and S.space_no!=#{spaceNo}
       order by s.like_cnt desc) JJ
       where rownum between 1 and 6 -->
-	
+	<select id="selectSameCategory" resultMap="spaceListMap">
  			select rownum, C.* from(
             select 
  				  S.space_no,
@@ -555,7 +555,7 @@ select
 				review join review_image using (review_no)
 			order by 
 				review_date desc) R join space on R.space_no=space.space_no
-	        where rownum between 1 and 4 and space.status='O'
+	        where rownum between 1 and 8 and space.status='O'
 	</select>
 	
 	<!-- autocomplete tag -->

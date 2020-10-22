@@ -39,11 +39,8 @@
 	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 	
     <!-- Favicon icon -->
-<%--     <link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/assets/images/favicon.png"/> --%>
-  	<link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/assets/images/favicon.png">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/assets/images/favicon.png">
 	<link rel="icon" href="${pageContext.request.contextPath }/resources/assets/images/favicon.png">  
-	
-	
     <!-- This page CSS -->
     <!-- chartist CSS -->
     <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/assets/node_modules/morrisjs/morris.css">
@@ -81,12 +78,11 @@
 <script>
 	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
 	<c:if test="${ not empty msg }">
-		swal('${ msg }');
+		alert('${ msg }');
 	</c:if>
 	<c:if test="${ not empty script }">
 		self.close();	
 	</c:if>
-	
 $(function(){
 	$(".nav-ul").hide();
 	
