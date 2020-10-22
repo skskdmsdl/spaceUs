@@ -180,7 +180,7 @@
                   </div>
                <div class="wrap-input100 validate-input" 
                   style="width: 100%;">
-                   <input class="input100" type="text" name="memberEmail" id="memberEmail" placeholder="email" >
+                   <input class="input100" type="text" name="memberEmail" id="memberEmail" placeholder="email">
                    <span class="focus-input100">email</span>
                   <span class="focus-output100"></span> 
                </div>
