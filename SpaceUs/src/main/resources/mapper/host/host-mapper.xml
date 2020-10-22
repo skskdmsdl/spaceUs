@@ -57,6 +57,7 @@
           WHERE D.settlement_date BETWEEN SYSDATE-30
                              AND SYSDATE
                 AND S.member_email=#{hostId}
+          order by settlement_date asc
   
   
 <!-- 	SELECT TO_CHAR(b.dt, 'YYYY-MM-DD') AS settlement_date
