@@ -1525,3 +1525,39 @@ update space set status = 'O' where space_no = 'space212';
 
 select * from space;
 select * from auth;
+
+select * from member where member_email='test2@naver.com';
+
+update member set member_phone= '01012341234' where member_email = 'test3@naver.com';
+
+commit;
+
+select * from reservation;
+
+select * from member;
+
+select * from group_board;
+
+COMMIT;
+
+delete from group_baord where group_board_no = 'G161';
+update group_board set member_email = 'sinsa@naver.com' where group_board_no='G161';
+
+update group_board set report_cnt = 9 where member_email='rhkim999@gmail.com';
+
+update group_board set member_email='rhkim9990@gmail.com' where member_email='rhkim999@gmail.com';
+
+
+update member set member_email='rhkim9990@gmail.com' where member_email='rhkim999@gmail.com';
+
+update 
+commit;
+
+select
+			*
+		from
+			blacklist
+		where 
+			board_type='G';
+            
+alter table blackList add blackList_date Date default sysdate;

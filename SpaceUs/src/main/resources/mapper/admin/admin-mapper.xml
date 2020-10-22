@@ -113,6 +113,7 @@
 			blacklist
 		where 
 			board_type='G'
+		order by blackList_date desc
 	</select>
 	<!-- blackList recruit -->
 	<select id="selectRecruitList" resultMap="manageBlackListMap">
@@ -122,6 +123,7 @@
 			blacklist
 		where 
 			board_type='R'
+		order by blackList_date desc
 	</select>
 	<resultMap type="manageBlackList" id="manageBlackListMap"></resultMap>
 	
