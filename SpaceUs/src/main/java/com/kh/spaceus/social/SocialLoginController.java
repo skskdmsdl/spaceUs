@@ -169,7 +169,8 @@ public class SocialLoginController {
 	public String getGoogleSignIn(Model model, @RequestParam("idtoken") String idtoken,
 			@RequestParam(required = false) String email, @RequestParam(required = false) String tokenEmail,
 			HttpSession session) throws Exception {
-
+		System.out.println("@@@@@@@@"+tokenEmail);
+		System.out.println("@@@@@@@@"+email);
 		HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 		JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 		GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(httpTransport, JSON_FACTORY)
