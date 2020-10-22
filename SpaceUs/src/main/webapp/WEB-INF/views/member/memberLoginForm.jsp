@@ -31,7 +31,7 @@
 	<meta name="google-signin-client_id" content="398489879454-c5aqb8i12qv1gku3dgtt31fd8iogm2hd.apps.googleusercontent.com">
 <script>
 	<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
-	<c:if test="${ not empty msg }">
+	/* <c:if test="${ not empty msg }">
 		alert("${msg}");	
 	</c:if>
 	<c:if test="${ not empty email }">
@@ -39,7 +39,7 @@
 	</c:if>
 	<c:if test="${ not empty closeFunction }">
 	    self.close();
-	</c:if>
+	</c:if> */
 	
 	function onSignIn(googleUser) {
 		var id_token = googleUser.getAuthResponse().id_token;
@@ -180,7 +180,7 @@
 						</div>
 					<div class="wrap-input100 validate-input" 
 						style="width: 100%;">
-						 <input class="input100" type="text" name="memberEmail" id="memberEmail" placeholder="email">
+						 <input class="input100" type="text" name="memberEmail" id="memberEmail" placeholder="${ email }" value="${ email }">
 						 <span class="focus-input100">email</span>
 						<span class="focus-output100"></span> 
 					</div>
