@@ -15,7 +15,10 @@ create table member(
 		constraints pk_member_email primary key(member_email)
 );
 
-select * from member;
+select * from member where member_email='honggd@naver.com';
+UPDATE member
+  SET member_phone = '01077779999'
+  where member_email='honggd@naver.com';
 commit;
 --insert into member
 --values ('seung@naver.com','김승연','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu',
@@ -361,7 +364,6 @@ create table qna(
 
 create sequence seq_qna_no;
 select * from qna;
-
 -----------------------------
 ----------- 리뷰 ------------
 -----------------------------
@@ -779,7 +781,7 @@ select * from monthly_sale;
 select * from yearly_sale;
 
 commit;
-select * from reservation;
+select * from reservation where space_no='space108';
 select 
       space_no
    from 
