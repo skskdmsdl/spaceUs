@@ -1543,7 +1543,8 @@ COMMIT;
 delete from group_baord where group_board_no = 'G161';
 update group_board set member_email = 'sinsa@naver.com' where group_board_no='G161';
 
-update group_board set report_cnt = 9 where member_email='rhkim999@gmail.com';
+update group_board set report_cnt = 9 where member_email='user14@naver.com';
+commit;
 
 update group_board set member_email='rhkim9990@gmail.com' where member_email='rhkim999@gmail.com';
 
@@ -1572,3 +1573,9 @@ select * from group_board;
 
 commit;
 update reservation set rev_comple = 1 where member_email='jjjj@naver.com';
+
+select * from member where member_phone = '01035505472';
+
+delete from member where member_phone = '01048179843';
+
+commit;
