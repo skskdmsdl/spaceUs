@@ -1458,14 +1458,106 @@ SELECT address as name, space_no FROM space union all
              
 select * from member where member_phone='01048179843';
 
-delete from member where member_phone='01048179843';
+delete from auth where member_email='rhkim10@kakao.com';
 commit;
 
+select * from auth;
+select * from member;
 select * from tag;
+select * from space;
 
 select * from exhibition join tag using(tag_no);
-
+update space set address = '우(25822) 강원 동해시 내동길 91-1  (내동)' where space_no ='space110';
+commit;
 select * from reservation;
 update reservation set rev_comple = 1 where rev_no = 'imp_094016579288';
-select * from member join auth using(member_email);
+select * from member; join auth using(member_email);
 commit;
+
+insert into member values('host1@naver.com','호스트1','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host2@naver.com','호스트2','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host3@naver.com','호스트3','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host4@naver.com','호스트4','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host5@naver.com','호스트5','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host6@naver.com','호스트6','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host7@naver.com','호스트7','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host8@naver.com','호스트8','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host9@naver.com','호스트9','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01041112222','1990-10-19',default,0,default);
+insert into member values('host10@naver.com','호스트10','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+
+insert into member values('host11@naver.com','호스트11','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host12@naver.com','호스트12','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host13@naver.com','호스트13','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host14@naver.com','호스트14','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host15@naver.com','호스트15','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host16@naver.com','호스트16','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host17@naver.com','호스트17','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host18@naver.com','호스트18','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host19@naver.com','호스트19','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+insert into member values('host20@naver.com','호스트20','$2a$10$Qc91X8k0YEUfCTwsX4PGKuni0Klgjt35x6MLusqdHbq5Kw1rQh4Uu','01011112222','1990-10-19',default,0,default);
+
+insert into auth values('host1@naver.com',default);
+insert into auth values('host2@naver.com',default);
+insert into auth values('host3@naver.com',default);
+insert into auth values('host4@naver.com',default);
+insert into auth values('host5@naver.com',default);
+insert into auth values('host6@naver.com',default);
+insert into auth values('host7@naver.com',default);
+insert into auth values('host8@naver.com',default);
+insert into auth values('host9@naver.com',default);
+insert into auth values('host10@naver.com',default);
+
+insert into auth values('host11@naver.com',default);
+insert into auth values('host12@naver.com',default);
+insert into auth values('host13@naver.com',default);
+insert into auth values('host14@naver.com',default);
+insert into auth values('host15@naver.com',default);
+insert into auth values('host16@naver.com',default);
+insert into auth values('host17@naver.com',default);
+insert into auth values('host18@naver.com',default);
+insert into auth values('host19@naver.com',default);
+insert into auth values('host20@naver.com',default);
+
+commit;
+select * from tag;
+delete from space where space_no= 'space213';
+update space set status = 'O' where space_no = 'space212';
+
+select * from space;
+select * from auth;
+
+select * from member where member_email='test2@naver.com';
+
+update member set member_phone= '01012341234' where member_email = 'test3@naver.com';
+
+commit;
+
+select * from reservation;
+
+select * from member;
+
+select * from group_board;
+
+COMMIT;
+
+delete from group_baord where group_board_no = 'G161';
+update group_board set member_email = 'sinsa@naver.com' where group_board_no='G161';
+
+update group_board set report_cnt = 9 where member_email='rhkim999@gmail.com';
+
+update group_board set member_email='rhkim9990@gmail.com' where member_email='rhkim999@gmail.com';
+
+
+update member set member_email='rhkim9990@gmail.com' where member_email='rhkim999@gmail.com';
+
+update 
+commit;
+
+select
+			*
+		from
+			blacklist
+		where 
+			board_type='G';
+            
+alter table blackList add blackList_date Date default sysdate;
