@@ -1258,6 +1258,7 @@ $("[name=reviewPaging]").click(function(){
 		var position = $(window).scrollTop(); 
 		location.href="${pageContext.request.contextPath }/space/spaceDetail.do?spaceNo="+"${space.spaceNo}"+"&reviewPaging="+$(this).val()+"&width="+position;
 });
+
 //로그인 후 이용 처리
 $("#likeLogin").click(function(){
 
