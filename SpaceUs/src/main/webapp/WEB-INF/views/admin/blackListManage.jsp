@@ -430,12 +430,13 @@ $("[name=reportBoardNo]").click(function(){
 		dataType: "json",
 		method: "GET",
 		success: function(data){
-			console.log(data);
+			/* console.log(data[0].reportReason); */
 			var str = "";
 			for(var i in data){
 				str=data[i].reportReason;
+				swal(str);
+				console.log(data[i]);
 			};
-			/* displayResultModal(data); */
 		},
 		error: function(x,s,e){
 			console.log("처리실패",x,s,e);
