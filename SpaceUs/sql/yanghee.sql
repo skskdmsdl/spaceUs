@@ -1561,3 +1561,14 @@ select
 			board_type='G';
             
 alter table blackList add blackList_date Date default sysdate;
+
+select * from space;
+
+update space set space_name = '소셜팩토리 매니아' where space_no ='space105';
+select * from reservation;
+
+select * from group_board;
+
+
+commit;
+update reservation set rev_comple = 1 where member_email='jjjj@naver.com';
