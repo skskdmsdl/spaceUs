@@ -1,7 +1,7 @@
 package com.kh.spaceus.admin.model.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,5 +20,6 @@ public class ManageBlackList implements Serializable {
 	private String groupBoardTitle;
 	private String memberEmail;
 	private String title;
+	private Date blackListDate;
 	
 }
