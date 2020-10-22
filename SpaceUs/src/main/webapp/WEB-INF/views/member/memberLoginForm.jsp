@@ -257,17 +257,6 @@
 	});
 </script>
 <script>
-<!-- RedirectAttributes에 등록된 msg값 존재여부 확인 후 출력 -->
-<c:if test="${ not empty msg }">
-	alert("${msg}");	
-</c:if>
-<c:if test="${ not empty email }">
-	alert('이미 가입하신 이메일입니다. 로그인해주세요.');
-	$("[name=memberEmail]").val('${email}');
-</c:if>
-<c:if test="${ not empty closeFunction }">
-    self.close();
-</c:if>
 </script>
 </body>
 </html>
