@@ -1576,6 +1576,28 @@ update reservation set rev_comple = 1 where member_email='jjjj@naver.com';
 
 select * from member where member_phone = '01035505472';
 
-delete from member where member_phone = '01048179843';
+delete from auth where member_email = 'rhkim999@gmail.com';
 
 commit;
+
+select * from member;
+
+delete from reservation where member_email='rhkim999@gmail.com';
+
+select * from review;
+
+delete from review where review_no='REVIEW143';
+commit;
+select * from group_board;
+update group_board set report_cnt = 9 where group_board_no='G163';
+
+select * from blackList;
+
+delete from blackList where blackList_no='BLACK123';
+
+select * from report;
+
+delete from report where member_email='admin@spaceus.com';
+
+commit;
+
