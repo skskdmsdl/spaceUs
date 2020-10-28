@@ -1,4 +1,4 @@
-# spaceUs
+# SpaceUs
 TMI_Final_Team_Project
 
 # Overview
