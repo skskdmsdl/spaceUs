@@ -36,8 +36,7 @@ TMI_Final_Team_Project
 * 정산내역 Excel 파일로 받기
 
 # ERD
-<img src="/resources/images/erd.png"  width="700" height="370">
-![erd](./images/erd.png)
+![erd](https://user-images.githubusercontent.com/66931820/97409160-8848b600-1940-11eb-953b-8f27d1c9120a.png)
 
 
 
