@@ -36,7 +36,7 @@ TMI_Final_Team_Project
 * 정산내역 Excel 파일로 받기
 
 # ERD
-<img src="/resources/images/erd.png"  width="700" height="370">
+<img src="${ pageContext.request.contextPath }/resources/images/erd.png"  width="700" height="370">
 
 
 
