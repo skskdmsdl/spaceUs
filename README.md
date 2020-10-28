@@ -49,8 +49,8 @@ localhost:9090/spaceus
 
 
 * HOST
-- id : user14@naver.com
-- pw : 1234
+    id : user14@naver.com
+    pw : 1234
 호스트로 로그인하면 마이페이지, 호스트페이지, 커뮤니티, 공간예약, 채팅 이용가능
 
 
