@@ -43,7 +43,7 @@ TMI_Final_Team_Project
 localhost:9090/spaceus
 
 * USER 
-- id : honggd@naver.com
+    * id : honggd@naver.com
 - pw : 1234
 일반유저로 로그인하면 마이페이지, 공간등록, 커뮤니티, 공간예약, 채팅 이용가능
 
