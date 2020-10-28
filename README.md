@@ -37,7 +37,7 @@ TMI_Final_Team_Project
 
 # ERD
 <img src="/resources/images/erd.png"  width="700" height="370">
-![캡처](/resources/images/erd.png)
+![erd](./resources/images/erd.png)
 
 
 
