@@ -43,20 +43,20 @@ TMI_Final_Team_Project
 localhost:9090/spaceus
 
 * USER 
-    * id : honggd@naver.com
-- pw : 1234
+   * id : honggd@naver.com
+   * pw : 1234
 일반유저로 로그인하면 마이페이지, 공간등록, 커뮤니티, 공간예약, 채팅 이용가능
 
 
-* HOST
-    id : user14@naver.com
-    pw : 1234
+HOST
+* id : user14@naver.com
+* pw : 1234
 호스트로 로그인하면 마이페이지, 호스트페이지, 커뮤니티, 공간예약, 채팅 이용가능
 
 
 * ADMIN
-- id : admin@spaceus.com
-- pw : 1234
+      * id : admin@spaceus.com
+      * pw : 1234
 어드민으로 로그인하면 관리자페이지, 채팅 이용가능
 
 
