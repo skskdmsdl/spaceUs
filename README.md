@@ -39,7 +39,7 @@ TMI_Final_Team_Project
 ![erd](https://user-images.githubusercontent.com/66931820/97409160-8848b600-1940-11eb-953b-8f27d1c9120a.png)
 
 
-# README
+# Information
 localhost:9090/spaceus
 
 * USER<br/>
